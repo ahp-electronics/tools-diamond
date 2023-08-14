@@ -1,0 +1,22 @@
+var pairs =
+{
+"ld4p3bx":{"primitive":1}
+,"bit":{"positive":1}
+,"positive":{"edge":1,"clock":1,"level":1}
+,"edge":{"triggered":1}
+,"triggered":{"loadable":1}
+,"loadable":{"down-counter":1}
+,"down-counter":{"positive":1}
+,"clock":{"enable":1}
+,"enable":{"positive":1}
+,"level":{"asynchronous":1}
+,"asynchronous":{"preset":1}
+,"architectures":{"supported":1}
+,"active":{"low":1}
+,"truth":{"table":1}
+,"don\u2019t":{"care":1}
+,"0:3":{"0000":1,"0:3":1}
+,"0000":{"otherwise":1}
+,"gsr":{"0:3":1}
+}
+;Search.control.loadWordPairs(pairs);

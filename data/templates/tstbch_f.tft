@@ -1,0 +1,71 @@
+@suppresnewline@
+@comment $Header: G:/synario/dev90/generic/vhdl/rcs/testbnch.tft 1.2 2001/04/24 03:27:37Z zsong Exp $ @
+@comment --------------------------------------------------------------------- @
+@comment Test case for the template-drive TFI generator                        @
+@comment This is a test for generating VHDL testbench files.                   @
+@comment --------------------------------------------------------------------- @
+@set suppresnewline=off@
+-- VHDL Test Bench Created from source file %module%.vhd -- %ddate%
+--
+-- Notes: 
+-- 1) This testbench template has been automatically generated using types
+-- std_logic and std_logic_vector for the ports of the unit under test.
+-- Lattice recommends that these types always be used for the top-level
+-- I/O of a design in order to guarantee that the testbench will bind
+-- correctly to the timing (post-route) simulation model.
+-- 2) To use this template as your testbench, change the filename to any
+-- name of your choice with the extension .vhd, and use the "source->import"
+-- menu in the ispLEVER Project Navigator to import the testbench.
+-- Then edit the user defined section below, adding code to generate the 
+-- stimulus for your design.
+-- 3) VHDL simulations will produce errors if there are Lattice FPGA library 
+-- elements in your design that require the instantiation of GSR, PUR, and
+-- TSALL and they are not present in the testbench. For more information see
+-- the How To section of online help.  
+--
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+
+ENTITY testbench IS
+END testbench;
+
+@set suppresnewline=on@
+ARCHITECTURE behavior OF testbench IS @cr@@cr@
+@comment do the component declaration. @
+@tab@COMPONENT %module%
+@set sigdelim=@
+@cr@@tab@PORT(
+@iterate@%iport%@cr@@tab@@tab@@iterator@ : IN @vhdl_typedec@;@enditerate@
+@ifhas oport=*@ @comment if the design has any output ports... @
+   @iterate@%bport%@cr@@tab@@tab@@iterator@ : INOUT @vhdl_typedec@;@enditerate@
+   @set sigdelim=;@
+   @iterate@%oport%@cr@@tab@@tab@@iterator@ : OUT @vhdl_typedec@@enditerate@
+@endif@
+@ifnhas oport=*@ @comment we need an "else in this language! @
+   @set sigdelim=;@
+   @iterate@%bport%@cr@@tab@@tab@@iterator@ : INOUT @vhdl_typedec@@enditerate@
+@endif@
+@cr@@tab@@tab@);@cr@
+@tab@END COMPONENT;@cr@@cr@
+@comment Now do a signal declaration for each port @
+@set sigdelim=@
+@iterate@%port%@tab@SIGNAL @iterator@ :  @vhdl_typedec@;@cr@@enditerate@
+@cr@
+BEGIN@cr@@cr@
+@comment do the component instantiation                                    @
+@set sigdelim=,@
+-- Please check and add your generic clause manually@cr@
+@tab@uut: %module% PORT MAP(
+@iterate@%port%
+@cr@@tab@@tab@@iterator@ => @iterator@@enditerate@
+@cr@@tab@);@cr@@cr@
+@set suppresnewline=off@
+-- *** Test Bench - User Defined Section ***
+   tb : PROCESS
+   BEGIN
+      wait; -- will wait forever
+   END PROCESS;
+-- *** End Test Bench - User Defined Section ***
+
+END;

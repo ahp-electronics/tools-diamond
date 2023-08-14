@@ -1,0 +1,82 @@
+[ngd]
+NGD extended Tcl commands
+For more information on a specific command, type the command without any options:
+ngd_port          NGD port command
+ngd_inst          NGD instance command
+ngd_net           NGD net command
+ngd_attr          NGD attribute command
+
+[ngd_port]
+ngd_port get [options]
+   get [-in] [-out] [-bidi] [-tristate]            
+                  Returns list of port tcl objects in a comma-separated string in 
+                  following format:
+                  port_name1,port_name2,port_name3
+                  If no option is specified then all ports will be returned. If more than
+                  one option is specified then a combination of results from each
+                  option is returned.
+     -in      : Input ports
+     -out     : Output ports
+     -bidi    : Bidirectional ports
+     -tristate: Tri-state output ports.
+
+[ngd_inst]
+ngd_inst get [options]
+   get [-asic] [-cell] [-comp]
+                  Returns a list of instance name in a comma-separated string
+                  in following format:
+                  hier_inst_name1,hier_inst_name2,hier_inst_name3
+                  If no option is specified then all instances will be returned. If more 
+                  than one option is specified then the combination of results from each 
+                  option is returned.
+     -asic : ASIC component
+     -cell : Register component		
+     -comp : Others
+
+
+[ngd_net]
+ngd_net get {-inst hierInstName [-pin index | -fanin | -fanout]} | [-clock | -vcc | -gnd]*
+   get [-clock] [-vcc] [-gnd]
+                  Returns a list of net/signal tcl objects in a comma-separated string in 
+                  following format:
+                  hier_net_name1,hier_net_name2,hier_net_name3
+                  If no option is specified then all nets will be returned. If more than 
+                  one option is specified then the union of results from each option is 
+                  returned.
+     -clock : Clock net
+     -vcc   : Power net
+     -gnd   : Ground Net
+   get -inst hierInstName { -pin index | -fanin | -fanout}
+                  Returns a list of net/signal tcl objects in a comma-separated string in 
+                  following format:
+                  hier_net_name1,hier_net_name2,hier_net_name3
+           -pin index : net that drivers user specified pin of instance "hierInstName"
+           -fanin     : nets that drive instance "hierInstName"
+           -fanout    : nets that is being driven by instance "hierInstName"
+
+[ngd_attr]
+ngd_attr get {-inst name | -net name | -port name} -attributeName
+   get -inst hierInstName -attributeName
+                  Retuns a list of attributes for specified hierarchical instances.
+                  Acceptable attributeName are:
+                          pincount
+                          fanincount
+                          fanoutcount
+                          type: possible returned value is one of following:
+                              asic, cell, comp
+   get -net netName -attributeName
+                  Returns a list of attributes for specified nets.
+                  Acceptable attributeName are:
+                          fanincount
+                          fanoutcount
+                          fun: possible returned value is one of following:
+                             clock, data
+   get -port portName -attributeName
+                  Returns a list of attributes for specified ports.
+                  Acceptable attributeName are:
+                          differential: possible returned value is one of following:
+                             pos, neg, none
+                          direction: possible returned value is one of following:
+                             in, out, bidi
+
+

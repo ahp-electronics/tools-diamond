@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messageFile name="baspn" fid="214" alias="baspn" vendor="Lattice Semiconductor Corporation" stamp="05/13/2013">
+  <description text="Message database of baspn" />
+  <owner text="Tong.Feng" />
+  <messages>
+    <!----------------------------------------------------------------------------------------------------\>
+    <!-- Baspn's message database-------------------------------------------------------------------------|>
+	<!-- Messages are divided into several groups based on components ------------------------------------|>
+    <!-- Three types of message: Error, Warning, Info ----------------------------------------------------|>
+	<!-- Each type of the same group shifts 1000, and there are 100 messages available--------------------|>
+	<!---Component------ Start:End---Start:End---Start:End------------------------------------------------|>
+	<!-- Prjmngr-------- 0000:0099 - 1000:1099 - 2000:2099 -----------------------------------------------|>
+	<!-- Project-------- 0100:0199 - 1100:1199 - 2100:2199, reserve 50:99 for project reader/writer ------|>
+	<!-- Implementation- 0200:0299 - 1200:1299 - 2100:2299, reserve 50:99 for incremental impl -----------|>
+	<!-- Run Flow------- 0300:0399 - 1300:1399 - 2300:2399 -----------------------------------------------|>
+	<!-- Clone/Archive-- 0400:0499 - 1400:1499 - 2400:2499 -----------------------------------------------|>
+    <!-- Reserve 9990 and following IDs for messages baspn gets no idea ----------------------------------|>
+	<!-- Please DO NOT remove any item even it is obsolete -----------------------------------------------|>
+    <!----------------------------------------------------------------------------------------------------/>
+
+    <!-- define Error message -------------------------------------------------------------------------------------------------------------------------------->  
+    <!-- Prjmngr 0000:0099--------------------------------------------------------------------------------->
+    <msg uid="0000" type="Error" text="Current project is not closed." />
+    <msg uid="0001" type="Error" text="The project file '$$s' does not exist." />
+    <msg uid="0002" type="Error" text="Can't set the working directory to the project directory '$$s'." />
+	<msg uid="0003" type="Error" text="Error in reading project file '$$s', can't load the project."/>
+	<msg uid="0004" type="Error" text="Please stop the running task before close project."/>
+	<msg uid="0005" type="Error" text="No new project infomation."/>
+	<msg uid="0006" type="Error" text="Can't create project in an unexisting directory '$$s'."/>	
+	<msg uid="0007" type="Error" text="Can't set the working directory to the new created project directory '$$s'."/>		
+	<msg uid="0008" type="Error" text="Meet invalid implementation name parameter."/>
+	<msg uid="0009" type="Error" text="Meet invalid implementation directory parameter."/>
+	<msg uid="0010" type="Error" text="Failed to create the implementation directory '$$s'."/>
+	<msg uid="0011" type="Error" text="No valid strategy can be used, can't create the new implementation." />
+	<msg uid="0012" type="Error" text="Failed to add logic preference resource '$$s'" />	
+	<msg uid="0013" type="Error" text="'$$s' is not a valid implementation name in current project." />		
+	<msg uid="0014" type="Error" text="Implementation '$$s' is already in current project." />	
+	<msg uid="0015" type="Error" text="Meet invalid implementation directory parameter." />	
+	<msg uid="0016" type="Error" text="Failed to create the implementation directory '$$s'." />
+	<msg uid="0017" type="Error" text="No valid strategy can be used, can't clone the implementation." />	
+	<msg uid="0018" type="Error" text="Can't clone the implementation." />		
+	<msg uid="0019" type="Error" text="The source file '$$s' can't be imported." />	
+	<msg uid="0020" type="Error" text="Can't find the project file in the archive file." />
+
+	<!-- Project 0100:0199-------------------------------------------------------------------------------->
+    <msg uid="0100" type="Error" text="Can't create an implementation with the same name '$$s' of an existing implementation." />
+	<msg uid="0101" type="Error" text="Can't create an implementation under the same directory of an existing implementation '$$s'." />
+    <msg uid="0102" type="Error" text="There isn't any implementation yet." />
+    <msg uid="0103" type="Error" text="The strategy '$$s' does not exist." />
+    <msg uid="0104" type="Error" text="Can't remove the last strategy in the project." />
+    <msg uid="0105" type="Error" text="The strategy '$$s' is used by the implementation '$$s'.\nIt can't be removed." />
+    <msg uid="0106" type="Error" text="Implementation '$$s' can't be removed while a flow task is running." />
+    <msg uid="0107" type="Error" text="Can't remove the active implementation." />
+    <msg uid="0108" type="Error" text="The strategy '$$s' dos not exist." />
+    <msg uid="0109" type="Error" text="Replace the default strategy with strategy '$$s'." />	
+    <msg uid="0110" type="Error" text="No active implementation in project. Set implementation '$$s' as the active implementation." />
+	<msg uid="0111" type="Error" text="No implementation in project." />
+    <msg uid="0112" type="Error" text="Project DRC checking failed." />
+    <msg uid="0113" type="Error" text="Can't change device when a flow is running." />
+    <msg uid="0114" type="Error" text="The lattice synthesis tool is not supported by the device '$$s'." />
+    <msg uid="0115" type="Error" text="Can't change external ASC chips' setting when a flow is running." />
+    <msg uid="0116" type="Error" text="Part name '$$s' is invalid or unsupported device." />
+	
+    <msg uid="0150" type="Error" text="Can't load a Diamond project which is only supported in Diamond $$s or later version." />
+    <msg uid="0151" type="Error" text="Incremental flow is not supported for device '$$s', the setting is ignored." />
+
+	<!-- Implementation 0200:0249------------------------------------------------------------------------->
+	<msg uid="0200" type="Error" text="Remove an enabled preference source is not allowed." />
+	<msg uid="0201" type="Error" text="Can't exclude the preference source '$$s'." />
+	<msg uid="0202" type="Error" text="The source of type '$$s' is not supported in this flow." />
+	<msg uid="0203" type="Error" text="The synthesis tool '$$s' is not supported by lattice." />
+	<msg uid="0204" type="Error" text="Logical preference file '$$s' does not exist. It will be removed." />
+	<msg uid="0205" type="Error" text="No default logical preference file is assigned to the implementation '$$s', $$s" />
+	<msg uid="0206" type="Error" text="More than one files are set as the default logical preference of the implementation '$$s'.\nOnly keep the '$$s' as the default logical preference." />
+	<msg uid="0207" type="Error" text="Adding an Reveal Analyzer file while its associated Reveal Inserter file is not in the design is not allowed." />	
+	<!-- Incremental implementation 0250:0299-->
+	<msg uid="0250" type="Error" text="Backup as Golden Reference unsuccessfully." />
+	<msg uid="0251" type="Error" text="Current design does not work in incremental mode." />
+	<msg uid="0252" type="Error" text="The current design has not been successfully run to Place and Route." />
+	<msg uid="0253" type="Error" text="Restore Golden as reference unsuccessfully." />
+	<msg uid="0254" type="Error" text="There's no golden backup reference." />
+	<msg uid="0255" type="Error" text="Restore Previous reference unsuccessfully." />
+	<msg uid="0256" type="Error" text="There's no previous backup reference." />
+	
+	<!-- Run Flow 0300:0399------------------------------------------------------------------------------->
+	<msg uid="0300" type="Error" text="There's no running task with id '$$s'." />
+	<msg uid="0301" type="Error" text="Task with id '$$s' is not in managed run mode.\nCan't do stop operation on a seed of this task." />
+	<msg uid="0302" type="Error" text="Task with id '$$s' is not in managed run mode.\nCan't do pause operation on a seed of this task." />	
+	<msg uid="0303" type="Error" text="There's no running task seed with id '$$s'." />
+
+	<!-- Clone/Archive 0400:0499-->
+	<msg uid="0400" type="Error" text="Internal error, wrong arguments." />		
+	
+    <!-- define warning message ------------------------------------------------------------------------------------------------------------------------------>
+	<!-- prjmngr 1000:1099--------------------------------------------------------------------------------->
+	<msg uid="1000" type="Warning" text="Create a new implementation in an existing sub-directory '$$s'." />
+	<msg uid="1001" type="Warning" text="'$$s' is not a valid strategy name in current project." />
+	<msg uid="1002" type="Warning" text="Not specify the default strategy name, try the current default strategy '$$s'." />
+	<msg uid="1002" type="Warning" text="Clone a new implementation into an existing sub-directory '$$s'." /> 
+	<msg uid="1003" type="Warning" text="The source file '$$s' in implementation '$$s' doesn't exist." /> 
+	<msg uid="1004" type="Warning" text="Lattice recommends you to use the device '$$s'." />
+
+	<!-- Project 1100:1199--------------------------------------------------------------------------------->
+	<msg uid="1100" type="Warning" text="The file '$$s' can't be renamed to 'SS'.\nThe constraints file is ignored." />
+	<msg uid="1101" type="Warning" text="Can't add external ASC chip for device '$$s'.\nThe Setting is ignored." />	
+	<msg uid="1102" type="Warning" text="ASC chip '$$s' is invalid or unsupported ASC chip for device '$$s'.\nThe Setting is ignored." />
+	
+	<msg uid="1150" type="Warning" text="The strategy written failed." />
+	
+	<!-- Implementation 1200:1249------------------------------------------------------------------------->
+	<msg uid="1200" type="Warning" text="The source of type '$$s' is not supported in this flow. The added resource '$$s' is disabled." />
+	<msg uid="1201" type="Warning" text="There already exists a '$$s'. The added resource '$$s' is disabled." />
+	<msg uid="1202" type="Warning" text="Diamond could not find synthsis engine '$$s' within '$$s', please check." />
+	<!-- Incremental implementation 1250:1299-->	
+	
+	<!-- Clone/Archive 1400:1499-------------------------------------------------------------------------->	
+	<msg uid="1400" type="Warning" text="File(s) referenced in strategy have been cloned into new implementation, may need change strategy setting." />
+
+    <!-- define information message -------------------------------------------------------------------------------------------------------------------------->	
+	<!-- Implementation 2200:2249------------------------------------------------------------------------->
+	<msg uid="2200" type="Info" text="Incremental Flow is not supported for this new device and is to be turn off." />
+	<!-- Incremental implementation 2250:2299-->		
+	<msg uid="2250" type="Info" text="Backup as Golden Reference successfully." />
+	<msg uid="2251" type="Info" text="Restore Golden as reference successfully." />
+	<msg uid="2252" type="Info" text="Restore Previous reference successfully." />	
+
+    <!-- messages defined to handle ut_** -------------------------------------------------------------------------------------------------------------------->
+    <msg uid="9990" type="Error" text="$$s" />
+    <msg uid="9991" type="Warning" level="2" text="$$s" />
+    <msg uid="9992" type="Info" text="$$s" />
+    <msg uid="9993" type="Status" text="$$s" />
+    <msg uid="9994" type="Error" text="Error - $$s" />
+    <msg uid="9995" type="Warning" level="2" text="Warning - $$s" />
+    <msg uid="9996" type="Info" text="Info - $$s" />
+    <msg uid="9997" type="Status" text="Error - $$s" />
+    <msg uid="9999" type="Error" text="This is a testing message with one dynamic data $$s" >
+       <help online="onlineID" web="webID" datasheet="datasheet" />
+       <navigation>
+          <!-- define navigation function that require first dynamic data and first navigation data as input -->
+          <fun menu="fun1" cmd="command line 0 1" />
+          <!-- define navigation function that require first dynamic data and second navigation data as input -->
+          <fun menu="fun2" cmd="command line 0 2" />
+       </navigation>
+    </msg>
+  </messages>
+</messageFile>

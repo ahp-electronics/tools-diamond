@@ -1,0 +1,27 @@
+var pairs =
+{
+"port":{"assignment":1,"assignments":1,"settings":1,"download":1,"address":1,"setup":1}
+,"assignment":{"setting":1}
+,"svf":{"debugger":1,"stapl":1}
+,"assignments":{"options":1}
+,"options":{"svf":1,"download":1,"want":1}
+,"setting":{"port":1}
+,"download":{"debugger":1,"select":1,"cable":1}
+,"cable":{"port":1,"type":1}
+,"settings":{"dialog":1}
+,"dialog":{"box":1}
+,"box":{"specify":1,"opens":1}
+,"specify":{"preferred":1}
+,"preferred":{"parallel":1}
+,"parallel":{"port":1}
+,"select":{"port":1,"download":1,"options":1}
+,"address":{"select":1}
+,"debugger":{"choose":1}
+,"choose":{"configuration":1}
+,"configuration":{"cable":1}
+,"want":{"click":1}
+,"debugging":{"svf":1}
+,"stapl":{"vme":1}
+,"vme":{"files":1}
+}
+;Search.control.loadWordPairs(pairs);

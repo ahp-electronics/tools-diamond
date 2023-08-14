@@ -1,0 +1,19 @@
+var pairs =
+{
+"options":{"setting":1}
+,"setting":{"trigger":1}
+,"trigger":{"options":1,"units":1,"expressions":1,"signal":1}
+,"addition":{"trigger":1}
+,"units":{"trigger":1}
+,"expressions":{"two":1}
+,"two":{"aspects":1}
+,"aspects":{"triggers":1}
+,"triggers":{"final":1}
+,"final":{"event":1}
+,"event":{"counter":1}
+,"counter":{"enabling":1}
+,"enabling":{"trigger":1}
+,"signal":{"reveal":1}
+,"reveal":{"modules":1}
+}
+;Search.control.loadWordPairs(pairs);

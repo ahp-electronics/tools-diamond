@@ -1,0 +1,26 @@
+var pairs =
+{
+"symbol":{"editor":1,"file":1,"files":1}
+,"opening":{"symbols":1,"symbol":1,"existing":1}
+,"existing":{"symbol":1}
+,"open":{"existing":1,"file":1}
+,"file":{"diamond\u2019s":1,"open":1,"dialog":1,"type":1}
+,"diamond\u2019s":{"main":1}
+,"main":{"window":1}
+,"diamond":{"window":1}
+,"window":{"choose":1}
+,"choose":{"file":1,"symbol":1}
+,"dialog":{"box":1}
+,"box":{"file":1}
+,"type":{"menu":1}
+,"menu":{"bottom-right":1}
+,"bottom-right":{"choose":1}
+,"files":{".sym":1}
+,"browse":{"desired":1}
+,"desired":{"symbol":1}
+,"click":{"open":1}
+,"editor":{"opens":1}
+,"opens":{"selected":1}
+,"selected":{"symbol":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,227 @@
+[prj]
+Project Manager extended Tcl commands
+For more information on a specific command, type hlp command-name:
+
+  prj_project  Project commands to manipulate project
+  prj_src      Project source commands to manipulate project sources
+  prj_impl     Project implementation commands to manipulate implementation
+  prj_strgy    Project strategy commands to manipulate strategies
+  prj_run      Project flow running command to run a flow process
+  prj_syn      Project synthesis tool commands to list or set synthesis tool
+  prj_dev      Project device commands to list or set the device used in the
+               project
+  prj_incr     Project commands to manipulate incremental design flow
+  
+[prj_project]
+prj_project new - Create a new project
+  Usage:
+    prj_project new -name <project name> [-dev <device name>] [-asc_num <asc number>]
+                    [-lpf <lpf file name>] [-impl <initial implementation name>]
+                    [impl_dir <initial implementation directory>] [-synthesis <synthesis tool name>]
+                    
+
+prj_project open - Open a project file
+  Usage:
+    prj_project open <project file>
+
+prj_project close - Close the current project
+  Usage:
+    prj_project close
+
+prj_project save - Save the current project
+  Usage:
+    prj_project save [project file]
+	
+prj_project saveas - Save the current project as a new project with specified name and directory and change current workaround to the new project
+  Usage:
+    prj_project saveas -name <new project name> -dir <new project directory> [-copy_gen]
+	
+prj_project option - List, set or remove a project option
+  Usage:
+    prj_project option
+            : List all the options in the current project
+    prj_project option <option name> [option value list]
+            : List or set the option value
+    prj_project option -append <option name> <option value>
+            : Append a value to the specified option value
+    prj_project option -rem <option name>...
+            : Remove the options of the current project
+
+prj_project archive - Archive the current project
+  Usage:
+    prj_project archive [-includeAll] <archive_file>
+            : Archive the current project into the archive_file
+    prj_project archive -extract -dir <destination directory> <archive_file>
+            : Extract the archive file and load the project
+
+[prj_src]
+prj_src add - Add sources to the current project
+  Usage:
+    prj_src add [-impl <implement name>] [-format <VHDL|VERILOG|EDIF|SCHEMATIC|...>]
+                [-simulate_only|-synthesis_only]
+                [-include <path list for Verilog include search path>]
+                [-work <VHDL lib name>] [[-opt <name=value>] ...] [-exclude]
+                <src file>...
+
+prj_src remove - Remove design source from the current project
+  Usage:
+    prj_src remove [-impl <implement name>] -all
+            : Remove all the design sources in project
+    prj_src remove [-impl <implement name>] <src  file> ...
+            : Remove the specified sources from the current project
+
+prj_src exclude - Exclude the design sources from the current project
+  Usage:
+    prj_src exclude [-impl <implement name>] <src  file>
+
+prj_src enable - Enable the excluded design sources from the current project
+  Usage:
+    prj_src enable [-impl <implement name>] <src  file> ...
+
+prj_src syn_sim - Return or change the setting of a design HDL source as 
+                  a synthesis or simulation source
+  Usage:"
+    prj_src syn_sim [-impl <implement name>] -src <source name>
+                    [SimulateOnly|SynthesisOnly|SynthesisAndSimulate]
+                    
+prj_src option - List, set or remove a source option
+  Usage:
+    prj_src option -src <source name> [-impl <implement name>]
+            : List all the options in the specified source
+    prj_src option -src <source name> [-impl <implement name>]
+                   <option name> [option value list]
+            : List or set the source's option value
+    prj_src option -src <source name> [-impl <implement name>]
+                   -append <option name> <option value>
+            : Append a value to the specified option value
+    prj_src option -src <source name> [-impl <implement name>]
+                   -rem <option name>...
+            : Remove the options of the source
+
+[prj_impl]
+prj_impl new - Create a new implementation in the current project
+  Usage:
+    prj_impl new <new impl name> [-dir <implementation directory>]
+                 [-lpf <lpf file name>] [-strategy <default strategy name>] [-synthesis <synthesis tool name>]
+
+prj_impl delete - Delete the specified implementation in the current project
+  Usage:
+    prj_impl delete <impl name>
+
+prj_impl active - Activate implementation in the current project
+  Usage:
+    prj_impl active <impl name>
+
+prj_impl path - List the implementation's path
+  Usage:
+    prj_impl path [-impl <implement name>]
+
+prj_impl pre_script - List or set the implementation's user script before running milestone.
+  Usage:
+    prj_impl pre_script [-impl <implement name>] <milestone name> <script_file>
+          : <milestone name> should be "syn", "map", "par", "export"
+
+prj_impl post_script - List or set the implementation's user script after running milestone.
+  Usage:
+    prj_impl post_script [-impl <implement name>] <milestone name> <script_file>
+          : <milestone name> should be "syn", "map", "par", "export"
+
+prj_impl option - List, set or remove implementation options in the current project
+  Usage:
+    prj_impl option [-impl <implement name>]
+            : List all the options in the specified implementation
+    prj_impl option [-impl <implement name>] <option name> [option value list]
+            : List or set the implementation's option value
+    prj_impl option [-impl <implement name>] -append <option name> <option value>
+            : Append a value to the specified option value
+    prj_impl option [-impl <implement name>] -rem <option name>...
+            : Remove the the options in the implementation
+
+prj_impl cleanup - Clean up the implementation result files in the current project
+  Usage:
+    prj_impl cleanup [-impl <implement name>]
+
+prj_impl clone - Clone an existing implementation
+  Usage:
+	prj_impl clone <new impl name> [-dir <new impl directory>] [-copyRef] [-impl <original impl name>]
+
+[prj_strgy]
+prj_strgy copy - Create a new strategy by copying from an existing strategy
+  Usage:
+    prj_strgy copy -from <source strategy name> -name <new strategy name>
+                   -file <strategy file name>
+
+prj_strgy new - Create a new strategy with default setting
+  Usage:
+    prj_strgy new -name <new strategy name> -file <strategy file name>
+
+prj_strgy import - Import an existing strategy file
+  Usage:
+    prj_strgy import -name <new strategy name> -file <strategy file name>
+
+prj_strgy delete - Delete an existing strategy
+  Usage:
+    prj_strgy delete <strategy name>
+
+prj_strgy set - Associate the strategy with the specified implementation
+  Usage:
+    prj_strgy set [-impl <implementation name>] <strategy name>
+    
+prj_strgy set_value - Set value to a strategy item
+  Usage:
+    prj_strgy set_value [-strategy <strategy name>] <option name=option value> ...
+	
+prj_strgy get_value - Get value of a strategy item
+  Usage:
+    prj_strgy get_value [-strategy <strategy name>] <option name>
+	
+prj_strgy list_value - List value of strategy items
+  Usage:
+    prj_strgy list_value [-strategy <strategy name>] <pattern>
+
+prj_strgy list_option - List strategy option help
+  Usage:
+    prj_strgy list_option <pattern>
+
+[prj_run]
+prj_run - Run a milestone or task
+  Usage:
+    prj_run <milestone name> [-impl <implement name>] [-task <task name>]
+            [-forceAll|forceOne]
+     
+[prj_syn]
+prj_syn - List or set the synthesis tool
+  Usage:
+    prj_syn 
+            : List the synthesis tool used in active implementation
+    prj_syn set <synthesis tool> [-impl <implementation name>]
+            : Set the synthesis tool for specified implementation
+              Synthesis tool could be 'lse', 'synplify' or 'precision'.
+
+[prj_dev]
+prj_dev - List or set the device
+  Usage:
+    prj_dev [-family|-device|-package|-performance|-operation|-part|-asc]
+            : List the device information of the current project in family, 
+              device, package, performance, operation, part, ASC sequence Tcl list
+  
+    prj_dev set [-family <family name>] [-device <device name>] 
+                [-package <package name>] [-performance <performance grade>] 
+                [-operation <operation>] [-part <part name>] [-asc_num <asc number>]
+            : Change the device to the specified family, device, package, performance,
+              operation, part or ASC
+  
+[prj_incr]
+prj_incr enable - Get or set the incremental design flow mode 
+  Usage:
+    prj_incr set [-enable|-disable] [-impl <implementation name>]
+    
+prj_incr restore - Set the previous or golden backup as the reference 
+                          for the next incremental run
+  Usage:
+    prj_incr restore [-impl <implementation name>] <previous|golden>
+
+prj_incr backup_golden - Set the current successful results as the 
+                                golden reference backup
+  Usage:
+    prj_incr backup_golden [-impl <implementation name>]

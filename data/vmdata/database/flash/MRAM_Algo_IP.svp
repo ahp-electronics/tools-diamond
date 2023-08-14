@@ -1,0 +1,424 @@
+DATA:
+    PATTERN  (--, --, FILE(--, --));      
+    WREN   ( 1, 1, b01100000);
+    WRDI   ( 1, 1, b00100000);
+    RDSR   ( 1, 1, b10100000);
+    READ   ( 1, 1, b11000000);
+    WRITE   ( 1, 1, b01000000);
+    DEVICE_ID  (1,1,FILE(ID, --)); 
+DATA_END;
+
+PROTOCOL:	PCM;
+
+SIGNAL_DECL: 
+	inout L_f_cs;
+	buffer  clock;
+SIGNAL_DECL_END;
+             
+BUS_DECL: 
+    /CE = L_f_cs;
+BUS_DECL_END;
+
+FUNCTION INITIAL;
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	clock   HIGH;
+	SET_ROW (PATTERN, 0);
+	Addr = START_ADDRESS;
+	SIR	8	TDI(FF) ;
+END_FUNCTION;
+
+FUNCTION SELECT_SPI_DEVICE;
+	SIR 8 TDI(32) ;
+	SDR 10 TDI(028) ;
+	SIR 8 TDI(38) ;
+	SDR 9 TDI(003) ;
+	SIR 8 TDI(32) ;
+	SDR 10 TDI(020) ;
+	SIR 8 TDI(38) ;
+	# Where X=select register value [0=SPI(0), 1=SPI(1),2=SPI(2), ..., 7=SPI(7)]
+	SDR 4 TDI(SPI_DEVICE) ; 
+END_FUNCTION;
+FUNCTION TOGGLE_PROGRAMN;
+	SIR 8 TDI(32) ;       
+	SDR 10 TDI(028) ;
+	SIR 8 TDI(38) ;
+	SDR 9 TDI(004) ;
+	SIR 8 TDI(32) ;
+	SDR 10 TDI(020) ;
+	SIR 8 TDI(38) ;
+	SDR 2 TDI (1) ;
+	RUNTEST IDLE 3 TCK 1.00E-003 SEC;
+	SDR 2 TDI (0) ;
+	RUNTEST IDLE 3 TCK 1.00E-003 SEC;
+END_FUNCTION;
+
+FUNCTION CHECK_IP_ID;
+	INT32 Multiple = 0;
+	Multiple = IP_ID;
+	# Shift ER1 instruction (0x32) into JTAG IR register to select ER1
+	SIR	8	TDI(32) ;
+	# Shift "0_00101000" to the 9 bit ER1 register
+	#    bit[8:5] = "0001" to enable "SPI Serial FLASH programmer IP"
+	#    bit[4] = "0" to disable ispTRACY IP
+	#    bit[3] = "1" to select "ER2 8-bit Control Register"
+	#    bit[2:0] are readonly bits
+	SDR 10 TDI(028);
+	# Shift ER2 instruction (0x38) into JTAG IR register to select ER2
+	SIR 8 TDI(38);
+	# Shift "00000000" to the 8-bit ER2 control register to select DR0
+	SDR 9 TDI(000);
+	# Shift ER1 instruction (0x32) into JTAG IR register to select ER1
+	SIR 8 TDI(32);
+	# Shift "0_00100000" to the 9 bit ER1 register to select ER2 Data Registers
+	#    bit[8:5] = "0001" to enable "SPI Serial FLASH programmer IP"
+	#    bit[4] = "0" to disable ispTRACY IP
+	#    bit[3] = "0" to select "ER2 Data Registers"
+	#    bit[2:0] are readonly bits
+	SDR 10 TDI(020);
+	# Shift ER2 instruction (0x38) into JTAG IR register to select ER2
+	SIR 8 TDI(38);
+	# Shift out the 8-bit ER2 Data Register DR0 (ID register)
+	#    This is a readonly register.  The readback value should be:
+	#    bit[7:0] (8-bit IP functionality ID) = 0x01 ---> SPI Serial FLASH Programmer IP
+	IF (Multiple Equal 0);
+		SDR 9 TDI(000) TDO(001) MASK(0FF);
+	ELSE;
+		SDR 9 TDI(000) TDO(002) MASK(0FF);
+		Call SELECT_SPI_DEVICE;
+	END_IF;	
+	# Shift ER1 instruction (0x32) into JTAG IR register to select ER1
+	SIR 8 TDI(32);
+	# Shift "0_00101000" to the 9 bit ER1 register
+	#    bit[8:5] = "0001" to enable "SPI Serial FLASH programmer IP"
+	#    bit[4] = "0" to disable ispTRACY IP
+	#    bit[3] = "1" to select "ER2 8-bit Control Register"
+	#    bit[2:0] are readonly bits
+	SDR 10 TDI(028);
+	# Shift ER2 instruction (0x38) into JTAG IR register to select ER2
+	SIR 8 TDI(38);
+	# Shift "00000001" to the 8-bit ER2 control register to select DR1
+	SDR 9 TDI(001);
+	# Shift ER1 instruction (0x32) into JTAG IR register to select ER1
+	SIR 8 TDI(32);
+	# Shift "0_00100000" to the 9 bit ER1 register to select ER2 Data Registers
+	#    bit[8:5] = "0001" to enable "SPI Serial FLASH programmer IP"
+	#    bit[4] = "0" to disable ispTRACY IP
+	#    bit[3] = "0" to select "ER2 Data Registers"
+	#    bit[2:0] are readonly bits
+	SDR 10 TDI(020);
+	# Shift ER2 instruction (0x38) into JTAG IR register to select ER2
+	SIR 8 TDI(38);
+END_FUNCTION;
+
+FUNCTION ENABLE;
+	SDR 9 TDI(060+TDR);
+END_FUNCTION;
+
+FUNCTION PROGRAM;
+	Addr = START_ADDRESS;
+	INT32 BuffAddr = 0;
+	RESET_BURST;
+	SDR 33 TDI(00+PATTERN[-1]+Addr+40+TDR);
+END_FUNCTION;
+
+FUNCTION DISABLE;
+	SDR 9 TDI(020+TDR);
+END_FUNCTION;
+
+FUNCTION VERIFY;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	SDR 48  TDI(HDR+0000+Addr+C0+TDR) TDO(PATTERN+HDR+FFFFFFFFFFFF) MASK(PATTERN+HDR+000000000000);
+END_FUNCTION;
+
+FUNCTION BLANK_CHECK;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	SDR 48  TDI(HDR+0000+Addr+C0+TDR) TDO(BLANK_PATTERN+HDR+FFFFFFFFFFFF) ;
+END_FUNCTION;
+
+FUNCTION READBACK;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	SDR 48  TDI(HDR+0000+Addr+C0+TDR) TDO(SAVE_PATTERN+HDR+FFFFFFFFFFFF) ;
+END_FUNCTION;
+
+FUNCTION UPLOAD;
+	# 03/29/05 Nguyen added UPLOAD function to support Erase,Program,Verify,Refresh operation
+	# 03/29/05 Nguyen added UPLOAD function to support Program,Refresh operation
+	INT32 Idx1 = 0;
+	SIR	8	TDI (23) ;
+	RUNTEST	IDLE	5 TCK	1.00E-003 SEC;
+	SIR	8	TDI (23) ;
+	RUNTEST	IDLE	5 TCK	1.00E-003 SEC;
+	SIR	8	TDI (FF) ;
+	RUNTEST	IDLE	5 TCK	1.00E-000 SEC;
+END_FUNCTION;
+
+OPERATION Verify ID;
+  	INT32 Addr = 0;
+END_OPERATION;
+
+OPERATION Program,Verify;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+	$ Enabling...
+	Call ENABLE;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+
+END_OPERATION;
+
+OPERATION Program,Verify,Refresh;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+	$ Enabling...
+	Call ENABLE;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	$ Uploading...
+	Call UPLOAD; 
+
+       
+END_OPERATION;
+
+OPERATION SPI MRAM Program,Verify;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+	$ Enabling...
+	Call ENABLE;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+
+       
+END_OPERATION;
+
+OPERATION SPI MRAM Program,Verify,Refresh;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+	$ Enabling...
+	Call ENABLE;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	$ Uploading...
+	Call UPLOAD; 
+       
+END_OPERATION;
+
+OPERATION Program;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+   
+    $ Enabling...
+	Call ENABLE;
+    	
+    $ Programming...
+	Call PROGRAM;
+
+	# Disabling...
+	Call DISABLE;
+    
+END_OPERATION;
+
+OPERATION Program,Refresh;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ Enabling...
+	Call ENABLE;
+    	
+    $ Programming...
+	Call PROGRAM;
+
+	# Disabling...
+	Call DISABLE;
+	
+	$ Uploading...
+	Call UPLOAD; 
+    
+END_OPERATION;
+
+
+OPERATION SPI MRAM Program;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ Enabling...
+	Call ENABLE;
+    	
+    $ Programming...
+	Call PROGRAM;
+
+	# Disabling...
+	Call DISABLE;
+    
+END_OPERATION;
+
+OPERATION SPI MRAM Program,Refresh;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ Enabling...
+	Call ENABLE;
+    	
+    $ Programming...
+	Call PROGRAM;
+
+	# Disabling...
+	Call DISABLE;
+	
+	$ Uploading...
+	Call UPLOAD; 
+    
+END_OPERATION;
+
+OPERATION Verify Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ Verifying...
+	Call VERIFY;
+
+    
+END_OPERATION;
+
+OPERATION Read and Save;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ Reading Back...
+	Call READBACK;
+
+END_OPERATION;
+
+OPERATION Erase Only;
+	INT32 Addr = 0;
+END_OPERATION;
+OPERATION Erase All;
+	INT32 Addr = 0;
+END_OPERATION;
+
+OPERATION Erase Sector(s) Only;
+	INT32 Addr = 0;
+END_OPERATION;
+OPERATION Blank Check;
+	INT32 Addr = 0;
+    
+    $ Initializing...
+	Call INITIAL;	
+	
+	$ Checking SPI FLASH Programmer IP...
+    Call CHECK_IP_ID;
+   
+    $ Blank Checking...
+	Call BLANK_CHECK;
+    
+END_OPERATION;
+
+OPERATION Disabled;
+    INT32 Idx1 = 0;
+    $ Resetting...
+    SIR	8	TDI (18) ;
+	RUNTEST	IDLE	3 TCK	2.00E-002 SEC;
+	$ FPGA Loader Disabled.Please Reset the target FPGA device...
+END_OPERATION;
+
+OPERATION Uploaded;
+    INT32 Idx1 = 0;
+    $ Uploading...
+    Call UPLOAD;
+END_OPERATION;
+
+OPERATION Select_SPI_Device;
+    INT32 Idx1 = 0;
+    $ Initializing...
+	Call INITIAL;	
+	Call CHECK_IP_ID;
+    $ Select SPI Device...
+    Call SELECT_SPI_DEVICE;
+END_OPERATION;
+
+OPERATION Toggle_ProgramN;
+    $ Trasition the PROGRAMN...
+    Call TOGGLE_PROGRAMN;
+END_OPERATION;
+
+OPERATION Bypass;
+	INT32 Addr = 0;
+END_OPERATION;            
+            

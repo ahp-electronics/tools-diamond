@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title ="basereport">
+  <!-- ReportDef id="Report_Bitstream" value ="$(report_base).bit, $(report_base).rbt"/ -->
+  <ReportDef id="Report_Bitstream" value ='strategy.PROP_BIT_OutFormatBitGen=="Bit File (Binary)"||strategy.PROP_BIT_OutFormatBitGen=="Mask and Readback File (Binary)"?$(report_base).bit:$(report_base).rbt'/>
+  <ReportDef id="Report_JDec" value ="$(report_base).jed"/>
+  <ReportDef id="Report_PromData" value ='strategy.PROP_BIT_OutFormatPromGen=="Intel Hex 32-bit"?$(report_base).mcs:$(report_base).exo'/>
+  <ReportDef id="Report_SynplifyRep" value="$(report_base).srf" />
+  <ReportDef id="Report_PrecisionRep" value="$(report_base).srp" />
+  <ReportDef id="Report_LSERep" value="synthesis.log" />
+  <ReportDef id="Report_TranslateRep" value ="$(report_base).drp" />
+  <ReportDef id="Report_MapEqu"  value ="$(report_base).n2e" />
+  <ReportDef id="Report_MapRep"  value ="$(report_base).mrp" />
+  <ReportDef id="Report_MapTrace" value ="$(report_base).tw1" />
+  <ReportDef id="Report_PARRep" value ="$(report_base).par" />
+  <ReportDef id="Report_PADRep" value ="$(report_base).pad" />
+  <ReportDef id="Report_PARTrace" value ="$(report_base).twr"/>
+  <ReportDef id ="Report_IOTiming" value ="$(report_base).ior"/>
+  <ReportDef id ="Report_SSO" value ="$(report_base).sso"/>  
+  <ReportDef id="Report_BitGen" value ="$(report_base).bgn"/>
+  <ReportDef id="Report_PRM" value ="$(report_base).prm"/>
+  <ReportDef id ="Report_NGD" value ="$(report_base).ngd"/>
+  <ReportDef id ="Report_MAP_NCD" value ="$(report_base)_map.ncd"/>
+  <ReportDef id ="Report_PAR_NCD" value ="$(report_base).ncd"/>
+  <ReportDef id ="Report_TimingSimFileVlg" value ="$(report_base)_vo.vo, $(report_base)_vo.sdf"/>
+  <ReportDef id ="Report_TimingSimFileVHD" value ="$(report_base)_vho.vho, $(report_base)_vho.sdf"/>
+  <ReportDef id ="Report_PostMapSimFileVHD" value ="$(report_base)_mapvho.vho, $(report_base)_mapvho.sdf"/>
+  <ReportDef id ="Report_PostMapSimFileVlg" value ="$(report_base)_mapvo.vo, $(report_base)_mapvo.sdf"/>
+  <ReportDef id ="Report_SynResUtil" value ="$(report_base).areasrr"/>
+  <ReportDef id ="Report_LSEResUtil" value ="$(report_base).arearep"/>
+  <ReportDef id ="Report_MapResUtil" value ="$(report_base)_map.hrr"/>
+  <ReportDef id ="Report_LSEData" value ="$(report_base).lsedata"/>  
+  <ReportDef id ="Report_Message" value ="message.xml"/> 
+  <ReportDef id ="Report_MessageFilter" value ="filter.xml"/>
+  <ReportDef id ="Report_RtlVdb" value ='implementation.top==""? !LSE_DEFRTLVDB : .vdbs/${implementation.top}_rtl.vdb'/> 
+  <ReportDef id ="Report_TchVdb" value ='implementation.top==""? !LSE_DEFTECHVDB : .vdbs/${implementation.top}_tech.vdb'/> 
+  <ReportDef id ="Report_MapVdb" value =".vdbs/$(report_base)_map.vdb"/>
+  <ReportDef id ="Report_LSETimingRep" value ='implementation.top==""? !LSE_DEFTWR : ${implementation.top}_lse.twr'/>  
+  <ReportDef id ="Report_IBIS_Model" value ='!IBISGen:ibs_outfile'/>
+  <ReportDef id ="Report_ASC_HEX" value = '$(report_base).txt' />
+  <ReportDef id="Report_Bitstream_XO3L" value ='strategy.PROP_BIT_OutFormatBitGen=="Bit File (Binary)"||strategy.PROP_BIT_OutFormatBitGen=="Mask and Readback File (Binary)"?$(report_base)_XO3L.bit:$(report_base)_XO3L.rbt'/>  
+  <ReportDef id="Report_JDec_XO3L" value ="$(report_base)_XO3L.jed"/>
+  <ReportDef id="Report_BitGen_XO3" value ="$(report_base)_XO3L.bgn"/>  
+  <ReportDef id="Report_PowerCal" value ="${report_base}.pwrp"/>
+  <!-- ReportDef id ="Report_TimingSimSDF" value ="$(report_base).sdf"/ -->
+</BaliFlowDef>

@@ -1,0 +1,46 @@
+COMMERCIAL ;
+BLOCK RESETPATHS ;
+BLOCK ASYNCPATHS ;
+##########################################################################
+# Frequency Declerations
+##########################################################################
+FREQUENCY NET "clk_in_c" 100.000000 MHz ;
+FREQUENCY NET "sclk" 200.000000 MHz PAR_ADJ 40.000000 ;
+FREQUENCY NET "*clocking/clkos" 400.000000 MHz PAR_ADJ 80.000000 ;
+FREQUENCY NET "*sclk2x" 400.000000 MHz PAR_ADJ 80.000000 ;
+##########################################################################
+# Block, Maxdelay, Multicycle preferences
+##########################################################################
+BLOCK PATH FROM PORT "reset_*" ;
+BLOCK NET "*read_pulse_tap*" ;
+MAXDELAY NET "*U1_ddr3_sdram_mem_io_top/ddr3_read_data_out*" 4.500000 nS ;
+MAXDELAY NET "*U1_ddr3_sdram_mem_io_top/datavalid_o_*" 4.400000 nS ;
+MAXDELAY NET "*U1_ddr3_sdram_mem_io_top/ddrin_*" 2.500000 nS ;
+MULTICYCLE FROM CELL "*/uddcntln" 2.000000 X ;
+#Half SCLK clock path
+MAXDELAY TO CELL "*/dq_read_o_n0*" 5.000000 ns ;
+#sclk(-)  or sclk(+) to sclk2x(+)
+MAXDELAY TO CELL "*/dq_read_o_t2_sclk*" 2.500000 ns ;
+#Half SCLK2x clock path
+MAXDELAY TO CELL "*/dq_read_o_n00*" 2.500000 ns ;
+#Mux input and output paths
+MAXDELAY NET "*/dq_read_o_p01*" 0.550000 nS ;
+MAXDELAY NET "*/dq_read_o_n00*" 0.550000 nS ;
+MAXDELAY NET "*/dqs_read*" 0.615000 nS ;
+##########################################################################
+# CSM logic preferences
+##########################################################################
+BLOCK PATH FROM CLKNET "clk_in_c" TO CLKNET "sclk" ;
+BLOCK PATH FROM CLKNET "clk_in_c" TO CLKNET "*clocking/clkos" ;
+BLOCK PATH FROM CLKNET "sclk" TO CLKNET "clk_in_c" ;
+BLOCK PATH FROM CLKNET "*sclk2x" TO CLKNET "clk_in_c" ;
+BLOCK PATH FROM CLKNET "clk_in_c" TO CLKNET "*eclk" ;
+BLOCK PATH FROM CLKNET "*clocking/clkos" TO CLKNET "*eclk" ;
+BLOCK PATH FROM CLKNET "*clocking/clkos" TO CLKNET "sclk" ;
+BLOCK PATH FROM CLKNET "*sclk2x" TO CLKNET "*clocking/clkos" ;
+MAXDELAY NET "*clocking/pll_phase*" 2.500000 nS ;
+MAXDELAY NET "*dqclk1bar_ff" 0.650000 nS ;
+MAXDELAY NET "*eclk" 1.200000 nS ;
+MAXDELAY NET "*clocking/stop" 0.800000 nS ;
+MAXDELAY NET "*clocking/clkos" 1.100000 nS ;
+

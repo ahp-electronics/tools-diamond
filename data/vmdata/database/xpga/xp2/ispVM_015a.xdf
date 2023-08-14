@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Spinti 07/07/06
+	xpga/xp2 sub directory
+		.Contains device database file and all the algorithm files for LatticeXP2 technology devices.
+	 ispVM_015.xdf  support :
+		. LatticeXP2 family.
+	Spinti: 02/22/07 Created release database.
+	Spinti: 04/24/07 Corrected LFXP2-17E_AS PONs.
+	07/03/07 Nguyen modified to support rev A silicon
+	Ong   : 07/17/07  Corrected the Socket Adpater names for LFXP2-17E.
+	        Renamed PA-T100/LFXP3C to PN-Q208/LFXP2
+		  Renamed PA-T144/LFXP3C to PN-FT256/LFXP2
+		  Renamed PA-Q208/LFXP3C to PN-F484/LFXP2
+	07/20/07 Nguyen modified to support "SRAM Program,Verify" Operation		  
+	Spinti: 09/05/07 Removed the .xfp tag since the XP2 does not have a sysCONFIG port.
+	Nguyen: 01/18/08 changed the maximum PWE for the 17K to 240 seconds based on Howard request. 
+	Nguyen: 05/16/08 Added "XSRAM Read Status Register" and "XSRAM Verify Only"
+-->
+<ispXDF version="16.1">
+    <Family name="LatticeXP2_AS">
+       <Device name="LFXP2-17E_AS">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP2-17E_AS </CodeName>
+            <FullName> LFXP2-17E_AS </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XP2_AS.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XP2_AS.svp"
+                         value="0x07"/>
+            <JtagID>0x0129B043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2188 </ColWidth>
+            <RowWidth> 1658 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <ArchLength>  2184 </ArchLength>
+            <SEDLength>  32 </SEDLength>
+            <TotalFuses> 3627736 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   2400 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>730</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP2-17E_AS </PON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LFXP2-17E-XXQ208AS </PON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-Q208/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LFXP2-17E-XXFT256AS </PON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256/LFXP2"/>
+            </Package>
+           	<Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFXP2-17E-XXF484AS </PON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484/LFXP2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;15 MHz;20 MHz;26 MHz;32 MHz;40 MHz;54 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000000;000000;000000;000000;000000;000000;000000;
+            							000000;000000;000000;000000;000000;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;001100;000000;010101;101111;100101;100000;100011;111100;
+            				   111010;110100;110110;110111;110000;110001;</Clock_divider>
+            </ControlReg0>
+            <EBRFile> lfxp2-17_ebr_only.bit </EBRFile>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;1463;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;1718;</Persistent_fuse_Column>
+            </Persistent_fuse>
+<!--
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1678</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>188</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+-->
+			<Status_Control>
+            	<StatusBitName>;PASS/FAIL;DONE;PROTECT;NA;OTP;KEYLOCK;ENCRYPT;SECURITY;</StatusBitName>
+            	<StatusControl>;in;in;in;in;in;in;in;in;</StatusControl>
+            	<StatusIndex>;0;1;2;3;4;5;6;7;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Operation>
+        	&quot;FLASH Erase,Program,Verify&quot;
+        	&quot;FLASH Erase,Program,Verify,Secure&quot;
+        	&quot;FLASH Verify Only&quot;
+			&quot;FLASH Erase Only&quot;
+			&quot;FLASH Verify ID&quot;
+			&quot;FLASH Display ID&quot;
+			&quot;FLASH Display USERCODE&quot;
+			&quot;FLASH Read and Save&quot;
+			&quot;FLASH Calculate Checksum&quot;
+			&quot;FLASH TAG Program,Verify&quot;
+			&quot;FLASH TAG Erase&quot;
+			&quot;FLASH Save JEDEC with TAG&quot;
+			&quot;FLASH Read Status Register&quot;
+			&quot;FLASH Read DONE bit&quot;
+			&quot;FLASH Bypass&quot;
+			
+			&quot;XFLASH Erase,Program,Verify&quot;
+			&quot;XFLASH Erase,Program,Verify,Secure&quot;
+			&quot;XFLASH Program and TransFR&quot;
+			&quot;XFLASH TransFR&quot;		
+			&quot;XFLASH Verify Only&quot;
+			&quot;XFLASH Erase Only&quot;
+			&quot;XFLASH Read and Save&quot;
+			&quot;XFLASH Upload to Static RAM&quot;			
+			&quot;XFLASH TAG Program,Verify&quot;
+			&quot;XFLASH TAG Erase&quot;
+			&quot;XFLASH Save JEDEC with TAG&quot;		
+			&quot;XFLASH Read Status Register&quot;	
+			&quot;XFLASH Bypass&quot;
+			
+			&quot;SRAM Program,Verify&quot;
+<!--			&quot;SRAM Program Only&quot;-->
+            &quot;SRAM Verify ID&quot;
+            &quot;SRAM Display ID&quot;
+<!--            &quot;SRAM Verify Only&quot; -->
+            &quot;SRAM Erase Only&quot;
+            &quot;SRAM Display USERCODE&quot;
+            &quot;SRAM Read and Save&quot;
+	        &quot;SRAM Read Status Register&quot;
+            &quot;SRAM Read DONE bit&quot;            
+            &quot;SRAM Refresh&quot;
+            &quot;SRAM Bypass&quot;
+
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Verify Only&quot;
+            &quot;XSRAM Read Status Register&quot;
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Bypass&quot;
+            
+            <!--   	&quot;Security Program Encryption Key&quot;-->
+	     	<!--       &quot;Security Read Feature Row&quot;-->
+		 	<!--		&quot;Security Erase Feature Row&quot;-->
+		 
+            &quot;Security Erase,Program,Verify&quot;			
+        	&quot;Security Erase Only&quot;
+        	&quot;Security Erase,Program,Verify with my_ASSP&quot;
+        	&quot;Security Erase,Program,Verify with OTP&quot;
+			&quot;Security Background Erase,Program,Verify&quot;
+			&quot;Security Background  Program and TransFR&quot;
+			&quot;Security Background Erase Only&quot;		
+			&quot;Security Read Status Register&quot;
+				
+				
+			&quot;SPI Flash Erase,Program,Verify&quot;
+		    &quot;SPI Flash Erase,Program,Verify,Refresh&quot;
+		    &quot;SPI Flash Erase,Program&quot;
+		    &quot;SPI Flash Verify Only&quot;
+		    &quot;SPI Flash Erase All&quot;
+		    &quot;SPI Flash Read and Save&quot;
+		    &quot;SPI Flash Calculate File Size Checksum&quot;
+            &quot;SPI Flash Calculate Device Size Checksum&quot;
+		    &quot;SPI Flash Bypass&quot;
+		
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed;*.isc"/>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="TRUE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>2</CFGPinCount>
+     	<BitstreamModelTemplate>Magma Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;Leave Alone;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;FLASH;XFLASH;SRAM;XSRAM;SECURITY;SPI;</Programming_Mode_Control>
+    </Family>   
+</ispXDF>

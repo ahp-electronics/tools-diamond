@@ -1,0 +1,111 @@
+// $Header: /home/dmsys/pvcs/RCSMigTest/rcs/mg5g00/pkg/m5gnb/data/RCS/mg5glib.ttl,v 1.15 2005/03/10 22:39:13 jmchan Exp $
+
+// File: mg5glib.ttl
+// Description: TTL file for magma/mg5g00/XP.
+
+// Translate INPUT/OUTPUT flops to Generic PIC register with proper props
+// The EXPRESS keyword tells the client to use the ECLK routing.
+IFS1P3BX = FS1P3BX ( DIN ) {
+           D; SP; SCLK=CK; PD; Q;
+};
+OFS1P3BX = FS1P3BX ( DOUT ) {
+           D; SP; SCLK=CK; PD; Q;
+};
+OFE1P3BX = FS1P3BX ( DOUT EXPRESS ) {
+           D; SP; ECLK=CK; PD; Q;
+};
+IFS1P3DX = FS1P3DX ( DIN ) {
+           D; SP; SCLK=CK; CD; Q;
+};
+OFS1P3DX = FS1P3DX ( DOUT ) {
+           D; SP; SCLK=CK; CD; Q;
+};
+OFE1P3DX = FS1P3DX ( DOUT EXPRESS ) {
+           D; SP; ECLK=CK; CD; Q;
+};
+
+IFS1P3IX = FS1P3IX ( DIN ) {
+           D; SP; CD; SCLK=CK; Q;
+};
+OFS1P3IX = FS1P3IX ( DOUT ) {
+           D; SP; CD; SCLK=CK; Q;
+};
+OFE1P3IX = FS1P3IX ( DOUT EXPRESS ) {
+           D; SP; CD; ECLK=CK; Q;
+};
+IFS1P3JX = FS1P3JX ( DIN ) {
+           D; SP; PD; SCLK=CK; Q;
+};
+OFS1P3JX = FS1P3JX ( DOUT ) {
+           D; SP; PD; SCLK=CK; Q;
+};
+OFE1P3JX = FS1P3JX ( DOUT EXPRESS ) {
+           D; SP; PD; ECLK=CK; Q;
+};
+
+// Turn off 5G distr. RAMs
+SPR32X1 = SPR32X1 {
+          AD0; AD1; AD2; AD3; AD4; CK=ECLK; D; WRE; WPE; DO0;
+};
+SPR64X1 = SPR64X1 {
+          AD0; AD1; AD2; AD3; AD4; AD5; CK=ECLK; D; WRE; WPE; DO0;
+};
+SPR128X1 = SPR128X1 {
+          AD0; AD1; AD2; AD3; AD4; AD5; AD6; CK=ECLK; D; WRE; WPE; DO0;
+};
+DPR32X1 = DPR32X1 {
+          D; CK=ECLK; WRE; WPE; RAD0; RAD1; RAD2; RAD3; RAD4; WAD0; WAD1; WAD2; WAD3; WAD4; RDO; WDO;
+};
+DPR64X1 = DPR64X1 {
+          D; CK=ECLK; WRE; WPE; RAD0; RAD1; RAD2; RAD3; RAD4; RAD5; WAD0; WAD1; WAD2; WAD3; WAD4; WAD5; RDO; WDO;
+};
+
+// Turn off OSCIL by forcing pin mismatch
+OSCIL = OSCIL {
+        OSC=CK;
+};
+
+// Input buffers for backward compatibility.
+// IBM    = IBM   ( IO_TYPE=LVCMOS18 PULLMODE=NONE );
+// IBMS   = IBMS  ( IO_TYPE=LVCMOS18 PULLMODE=NONE );
+// IBMPD  = IBMPD ( IO_TYPE=LVCMOS18 PULLMODE=DN );
+// IBMPDS = IBMPDS( IO_TYPE=LVCMOS18 PULLMODE=DN );
+// IBMPU  = IBMPU ( IO_TYPE=LVCMOS18 PULLMODE=UP );
+// IBMPUS = IBMPUS( IO_TYPE=LVCMOS18 PULLMODE=UP );
+
+// Add new input buffers.
+// IB = IBM ( IO_TYPE=LVCMOS18 PULLMODE=NONE );
+// IBPD = IBMPD ( IO_TYPE=LVCMOS18 PULLMODE=DN );
+// IBPU = IBMPU ( IO_TYPE=LVCMOS18 PULLMODE=UP );
+
+// Translate output buffers.
+// OB  = OB  ( IO_TYPE=LVCMOS18 PULLMODE=NONE );
+// OBZ = OBZ ( IO_TYPE=LVCMOS18 PULLMODE=NONE );
+// OBZPU = OBZPU ( IO_TYPE=LVCMOS18 PULLMODE=UP );
+// OBZPD = OBZPD ( IO_TYPE=LVCMOS18 PULLMODE=DN );
+// OBW = OBW ( IO_TYPE=LVCMOS18 PULLMODE=KEEPER );
+
+// BB  = BB  ( IO_TYPE=LVCMOS18 PULLMODE=NONE );
+// BBPU = BBPU ( IO_TYPE=LVCMOS18 PULLMODE=UP );
+// BBPD = BBPD ( IO_TYPE=LVCMOS18 PULLMODE=DN );
+// BBW = BBW ( IO_TYPE=LVCMOS18 PULLMODE=KEEPER );
+
+
+// Turn off 5G DDRs.
+INDDR = INDDR {
+         D; CK=ELCK; LSR; RUN; Q0; Q1; LOCK;
+};
+INDDRX = INDDRX {
+         D; CK=ELCK; LSR; RUN; Q0; Q1; LOCK;
+};
+OUTDDR = OUTDDR {
+         D0; D1; CK=ELCK; LSR; Q;
+};
+OUTDDRX = OUTDDRX {
+         D0; D1; CK=ELCK; LSR; Q;
+};
+
+// Turn off TSALL.
+// TSALL = TSALL {
+//	TSALL = NOT_USED;
+// };

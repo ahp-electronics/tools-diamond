@@ -1,0 +1,869 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!--
+	Spinti 04/21/04
+	MACH sub directory
+		.Contains device database file and all the algorithm files for the Mature MACH4 and MACH4LV devices.
+	 ispVM_002a1.xdf  support :
+		. MACH4 family
+		. MACH4LV family
+	11/18/04 Nguyen added "Voltage_Control" field foe device with 6 pins
+-->
+<ispXDF version="14.1">
+    <Comment>MACH Devices List</Comment>
+    <Family name="MACH4">
+        <Device name="M4-32/32">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>4</Pins>
+            <CodeName> M4-32/32    </CodeName>
+            <FullName> M4-32/32 </FullName>
+            <AliasName> iM4A5-32/32    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x07430157</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 378            </ColWidth>
+            <RowWidth> 80            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 16160    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>98</BScan_Length>
+            <Package>
+                <Type> All    </Type>
+                <PON> M4-32/32    </PON>
+                <JDFFile> M4_032P5.JDF </JDFFile>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 44-pin PLCC    </Type>
+                <PON> M4-32/32-XXJC    </PON>
+                <JDFFile> M4_032P5.JDF </JDFFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110000"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-44-28-01P-3-YAM"/>
+            </Package>
+            <Package>
+                <Type> 44-pin TQFP  </Type>
+                <PON> M4-32/32-XXVC    </PON>
+                <JDFFile> M4_032P5.JDF </JDFFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110011"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-44TQ-28D-C6-ENP"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP    </Type>
+                <PON> M4-32/32-XXVC48 </PON>
+                <JDFFile> M4_032P5.JDF </JDFFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110011"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-48TQ-28D-A6-YAM"/>
+            </Package>
+        </Device>
+        <Device name="M4-64/32">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>4</Pins>
+            <CodeName> M4-64/32    </CodeName>
+            <FullName> M4-64/32 </FullName>
+            <AliasName> iM4A5-64/32    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x07480157</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 378            </ColWidth>
+            <RowWidth> 80            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 30240    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>98</BScan_Length>
+         <Package>
+                <Type> All    </Type>
+                <PON> M4-64/32    </PON>
+                <JDFFile> M4_064P5.JDF </JDFFile>
+                <INIFile> M4_064P5.INI </INIFile>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+           <Package>
+                <Type> 44-pin PLCC    </Type>
+                <PON> M4-64/32-XXJC    </PON>
+                <JDFFile> M4_064P5.JDF </JDFFile>
+                <INIFile> M4_064P5.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110000"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-44-28-01P-3-YAM"/>
+            </Package>
+            <Package>
+                <Type> 44-pin TQFP  </Type>
+                <PON> M4-64/32-XXVC    </PON>
+                <JDFFile> M4_064P5.JDF </JDFFile>
+                <INIFile> M4_064P5.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110011"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-44TQ-28D-C6-ENP"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP    </Type>
+                <PON> M4-64/32-XXVC48 </PON>
+                <JDFFile> M4_064P5.JDF </JDFFile>
+                <INIFile> M4_064P5.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110011"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-48TQ-28D-A6-YAM"/>
+            </Package>
+        </Device>
+        <Device name="M4-96/48">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>4</Pins>
+            <CodeName> M4-96/48    </CodeName>
+            <FullName> M4-96/48 </FullName>
+            <AliasName> iM4A5-96/48    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x074D0157</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 582            </ColWidth>
+            <RowWidth> 80            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 46560    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>152</BScan_Length>
+            <Package>
+                <Type> 100-pin TQFP  </Type>
+                <PON> M4-96/48-XXVC     </PON>
+                <JDFFile> M4_96T5.JDF </JDFFile>
+                <INIFile> M4_96T5.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-100TQ-28D-E6-YAM(Rev. 3)"/>
+            </Package>
+        </Device>
+        <Device name="M4-96/96">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>5</Pins>
+            <CodeName> M4-96/96    </CodeName>
+            <FullName> M4-96/96 </FullName>
+            <AlgoTemplate>MACH465.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH465.svp"
+                         value="0x03"/>
+            <JtagID>0x071B8003</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 642            </ColWidth>
+            <RowWidth> 80            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 43740    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>294</BScan_Length>
+            <Package>
+                <Type> 144-pin PQFP          </Type>
+                <PON> M4-96/96-XXYC        </PON>
+                <JDFFile> MACH355.JDF        </JDFFile>
+                <INIFile> MACH355.INI        </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110010"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-144-28-01Q-600"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>5.0V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TRST,ENABLE</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="MACH445">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>5</Pins>
+            <CodeName> MACH445    </CodeName>
+            <FullName> MACH445 </FullName>
+            <AlgoTemplate>MACH465.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH465.svp"
+                         value="0x03"/>
+            <JtagID>0x07568003</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 792            </ColWidth>
+            <RowWidth> 80            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 54096    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>198</BScan_Length>
+            <Package>
+                <Type> 100-pin PQFP          </Type>
+                <PON> MACH445-XXYC        </PON>
+                <JDFFile> MACH445.JDF        </JDFFile>
+                <INIFile> MACH445.INI        </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-100PQ-28D-A6-YAM"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-100-28-03Q-600"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>5.0V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TRST,ENABLE</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="M4-128/64">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>5</Pins>
+            <CodeName> M4-128/64    </CodeName>
+            <FullName> M4-128/64 </FullName>
+            <AliasName> iM4A5-128/64    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x17568003</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 792            </ColWidth>
+            <RowWidth> 80            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 54096    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>198</BScan_Length>
+          <Package>
+                <Type> All  </Type>
+                <PON> M4-128/64 </PON>
+                <JDFFile> M4_128A.JDF </JDFFile>
+                <INIFile> M4_128A.INI </INIFile>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin PQFP  </Type>
+                <PON> M4-128/64-XXYC </PON>
+                <JDFFile> M4_128A.JDF </JDFFile>
+                <INIFile> M4_128A.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-100PQ-28D-A6-YAM"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-100-28-03Q-600"/>
+            </Package>
+            <Package>
+                <Type> 100-pin PQFP-446 </Type>
+                <PON> MACH446-XXYC        </PON>
+                <JDFFile> M4_128A.JDF </JDFFile>
+                <INIFile> M4_128A.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-100PQ-28D-A6-YAM"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-100-28-03Q-600"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP  </Type>
+                <PON> M4-128/64-XXVC </PON>
+                <JDFFile> M4_128A.JDF </JDFFile>
+                <INIFile> M4_128A.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-100TQ-28D-E6-YAM(Rev. 3)"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>5.0V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TRST,ENABLE</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="M4-192/96">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>4</Pins>
+            <CodeName> M4-192/96    </CodeName>
+            <FullName> M4-192/96 </FullName>
+            <AliasName> iM4A5-192/96    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x075C0157</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 1242            </ColWidth>
+            <RowWidth> 82            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 87192    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>308</BScan_Length>
+            <Package>
+                <Type> 144-pin TQFP  </Type>
+                <PON> M4-192/96-XXVC </PON>
+                <JDFFile> M4_192T5.JDF </JDFFile>
+                <INIFile> M4_192T5.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110011"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-144TQ-28D-B6-YAM"/>
+            </Package>
+        </Device>
+        <Device name="M4-256/128">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>5</Pins>
+            <CodeName> M4-256/128    </CodeName>
+            <FullName> M4-256/128 </FullName>
+            <AliasName> iM4A5-256/128    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x17608003</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x1FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 1728            </ColWidth>
+            <RowWidth> 82            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 121152    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>402</BScan_Length>
+           <Package>
+                <Type> All  </Type>
+                <PON> M4-256/128    </PON>
+                <JDFFile> M4_256B.JDF </JDFFile>
+                <INIFile> M4_256B.INI </INIFile>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP  </Type>
+                <PON> M4-256/128-XXYC    </PON>
+                <JDFFile> M4_256B.JDF </JDFFile>
+                <INIFile> M4_256B.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-208PQ-28D-B6-YAM(Rev. 2)"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-208-28-01PG-600"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP-466  </Type>
+                <PON> MACH466-256/128-XXYC</PON>
+                <JDFFile> M4_256B.JDF </JDFFile>
+                <INIFile> M4_256B.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-208PQ-28D-B6-YAM(Rev. 2)"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-208-28-01PG-600"/>
+            </Package>
+            <Package>
+                <Type> 256-ball BGA  </Type>
+                <PON> M4-256/128-XXAC    </PON>
+                <JDFFile> M4_256B.JDF </JDFFile>
+                <INIFile> M4_256B.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-256BGA-28D-B6-PLA(Rev. 2)"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>5.0V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TRST,ENABLE</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="MACH465">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>5</Pins>
+            <CodeName> MACH465    </CodeName>
+            <FullName> MACH465 </FullName>
+            <AlgoTemplate>MACH465.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH465.svp"
+                         value="0x03"/>
+            <JtagID>0x07608003</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x1FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 1728            </ColWidth>
+            <RowWidth> 82            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 121152    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>402</BScan_Length>
+            <Package>
+                <Type> 208-pin PQFP-465  </Type>
+                <PON> MACH465-XXYC    </PON>
+                <JDFFile> MACH465.JDF </JDFFile>
+                <INIFile> MACH465.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00110010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-208PQ-28D-B6-YAM(Rev. 2)"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-208-28-01PG-600"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>5.0V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TRST,ENABLE</PinList>
+            </Voltage_Control>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save JEDEC&quot;
+        </Operation>
+        <BypassInst>010001</BypassInst>
+        <IDInstr>0x01</IDInstr>
+        <ReInitialize value="TRUE"/>
+        <LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+    <Family name="MACH4LV">
+        <Device name="M4LV-32/32">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>4</Pins>
+            <CodeName> M4LV-32/32    </CodeName>
+            <FullName> M4LV-32/32 </FullName>
+            <AliasName> iM4A3-32/32    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x07434157</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 378            </ColWidth>
+            <RowWidth> 80            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 16160    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>98</BScan_Length>
+            <Package>
+                <Type> All    </Type>
+                <PON> M4LV-32/32    </PON>
+                <JDFFile>M4_032PL.JDF </JDFFile>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 44-pin PLCC    </Type>
+                <PON> M4LV-32/32-XXJC    </PON>
+                <JDFFile>M4_032PL.JDF </JDFFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100000"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-44-28-01P-3-YAM"/>
+            </Package>
+            <Package>
+                <Type> 44-pin TQFP  </Type>
+                <PON> M4LV-32/32-XXVC    </PON>
+                <JDFFile>M4_032PL.JDF </JDFFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100011"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-44TQ-28D-C6-ENP"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP    </Type>
+                <PON> M4LV-32/32-XXVC48 </PON>
+                <JDFFile>M4_032PL.JDF </JDFFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100011"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-48TQ-28D-A6-YAM"/>
+            </Package>
+        </Device>
+        <Device name="M4LV-64/32">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>4</Pins>
+            <CodeName> M4LV-64/32    </CodeName>
+            <FullName> M4LV-64/32 </FullName>
+            <AliasName> iM4A3-64/32    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x07484157</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 378            </ColWidth>
+            <RowWidth> 80            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 30240    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>98</BScan_Length>
+            <Package>
+                <Type> All    </Type>
+                <PON> M4LV-64/32    </PON>
+                <JDFFile> M4_064PL.JDF </JDFFile>
+                <INIFile> M4_064PL.INI </INIFile>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 44-pin PLCC    </Type>
+                <PON> M4LV-64/32-XXJC    </PON>
+                <JDFFile> M4_064PL.JDF </JDFFile>
+                <INIFile> M4_064PL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100000"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-44-28-01P-3-YAM"/>
+            </Package>
+            <Package>
+                <Type> 44-pin TQFP  </Type>
+                <PON> M4LV-64/32-XXVC    </PON>
+                <JDFFile> M4_064PL.JDF </JDFFile>
+                <INIFile> M4_064PL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100011"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-44TQ-28D-C6-ENP"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP    </Type>
+                <PON> M4LV-64/32-XXVC48 </PON>
+                <JDFFile> M4_064PL.JDF </JDFFile>
+                <INIFile> M4_064PL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100011"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-48TQ-28D-A6-YAM"/>
+            </Package>
+        </Device>
+        <Device name="M4LV-96/48">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>4</Pins>
+            <CodeName> M4LV-96/48    </CodeName>
+            <FullName> M4LV-96/48 </FullName>
+            <AliasName> iM4A3-96/48    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x074D4157</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 582            </ColWidth>
+            <RowWidth> 80            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 46560    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>152</BScan_Length>
+            <Package>
+                <Type> 100-pin TQFP  </Type>
+                <PON> M4LV-96/48-XXVC     </PON>
+                <JDFFile> M4_96TL.JDF </JDFFile>
+                <INIFile> M4_96TL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-100TQ-28D-E6-YAM(Rev. 3)"/>
+            </Package>
+        </Device>
+        <Device name="M4LV-128/64">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>5</Pins>
+            <CodeName> M4LV-128/64    </CodeName>
+            <FullName> M4LV-128/64 </FullName>
+            <AliasName> iM4A3-128/64    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x0756C003</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 792            </ColWidth>
+            <RowWidth> 80            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 54096    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>198</BScan_Length>
+           <Package>
+                <Type> All  </Type>
+                <PON> M4LV-128/64 </PON>
+                <JDFFile> M4_128AL.JDF </JDFFile>
+                <INIFile> M4_128AL.INI </INIFile>
+                <Adapter vendor="Not Applicable"/>    
+            </Package>
+            <Package>
+                <Type> 100-pin PQFP  </Type>
+                <PON> M4LV-128/64-XXYC </PON>
+                <JDFFile> M4_128AL.JDF </JDFFile>
+                <INIFile> M4_128AL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-100PQ-28D-A6-YAM"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-100-28-03Q-600"/>    
+            </Package>
+            <Package>
+                <Type> 100-pin PQFP-LV446 </Type>
+                <PON> MACHLV446-XXYC        </PON>
+                <JDFFile> M4_128AL.JDF </JDFFile>
+                <INIFile> M4_128AL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-100PQ-28D-A6-YAM"/>    
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-100-28-03Q-600"/>        
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP  </Type>
+                <PON> M4LV-128/64-XXVC </PON>
+                <JDFFile> M4_128AL.JDF </JDFFile>
+                <INIFile> M4_128AL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-100TQ-28D-E6-YAM(Rev. 3)"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TRST,ENABLE</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="M4LV-192/96">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>4</Pins>
+            <CodeName> M4LV-192/96    </CodeName>
+            <FullName> M4LV-192/96 </FullName>
+            <AliasName> iM4A3-192/96    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x075C4157</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 1242            </ColWidth>
+            <RowWidth> 82            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 87192    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>308</BScan_Length>
+            <Package>
+                <Type> 144-pin TQFP  </Type>
+                <PON> M4LV-192/96-XXVC </PON>
+                <JDFFile> M4_192TL.JDF </JDFFile>
+                <INIFile> M4_192TL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100011"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-144TQ-28D-B6-YAM"/>
+            </Package>
+        </Device>
+        <Device name="M4LV-256/128">
+            <Comm> JTAG </Comm>
+            <Vendor> Vantis </Vendor>
+            <Pins>5</Pins>
+            <CodeName> M4LV-256/128    </CodeName>
+            <FullName> M4LV-256/128 </FullName>
+            <AliasName> iM4A3-256/128    </AliasName>
+            <AlgoTemplate>MACH4.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACH4.svp"
+                         value="0x03"/>
+            <JtagID>0x0760C003</JtagID>
+            <IDMask>0x0FFFFFFF    </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 1728            </ColWidth>
+            <RowWidth> 82            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 121152    </TotalFuses>
+            <PWP> 50        </PWP>
+            <PWE> 100 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>402</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> M4LV-256/128    </PON>
+                <JDFFile> M4_256BL.JDF </JDFFile>
+                <INIFile> M4_256BL.INI </INIFile>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP  </Type>
+                <PON> M4LV-256/128-XXYC    </PON>
+                <JDFFile> M4_256BL.JDF </JDFFile>
+                <INIFile> M4_256BL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-208PQ-28D-B6-YAM(Rev. 2)"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-208-28-01PG-600"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP-LV466  </Type>
+                <PON> MACHLV466-256/128-XXYC</PON>
+               <JDFFile> M4_256BL.JDF </JDFFile>
+                <INIFile> M4_256BL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-208PQ-28D-B6-YAM(Rev. 2)"/>
+                <Adapter vendor="Emulation Technology, Inc."
+                       adapter_name="AS-208-28-01PG-600"/>
+            </Package>
+            <Package>
+                <Type> 256-ball BGA  </Type>
+                <PON> M4LV-256/128-XXAC    </PON>
+                <JDFFile> M4_256BL.JDF </JDFFile>
+                <INIFile> M4_256BL.INI </INIFile>
+                <!--     Voltage settings Bit 5 and 4 
+                        00 = 1.8, 01 = 2.5, 10 = 3.3, 11 = 5 -->
+                <MCtrl setting="00100010"/>
+                <Adapter vendor="California Integration, Inc."
+                       adapter_name="CIC-256BGA-28D-B6-PLA(Rev. 2)"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TRST,ENABLE</PinList>
+            </Voltage_Control>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save JEDEC&quot;
+        </Operation>
+        <BypassInst>010001</BypassInst>
+        <IDInstr>0x01</IDInstr>
+        <ReInitialize value="TRUE"/>
+        <LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+</ispXDF>
+

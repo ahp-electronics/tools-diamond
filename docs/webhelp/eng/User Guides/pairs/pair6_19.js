@@ -1,0 +1,22 @@
+var pairs =
+{
+"ibis":{"models":1,"model":1}
+,"generating":{"ibis":1}
+,"models":{"diamond":1,"double-clicking":1}
+,"generate":{"ibis":1}
+,"double-clicking":{"ibis":1}
+,"model":{"process":1,"file":1}
+,"process":{"ibis-ami":1,"beneath":1,"view":1,"generates":1}
+,"ibis-ami":{"process":1}
+,"beneath":{"export":1}
+,"export":{"files":1}
+,"files":{"process":1}
+,"view":{"process":1}
+,"generates":{"design-specific":1}
+,"design-specific":{"model":1}
+,"file":{"project_name.ibs":1}
+,"project_name.ibs":{"project_name.ami":1}
+,"project_name.ami":{"project":1}
+,"project":{"directory":1}
+}
+;Search.control.loadWordPairs(pairs);

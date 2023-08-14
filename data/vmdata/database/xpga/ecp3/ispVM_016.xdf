@@ -1,0 +1,990 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Spinti 11/02/07
+	xpga/ecp3 sub directory
+		.Contains device database file and all the algorithm files for ECP3 technology devices.
+	 ispVM_016.xdf  support :
+		. ECP3 family.
+	10/10/08 Spinti: Created 
+	11/20/08 Spinti: Removed the FLASH TransFR operation.
+	11/21/08 Spinti: Added the LFE3-70E_ES and LFE3-70E_ES/LFE3-95E_ES for Scan operations.
+	01/27/09 Spinti: Added SPIm and SSPI modes and operations for release ES support.
+	02/27/09 Spinti: Removed SPIm and SSPI modes and operations for release ES support.
+	06/26/09 Nguyen: Removed SPIm and SSPIm modes.
+	07/07/09 Nguyen: added LatticeECP3EA family for LFE3-150EA_ES device
+	11/23/09 Nguyen changed the TotalFuses based on the maximum number of bits of encrypted and with EMB bitstreams
+	12/04/09 Nguyen: added LFE3-95EA_ES device into LatticeECP3EA family
+	12/08/09 Nguyen: enable the STAPL support
+	01/12/10 Nguyen: added LFE3-70EA_ES device into LatticeECP3EA family
+	02/05/10 Nguyen: added LFE3-35EA device into LatticeECP3EA family
+	04/08/10 Nguyen: added LFE3-17EA device into LatticeECP3EA family
+	06/04/10 Nguyen: sync up the devices with Diamond 1.0 device list
+	11/24/10 Spinti: Added PN-FT256-E3 and PN-F672-E3 Model300 socket adapters.
+	06/20/11 Nguyen: Used LatitticeECP3 as family for all EA devices
+	03/20/12 Nguyen: Fixed LFE3-35EA columm width
+	07/20/12 Nguyen: Add the ECP3-Automotive devices
+	04/28/14 EGZ: Based on cfg\usage_model\45_65_nM_Configuration_Usage_Model.pdf   Rev 2.8 page 13. 
+	              Changed 30 setting to 33 and remove settings 34, 41, 45, 51, 55, 60, 130
+	09/09/14 EGZ: added LFE3-17EA 328csBGA package to fix SOF-122600.
+-->
+<ispXDF version="17.0">
+	<Family name="LatticeECP3">
+    	<FamilyAliasName>LatticeECP3EA</FamilyAliasName>
+    	<Device name="LAE3-17EA">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAE3-17EA </CodeName>
+            <FullName> LAE3-17EA </FullName>
+            <AliasName> LAE3-17EA_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP3.svp"
+                         value="0x03"/>
+            <JtagID>0x01010043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2584 </ColWidth>
+            <RowWidth> 1543 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4651496 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>467</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LAE3-17EA </PON>
+                <JDFFile> ecp3-17.msk </JDFFile> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LAE3-17EA-XXFTN256E </PON>
+                <JDFFile> ecp3-17.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-E3"/>
+            </Package>            
+            <Package>
+                <Type> 328-ball fpBGA </Type>
+                <PON> LAE3-17EA-XXMG328E </PON>
+                <JDFFile> ecp3-17.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F328-E3"/>
+            </Package>              
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LAE3-17EA-XXFN484E </PON>
+                <JDFFile> ecp3-17.msk </JDFFile> 
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-E3"/>
+            </Package>   
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;33 MHz;</Frequency>
+            	<Master_Clock_Frequency>;010010;000000;010010;010010;010010;010010;010010;
+            							 010010;010010;010111;000110;010010;011010;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;110100;110100;110111;110111;</Clock_divider>
+            </ControlReg0>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+	        <Persistent_fuse>
+	           	<Persistent_fuse_Address>;492;492;</Persistent_fuse_Address>
+	           	<Persistent_fuse_Column>;463;431;</Persistent_fuse_Column>
+	        </Persistent_fuse>  
+			<Multiboot_fuses> -->
+				<Multiboot_cfg_Address>492</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>411</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>409</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;415;417;419;421;423;425;427;429;</Multiboot_auto_add_Column>
+			</Multiboot_fuses> -->
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>492</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>459</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+        </Device>
+    	<Device name="LFE3-17EA">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE3-17EA </CodeName>
+            <FullName> LFE3-17EA </FullName>
+            <AliasName> LFE3-17EA_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP3.svp"
+                         value="0x03"/>
+            <JtagID>0x01010043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2584 </ColWidth>
+            <RowWidth> 1543 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4651496 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>467</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE3-17EA </PON>
+                <JDFFile> ecp3-17.msk </JDFFile> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LFE3-17EA-XXFTN256E </PON>
+                <JDFFile> ecp3-17.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-E3"/>
+            </Package>            
+            <Package>
+                <Type> 328-ball csBGA </Type>
+                <PON> LFE3-17EA-XXMG328C </PON>
+                <JDFFile> ecp3-17.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M328-E3"/>
+            </Package>              
+            <Package>
+                <Type> 328-ball fpBGA </Type>
+                <PON> LFE3-17EA-XXMG328E </PON>
+                <JDFFile> ecp3-17.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F328-E3"/>
+            </Package>              
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE3-17EA-XXFN484E </PON>
+                <JDFFile> ecp3-17.msk </JDFFile> 
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-E3"/>
+            </Package>   
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;33 MHz;</Frequency>
+            	<Master_Clock_Frequency>;010010;000000;010010;010010;010010;010010;010010;
+            							 010010;010010;010111;000110;010010;011010;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;110100;110100;110111;110111;</Clock_divider>
+            </ControlReg0>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+	        <Persistent_fuse>
+	           	<Persistent_fuse_Address>;492;492;</Persistent_fuse_Address>
+	           	<Persistent_fuse_Column>;463;431;</Persistent_fuse_Column>
+	        </Persistent_fuse>  
+			<Multiboot_fuses> -->
+				<Multiboot_cfg_Address>492</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>411</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>409</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;415;417;419;421;423;425;427;429;</Multiboot_auto_add_Column>
+			</Multiboot_fuses> -->
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>492</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>459</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+        </Device>
+        <Device name="LAE3-35EA">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAE3-35EA </CodeName>
+            <FullName> LAE3-35EA </FullName>
+            <AliasName> LAE3-35EA_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP3.svp"
+                         value="0x03"/>
+            <JtagID>0x01012043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 3412 </ColWidth>
+            <RowWidth> 2067 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 8520296 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>675</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LAE3-35EA </PON>
+                <JDFFile> ecp3-35.msk </JDFFile> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LAE3-35EA-XXFTN256E </PON>
+                <JDFFile> ecp3-35.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-E3"/>
+            </Package>   
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LAE3-35EA-XXFN484E </PON>
+                <JDFFile> ecp3-35.msk </JDFFile>
+                <MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-E3"/>
+            </Package>   
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LAE3-35EA-XXFN672E </PON>
+                <JDFFile> ecp3-35.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672-E3"/>
+            </Package>   
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;33 MHz;</Frequency>
+            	<Master_Clock_Frequency>;010010;000000;010010;010010;010010;010010;010010;
+            							 010010;010010;010111;000110;010010;011010;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;110100;110100;110111;110111;</Clock_divider>
+            </ControlReg0>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+	        <Persistent_fuse>
+	           	<Persistent_fuse_Address>;492;492;</Persistent_fuse_Address>
+	           	<Persistent_fuse_Column>;467;435;</Persistent_fuse_Column>
+	        </Persistent_fuse>  
+			<Multiboot_fuses> -->
+				<Multiboot_cfg_Address>492</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>411</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>409</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;415;417;419;421;423;425;427;429;</Multiboot_auto_add_Column>
+			</Multiboot_fuses> -->
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>492</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>459</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+        </Device>
+    	<Device name="LFE3-35EA">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE3-35EA </CodeName>
+            <FullName> LFE3-35EA </FullName>
+            <AliasName> LFE3-35EA_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP3.svp"
+                         value="0x03"/>
+            <JtagID>0x01012043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 3412 </ColWidth>
+            <RowWidth> 2067 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 8520296 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>675</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE3-35EA </PON>
+                <JDFFile> ecp3-35.msk </JDFFile> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LFE3-35EA-XXFTN256E </PON>
+                <JDFFile> ecp3-35.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-E3"/>
+            </Package>   
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE3-35EA-XXFN484E </PON>
+                <JDFFile> ecp3-35.msk </JDFFile>
+                <MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-E3"/>
+            </Package>   
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE3-35EA-XXFN672E </PON>
+                <JDFFile> ecp3-35.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672-E3"/>
+            </Package>   
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;33 MHz;</Frequency>
+            	<Master_Clock_Frequency>;010010;000000;010010;010010;010010;010010;010010;
+            							 010010;010010;010111;000110;010010;011010;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;110100;110100;110111;110111;</Clock_divider>
+            </ControlReg0>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+	        <Persistent_fuse>
+	           	<Persistent_fuse_Address>;492;492;</Persistent_fuse_Address>
+	           	<Persistent_fuse_Column>;467;435;</Persistent_fuse_Column>
+	        </Persistent_fuse>  
+			<Multiboot_fuses> -->
+				<Multiboot_cfg_Address>492</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>411</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>409</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;415;417;419;421;423;425;427;429;</Multiboot_auto_add_Column>
+			</Multiboot_fuses> -->
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>492</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>459</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+        </Device>
+        <Device name="LFE3-70E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE3-70E </CodeName>
+            <FullName> LFE3-70E </FullName>
+            <AliasName> LFE3-70E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP3.svp"
+                         value="0x03"/>
+            <JtagID>0x01014043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 6724 </ColWidth>
+            <RowWidth> 2819 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 23582696 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1077</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE3-70E </PON>
+                <JDFFile> ecp3-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE3-70E-XXFN484 </PON>
+                <JDFFile> ecp3-70.msk </JDFFile> 
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-E3"/>
+            </Package>   
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE3-70E-XXFN672 </PON>
+                <JDFFile> ecp3-70.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672-E3"/>
+            </Package>   
+            <Package>
+                <Type> 1156-ball fpBGA </Type>
+                <PON> LFE3-70E-XXFN1156 </PON>
+                <JDFFile> ecp3-70.msk </JDFFile> 
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;33 MHz;</Frequency>
+            	<Master_Clock_Frequency>;010010;000000;010010;010010;010010;010010;010010;
+            							 010010;010010;010111;000110;010010;011010;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;110100;110100;110111;110111;</Clock_divider>
+            </ControlReg0>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+	        <Persistent_fuse> 
+	            <Persistent_fuse_Address>;464;464;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;463;431;</Persistent_fuse_Column> 
+	        </Persistent_fuse>  
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>464</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>411</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>409</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;415;417;419;421;423;425;427;429;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>464</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>459</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+    	<Device name="LFE3-70EA">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE3-70EA </CodeName>
+            <FullName> LFE3-70EA </FullName>
+            <AliasName> LFE3-70EA_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP3.svp"
+                         value="0x03"/>
+            <JtagID>0x01014043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 6724 </ColWidth>
+            <RowWidth> 2819 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 23582696 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1077</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE3-70EA </PON>
+                <JDFFile> ecp3-70.msk </JDFFile> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE3-70EA-XXFN484 </PON>
+                <JDFFile> ecp3-70.msk </JDFFile> 
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-E3"/>
+            </Package>   
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE3-70EA-XXFN672 </PON>
+                <JDFFile> ecp3-70.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672-E3"/>
+            </Package>   
+            <Package>
+                <Type> 1156-ball fpBGA </Type>
+                <PON> LFE3-70EA-XXFN1156 </PON>
+                <JDFFile> ecp3-70.msk </JDFFile> 
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;33 MHz;</Frequency>
+            	<Master_Clock_Frequency>;010010;000000;010010;010010;010010;010010;010010;
+            							 010010;010010;010111;000110;010010;011010;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;110100;110100;110111;110111;</Clock_divider>
+            </ControlReg0>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+	        <Persistent_fuse> 
+	            <Persistent_fuse_Address>;464;464;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;463;431;</Persistent_fuse_Column> 
+	        </Persistent_fuse>  
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>464</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>411</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>409</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;415;417;419;421;423;425;427;429;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>464</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>459</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LFE3-95E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE3-95E </CodeName>
+            <FullName> LFE3-95E </FullName>
+            <AliasName> LFE3-95E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP3.svp"
+                         value="0x03"/>
+            <JtagID>0x01014043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 6724 </ColWidth>
+            <RowWidth> 2819 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 23582696 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1077</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE3-95E </PON>
+                <JDFFile> ecp3-95.msk </JDFFile> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE3-95E-XXFN484 </PON>
+                <JDFFile> ecp3-95.msk </JDFFile> 
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-E3"/>
+            </Package>   
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE3-95E-XXFN672 </PON>
+                <JDFFile> ecp3-95.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672-E3"/>
+            </Package>   
+            <Package>
+                <Type> 1156-ball fpBGA </Type>
+                <PON> LFE3-95E-XXFN1156 </PON>
+                <JDFFile> ecp3-95.msk </JDFFile> 
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;33 MHz;</Frequency>
+            	<Master_Clock_Frequency>;010010;000000;010010;010010;010010;010010;010010;
+            							 010010;010010;010111;000110;010010;011010;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;110100;110100;110111;110111;</Clock_divider>
+            </ControlReg0>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+	        <Persistent_fuse> 
+	            <Persistent_fuse_Address>;464;464;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;463;431;</Persistent_fuse_Column> 
+	        </Persistent_fuse>  
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>464</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>411</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>409</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;415;417;419;421;423;425;427;429;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>464</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>459</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+    	<Device name="LFE3-95EA">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE3-95EA </CodeName>
+            <FullName> LFE3-95EA </FullName>
+            <AliasName> LFE3-95EA_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP3.svp"
+                         value="0x03"/>
+            <JtagID>0x01014043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 6724 </ColWidth>
+            <RowWidth> 2819 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 23582696 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1077</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE3-95EA </PON>
+                <JDFFile> ecp3-95.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE3-95EA-XXFN484 </PON>
+                <JDFFile> ecp3-95.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-E3"/>
+            </Package>   
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE3-95EA-XXFN672 </PON>
+                <JDFFile> ecp3-95.msk </JDFFile>
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672-E3"/>
+            </Package>   
+           <Package>
+                <Type> 1156-ball fpBGA </Type>
+                <PON> LFE3-95EA-XXFN1156 </PON>
+                <JDFFile> ecp3-95.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;33 MHz;</Frequency>
+            	<Master_Clock_Frequency>;010010;000000;010010;010010;010010;010010;010010;
+            							 010010;010010;010111;000110;010010;011010;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;110100;110100;110111;110111;</Clock_divider>
+            </ControlReg0>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+	        <Persistent_fuse> 
+	            <Persistent_fuse_Address>;464;464;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;463;431;</Persistent_fuse_Column> 
+	        </Persistent_fuse>  
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>464</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>411</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>409</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;415;417;419;421;423;425;427;429;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>464</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>459</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LFE3-150EA">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE3-150EA </CodeName>
+            <FullName> LFE3-150EA </FullName>
+            <AliasName> LFE3-150EA_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP3.svp"
+                         value="0x03"/>
+            <JtagID>0x01015043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 8380 </ColWidth>
+            <RowWidth> 3607 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 37326696 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1326</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE3-150EA </PON>
+                <JDFFile> ecp3-150.msk </JDFFile> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE3-150EA-XXFN672 </PON>
+                <JDFFile> ecp3-150.msk </JDFFile> 
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672-E3"/>
+            </Package>   
+            <Package>
+                <Type> 1156-ball fpBGA </Type>
+                <PON> LFE3-150EA-XXFN1156 </PON>
+                <JDFFile> ecp3-150.msk </JDFFile> 
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;33 MHz;</Frequency>
+            	<Master_Clock_Frequency>;010010;000000;010010;010010;010010;010010;010010;
+            							 010010;010010;010111;000110;010010;011010;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;110100;110100;110111;110111;</Clock_divider>
+            </ControlReg0>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+	        <Persistent_fuse> 
+	            <Persistent_fuse_Address>;464;464;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;463;431;</Persistent_fuse_Column> 
+	        </Persistent_fuse>  
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>464</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>411</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>409</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;415;417;419;421;423;425;427;429;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>464</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>459</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+     <Operation>
+		&quot;Fast Program&quot;
+		&quot;Erase,Program,Verify&quot;
+ 		&quot;Verify Only&quot;
+		&quot;Erase Only&quot;
+		&quot;Verify ID&quot;
+		&quot;Display ID&quot;
+		&quot;Display USERCODE&quot;
+		&quot;Read and Save&quot;
+		&quot;Read DONE bit&quot;
+		&quot;Display Status Register&quot;
+		&quot;Display Control Register0&quot;
+		&quot;Refresh from FLASH&quot;
+		&quot;Bypass&quot;
+
+		&quot;Security Program Encryption Key&quot; 
+		&quot;Security Verify Encryption Key&quot;
+		&quot;Security Read Encryption Key&quot;
+		&quot;Security Program Key Lock&quot;
+		&quot;Security Read Lock Fuses&quot;
+		&quot;Security Read Status Register&quot;
+		&quot;Security Fast Program with Encryption Option&quot;
+		&quot;Security Verify with Encryption Option&quot;	
+
+
+		&quot;XSRAM Verify ID&quot;
+		&quot;XSRAM Read and Save&quot;
+		&quot;XSRAM Display Status Register&quot;
+		&quot;XSRAM Bypass&quot;
+
+		&quot;Serial Program&quot;
+        &quot;Serial Read DONE bit&quot;
+		
+		&quot;SPI Flash Erase,Program,Verify&quot;
+		&quot;SPI Flash Erase,Program&quot;
+		&quot;SPI Flash Verify Only&quot;
+		&quot;SPI Flash Erase All&quot;
+		&quot;SPI Flash Read and Save&quot;
+		&quot;SPI Flash Calculate File Size Checksum&quot;
+        &quot;SPI Flash Calculate Device Size Checksum&quot;
+		&quot;SPI Flash Bypass&quot;
+		&quot;Scan SPI Flash Device&quot;
+
+        &quot;Slave SPI Fast Program&quot;
+    	&quot;Slave SPI Fast Program,Refresh&quot;
+    	&quot;Slave SPI Erase Only&quot;
+		&quot;Slave SPI Verify ID&quot;
+		&quot;Slave SPI Display ID&quot;
+		&quot;Slave SPI Display USERCODE&quot;
+		&quot;Slave SPI Read and Save&quot;
+		&quot;Slave SPI Display Control Register0&quot;
+		&quot;Slave SPI Read Status Register&quot;
+		&quot;Slave SPI Upload to Static RAM&quot;
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.isc;*.bit;*.rbt"/>
+		<XFPFile>ECP3.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP3 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;Leave Alone;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;SECKEYS;SECPRODUCT;SLAVESPI;SPI Background;DUAL_BOOT;XSRAM;SERIAL;SSPI Flash;</Programming_Mode_Control>
+    </Family>    
+    <Family name="LatticeECP3_AS">
+        <Device name="LFE3-95E_AS">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE3-95E_AS </CodeName>
+            <FullName> LFE3-95E_AS </FullName>
+            <AliasName> LFE3-95E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP3.svp"
+                         value="0x03"/>
+            <JtagID>0x01014043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 6724 </ColWidth>
+            <RowWidth> 2819 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 23582696 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1077</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE3-95E_AS </PON>
+<!--                <JDFFile> ecp3-95.msk </JDFFile> -->
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE3-95E-XXFN484AS </PON>
+<!--                <JDFFile> ecp3-95.msk </JDFFile> -->
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-E3"/>
+            </Package>   
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE3-95E-XXFN672AS </PON>
+<!--                <JDFFile> ecp3-95.msk </JDFFile> -->
+		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672-E3"/>
+            </Package>   
+            <Package> 
+                <Type> 1152-ball fpBGA </Type> 
+                <PON> LFE3-95E-XXFN1152AS </PON> 
+<!--                <JDFFile> ecp3-95.msk </JDFFile> -->
+                <Adapter vendor="Lattice Semiconductor" 
+                         adapter_name="Not Applicable"/> 
+            </Package> 
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;33 MHz;</Frequency>
+            	<Master_Clock_Frequency>;010010;000000;010010;010010;010010;010010;010010;
+            							 010010;010010;010111;000110;010010;011010;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;110100;110100;110111;110111;</Clock_divider>
+            </ControlReg0>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+	            <Persistent_fuse> 
+	           	    <Persistent_fuse_Address>;464;464;</Persistent_fuse_Address> 
+	           	    <Persistent_fuse_Column>;463;431;</Persistent_fuse_Column> 
+	            </Persistent_fuse>  
+<!--            <SSPI_Persistent_fuse>  -->
+<!--           	    <SSPI_Persistent_fuse_Address>;464;</SSPI_Persistent_fuse_Address>  -->
+<!--           	    <SSPI_Persistent_fuse_Column>;431;</SSPI_Persistent_fuse_Column>  -->
+<!--            </SSPI_Persistent_fuse>  -->
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>464</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>411</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>409</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;415;417;419;421;423;425;427;429;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>464</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>459</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+	</Device>
+        <Operation>
+	 		&quot;Erase,Program,Verify&quot;
+			&quot;Verify Only&quot;
+			&quot;Erase Only&quot;
+			&quot;Verify ID&quot;
+			&quot;Display ID&quot;
+			&quot;Display USERCODE&quot;
+			&quot;Read and Save&quot;
+			&quot;Read DONE bit&quot;
+			&quot;Display Status Register&quot;
+			&quot;Display Control Register0&quot;
+			&quot;Bypass&quot;
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.isc;*.bit;*.rbt"/>
+		<XFPFile>ECP3.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP3 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;Leave Alone;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;</Programming_Mode_Control>
+    </Family>
+</ispXDF>
+

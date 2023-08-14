@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!ELEMENT 	SVF_Plus (	Header, Setup, Parameter, Data?, Operation_List+, Script) >
+<!ATTLIST 	SVF_Plus
+			version		CDATA	#REQUIRED>
+
+<!-- Header Node_________________________________________________________ -->
+<!ELEMENT	Header	(	(Device+) | Chain	)	>
+<!ELEMENT	Chain	(	Device+	) >
+<!ELEMENT	Device	EMPTY	>
+<!ATTLIST	Device
+			name	CDATA	#REQUIRED >
+
+<!-- Setup Node__________________________________________________________ -->
+<!ELEMENT	Setup	(	StackSize, Interface	)	>
+<!ELEMENT	StackSize	EMPTY	>
+<!ATTLIST	StackSize
+			size		CDATA 	#IMPLIED > 
+<!ELEMENT	Interface	(#PCDATA)*	>
+<!ATTLIST	Interface
+			protocol	(JTAG_1149.1 | LatticeISP)	#REQUIRED>
+
+<!-- Parameter Node______________________________________________________ -->
+<!ELEMENT Parameter (	Instruction_Length, Row_Width, Address_Length, Address,
+						ID_Length, Usercode_Length?, Arch_Length?, BSCAN_Length?, Arch_Row?, 
+						Bscan?, BscanMask?, TotalFuse?, PWP?, PWV?, PWE?, Instruction*, SkipRow?, 
+						Debug?, MDRDelay?, MDRIspEN?, Keylock?, EncryptOnly?, MDRTRST?, Real_Row_Width?, Temp_Row_Count?, Temp_UFM_Count?) >
+						
+<!ELEMENT	Instruction_Length EMPTY>
+<!ATTLIST	Instruction_Length
+			value	CDATA #REQUIRED>
+<!ELEMENT	Row_Width EMPTY>
+<!ATTLIST	Row_Width
+			value	CDATA #REQUIRED>
+<!ELEMENT	Address_Length EMPTY>
+<!ATTLIST	Address_Length
+			value	CDATA #REQUIRED>
+<!ELEMENT	ID_Length EMPTY>
+<!ATTLIST	ID_Length
+			value	CDATA "32">
+<!ELEMENT	Usercode_Length EMPTY>
+<!ATTLIST	Usercode_Length
+			value	CDATA "32">
+<!ELEMENT	Address (#PCDATA)*>
+<!ATTLIST	Address
+			length	CDATA #REQUIRED>
+
+<!ELEMENT	Arch_Length EMPTY>
+<!ATTLIST	Arch_Length
+			value	CDATA #REQUIRED>
+			
+<!ELEMENT	Arch_Row EMPTY>
+<!ATTLIST	Arch_Row
+			value	CDATA #REQUIRED>
+
+<!ELEMENT	BSCAN_Length EMPTY>
+<!ATTLIST	BSCAN_Length
+			value	CDATA #REQUIRED>
+
+<!ELEMENT	Bscan (#PCDATA)*>
+<!ATTLIST	Bscan
+			length	CDATA #REQUIRED>
+
+<!ELEMENT	BscanMask (#PCDATA)*>
+<!ATTLIST	BscanMask
+			length	CDATA #REQUIRED>
+			
+<!ELEMENT	TotalFuse EMPTY>
+<!ATTLIST	TotalFuse
+			value	CDATA #REQUIRED>
+			
+<!ELEMENT	PWP EMPTY>
+<!ATTLIST	PWP
+			value		CDATA 	#REQUIRED >			
+<!ELEMENT	PWV EMPTY>
+<!ATTLIST	PWV
+			value		CDATA 	#REQUIRED >
+<!ELEMENT	PWE EMPTY>
+<!ATTLIST	PWE
+			value		CDATA 	#REQUIRED >
+
+<!ATTLIST	SkipRow
+			value		CDATA 	#REQUIRED >
+
+<!ATTLIST	KeyLock
+			value		CDATA 	#REQUIRED >
+
+<!ATTLIST   EncryptOnly
+			value		CDATA 	#REQUIRED >
+			
+<!ATTLIST	Debug
+			value		CDATA 	#REQUIRED >
+
+<!ATTLIST	MDRDelay
+			value		CDATA 	#REQUIRED >
+
+<!ATTLIST	MDRIspEN
+			value		CDATA 	#REQUIRED >
+
+<!ATTLIST	MDRTRST
+			value		CDATA 	#REQUIRED >
+									
+<!ATTLIST	Real_Row_Width
+			value		CDATA 	#REQUIRED >
+
+<!ATTLIST	Temp_Row_Count
+			value		CDATA 	#REQUIRED >
+
+<!ATTLIST	Temp_UFM_Count
+			value		CDATA 	#REQUIRED >			
+
+						
+<!ELEMENT	Instruction		(#PCDATA)* >
+
+<!-- Data Node____________________________________________________________ -->
+<!ELEMENT	Data	(DataField+) >
+<!ELEMENT	DataField	(FieldBlock+) >
+<!ATTLIST	DataField
+			name	CDATA	#REQUIRED >
+<!ELEMENT	FieldBlock	(#PCDATA)* >
+<!ATTLIST	FieldBlock
+			row_width	CDATA	#REQUIRED >
+
+<!-- Operation_List Node_________________________________________________ -->
+<!ELEMENT	Operation_List (#PCDATA)* >
+<!ATTLIST	Operation_List
+			label 	CDATA	"ISPOperation" >
+
+<!ELEMENT	Script	(#PCDATA)* >
+<!ATTLIST	Script
+			language 	(SVF_Plus | SVF | LSM | STAPL | ISC_P1532)	#IMPLIED >

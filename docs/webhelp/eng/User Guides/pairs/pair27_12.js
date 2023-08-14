@@ -1,0 +1,25 @@
+var pairs =
+{
+"sample":{"counts":1}
+,"counts":{"sample":1}
+,"counting":{"samples":1,"drag":1}
+,"samples":{"counting":1,"range":1,"lines":1}
+,"easily":{"count":1}
+,"count":{"number":1,"samples":1}
+,"number":{"samples":1}
+,"range":{"display":1}
+,"click":{"want":1}
+,"want":{"start":1}
+,"start":{"counting":1}
+,"drag":{"end":1}
+,"end":{"range":1}
+,"you\u2019re":{"dragging":1}
+,"dragging":{"waveform":1}
+,"waveform":{"view":1}
+,"view":{"shows":1}
+,"shows":{"two":1}
+,"two":{"red":1}
+,"red":{"lines":1}
+,"lines":{"number":1}
+}
+;Search.control.loadWordPairs(pairs);

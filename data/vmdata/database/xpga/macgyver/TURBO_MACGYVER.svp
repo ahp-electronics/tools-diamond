@@ -1,0 +1,1410 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<!-- 
+	03/30/2015 egz Created
+-->
+<SVF_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+	<!-- Length fields are in number if bits -->
+	<Instruction_Length value="INSTRUCTION_REGISTER_LENGTH"/> 
+	<Temp_Row_Count		value="DEVICE_CFG_ROW_WIDTH"/>    
+	<Temp_UFM_Count		value="DEVICE_UFM_ROW_WIDTH"/> 	 
+	<Row_Width			value="DEVICE_ROW_WIDTH"/> 
+	<Address_Length		value="ADDRESS_REGISTER_LENGTH"/> 
+	<Address length="ADDRESS_LENGTH">
+		INI_ADDRESS			
+	</Address>
+	<ID_Length 			value="DEVICE_ID_LENGTH"/>
+	<Usercode_Length 	value="DEVICE_USERCODE_LENGTH"/>
+	<BSCAN_Length value="BSCAN_REGISTER_LENGTH"/> 
+	<Bscan length="BSCAN_LENGTH">
+		BSCAN_DATA
+	</Bscan>
+	<BscanMask length="BSCAN_LENGTH">
+		BSCAN_MASK
+	</BscanMask>
+	<TotalFuse value="TOTAL_FUSE_MAP"/>
+	<PWP	value="PROGRAMING_PULSE_WIDTH"/>
+	<PWV	value="VERIFY_PULSE_WIDTH"/>
+	<PWE	value="ERASE_PULSE_WIDTH"/>
+	<MDRDelay value="MDR_DELAY"/>	
+	<Instruction>
+		EXTEST	 			= 0x15;
+		EXTEST_PULSE        = 0x2D;
+		EXTEST_TRAIN        = 0x2E;
+		INTEST              = 0x2C;
+		CLAMP               = 0x78;
+		HIGHZ               = 0x18;
+		LSC_PRELOAD         = 0x1C;
+		LSC_SAMPLE          = 0x1C;
+		BYPASS              = 0xFF;
+		VERIFY_ID			= 0xE2;
+		IDCODE_PUB          = 0xE0;
+		LSC_UIDCODE_PUB     = 0x19;
+		USERCODE            = 0xC0;
+		LSC_READ_TEMP       = 0xE8;
+		LSC_DEVICE_CTRL     = 0x7D;
+		LSC_READ_STATUS     = 0x3C;
+		LSC_CHECK_BUSY      = 0xF0;
+		LSC_REFRESH         = 0x79;
+		LSC_I2CI_CRBR_WT    = 0x9C;
+		LSC_I2CI_TXDR_WT    = 0x9D;
+		LSC_I2CI_RXDR_RD    = 0x9E;
+		LSC_I2CI_SR_RD      = 0x9F;
+		LSC_IP_A            = 0x32;
+		LSC_IP_B            = 0x38;
+		LSC_IPTEST_A        = 0x33;
+		LSC_IPTEST_B        = 0x39;
+		LSC_PROG_SPI        = 0x3A;
+		LSC_PROG_SPI1       = 0x3E;
+		LSC_IDCODE_PRV      = 0x16;
+		LSC_READ_PES        = 0x11;
+		LSC_MANUFACTURE_SHIFT = 0x90;
+		ISC_ENABLE          = 0xC6;
+		LSC_ENABLE_X        = 0x74;
+		ISC_DISABLE         = 0x26;
+		ISC_PROGRAM         = 0x67;
+		ISC_NOOP            = 0x30;
+		ISC_PROGRAM_USERCODE = 0xC2;
+		ISC_READ            = 0x80;
+		ISC_ERASE           = 0x0E;
+		ISC_DISCHARGE       = 0x14;
+		ISC_PROGRAM_DONE    = 0x5E;
+		ISC_ERASE_DONE      = 0x24;
+		ISC_PROGRAM_SECURITY = 0xCE;
+		LSC_PROGRAM_SECPLUS = 0xCF;
+		ISC_DATA_SHIFT      = 0x05;
+		ISC_ADDRESS_SHIFT   = 0x42;
+		LSC_INIT_ADDRESS    = 0x46;
+		LSC_WRITE_ADDRESS   = 0xB4;
+		LSC_PROG_INCR_RTI   = 0x82;
+		LSC_PROG_INCR_ENC   = 0xB6;
+		LSC_PROG_INCR_CMP   = 0xB8;
+		LSC_PROG_INCR_CNE   = 0xBA;
+		LSC_VERIFY_INCR_RTI = 0x6A;
+		LSC_PROG_CTRL0      = 0x22;
+		LSC_READ_CTRL0      = 0x20;
+		LSC_RESET_CRC       = 0x3B;
+		LSC_READ_CRC        = 0x60;
+		LSC_PROG_SED_CRC    = 0xA2;
+		LSC_READ_SED_CRC    = 0xA4;
+		LSC_SHIFT_PASSWORD  = 0xBC;
+		LSC_PROG_PASSWORD   = 0xF1;
+		LSC_READ_PASSWORD   = 0xF2;
+		LSC_PROG_CIPHER_KEY = 0xF3;
+		LSC_READ_CIPHER_KEY = 0xF4;
+		LSC_PROG_FEATURE    = 0xE4;          
+		LSC_READ_FEATURE    = 0xE7;      
+		LSC_PROG_FEABITS    = 0xF8;
+		LSC_READ_FEABITS    = 0xFB;
+		LSC_PROG_OTP        = 0xF9;
+		LSC_READ_OTP        = 0xFA;
+		LSC_WRITE_COMP_DIC  = 0x02;
+		LSC_WRITE_BUS_ADDR  = 0xF6;
+		LSC_PCS_WRITE       = 0x72;
+		LSC_PCS_READ        = 0xF7;
+		LSC_EBR_WRITE       = 0xB2;
+		LSC_EBR_READ        = 0xB0;
+		LSC_PROG_INCR_NV    = 0x70;
+		LSC_READ_INCR_NV    = 0x73;
+		LSC_INIT_ADDR_UFM   = 0x47;
+		LSC_READ_TAG        = 0xCA;
+		LSC_ERASE_UFM       = 0xCB;
+		LSC_PROG_UFM        = 0xC9;
+		LSC_READ_UFM        = 0xCA;
+		LSC_STORE           = 0xD0;
+		LSC_BITSTREAM_BURST = 0x7A;
+		LSC_PROG_PES        = 0xD0;
+		LSC_PROG_MES        = 0xD1;
+		LSC_PROG_MAIN_RED   = 0xD3;
+		LSC_PROG_MAIN_RCR   = 0xD4;
+		LSC_PROG_MAIN_RMR   = 0xD5;
+		LSC_PROG_NV_RED     = 0xD6;
+		LSC_PROG_NV_RMR     = 0xD7;
+		LSC_READ_MES        = 0xD8; 
+		LSC_READ_TRIM       = 0xD1;
+		LSC_READ_MAIN_RED   = 0xDA;
+		LSC_READ_MAIN_RCR   = 0xDC;
+		LSC_READ_MAIN_RMR   = 0xDC;
+		LSC_READ_NV_RED     = 0xDD;
+		LSC_READ_NV_RMR     = 0xDE;
+		LSC_MFG_MTEST       = 0x96;
+		LSC_MFG_MTRIM       = 0x69;
+		LSC_MFG_MDATA       = 0x8F;
+		LSC_ISCAN           = 0xDF;			
+	</Instruction>
+
+</Parameter>
+<Data>
+	<DataField	name="IDTDI">
+		<FieldBlock	row_width="DEVICE_ID_LENGTH">
+			ID_DATA
+		</FieldBlock>
+	</DataField>
+	<DataField	name="BSCANTDO">
+		<FieldBlock	row_width="BSCAN_REGISTER_LENGTH">
+			0x00000000000000000200000000000000000000000000000800000000000
+			  000000000000000000000000000000000000000000000000000000000000000000
+		</FieldBlock>
+	</DataField>
+	<DataField	name="BSCANMASK">
+		<FieldBlock	row_width="BSCAN_REGISTER_LENGTH">
+			0x00000000000000000200000000000000000000000000000800000000000
+			  000000000000000000000000000000000000000000000000000000000000000000
+		</FieldBlock>
+	</DataField>
+</Data>
+<Operation_List label="TurboOperation0">
+ "Erase Only"	=	"			"	INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SRAM_ERASE	! Erase the SRAM, 
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									DISABLE ! Exit the programming mode"	;
+									
+	"Verify ID" = 					"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+										
+	"Fast Program" 				= "	INIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode"	;
+								
+	"Erase,Program,Verify" = "		"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE, 
+										IO_STATE ! Program Bscan register,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SRAM_ERASE	! Erase the SRAM, 
+										SRAM_PROGRAM	! Program Fuse Map,
+										PROGRAM_USERCODE	! Program USERCODE,
+										SRAM_VERIFY	! Verify Fuse Map,  
+										SYNCFUNCTION,
+										VERIFY_USERCODE		! Verify USERCODE, 
+										SYNCFUNCTION,
+										PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+										DISABLE ! Exit the programming mode"	;
+									
+	
+									
+	"Verify Only"				=	"	INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,  
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SRAM_VERIFY	[SEQUENTIAL]! Verify Fuse Map, 
+									SYNCFUNCTION,
+									VERIFY_USERCODE		! Verify USERCODE, 
+									SYNCFUNCTION,
+									DISABLE ! Exit the programming mode"	;
+									
+	
+	"Display ID" = 						"INIT, READ_ID, SAVE_ID";				
+			
+	"Display USERCODE"				= "INIT, READ_ID, SAVE_ID,SAVE_USERCODE";	
+		
+	"Read and Save"	=				"	INIT, 									
+										READ_ID, 
+										SAVE_ID, 
+										IO_STATE ! Program Bscan register,
+										SRAM_ENABLE, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE, 
+										DISABLE";
+										
+	"Display Control Register0" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SAVE_CONTROL0 !Read Control Register 0,
+										DISABLE";			
+												             
+	"Program Control Register0" 		= "INIT ! Initialize,					
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										PROGRAM_CONTROL0 ! Program Control Register 0,
+										DISABLE";		
+																 
+	"Read Status Register" 				="INIT ! Initialize,				
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SAVE_STATUS";
+											
+	"Refresh"					 = " 	INIT !Initialize,
+										READ_ID !Check the IDCODE,
+										SYNCFUNCTION, 
+										REFRESH_FUNCTION ! Refresh";
+							  
+	"XSRAM Verify Only"			=	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE, 
+										SYNCFUNCTION, 
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										VERIFY	[SEQUENTIAL] ! Verify Fuse Map, 
+										SYNCFUNCTION, 
+										VERIFY_USERCODE		! Verify USERCODE, 
+										SYNCFUNCTION, 
+										DISABLE ! Exit the programming mode"	;
+										
+	"XSRAM Verify ID" 			= 	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+										
+	"XSRAM Verify USERCODE"		=	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,
+										SYNCFUNCTION, 
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										VERIFY_USERCODE		! Verify USERCODE,
+										DISABLE ! Exit the programming mode"	;
+										
+	"XSRAM Read and Save"			=	"INIT, 									
+										READ_ID, 
+										SAVE_ID, 
+										SRAM_TRANSPARENT_READ_ENABLE, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE, 
+										DISABLE";			
+												
+	"XSRAM Display ID" 					= "INIT, READ_ID, SAVE_ID";										
+
+	"XSRAM Read Status Register" 		= "INIT ! Initialize,						
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+										SAVE_STATUS,
+										DISABLE ! Exit the programming mode";
+											
+	"XSRAM Bypass"	=					"	INIT 	! Initialize"	;
+	"XSRAM Refresh" = 					" 	INIT !Initialize,
+											READ_ID !Check the IDCODE,
+											SYNCFUNCTION, 
+											REFRESH_FUNCTION ! Refresh"; 	
+	"XSRAM Display USERCODE"	=	"INIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SVF_SAVE_USERCODE, DISABLE";
+							
+</Operation_List>	
+<Operation_List label="TurboOperation1">
+	"Erase Only"	=	"			"	INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SRAM_ERASE	! Erase the SRAM, 
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									DISABLE ! Exit the programming mode"	;
+									
+	"Verify ID" = 					"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+										
+	"Fast Program" 				= "	INIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode"	;
+								
+	"Erase,Program,Verify" = "		"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE, 
+										IO_STATE ! Program Bscan register,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SRAM_ERASE	! Erase the SRAM, 
+										SRAM_PROGRAM	! Program Fuse Map,
+										PROGRAM_USERCODE	! Program USERCODE,
+										SRAM_VERIFY	! Verify Fuse Map,  
+										SYNCFUNCTION,
+										VERIFY_USERCODE		! Verify USERCODE, 
+										SYNCFUNCTION,
+										PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+										DISABLE ! Exit the programming mode"	;
+									
+	
+									
+	"Verify Only"				=	"	INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,  
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SRAM_VERIFY	[SEQUENTIAL]! Verify Fuse Map, 
+									SYNCFUNCTION,
+									VERIFY_USERCODE		! Verify USERCODE, 
+									SYNCFUNCTION,
+									DISABLE ! Exit the programming mode"	;
+									
+	
+	"Display ID" = 						"INIT, READ_ID, SAVE_ID";						
+	"Display USERCODE"				="	INIT, READ_ID, SAVE_ID,SAVE_USERCODE";		
+	"Read and Save"	=				"	INIT, 									
+										READ_ID, 
+										SAVE_ID, 
+										IO_STATE ! Program Bscan register,
+										SRAM_ENABLE, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE, 
+										DISABLE";
+										
+	"Display Control Register0" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SAVE_CONTROL0 !Read Control Register 0,
+										DISABLE";					             
+	"Program Control Register0" 		= "INIT ! Initialize,				
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										PROGRAM_CONTROL0 ! Program Control Register 0,
+										DISABLE";								 
+	"Read Status Register" 				="INIT ! Initialize,				
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SAVE_STATUS";	
+	"Refresh"					 = " 	INIT !Initialize,
+										READ_ID !Check the IDCODE,
+										SYNCFUNCTION, 
+										REFRESH_FUNCTION ! Refresh";
+							  
+	"XSRAM Verify Only"			=	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE, 
+										SYNCFUNCTION, 
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										VERIFY	[SEQUENTIAL] ! Verify Fuse Map, 
+										SYNCFUNCTION, 
+										VERIFY_USERCODE		! Verify USERCODE, 
+										SYNCFUNCTION, 
+										DISABLE ! Exit the programming mode"	;
+										
+	"XSRAM Verify ID" 			= 	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	"XSRAM Verify USERCODE"		=	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,
+										SYNCFUNCTION, 
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										VERIFY_USERCODE		! Verify USERCODE,
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Read and Save"			=	"INIT, 									
+										READ_ID, 
+										SAVE_ID, 
+										SRAM_TRANSPARENT_READ_ENABLE, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE, 
+										DISABLE";					
+	"XSRAM Display ID" 					= "INIT, READ_ID, SAVE_ID";										
+
+	"XSRAM Read Status Register" 		= "INIT ! Initialize,						
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+										SAVE_STATUS,
+										DISABLE ! Exit the programming mode";	
+	"XSRAM Bypass"	=					"	INIT 	! Initialize"	;
+	"XSRAM Refresh" = 					" 	INIT !Initialize,
+											READ_ID !Check the IDCODE,
+											SYNCFUNCTION, 
+											REFRESH_FUNCTION ! Refresh"; 	
+	"XSRAM Display USERCODE"	=	"INIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SVF_SAVE_USERCODE, DISABLE";
+</Operation_List>
+<Operation_List label="TurboOperation2">
+"Erase Only"	=	"			"	INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SRAM_ERASE	! Erase the SRAM, 
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									DISABLE ! Exit the programming mode"	;
+									
+	"Verify ID" = 					"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+										
+	"Fast Program" 				= "	INIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode"	;
+								
+	"Erase,Program,Verify" = "		"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE, 
+										IO_STATE ! Program Bscan register,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SRAM_ERASE	! Erase the SRAM, 
+										SRAM_PROGRAM	! Program Fuse Map,
+										PROGRAM_USERCODE	! Program USERCODE,
+										SRAM_VERIFY	! Verify Fuse Map,  
+										SYNCFUNCTION,
+										VERIFY_USERCODE		! Verify USERCODE, 
+										SYNCFUNCTION,
+										PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+										DISABLE ! Exit the programming mode"	;
+									
+	
+									
+	"Verify Only"				=	"	INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,  
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SRAM_VERIFY	[SEQUENTIAL]! Verify Fuse Map, 
+									SYNCFUNCTION,
+									VERIFY_USERCODE		! Verify USERCODE, 
+									SYNCFUNCTION,
+									DISABLE ! Exit the programming mode"	;
+									
+	
+	"Display ID" = 						"INIT, READ_ID, SAVE_ID";						
+	"Display USERCODE"				="	INIT, READ_ID, SAVE_ID,SAVE_USERCODE";		
+	"Read and Save"	=				"	INIT, 									
+										READ_ID, 
+										SAVE_ID, 
+										IO_STATE ! Program Bscan register,
+										SRAM_ENABLE, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE, 
+										DISABLE";
+	"Display Control Register0" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SAVE_CONTROL0 !Read Control Register 0,
+										DISABLE";					             
+	"Program Control Register0" 		= "INIT ! Initialize,					
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										PROGRAM_CONTROL0 ! Program Control Register 0,
+										DISABLE";								 
+	"Read Status Register" 				="INIT ! Initialize,				
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SAVE_STATUS";	
+	"Refresh"					 = " 	INIT !Initialize,
+										READ_ID !Check the IDCODE,
+										SYNCFUNCTION, 
+										REFRESH_FUNCTION ! Refresh";
+							  
+	"XSRAM Verify Only"			=	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE, 
+										SYNCFUNCTION, 
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										VERIFY	[SEQUENTIAL] ! Verify Fuse Map, 
+										SYNCFUNCTION, 
+										VERIFY_USERCODE		! Verify USERCODE, 
+										SYNCFUNCTION, 
+										DISABLE ! Exit the programming mode"	;
+									
+	"XSRAM Verify ID" 			= 	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	"XSRAM Verify USERCODE"		=	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,
+										SYNCFUNCTION, 
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										VERIFY_USERCODE		! Verify USERCODE,
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Read and Save"			=	"INIT, 									
+										READ_ID, 
+										SAVE_ID, 
+										SRAM_TRANSPARENT_READ_ENABLE, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE, 
+										DISABLE";					
+	"XSRAM Display ID" 					= "INIT, READ_ID, SAVE_ID";									
+
+	"XSRAM Read Status Register" 		= "INIT ! Initialize,						
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+										SAVE_STATUS,
+										DISABLE ! Exit the programming mode";	
+	"XSRAM Bypass"	=					"	INIT 	! Initialize"	;
+	"XSRAM Refresh" = 					" 	INIT !Initialize,
+											READ_ID !Check the IDCODE,
+											SYNCFUNCTION, 
+											REFRESH_FUNCTION ! Refresh"; 	
+	"XSRAM Display USERCODE"	=	"INIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SVF_SAVE_USERCODE, DISABLE";
+</Operation_List>
+<Operation_List label="TurboOperation3">
+"Erase Only"	=	"			"	INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SRAM_ERASE	! Erase the SRAM, 
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									DISABLE ! Exit the programming mode"	;
+									
+	"Verify ID" = 					"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+										
+	"Fast Program" 				= "	INIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode"	;
+								
+	"Erase,Program,Verify" = "		"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE, 
+										IO_STATE ! Program Bscan register,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SRAM_ERASE	! Erase the SRAM, 
+										SRAM_PROGRAM	! Program Fuse Map,
+										PROGRAM_USERCODE	! Program USERCODE,
+										SRAM_VERIFY	! Verify Fuse Map,  
+										SYNCFUNCTION,
+										VERIFY_USERCODE		! Verify USERCODE, 
+										SYNCFUNCTION,
+										PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+										DISABLE ! Exit the programming mode"	;
+									
+	
+									
+	"Verify Only"				=	"	INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,  
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SYNCFUNCTION,
+									SRAM_VERIFY	[SEQUENTIAL]! Verify Fuse Map, 
+									SYNCFUNCTION,
+									VERIFY_USERCODE		! Verify USERCODE, 
+									SYNCFUNCTION,
+									DISABLE ! Exit the programming mode"	;
+									
+	
+	"Display ID" = 						"INIT, READ_ID, SAVE_ID";						
+	"Display USERCODE"				="	INIT, READ_ID, SAVE_ID,SAVE_USERCODE";		
+	"Read and Save"	=				"	INIT, 									
+										READ_ID, 
+										SAVE_ID, 
+										IO_STATE ! Program Bscan register,
+										SRAM_ENABLE, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE, 
+										DISABLE";
+	"Display Control Register0" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SAVE_CONTROL0 !Read Control Register 0,
+										DISABLE";					             
+	"Program Control Register0" 		= "INIT ! Initialize,				
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										PROGRAM_CONTROL0 ! Program Control Register 0,
+										DISABLE";								 
+	"Read Status Register" 				="INIT ! Initialize,				
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SAVE_STATUS";	
+	"Refresh"					 = " 	INIT !Initialize,
+										READ_ID !Check the IDCODE,
+										SYNCFUNCTION, 
+										REFRESH_FUNCTION ! Refresh";
+							  
+	"XSRAM Verify Only"			=	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE, 
+										SYNCFUNCTION, 
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										VERIFY	[SEQUENTIAL] ! Verify Fuse Map, 
+										SYNCFUNCTION, 
+										VERIFY_USERCODE		! Verify USERCODE, 
+										SYNCFUNCTION, 
+										DISABLE ! Exit the programming mode"	;
+									
+	"XSRAM Verify ID" 			= 	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	"XSRAM Verify USERCODE"		=	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,
+										SYNCFUNCTION, 
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										SYNCFUNCTION, 
+										VERIFY_USERCODE		! Verify USERCODE,
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Read and Save"			=	"INIT, 								
+										READ_ID, 
+										SAVE_ID, 
+										SRAM_TRANSPARENT_READ_ENABLE, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE, 
+										DISABLE";					
+	"XSRAM Display ID" 					= "INIT, READ_ID, SAVE_ID";									
+
+	"XSRAM Read Status Register" 		= "INIT ! Initialize,					
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+										SAVE_STATUS,
+										DISABLE ! Exit the programming mode";	
+	"XSRAM Bypass"	=					"	INIT 	! Initialize"	;
+	"XSRAM Refresh" = 					" 	INIT !Initialize,
+											READ_ID !Check the IDCODE,
+											SYNCFUNCTION, 
+											REFRESH_FUNCTION ! Refresh"; 	
+	"XSRAM Display USERCODE"	=	"INIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SVF_SAVE_USERCODE, DISABLE";	
+</Operation_List>
+<Script>
+<![CDATA[
+function INIT {
+	HDR HDR_LENGTH TDI(HDR_PATTERN);
+	HIR HIR_LENGTH TDI(HIR_PATTERN);
+	TDR TDR_LENGTH TDI(TDR_PATTERN);
+	TIR TIR_LENGTH TDI(TIR_PATTERN);
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+	SYNC;
+}
+function SVFINIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+	SYNC;
+}
+function PRELOAD {				
+   // Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+   SYNC;
+}
+function INI_PRELOAD {				
+   // Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   SDR BSCAN_Length TDI(#1^BSCAN_Length);
+   SYNC;
+}
+function SAMPLE {				
+   // Shift in Sample(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   SYNC;
+   STATE DRPAUSE;
+   STATE IDLE;
+   SYNC;
+}
+function INI_SAMPLE {				
+   // Shift in Sample(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   SYNC;
+   STATE DRPAUSE;
+   STATE IDLE;
+   SYNC;
+}
+
+function DYNAMIC {	
+   // Shift in Preload instruction
+   ENDDR DRPAUSE;
+   // Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1])
+   					DMASK(BscanMask[1]);
+   ENDDR IDLE;
+   STATE IDLE;
+   SYNC;
+}
+function FLASH_ENABLE {
+	SYNC;
+	// Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x08);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+	SYNC;
+}
+function FLASH_TRANSPARENT_ENABLE {
+	SYNC;
+	// Shift in LSC_ENABLE_X(0x74) instruction;
+    SIR Instruction_Length TDI (LSC_ENABLE_X);
+    SDR 8 TDI(0x08);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+	SYNC;
+}
+function SRAM_ENABLE {
+	SYNC;
+	// Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x00);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+	SYNC;
+}
+function SRAM_TRANSPARENT_READ_ENABLE {
+	SYNC;
+	// Shift in LSC_ENABLE_X(0x74) instruction;
+    SIR Instruction_Length TDI (LSC_ENABLE_X);
+    SDR 8 TDI(0x00);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+	SYNC;
+}
+function UFM_ENABLE {
+	SYNC;
+	// Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x0E);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+	SYNC;
+}
+function UFM_TRANSPARENT_ENABLE
+{
+	SYNC;
+	// Shift in LSC_ENABLE_X(0x74) instruction;
+    SIR Instruction_Length TDI (LSC_ENABLE_X);
+    SDR 8 TDI(0x0E);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+	SYNC;
+}
+function DISABLE {
+	SYNC;
+	// Shift in ISC DISABLE(0x26) instruction;
+    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	IDLE  TCK 2 DELAY 200;     
+	     
+	// Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 2 DELAY 10;
+	SYNC;	
+}
+function READ_ID {
+	// Shift in IDCODE_PUB(0xE0) instruction;
+    SIR Instruction_Length 	TDI (IDCODE_PUB);
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+					        TDO	(IDTDI[1])
+					        MASK (DEVICE_ID_MASK);
+	SYNC;					        
+}
+function CHECK_STATUS {
+	// Shift in LSC_READ_STATUS(0x3C) instruction;
+	SIR Instruction_Length TDI (LSC_READ_STATUS);
+	RUN_TEST IDLE TCK 2 DELAY PWV; 
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO(0x00000000)
+			  	MASK(0x00003000);
+	SYNC;	
+}
+function CHECK_MSPI {
+	// Shift in ISC ENABLE(0xC6) instruction;
+	SIR Instruction_Length TDI (ISC_ENABLE);
+	SDR 8 TDI(0x08);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+	// Shift in in LSC_READ_FEABITS(0xFB) instruction;
+	SIR Instruction_Length	TDI (LSC_READ_FEABITS);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+	SDR_VERIFY 16   TDI(#0^16)
+		 	 		TDO(0x0800)
+		 	 		MASK(0xC800);
+	// Shift in ISC DISABLE(0x26) instruction;
+	SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	IDLE  TCK 2 DELAY 1;     
+	SYNC;
+}
+function CHECK_KEYLOCK 
+{
+	SYNC;
+	// Shift in LSC_READ_STATUS(0x3C) instruction;
+	SIR Instruction_Length TDI (LSC_READ_STATUS);
+	RUN_TEST IDLE TCK 2 DELAY PWV; 
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO(0x00000000)
+			  	MASK(0x00024040);
+	
+	// Shift in LSC_READ_STATUS(0x3C) instruction;
+	SIR Instruction_Length TDI (LSC_READ_STATUS);
+	RUN_TEST IDLE TCK 2 DELAY PWV; 
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO(0x00000000)
+			  	MASK(0x00010000);			  			  
+		
+	SYNC;
+	
+}
+function SRAM_ERASE {
+	SYNC;
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x01);
+	RUN_TEST 	TCK 2 DELAY PWE;
+	// Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY Instruction_Length TDI (BYPASS)
+    					   		  TDO (0x00)
+    					   		  MASK(0xC4);
+	SYNC;
+}
+function FLASH_ERASE {
+	SYNC;
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x0E);
+	RUN_TEST 	TCK 2 ;
+	// Shift in LSC_CHECK_BUSY(0xF0) instruction;
+    SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+	loop PWE {
+		RUN_TEST IDLE  TCK 2 DELAY PWP;
+		SDR_VERIFY 1 TDI(#0) TDO(#0);
+	}
+	SYNC;
+}
+function SVF_FLASH_ERASE {
+	SYNC;
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x0E);
+	RUN_TEST 	TCK 2 DELAY PWE;
+	// Shift in LSC_CHECK_BUSY(0xF0) instruction;
+    SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+    SDR_VERIFY 1 TDI(#0) TDO(#0);
+	SYNC;
+}
+function DIRECT_FLASH_ERASE {
+	SYNC;
+    // SRAM Erase
+	// Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x00);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+	
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x01);
+	RUN_TEST 	TCK 2 DELAY PWE;
+	
+	// Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (BYPASS)
+									TDO(0x00)
+									MASK(0xC4);	
+    SYNC;
+    SYNC;
+    // FLASH Erase
+	// Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x08);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+			
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x0E);
+	RUN_TEST 	TCK 2 ;
+	// Shift in LSC_CHECK_BUSY(0xF0) instruction;
+    SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+	loop PWE {
+		RUN_TEST IDLE  TCK 2 DELAY PWP;
+		SDR_VERIFY 1 TDI(#0) TDO(#0);
+	}
+	SYNC;
+}
+
+function SVF_DIRECT_FLASH_ERASE {
+	SYNC;
+	// SRAM Erase
+	// Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x00);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+	
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x01);
+	RUN_TEST 	TCK 2 DELAY PWE;
+	
+	// Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (BYPASS)
+									TDO(0x00)
+									MASK(0xC4);	
+									
+	// FLASH Erase
+	// Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x08);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+				
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x0E);
+	RUN_TEST 	TCK 2 DELAY PWE;
+	// Shift in LSC_CHECK_BUSY(0xF0) instruction;
+    SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+    SDR_VERIFY 1 TDI(#0) TDO(#0);
+	SYNC;
+}
+function UFM_ERASE {
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x08);
+	RUN_TEST 	TCK 2 ;
+	// Shift in LSC_CHECK_BUSY(0xF0) instruction;
+    SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+	loop PWE {
+		RUN_TEST IDLE  TCK 2 DELAY PWP;
+		SDR_VERIFY 1 TDI(#0) TDO(#0);
+	}
+	SYNC;
+}
+function SVF_UFM_ERASE {			
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x08);
+	RUN_TEST 	TCK 2 DELAY 25000;
+	// Shift in LSC_CHECK_BUSY(0xF0) instruction;
+    SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+    SDR_VERIFY 1 TDI(#0) TDO(#0);
+    SYNC;
+}
+function FEATURE_ERASE {
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x02);
+	RUN_TEST 	TCK 2 ;
+	// Shift in LSC_CHECK_BUSY(0xF0) instruction;
+    SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+	loop PWE {
+		RUN_TEST IDLE  TCK 2 DELAY PWP;
+		SDR_VERIFY 1 TDI(#0) TDO(#0);
+	}
+	SYNC;
+}
+function SVF_FEATURE_ERASE {			
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x02);
+	RUN_TEST 	TCK 2 DELAY 25000;
+	// Shift in LSC_CHECK_BUSY(0xF0) instruction;
+    SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+    SDR_VERIFY 1 TDI(#0) TDO(#0);
+    SYNC;
+}
+function BURST_PROGRAM {
+	FuseArray_TDI.row = 1;
+	// Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+    SDR 8 TDI(0x01);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	
+	// Shift in LSC_BITSTREAM_BURST(0x7A) instruction;
+    SIR Instruction_Length	TDI (LSC_BITSTREAM_BURST);
+	SDR	TotalFuse		TDI	(FuseArray_TDI);
+	RUN_TEST	IDLE TCK 100 DELAY PWP;
+	SYNC;
+}
+function FLASH_PROGRAM_STATUS {
+	FuseArray_TDI.row = 1;
+	// Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+    SDR 8 TDI(0x04);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	repeat Temp_Row_Count{
+		// Shift in LSC_PROG_INCR_NV(0x70) instruction;
+    	SIR Instruction_Length	TDI (LSC_PROG_INCR_NV);    								
+		SDR	128	TDI	(FuseArray_TDI);
+		RUN_TEST IDLE TCK 2 DELAY 1;	
+	} 	
+	SYNC;
+}
+function SVF_FLASH_PROGRAM_STATUS {
+	FuseArray_TDI.row = 1;
+	// Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+    SDR 8 TDI(0x04);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	repeat Temp_Row_Count{	
+		// Shift in LSC_PROG_INCR_NV(0x70) instruction;
+    	SIR Instruction_Length	TDI (LSC_PROG_INCR_NV);    				
+		SDR	128	TDI	(FuseArray_TDI);	
+		RUN_TEST IDLE TCK 2  DELAY 100;	 
+	} 
+	SYNC;
+}
+function UFM_PROGRAM_STATUS {
+	EFuseArray_TDI.row = 1;
+	// Shift in LSC_INIT_ADDR_UFM(0x47) instruction;
+    SIR Instruction_Length	TDI (LSC_INIT_ADDR_UFM);
+    RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	repeat Temp_UFM_Count{	
+		// Shift in LSC_PROG_INCR_NV(0x70) instruction;
+    	SIR Instruction_Length	TDI (LSC_PROG_INCR_NV);
+		SDR	128	TDI	(EFuseArray_TDI);
+		RUN_TEST IDLE TCK 2 DELAY 1;			
+	} 	   
+	SYNC;
+}
+function SVF_UFM_PROGRAM_STATUS {
+	EFuseArray_TDI.row = 1;
+	// Shift in LSC_INIT_ADDR_UFM(0x47) instruction;
+    SIR Instruction_Length	TDI (LSC_INIT_ADDR_UFM);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	repeat Temp_UFM_Count{
+		// Shift in LSC_PROG_INCR_NV(0x70) instruction;
+    	SIR Instruction_Length	TDI (LSC_PROG_INCR_NV);    						
+		SDR	128	TDI	(EFuseArray_TDI);	
+		RUN_TEST IDLE TCK 2  DELAY 100;	  		
+	}
+	SYNC;
+}
+function SRAM_PROGRAM {
+	FuseArray_TDI.row = 1;	
+	// Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	// Shift in LSC_PROG_INCR_RTI(0x82) instruction;
+    SIR Instruction_Length	TDI	(LSC_PROG_INCR_RTI);
+	repeat Address_Length {
+		SDR	Row_Width	TDI	(FuseArray_TDI);	    
+	    RUN_TEST	IDLE TCK 2 DELAY 	PWP;						
+	}	
+	SYNC;			
+}
+function FEATURE_PROGRAM_STATUS
+{
+	datastream FeatureArray[1][64];
+	datastream FeatureBitsArray[1][16];
+	ArchArray_TDI.row = 1;
+	FeatureArray[1] = ArchArray_TDI[1] << 16;
+	//print (0,FeatureArray);
+
+	// Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+    SDR 8 TDI(0x02);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	// Shift in LSC_PROG_FEATURE( 0xE4) instruction;
+    SIR Instruction_Length	TDI (LSC_PROG_FEATURE);
+    SDR 64 TDI(FeatureArray[1]);
+    RUN_TEST IDLE TCK 2 ;
+    // Shift in LSC_CHECK_BUSY(0xF0) instruction;
+	SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+	loop PWP {
+		RUN_TEST IDLE DELAY 1;
+		SDR_VERIFY 1 TDI(#0) TDO(#0);
+	}	  
+	// Shift in LSC_READ_FEATURE (0xE7) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_FEATURE);
+    RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+    SDR_VERIFY 64   TDI(#0^64)
+    				TDO(FeatureArray[1]);
+    		
+    FeatureBitsArray[1] = ArchArray_TDI[1];
+    //print (0,FeatureBitsArray);
+    
+    // Shift in in LSC_PROG_FEABITS(0xF8) instruction;
+    SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+    SDR 16 TDI(FeatureBitsArray[1]);
+    RUN_TEST IDLE TCK 2 ;
+    // Shift in LSC_CHECK_BUSY(0xF0) instruction;
+	SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+	loop PWP {
+		RUN_TEST IDLE DELAY 1;
+		SDR_VERIFY 1 TDI(#0) TDO(#0);
+	}	  
+	// Shift in in LSC_READ_FEABITS(0xFB) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_FEABITS);
+    RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+    SDR_VERIFY 16   TDI(#0^16)
+    				TDO(FeatureBitsArray[1]);
+	SYNC;    				
+}
+function SVF_FEATURE_PROGRAM_STATUS
+{
+	datastream FeatureArray[1][64];
+	datastream FeatureBitsArray[1][16];
+	ArchArray_TDI.row = 1;
+	FeatureArray[1] = ArchArray_TDI[1] << 16;
+	//print (0,FeatureArray);
+
+	// Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+    SDR 8 TDI(0x02);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	// Shift in LSC_PROG_FEATURE( 0xE4) instruction;
+    SIR Instruction_Length	TDI (LSC_PROG_FEATURE);
+    SDR 64 TDI(FeatureArray[1]);
+    RUN_TEST IDLE TCK 2 DELAY 100;
+    // Shift in LSC_READ_FEATURE (0xE7) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_FEATURE);
+    RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+    SDR_VERIFY 64   TDI(#0^64)
+    				TDO(FeatureArray[1]);
+    		
+    FeatureBitsArray[1] = ArchArray_TDI[1];
+    //print (0,FeatureBitsArray);
+    
+    // Shift in in LSC_PROG_FEABITS(0xF8) instruction;
+    SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+    SDR 16 TDI(FeatureBitsArray[1]);
+    RUN_TEST IDLE TCK 2 DELAY 100;
+    // Shift in in LSC_READ_FEABITS(0xFB) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_FEABITS);
+    RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+    SDR_VERIFY 16   TDI(#0^16)
+    				TDO(FeatureBitsArray[1]);
+	SYNC;    				
+}
+function PROGRAM_USERCODE {
+	Usercode_TDI.row = 1;
+	SYNC;
+	// Shift in READ USERCODE(0xC0) instruction;
+    SIR Instruction_Length TDI (USERCODE);
+	SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+	// Shift in ISC PROGRAM USERCODE(0xC2) instruction;
+    SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+	RUN_TEST	TCK 2   DELAY 	PWP;
+	SYNC;
+}
+function PROGRAM_SECURITY {
+	// Shift in ISC PROGRAM SECURITY(0xCE) instruction;
+    SIR Instruction_Length	TDI	(ISC_PROGRAM_SECURITY);
+	RUN_TEST	TCK 2 DELAY PWP;
+	SYNC;	
+}
+function UFM_SECURITY {
+	// Shift in LSC_PROGRAM_SECPLUS(0xCF) instruction;
+    SIR Instruction_Length	TDI	(LSC_PROGRAM_SECPLUS);
+	RUN_TEST	TCK 2 DELAY PWP;
+	SYNC;
+}
+function PROGRAM_DONE_BIT {
+	SYNC;
+	// Shift in ISC PROGRAM DONE(0x5E) instruction;
+    SIR	Instruction_Length 	TDI (ISC_PROGRAM_DONE);
+	RUN_TEST	IDLE TCK 2 DELAY PWP;				
+	// Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (BYPASS)
+									TDO(0x04)
+									MASK(0xC4);	
+	SYNC;			   	      
+}
+function FLASH_PROGRAM_DONE_BIT {
+	SYNC;
+	// Shift in ISC PROGRAM DONE(0x5E) instruction;
+    SIR	Instruction_Length 	TDI (ISC_PROGRAM_DONE);
+	RUN_TEST	IDLE TCK 2 ;
+	// Shift in LSC_CHECK_BUSY(0xF0) instruction;
+	SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+	loop PWP {
+		RUN_TEST IDLE DELAY 1;
+		SDR_VERIFY 1 TDI(#0) TDO(#0);
+	}		
+	// Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (BYPASS)
+									TDO(0x04)
+									MASK(0xC4);
+	SYNC;			   	      
+}
+function VERIFY_SRAM_DONE_BIT {
+	// Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (BYPASS)
+									TDO(0x04)
+									MASK(0xC4);	
+	SYNC;									
+}
+function VERIFY_DONE_BIT {
+    SYNC;	
+	// Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (BYPASS)
+									TDO(0x04)
+									MASK(0xC4);	   			   	      	
+    SYNC;					   	      	
+}
+function SRAM_VERIFY {
+	FuseArray_TDI.row = 1;
+	FuseArray_MASK.row = 1;
+	// Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	// Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(LSC_VERIFY_INCR_RTI);
+	repeat Address_Length {
+		RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+		SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+								TDO	(FuseArray_TDI)
+								MASK(FuseArray_MASK);
+		SYNC;
+	}
+	SYNC;
+}
+function FLASH_VERIFY {
+	FuseArray_TDI.row = 1;
+	// Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x04);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+	// Shift in LSC_READ_INCR_NV(0x73) instruction;
+    SIR Instruction_Length	TDI	(LSC_READ_INCR_NV);
+	repeat Temp_Row_Count{	
+		RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+		SDR_VERIFY	128	TDI	(#1^128)
+						TDO	(FuseArray_TDI);		
+		SYNC;
+	}
+	SYNC;
+}
+function UFM_VERIFY {
+	EFuseArray_TDI.row = 1;
+	// Shift in LSC_INIT_ADDR_UFM(0x47) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDR_UFM);
+	RUN_TEST	IDLE  TCK 2 DELAY PWP;      	
+	// Shift in LSC_READ_INCR_NV(0x73) instruction;
+    SIR Instruction_Length	TDI	(LSC_READ_INCR_NV);
+	repeat Temp_UFM_Count{	
+		RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+		SDR_VERIFY	128	TDI	(#1^128)
+						TDO	(EFuseArray_TDI);
+		SYNC;
+	}
+	SYNC;				
+}
+function FEATURE_VERIFY_STATUS
+{
+	datastream FeatureArray[1][64];
+	datastream FeatureBitsArray[1][16];
+	ArchArray_TDI.row = 1;
+	FeatureArray[1] = ArchArray_TDI[1] << 16;			  
+	// Shift in LSC_READ_FEATURE (0xE7) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_FEATURE);
+    RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+    SDR_VERIFY 64   TDI(#0^64)
+    				TDO(FeatureArray[1]);    		
+    FeatureBitsArray[1] = ArchArray_TDI[1];    	  
+	// Shift in in LSC_READ_FEABITS(0xFB) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_FEABITS);
+    RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+    SDR_VERIFY 16   TDI(#0^16)
+    				TDO(FeatureBitsArray[1]);
+	SYNC;    				
+}
+function VERIFY_USERCODE {
+	Usercode_TDI.row = 1;
+	SYNC;
+	// Shift in READ USERCODE(0xC0) instruction;
+    SIR Instruction_Length TDI (USERCODE);
+    RUN_TEST	TCK 2  DELAY 	PWV;
+	SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+								TDO	(Usercode_TDI);
+	SYNC;								
+}
+function REFRESH_FUNCTION {
+	// Shift in LSC_REFRESH(0x79) instruction;
+    SIR Instruction_Length	TDI (LSC_REFRESH);
+    RUN_TEST IDLE TCK 2 DELAY PWP; 
+
+	// Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length	TDI (BYPASS);
+	RUN_TEST IDLE TCK 100 DELAY 1;
+	SYNC;
+}
+
+function UPLOAD_FUNCTION {
+	// Shift in LSC_REFRESH(0x79) instruction;
+    SIR Instruction_Length	TDI (LSC_REFRESH);
+	RUN_TEST IDLE TCK 2 DELAY PWP; 
+
+	// Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length	TDI (BYPASS);
+	RUN_TEST IDLE TCK 100 DELAY 1;
+	SYNC;
+}
+function FLASH_MDR{
+	SYNC;				        
+   
+	// SRAM Erase
+	// Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x00);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+	
+	// Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x01);
+	RUN_TEST 	TCK 2 DELAY PWE;
+	
+    // Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x08);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+
+	// Shift in ISC DISABLE(0x26) instruction;
+    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	IDLE  TCK 2 DELAY MDRDelay;     
+	     
+	// Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 2 DELAY 1;
+	
+	SYNC;
+}	
+function SYNCFUNCTION {
+	SYNC;
+}
+]]>
+</Script>
+</SVF_Plus>

@@ -1,0 +1,1425 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        SVF_Plus    SYSTEM    "SVF_Plus.dtd" >
+<!--
+    03/04/05 Spinti: Changed the PROGRAM_SECURITY pulse width to 50.
+    03/08/05 Spinti: Changed the DISABLE delay to 200ms.
+    11/28/05 Nguyen changed to skip verify CFG row 1 and row 4 to fixed the glitch 
+    whenever we verify the row that has some eeprom bits that configure the HVout (an output). 
+	Row 3 is like this, which sets HVOUT bypass =0, which causes the problem.  
+	Its the last 0 bit on the right.
+	L41235 11111111111111111111111111111111111111111111111111111011*
+    06/21/06 Ong   :Added Verify Done Bit to Verfiy Only operation for Jtag and ATDI.  	
+    07/16/07 Spinti: Changed PROGRAM_DONE pulse width to 50ms.
+    10/30/08 Spinti: Added the "Secure Device" and "ATDI Secure Device" operations.
+    11/26/08 Nguyen Changed TDO(0XFF)and MASK(0x04) for Verify Done Bit to TDO(0X1D) and no MASK. Checks all availabe bits.   	
+    11/26/08 Nguyen added the "Erase,Program", "ATDI Erase,Program", "Verify,Secure" and "ATDI Verify,Secure" operations for ispPAC Power Manager II
+    
+-->
+<SVF_Plus version="1.0">
+<Header>
+    <Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+    <Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+    <!-- Length fields are in number if bits -->
+    <Instruction_Length  value="INSTRUCTION_REGISTER_LENGTH"/>
+    <Row_Width           value="DEVICE_ROW_WIDTH"/>
+    <Address_Length      value="ADDRESS_REGISTER_LENGTH"/>
+    <Address length="ADDRESS_LENGTH">
+        INI_ADDRESS
+    </Address>
+    <ID_Length           value="DEVICE_ID_LENGTH"/>
+    <Usercode_Length     value="DEVICE_USERCODE_LENGTH"/>
+    <Arch_Length         value="ARCHITECH_LENGTH"/>
+    <Arch_Row            value="ARCHITECH_ROW"/>
+    <PWP    value="PROGRAMING_PULSE_WIDTH"/>
+    <PWV    value="VERIFY_PULSE_WIDTH"/>
+    <PWE    value="ERASE_PULSE_WIDTH"/>
+    <Instruction>
+        EXTEST                = 0x00;
+        SAMPLE                = 0x1C;
+        INTEST				  = 0x2C;
+        HIGHZ				  = 0x18;
+        ADDPLD                = 0x01;
+        DATAPLD               = 0x02;
+        PROGPLD               = 0x07;
+        ERASEPLD	              = 0x03;
+        PROGESF               = 0x06;
+        READPLD               = 0x0A;
+        DISCHARGE             = 0x14;
+        PROGRAMEN             = 0x15;
+        IDCODE                = 0x16;
+        BYPASS                = 0xFF;
+        USERCODE			  = 0x17;
+        PROG_USERCODE      	  = 0x1A;
+        PROG_INCR			  = 0x27;
+        VERIFY_INCR			  = 0x2A;
+        PROG_SECURITY	      = 0x09;
+        PROGRAMDIS            = 0x1E;
+        PROGRAM_DONE		  = 0x2F;
+        ERASE_DONE			  = 0x24;   
+        CFGBE	              = 0x29;
+        ADDCFG                = 0x2B;
+        DATACFG               = 0x2D;
+        PROGCFG               = 0x2E;
+        READCFG               = 0x28;
+        
+    </Instruction>
+</Parameter>
+<Data>
+    <DataField    name="IDTDI">
+        <FieldBlock    row_width="DEVICE_ID_LENGTH">
+            ID_DATA
+        </FieldBlock>
+    </DataField>
+    <DataField    name="Address_CFG">
+        <FieldBlock    row_width="12">
+            0x800,
+            0x400,
+            0x200,
+            0x100,
+            0x080,
+            0x040,
+            0x020,
+            0x010,
+            0x008,
+            0x004,
+            0x002,
+            0x001
+        </FieldBlock>
+    </DataField>
+</Data>
+<Operation_List>
+    "Read and Save JEDEC" = "INIT, 
+    						 SAVE_ID, 
+    						 ENABLE, 
+    						 SAVE_ARRAY, 
+    						 SAVE_USERCODE, 
+    						 DISABLE";
+
+    "Calculate Checksum" = "INIT, 
+     						SAVE_ID, 
+     						ENABLE, 
+     						SAVE_ARRAY, 
+     						SAVE_USERCODE, 
+     						DISABLE";
+
+    "Read and Save" = "INIT, 
+    				   SAVE_ID, 
+    				   ENABLE, 
+    				   SAVE_ARRAY, 
+    				   SAVE_USERCODE, 
+    				   DISABLE";
+
+    "Calculate Data CRC" = "INIT, SAVE_ID, ENABLE, SAVE_ARRAY, SAVE_USERCODE, DISABLE";
+
+    "Erase,Program,Verify" = "INIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+                    DISABLE     ! Exit the programming mode";
+
+	"Erase,Program" = "INIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+                    DISABLE     ! Exit the programming mode";
+                    
+    "Erase,Program,Verify,Secure" = "INIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,                     
+                    PROGRAM_SECURITY ! Secure device,
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode";
+
+    "Secure Device" = "INIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    PROGRAM_SECURITY ! Secure device,
+                    DISABLE     ! Exit the programming mode";
+
+    "Program Only" = "INIT       ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode";
+
+    "Verify Only" = "INIT       ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+  			  		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT"	;
+	
+	"Verify,Secure" = "INIT       ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device, 
+  			  		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT"	;
+			  
+    "Verify ID" =  "INIT        ! Initialize,
+                    READ_ID     ! Check the IDCODE";
+                    
+    "Display ID" = "INIT, READ_ID, SAVE_ID";
+
+    "Verify USERCODE" = " INIT ! Initialize, 
+                    READ_ID    ! Check the IDCODE,
+                    VERIFY_USERCODE ! Verify USERCODE";
+                     
+    "Display USERCODE" = "INIT, READ_ID, SAVE_USERCODE";
+
+    "Erase Only" = "INIT        ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    DISABLE     ! Exit the programming mode";
+                    
+    "Bypass" = "INIT  ! Initialize";
+
+    "Re-Initialize" = "INIT     ! Initialize,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    DISABLE     ! Exit the programming mode";
+                    
+    "Disable Only" = "INIT      ! Initialize,
+                    DISABLE     ! Exit the programming mode";
+	"Erase DONE bit"	=	"INIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"Program DONE bit"	=	"INIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Read DONE bit"	=	"INIT 	! Initialize, 
+					 	READ_DONE_BIT	! Read the done bit"	;
+	"Display DONE bit"	=	"INIT 	! Initialize, 
+					 	READ_DONE_BIT	! Read the done bit"	;  
+
+	"ATDI Read and Save JEDEC" = "INIT,
+							 ATDI_INIT, 
+    						 SAVE_ID, 
+    						 ENABLE, 
+    						 SAVE_ARRAY,     						  
+    						 SAVE_USERCODE, 
+    						 DISABLE";
+
+    "ATDI Calculate Checksum" = "INIT, 
+    						ATDI_INIT,
+     						SAVE_ID, 
+     						ENABLE, 
+     						SAVE_ARRAY,      						 
+     						SAVE_USERCODE, 
+     						DISABLE";
+
+    "ATDI Read and Save" = "INIT, 
+    					ATDI_INIT,
+    				   SAVE_ID, 
+    				   ENABLE, 
+    				   SAVE_ARRAY,     				    
+    				   SAVE_USERCODE, 
+    				   DISABLE";
+
+    "ATDI Calculate Data CRC" = "INIT, ATDI_INIT,SAVE_ID, ENABLE, SAVE_ARRAY, SAVE_USERCODE, DISABLE";
+
+    "ATDI Erase,Program,Verify" = "INIT  ! Initialize,
+    				ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+                    DISABLE     ! Exit the programming mode";
+                    
+	"ATDI Erase,Program" = "INIT  ! Initialize,
+    				ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+                    DISABLE     ! Exit the programming mode";                    
+
+    "ATDI Erase,Program,Verify,Secure" = "INIT  ! Initialize,
+    				ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,                     
+                    PROGRAM_SECURITY ! Secure device,
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode";
+
+    "ATDI Secure Device" = "INIT  ! Initialize,
+    				ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    PROGRAM_SECURITY ! Secure device,
+                    DISABLE     ! Exit the programming mode";
+
+    "ATDI Program Only" = "INIT       ! Initialize,
+   					ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode";
+
+    "ATDI Verify Only" = "INIT       ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+			  		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT"	;
+			  
+	"ATDI Verify,Secure" = "INIT       ! Initialize,
+					ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device, 
+  			  		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT"	;
+			  					  
+    "ATDI Verify ID" =  "INIT        ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE";
+                    
+    "ATDI Display ID" = "INIT, ATDI_INIT ,READ_ID, SAVE_ID";
+
+    "ATDI Verify USERCODE" = " INIT ! Initialize, 
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID    ! Check the IDCODE,
+                    VERIFY_USERCODE ! Verify USERCODE";
+                     
+    "ATDI Display USERCODE" = "INIT, ATDI_INIT,READ_ID, SAVE_USERCODE";
+
+    "ATDI Erase Only" = "INIT        ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    DISABLE     ! Exit the programming mode";
+                    
+    "ATDI Bypass" = "INIT  ! Initialize";
+
+    "ATDI Re-Initialize" = "INIT     ! Initialize,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    DISABLE     ! Exit the programming mode";
+                    
+    "ATDI Disable Only" = "INIT      ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    DISABLE     ! Exit the programming mode";
+	"ATDI Erase DONE bit"	=	"INIT 	! Initialize, 
+							ATDI_INIT ! Enable ATDI Pin,
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"ATDI Program DONE bit"	=	"INIT 	! Initialize, 
+							ATDI_INIT ! Enable ATDI Pin,
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"ATDI Read DONE bit"	=	"INIT 	! Initialize, 
+					 	ATDI_INIT ! Enable ATDI Pin,
+					 	READ_DONE_BIT	! Read the done bit"	;
+	"ATDI Display DONE bit"	=	"INIT 	! Initialize, 
+					 	ATDI_INIT ! Enable ATDI Pin,
+					 	READ_DONE_BIT	! Read the done bit"	;					 	                  
+                    
+</Operation_List>
+
+<Operation_List label="SingleSVFOperation">
+    "Read and Save JEDEC" = "SVFINIT  ! Initialize,
+                    READ_ID      ! Check the IDCODE,
+                    ENABLE       ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE      ! Exit the programming mode";
+
+    "Calculate Checksum" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE     ! Exit the programming mode";
+
+    "Read and Save" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE     ! Exit the programming mode";
+
+    "Calculate Data CRC" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE     ! Exit the programming mode";
+
+    "Erase,Program,Verify" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode";
+
+	"Erase,Program" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode";
+                    
+    "Erase,Program,Verify,Secure" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    PROGRAM_SECURITY ! Secure device,
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE    ! Exit the programming mode";
+
+    "Secure Device" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    PROGRAM_SECURITY ! Secure device,
+                    DISABLE     ! Exit the programming mode";
+
+    "Program Only" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode";
+
+    "Verify Only" = "SVFINIT   ! Initialize,
+                    READ_ID    ! Check the IDCODE,
+                    ENABLE     ! Enable the programming mode,
+                    VERIFY     ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE    ! Verify USERCODE,
+			  		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT"	;
+			  		
+	"Verify,Secure" = "SVFINIT       ! Initialize,
+					READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device, 
+  			  		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT"	;
+			  					  		
+    "Verify ID" =  "INIT       ! Initialize,
+                    READ_ID    ! Check the IDCODE";
+
+    "Display ID" = "SVFINIT     ! Initialize,
+                    SVF_SAVE_ID ! Read the IDCODE";
+
+    "Display USERCODE" = "SVFINIT 	  ! Initialize, 
+                    READ_ID           ! Check the IDCODE",
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+                    
+    "Verify USERCODE" = "SVFINIT      ! Initialize, 
+                    READ_ID           ! Check the IDCODE",
+                    VERIFY_USERCODE   ! Verify USERCODE";
+
+    "Erase Only" = "SVFINIT    ! Initialize,
+                    READ_ID    ! Check the IDCODE,
+                    ENABLE     ! Enable the programming mode,
+                    ERASE      ! Erase the device,
+                    DISABLE    ! Exit the programming mode";
+
+    "Bypass" = "SVFINIT  ! Initialize";
+
+    "Disable Only" = "SVFINIT  ! Initialize,
+                    DISABLE    ! Exit the programming mode";
+
+    "Re-Initialize" = "SVFINIT ! Initialize,
+                    ENABLE     ! Enable the programming mode,
+                    ERASE      ! Erase the device,
+                    DISABLE    ! Exit the programming mode";
+	"Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Read DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"	;
+	"Display DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"	;
+					 	
+	"ATDI Read and Save JEDEC" = "SVFINIT  ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID      ! Check the IDCODE,
+                    ENABLE       ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE      ! Exit the programming mode";
+
+    "ATDI Calculate Checksum" = "SVFINIT   ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE     ! Exit the programming mode";
+
+    "ATDI Read and Save" = "SVFINIT  ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE     ! Exit the programming mode";
+
+    "ATDI Calculate Data CRC" = "SVFINIT   ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE     ! Exit the programming mode";
+
+    "ATDI Erase,Program,Verify" = "SVFINIT  ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode";
+
+	"ATDI Erase,Program" = "SVFINIT  ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode";
+                    
+    "ATDI Erase,Program,Verify,Secure" = "SVFINIT  ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    PROGRAM_SECURITY ! Secure device,
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE    ! Exit the programming mode";
+
+    "ATDI Secure Device" = "SVFINIT  ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    PROGRAM_SECURITY ! Secure device,
+                    DISABLE     ! Exit the programming mode";
+
+    "ATDI Program Only" = "SVFINIT   ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode";
+
+    "ATDI Verify Only" = "SVFINIT   ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID    ! Check the IDCODE,
+                    ENABLE     ! Enable the programming mode,
+                    VERIFY     ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+			  		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT"	;
+			  		
+	"ATDI Verify,Secure" = "SVFINIT       ! Initialize,
+					ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device, 
+  			  		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT"	;
+			  					  		
+    "ATDI Verify ID" =  "INIT       ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID    ! Check the IDCODE";
+
+    "ATDI Display ID" = "SVFINIT     ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    SVF_SAVE_ID ! Read the IDCODE";
+
+    "ATDI Display USERCODE" = "SVFINIT 	  ! Initialize, 
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID           ! Check the IDCODE",
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+                    
+    "ATDI Verify USERCODE" = "SVFINIT      ! Initialize, 
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID           ! Check the IDCODE",
+                    VERIFY_USERCODE   ! Verify USERCODE";
+
+    "ATDI Erase Only" = "SVFINIT    ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID    ! Check the IDCODE,
+                    ENABLE     ! Enable the programming mode,
+                    ERASE      ! Erase the device,
+                    DISABLE    ! Exit the programming mode";
+
+    "ATDI Bypass" = "SVFINIT  ! Initialize";
+
+    "ATDI Disable Only" = "SVFINIT  ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    DISABLE    ! Exit the programming mode";
+
+    "ATDI Re-Initialize" = "SVFINIT ! Initialize,
+                    ENABLE     ! Enable the programming mode,
+                    ERASE      ! Erase the device,
+                    DISABLE    ! Exit the programming mode";
+	"ATDI Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							ATDI_INIT ! Enable ATDI Pin,
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"ATDI Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							ATDI_INIT ! Enable ATDI Pin,
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"ATDI Read DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	ATDI_INIT ! Enable ATDI Pin,
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"	;
+	"ATDI Display DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	ATDI_INIT ! Enable ATDI Pin,
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"	;					 	                            
+</Operation_List>
+
+<Operation_List label="TurboOperation">
+    "Read and Save JEDEC" = "INIT, SAVE_ARRAY, SAVE_USERCODE";
+
+    "Calculate Checksum" = "INIT, SAVE_ARRAY, SAVE_USERCODE";
+
+    "Read and Save" = "INIT, SAVE_ARRAY, SAVE_USERCODE";
+
+    "Calculate Data CRC" = "INIT, SAVE_ARRAY, SAVE_USERCODE";
+
+    "Erase,Program,Verify" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE    ! Verify USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit"; 
+
+	"Erase,Program" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit"; 
+                    
+    "Erase,Program,Verify,Secure" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE  ! Verify USERCODE, 
+                    PROGRAM_SECURITY ! Secure device,
+                    PROGRAM_DONE_BIT	! Program DONE bit";
+
+    "Secure Device" = "INIT  ! Initialize,
+                    PROGRAM_SECURITY	! Secure device";
+
+    "Program Only" = "INIT      ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit";
+
+    "Verify Only" = "INIT    ! Initialize,
+                    VERIFY   ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE";
+
+	"Verify,Secure" = "INIT       ! Initialize,
+					VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device"	;
+			  		
+    "Verify ID" =  "INIT     ! Initialize,
+                    READ_ID  ! Check the IDCODE";
+
+    "Display ID" = "INIT, READ_ID, SAVE_ID";
+
+    "Verify USERCODE" = "INIT ! Initialize, 
+                    VERIFY_USERCODE ! Verify USERCODE"; 
+
+    "Display USERCODE" = "INIT,
+                    SAVE_USERCODE";
+
+    "Erase Only" = "INIT     ! Initialize,
+                    ERASE    ! Erase the device";
+
+    "Bypass" = "INIT  ! Initialize";
+
+    "Re-Initialize" = "INIT  ! Initialize,
+                    ENABLE   ! Enable the programming mode,
+                    ERASE    ! Erase the device";
+
+    "Disable Only" = "INIT   ! Initialize,
+                    DISABLE  ! Exit the programming mode";
+
+    "Enable Only" = "INIT    ! Initialize,
+                    READ_ID  ! Check the IDCODE,
+                    ENABLE   ! Enable the programming mode";
+	"Erase DONE bit"	=	"INIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"Program DONE bit"	=	"INIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Read DONE bit"	=	"INIT 	! Initialize, 
+					 	READ_DONE_BIT	! Read the done bit"	;
+	"Display DONE bit"	=	"INIT 	! Initialize, 
+					 	READ_DONE_BIT	! Read the done bit"  
+	
+	"ATDI Read and Save JEDEC" = "INIT, SAVE_ARRAY, SAVE_USERCODE";
+
+    "ATDI Calculate Checksum" = "INIT, SAVE_ARRAY, SAVE_USERCODE";
+
+    "ATDI Read and Save" = "INIT, SAVE_ARRAY, SAVE_USERCODE";
+
+    "ATDI Calculate Data CRC" = "INIT, SAVE_ARRAY, SAVE_USERCODE";
+
+    "ATDI Erase,Program,Verify" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE    ! Verify USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit"; 
+
+	"ATDI Erase,Program" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit"; 
+                    
+    "ATDI Erase,Program,Verify,Secure" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_USERCODE  ! Verify USERCODE, 
+                    PROGRAM_SECURITY ! Secure device,
+                    PROGRAM_DONE_BIT	! Program DONE bit";
+
+    "ATDI Secure Device" = "INIT  ! Initialize,
+                    PROGRAM_SECURITY	! Secure device";
+
+    "ATDI Program Only" = "INIT      ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit";
+
+    "ATDI Verify Only" = "INIT    ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    VERIFY   ! Verify Fuse Map";
+
+	"ATDI Verify,Secure" = "INIT    ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    VERIFY   ! Verify Fuse Map,
+                    PROGRAM_SECURITY	! Secure device";
+                    
+	
+    "ATDI Verify ID" =  "INIT     ! Initialize,
+                    READ_ID  ! Check the IDCODE";
+
+    "ATDI Display ID" = "INIT, READ_ID, SAVE_ID";
+
+    "ATDI Verify USERCODE" = "INIT ! Initialize, 
+                    VERIFY_USERCODE ! Verify USERCODE"; 
+
+    "ATDI Display USERCODE" = "INIT,
+                    SAVE_USERCODE";
+
+    "ATDI Erase Only" = "INIT     ! Initialize,
+                    ERASE    ! Erase the device";
+
+    "ATDI Bypass" = "INIT  ! Initialize";
+
+    "ATDI Re-Initialize" = "INIT  ! Initialize,
+                    ENABLE   ! Enable the programming mode,
+                    ERASE    ! Erase the device";
+
+    "ATDI Disable Only" = "INIT   ! Initialize,
+                    DISABLE  ! Exit the programming mode";
+
+    "ATDI Enable Only" = "INIT    ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID  ! Check the IDCODE,
+                    ENABLE   ! Enable the programming mode";
+	"ATDI Erase DONE bit"	=	"INIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"ATDI Program DONE bit"	=	"INIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"ATDI Read DONE bit"	=	"INIT 	! Initialize, 
+					 	READ_DONE_BIT	! Read the done bit"	;
+	"ATDI Display DONE bit"	=	"INIT 	! Initialize, 
+					 	READ_DONE_BIT	! Read the done bit" 					 	                  
+</Operation_List>
+
+<Operation_List label="ChainSVFOperation">
+    "Read and Save JEDEC" = "SVFINIT  ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "Calculate Checksum" = "SVFINIT   ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "Read and Save" = "SVFINIT        ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "Calculate Data CRC" = "SVFINIT   ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "Simultanous Erase,Program,Verify" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM_VERIFY    ! Program and Verify Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_DONE_BIT  ! Program DONE bit"; 
+
+    "Simultanous Erase,Program,Verify,Secure" = "SVFINIT  ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM_VERIFY    ! Program and Verify Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+                    PROGRAM_SECURITY  ! Secure device,
+                    PROGRAM_DONE_BIT  ! Program DONE bit";
+
+    "Erase,Program,Verify" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_DONE_BIT  ! Program DONE bit"; 
+
+	"Erase,Program" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    PROGRAM_DONE_BIT  ! Program DONE bit";
+                    
+    "Erase,Program,Verify,Secure" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+                    PROGRAM_SECURITY  ! Secure device,
+                    PROGRAM_DONE_BIT	! Program DONE bit";
+
+    "Secure Device" = "SVFINIT   ! Initialize,
+                    PROGRAM_SECURITY ! Secure device";
+
+    "Program Only" = "SVFINIT         ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit";
+
+    "Verify Only" = "SVFINIT          ! Initialize,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE"; 
+
+	"Verify,Secure" = "SVFINIT          ! Initialize,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device"; 
+                    
+    "Verify ID" =  "SVFINIT      ! Initialize,
+                    READ_ID      ! Check the IDCODE";
+
+    "Display ID" = "SVFINIT      ! Initialize,
+                    SVF_SAVE_ID  ! Read the IDCODE";
+
+    "Display USERCODE" = "SVFINIT     ! Initialize, 
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+								
+    "Verify USERCODE" = "SVFINIT      ! Initialize, 
+                    VERIFY_USERCODE   ! Verify USERCODE";
+
+    "Erase Only" = "SVFINIT      ! Initialize,
+                    ERASE        ! Erase the device";
+
+    "Bypass" = "SVFINIT  ! Initialize";
+
+    "Disable Only" = "SVFINIT    ! Initialize,
+                    DISABLE      ! Exit the programming mode";
+
+    "Re-Initialize" = "SVFINIT   ! Initialize,
+                    ERASE        ! Erase the device";
+
+    "Enable Only" = "SVFINIT     ! Initialize,
+                    ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID      ! Check the IDCODE,
+                    ENABLE       ! Enable the programming mode";
+	"Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Read DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"	;
+	"Display DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"
+	
+	"ATDI Read and Save JEDEC" = "SVFINIT  ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "ATDI Calculate Checksum" = "SVFINIT   ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "ATDI Read and Save" = "SVFINIT        ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "ATDI Calculate Data CRC" = "SVFINIT   ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,                    
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "ATDI Simultanous Erase,Program,Verify" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM_VERIFY    ! Program and Verify Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_DONE_BIT  ! Program DONE bit"; 
+
+    "ATDI Simultanous Erase,Program,Verify,Secure" = "SVFINIT  ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM_VERIFY    ! Program and Verify Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+                    PROGRAM_SECURITY  ! Secure device,
+                    PROGRAM_DONE_BIT  ! Program DONE bit";
+
+    "ATDI Erase,Program,Verify" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_DONE_BIT  ! Program DONE bit"; 
+
+	"ATDI Erase,Program" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    PROGRAM_DONE_BIT  ! Program DONE bit"; 
+                    
+    "ATDI Erase,Program,Verify,Secure" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+                    PROGRAM_SECURITY  ! Secure device,
+                    PROGRAM_DONE_BIT	! Program DONE bit";
+
+    "ATDI Secure Device" = "SVFINIT   ! Initialize,
+                    PROGRAM_SECURITY ! Secure device";
+
+    "ATDI Program Only" = "SVFINIT         ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    PROGRAM_DONE_BIT	! Program DONE bit";
+
+    "ATDI Verify Only" = "SVFINIT          ! Initialize,
+    				ATDI_INIT ! Enable ATDI Pin,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE"; 
+
+	"ATDI Verify,Secure" = "SVFINIT          ! Initialize,
+					ATDI_INIT ! Enable ATDI Pin,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device"; 
+                    
+    "ATDI Verify ID" =  "SVFINIT      ! Initialize,
+                    READ_ID      ! Check the IDCODE";
+
+    "ATDI Display ID" = "SVFINIT      ! Initialize,
+                    SVF_SAVE_ID  ! Read the IDCODE";
+
+    "ATDI Display USERCODE" = "SVFINIT     ! Initialize, 
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+								
+    "ATDI Verify USERCODE" = "SVFINIT      ! Initialize, 
+                    VERIFY_USERCODE   ! Verify USERCODE";
+
+    "ATDI Erase Only" = "SVFINIT      ! Initialize,
+                    ERASE        ! Erase the device";
+
+    "ATDI Bypass" = "SVFINIT  ! Initialize";
+
+    "ATDI Disable Only" = "SVFINIT    ! Initialize,
+                    DISABLE      ! Exit the programming mode";
+
+    "ATDI Re-Initialize" = "SVFINIT   ! Initialize,
+                    ERASE        ! Erase the device";
+
+    "ATDI Enable Only" = "SVFINIT     ! Initialize,
+    				ATDI_INIT ! Enable ATDI Pin,
+                    READ_ID      ! Check the IDCODE,
+                    ENABLE       ! Enable the programming mode";
+	"ATDI Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"ATDI Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"ATDI Read DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"	;
+	"ATDI Display DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"					 	                    
+</Operation_List>
+
+<Script>
+<![CDATA[
+function INIT {
+    HDR HDR_LENGTH TDI(HDR_PATTERN);
+    HIR HIR_LENGTH TDI(HIR_PATTERN);
+    TDR TDR_LENGTH TDI(TDR_PATTERN);
+    TIR TIR_LENGTH TDI(TIR_PATTERN);
+    ENDDR DRPAUSE;
+    ENDIR IRPAUSE;
+    FREQUENCY 1E6 HZ;
+    STATE IDLE;
+}
+function SVFINIT {
+    HDR 0;
+    HIR 0;
+    TDR 0;
+    TIR 0;
+    ENDDR DRPAUSE;
+    ENDIR IRPAUSE;
+    FREQUENCY 1E6 HZ;
+    STATE IDLE;
+}
+function ATDI_INIT {
+    HDR 0;
+    HIR 0;
+    TDR 0;
+    TIR 0;
+    ! Enable the ATDI pin;
+	STATE IRPAUSE;
+	STATE IDLE;
+	STATE IRPAUSE;
+	STATE IDLE;
+	STATE IRPAUSE;
+	STATE IDLE;
+	STATE IRPAUSE;
+	STATE IDLE;
+}
+function READ_ID {
+	! Shift in IDCODE(0x16) instruction;
+    SIR Instruction_Length TDI  (IDCODE);
+    SDR_VERIFY ID_Length   TDI  (#1^ID_Length)
+                           TDO  (IDTDI[1])
+                           MASK (DEVICE_ID_MASK);
+	STATE IDLE;                           
+}
+function ENABLE {
+    ! Shift in PROGRAM_ENABLE(0x15) instruction;
+    SIR Instruction_Length TDI (PROGRAMEN);
+    STATE IDLE;
+    //TDR 0;
+    //TIR 0;
+}
+function ERASE {
+	! Shift in ERASE_DONE(0x24) instruction;
+    SIR Instruction_Length TDI (ERASE_DONE);
+    RUN_TEST TCK 5 DELAY PWP;
+    
+    ! Shift in ERASE(0x03) instruction;
+    SIR Instruction_Length TDI (ERASEPLD);
+    RUN_TEST TCK 5 DELAY PWE;
+	
+	! Shift in PROGRAM_ENABLE(0x15) instruction;
+    SIR Instruction_Length TDI (PROGRAMEN);
+    STATE IDLE;
+    
+    ! Shift in DISCHARGE(0x14) instruction;
+    SIR Instruction_Length TDI (DISCHARGE);
+    RUN_TEST TCK 5 DELAY PWP;
+}
+
+function DISABLE {
+    ! Shift in PROGRAM DISABLE(0x1E) instruction;
+    SIR Instruction_Length TDI (PROGRAMDIS);
+    RUN_TEST TCK 5 DELAY 200;
+    ! Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length TDI (BYPASS);
+    RUN_TEST TCK 5 DELAY PWP;
+}
+function PROGRAM {
+	int32	RowCount = 1;
+    Address.row = 1;
+    FuseArray_TDI.row = 1;
+
+    repeat Address_Length {
+    	! Shift in PROGRAM_ENABLE(0x15) instruction;
+	    SIR Instruction_Length TDI (PROGRAMEN);
+	    STATE IDLE;
+        ! Shift in ADDRESS(0x01) instruction;
+        SIR Instruction_Length TDI (ADDPLD);
+        SDR Address_Length TDI (Address[1]);
+		STATE IDLE;
+        ! Shift in DATA(0x02) instruction;
+        SIR Instruction_Length TDI (DATAPLD);
+        ! Shift in Data Row = RowCount;
+        SDR Row_Width TDI (FuseArray_TDI[RowCount]);
+        ! Shift in PROGRAM(0x07) instruction;
+        SIR Instruction_Length TDI (PROGPLD);
+        RUN_TEST TCK 5 DELAY PWP;
+        Address[1] = Address[1] >> 1;
+        RowCount = RowCount + 1 ;
+    } // repeat
+    Address[1] = #1@(#0^(Address_Length-1));
+}
+function PROGRAM_VERIFY {
+    int32 RowCount = 1;
+    FuseArray_TDI.row = 1;
+    Address.row = 1;
+    ! Shift in PROGRAM_ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (PROGRAMEN);
+	STATE IDLE;
+    ! Shift in ADDRESS(0x01) instruction;
+    SIR Instruction_Length TDI (ADDPLD);
+    SDR Address_Length TDI (Address[1]);
+	STATE IDLE;
+
+    repeat Address_Length-1 {
+        ! Shift in DATA(0x02) instruction;
+        SIR Instruction_Length TDI (DATAPLD);
+        ! Shift in Data Row = RowCount;
+        SDR Row_Width TDI (FuseArray_TDI[RowCount]);
+        ! Shift in PROGRAM(0x07) instruction;
+        SIR Instruction_Length TDI (PROGPLD);
+        RUN_TEST TCK 5 DELAY PWP;
+
+        ! Shift in VERIFY(0x0A) instruction; 
+        SIR Instruction_Length TDI (READPLD);
+        RUN_TEST TCK 5 DELAY PWV;
+
+        ! Shift in DATA(0x02) instruction;
+        SIR Instruction_Length TDI (DATAPLD);
+        ! Shift Out Data Row = RowCount;
+        SDR_VERIFY Row_Width TDI (FuseArray_TDI[RowCount+1])
+                             TDO (FuseArray_TDI[RowCount]);
+        Address[1] = Address[1] >> 1;
+        RowCount = RowCount + 1;
+		! Shift in PROGRAM_ENABLE(0x15) instruction;
+		SIR Instruction_Length TDI (PROGRAMEN);
+		STATE IDLE;
+        ! Shift in ADDRESS(0x01) instruction;
+    	SIR Instruction_Length TDI (ADDPLD);
+    	SDR Address_Length TDI (Address[1]);
+		STATE IDLE;
+    } // repeat
+
+    ! Shift in DATA(0x02) instruction;
+    SIR Instruction_Length TDI (DATAPLD);
+    ! Shift in Data Row = RowCount;
+    SDR Row_Width TDI (FuseArray_TDI[RowCount]);
+    ! Shift in PROGRAM(0x07) instruction;
+    SIR Instruction_Length TDI (PROGPLD);
+    RUN_TEST TCK 5 DELAY PWP;
+
+    ! Shift in VERIFY(0x0A) instruction; 
+    SIR Instruction_Length TDI (READPLD);
+    RUN_TEST TCK 5 DELAY PWV;
+
+    ! Shift in DATA(0x02) instruction;
+    SIR Instruction_Length TDI (DATAPLD);
+    ! Shift Out Data Row = RowCount;
+    SDR_VERIFY Row_Width TDI (#1^Row_Width)
+                         TDO (FuseArray_TDI[RowCount]);
+    Address[1] = #1@(#0^(Address_Length-1));
+}
+function PROGRAM_USERCODE {
+    IF (Usercode_TDI.row = 1)
+	{
+		! Shift in USERCODE(0x17) instruction;
+	    SIR Instruction_Length	TDI (USERCODE);
+		SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+		! Shift in PROGRAM USERCODE(0x1A) instruction;
+	    SIR Instruction_Length	TDI (PROG_USERCODE);
+		RUN_TEST	TCK 	5 DELAY 	PWP;
+	}
+}
+function PROGRAM_SECURITY {
+    ! Shift in PROGRAM SECURITY(0x09) instruction;
+    SIR Instruction_Length TDI (PROG_SECURITY);
+    RUN_TEST TCK 5 DELAY PWP;
+}
+
+function PROGRAM_DONE_BIT {
+	! Shift in PROGRAM DONE(0x2F) instruction;
+    SIR	Instruction_Length 	TDI (PROGRAM_DONE);
+	RUN_TEST	IDLE TCK 5 DELAY 50;
+	! Shift in PROGRAM DISABLE(0x1E) instruction;
+    SIR	Instruction_Length 	TDI (PROGRAMDIS);
+	RUN_TEST	IDLE  TCK 5 DELAY 200;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 10;
+	! Shift in IDCODE(0x16) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (IDCODE)
+										TDO(0x1D);	
+}
+function VERIFY_DONE_BIT {	
+	! Shift in IDCODE(0x16) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI(IDCODE)
+								    TDO(0x1D);			   	      	
+}
+function ERASE_DONE_BIT {
+	! Shift in ISC ERASE DONE(0x24) instruction;
+    SIR	Instruction_Length 	TDI (ISC_ERASE_DONE);
+	RUN_TEST	TCK 5 DELAY PWP;
+	STATE IDLE;
+}
+function VERIFY {
+    int32 RowCount = 1;
+    FuseArray_TDI.row = 1;
+    Address.row = 1;
+    
+
+    repeat Address_Length {
+    	! Shift in PROGRAM_ENABLE(0x15) instruction;
+		SIR Instruction_Length TDI (PROGRAMEN);
+		STATE IDLE;
+	    ! Shift in ADDRESS(0x01) instruction;
+	    SIR Instruction_Length TDI (ADDPLD);
+	    SDR Address_Length TDI (Address[1]);
+		STATE IDLE;
+        ! Shift in VERIFY(0x0A) instruction; 
+    	SIR Instruction_Length TDI (READPLD);
+    	RUN_TEST TCK 5 DELAY PWV;
+
+        ! Shift in DATA(0x02) instruction;
+    	SIR Instruction_Length TDI (DATAPLD);
+    	! Shift Out Data Row = RowCount;
+    	SDR_VERIFY Row_Width TDI (#1^Row_Width)
+                         	 TDO (FuseArray_TDI[RowCount]);
+        RowCount = RowCount+1;
+        Address[1] = Address[1] >> 1;
+        
+    } // repeat
+    Address[1] = #1@(#0^(Address_Length-1));
+}
+function VERIFY_USERCODE {
+    IF (Usercode_TDI.row = 1)
+	{
+		! Shift in USERCODE(0x17) instruction;
+	    SIR Instruction_Length TDI (USERCODE);
+		SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+									TDO	(Usercode_TDI);
+	}
+}
+function SAVE_ID {
+    datastream SavedID[1][ID_Length];
+    file NewFile = "FILE_SAVE";
+
+    SIR Instruction_Length TDI (IDCODE);
+    SDR ID_Length TDI (#1^ID_Length)
+                  TDO (SavedID);
+    // Write To File
+    fopen  NewFile att "w" format "SVF_Plus";
+    fwrite NewFile (ID, SavedID);
+    fclose NewFile;
+}
+function SVF_SAVE_ID {
+    SIR Instruction_Length TDI (IDCODE);
+    SDR_VERIFY ID_Length TDI  (#1^ID_Length)
+                         TDO  (IDTDI[1])
+                         MASK (#0^ID_Length);
+}
+function SAVE_ARRAY {
+    datastream SavedFuseMap[Address_Length][Row_Width];
+    file NewFile = "FILE_SAVE";
+    Address.row = 1;
+
+    ! Shift in PROGRAM_ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (PROGRAMEN);
+	STATE IDLE;
+    ! Shift in ADDRESS(0x01) instruction;
+    SIR Instruction_Length TDI (ADDPLD);
+    SDR Address_Length TDI (Address[1]);
+	STATE IDLE;
+
+    repeat Address_Length-1 {
+        ! Shift in VERIFY(0x0A) instruction; 
+    	SIR Instruction_Length TDI (READPLD);
+    	RUN_TEST TCK 5 DELAY PWV;
+
+        ! Shift in DATA(0x02) instruction;
+    	SIR Instruction_Length TDI (DATAPLD);
+    	SDR Row_Width TDI (#1^Row_Width)
+                      TDO (SavedFuseMap);
+        Address[1] = Address[1] >> 1;
+        ! Shift in PROGRAM_ENABLE(0x15) instruction;
+		SIR Instruction_Length TDI (PROGRAMEN);
+		STATE IDLE;
+        ! Shift in ADDRESS(0x01) instruction;
+    	SIR Instruction_Length TDI (ADDPLD);
+    	SDR Address_Length TDI (Address[1]);
+		STATE IDLE;
+    } // repeat
+    ! Shift in VERIFY(0x0A) instruction; 
+	SIR Instruction_Length TDI (READPLD);
+	RUN_TEST TCK 5 DELAY PWV;
+
+    ! Shift in DATA(0x02) instruction;
+	SIR Instruction_Length TDI (DATAPLD);
+	SDR Row_Width TDI (#1^Row_Width)
+                  TDO (SavedFuseMap);
+    Address[1] = #1@(#0^(Address_Length-1));
+
+    // Write To file
+    fopen NewFile att "wa"
+               format "SVF_Plus";
+    fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+    fclose NewFile;
+}
+// created: spinti 04/01/2003
+function SVF_SAVE_ARRAY {
+    Address.row = 1;
+
+    ! Shift in PROGRAM_ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (PROGRAMEN);
+	STATE IDLE;
+    ! Shift in ADDRESS(0x01) instruction;
+    SIR Instruction_Length TDI (ADDPLD);
+    SDR Address_Length TDI (Address[1]);
+	STATE IDLE;
+
+    repeat Address_Length-1 {
+        ! Shift in VERIFY(0x0A) instruction; 
+    	SIR Instruction_Length TDI (READPLD);
+    	RUN_TEST TCK 5 DELAY PWV;
+
+        ! Shift in DATA(0x02) instruction;
+    	SIR Instruction_Length TDI (DATAPLD);
+    	SDR_VERIFY Row_Width TDI (#1^Row_Width)
+                      TDO (#1^Row_Width)
+                      MASK(#0^Row_Width);
+        Address[1] = Address[1] >> 1;
+        ! Shift in PROGRAM_ENABLE(0x15) instruction;
+		SIR Instruction_Length TDI (PROGRAMEN);
+		STATE IDLE;
+        ! Shift in ADDRESS(0x01) instruction;
+    	SIR Instruction_Length TDI (ADDPLD);
+    	SDR Address_Length TDI (Address[1]);
+		STATE IDLE;
+    } // repeat
+    ! Shift in VERIFY(0x0A) instruction; 
+	SIR Instruction_Length TDI (READPLD);
+	RUN_TEST TCK 5 DELAY PWV;
+
+    ! Shift in DATA(0x02) instruction;
+	SIR Instruction_Length TDI (DATAPLD);
+	SDR_VERIFY Row_Width TDI (#1^Row_Width)
+                      TDO (#1^Row_Width)
+                      MASK(#0^Row_Width);
+    Address[1] = #1@(#0^(Address_Length-1));
+}
+function SAVE_USERCODE {
+    datastream SavedUsercode[1][Usercode_Length];
+    file NewFile = "FILE_SAVE";
+    ! Shift in USERCODE(0x17) instruction;
+    SIR Instruction_Length	TDI (USERCODE);
+    RUN_TEST TCK 5 DELAY PWV;
+    SDR	Usercode_Length TDI (#1^Usercode_Length)
+                        TDO (SavedUsercode);
+    // Write To file 
+    fopen NewFile att "wa"
+                  format "SVF_Plus";	
+    fwrite NewFile (Usercode_TDI, SavedUsercode);
+    fclose NewFile;
+}
+function SVF_SAVE_USERCODE {
+    ! Shift in USERCODE(0x17) instruction; 
+    SIR Instruction_Length TDI (USERCODE);
+    SDR_VERIFY Usercode_Length TDI  (#1^Usercode_Length)
+                               TDO  (#1^Usercode_Length)
+                               MASK (#0^Usercode_Length);
+}
+function READ_DONE_BIT {
+	datastream SavedDONE_BIT[1][Instruction_Length];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in IDCODE(0x16) instruction;
+    SIR Instruction_Length	TDI	(IDCODE)
+							TDO (SavedDONE_BIT);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (DONE_BIT, SavedDONE_BIT);
+	fclose 	NewFile;
+}
+function SVF_SAVE_DONE_BIT {
+	! Shift in IDCODE(0x16) instruction;
+    SIR_VERIFY Instruction_Length	TDI	(0x16)
+				TDO (#1^Instruction_Length)
+				MASK(#0^Instruction_Length);
+}
+]]>
+</Script>
+</SVF_Plus>

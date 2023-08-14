@@ -1,0 +1,66 @@
+#!/bin/bash
+
+makeAbsolute() {
+    case "$1" in
+	/*)
+	    # already absolute, return it
+	    echo "$1"
+	    ;;
+	*)
+	    # relative, prepend $2 made absolute
+	    echo `makeAbsolute "$2" "$PWD"`/"$1" | sed 's,/\.$,,'
+	    ;;
+    esac
+}
+
+if test -L "$0"; then
+    # Try readlink(1)
+    readlink=`type readlink 2>/dev/null` || readlink=
+    if test -n "$readlink"; then
+	# We have readlink(1), so we can use it
+	me=`readlink -nf "$0"`
+    else
+	# No readlink(1), so let's try ls -l
+	me=`ls -l "$0" | sed 's/^.*-> //'`
+	base=`dirname "$0"`
+	me=`makeAbsolute "$me" "$base"`
+    fi
+else
+	base=`dirname "$0"`
+	me=`makeAbsolute "$0" "$base"`
+fi
+
+bindir=`dirname "$me" | sed 's,/\.$,,'`
+
+##setup enviroment
+source ${bindir}/diamond_env
+
+if  test "$1" == "-pwc"; then
+	shift
+	exec "${bindir}/pwcmain" ${1+"$@"} 
+	exit 0
+elif test "$1" == "-rva"; then
+	shift
+	exec "${bindir}/rvamain" ${1+"$@"} >/dev/null 
+	exit 0
+elif test "$1" == "-ipx"; then
+	shift
+	exec "${bindir}/ipxwrapper" ${1+"$@"} 
+	exit 0
+elif test "$1" == "-epic"; then
+	shift
+	if test -z "$LD_LIBRARY_PATH"; then
+		LD_LIBRARY_PATH="${bindir}/toolapps"
+	else
+		LD_LIBRARY_PATH="${bindir}/toolapps:${LD_LIBRARY_PATH}"
+	fi
+	export LD_LIBRARY_PATH
+	exec "${bindir}/fpgae" ${1+"$@"}
+	exit 0
+elif test "$1" == "-pgr"; then
+        shift
+        exec "${bindir}/pgrmain" ${1+"$@"} >& /dev/null
+        exit 0
+fi
+
+exec "${bindir}/pnmain" ${1+"$@"}  >/dev/null

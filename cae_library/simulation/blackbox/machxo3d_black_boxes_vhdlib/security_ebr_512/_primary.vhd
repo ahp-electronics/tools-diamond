@@ -1,0 +1,41 @@
+library verilog;
+use verilog.vl_types.all;
+entity security_ebr_512 is
+    port(
+        vccm            : in     vl_logic;
+        trim_mem        : in     vl_logic_vector(2 downto 0);
+        cib_oprcea      : in     vl_logic;
+        cib_oprceb      : in     vl_logic;
+        cib_addra       : in     vl_logic_vector(12 downto 0);
+        cib_addrb       : in     vl_logic_vector(12 downto 0);
+        cib_dataa       : in     vl_logic_vector(8 downto 0);
+        cib_datab       : in     vl_logic_vector(8 downto 0);
+        cib_cea         : in     vl_logic;
+        cib_ceb         : in     vl_logic;
+        cib_clka        : in     vl_logic;
+        cib_clkb        : in     vl_logic;
+        cib_csa         : in     vl_logic_vector(2 downto 0);
+        cib_csb         : in     vl_logic_vector(2 downto 0);
+        cib_rsta        : in     vl_logic;
+        cib_rstb        : in     vl_logic;
+        cib_wea         : in     vl_logic;
+        cib_web         : in     vl_logic;
+        addr            : in     vl_logic_vector(1 downto 0);
+        data            : inout  vl_logic_vector(143 downto 0);
+        datan           : inout  vl_logic_vector(143 downto 0);
+        por_n           : in     vl_logic;
+        gsrn            : in     vl_logic;
+        es_o            : in     vl_logic_vector(35 downto 0);
+        from_prev_sel   : in     vl_logic;
+        from_prev_ebr   : in     vl_logic_vector(8 downto 0);
+        full_flag       : out    vl_logic;
+        empty_flag      : out    vl_logic;
+        afull_flag      : out    vl_logic;
+        aempty_flag     : out    vl_logic;
+        doa             : out    vl_logic_vector(8 downto 0);
+        dob             : out    vl_logic_vector(8 downto 0);
+        mc1_out         : out    vl_logic_vector(39 downto 0);
+        to_next_sel     : out    vl_logic;
+        to_next_ebr     : out    vl_logic_vector(8 downto 0)
+    );
+end security_ebr_512;

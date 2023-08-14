@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file defines properties of machxo devices -->
+<StrategyConfig parent="base_jedec.stf" version="1.0">
+
+<!-- *************************************************************** -->
+<!-- Synplify Property --> 
+<!-- *************************************************************** -->
+
+<!-- ispLEVER : _EdfFrequency=S,INT,Frequency (MHz),200 -->
+<!-- SOF-129577, Crosslink, xp2, ecp3 family and ecp5 family - Fmax = 200MHz, 
+     all Xo2 and above devices - Fmax = 100MHz -->
+<Property
+	name="PROP_SYN_EdfFrequency"
+	tclid="syn_frequency"
+	type="numstring"
+	cmdline="set_option -frequency %CurrentValue%"
+	reversedcmdline="set_option -frequency auto">
+	<Value
+		defaultValue="100"
+		lowerLimitValue="0"
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- ispLEVER : _EdfArea=S,BOOL,Area,TRUE 
+    default value is TRUE for machxo only -->
+<!-- SOF-129577, by default, area in strategy should be false across all family of devices
+<Property
+	name="PROP_SYN_EdfArea"
+	tclid="syn_area"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -frequency 1"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+-->
+
+<!-- *************************************************************** -->
+<!-- Precision Property --> 
+<!-- *************************************************************** -->
+<!-- _VSynComArea=S,BOOL,Area,FALSE -->
+<Property
+	name="PROP_PRE_VSynComArea"
+	tclid="pre_area"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -compile_for_area"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- *************************************************************** -->
+<!-- LST Property --> 
+<!-- *************************************************************** -->
+<Property
+	name="PROP_LST_OptimizeGoal"
+	tclid="lse_opt_goal"
+	type="list">
+	<Value
+		defaultValue="Balanced"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Area" cmdline="-optimization_goal Area"/>
+		<Correlation driverValue="Timing" cmdline="-optimization_goal Timing"/>				
+		<Correlation driverValue="Balanced" cmdline="-optimization_goal Balanced"/>
+	</CmdLines>
+</Property>
+
+<!-- *************************************************************** -->
+<!-- Map Design Property --> 
+<!-- *************************************************************** -->
+
+<!-- _PackLogMapDesXO=S,INT,Pack Logic Block Util. [blank or 0 to 100],0 -->
+<Property
+	name="PROP_MAP_PackLogMapDes"
+	tclid="map_pack_logic_blk_util"
+	type="numstring"
+	cmdline="-c %CurrentValue%"
+  reversedcmdline="">
+	<Value
+		defaultValue="0"
+	/>
+</Property>
+
+<!-- *************************************************************** -->
+<!-- JEDEC Property --> 
+<!-- *************************************************************** -->
+<!-- _XODisableUESBitgen=A,BOOL,Disable UES,FALSE -->
+<!-- for synsvf cmd line -->
+<Property
+	name="PROP_BIT_DisableUESBitgen"
+	tclid="bit_disable_ues"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-overwriteues disable"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- *************************************************************** -->
+<!-- Place & Route Design Property --> 
+<!-- *************************************************************** -->
+
+<!-- ; 8/8/05 TN - turn off for all fpga except machXO (default) -->
+<!-- _parHold=A,SLIST,Auto Hold-Time Correction -->
+<!--	_parHoldOff=A,LITEM,OFF,F -->
+<!--	_parHoldOn=A,LITEM,ON,N	 
+<Property
+	name="PROP_PAR_parHold"
+	tclid="par_auto_hld"
+	type="list">
+	<Value
+		defaultValue="On"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Off" cmdline="-exp parHold=OFF"/>
+		<Correlation driverValue="On" cmdline="-exp parHold=ON"/>
+	</CmdLines>
+</Property> -->
+
+<!-- *************************************************************** -->
+<!-- *****************************  PropertySet *************************** -->
+<!-- *************************************************************** -->
+
+<!-- Except: PROPUI_PAR_RoutingOpt PROPUI_PAR_NewRouteParDes -->
+<PropertySet	
+	name="PROPSET_PlaceRoute" >
+  <Include>
+      <PropertyUIItem> PROPUI_PAR_EffortParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RoutePassParDes </PropertyUIItem>
+	  <PropertyUIItem> PROPUI_PAR_NewRouteParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RemoveDir </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_DisableTDParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_CrDlyStFileParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PrefErrorOut </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RoutingCDP </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RoutingCDR </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PlcIterParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PlcStCostTblParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_SaveBestRsltParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RouteResOptParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RouteDlyRedParDes </PropertyUIItem>
+<!--  <PropertyUIItem> PROPUI_PAR_PlcInputLimit </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PlcInputNeighborSize </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_GuideFileParDes </PropertyUIItem> -->
+      <PropertyUIItem> PROPUI_PAR_ParRunPlaceOnly </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_ParMultiNodeList </PropertyUIItem>
+<!--  <PropertyUIItem> PROPUI_PAR_ParNCDGuideFile </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_ParMatchFact </PropertyUIItem> 
+      <PropertyUIItem> PROPUI_PAR_ParGuideRepMatch </PropertyUIItem> -->
+      <PropertyUIItem> PROPUI_PAR_parPathBased </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_parHold </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PARClockSkew </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PARModArgs </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RunParWithTrce </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_StopZero </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_MultiSeedSortMode </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RunTimeReduction </PropertyUIItem>
+  </Include>		
+</PropertySet>
+
+<!-- *****************************  Bitgen *************************** -->
+<PropertySet	
+	name="PROPSET_BITGEN"	 >
+  <Include>
+      <PropertyUIItem> PROPUI_BIT_RunDRCBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_DisableUESBitgen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TMCHK_EnableCheck </PropertyUIItem>
+  </Include>	
+</PropertySet>
+
+<!-- *************************************************************** -->
+<!-- *****************************  Strategy Ui *************************** -->
+<!-- *************************************************************** -->	
+<!-- "parent" value must be defined before use it -->
+<StrategyUI name="STYUI_Normal">			
+	<Group name="GROUP_Synthesis" parent="root" label="Synthesize Design" type="0" data="" />
+		<Group name="GROUP_Synplify" parent="GROUP_Synthesis" label="Synplify Pro" type="1" data="PROPSET_Synplify" />
+		<!--<Group name="GROUP_Precision" parent="GROUP_Synthesis" label="Precision" type="1" data="PROPSET_Precision" />-->	
+		<Group name="GROUP_LST" parent="GROUP_Synthesis" label="LSE" type="1" data="PROPSET_LST" />
+	<Group name="GROUP_BuildDatabase" parent="root" label="Translate Design" type="1" data="PROPSET_Edif" />
+	<Group name="GROUP_MapDesign" parent="root" label="Map Design" type="1" data="PROPSET_Map" />
+        <Group name="GROUP_MapSTA" parent="GROUP_MapDesign" label="Map Trace" type="1" data="PROPSET_MAPTRACE" />
+	<Group name="GROUP_PLACE" parent="root" label="Place &amp; Route Design" type="1" data="PROPSET_PlaceRoute" />
+	   <Group name="GROUP_PARSTA" parent="GROUP_PLACE" label="Place &amp; Route Trace" type="1" data="PROPSET_PARTRACE" />
+	   <Group name="GROUP_IOTIMING" parent="GROUP_PLACE" label="IO Timing Analysis" type="1" data="PROPSET_IOTIMING" />
+	<Group name="GROUP_TIMSIM" parent="root" label="Timing Simulation" type="1" data="PROPSET_TIMSIMFILE" />
+	<Group name="GROUP_BITGEN" parent="root" label="Bitstream" type="1" data="PROPSET_BITGEN" />
+</StrategyUI>
+
+</StrategyConfig>

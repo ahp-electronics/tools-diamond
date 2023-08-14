@@ -1,0 +1,36 @@
+
+
+! ******************************************************************
+!                        TEST PROGRAM HEADER
+! ******************************************************************
+!
+! Created: 
+! JEDEC input:
+!
+! ******************************************************************
+!                        DECLARATION SECTION
+! ******************************************************************
+
+! SINGLE-PIN ASSIGNMENTS:
+
+assign SCLK  to pins 1
+assign SDI   to pins 15
+assign SDO   to pins 22
+assign MODE  to pins 8
+assign UNUSED to pins 3,4,5,6,7,9,10,11,12,13,16
+assign UNUSED to pins 17,18,19,20,21,23,24,25,26,27
+
+family TTL
+
+! TYPE CLASSIFICATIONS:
+
+nondigital UNUSED
+
+inputs SCLK, SDI, MODE, ISPEN
+outputs SDO
+
+pcf order is ISPEN, MODE, SCLK, SDI, SDO
+
+! ******************************************************************
+!                      VECTOR EXECUTION SECTION
+! ******************************************************************

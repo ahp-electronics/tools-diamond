@@ -1,0 +1,36 @@
+#include "ngdin.prp"
+#include "synopsys.prp"
+#include "orca.prp"
+
+// Ext Name    Ext type    Int Name       Int Type {Data Trans} Exclus.  Over.
+
+// Non-Black box props. All "ASIC" block properties are computed dynamically
+// in the PMs.
+
+// PIO props
+SLEWRATE       string      SLEWRATE       string                         TRUE
+IO_TYPE        string      IO_TYPE        string                         TRUE
+IO_TYPES       string      IO_TYPE        string                         TRUE
+PCICLAMP       string      PCICLAMP       string                         TRUE
+
+// IO sysConfig
+PERSISTENT     string      PERSISTENT     string                        TRUE
+PROHIBIT       string      PROHIBIT       string                        TRUE
+CONFIG_*       string      CONFIG_        string                        TRUE
+DONE_*         string      DONE           string                        TRUE
+MCCLK_FREQ     string      MCCLK_FREQ     string                        TRUE
+WAKE_UP        integer     WAKE_UP        integer                       TRUE
+COMPRESS_*     string      COMPRESS       string                        TRUE
+
+//
+NORETIME       string      NORETIME       string                        TRUE
+FREQUENCY_PIN* string      FREQUENCY_PIN  string                        TRUE
+
+// EBR, added here as all 5g based devices use them
+MEM_INIT_FILE  string      MEM_INIT_FILE  string                        TRUE
+MEM_LPC_FILE   string      MEM_LPC_FILE   string                        TRUE
+
+
+// LOGIC INSERTER property (REVEAL)
+RVL_*          string      RVL            string                        TRUE
+

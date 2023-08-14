@@ -1,0 +1,112 @@
+#include "ngdin.prp"
+#include "synopsys.prp"
+#include "orca.prp"
+
+// Ext Name    Ext type    Int Name       Int Type {Data Trans} Exclus.  Over.
+
+// Non-Black box props. All "ASIC" block properties are computed dynamically
+// in the PMs.
+
+// PIO props
+SLEWRATE       string      SLEWRATE       string                         TRUE
+IO_TYPE        string      IO_TYPE        string                         TRUE
+IO_TYPES       string      IO_TYPE        string                         TRUE
+PCICLAMP       string      PCICLAMP       string                         TRUE
+
+// IO sysConfig
+PERSISTENT     string      PERSISTENT     string                        TRUE
+PROHIBIT       string      PROHIBIT       string                        TRUE
+CONFIG_*       string      CONFIG_        string                        TRUE
+DONE_*         string      DONE           string                        TRUE
+MCCLK_FREQ     string      MCCLK_FREQ     string                        TRUE
+WAKE_UP        integer     WAKE_UP        integer                       TRUE
+COMPRESS_*     string      COMPRESS       string                        TRUE
+
+//
+NORETIME       string      NORETIME       string                        TRUE
+FREQUENCY_PIN* string      FREQUENCY_PIN  string                        TRUE
+
+// EBR, added here as all 5g based devices use them
+MEM_INIT_FILE  string      MEM_INIT_FILE  string                        TRUE
+MEM_LPC_FILE   string      MEM_LPC_FILE   string                        TRUE
+
+
+// LOGIC INSERTER property (REVEAL)
+RVL_*          string      RVL            string                        TRUE
+
+
+// Ext Name    Ext type    Int Name       Int Type {Data Trans} Exclus.  Over.
+
+// PIO props
+DRIVE          string      DRIVE          string                         TRUE
+PULLMODE       string      PULLMODE       string                         TRUE
+//VREFMODE     string      VREF           string                         TRUE
+//VREF         string      VREF           string                         TRUE
+OPENDRAIN      string      OPENDRAIN      string                         TRUE
+INF            string      INF            string                         TRUE
+//SCHMITT_TRIGGER string     SCHMITT_TRIGGER string                        TRUE
+
+// IOL props
+
+// Ext Name    Ext type    Int Name       Int Type {Data Trans} Exclus.  Over.
+// For wild cards(*), int name is irrelevant
+DATA_WIDTH*    integer     DATA_WIDTH     string                         TRUE
+RESETMODE      string      RESETMODE      string                         TRUE
+REGMODE*       string      REGMODE        string                         TRUE
+CSDECODE*      string      CSDECODE       string                         TRUE
+WRITEMODE*     string      WRITEMODE      string                         TRUE
+DISABLED_GSR   string      GSR            string                         TRUE
+GSR            string      GSR            string                         TRUE
+
+//FIFO
+AEPOINTER*     string      AEPOINTER      string                         TRUE
+AFPOINTER*     string      AFPOINTER      string                         TRUE
+FULLPOINTER*   string      FULLPOINTER    string                         TRUE
+
+// JTAG
+USERCODE       string      USERCODE       string                         TRUE
+ER*            string      ER             string                         TRUE
+
+// DLL
+//DEL_ADJ        string      DEL_ADJ        string                         TRUE
+//DEL_VAL        integer     DEL_VAL        string                         TRUE
+LOCK_SENSITIVITY   string    LOCK_SENSITIVITY   string                   TRUE
+ 
+// PLL
+FIN 	       string      FIN            string                       TRUE
+CLKI_DIV       string      CLKI_DIV       string                       TRUE
+CLKFB_DIV      string      CLKFB_DIV      string                       TRUE	
+CLKOP_DIV      string      CLKOP_DIV      string                       TRUE
+CLKOK_DIV      string      CLKOK_DIV      string                       TRUE
+FDEL           string      FDEL           string                       TRUE
+PHASEADJ       string      PHASEADJ       string                       TRUE
+DUTY           string      DUTY           string                       TRUE
+//WAKE_ON_LOCK   string      WAKE_ON_LOCK   string                       TRUE
+DELAY_CNTL     string      DELAY_CNTL     string                       TRUE
+FB_MODE        string      FB_MODE        string                       TRUE
+
+// DCS
+DCSMODE        string      DCSMODE        string                       TRUE
+
+// TSALL
+//TSALLMODE      string      TSALLMODE      string                       TRUE
+
+// Formerly INT_FBK.
+//PLL_FBK_ATTRIBUTE string   PLL_FBK_ATTRIBUTE string                  TRUE
+
+// FIXEDDELAY=[TRUE,FASLE] for fixed delay before the delay cell
+// INDELAY=[DEL0,...DEL15] for static delay
+//FIXEDDELAY     string      FIXEDDELAY     string                       TRUE
+
+// DDR
+REGSET         string      REGSET         string                       TRUE
+
+// IO sysConfig
+//PWRSAVE        string      PWRSAVE        string                        TRUE
+INBUF          string      INBUF          string                        TRUE
+
+// CCU2
+INIT0          string      INIT0          string                        TRUE
+INIT1          string      INIT1          string                        TRUE
+INJECT1_*      string      INJECT1_       string                        TRUE
+

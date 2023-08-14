@@ -1,0 +1,266 @@
+#
+# These are the default transform rules for the vcover 'diff' command
+# when it is using the full VM flow (i.e. targeting the Results Analysis GUI window)
+#
+# These rules may be used as a starting-point for developing more targeted transforms.
+# Note that 'msg', 'severity', and 'time' are predefined fields and must
+# be defined (for the Results Analysis GUI to work).
+# The 'msg' field will determine the primary Results Analysis window sorting
+# The 'severity' field defaults in this base file to Note
+# The 'time' field defaults in this base file to 0. For difference analysis,
+#  this field is essentially meaningless.
+#
+# The other fields can be changed, further discriminated, or new fields added by 
+# the user. These user-defined fields can be added into the
+# Results Analysis view using the ColumnLayout/Configure ColumnLayout choices.
+#
+
+# This rule transforms the command echo comment
+# It is used so that the GUI has a rule to display the two UCDB input
+# file names.
+# There will be 0 or 1 match - 0 if the -nocomments option is in effect
+transform {\-\- vcover diff (\S*) (\S*) (.*) \-\-$} {
+          field msg {First UCDB: $1 Second UCDB: $2}
+          field severity {Note}
+          field time {0}
+          field DiffArgs {$3}
+          field DiffType {Comment}
+}
+
+#Example: << Scope Toggle {/top/colors/SECONDARY_PURPLE} Structural
+transform {(<<|>>|<>) (Scope|Historynode) (\w+) \{([^\}\r\n]*)\} (Structural)} {
+          field msg {Structural difference}
+          field severity {Warning}
+          field time {0}
+          field Location {[switch -- $1 { "<<" "list Database1" ">>" "list Database2" default {list Both} }]}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field DiffType {$5}
+}
+
+#Example: << Bin Toggle {/top/colors/SECONDARY_PURPLE} {toggle_low} Structural
+transform {(<<|>>|<>) (Bin) (\w+) \{([^\}\r\n]*)\} \{([^\}\r\n]*)\} (Structural)} {
+          field msg {Structural difference}
+          field severity {Warning}
+          field time {0}
+          field Location {[switch -- $1 { "<<" "list Database1" ">>" "list Database2" default {list Both} }]}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field BinName {$5}
+          field DiffType {$6}
+}
+
+#Example: <> Scope Instance {/top/colors} Attribute {XYZ} Int Int {1} {2}
+#Example: <> HistoryNode Test {mytest} Attribute {XYZ} Int Int {1} {2}
+transform {(<>) (\w+) (\w+) \{([^\}\r\n]*)\} (Attribute) \{([^\}\r\n]*)\} (\w+) (\w+) \{([^\}\r\n]*)\} \{([^\}\r\n]*)} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {Both}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field DiffType {$5}
+          field DiffDetails {$6 $7 $8 $9 $10}
+          field AttrName {$6}
+          field FirstType {$7}
+          field SecondType {$8}
+          field FirstValue {$9}
+          field SecondValue {$10}
+}
+
+#Example: << Scope Instance {/top/colors} Attribute {XYZ} Int Int {1} {2}
+#Example: << HistoryNode Test {mytest} Attribute {XYZ} Int Int {1} {2}
+transform {(<<) (\w+) (\w+) \{([^\}\r\n]*)\} (Attribute) \{([^\}\r\n]*)\} (\w+) \{([^\}\r\n]*)\}} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {Database1}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field DiffType {$5}
+          field DiffDetails {$6 $7 $8}
+          field AttrName {$6}
+          field FirstType {$7}
+          field FirstValue {$8}
+}
+
+#Example: >> Scope Instance {/top/colors} Attribute {XYZ} Int {1}
+#Example: >> HistoryNode Test {mytest} Attribute {XYZ} String {My string}
+transform {(>>) (\w+) (\w+) \{([^\}\r\n]*)\} (Attribute) \{([^\}\r\n]*)\} (\w+) \{([^\}\r\n]*)\}} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {Database2}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field DiffType {$5}
+          field DiffDetails {$6 $7 $8}
+          field AttrName {$6}
+          field SecondType {$7}
+          field SecondValue {$8}
+}
+
+#Example: <> Bin ToggleBin {/top/colors/} {l_h} Attribute {XYZ} Int Int {1} {2}
+transform {(<>) (\w+) (\w+) \{([^\}\r\n]*)\} \{([^\}\r\n]*)\} (Attribute) \{([^\}\r\n]*)\} (\w+) (\w+) \{([^\}\r\n]*)\} \{([^\}\r\n]*)\}} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {Both}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field BinName {$5}
+          field DiffType {$6}
+          field DiffDetails {$7 $8 $9 $10 $11}
+          field AttrName {$7}
+          field FirstType {$8}
+          field SecondType {$9}
+          field FirstValue {$10}
+          field SecondValue {$11}
+}
+
+#Example: << Bin ToggleBin {/top/colors/} {l_h} Attribute {XYZ} Int Int {1} {2}
+transform {(<<) (\w+) (\w+) \{([^\}\r\n]*)\} \{([^\}\r\n]*)\} (Attribute) \{([^\}\r\n]*)\} (\w+) \{([^\}\r\n]*)\}} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {Both}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field BinName {$5}
+          field DiffType {$6}
+          field DiffDetails {$7 $8 $9}
+          field AttrName {$7}
+          field FirstType {$8}
+          field FirstValue {$9}
+}
+
+#Example: << Bin ToggleBin {/top/colors/} {l_h} Attribute {XYZ} Int Int {1} {2}
+transform {(>>) (\w+) (\w+) \{([^\}\r\n]*)\} \{([^\}\r\n]*)\} (Attribute) \{([^\}\r\n]*)\} (\w+) \{([^\}\r\n]*)\}} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {Both}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field BinName {$5}
+          field DiffType {$6}
+          field DiffDetails {$7 $8 $9}
+          field AttrName {$7}
+          field SecondType {$8}
+          field SecondValue {$9}
+}
+
+#Example: >> Scope Instance {/top} Tag {SECOND_TOP_LEVEL_TAG}
+transform {(<<|>>|<>) (Scope) (\w+) \{([^\}\r\n]*)\} (Tag) \{([^\}\r\n]*)\}} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {[switch -- $1 { {<<} "list Database1" {>>} "list Database2" default {list Both} }]}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field DiffType {$5}
+          field DiffDetails {$6 $7}
+          field AttrName {$6}
+}
+
+#Example: <> Scope Instance {/top/colors} Flag {0x0000007f} {0x0000003f}
+transform {(<<|>>|<>) (Scope) (\w+) \{([^\}\r\n]*)\} (\w+) \{([^\}\r\n]*)\} \{([^\}\r\n]*)\}} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {[switch -- $1 { {<<} "list Database1" {>>} "list Database2" default {list Both} }]}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field DiffType {$5}
+          field DiffDetails {$6 $7}
+          field FirstValue {$6}
+          field SecondValue {$7}
+}
+
+#Example: <> Scope Coverpoint {/top/memories/mem_cvg/xyz/scattered_val_mem} Source Verilog SystemVerilog
+#Example: <> Scope Coverpoint {/top/memories/mem_cvg/xyz/scattered_val_mem} Weight 1 10
+transform {(<<|>>|<>) (Scope) (\w+) \{([^\}\r\n]*)\} (\w+) ([^\r\n]*) ([^\r\n]*)} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {[switch -- $1 { {<<} "list Database1" {>>} "list Database2" default {list Both} }]}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field DiffType {$5}
+          field DiffDetails {$6 $7}
+          field FirstValue {$6}
+          field SecondValue {$7}
+}
+
+#General rule for ... Tag TagVal
+# (Ignores quotes if present)
+#Example: >> Bin StatementBin {/top} {#stmt#10#0#} Tag {SECOND_TOP_LEVEL_TAG}
+transform {(<<|>>) (Bin) (\w+) \{([^\}\r\n]*)\} \{([^\}\r\n]*)\} (Tag) \{*([^\}\r\n]*)\}*} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {[switch -- $1 { {<<} "list Database1" {>>} "list Database2" default {list Both} }]}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field BinName {$5}
+          field DiffType {$6}
+          field DiffDetails {$6 $7 $8}
+          field AttrName {$7}
+}
+
+#General rule for ... DiffType Val1 Val2 
+# (Ignores quotes if present)
+#Example: <> Bin Instance {/top/colors} {toggle_high} Count 17 39
+#Example: <> Bin Instance {/top/colors} {toggle_high} Flag {0x0000007f} {0x0000003f}
+transform {(<<|>>|<>) (Bin) (\w+) \{([^\}\r\n]*)\} \{([^\}\r\n]*)\} (\w+) \{*([^\}\r\n]*)\}* \{*([^\}\r\n]*)\}*} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {[switch -- $1 { {<<} "list Database1" {>>} "list Database2" default {list Both} }]}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field BinName {$5}
+          field DiffType {$6}
+          field DiffDetails {$6 $7 $8}
+          field FirstValue {$7}
+          field SecondValue {$8}
+}
+
+#Example: <> Historynode Mismatched {history2} Kind Testplan Merge
+
+transform {(<<|>>|<>) (Historynode) (\w+) \{([^\}\r\n]*)\} (\w+) \{*([^\}\r\n]*)\}* \{*([^\}\r\n]*)\}*} {
+          field msg {Data difference}
+          field severity {Warning}
+          field time {0}
+          field Location {[switch -- $1 { {<<} "list Database1" {>>} "list Database2" default {list Both} }]}
+          field CompositeType {$2}
+          field UCDBType {$3}
+          field CompositeName {$4}
+          field DiffType {$5}
+          field DiffDetails {$5 $6 $7}
+          field FirstValue {$6}
+          field SecondValue {$7}
+}
+
+# catch everything unmatched (for debug and sanity-checking)
+
+transform {(.*)} {
+          field msg {Default fallthrough rule}
+          field severity {Warning}
+          field time {0}
+          field DiffType {UnMatched}
+          field DiffDetails {$1}
+}

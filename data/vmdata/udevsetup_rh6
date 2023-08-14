@@ -1,0 +1,40 @@
+#! /bin/bash
+
+
+printrules () {
+    /bin/echo "#lattice" >> $rulespath/10-local.rules 
+    /bin/echo "BUS==\"usb\",ACTION==\"add\",ATTRS{idVendor}==\"1134\",ATTRS{idProduct}==\"8001\",MODE==\"0660\",GROUP==\"plugdev\",SYMLINK+=\"lattice-%n\"" >> $rulespath/10-local.rules
+    /bin/echo "#FTDI" >> $rulespath/10-local.rules 
+    /bin/echo "BUS==\"usb\",ACTION==\"add\",ATTRS{idVendor}==\"0403\",ATTRS{idProduct}==\"6010\",MODE==\"0660\",GROUP==\"plugdev\",SYMLINK+=\"ftdi-%n\"" >> $rulespath/10-local.rules
+    /bin/echo "SUBSYSTEM==\"usb\",DRIVER==\"ftdi_sio\",ATTRS{idVendor}==\"0403\",SYSFS{idProduct}==\"6010\",ATTR{bInterfaceNumber}==\"00\",RUN+=\"/bin/sh -c 'basename %p >/sys/bus/usb/drivers/ftdi_sio/unbind'\"" >>$rulespath/10-local.rules
+}
+
+rulespath=/etc/udev/rules.d
+if [ -e $rulespath/10-local.rules ]; then
+    /bin/echo "File 10-local.rules already exists, write over file? (y/n)"
+    read ans
+    case "$ans" in
+    y)
+        /bin/cp -f $rulespath/10-local.rules $rulespath/../10-local.bak
+        /bin/cp /dev/null $rulespath/10-local.rules
+        printrules
+        ;;
+        n)
+            /bin/echo "Setup unsuccessful"
+            exit
+            ;;
+        *)
+            /bin/echo $"Usage: $0 foo"
+            exit 1
+    esac
+else
+    /bin/touch  $rulespath/10-local.rules
+    /bin/chmod 755 $rulespath/10-local.rules
+    printrules
+fi
+
+/usr/bin/skill -HUP udevd
+/bin/echo "Setup successful"
+
+                        
+                        

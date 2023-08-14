@@ -1,0 +1,9 @@
+Clock: CLK * 1 ;
+Reset: => 1; @100 => 0;
+ClockEn: => 0; @100; @Reset & E0; => 1;
+Address: => 0;@100; @Reset & E0; *(num_rows*2 + 6)@Clock => COUNT;
+Addr: => 0;@100; @Reset & E0; *(num_rows*2 + 6)@Clock => COUNT;
+Data: => 0; @100; @Reset & E0;*(num_rows + 3)@Clock => COUNT;
+Din: => 0; @100; @Reset & E0;*(num_rows + 3)@Clock => COUNT;
+WE: => 0; @Reset & E0; * (num_rows+3) @Clock => 1; => 0;
+

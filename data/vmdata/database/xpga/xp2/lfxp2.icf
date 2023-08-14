@@ -1,0 +1,310 @@
+-- ISC flow file for Lattice XP2 family 
+-- Beta Version 1.1
+-- This version has been partially validated on silicon with XP2-30E by
+-- removing all the looping
+-- This version is based off non-looping ISC flow Beta version 1.2
+-- This version is cross-verified with Lattice Non Volatile Flash Prog Spec_R2.1
+-- Note "This file contains additional information that may cause a BSDL"
+-- Note "parser to reject or error if your parser does not contain the"
+-- Note "1532 library. BSDL files without ISC extensions are available"
+-- Note "on the Lattice website at www.latticesemi.com."
+-- Note " "
+-- Note "This ISC BSDL file uses a adoptive programming algorithm,"
+-- Note "which optimize programing time by utilizating looping"
+-- Note "defined in IEEE 1532-2002.  Programmer that does not"
+-- Note "support looping may not use this ISC flow."
+-- Note " "
+-- Note "This version of ISC flow file is based off the non-looping "
+-- Note "ISC flow file Beta Version 1.2, but this version has not been "
+-- Note "validated on silicon."
+-- Family LatticeXP2
+-- Device LFXP2_5E LFXP2_8E LFXP2_17E LFXP2_30E LFXP2_40E
+-- Attribute INSTRUCTION_OPCODE
+		"   ISC_ADDRESS_SHIFT		(00000001)," &
+		"              IDCODE		(00010110," &
+		"                    		 00011001," &
+		"                    		 00011101)," &
+		"             PRELOAD		(00011100)," &
+		"          ISC_ENABLE		(00010101)," &
+		"            ISC_READ		(00001010)," &
+		"    ISC_PROGRAM_DONE		(00101111)," &
+		"         ISC_DISABLE		(00011110)," &
+		"ISC_PROGRAM_USERCODE		(00011010)," &
+		"           ISC_ERASE		(00000011)," &
+		"            ISC_NOOP		(00110000)," &
+		"         ISC_PROGRAM		(00000111)," &
+		"ISC_PROGRAM_SECURITY		(00001001)," &
+		"              SAMPLE		(00011100)," &
+		"               HIGHZ		(00011000)," &
+		"         LSC_REFRESH		(00100011)," &
+		"              BYPASS		(11111111)," &
+		"      ISC_DATA_SHIFT		(00000010)," &
+		"       ISC_DISCHARGE		(00010100)," &
+		"            USERCODE		(00010111)," &		
+		"   LSC_RESET_ADDRESS		(00100001)," &
+		"  LSC_PROGRAM_STATUS		(01010010)," &
+		"	  LSC_READ_STATUS		(10110010)," &
+		" LSC_PROGRAM_SED_CRC		(01000101)," &
+		"		  LSC_SED_CRC		(01000100)," &
+		"               CLAMP		(00100000)," &
+		"              EXTEST		(11010101)," &
+		"			PINCR_RTI		(01100111)," &
+		"			RINCR_RTI		(01101010)," &
+		"RESERVE	(00110011," &  -- IPTESTA
+			"		 00111000," &  -- IPB
+			"		 00110010," &  -- IPA
+			"		 00111001)," & -- IPTESTB
+		"PRIVATE	(01001010, 01010101, 11000110, " &
+			"01110111, 00110101, 00101100, 01110000, " &
+			"01000001, 01000100, 10000000, " &
+			"01000000, 01000111, 01110010, " &
+			"00001111, 00010000, 11000000, 11000011, " &
+			"11000100, 00111010, 01110101, " &
+			"11000101, 00010001, 01110001)";
+-- Attribute End
+-- Attribute REGISTER_ACCESS
+		"ISC_DEFAULT[1]		(ISC_ERASE, " &
+		"			 ISC_PROGRAM_SECURITY, " &
+		"			 ISC_DISCHARGE, " &
+		"			 ISC_ENABLE, " &
+		"			 ISC_DISABLE, " &
+		"			 ISC_PROGRAM_DONE, " &
+		"			 ISC_NOOP, " &
+		"			 LSC_PROGRAM_STATUS, " &	
+		"			 LSC_RESET_ADDRESS), " &
+		"ISC_ADDRESS[ADDRESS_REGISTER_LENGTH]		(ISC_ADDRESS_SHIFT), " &
+		"BYPASS		(HIGHZ, " &
+		"			 CLAMP, " &
+		"			 BYPASS, " &
+		"			 LSC_REFRESH), " &
+		"ISC_DATA[DEVICE_ROW_WIDTH]		(ISC_DATA_SHIFT), " &
+		"DEVICE_ID		(IDCODE, " &
+		"			 LSC_PROGRAM_SED_CRC, " &
+		"			 LSC_SED_CRC, " &			
+		"			 USERCODE, " &
+		"			 ISC_PROGRAM_USERCODE), " &
+		"STATUS[8]		(LSC_READ_STATUS), " &
+		"BOUNDARY		(SAMPLE, " &
+		"			 PRELOAD, " &
+		"			 EXTEST), " &
+		"ISC_PDATA[DEVICE_ROW_WIDTH]		(ISC_PROGRAM, " &
+		"			 PINCR_RTI, " &
+		"			 RINCR_RTI, " &
+		"			 ISC_READ)";
+-- Attribute End
+-- Variable ID_DATA
+-- Variable BSCAN_REGISTER_LENGTH
+-- Variable ADDRESS_REGISTER_LENGTH
+-- Variable DEVICE_ROW_WIDTH
+-- Variable BSCAN_REGISTER_VALUE
+-- Start
+
+	attribute ISC_Pin_Behavior of DEVICE_NAME : entity is "CLAMP";
+
+	attribute ISC_Status of DEVICE_NAME : entity is "Not Implemented";
+
+	attribute ISC_Blank_Usercode of DEVICE_NAME : entity is
+		"11111111111111111111111111111111";
+
+-----------------------------
+--  ISC_Flow Descriptions    
+-----------------------------
+	attribute ISC_Flow of DEVICE_NAME : entity is
+
+		"flow_verify(idcode) " &
+			"Initialize " &
+			"  (IDCODE wait TCK 1 32:ID_DATA )," &
+
+		"flow_enable " &
+			"Initialize " &
+			"  (ISC_ENABLE  wait TCK 5, 10.0e-3)," &
+
+		"flow_verify(protect) " &
+			"Initialize " &
+			"  (LSC_READ_STATUS wait TCK 3, 1.0e-3 8:00*74), " &
+	
+		"flow_erase " &
+			"Initialize " &
+			"  (ISC_ERASE wait TCK 5, 1.0e-3) " &
+            "  loop max 600 ( " &
+            "    (LSC_PROGRAM_STATUS wait  500.0e-3 1:1:OST) "&
+			"  ) , " &
+
+		"flow_verify(status) " &
+			"Initialize " &
+			"  (LSC_READ_STATUS  wait TCK 3, 1.0e-3 8:00*00), "&
+			
+		"flow_preload " &
+			"Initialize " &
+			"  (SAMPLE BSCAN_REGISTER_LENGTH:BSCAN_REGISTER_VALUE wait TCK 3 )," &
+
+		"flow_program(array) " &
+			"Initialize " &
+			"  (LSC_RESET_ADDRESS  wait TCK 3, 1.0e-3 )" &
+			"Repeat ADDRESS_REGISTER_LENGTH " &
+			"  (PINCR_RTI DEVICE_ROW_WIDTH:? wait TCK 5, 1.0e-3)" &
+			"  loop max 50 ( " &
+			"    (LSC_PROGRAM_STATUS wait  1.0e-3 1:1:OST) "&
+			"  ) , " &
+			
+		"flow_verify(array) " &
+			"Initialize " &
+			"  (LSC_RESET_ADDRESS  wait TCK 5, 1.0e-3 )" &
+			"Repeat ADDRESS_REGISTER_LENGTH " &
+			"  (RINCR_RTI wait TCK 5, 1.0e-3 DEVICE_ROW_WIDTH:?:CRC)," &
+
+		"flow_read(array) " &
+			"Initialize " &
+			"  (LSC_RESET_ADDRESS  wait TCK 3, 1.0e-3 )" &
+			"Repeat ADDRESS_REGISTER_LENGTH " &
+			"  (RINCR_RTI wait TCK 3 DEVICE_ROW_WIDTH:!:CRC)," &
+
+		"flow_program(usercode) " &
+			"Initialize " &
+			"  (ISC_PROGRAM_USERCODE 32:? wait TCK 5, 10.0e-3)," &			
+-- 3rd programming spec does not do looping, but some ppl have problem with delay time to short
+--			"  (ISC_PROGRAM_USERCODE 32:? wait TCK 5, 1.0e-3)" &
+--			"  loop max 10 ( " &
+--			"    (LSC_PROGRAM_STATUS wait  1.0e-3 1:1:OST) "&
+--			"  ) , " &
+									
+		"flow_verify(usercode) " &
+			"Initialize " &
+			"  (USERCODE wait TCK 5, 1.0e-3 32:? )," &
+
+		"flow_read(usercode) " &
+			"Initialize " &
+			"  (USERCODE wait TCK 5, 1.0e-3 32:! )," &
+
+-- 3rd programming spec does not do looping
+--		"flow_program(sed_crc_tdi) " &
+--			"Initialize " &
+--			"  (LSC_PROGRAM_SED_CRC 32:? wait TCK 3)" &
+--			"  loop max 10 ( " &
+--			"    (LSC_PROGRAM_STATUS wait  1.0e-3 1:1:OST) "&
+--			"  ) , " &
+
+		"flow_program(sed_crc_tdi) " &
+			"Initialize " &
+			"  (LSC_PROGRAM_SED_CRC 32:? wait TCK 3, 10.0e-3), " &
+			
+		"flow_verify(sed_crc_tdi) " &
+			"Initialize " &
+			"  (LSC_SED_CRC wait TCK 3, 1.0e-3 32:? )," &
+				
+		"flow_read(sed_crc_tdi) " &
+			"Initialize " &
+			"  (LSC_SED_CRC wait TCK 3, 1.0e-3 32:! )," &			
+						
+		"flow_program_security " &
+			"Initialize " &
+			"  (ISC_PROGRAM_SECURITY wait TCK 5)" &
+			"  loop max 50 ( " &
+			"    (LSC_PROGRAM_STATUS wait  1.0e-3 1:1:OST) "&
+			"  ) , " &
+			
+		"flow_disable " &
+			"Initialize " &
+			"  (ISC_DISABLE  wait TCK 5, 200.0e-3) "&
+			"  (BYPASS       wait TCK 5, 1.0e-3), "&
+
+-- This is the svp indicates, which has looping
+--		"flow_program_done " &
+--			"Initialize " &
+--			"  (ISC_PROGRAM_DONE wait TCK 5)" &
+--			"  loop max 40 ( " &
+--			"    (LSC_PROGRAM_STATUS wait  5.0e-3 1:1:OST) "&
+--			"  )  ";
+
+		"flow_program_done " &
+			"Initialize " &
+			"  (ISC_PROGRAM_DONE wait TCK 5, 50.0e-3)" ;
+
+
+-----------------------------
+--  ISC_Procdeure Descriptions    
+-----------------------------
+	attribute ISC_Procedure of DEVICE_NAME : entity is
+
+		"proc_verify(idcode)     = (flow_verify(idcode)), " &
+		"proc_verify(status)     = (flow_verify(status)), " &
+		"proc_enable             = (flow_enable), " &
+		"proc_disable            = (flow_disable), " &
+		"proc_program(array)     = (flow_program(array)), " &
+		"proc_verify(array)      = (flow_verify(array)), " &
+		"proc_erase              = (flow_erase), " &
+		"proc_read(array)        = (flow_read(array)), " &
+		"proc_program(usercode)  = (flow_program(usercode)), " &
+		"proc_verify(usercode)   = (flow_verify(usercode)), " &
+		"proc_read(usercode)     = (flow_read(usercode)), " &
+		"proc_program_done       = (flow_program_done), " &
+		"proc_error_exit         = (flow_disable), " &
+		"proc_preload            = (flow_preload), " &
+		"proc_program(sed_crc_tdi)	 = (flow_program(sed_crc_tdi)), " &
+		"proc_verify(sed_crc_tdi)	 = (flow_verify(sed_crc_tdi)), " &
+		"proc_read(sed_crc_tdi)	 	 = (flow_read(sed_crc_tdi)), " &
+		"proc_program(security)  = (flow_program_security), " &
+		"proc_verify(protect)	 = (flow_verify(protect))";
+
+-----------------------------
+--  ISC_Action Descriptions    
+-----------------------------
+	attribute ISC_Action of DEVICE_NAME : entity is
+
+		"erase          = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"			proc_verify(protect) recommended, " &
+		"           proc_erase, " &
+		"           proc_verify(status), " &
+		"           proc_disable), " &
+		"program        = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"			proc_verify(protect) recommended, " &		
+		"           proc_erase , " &
+		"           proc_verify(status), " &
+		"           proc_disable, " &
+		"           proc_enable, " &
+		"           proc_verify(status), " &
+		"           proc_program(array), " &
+		"           proc_verify(status), " &
+		"           proc_program(usercode), " &
+		"			proc_program(sed_crc_tdi) optional, " &
+		"           proc_verify(status), " &
+		"           proc_verify(array), " &
+		"           proc_verify(usercode), " &
+		"			proc_verify(sed_crc_tdi) optional, " &
+		"           proc_verify(status) optional, " &
+		"           proc_program(security) optional, " &
+		"           proc_verify(status), " &
+		"           proc_program_done, " &
+		"           proc_verify(status), " &
+		"           proc_disable), " &
+		"verify         = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_verify(array), " &
+		"           proc_verify(usercode), " &
+		"			proc_verify(sed_crc_tdi) optional, " &
+		"           proc_disable), " &
+		"read           = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_read(array) , " &
+		"           proc_read(usercode), " &
+		"			proc_read(sed_crc_tdi) optional, " &
+		"           proc_disable), " &
+		"verify_idcode  = ( proc_verify(idcode)), " &
+		"secure         = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_program(security), " &
+		"           proc_disable) ";
+		
+attribute DESIGN_WARNING of DEVICE_NAME : entity is
+    "This ISC BSDL file uses a looping programming algorithm for optimized " &
+    "programming times.  Do not use this ISC BSDL file if your driver does " &
+    "not support looping." &
+    "The SLEEPN pin is used to put the device in Sleep mode." &
+    "It must be High throughout the entire BSCAN testing.";		

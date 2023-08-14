@@ -1,0 +1,48 @@
+library verilog;
+use verilog.vl_types.all;
+entity clock_gen is
+    port(
+        PAD_DONE        : in     vl_logic;
+        SCAN_EN         : in     vl_logic;
+        SCAN_CFG        : in     vl_logic;
+        FMCLK           : in     vl_logic;
+        FSCLK           : in     vl_logic;
+        MPI_CLK         : in     vl_logic;
+        RFPSC_SEL       : in     vl_logic;
+        LFPSC_CLK       : in     vl_logic;
+        RFPSC_CLK       : in     vl_logic;
+        SED_CLK         : in     vl_logic;
+        USR_CLK         : in     vl_logic;
+        OSC_DIV_EN      : in     vl_logic;
+        CFG_OSC         : in     vl_logic;
+        CCLKIN          : in     vl_logic;
+        TCK             : in     vl_logic;
+        ENTCK_JTAG      : in     vl_logic;
+        JTAG_MODE       : in     vl_logic;
+        MPI_SYNC        : in     vl_logic;
+        MC1_SED_CLK     : in     vl_logic;
+        MC1_FM_SYNC     : in     vl_logic;
+        MC1_FS_SYNC     : in     vl_logic;
+        HCLK_SEL        : in     vl_logic_vector(2 downto 0);
+        SCLK_SEL        : in     vl_logic_vector(1 downto 0);
+        CCLK_SEL        : in     vl_logic_vector(1 downto 0);
+        CK_SEL          : in     vl_logic_vector(2 downto 0);
+        OSC_DIV128      : out    vl_logic;
+        CFG_CKB         : out    vl_logic;
+        MPC_CLKB        : out    vl_logic;
+        FMCLKB          : out    vl_logic;
+        FSCLKB          : out    vl_logic;
+        HCLK_RFR        : out    vl_logic;
+        HCLK_CIB        : out    vl_logic;
+        HCLK_LASB       : out    vl_logic;
+        HCLK_RASB       : out    vl_logic;
+        HCLKB           : out    vl_logic;
+        TCKB            : out    vl_logic;
+        TCK2            : out    vl_logic;
+        SCLKB           : out    vl_logic;
+        RCLKS           : out    vl_logic;
+        CCLK_AD         : out    vl_logic;
+        CCLK_OUT        : out    vl_logic;
+        CCLKB           : out    vl_logic
+    );
+end clock_gen;

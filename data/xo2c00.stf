@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file defines properties of machxo devices -->
+<StrategyConfig parent="mj5g00.stf" version="1.0">
+
+<!-- *************************************************************** -->
+<!-- Place & Route Design Property --> 
+<!-- *************************************************************** -->
+
+<!-- ; 8/8/05 TN - turn off for all fpga except machXO (default) -->
+<!-- _parHold=A,SLIST,Auto Hold-Time Correction -->
+<!--	_parHoldOff=A,LITEM,OFF,F -->
+<!--	_parHoldOn=A,LITEM,ON,N	 
+<Property
+	name="PROP_PAR_parHold"
+	tclid="par_auto_hld"
+	type="list">
+	<Value
+		defaultValue="Off"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Off" cmdline="-exp parHold=OFF"/>
+		<Correlation driverValue="On" cmdline="-exp parHold=ON"/>
+	</CmdLines>
+</Property> -->
+
+<!-- *************************************************************** -->
+<!-- *****************************  PropertySet *************************** -->
+<!-- *************************************************************** -->
+<!-- *****************************  Bitgen *************************** -->
+<PropertySet	
+	name="PROPSET_BITGEN"	 >
+  <Include>
+      <PropertyUIItem> PROPUI_BIT_RunDRCBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_DisableUESBitgen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_SearchPthBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_DisRAMResBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_NoHeader </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TMCHK_EnableCheck </PropertyUIItem>
+  </Include>
+</PropertySet>
+
+</StrategyConfig>

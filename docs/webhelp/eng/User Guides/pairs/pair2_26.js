@@ -1,0 +1,26 @@
+var pairs =
+{
+"running":{"programming":1}
+,"programming":{"file":1}
+,"file":{"utility":1}
+,"run":{"programming":1}
+,"issue":{"start":1}
+,"start":{"command":1}
+,"windows":{"choose":1}
+,"choose":{"programs":1}
+,"programs":{"diamond":1}
+,"diamond":{"accessories":1}
+,"accessories":{"programming":1}
+,"linux":{"install_path":1}
+,"install_path":{"bin":1}
+,"bin":{"lin":1}
+,"lin":{"directory":1}
+,"directory":{"enter":1}
+,"enter":{"following":1}
+,"following":{"command":1}
+,"command":{"line":1}
+,"utility":{"window":1}
+,"window":{"opens":1}
+,"using":{"programming":1}
+}
+;Search.control.loadWordPairs(pairs);

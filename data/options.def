@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliOptionDef description="Predefined Options' Definitions">
+  <Option name="top" flag="emuratable" target="implement" type="string" />
+  <Option name="def_top" target="implement" type="string" />
+  <Option name="top_module" target="src" type="string" />
+  <Option name="run_flow" flag="caseinsensitive" target="implement" type="single_option" default="normal">
+    <value>NORMAL</value>
+    <value>INITIAL</value>
+    <value>INCREMENTAL</value>
+  </Option>
+  <!-- For synthesis HDLs -->
+  <Option name="HDL_PARAM" flag="emuratable" target="implement" type="string_list"/>
+  <!-- For define verilog directives -->
+  <Option name="VERILOG_DIRECTIVES" flag="emuratable" target="implement" type="string_list"/>
+  <Option name="HDL_KEYFILE" flag="emuratable" target="implement" type="string_list"/>
+  <Option name="lib" flag="emuratable,inheritable" target="implement,src:vhdl,src:sch" type="string" default="work"/>
+  <Option name="include path" flag="emuratable,inheritable" target="implement,src:verilog,src:sch" type="string_list" />
+  <Option name="HDL type" flag="emuratable,inheritable" target="project,implement,src:sch" type="single_option" default="Verilog">
+    <value>Verilog</value>
+    <value>VHDL</value>
+  </Option>
+  <Option name="VerilogStandard" flag="emuratable,inheritable" target="project,implement,src:verilog" type="single_option" default="Verilog 2001">
+    <value>Verilog 95</value>
+    <value>Verilog 2001</value>
+    <value>System Verilog</value>
+  </Option>
+  <Option name="target" target="src:sch" type="string"/>
+  <Option name="pojo_flow" flag="caseinsensitive" target="implement" type="single_option" default="normal">
+	<value>NORMAL</value>
+	<value>EXPORT</value>
+  </Option>
+    <Option name="pojo_jedec" flag="casesensitive" target="implement" type="string" />
+</BaliOptionDef>

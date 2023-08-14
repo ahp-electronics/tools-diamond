@@ -1,0 +1,733 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		FPGA_Plus	SYSTEM	"FPGA_Plus.dtd" >
+<FPGA_Plus version="1.0">
+
+<!-- Operations                                 -->
+<Operation name="Write_Configuration_Embedded_Bitstream">
+	call write_configuration_embedded_bitstream;
+</Operation>
+<!-- Parameters                                 -->
+<Parameter>
+	DATASTREAM MAGIC_NUMBER = hFF;
+	DATASTREAM CONFIG_COMMENT_TERM = hFF;
+	DATASTREAM RBK_COMMENT_TERM = hFE;
+	DATASTREAM MSK_COMMENT_TERM = hFD;
+
+	DATASTREAM ALL_1_DELAY_FRAME = hFFFFFFFFFFFFFFFFFFFF;
+	DATASTREAM ALL_1_COMMAND_INFO = hFFFFFF;
+	DATASTREAM HEADER_DUMMY = hFFFF;
+	DATASTREAM PREAMBLE = hBDB3;
+	DATASTREAM COMMAND_INFO_CRC_OFF = h000000;
+	DATASTREAM COMMAND_INFO_CRC_ON = h800000;
+	DATASTREAM STOPBYTES = hFFFFFFFF;
+	DATASTREAM TERMINATOR = hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;
+	DATASTREAM ALL_1_IDCODE_FRAME = hFFFFFFFFFFFFFF;
+	DATASTREAM ALL_1_PROGRAM_SECURITY_FRAME = hFFFFFFFF;
+	
+	DATASTREAM MSK_IDCODE = hFFFFFFF0;
+	DATASTREAM MSK_CTL_REGISTER = hFFFFFFFF;
+	DATASTREAM MSK_STOPBYTES = h00000000;
+	DATASTREAM MSK_USERCODE = hFFFFFFFF;			             
+	DATASTREAM MSK_TERMINATOR = h0000000000000000000000000000000000000000;
+
+	DATASTREAM VERIFYID = hC7;
+	DATASTREAM READID = h87;
+	DATASTREAM CONTROLREG0 = hC4;
+	DATASTREAM RESETADDR = hE2;
+	DATASTREAM WRITEINC = hC1;
+	DATASTREAM READINC = h81;
+	DATASTREAM USERCODE = hC3;
+	DATASTREAM READUSERCODE = hC0;
+	DATASTREAM PROGRAMSECURE = hF3;
+	DATASTREAM PROGRAMDONE = h7A;
+	DATASTREAM FLASHENABLE = hE3;
+	DATASTREAM CLEARALL = hF0;
+	DATASTREAM FLASHPROGRAMDONE = hEA;
+	DATASTREAM SRAMPROGRAMDONE = hFA;
+	DATASTREAM FLASHDISABLE = hE4;
+
+	DATASTREAM READ_PROGRAM_SECURE = hFF;
+	DATASTREAM READ_VERIFY_ID = hFF;
+	DATASTREAM END_FRAME = hFFFFFFFF;
+	DATASTREAM DEFAULT_CONTROL_REGISTER_0 = h00000000000001;
+	
+	DATASTREAM DEFAULT_ALL_0 = h0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
+	DATASTREAM DEFAULT_USERCODE_0 = h00000000000000;
+	DATASTREAM DEFAULT_ID = hFFFFFFFF;
+	DATASTREAM ADDRESS_INC = h800746;
+	DATASTREAM DUMMY_0 = h00;
+</Parameter>
+
+<Script>
+<![CDATA[
+function write_configuration_embedded_bitstream
+{
+	if ( __SERIAL__ )
+	{
+		//
+		// Drive all pins high
+		//
+		cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+		cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+		cpu_send_register();
+		
+		//
+		// Drive PROG pin low
+		//
+		cpu_set_pin( CPU_PROG_PIN, CPU_LOW );
+		cpu_send_register();
+		
+		//
+		// Check INIT pin low
+		//
+		cpu_check_pin( CPU_INIT_PIN, CPU_LOW, 5000, 100 );
+		
+		//
+		// Check DONE pin low
+		//
+		cpu_check_pin( CPU_DONE_PIN, CPU_LOW, 5000, 100 );
+		
+		//
+		// Drive PROG pin high
+		//
+		cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+		cpu_send_register();
+		
+		//
+		// Check INIT pin high
+		//
+		cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 5000, 100 );
+		
+		
+		//
+		// Drive CCLK pin low
+		//
+		cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+		cpu_send_register();
+		
+		add_serial_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+		cpu_serial_bitstream_data();
+		add_serial_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+		add_serial_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+		//
+		// Check INIT pin high
+		//
+		cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 500 );
+		
+		//
+		// Check DONE pin high
+		//
+		cpu_check_pin( CPU_DONE_PIN, CPU_HIGH, 1000, 500 );
+			
+	}
+	else
+	{
+		if ( __FLASH__ ) {
+			//
+			// Drive all pins high
+			//
+			cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+			cpu_send_register();
+			cpu_set_pin( CPU_CS_PIN, CPU_HIGH );
+			cpu_set_pin( CPU_CS1_PIN, CPU_HIGH );
+			cpu_set_pin( CPU_WRITE_EN_PIN, CPU_HIGH );	
+			cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+			cpu_send_register();
+			cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+			cpu_send_register();	
+			cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+			cpu_send_register();
+			cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+			cpu_send_register();
+			cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+			cpu_send_register();
+			cpu_check_pin( CPU_BUSY_PIN, CPU_HIGH, 5000, 100 );
+		
+			if ( __XFLASH__ )
+			{
+			}
+			else
+			{
+				//
+				// Drive PROG pin low
+				//
+				cpu_set_pin( CPU_PROG_PIN, CPU_LOW );
+				cpu_send_register();
+			}
+			cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+			cpu_send_register();
+				
+			cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+			cpu_send_register();
+			cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+			cpu_send_register();
+			cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+			cpu_send_register();
+		
+			//
+			// Drive CS pin low
+			//
+			cpu_set_pin( CPU_CS_PIN, CPU_LOW );
+			
+			//
+			// Drive CS1 pin low
+			//
+			cpu_set_pin( CPU_CS1_PIN, CPU_LOW );
+	
+			//
+			// Drive WRITE_EN pin low
+			//
+			cpu_set_pin( CPU_WRITE_EN_PIN, CPU_LOW );
+			cpu_send_register();
+			cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+			cpu_send_register();
+			cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+			cpu_send_register();
+			cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 5000, 100 );
+			if ( __XFLASH__ )
+			{
+			}
+			else
+			{
+				//
+				// Check DONE pin low
+				//
+				cpu_check_pin( CPU_DONE_PIN, CPU_LOW, 5000, 100 );
+			}
+			
+		}
+		else {
+			//
+			// Drive all pins high
+			//
+			cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+			cpu_send_register();
+			cpu_set_pin( CPU_CS_PIN, CPU_HIGH );
+			cpu_set_pin( CPU_CS1_PIN, CPU_HIGH );
+			cpu_set_pin( CPU_WRITE_EN_PIN, CPU_HIGH );
+			cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+			cpu_send_register();
+			cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+			cpu_send_register();	
+			cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+			cpu_send_register();
+			cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+			cpu_send_register();
+			cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+			cpu_send_register();
+			cpu_check_pin( CPU_BUSY_PIN, CPU_HIGH, 5000, 100 );
+			//
+			// Drive PROG pin low
+			//
+			cpu_set_pin( CPU_PROG_PIN, CPU_LOW );
+			cpu_send_register();
+			
+			//
+			// Check INIT pin low
+			//
+			cpu_check_pin( CPU_INIT_PIN, CPU_LOW, 5000, 100 );
+			
+			//
+			// Check DONE pin low
+			//
+			cpu_check_pin( CPU_DONE_PIN, CPU_LOW, 5000, 100 );
+		
+			//
+			// Drive PROG pin high
+			//
+			cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+			cpu_send_register();
+			//
+			// Check INIT pin high
+			//
+			cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 5000, 100 );
+			//
+			// Drive WRITE_EN pin low
+			//
+			cpu_set_pin( CPU_WRITE_EN_PIN, CPU_LOW );
+			cpu_send_register();
+			
+			//
+			// Drive CS pin low
+			//
+			cpu_set_pin( CPU_CS_PIN, CPU_LOW );
+			cpu_send_register();
+			
+			//
+			// Drive CS1 pin low
+			//
+			cpu_set_pin( CPU_CS1_PIN, CPU_LOW );
+			cpu_send_register();
+			
+		}
+		//
+		// Blast bitstream data
+		//
+		if ( __FLASH__ ) {
+			if ( __PROGRAM__ )
+			{
+				if ( __PROGRAM_DONE__ )
+				{
+					call flash_embedded_bitstream_program_done;
+				}
+				else
+				{
+					call flash_embedded_bitstream_data;
+				}
+				//
+				// Drive all pins high
+				//
+				cpu_set_pin( CPU_WRITE_EN_PIN, CPU_HIGH );
+				cpu_set_pin( CPU_CS1_PIN, CPU_HIGH );
+				cpu_set_pin( CPU_CS_PIN, CPU_HIGH );
+				
+				cpu_send_register();
+				cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+				cpu_send_register();
+				cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+				cpu_send_register();
+				cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+				cpu_send_register();
+				if ( __XFLASH__ )
+				{
+				}
+				else
+				{
+					//
+					// Drive PROG pin low
+					//
+					cpu_set_pin( CPU_PROG_PIN, CPU_LOW );
+					cpu_send_register();
+				
+					//
+					// Drive PROG pin high
+					//
+					cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+					cpu_send_register();
+					
+					//
+					// Check DONE pin high
+					//
+					cpu_check_pin( CPU_DONE_PIN, CPU_HIGH, 5000, 500 );
+					cpu_send_register();
+				}
+			}
+			else
+			{
+				call flash_embedded_bitstream_data_erase;
+				if ( __XFLASH__ )
+				{
+				}
+				else
+				{
+					//
+					// Drive PROG pin low
+					//
+					cpu_set_pin( CPU_PROG_PIN, CPU_LOW );
+					cpu_send_register();
+				
+					//
+					// Drive PROG pin high
+					//
+					cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+					cpu_send_register();
+					
+					//
+					// Check DONE pin low
+					//
+					cpu_check_pin( CPU_DONE_PIN, CPU_LOW, 5000, 500 );
+				}
+				//
+				// Drive all pins high
+				//
+				cpu_set_pin( CPU_WRITE_EN_PIN, CPU_HIGH );
+				cpu_set_pin( CPU_CS1_PIN, CPU_HIGH );
+				cpu_set_pin( CPU_CS_PIN, CPU_HIGH );
+				
+				cpu_send_register();
+				cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+				cpu_send_register();
+				cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+				cpu_send_register();
+				cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+				cpu_send_register();
+			}
+		}
+		else {
+			if ( __PROGRAM__ )
+			{
+				cpu_bitstream_data();
+				
+				//////////////////////////////////////////////////////////////
+				//
+				// Process Program Done frame.
+				//
+				//////////////////////////////////////////////////////////////
+				
+				add_embedded_bitstream_frame( SRAMPROGRAMDONE, COMMAND_INFO_CRC_OFF, SramProgramDone );
+				add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+				add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+				//
+				// Check INIT pin high
+				//
+				cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 5000, 500 );
+				
+				//
+				// Check DONE pin high
+				//
+				cpu_check_pin( CPU_DONE_PIN, CPU_HIGH, 5000, 500 );
+			}
+			else
+			{
+				///////////////////////////////////////////////////////////////
+				//
+				// Process Header frame.
+				//
+				//////////////////////////////////////////////////////////////
+				
+				embedded_bitstream_frame();
+			
+				///////////////////////////////////////////////////////////////
+				//
+				// Process Verify ID frame.
+				//
+				//////////////////////////////////////////////////////////////
+					
+				embedded_bitstream_frame();
+				
+				
+				///////////////////////////////////////////////////////////////
+				//
+				// Process Control Register 0 frame.
+				//
+				//////////////////////////////////////////////////////////////
+				
+				embedded_bitstream_frame();
+				
+				
+			
+				///////////////////////////////////////////////////////////////
+				//
+				// Add Clear All Frame.
+				// Check for BUSY pin to be low.
+				// Check for INIT pin to be high.
+				//
+				//////////////////////////////////////////////////////////////
+				
+				add_embedded_bitstream_frame( CLEARALL, COMMAND_INFO_CRC_OFF, ClearAll );
+				add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+				cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 50000, 5000 );
+				cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 500 );
+				//
+				// Check DONE pin low
+				//
+				cpu_check_pin( CPU_DONE_PIN, CPU_LOW, 5000, 500 );
+			}
+			//
+			// Drive all pins high
+			//
+			cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+			cpu_set_pin( CPU_WRITE_EN_PIN, CPU_HIGH );
+			cpu_set_pin( CPU_CS1_PIN, CPU_HIGH );
+			cpu_set_pin( CPU_CS_PIN, CPU_HIGH );
+			cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+			cpu_send_register();
+		}
+	}
+}
+
+
+
+function flash_embedded_bitstream_data
+{
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Header frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	embedded_bitstream_frame();
+	
+
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Verify ID frame.
+	//
+	//////////////////////////////////////////////////////////////
+		
+	embedded_bitstream_frame();
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 500 );
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Add Flash Enable Frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( FLASHENABLE, COMMAND_INFO_CRC_OFF, FlashEnable );
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 5000, 100 );
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 100 );
+	add_embedded_bitstream_frame( MAGIC_NUMBER,MAGIC_NUMBER, Dummy );
+	
+	
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Control Register 0 frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	embedded_bitstream_frame();
+	
+	
+
+	///////////////////////////////////////////////////////////////
+	//
+	// Add Clear All Frame.
+	// Check for BUSY pin to be low.
+	// Check for INIT pin to be high.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( CLEARALL, COMMAND_INFO_CRC_OFF, ClearAll );
+	add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+	cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 50000, 5000 );
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 500 );
+
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Reset Address frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	embedded_bitstream_frame();
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Write Increment frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	embedded_bitstream_frame();
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Fuse Array data frames.
+	// Check for BUSY pin to be low.
+	// Check for INIT pin to be high.
+	//
+	//////////////////////////////////////////////////////////////
+		
+	repeat ( get_number( Write Increment Frame, CommandInfo ) )
+	{
+		embedded_bitstream_frame();
+		add_embedded_bitstream_frame( MAGIC_NUMBER,  0, Dummy );
+		cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 100,  10000 );
+		cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 100, 10000 );
+	}
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Process End Fuse Data frame.
+	//
+	//////////////////////////////////////////////////////////////
+
+	embedded_bitstream_frame();
+
+	///////////////////////////////////////////////////////////////
+	//
+	// Process USERCODE frame.
+	// Check for BUSY pin to be low.
+	// Check for INIT pin to be high.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	embedded_bitstream_frame();
+	add_embedded_bitstream_frame( MAGIC_NUMBER, 0, Dummy );
+	cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 100,  10000 );
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 100, 10000 );
+
+	
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Program Security frame if the Secure flag was set.
+	// Check for BUSY pin to be low.
+	// Check for INIT pin to be high.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	embedded_bitstream_frame();
+	cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 100,  10000 );
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 100, 10000 );
+
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Add Flash Program Done Frame.
+	// Check for BUSY pin to be low.
+	// Check for INIT pin to be high.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( FLASHPROGRAMDONE, COMMAND_INFO_CRC_OFF, FlashProgramDone );
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+	cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 1000,  10000 );
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 100, 10000 );
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Add Flash Disable Frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( FLASHDISABLE, COMMAND_INFO_CRC_OFF, FlashDisable );
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+	
+	//////////////////////////////////////////////////////////////
+	//
+	// Process Program Done frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( SRAMPROGRAMDONE, COMMAND_INFO_CRC_OFF, SramProgramDone );
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+	
+	//////////////////////////////////////////////////////////////
+	//
+	// Process End frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	embedded_bitstream_frame();
+}
+
+
+
+function flash_embedded_bitstream_data_erase
+{
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Header frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	embedded_bitstream_frame();
+	
+
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Verify ID frame.
+	//
+	//////////////////////////////////////////////////////////////
+		
+	embedded_bitstream_frame();
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 500 );
+	
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Add Flash Enable Frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( FLASHENABLE, COMMAND_INFO_CRC_OFF, FlashEnable );
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 5000, 100 );
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 100 );
+	add_embedded_bitstream_frame( MAGIC_NUMBER,MAGIC_NUMBER, Dummy );
+	
+	
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Control Register 0 frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	embedded_bitstream_frame();
+	
+	
+
+	///////////////////////////////////////////////////////////////
+	//
+	// Add Clear All Frame.
+	// Check for BUSY pin to be low.
+	// Check for INIT pin to be high.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( CLEARALL, COMMAND_INFO_CRC_OFF, ClearAll );
+	add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+	cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 50000, 5000 );
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 500 );
+	
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Add Flash Disable Frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( FLASHDISABLE, COMMAND_INFO_CRC_OFF, FlashDisable );
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+}
+function flash_embedded_bitstream_program_done
+{
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	///////////////////////////////////////////////////////////////
+	//
+	// Process Header frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( HEADER_DUMMY, PREAMBLE, Header );
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Add Flash Enable Frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( FLASHENABLE, COMMAND_INFO_CRC_OFF, FlashEnable );
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 5000, 100 );
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 100 );
+	add_embedded_bitstream_frame( MAGIC_NUMBER,MAGIC_NUMBER, Dummy );
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Add Flash Program Done Frame.
+	// Check for BUSY pin to be low.
+	// Check for INIT pin to be high.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( FLASHPROGRAMDONE, COMMAND_INFO_CRC_OFF, FlashProgramDone );
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+	cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 50000, 500 );
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 500 );
+	
+	///////////////////////////////////////////////////////////////
+	//
+	// Add Flash Disable Frame.
+	//
+	//////////////////////////////////////////////////////////////
+	
+	add_embedded_bitstream_frame( FLASHDISABLE, COMMAND_INFO_CRC_OFF, FlashDisable );
+	add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+	add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+}
+
+
+]]>
+</Script>
+</FPGA_Plus>

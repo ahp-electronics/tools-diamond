@@ -1,0 +1,5 @@
+Clock: CLK * 1 ;
+Reset: => 1; @100 => 0;
+ClkEn: => 1;
+Data: => 0; * 200 @ Clock => COUNT;
+Shift: => 0; @ Reset & E0; *20 @ Clock; => COUNT; *20 @Clock; => COUNT; *20 @ Clock;

@@ -1,0 +1,25 @@
+var pairs =
+{
+"firmware":{"tab":1,"ftdi":1,"device":1,"file":1,"version":1}
+,"following":{"options":1}
+,"options":{"available":1}
+,"available":{"firmware":1}
+,"machxo2":{"firmware":1}
+,"select":{"file":1}
+,"file":{"update":1}
+,"update":{"firmware":1}
+,"ftdi":{"cable\u2019s":1}
+,"cable\u2019s":{"machxo2":1,"powr607":1,"firmware":1}
+,"powr607":{"firmware":1}
+,"reprograms":{"firmware":1}
+,"device":{"devices":1}
+,"devices":{"cable":1}
+,"save":{"existing":1,"current":1}
+,"existing":{"firmware":1}
+,"users":{"save":1}
+,"current":{"cable\u2019s":1}
+,"shows":{"cable\u2019s":1}
+,"version":{"number":1}
+,"programmer":{"options":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,5 @@
+OutClock: CLK * 1 ;
+Reset: => 1; @100 => 0;
+OutClockEn: => 0; @100; @Reset & E0; => 1;
+Address: => 0;@100; @Reset & E0; *(num_rows + 3)@OutClock => COUNT;
+

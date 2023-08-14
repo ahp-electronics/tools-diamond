@@ -1,0 +1,25 @@
+var pairs =
+{
+"schematic":{"editor":1}
+,"sheets":{"schematics":1,"existing":1}
+,"adding":{"new":1}
+,"new":{"sheet":1,"blank":1}
+,"add":{"new":1}
+,"blank":{"sheets":1}
+,"existing":{"schematic":1}
+,"sheet":{"schematic":1,"operating":1,"number":1,"size":1,"list":1}
+,"choose":{"edit":1}
+,"edit":{"sheet":1}
+,"operating":{"dialog":1}
+,"dialog":{"box":1}
+,"box":{"click":1,"enter":1}
+,"click":{"new":1}
+,"pop-up":{"dialog":1}
+,"enter":{"sheet":1}
+,"number":{"select":1}
+,"select":{"sheet":1}
+,"size":{"click":1}
+,"editor":{"adds":1}
+,"adds":{"new":1}
+}
+;Search.control.loadWordPairs(pairs);

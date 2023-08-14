@@ -1,0 +1,3905 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Michael Block 10/8/2013 created XO3 database
+	Updated attributes for virtual devices. Edward Zhou, 03/04/2014.
+	Added 121 csfBGA package to XO3L-4300E device, 04/23/2014.
+	Added persist bits. egz, 11/05/2014
+	Nguyen 11/10/14
+		. Changed the Erase Times SOF-123178
+										XO3-640		XO3-1300
+			Programmer V3.0 and newer		3.5			10
+			Programmer Proposed Limits		15			15
+
+    egz 02/09/2015, added XO3LF devices based on the device list for D3_4_1.
+	                Updated XO3LF operations mainly based on D3.4 XO2's operations. No support for external ASC.
+					Updated Access mode.
+
+	02/11/15  Nguyen added "I2C Recovery Erase Only" operation due to Steve Hossner requested
+	03/06/2015, EGZ, update device voltage.	
+	02/11/2015 Nguyen added LCMXO3L-9400E, LCMXO3L-9400C, LCMXO3LF-9400E and LCMXO3LF-9400C
+	02/23/2018 Nguyen changed Max Erase time of 9400 devices from 9000 to 4500 (requested by Francel Go)
+-->
+<ispXDF version="18.0">
+    <Family name="MachXO3L">
+       <FamilyAliasName>MachXO3L-ES</FamilyAliasName>
+        <Device name="LCMXO3L-640E">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-640E </CodeName>
+            <FullName> LCMXO3L-640E </FullName>
+            <AliasName> LCMXO3L-640E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0xC12B2043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1080 </ColWidth>
+            <RowWidth> 333 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  65536 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 343936 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>208</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-640E </PON>
+                <AliasPON> LCMXO3L-640E-ES </AliasPON>
+                <JDFFile> lcmxo3l_640.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LCMXO3L-640E-XXMG121 </PON>
+                <AliasPON> LCMXO3L-640E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3l_1300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;330;330;330;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;844;840;838;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>330</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>920</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3L-1300E">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-1300E </CodeName>
+            <FullName> LCMXO3L-1300E </FullName>
+            <AliasName> LCMXO3L-1300E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0x412B2043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1080 </ColWidth>
+            <RowWidth> 333 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  65536 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 343936 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>208</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-1300E </PON>
+                <AliasPON> LCMXO3L-1300E-ES </AliasPON>
+                <JDFFile> lcmxo3l_1300.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LCMXO3L-1300E-XXMG121 </PON>
+                <AliasPON> LCMXO3L-1300E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3l_1300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 36-ball WLCSP </Type>
+                <PON> LCMXO3L-1300E-XXUWG36 </PON>
+                <AliasPON> LCMXO3L-1300E-XXUWG36 </AliasPON>
+                <JDFFile> lcmxo3l_1300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;330;330;330;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;844;840;838;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>330</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>920</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3L-1300E-MG256">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-1300E-MG256 </CodeName>
+            <FullName> LCMXO3L-1300E-MG256 </FullName>
+            <AliasName> LCMXO3L-1300E-MG256_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0xC12B3043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-1300E-MG256 </PON>
+                <AliasPON> LCMXO3L-1300E-MG256-ES </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Package>
+                <Type> 256-ball csfBGA</Type>
+                <PON> LCMXO3L-1300E-5MG256 </PON>
+                <AliasPON> LCMXO3L-1300E-5CSFBGA256 </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball csfBGA S6</Type>
+                <PON> LCMXO3L-1300E-6MG256 </PON>
+                <AliasPON> LCMXO3L-1300E-6CSFBGA256 </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>			
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--               <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList> -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3L-2100E">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-2100E </CodeName>
+            <FullName> LCMXO3L-2100E </FullName>
+            <AliasName> LCMXO3L-2100E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0x412B3043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-2100E </PON>
+                <AliasPON> LCMXO3L-2100E-ES </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball csfBGA </Type>
+                <PON> LCMXO3L-2100E-XXMG256 </PON>
+                <AliasPON> LCMXO3L-2100E-XXMG256 </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LCMXO3L-2100E-XXMG121 </PON>
+                <AliasPON> LCMXO3L-2100E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 49-ball WLCSP </Type>
+                <PON> LCMXO3L-2100E-XXUWG49 </PON>
+                <AliasPON> LCMXO3L-2100E-XXUWG49 </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>			
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3L-2100E-MG324">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-2100E-MG324 </CodeName>
+            <FullName> LCMXO3L-2100E-MG324 </FullName>
+            <AliasName> LCMXO3L-2100E-MG324_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0xC12B4043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-2100E-MG324 </PON>
+                <AliasPON> LCMXO3L-2100E-MG324-ES </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 324-ball csfBGA</Type>
+                <PON> LCMXO3L-2100E-5MG324 </PON>
+                <AliasPON> LCMXO3L-2100E-5CSFBGA324 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 324-ball csfBGA S6</Type>
+                <PON> LCMXO3L-2100E-6MG324 </PON>
+                <AliasPON> LCMXO3L-2100E-6CSFBGA324 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3L-4300E">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-4300E </CodeName>
+            <FullName> LCMXO3L-4300E </FullName>
+            <AliasName> LCMXO3L-4300E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0x412B4043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>          
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>   
+            <ExternalASC> 0 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-4300E </PON>
+                <AliasPON> LCMXO3L-4300E-ES </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 81-ball WLCSP </Type>
+                <PON> LCMXO3L-4300E-XXUWG81 </PON>
+                <AliasPON> LCMXO3L-4300E-XXUWG81 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LCMXO3L-4300E-XXMG121 </PON>
+                <AliasPON> LCMXO3L-4300E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball csfBGA </Type>
+                <PON> LCMXO3L-4300E-XXMG256 </PON>
+                <AliasPON> LCMXO3L-4300E-XXMG256 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 324-ball csfBGA </Type>
+                <PON> LCMXO3L-4300E-XXMG324 </PON>
+                <AliasPON> LCMXO3L-4300E-XXMG324 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3L-6900E">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-6900E </CodeName>
+            <FullName> LCMXO3L-6900E </FullName>
+            <AliasName> LCMXO3L-6900E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0x412B5043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>      
+            <ExternalASC> 0 </ExternalASC>                  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-6900E </PON>
+                <AliasPON> LCMXO3L-6900E-ES </AliasPON>
+                <JDFFile> lcmxo3l_6900.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 256-ball csfBGA </Type>
+                <PON> LCMXO3L-6900E-XXMG256 </PON>
+                <AliasPON> LCMXO3L-6900E-XXMG256 </AliasPON>
+                <JDFFile> lcmxo3l_6900.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>            
+            <Package>
+                <Type> 324-ball csfBGA </Type>
+                <PON> LCMXO3L-6900E-XXMG324 </PON>
+                <AliasPON> LCMXO3L-6900E-XXMG324 </AliasPON>
+                <JDFFile> lcmxo3l_6900.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3L-9400E">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-9400E </CodeName>
+            <FullName> LCMXO3L-9400E </FullName>
+            <AliasName> LCMXO3L-9400E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0x412B6043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 2376 </ColWidth>
+            <RowWidth> 888 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  458752 </EColumn>         
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 2063872 </TotalFuses>
+            <PWP>  10 </PWP>
+            <PWE>  4500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>760</BScan_Length>
+            <ExternalASC> 0 </ExternalASC>                        
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-9400E </PON>
+                <AliasPON> LCMXO3L-9400E-ES </AliasPON>
+                <JDFFile> lcmxo3l_9400.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 256-ball csBGA </Type>
+                <PON> LCMXO3L-9400E-XXMG256 </PON>
+                <AliasPON> LCMXO3L-9400E-XXMG256ES </AliasPON>
+                <JDFFile> lcmxo3l_9400.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            </Voltage_Control>
+            <Persistent_fuse> 
+	            <Persistent_fuse_Address>;881;881;881;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;2140;2136;2134;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>881</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>2216</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done>
+        </Device> 
+        <Device name="LCMXO3L-1300C">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-1300C </CodeName>
+            <FullName> LCMXO3L-1300C </FullName>
+            <AliasName> LCMXO3L-1300C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0xC12BB043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-1300C </PON>
+                <AliasPON> LCMXO3L-1300C-ES </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO3L-1300C-XXBG256 </PON>
+                <AliasPON> LCMXO3L-1300C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+		</Device>
+        <Device name="LCMXO3L-2100C">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-2100C </CodeName>
+            <FullName> LCMXO3L-2100C </FullName>
+            <AliasName> LCMXO3L-2100C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0x412BB043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-2100C </PON>
+                <AliasPON> LCMXO3L-2100C-ES </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO3L-2100C-XXBG256 </PON>
+                <AliasPON> LCMXO3L-2100C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3l_2100.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3L-2100C-BG324">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-2100C-BG324 </CodeName>
+            <FullName> LCMXO3L-2100C-BG324 </FullName>
+            <AliasName> LCMXO3L-2100C-BG324_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0xC12BC043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-2100C </PON>
+                <AliasPON> LCMXO3L-2100C-ES </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 324-ball csBGA</Type>
+                <PON> LCMXO3L-2100C-5BG324 </PON>
+                <AliasPON> LCMXO3L-2100C-5CABGA324 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B324-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA</Type>
+                <PON> LCMXO3L-2100C-6BG324 </PON>
+                <AliasPON> LCMXO3L-2100C-6CABGA324 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B324-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA S6</Type>
+                <PON> LCMXO3L-2100C-6BG324 </PON>
+                <AliasPON> LCMXO3L-2100C-6CABGA324 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B324-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3L-4300C">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-4300C </CodeName>
+            <FullName> LCMXO3L-4300C </FullName>
+            <AliasName> LCMXO3L-4300C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0x412BC043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-4300C </PON>
+                <AliasPON> LCMXO3L-4300C-ES </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO3L-4300C-XXBG256 </PON>
+                <AliasPON> LCMXO3L-4300C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA </Type>
+                <PON> LCMXO3L-4300C-XXBG324 </PON>
+                <AliasPON> LCMXO3L-4300C-XXBG324 </AliasPON>
+                <JDFFile> lcmxo3l_4300.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device> 
+        <Device name="LCMXO3L-4300C-BG400">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-4300C-BG400 </CodeName>
+            <FullName> LCMXO3L-4300C-BG400 </FullName>
+            <AliasName> LCMXO3L-4300C-BG400_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0xC12BD043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-4300C </PON>
+                <AliasPON> LCMXO3L-4300C-ES </AliasPON>
+                <JDFFile> lcmxo3l_6900.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                   
+            <Package>
+                <Type> 400-ball caBGA</Type>
+                <PON> LCMXO3L-4300C-5BG400 </PON>
+                <AliasPON> LCMXO3L-4300C-5CABGA400 </AliasPON>
+                <JDFFile> lcmxo3l_6900.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B400-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 400-ball caBGA S6</Type>
+                <PON> LCMXO3L-4300C-6BG400</PON>
+                <AliasPON> LCMXO3L-4300C-6CABGA400 </AliasPON>
+                <JDFFile> lcmxo3l_6900.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B400-LCMXO3"/>
+            </Package>			
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>   
+        <Device name="LCMXO3L-6900C">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-6900C </CodeName>
+            <FullName> LCMXO3L-6900C </FullName>
+            <AliasName> LCMXO3L-6900C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0x412BD043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <ExternalASC> 0 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-6900C </PON>
+                <AliasPON> LCMXO3L-6900C-ES </AliasPON>
+                <JDFFile> lcmxo3l_6900.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                   
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO3L-6900C-XXBGA256 </PON>
+                <AliasPON> LCMXO3L-6900C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3l_6900.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA </Type>
+                <PON> LCMXO3L-6900C-XXBG324 </PON>
+                <AliasPON> LCMXO3L-6900C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3l_6900.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B324-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 400-ball caBGA </Type>
+                <PON> LCMXO3L-6900C-XXBG400 </PON>
+                <AliasPON> LCMXO3L-6900C-XXBG400 </AliasPON>
+                <JDFFile> lcmxo3l_6900.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B400-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+<!--                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>  -->
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>   
+		<Device name="LCMXO3L-9400C">
+            <Comm> JTAG </Comm>
+            <Access> NVCM/XNVCM/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3L-9400C </CodeName>
+            <FullName> LCMXO3L-9400C </FullName>
+            <AliasName> LCMXO3L-9400C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3L.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3L.svp"
+                         value="0x07"/>
+            <JtagID>0x412BE043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 2376 </ColWidth>
+            <RowWidth> 888 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  458752 </EColumn>         
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 2063872 </TotalFuses>
+            <PWP>  10 </PWP>
+            <PWE>  4500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>760</BScan_Length>   
+            <ExternalASC> 0 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3L-9400C </PON>
+                <AliasPON> LCMXO3L-9400EC-ES </AliasPON>
+                <JDFFile> lcmxo3l_9400.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO3L-9400C-XXBG256 </PON>
+                <AliasPON> LCMXO3L-9400C-XXBG256ES </AliasPON>
+                <JDFFile> lcmxo3l_9400.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 400-ball caBGA </Type>
+                <PON> LCMXO3L-9400C-XXBG400 </PON>
+                <AliasPON> LCMXO3L-9400C-XXBG400ES </AliasPON>
+                <JDFFile> lcmxo3l_9400.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 484-ball caBGA </Type>
+                <PON> LCMXO3L-9400C-XXBG484 </PON>
+                <AliasPON> LCMXO3L-9400C-XXBG484ES </AliasPON>
+                <JDFFile> lcmxo3l_9400.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            </Voltage_Control>
+            <Persistent_fuse> 
+	            <Persistent_fuse_Address>;881;881;881;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;2140;2136;2134;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>881</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>2216</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done>
+        </Device> 
+        <Operation>
+        	&quot;NVCM Erase,Program,Verify&quot;
+        	&quot;NVCM Erase,Program,Verify,Secure&quot;
+        	&quot;NVCM Program&quot;
+        	&quot;NVCM Verify Only&quot;
+			&quot;NVCM Erase Only&quot;
+			&quot;NVCM Verify ID&quot;
+			&quot;NVCM Display ID&quot;	
+	    	&quot;NVCM Display USERCODE&quot;
+			&quot;NVCM Read and Save&quot;
+			&quot;NVCM Calculate Checksum&quot;
+			&quot;NVCM Read Status Register&quot;
+			&quot;NVCM Verify Feature Rows&quot;
+			&quot;NVCM Program Feature Rows&quot;			
+			&quot;NVCM Secure Device&quot;
+			&quot;NVCM Refresh&quot;
+			&quot;NVCM Bypass&quot;
+
+            &quot;SRAM Fast Configuration&quot;
+            &quot;SRAM Erase,Program,Verify&quot;
+            &quot;SRAM Erase Only&quot;                        
+            &quot;SRAM Verify Only&quot;
+            &quot;SRAM Verify ID&quot;
+            &quot;SRAM Display ID&quot;
+            &quot;SRAM Display USERCODE&quot;
+            &quot;SRAM Read and Save&quot;
+            &quot;SRAM Display Control Register0&quot;
+			&quot;SRAM Program Control Register0&quot;
+            &quot;SRAM Read Status Register&quot;
+            &quot;SRAM Refresh&quot;
+            &quot;SRAM Bypass&quot;
+
+			&quot;XSRAM SEI Fast Program&quot;
+			&quot;XSRAM Verify Only&quot;
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Verify USERCODE&quot;
+            &quot;XSRAM Display USERCODE&quot;                                   
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Read Status Register&quot; 
+            &quot;XSRAM Refresh&quot;
+            &quot;XSRAM Bypass&quot;
+
+            
+			&quot;Security Read Feature Rows&quot;
+			&quot;Security Program Feature Rows&quot;
+			&quot;Security Program Password Key&quot;
+			&quot;Security Program Password Key with Lock&quot;
+			&quot;Security Erase Feature Row with Password Key&quot;
+			&quot;Security Read Status Register&quot;
+			&quot;Security Display TraceID&quot;
+			
+			&quot;Security NVCM EPV with Password&quot;
+			&quot;Security NVCM Program with Password&quot;
+			&quot;Security NVCM Verify with Password&quot;
+			&quot;Security NVCM Erase with Password&quot;			
+			&quot;Security Fast Program with Password&quot;
+			&quot;Security SRAM EPV with Password&quot;
+			&quot;Security SRAM Verify with Password&quot;
+			&quot;Security SRAM Erase with Password&quot;
+			&quot;Security XSRAM SEI Fast Program with Password&quot;
+			&quot;Security XSRAM Verify with Password&quot;
+			
+			&quot;Security EPV with Password Key Option&quot;
+			&quot;Security EPV with my_ASSP, Password Key Option&quot;
+			&quot;Security EPV with OTP Option&quot;
+			&quot;Security EPVS with OTP Option&quot;
+			&quot;Security EPV with Full OTP Option&quot;
+			&quot;Security EPVS with Full OTP Option&quot;
+			
+			
+			
+			&quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Background Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Background Erase,Program&quot;
+			&quot;SPI Flash Verify ID&quot;
+			&quot;SPI Flash Background Verify ID&quot;
+	    	&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Background Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Background Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Background Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;SPI Flash Bypass&quot;
+	    	&quot;Scan SPI Flash Device&quot;
+
+	    	&quot;Slave SPI Erase,Program,Verify&quot;
+	    	&quot;Slave SPI Fast Configuration&quot;
+	    	&quot;Slave SPI Erase,Program,Verify,Secure&quot;
+	    	&quot;Slave SPI Erase Only&quot;			
+	    	&quot;Slave SPI Verify Only&quot;
+			&quot;Slave SPI Verify ID&quot;
+			&quot;Slave SPI Display ID&quot;
+			&quot;Slave SPI Verify USERCODE&quot;
+			&quot;Slave SPI Display USERCODE&quot;
+			&quot;Slave SPI Read and Save&quot;
+			&quot;Slave SPI Read Status Register&quot;
+			&quot;Slave SPI Background SEI Fast Program&quot;										    	
+			&quot;Slave SPI Refresh&quot;
+			&quot;Slave SPI Erase,Program,Verify with Password&quot;
+	    	&quot;Slave SPI Fast Configuration with Password&quot;
+	    	&quot;Slave SPI Verify Only with Password&quot;
+	    	&quot;Slave SPI Erase Only with Password&quot;
+
+	    	&quot;JTAGI2C Erase,Program,Verify&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify,Feature&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify,Feature,Secure&quot;							
+	    	&quot;JTAGI2C Fast Configuration&quot;	    	
+	    	&quot;JTAGI2C Program&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify,Secure&quot;
+	    	&quot;JTAGI2C Erase Only&quot;			
+	    	&quot;JTAGI2C Verify Only&quot;
+			&quot;JTAGI2C Verify ID&quot;
+			&quot;JTAGI2C Display ID&quot;
+			&quot;JTAGI2C Program Feature Rows&quot;
+			&quot;JTAGI2C Recovery Erase Only&quot;
+			&quot;JTAGI2C Refresh&quot;
+<!--	    	&quot;JTAGI2C Program Password Key&quot;-->
+<!--			&quot;JTAGI2C Program Password Key with Lock&quot;-->
+<!--			&quot;JTAGI2C Erase Feature Row with Password Key&quot;-->
+<!--			&quot;JTAGI2C EPV with Password Key Option&quot;-->
+<!--			&quot;JTAGI2C EPV with my_ASSP, Password Key Option&quot;-->
+			&quot;JTAGI2C Erase,Program,Verify with Password&quot;
+	    	&quot;JTAGI2C Fast Configuration with Password&quot;
+	    	&quot;JTAGI2C Verify Only with Password&quot;
+	    	&quot;JTAGI2C Erase Only with Password&quot;
+
+	    	&quot;I2C Erase,Program,Verify&quot;
+	    	&quot;I2C Erase,Program,Verify,Feature&quot;
+	    	&quot;I2C Erase,Program,Verify,Feature,Secure&quot;							
+	    	&quot;I2C Fast Configuration&quot;
+	    	&quot;I2C Program&quot;
+	    	&quot;I2C Erase,Program,Verify,Secure&quot;
+	    	&quot;I2C Erase Only&quot;			
+	    	&quot;I2C Verify Only&quot;
+			&quot;I2C Verify ID&quot;
+			&quot;I2C Display ID&quot;
+			&quot;I2C Program Feature Rows&quot;
+			&quot;I2C Recovery Erase Only&quot;
+			&quot;I2C Refresh&quot; 
+			&quot;I2C Program Password Key&quot;
+			&quot;I2C Program Password Key with Lock&quot;
+			&quot;I2C Erase Feature Row with Password Key&quot;
+			&quot;I2C EPV with Password Key Option&quot;
+			&quot;I2C EPV with my_ASSP Option&quot;
+			&quot;I2C EPV with my_ASSP, Password Key Option&quot;	    
+			&quot;I2C Erase,Program,Verify with Password&quot;
+	    	&quot;I2C Fast Configuration with Password&quot;
+	    	&quot;I2C Verify Only with Password&quot;
+	    	&quot;I2C Erase Only with Password&quot;			    						
+	    	
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0xE0</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed;*.isc"/>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <BitstreamModelTemplate>XO2 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;NVCM;SRAM;XSRAM;SECKEYS;SECURITY;SECPRODUCT;SPI;SLAVESPI;I2C;</Programming_Mode_Control>     	
+    </Family>   
+    <Family name="MachXO3LF">
+       <FamilyAliasName>MachXO3LF-ES</FamilyAliasName>
+        <Device name="LCMXO3LF-640E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-640E </CodeName>
+            <FullName> LCMXO3LF-640E </FullName>
+            <AliasName> LCMXO3LF-640E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12B2043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1080 </ColWidth>
+            <RowWidth> 333 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  65536 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 343936 </TotalFuses> 
+            <ExternalASC> 2 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>208</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-640E </PON>
+                <AliasPON> LCMXO3LF-640E-ES </AliasPON>
+                <JDFFile> lcmxo3lf_640e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LCMXO3LF-640E-XXMG121 </PON>
+                <AliasPON> LCMXO3LF-640E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3lf_640e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                 <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;330;330;330;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;844;840;838;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>330</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>920</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3LF-1300E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-1300E </CodeName>
+            <FullName> LCMXO3LF-1300E </FullName>
+            <AliasName> LCMXO3LF-1300E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612B2043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1080 </ColWidth>
+            <RowWidth> 333 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  65536 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 343936 </TotalFuses> 
+            <ExternalASC> 4 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>208</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-1300E </PON>
+                <AliasPON> LCMXO3LF-1300E-ES </AliasPON>
+                <JDFFile> lcmxo3lf_1300e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LCMXO3LF-1300E-XXMG121 </PON>
+                <AliasPON> LCMXO3LF-1300E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3lf_1300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 36-ball WLCSP </Type>
+                <PON> LCMXO3LF-1300E-XXUWG36 </PON>
+                <AliasPON> LCMXO3LF-1300E-XXUWG36 </AliasPON>
+                <JDFFile> lcmxo3lf_1300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;330;330;330;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;844;840;838;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>330</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>920</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LAMXO3LF-1300E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAMXO3LF-1300E </CodeName>
+            <FullName> LAMXO3LF-1300E </FullName>
+            <AliasName> LAMXO3LF-1300E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612B2043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1080 </ColWidth>
+            <RowWidth> 333 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  65536 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 343936 </TotalFuses> 
+            <ExternalASC> 4 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>208</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO3LF-1300E </PON>
+                <AliasPON> LAMXO3LF-1300E-ES </AliasPON>
+                <JDFFile> lcmxo3lf_1300e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LAMXO3LF-1300E-XXMG121 </PON>
+                <AliasPON> LAMXO3LF-1300E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3lf_1300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 36-ball WLCSP </Type>
+                <PON> LAMXO3LF-1300E-XXUWG36 </PON>
+                <AliasPON> LAMXO3LF-1300E-XXUWG36 </AliasPON>
+                <JDFFile> lcmxo3lf_1300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;330;330;330;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;844;840;838;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>330</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>920</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3LF-1300E-MG256">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-1300E-MG256 </CodeName>
+            <FullName> LCMXO3LF-1300E-MG256 </FullName>
+            <AliasName> LCMXO3LF-1300E-MG256_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12B3043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 4 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-1300E-MG256 </PON>
+                <AliasPON> LCMXO3LF-1300E-MG256-ES </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball csfBGA</Type>
+                <PON> LCMXO3LF-1300E-5MG256 </PON>
+                <AliasPON> LCMXO3LF-1300E-5CSFBGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball csfBGA S6</Type>
+                <PON> LCMXO3LF-1300E-6MG256 </PON>
+                <AliasPON> LCMXO3LF-1300E-6CSFBGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>	
+            <Package>
+                <Type> 256-ball caBGA</Type>
+                <PON> LCMXO3LF-1300E-5BG256 </PON>
+                <AliasPON> LCMXO3LF-1300E-5CABGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>	
+            <Package>
+                <Type> 256-ball caBGA S6</Type>
+                <PON> LCMXO3LF-1300E-6BG256 </PON>
+                <AliasPON> LCMXO3LF-1300E-6CABGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>			
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+               <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LAMXO3LF-1300E-MG256">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAMXO3LF-1300E-MG256 </CodeName>
+            <FullName> LAMXO3LF-1300E-MG256 </FullName>
+            <AliasName> LAMXO3LF-1300E-MG256_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12B3043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 4 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO3LF-1300E-MG256 </PON>
+                <AliasPON> LAMXO3LF-1300E-MG256-ES </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball csfBGA</Type>
+                <PON> LAMXO3LF-1300E-5MG256 </PON>
+                <AliasPON> LAMXO3LF-1300E-5CSFBGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball csfBGA S6</Type>
+                <PON> LAMXO3LF-1300E-6MG256 </PON>
+                <AliasPON> LAMXO3LF-1300E-6CSFBGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>	
+            <Package>
+                <Type> 256-ball caBGA</Type>
+                <PON> LAMXO3LF-1300E-5BG256 </PON>
+                <AliasPON> LAMXO3LF-1300E-5CABGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>	
+            <Package>
+                <Type> 256-ball caBGA S6</Type>
+                <PON> LAMXO3LF-1300E-6BG256 </PON>
+                <AliasPON> LAMXO3LF-1300E-6CABGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>			
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+               <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3LF-2100E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-2100E </CodeName>
+            <FullName> LCMXO3LF-2100E </FullName>
+            <AliasName> LCMXO3LF-2100E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612B3043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 6 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-2100E </PON>
+                <AliasPON> LCMXO3LF-2100E-ES </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball csfBGA </Type>
+                <PON> LCMXO3LF-2100E-XXMG256 </PON>
+                <AliasPON> LCMXO3LF-2100E-XXMG256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LCMXO3LF-2100E-XXMG121 </PON>
+                <AliasPON> LCMXO3LF-2100E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 49-ball WLCSP </Type>
+                <PON> LCMXO3LF-2100E-XXUWG49 </PON>
+                <AliasPON> LCMXO3LF-2100E-XXUWG49 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>			
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LAMXO3LF-2100E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAMXO3LF-2100E </CodeName>
+            <FullName> LAMXO3LF-2100E </FullName>
+            <AliasName> LAMXO3LF-2100E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612B3043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 6 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO3LF-2100E </PON>
+                <AliasPON> LAMXO3LF-2100E-ES </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball csfBGA </Type>
+                <PON> LAMXO3LF-2100E-XXMG256 </PON>
+                <AliasPON> LAMXO3LF-2100E-XXMG256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LAMXO3LF-2100E-XXMG121 </PON>
+                <AliasPON> LAMXO3LF-2100E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 49-ball WLCSP </Type>
+                <PON> LAMXO3LF-2100E-XXUWG49 </PON>
+                <AliasPON> LAMXO3LF-2100E-XXUWG49 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>			
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3LF-2100E-MG324">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-2100E-MG324 </CodeName>
+            <FullName> LCMXO3LF-2100E-MG324 </FullName>
+            <AliasName> LCMXO3LF-2100E-MG324_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12B4043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <ExternalASC> 6 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-2100E-MG324 </PON>
+                <AliasPON> LCMXO3LF-2100E-MG324-ES </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 324-ball csfBGA</Type>
+                <PON> LCMXO3LF-2100E-5MG324 </PON>
+                <AliasPON> LCMXO3LF-2100E-5CSFBGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 324-ball csfBGA S6</Type>
+                <PON> LCMXO3LF-2100E-6MG324 </PON>
+                <AliasPON> LCMXO3LF-2100E-6CSFBGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA</Type>
+                <PON> LCMXO3LF-2100E-5BG256 </PON>
+                <AliasPON> LCMXO3LF-2100E-5CABGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>	
+            <Package>
+                <Type> 256-ball caBGA S6</Type>
+                <PON> LCMXO3LF-2100E-6BG256 </PON>
+                <AliasPON> LCMXO3LF-2100E-6CABGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>	
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LAMXO3LF-2100E-MG324">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAMXO3LF-2100E-MG324 </CodeName>
+            <FullName> LAMXO3LF-2100E-MG324 </FullName>
+            <AliasName> LAMXO3LF-2100E-MG324_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12B4043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <ExternalASC> 6 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO3LF-2100E-MG324 </PON>
+                <AliasPON> LAMXO3LF-2100E-MG324-ES </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 324-ball csfBGA</Type>
+                <PON> LAMXO3LF-2100E-5MG324 </PON>
+                <AliasPON> LAMXO3LF-2100E-5CSFBGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 324-ball csfBGA S6</Type>
+                <PON> LAMXO3LF-2100E-6MG324 </PON>
+                <AliasPON> LAMXO3LF-2100E-6CSFBGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA</Type>
+                <PON> LAMXO3LF-2100E-5BG324 </PON>
+                <AliasPON> LAMXO3LF-2100E-5CABGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA S6</Type>
+                <PON> LAMXO3LF-2100E-6BG324 </PON>
+                <AliasPON> LAMXO3LF-2100E-6CABGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA</Type>
+                <PON> LAMXO3LF-2100E-5BG256 </PON>
+                <AliasPON> LAMXO3LF-2100E-5CABGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>	
+            <Package>
+                <Type> 256-ball caBGA S6</Type>
+                <PON> LAMXO3LF-2100E-6BG256 </PON>
+                <AliasPON> LAMXO3LF-2100E-6CABGA256 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>	
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3LF-4300E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-4300E </CodeName>
+            <FullName> LCMXO3LF-4300E </FullName>
+            <AliasName> LCMXO3LF-4300E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612B4043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>          
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>   
+            <ExternalASC> 8 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-4300E </PON>
+                <AliasPON> LCMXO3LF-4300E-ES </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 81-ball WLCSP </Type>
+                <PON> LCMXO3LF-4300E-XXUWG81 </PON>
+                <AliasPON> LCMXO3LF-4300E-XXUWG81 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LCMXO3LF-4300E-XXMG121 </PON>
+                <AliasPON> LCMXO3LF-4300E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball csfBGA </Type>
+                <PON> LCMXO3LF-4300E-XXMG256 </PON>
+                <AliasPON> LCMXO3LF-4300E-XXMG256 </AliasPON>
+                <JDFFile> lcmxo3le_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 324-ball csfBGA </Type>
+                <PON> LCMXO3LF-4300E-XXMG324 </PON>
+                <AliasPON> LCMXO3LF-4300E-XXMG324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LAMXO3LF-4300E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAMXO3LF-4300E </CodeName>
+            <FullName> LAMXO3LF-4300E </FullName>
+            <AliasName> LAMXO3LF-4300E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612B4043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>          
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>   
+            <ExternalASC> 8 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO3LF-4300E </PON>
+                <AliasPON> LAMXO3LF-4300E-ES </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 81-ball WLCSP </Type>
+                <PON> LAMXO3LF-4300E-XXUWG81 </PON>
+                <AliasPON> LAMXO3LF-4300E-XXUWG81 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 121-ball csfBGA </Type>
+                <PON> LAMXO3LF-4300E-XXMG121 </PON>
+                <AliasPON> LAMXO3LF-4300E-XXMG121 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball csfBGA </Type>
+                <PON> LAMXO3LF-4300E-XXMG256 </PON>
+                <AliasPON> LAMXO3LF-4300E-XXMG256 </AliasPON>
+                <JDFFile> lcmxo3le_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 324-ball csfBGA </Type>
+                <PON> LAMXO3LF-4300E-XXMG324 </PON>
+                <AliasPON> LAMXO3LF-4300E-XXMG324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3LF-6900E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-6900E </CodeName>
+            <FullName> LCMXO3LF-6900E </FullName>
+            <AliasName> LCMXO3LF-6900E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612B5043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>      
+            <ExternalASC> 8 </ExternalASC>                  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-6900E </PON>
+                <AliasPON> LCMXO3LF-6900E-ES </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 256-ball csfBGA </Type>
+                <PON> LCMXO3LF-6900E-XXMG256 </PON>
+                <AliasPON> LCMXO3LF-6900E-XXMG256 </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>            
+            <Package>
+                <Type> 324-ball csfBGA </Type>
+                <PON> LCMXO3LF-6900E-XXMG324 </PON>
+                <AliasPON> LCMXO3LF-6900E-XXMG324 </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device> 
+        <Device name="LCMXO3LF-9400E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-9400E </CodeName>
+            <FullName> LCMXO3LF-9400E </FullName>
+            <AliasName> LCMXO3LF-9400E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612B6043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 2376 </ColWidth>
+            <RowWidth> 888 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  458752 </EColumn>         
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 2063872 </TotalFuses>
+            <PWP>  10 </PWP>
+            <PWE>  4500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>760</BScan_Length>   
+            <ExternalASC> 8 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-9400E </PON>
+                <AliasPON> LCMXO3LF-9400E-ES </AliasPON>
+                <JDFFile> lcmxo3lf_9400.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 256-ball csfBGA </Type>
+                <PON> LCMXO3LF-9400E-XXMG256C </PON>
+                <AliasPON> LCMXO3LF-9400E-XXMG256CES </AliasPON>
+                <JDFFile> lcmxo3lf_9400.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            </Voltage_Control>
+            <Persistent_fuse> 
+	            <Persistent_fuse_Address>;881;881;881;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;2140;2136;2134;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>881</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>2216</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done>
+        </Device>        
+        <Device name="LCMXO3LF-1300C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-1300C </CodeName>
+            <FullName> LCMXO3LF-1300C </FullName>
+            <AliasName> LCMXO3LF-1300C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12BB043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 4 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-1300C </PON>
+                <AliasPON> LCMXO3LF-1300C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO3LF-1300C-XXBG256 </PON>
+                <AliasPON> LCMXO3LF-1300C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+		</Device>
+		<Device name="LAMXO3LF-1300C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAMXO3LF-1300C </CodeName>
+            <FullName> LAMXO3LF-1300C </FullName>
+            <AliasName> LAMXO3LF-1300C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12BB043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 4 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO3LF-1300C </PON>
+                <AliasPON> LAMXO3LF-1300C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LAMXO3LF-1300C-XXBG256 </PON>
+                <AliasPON> LAMXO3LF-1300C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+		</Device>
+        <Device name="LCMXO3LF-2100C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-2100C </CodeName>
+            <FullName> LCMXO3LF-2100C </FullName>
+            <AliasName> LCMXO3LF-2100C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612BB043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 6 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-2100C </PON>
+                <AliasPON> LCMXO3LF-2100C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO3LF-2100C-XXBG256 </PON>
+                <AliasPON> LCMXO3LF-2100C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LAMXO3LF-2100C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAMXO3LF-2100C </CodeName>
+            <FullName> LAMXO3LF-2100C </FullName>
+            <AliasName> LAMXO3LF-2100C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612BB043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <ExternalASC> 6 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO3LF-2100C </PON>
+                <AliasPON> LAMXO3LF-2100C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LAMXO3LF-2100C-XXBG256 </PON>
+                <AliasPON> LAMXO3LF-2100C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3lf_2100e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3LF-2100C-BG324">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-2100C-BG324 </CodeName>
+            <FullName> LCMXO3LF-2100C-BG324 </FullName>
+            <AliasName> LCMXO3LF-2100C-BG324_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12BC043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <ExternalASC> 6 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-2100C </PON>
+                <AliasPON> LCMXO3LF-2100C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 324-ball csBGA</Type>
+                <PON> LCMXO3LF-2100C-5BG324 </PON>
+                <AliasPON> LCMXO3LF-2100C-5CABGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B324-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA S6</Type>
+                <PON> LCMXO3LF-2100C-6BG324 </PON>
+                <AliasPON> LCMXO3LF-2100C-6CABGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B324-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball csfBGA</Type>
+                <PON> LCMXO3LF-2100C-5MG324 </PON>
+                <AliasPON> LCMXO3LF-2100C-5CSFBGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 324-ball csfBGA S6</Type>
+                <PON> LCMXO3LF-2100C-6MG324 </PON>
+                <AliasPON> LCMXO3LF-2100C-6CSFBGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LAMXO3LF-2100C-BG324">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAMXO3LF-2100C-BG324 </CodeName>
+            <FullName> LAMXO3LF-2100C-BG324 </FullName>
+            <AliasName> LAMXO3LF-2100C-BG324_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12BC043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <ExternalASC> 6 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO3LF-2100C </PON>
+                <AliasPON> LAMXO3LF-2100C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 324-ball csBGA</Type>
+                <PON> LAMXO3LF-2100C-5BG324 </PON>
+                <AliasPON> LAMXO3LF-2100C-5CABGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B324-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA S6</Type>
+                <PON> LAMXO3LF-2100C-6BG324 </PON>
+                <AliasPON> LAMXO3LF-2100C-6CABGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B324-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball csfBGA</Type>
+                <PON> LAMXO3LF-2100C-5MG324 </PON>
+                <AliasPON> LAMXO3LF-2100C-5CSFBGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 324-ball csfBGA S6</Type>
+                <PON> LAMXO3LF-2100C-6MG324 </PON>
+                <AliasPON> LAMXO3LF-2100C-6CSFBGA324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO3LF-4300C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-4300C </CodeName>
+            <FullName> LCMXO3LF-4300C </FullName>
+            <AliasName> LCMXO3LF-4300C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612BC043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <ExternalASC> 8 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-4300C </PON>
+                <AliasPON> LCMXO3LF-4300C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO3LF-4300C-XXBG256 </PON>
+                <AliasPON> LCMXO3LF-4300C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA </Type>
+                <PON> LCMXO3LF-4300C-XXBG324 </PON>
+                <AliasPON> LCMXO3LF-4300C-XXBG324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device> 
+        <Device name="LAMXO3LF-4300C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAMXO3LF-4300C </CodeName>
+            <FullName> LAMXO3LF-4300C </FullName>
+            <AliasName> LAMXO3LF-4300C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612BC043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <ExternalASC> 8 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO3LF-4300C </PON>
+                <AliasPON> LAMXO3LF-4300C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LAMXO3LF-4300C-XXBG256 </PON>
+                <AliasPON> LAMXO3LF-4300C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA </Type>
+                <PON> LAMXO3LF-4300C-XXBG324 </PON>
+                <AliasPON> LAMXO3LF-4300C-XXBG324 </AliasPON>
+                <JDFFile> lcmxo3lf_4300e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device> 
+        <Device name="LCMXO3LF-4300C-BG400">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-4300C-BG400 </CodeName>
+            <FullName> LCMXO3LF-4300C-BG400 </FullName>
+            <AliasName> LCMXO3LF-4300C-BG400_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12BD043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <ExternalASC> 8 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-4300C </PON>
+                <AliasPON> LCMXO3LF-4300C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                   
+            <Package>
+                <Type> 400-ball caBGA</Type>
+                <PON> LCMXO3LF-4300C-5BG400 </PON>
+                <AliasPON> LCMXO3LF-4300C-5CABGA400 </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B400-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 400-ball caBGA S6</Type>
+                <PON> LCMXO3LF-4300C-6BG400</PON>
+                <AliasPON> LCMXO3LF-4300C-6CABGA400 </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B400-LCMXO3"/>
+            </Package>			
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device> 
+        <Device name="LAMXO3LF-4300C-BG400">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAMXO3LF-4300C-BG400 </CodeName>
+            <FullName> LAMXO3LF-4300C-BG400 </FullName>
+            <AliasName> LAMXO3LF-4300C-BG400_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0xE12BD043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <ExternalASC> 8 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO3LF-4300C </PON>
+                <AliasPON> LAMXO3LF-4300C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                   
+            <Package>
+                <Type> 400-ball caBGA</Type>
+                <PON> LAMXO3LF-4300C-5BG400 </PON>
+                <AliasPON> LAMXO3LF-4300C-5CABGA400 </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B400-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 400-ball caBGA S6</Type>
+                <PON> LAMXO3LF-4300C-6BG400</PON>
+                <AliasPON> LAMXO3LF-4300C-6CABGA400 </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B400-LCMXO3"/>
+            </Package>			
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>   
+        <Device name="LCMXO3LF-6900C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-6900C </CodeName>
+            <FullName> LCMXO3LF-6900C </FullName>
+            <AliasName> LCMXO3LF-6900C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612BD043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <ExternalASC> 8 </ExternalASC>
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-6900C </PON>
+                <AliasPON> LCMXO3LF-6900C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                   
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO3LF-6900C-XXBGA256 </PON>
+                <AliasPON> LCMXO3LF-6900C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 324-ball caBGA </Type>
+                <PON> LCMXO3LF-6900C-XXBG324 </PON>
+                <AliasPON> LCMXO3LF-6900C-XXBG256 </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B324-LCMXO3"/>
+            </Package>
+            <Package>
+                <Type> 400-ball caBGA </Type>
+                <PON> LCMXO3LF-6900C-XXBG400 </PON>
+                <AliasPON> LCMXO3LF-6900C-XXBG400 </AliasPON>
+                <JDFFile> lcmxo3lf_6900e.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B400-LCMXO3"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>   
+        <Device name="LCMXO3LF-9400C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO3LF-9400C </CodeName>
+            <FullName> LCMXO3LF-9400C </FullName>
+            <AliasName> LCMXO3LF-9400C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO3LF.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO3LF.svp"
+                         value="0x07"/>
+            <JtagID>0x612BE043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 2376 </ColWidth>
+            <RowWidth> 888 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  458752 </EColumn>         
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 2063872 </TotalFuses>
+            <PWP>  10 </PWP>
+            <PWE>  4500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>760</BScan_Length> 
+            <ExternalASC> 8 </ExternalASC>                       
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO3LF-9400C </PON>
+                <AliasPON> LCMXO3LF-9400C-ES </AliasPON>
+                <JDFFile> lcmxo3lf_9400.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO3LF-9400C-XXBG256 </PON>
+                <AliasPON> LCMXO3LF-9400C-XXBG256ES </AliasPON>
+                <JDFFile> lcmxo3lf_9400.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 400-ball caBGA </Type>
+                <PON> LCMXO3LF-9400C-XXBG400 </PON>
+                <AliasPON> LCMXO3LF-9400C-XXBG400ES </AliasPON>
+                <JDFFile> lcmxo3lf_9400.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 484-ball caBGA </Type>
+                <PON> LCMXO3LF-9400C-XXBG484 </PON>
+                <AliasPON> LCMXO3LF-9400C-XXBG484ES </AliasPON>
+                <JDFFile> lcmxo3lf_9400.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            </Voltage_Control>
+            <Persistent_fuse> 
+	            <Persistent_fuse_Address>;881;881;881;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;2140;2136;2134;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>881</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>2216</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done>
+        </Device> 
+        <Operation>
+        	&quot;FLASH Erase,Program,Verify&quot;
+        	&quot;FLASH Program,Verify,skip Erase&quot;        	
+        	&quot;FLASH Erase,Program,Verify,Secure&quot;
+        	&quot;FLASH Erase,Program,Verify,Secure Plus&quot;
+        	&quot;FLASH Program&quot;
+        	&quot;FLASH Program,skip Erase&quot;
+        	&quot;FLASH CFG Erase,Program,Verify&quot;
+        	&quot;FLASH CFG Verify Only&quot;
+        	&quot;FLASH CFG and UFM Erase,Program,Verify&quot;
+        	&quot;FLASH Verify Only&quot;
+			&quot;FLASH Erase Only&quot;
+			&quot;FLASH Erase CFG Only&quot;
+			&quot;FLASH Erase CFG and UFM Only&quot;
+			&quot;FLASH Verify ID&quot;
+			&quot;FLASH Display ID&quot;	
+	    	&quot;FLASH Display USERCODE&quot;
+			&quot;FLASH Read and Save&quot;
+			&quot;FLASH Calculate Checksum&quot;
+			&quot;FLASH UFM Program,Verify&quot;
+			&quot;FLASH UFM Erase&quot;			
+			&quot;FLASH Verify UFM&quot;			
+<!--			&quot;FLASH UFM Read and Program&quot;-->
+			&quot;FLASH Read Status Register&quot;			
+			&quot;FLASH Secure Device&quot;
+			&quot;FLASH Secure Plus&quot;
+			&quot;FLASH Refresh&quot;
+			&quot;FLASH Verify Feature Rows&quot;
+			&quot;FLASH Program Feature Rows&quot;
+			&quot;FLASH Bypass&quot;
+			
+			
+			&quot;XFLASH Erase,Program,Verify&quot;
+			&quot;XFLASH Erase,Program,Verify without DONE&quot;
+        	&quot;XFLASH Erase,Program,Verify,Secure&quot;
+        	&quot;XFLASH Erase,Program,Verify,Secure Plus&quot;
+        	&quot;XFLASH Erase,Program,Verify,Refresh&quot;
+        	&quot;XFLASH Verify Feature Rows&quot;
+			&quot;XFLASH Program Feature Rows&quot;
+			&quot;XFLASH Erase,Program,Verify,Feature&quot;
+			&quot;XFLASH Erase,Program,Verify,Feature and TransFR&quot;
+			&quot;XFLASH CFG Erase,Program,Verify&quot;
+			&quot;XFLASH CFG Verify Only&quot;
+			&quot;XFLASH CFG Erase,Program,Verify without DONE&quot;
+        	&quot;XFLASH Program and TransFR&quot;
+        	&quot;XFLASH Program and Clamping IO&quot;
+        	&quot;XFLASH TransFR&quot;
+        	&quot;XFLASH Refresh with DONE&quot;
+        	&quot;XFLASH Clamping IO&quot;
+        	&quot;XFLASH Erase Only&quot;	
+        	&quot;XFLASH Erase CFG Only&quot;
+        	&quot;XFLASH Erase DONE&quot;		
+        	&quot;XFLASH Verify Only&quot;
+			&quot;XFLASH Read and Save&quot;
+			&quot;XFLASH Calculate Checksum&quot;
+			&quot;XFLASH UFM Program,Verify&quot;
+			&quot;XFLASH UFM Erase&quot;
+<!--			&quot;XFLASH UFM Read and Program&quot;-->
+			&quot;XFLASH Read Status Register&quot;
+			&quot;XFLASH Display USERCODE&quot;
+			&quot;XFLASH Secure Device&quot;
+			&quot;XFLASH Secure Plus&quot;
+			&quot;XFLASH Program DONE&quot;
+			&quot;XFLASH Bypass&quot;
+            
+            &quot;SRAM Fast Program&quot;
+            &quot;SRAM Erase,Program,Verify&quot;
+            &quot;SRAM Erase Only&quot;                        
+            &quot;SRAM Verify Only&quot;
+            &quot;SRAM Verify ID&quot;
+            &quot;SRAM Display ID&quot;
+            &quot;SRAM Display USERCODE&quot;
+            &quot;SRAM Read and Save&quot;
+            &quot;SRAM Display Control Register0&quot;
+			&quot;SRAM Program Control Register0&quot;
+            &quot;SRAM Read Status Register&quot;
+            &quot;SRAM Refresh&quot;
+            &quot;SRAM Bypass&quot;
+
+			&quot;XSRAM SEI Fast Program&quot;
+			&quot;XSRAM Verify Only&quot;
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Verify USERCODE&quot;
+            &quot;XSRAM Display USERCODE&quot;                                   
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Read Status Register&quot; 
+            &quot;XSRAM Refresh&quot;
+            &quot;XSRAM Bypass&quot;						
+			
+			&quot;Security Read Feature Rows&quot;
+<!--			&quot;Security Read Feature Row with Password Key&quot;-->
+			&quot;Security Program Feature Rows&quot;
+			&quot;Security Program Password Key&quot;
+			&quot;Security Program Password Key with Lock&quot;
+			&quot;Security Erase Feature Row with Password Key&quot;
+			&quot;Security Read Status Register&quot;
+			&quot;Security Display TraceID&quot;	
+			&quot;Security Flash EPV with Password&quot;
+			&quot;Security Flash Program with Password&quot;
+			&quot;Security Flash Verify with Password&quot;
+			&quot;Security Flash Erase with Password&quot;
+			&quot;Security XFlash EPV with Password&quot;
+			&quot;Security XFlash Program with Password&quot;
+			&quot;Security XFlash Verify with Password&quot;
+			&quot;Security XFlash Erase with Password&quot;
+			&quot;Security Fast Program with Password&quot;
+			&quot;Security SRAM EPV with Password&quot;
+			&quot;Security SRAM Verify with Password&quot;
+			&quot;Security SRAM Erase with Password&quot;
+			&quot;Security XSRAM SEI Fast Program with Password&quot;
+			&quot;Security XSRAM Verify with Password&quot;
+			
+			
+			&quot;Security EPV with Password Key Option&quot;
+			&quot;Security EPV with my_ASSP, Password Key Option&quot;
+			&quot;Security EPV with my_ASSP Option&quot;
+			&quot;Security EPVS with my_ASSP Option&quot;
+			&quot;Security EPV with OTP Option&quot;
+			&quot;Security EPVS with OTP Option&quot;
+			&quot;Security EPV with Full OTP Option&quot;
+			&quot;Security EPVS with Full OTP Option&quot;
+			
+			&quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Background Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Background Erase,Program&quot;
+			&quot;SPI Flash Verify ID&quot;
+			&quot;SPI Flash Background Verify ID&quot;
+	    	&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Background Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Background Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Background Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;SPI Flash Bypass&quot;
+	    	&quot;Scan SPI Flash Device&quot;
+	    	
+	    	&quot;Slave SPI Erase,Program,Verify&quot;
+	    	&quot;Slave SPI Fast Configuration&quot;
+	    	&quot;Slave SPI Erase,Program,Verify,Secure&quot;
+	    	&quot;Slave SPI Erase,Program,Verify,Secure Plus&quot;
+	    	&quot;Slave SPI CFG Erase,Program,Verify&quot;
+	    	&quot;Slave SPI CFG Verify Only&quot;
+	    	&quot;Slave SPI Erase Only&quot;			
+	    	&quot;Slave SPI Verify Only&quot;
+			&quot;Slave SPI Verify ID&quot;
+			&quot;Slave SPI Display ID&quot;
+			&quot;Slave SPI Verify USERCODE&quot;
+			&quot;Slave SPI Display USERCODE&quot;
+			&quot;Slave SPI Read and Save&quot;
+			&quot;Slave SPI Read Status Register&quot;
+			&quot;Slave SPI UFM Program,Verify&quot;
+			&quot;Slave SPI UFM Erase&quot;
+			&quot;Slave SPI Background Erase,Program,Verify&quot;
+	    	&quot;Slave SPI Background Erase,Program,Verify,Secure&quot;
+	    	&quot;Slave SPI Background Erase,Program,Verify,Secure Plus&quot;
+	    	&quot;Slave SPI Background Erase,Program&quot;
+	    	&quot;Slave SPI Background CFG Erase,Program,Verify&quot;
+	    	&quot;Slave SPI Background CFG Verify Only&quot;
+	    	&quot;Slave SPI Background Program Feature Rows&quot;
+			&quot;Slave SPI Background Erase,Program,Verify,Feature&quot;
+	    	&quot;Slave SPI Background Erase Only&quot;
+	    	&quot;Slave SPI Background Verify Only&quot;
+	    	&quot;Slave SPI Background SEI Fast Program&quot;										    	
+	    	&quot;Slave SPI Refresh&quot;
+	    	&quot;Slave SPI Erase,Program,Verify with Password&quot;
+	    	&quot;Slave SPI Fast Configuration with Password&quot;
+	    	&quot;Slave SPI Verify Only with Password&quot;
+	    	&quot;Slave SPI Erase Only with Password&quot;
+	    	
+	    	&quot;I2C Erase,Program,Verify&quot;
+	    	&quot;I2C Program&quot;
+	    	&quot;I2C Erase,Program,Verify,Secure&quot;
+	    	&quot;I2C Erase,Program,Verify,Secure Plus&quot;
+	    	&quot;I2C Fast Configuration&quot;
+	    	&quot;I2C Erase Only&quot;			
+	    	&quot;I2C Verify Only&quot;
+			&quot;I2C Verify ID&quot;
+			&quot;I2C Display ID&quot;
+			&quot;I2C Program Feature Rows&quot;
+			&quot;I2C Recovery Erase Only&quot;
+			&quot;I2C Erase,Program,Verify,Feature&quot;	
+			&quot;I2C Erase,Program,Verify,Feature,Secure&quot;	
+			&quot;I2C Erase,Program,Verify,Feature,Secure Plus&quot;		
+			&quot;I2C Background Erase,Program,Verify&quot;	 
+			&quot;I2C Background Erase,Program,Verify,Secure&quot;
+	    	&quot;I2C Background Erase,Program,Verify,Secure Plus&quot; 
+	    	&quot;I2C Background Program&quot; 
+			&quot;I2C Background Erase Only&quot;
+	    	&quot;I2C Background Verify Only&quot;
+	    	&quot;I2C Background Program Feature Rows&quot;
+	    	&quot;I2C Refresh&quot; 		  
+	    	&quot;I2C Program Password Key&quot;
+			&quot;I2C Program Password Key with Lock&quot;
+			&quot;I2C Erase Feature Row with Password Key&quot;
+			&quot;I2C EPV with Password Key Option&quot;
+			&quot;I2C EPV with my_ASSP Option&quot;
+			&quot;I2C EPV with my_ASSP, Password Key Option&quot;
+	    	&quot;I2C Erase,Program,Verify with Password&quot;
+	    	&quot;I2C Fast Configuration with Password&quot;
+	    	&quot;I2C Verify Only with Password&quot;
+	    	&quot;I2C Erase Only with Password&quot;	  		
+			
+			&quot;JTAGI2C Erase,Program,Verify&quot;
+	    	&quot;JTAGI2C Program&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify,Secure&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify,Secure Plus&quot;
+	    	&quot;JTAGI2C Erase Only&quot;			
+	    	&quot;JTAGI2C Verify Only&quot;
+			&quot;JTAGI2C Verify ID&quot;
+			&quot;JTAGI2C Display ID&quot;
+			&quot;JTAGI2C Read Feature Rows&quot;
+			&quot;JTAGI2C Program Feature Rows&quot;
+			&quot;JTAGI2C Erase,Program,Verify,Feature&quot;
+			&quot;JTAGI2C Erase,Program,Verify,Feature,Secure&quot;	
+			&quot;JTAGI2C Erase,Program,Verify,Feature,Secure Plus&quot;
+			&quot;JTAGI2C Recovery Erase Only&quot;			
+			&quot;JTAGI2C Background Erase,Program,Verify&quot;	 
+			&quot;JTAGI2C Background Erase,Program,Verify,Secure&quot;
+	    	&quot;JTAGI2C Background Erase,Program,Verify,Secure Plus&quot; 
+	    	&quot;JTAGI2C Background Program&quot; 
+			&quot;JTAGI2C Background Erase Only&quot;
+	    	&quot;JTAGI2C Background Verify Only&quot;
+	    	&quot;JTAGI2C Background Program Feature Rows&quot;
+	    	&quot;JTAGI2C Refresh&quot;
+<!--	    	&quot;JTAGI2C Program Password Key&quot;-->
+<!--			&quot;JTAGI2C Program Password Key with Lock&quot;-->
+<!--			&quot;JTAGI2C Erase Feature Row with Password Key&quot;-->
+<!--			&quot;JTAGI2C EPV with Password Key Option&quot;-->
+			&quot;JTAGI2C EPV with my_ASSP Option&quot;
+			&quot;JTAGI2C EPV with my_ASSP, Password Key Option&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify with Password&quot;
+	    	&quot;JTAGI2C Fast Configuration with Password&quot;
+	    	&quot;JTAGI2C Verify Only with Password&quot;
+	    	&quot;JTAGI2C Erase Only with Password&quot;
+	    	
+	    	&quot;PTM Bypass&quot;
+			&quot;PTM Erase,Program,Verify&quot;
+        	&quot;PTM Program&quot;
+			&quot;PTM Erase Only&quot;	
+			&quot;PTM Verify Only&quot;
+	    	&quot;PTM Verify ID&quot;
+			&quot;PTM Read Status Register&quot;
+			
+	    	&quot;PTM Background Bypass&quot;
+	    	&quot;PTM Background Erase,Program,Verify&quot;
+	    	&quot;PTM Background Erase,Program,Verify,Refresh&quot;	    	
+	    	&quot;PTM Background Program,Verify and TransFR&quot;	
+        	&quot;PTM Background Erase Only&quot;	
+			&quot;PTM Background Verify Only&quot;
+	    	&quot;PTM Background Verify ID&quot;
+			&quot;PTM Background Program Feature Rows&quot;
+			
+	    	&quot;ASC Erase,Program,Verify&quot;
+	    	&quot;ASC Program&quot;
+			&quot;ASC Erase Only&quot;			
+	    	&quot;ASC Verify Only&quot; 
+	    	&quot;ASC Verify ID&quot;   
+	    	&quot;ASC Read and Save&quot;
+	    	&quot;ASC Calculate Data CRC&quot;
+	    	&quot;ASC Read Status Register&quot; 
+	    	&quot;ASC Read FaultLog Registers&quot;
+	    	&quot;ASC Read FaultLog Memory&quot;
+	    	&quot;ASC FaultLog Erase Only&quot;	    	
+	    	&quot;ASC Erase,Program,Verify,I2CSA&quot;
+	    	
+	    	
+	    	&quot;ASC Background Erase,Program,Verify&quot;
+	    	&quot;ASC Background Erase Only&quot;			
+	    	&quot;ASC Background Verify Only&quot; 
+	    	&quot;ASC Background Verify ID&quot;   
+	    	&quot;ASC Background Read and Save&quot;
+	    	&quot;ASC Background Calculate Data CRC&quot;
+	    	&quot;ASC Background Read Status Register&quot;-->
+	    	&quot;ASC Background Erase,Program,Verify,I2CSA&quot;
+	    	
+	    	&quot;I2CASC Erase,Program,Verify&quot;
+	    	&quot;I2CASC Erase Only&quot;			
+	    	&quot;I2CASC Verify Only&quot;
+	    	&quot;I2CASC Verify ID&quot;   
+	    	&quot;I2CASC Read and Save&quot;
+	    	&quot;I2CASC Calculate Data CRC&quot;
+	    	&quot;I2CASC Read Status Register&quot;  
+	    	&quot;I2CASC Background Erase,Program,Verify&quot;
+	    	&quot;I2CASC Background Erase Only&quot;			
+	    	&quot;I2CASC Background Verify Only&quot; 
+	    	&quot;I2CASC Background Verify ID&quot;   
+	    	&quot;I2CASC Background Read and Save&quot;
+	    	&quot;I2CASC Background Read Status Register&quot;
+	    	
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0xE0</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed;*.isc"/>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <BitstreamModelTemplate>XO2 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;FLASH;XFLASH;SRAM;XSRAM;SECKEYS;SECURITY;SECPRODUCT;SPI;SLAVESPI;I2C;Parallel Flash;PTM;PTM Background;</Programming_Mode_Control>
+    </Family>   	
+</ispXDF>

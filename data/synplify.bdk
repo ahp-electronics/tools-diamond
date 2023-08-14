@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="synplify">
+  <TaskDef id = "Task_Synthesis_Synplify" title="Synplify_Synthesis" lable="Synplify Pro"
+           depend_on_milestones="hdlgen" depend_on_properties="implementation.synthesis_hdls, implementation.RTL_Reveal, implementation.SDC">
+    <Target id ="target">
+	  <!-- 
+      <if condition = 'defined(implementation.Reveal)&amp;&amp;(implementation.Reveal.level=="rtl" || (!defined(implementation.Reveal.level) &amp;&amp; !implementation.is_mix_hdls &amp;&amp; implementation.synthesisable_srces_count &gt; 0))' cmd = "Cmd_Reveal_CmdGen"/>
+	  <if condition = 'defined(implementation.Reveal)&amp;&amp;(implementation.Reveal.level=="rtl" || (!defined(implementation.Reveal.level) &amp;&amp; !implementation.is_mix_hdls &amp;&amp; implementation.synthesisable_srces_count &gt; 0))' cmd = "Cmd_Reveal"/>
+      -->
+      <if condition = 'defined(implementation.Reveal)&amp;&amp;(implementation.synthesisable_srces_count &gt; 0)' cmd = "Cmd_Rtl_Reveal_CmdGen"/>
+	  <if condition = 'defined(implementation.Reveal)&amp;&amp;(implementation.synthesisable_srces_count &gt; 0)' cmd = "Cmd_Reveal"/>
+	  <Command using_def="Cmd_Cmdgen_Synplify" />
+      <Command using_def="Cmd_Synplify" />
+	  <!-- if condition = 'defined(implementation.Reveal)&amp;&amp;(implementation.Reveal.level=="rtl" || (!defined(implementation.Reveal.level) &amp;&amp; !implementation.is_mix_hdls &amp;&amp; implementation.synthesisable_srces_count &gt; 0))' cmd = "Cmd_Reveal_Clean"/ -->
+      <if condition = 'defined(implementation.Reveal)&amp;&amp;(implementation.synthesisable_srces_count &gt; 0)' cmd = "Cmd_Reveal_Clean"/>
+    </Target>
+    <Report using_def="Report_Synthesis" />
+  </TaskDef>
+  <CommandDef id="Cmd_Cmdgen_Synplify" type="CMD_TCL_SCRIPT_SOURCE">
+    <cmd_str>gen_synplify_tcl !Synthesis:REVEAL</cmd_str>
+    <scripts>syn_synplify.tcl</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_Synplify" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>synpwrap -msg -prj "${report_base}_synplify.tcl" -log "${report_base}.srf"</cmd_str>
+	<scripts>
+		<![CDATA[
+			proc synpwrap {args} {
+				set msg "synpwrap $args\n";
+				runtime_log $msg;
+				set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+				runtime_log $msg;
+				runtime_log "......\n";
+				runtime_log "......\n";
+			}
+		]]>
+	</scripts>
+  </CommandDef>
+  <ReportDef id="Report_PostSynSimFileVHD" value="$(report_base).vhm" />
+  <ReportDef id="Report_PostSynSimFileVlg" value="$(report_base).vm" />
+</BaliFlowDef>

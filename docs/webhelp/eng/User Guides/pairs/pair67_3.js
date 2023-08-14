@@ -1,0 +1,24 @@
+var pairs =
+{
+"reversing":{"pin":1,"view":1}
+,"pin":{"layout":1}
+,"layout":{"view":1,"reversing":1,"bottom":1}
+,"package":{"view":1}
+,"reverse":{"view":1,"pin":1}
+,"view":{"package":1,"device":1,"choose":1,"top":1,"view":1,"bottom":1,"command":1}
+,"device":{"pin":1}
+,"bottom":{"top":1,"view":1}
+,"top":{"perspective":1,"view":1}
+,"perspective":{"vice":1}
+,"vice":{"versa":1}
+,"choose":{"view":1}
+,"command":{"acts":1}
+,"acts":{"toggle":1}
+,"toggle":{"key":1}
+,"key":{"changes":1}
+,"changes":{"opposite":1}
+,"opposite":{"depending":1}
+,"depending":{"current":1}
+,"current":{"view":1}
+}
+;Search.control.loadWordPairs(pairs);

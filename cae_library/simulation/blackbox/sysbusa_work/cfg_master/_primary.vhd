@@ -1,0 +1,72 @@
+library verilog;
+use verilog.vl_types.all;
+entity cfg_master is
+    generic(
+        MASTER_SERI     : integer := 8;
+        MASTER_PARA     : integer := 12;
+        ASYNC_PERI      : integer := 13;
+        SLAVE_SERI      : integer := 15;
+        SLAVE_PARA      : integer := 9;
+        FPSC_PARA       : integer := 7;
+        MASTER_BYTE     : integer := 6;
+        FLASH_SPI03     : integer := 5;
+        FLASH_SPIX      : integer := 4;
+        MPC_BYTE        : integer := 10;
+        MPC_HWORD       : integer := 11;
+        MPC_WORD        : integer := 14;
+        CHK_PRE         : integer := 0;
+        CHK_ID          : integer := 1;
+        CHK_HDR         : integer := 2;
+        CHK_FPGA        : integer := 3;
+        CHK_RAM         : integer := 6;
+        CHK_FPSC        : integer := 5;
+        CHK_POST        : integer := 7;
+        A_ERTC          : integer := 11;
+      --A_OKTC          : integer type with unrepresentable value!
+        A_RTWT          : integer := 12;
+        A_RTTC          : integer := 13;
+        AHB_IDLE        : integer := 0;
+        AHB_WAIT        : integer := 24;
+        AHB_SREQ        : integer := 26;
+        AHB_SSEQ        : integer := 58;
+        AHB_BIDL        : integer := 28;
+        AHB_BBSY        : integer := 29;
+        AHB_BREQ        : integer := 30;
+        AHB_BRTY        : integer := 62;
+        AHB_BSEQ        : integer := 31
+    );
+    port(
+        HCLK            : in     vl_logic;
+        HGRANT_CFG      : in     vl_logic;
+        HREADY_CFG      : in     vl_logic;
+        HRESET_N        : in     vl_logic;
+        HRESP_CFG       : in     vl_logic_vector(1 downto 0);
+        RAMD_RDY        : in     vl_logic;
+        RAMA_RDY        : in     vl_logic;
+        FPSCD_RDY       : in     vl_logic;
+        FPSCA_RDY       : in     vl_logic;
+        SYS_BUSD        : in     vl_logic_vector(71 downto 0);
+        SYS_BUSA        : in     vl_logic_vector(9 downto 0);
+        CHK_STATE       : in     vl_logic_vector(2 downto 0);
+        MATCH           : in     vl_logic;
+        PRGM_JTAG       : in     vl_logic;
+        DONE            : in     vl_logic;
+        FSM_ERR         : in     vl_logic;
+        CFRONT_INIT_N   : in     vl_logic;
+        SYS_BUS_CFG     : in     vl_logic;
+        HBUSREQ_CFG     : out    vl_logic;
+        HLOCK_CFG       : out    vl_logic;
+        HWRITE_CFG      : out    vl_logic;
+        HBURST_CFG      : out    vl_logic;
+        HTRANS_CFG      : out    vl_logic_vector(1 downto 0);
+        HSIZE_CFG       : out    vl_logic_vector(1 downto 0);
+        HADDR_CFG       : out    vl_logic_vector(17 downto 0);
+        HWDATA_CFG      : out    vl_logic_vector(35 downto 0);
+        BUS_DATA_LOST   : out    vl_logic;
+        BUS_TRAP_ADDR   : out    vl_logic_vector(17 downto 0);
+        CFG_BUS_ERR     : out    vl_logic_vector(1 downto 0);
+        BUS_ERR_ADDR    : out    vl_logic_vector(17 downto 0);
+        AHB_DONE        : out    vl_logic;
+        RFR_SEL         : out    vl_logic_vector(3 downto 0)
+    );
+end cfg_master;

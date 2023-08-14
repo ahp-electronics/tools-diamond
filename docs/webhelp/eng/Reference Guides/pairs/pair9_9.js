@@ -1,0 +1,24 @@
+var pairs =
+{
+"bank":{"controller":1}
+,"controller":{"lvds":1,"used":1}
+,"lvds":{"outut":1,"outputs":1}
+,"outut":{"buffers":1}
+,"architectures":{"supported":1}
+,"input":{"lvdseni":1,"referenced":1,"dynamic":1}
+,"ecp5":{"default":1}
+,"dynamic":{"bank":1,"signal":1}
+,"used":{"power":1}
+,"power":{"down":1}
+,"down":{"banks":1}
+,"banks":{"inrd":1}
+,"inrd":{"input":1}
+,"referenced":{"differential":1}
+,"differential":{"lvds":1}
+,"outputs":{"lvdseni":1}
+,"lvdseni":{"input":1}
+,"signal":{"enable":1}
+,"enable":{"disable":1}
+,"disable":{"lvds":1}
+}
+;Search.control.loadWordPairs(pairs);

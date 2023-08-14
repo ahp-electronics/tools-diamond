@@ -1,0 +1,208 @@
+#$Header: L:/module/complex_mult/gui/core_template.tcl 1.12 mghuang Exp $
+
+#Rev 1.12: Diamond 1.3 IPExpress: Fixed cr_52877.
+
+#!/bin/sh
+# The next line is executed by /bin/sh, but not tcl \
+exec wish "$0" ${1+"$@"}
+
+package provide core_template 1.0.0
+
+proc CallDrawPins {}  {
+	global Para pin_flag
+
+	if {[string length $Para(pmi_dataa_width)] > 0 &&
+		[string length $Para(pmi_datab_width)] > 0 &&
+		[string length $Para(pmi_additional_pipeline)] > 0 } {DrawPins}
+} 
+
+proc GetTopicCB {} {
+	global Para
+
+	set Para(topic) ""
+}
+
+proc ChangeValueCmd {} {
+	global Para
+
+	set Para(pmi_datap_width) [expr $Para(pmi_dataa_width)+$Para(pmi_datab_width)+1]
+
+	if {[string length $Para(pmi_dataa_width)] > 0 &&
+		[string length $Para(pmi_datab_width)] > 0} {
+		#set tmp [expr $Para(pmi_dataa_width)>=$Para(pmi_datab_width)?$Para(pmi_dataa_width):$Para(pmi_datab_width)]
+		if {$Para(pmi_dataa_width)>=$Para(pmi_datab_width)} {
+			set tmp $Para(pmi_dataa_width)
+		} else {
+			set tmp $Para(pmi_datab_width)
+		}
+	} else {
+		set tmp 36
+	}
+	if {$Para(pmi_implemenntation) == "DSP"}  {
+		.lbl2Stage config -text "(0 - 3)"
+	} else  {
+		#ISPL_CR_31370
+		.lbl2Stage config -text "(0 - $tmp)"
+	} 
+
+	CallDrawPins
+}
+
+#******************************************************************************
+# Public Template Function: 
+#		Call Back proc for Load Parameter
+#  Input: None
+# Output: None
+#******************************************************************************
+proc LoadParaCB {} {
+	global Para
+
+	ChangeValueCmd
+} 
+
+#******************************************************************************
+# Public Template Function: 
+#		Call Back proc for Check Parameter
+#  Input: None
+# Output: 0 - Success, -1 - error
+#******************************************************************************
+proc CheckParameterCB {} {
+	global Para
+	
+	set tit "Check Parameter"
+	set ret [IsInRange "Input A Width" 2 36 $Para(pmi_dataa_width)]
+	if {$ret == "-1"} {return -1}
+	set ret [IsInRange "Input B Width" 2 36 $Para(pmi_datab_width)]
+	if {$ret == "-1"} {return -1}
+
+	if {$Para(pmi_implemenntation) == "DSP"}  {
+		set ret [IsInRange "the Number of Pipeline Stages" 0 3 $Para(pmi_additional_pipeline)]
+		if {$ret == "-1"} {return -1}
+	} else {
+		#ISPL_CR_31370
+		set tmp [expr $Para(pmi_dataa_width)>=$Para(pmi_datab_width)?$Para(pmi_dataa_width):$Para(pmi_datab_width)]
+		set ret [IsInRange "the Number of Pipeline Stages" 0 $tmp $Para(pmi_additional_pipeline)]
+		if {$ret == "-1"} {return -1}
+	}
+
+	return $ret
+}
+
+#******************************************************************************
+# Public Template Function: 
+#		Call Back proc for Generate Command-Line
+#  Input: None
+# Output: str (Command-line options)
+#******************************************************************************
+proc GenerateCB {} {
+	global Para
+
+	set str "-arch $Para(arch) -type cmult"
+    set l_has_reg 0
+
+	if {$Para(pmi_implemenntation) == "LUT"}  {lappend str -pfu_mult}
+
+	lappend str -widtha $Para(pmi_dataa_width) -widthb $Para(pmi_datab_width) -widthp $Para(pmi_datap_width)
+
+	if {$Para(pmi_sign) == "Signed"}  {lappend str -signed} 
+	lappend str -PL_stages $Para(pmi_additional_pipeline)
+
+	if {$Para(pmi_input_reg) == "Yes"}  {lappend str -input_reg; set l_has_reg 1} 
+	if {$Para(pmi_output_reg) == "Yes"}  {lappend str -output_reg; set l_has_reg 1} 
+	if {$Para(pmi_additional_pipeline) > 0} {set l_has_reg 1}
+	if {$Para(Implementation) == "4mult"}  {lappend str -$Para(Implementation)} 
+	if {$l_has_reg == 1} {lappend str -clk0 -ce0 -rst0}
+
+#	tk_messageBox -default ok -icon warning -message $str -title "Command Line" -type ok
+#	exit
+	return $str
+}
+
+proc Create_Image {} {
+	global Para diagram tnb tcl_platform pin_flag ft 
+
+	package require OrcaModule
+
+	#*** set private value ***
+
+	#*** Public Template Functions ***
+	# 1. ProjectSet
+	# 2. MainInterface
+	# 3. AttributeSetting
+	ProjectSet
+	MainInterface
+
+	AttributeSetting 400 420
+	set pin_flag 1
+	DrawImage 240 300 
+	set tnb $Para(tnb)
+
+	set page [$tnb add -label "Configuration"]
+	iwidgets::labeledframe .frmP1 -labeltext "" -labelpos nw
+	set frmP1 [.frmP1 childsite]
+
+	CreateLabelCombobox $frmP1 Block "Block Implementation" 20 8 Para(pmi_implemenntation) {} {ChangeValueCmd}
+	.lblBlock config -width 20 -anchor w
+	pack .frmBlock -in $frmP1 -side top -anchor w -padx 10 -pady 8
+	#ISPL_CR_30403 | ISPL_CR_30410 | ISPL_CR_30430, the DSP option only for ECP and ECP2
+	if {[lsearch $Para(dsp_lst) $Para(arch)] != -1}  {
+		.cboBlock insert list end DSP LUT	
+	} else  {
+		.cboBlock insert list end LUT	
+	} 
+
+	frame .frmWidth
+	CreateLabelEntry .frmWidth WidthA "Input A Width" "(2 - 36)" 4 e left Para(pmi_dataa_width) integer
+	CreateLabelEntry .frmWidth WidthB "Input B Width" "(2 - 36)" 4 e left Para(pmi_datab_width) integer
+	CreateLabelEntry .frmWidth WidthP "Product Width" " " 4 e left Para(pmi_datap_width) integer
+	.lblWidthA config -width 16 -anchor w
+	.lblWidthB config -width 16 -anchor w
+	.lblWidthP config -width 16 -anchor w
+	.entryWidthP config -state disable
+	pack .frmWidthA .frmWidthB .frmWidthP -in .frmWidth -side top -pady 2 -anchor w -padx 10
+	pack .frmWidth -in $frmP1 -side top -anchor w -padx 1 -pady 12
+
+	.entryWidthA.lwchildsite.entry config -validate key -vcmd {
+			after idle {ChangeValueCmd}
+			return 1
+	}
+	.entryWidthB.lwchildsite.entry config -validate key -vcmd {
+			after idle {ChangeValueCmd}
+			return 1
+	}
+
+	#label .lblRepresentation -text "Representation" 
+	#pack .lblRepresentation -in $frmP1 -side top -anchor w -padx 10
+	CreateRadioItem $frmP1 Rep "Representation" 16 Signed Signed Unsigned Unsigned 10 left Para(pmi_sign) {ChangeValueCmd}
+	.lblRep config -anchor w
+
+	CreateLabelEntryLabel $frmP1 Stage "Specify the Number of Pipeline Stages" 4 "" "" Para(pmi_additional_pipeline) integer
+	.lblStage config -width 35 -anchor w
+	pack .frmStage -in $frmP1 -side top -anchor w -padx 10 -pady 8
+	.entryStage.lwchildsite.entry config -validate key -vcmd {
+			after idle {ChangeValueCmd}
+			return 1
+	}
+
+
+	checkbutton .ckInReg  -text "Enable Input Registers" -variable Para(pmi_input_reg) -onvalue Yes -offvalue No -command {ChangeValueCmd}
+	checkbutton .ckOutReg -text "Enable Output Registers" -variable Para(pmi_output_reg) -onvalue Yes -offvalue No -command {ChangeValueCmd}
+	pack .ckInReg .ckOutReg -in $frmP1 -side top -anchor w -padx 10 -pady 2
+	CreateRadioItem $frmP1 Implementation "Implementation" 8 "3 Multiplier" 3mult "4 Multiplier" 4mult 10 left Para(Implementation) {ChangeValueCmd}
+	.lblImplementation config -width 15 -anchor w
+
+	pack .frmP1 -in $page -fill both -expand 1
+
+	ChangeValueCmd
+
+	$tnb view 0
+
+	#*** Public Template Functions ***
+	# 5. FunctionButton
+	# 6. CenterPosition
+	#FunctionButton
+	#CenterPosition
+	GeneralConfig
+#	set Para(topic) "complex_multiplier.htm"
+#	set Para(webhelp) "$Para(webhelpTop)#$Para(topic)"
+}

@@ -1,0 +1,42 @@
+[ActiveSupport MAP]
+Device = LIF-MD6000;
+Package = CTFBGA80;
+Performance = 6;
+LUTS_avail = 5936;
+LUTS_used = 557;
+FF_avail = 5973;
+FF_used = 374;
+INPUT_LVCMOS25 = 4;
+OUTPUT_LVCMOS25 = 5;
+IO_avail = 37;
+IO_used = 9;
+EBR_avail = 20;
+EBR_used = 2;
+; Begin EBR Section
+Instance_Name = counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpLbnonesadr6825668256p134ef63f_0_0_0;
+Type = DP8KE;
+Width_B = 6;
+Depth_A = 256;
+Depth_B = 256;
+REGMODE_A = OUTREG;
+REGMODE_B = OUTREG;
+RESETMODE = ASYNC;
+ASYNC_RESET_RELEASE = ASYNC;
+WRITEMODE_A = NORMAL;
+WRITEMODE_B = NORMAL;
+GSR = DISABLED;
+MEM_LPC_FILE = pmi_ram_dpLbnonesadr6825668256p134ef63f__PMIP__256__6__6B;
+Instance_Name = counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/genblk1.te_tt_ebr_ram/pmi_ram_dpLbnonesadr112112p1306641f_0_0_0;
+Type = DP8KE;
+Width_B = 1;
+Depth_A = 2;
+Depth_B = 2;
+REGMODE_A = OUTREG;
+REGMODE_B = OUTREG;
+RESETMODE = ASYNC;
+ASYNC_RESET_RELEASE = ASYNC;
+WRITEMODE_A = NORMAL;
+WRITEMODE_B = NORMAL;
+GSR = DISABLED;
+MEM_LPC_FILE = pmi_ram_dpLbnonesadr112112p1306641f__PMIP__2__1__1B;
+; End EBR Section

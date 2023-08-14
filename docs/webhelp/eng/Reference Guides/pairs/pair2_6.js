@@ -1,0 +1,26 @@
+var pairs =
+{
+"finding":{"modules":1}
+,"modules":{"guide":1,"functional":1}
+,"module":{"descriptions":1,"table":1,"lookup":1,"name":1}
+,"descriptions":{"arranged":1}
+,"arranged":{"alphabetically":1}
+,"alphabetically":{"find":1}
+,"find":{"modules":1}
+,"functional":{"type":1}
+,"type":{"following":1}
+,"following":{"lists":1}
+,"lists":{"look":1}
+,"look":{"specific":1}
+,"specific":{"pmi":1}
+,"pmi":{"module":1}
+,"digital":{"cdr":1}
+,"dynamic":{"bank":1}
+,"bank":{"controller":1}
+,"power":{"controller":1,"guard":1}
+,"tag":{"memory":1}
+,"distributed":{"ram":1}
+,"ebr":{"components":1}
+,"ipexpress":{"module":1}
+}
+;Search.control.loadWordPairs(pairs);

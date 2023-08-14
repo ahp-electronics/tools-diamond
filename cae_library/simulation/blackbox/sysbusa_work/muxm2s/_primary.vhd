@@ -1,0 +1,40 @@
+library verilog;
+use verilog.vl_types.all;
+entity muxm2s is
+    port(
+        HCLK            : in     vl_logic;
+        HRESET_N        : in     vl_logic;
+        HMASTER         : in     vl_logic_vector(3 downto 0);
+        HREADY          : in     vl_logic;
+        HADDR_CFG       : in     vl_logic_vector(17 downto 0);
+        HADDR_MPI       : in     vl_logic_vector(17 downto 0);
+        HADDR_FPGA      : in     vl_logic_vector(17 downto 0);
+        HADDR_FPSC      : in     vl_logic_vector(17 downto 0);
+        HADDR           : out    vl_logic_vector(17 downto 0);
+        HTRANS_CFG      : in     vl_logic_vector(1 downto 0);
+        HTRANS_MPI      : in     vl_logic_vector(1 downto 0);
+        HTRANS_FPGA     : in     vl_logic_vector(1 downto 0);
+        HTRANS_FPSC     : in     vl_logic_vector(1 downto 0);
+        HTRANS          : out    vl_logic_vector(1 downto 0);
+        HWRITE_CFG      : in     vl_logic;
+        HWRITE_MPI      : in     vl_logic;
+        HWRITE_FPGA     : in     vl_logic;
+        HWRITE_FPSC     : in     vl_logic;
+        HWRITE          : out    vl_logic;
+        HSIZE_CFG       : in     vl_logic_vector(1 downto 0);
+        HSIZE_MPI       : in     vl_logic_vector(1 downto 0);
+        HSIZE_FPGA      : in     vl_logic_vector(1 downto 0);
+        HSIZE_FPSC      : in     vl_logic_vector(1 downto 0);
+        HSIZE           : out    vl_logic_vector(1 downto 0);
+        HBURST_CFG      : in     vl_logic_vector(2 downto 0);
+        HBURST_MPI      : in     vl_logic_vector(2 downto 0);
+        HBURST_FPGA     : in     vl_logic_vector(2 downto 0);
+        HBURST_FPSC     : in     vl_logic_vector(2 downto 0);
+        HBURST          : out    vl_logic_vector(2 downto 0);
+        HWDATA_CFG      : in     vl_logic_vector(35 downto 0);
+        HWDATA_MPI      : in     vl_logic_vector(35 downto 0);
+        HWDATA_FPGA     : in     vl_logic_vector(35 downto 0);
+        HWDATA_FPSC     : in     vl_logic_vector(35 downto 0);
+        HWDATA          : out    vl_logic_vector(35 downto 0)
+    );
+end muxm2s;

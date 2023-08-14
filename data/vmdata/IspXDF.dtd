@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!ELEMENT	ispXDF	(	Comment?,Family* )	>
+<!ATTLIST	ispXDF
+			version		CDATA	#REQUIRED>
+
+<!ELEMENT	Comment	(	#PCDATA	)>
+<!ELEMENT	Family	(	Device+, Operation, BypassInst?, IDInstr?, ISCRelease?, XFPFile? , ICFFile? , ReInitialize?, Compliant1532?, CDRFixed?, Hidden?, DebugMode?, FamilyAliasName?, 
+						FPGALoaderSupport?, STAPLSupport?, FPGADeviceFamily?, CFGPinCount?, BitstreamModelTemplate?,
+						BScan_Control*, Programming_Mode_Control?, LicenseControl? ) >
+<!ATTLIST	Family
+			name		CDATA	#REQUIRED>
+<!ELEMENT	Device	(	Comm?, Access?, Architecture?, Vendor?, Pins?, CodeName, AliasName?, FullName, AlgoOption?, AlgoTemplate?, TurboAlgoTemplate*, InstructionBypass?, 
+						IDInstruction?, ISPAlgoTemplate?, Bitmap_Transformation?, IspID?, JtagID?, IDMask?, IDScanMask?, 
+						IDSize?, IRLength, ColWidth?, RowWidth?, UESPhysicalBits?, ispUESLogicalBits?, InstructionBypassPattern?,
+						jtagUSERCODELogicalBits?, DisableDeviceSTAPLSupport?, ispUESMask?, jtagUSERCODEMask?, TotalFuses?, ARCHLength?, ArchRow?, SEDLength?, EColumn?, EAddress?,
+						PWP?, PWE?, PWV?, BScan_Length?, BSDLFile?, BSDLFileTime?, ReadUSERCODEInst?, BypassLength?, BypassValue?, Package*, SysIO?, ExternalASC?,
+						Data_Frames?, Frame_Bytes?, Header_Bytes?, Data_Frame_Header?, Stop_Bytes?, UES_Bytes?, Trailer_Bytes?, End_Bytes?, ControlReg0*,
+						ControlReg1*, EBR*, Persistent_fuse*, Address_range?, SoftIP?, EBRFile?, BitstreamColWidth?, Status_Control*, Voltage_Control*, Sync_Ext_Done*) >
+
+<!ATTLIST	Device
+			name		CDATA	#REQUIRED>
+
+<!ELEMENT	Comm		(	#PCDATA	) >
+<!ELEMENT	Vendor	(	#PCDATA	) >
+<!ELEMENT	Access	(	#PCDATA	) >
+<!ELEMENT	Architecture	(	#PCDATA	) >
+<!ELEMENT	Pins	(	#PCDATA	) >
+<!ELEMENT	CodeName	(	#PCDATA	) >
+<!ELEMENT	AliasName	(	#PCDATA	) >
+<!ELEMENT	FullName	(	#PCDATA	) >
+<!ELEMENT	AlgoTemplate		(	#PCDATA	) >
+<!ELEMENT	InstructionBypass (	#PCDATA	) >
+<!ELEMENT	IDInstruction	(	#PCDATA	) >
+<!ELEMENT	ISPAlgoTemplate		(	#PCDATA	) >
+<!ELEMENT	AlgoOption		(	#PCDATA	) >
+<!ELEMENT	Bitmap_Transformation	(	#PCDATA	) >
+<!ELEMENT	IspID	(	#PCDATA	) >
+<!ELEMENT	JtagID	(	#PCDATA	) >
+<!ELEMENT	IDMask	(	#PCDATA	) >
+<!ELEMENT	IDScanMask	(	#PCDATA	) >
+<!ELEMENT	IDSize	(	#PCDATA	) >
+<!ELEMENT	IRLength	(	#PCDATA	) >
+<!ELEMENT	ColWidth	(	#PCDATA	) >
+<!ELEMENT	RowWidth	(	#PCDATA	) >
+<!ELEMENT	UESPhysicalBits	(	#PCDATA	) >
+<!ELEMENT	ispUESLogicalBits	(	#PCDATA	) >
+<!ELEMENT	jtagUSERCODELogicalBits	(	#PCDATA	) > 
+<!ELEMENT	DisableDeviceSTAPLSupport	(	#PCDATA	) >
+<!ELEMENT	ispUESMask	(	#PCDATA	) >
+<!ELEMENT	jtagUSERCODEMask	(	#PCDATA	) >
+<!ELEMENT	TotalFuses	(	#PCDATA	) >
+<!ELEMENT	ArchLength	(	#PCDATA	) >
+<!ELEMENT	ExternalASC (	#PCDATA	) >
+<!ELEMENT	SEDLength	(	#PCDATA	) >
+<!ELEMENT	ArchRow	(	#PCDATA	) >
+<!ELEMENT	EColumn	(	#PCDATA	) >
+<!ELEMENT	EAddress (	#PCDATA	) >
+<!ELEMENT	PWP	(	#PCDATA	) >
+<!ELEMENT	PWE	(	#PCDATA	) >
+<!ELEMENT	PWV	(	#PCDATA	) >
+<!ELEMENT	BScan_Length	(	#PCDATA	) >
+<!ELEMENT	BitstreamColWidth	(	#PCDATA	) >
+<!ELEMENT	BSDLFile	(	#PCDATA	) >
+<!ELEMENT	BSDLFileTime	(	#PCDATA	) >
+<!ELEMENT	BypassLength	(	#PCDATA	) >
+<!ELEMENT	BypassValue	(	#PCDATA	) >
+<!ELEMENT	ReadUSERCODEInst	(	#PCDATA	) >
+<!ELEMENT	InstructionBypassPattern	(	#PCDATA	) >
+<!ELEMENT	SysIO		(	#PCDATA	) >
+<!ELEMENT	TurboAlgoTemplate	EMPTY >
+<!ATTLIST	TurboAlgoTemplate
+		name	CDATA	#REQUIRED
+		value CDATA #REQUIRED>
+<!ELEMENT	Data_Frames		(	#PCDATA	) >
+<!ELEMENT	Frame_Bytes		(	#PCDATA	) >
+<!ELEMENT	Header_Bytes		(	#PCDATA	) >
+<!ELEMENT	Data_Frame_Header	(	#PCDATA	) >
+<!ELEMENT	Stop_Bytes		(	#PCDATA	) >
+<!ELEMENT	UES_Bytes		(	#PCDATA	) >
+<!ELEMENT	Trailer_Bytes		(	#PCDATA	) >
+<!ELEMENT	End_Bytes		(	#PCDATA	) >
+
+<!ELEMENT	ControlReg0	(	Frequency, Master_Clock_Frequency, Clock_divider) >
+<!ELEMENT	Frequency	(	#PCDATA	) >
+<!ELEMENT	Master_Clock_Frequency	(	#PCDATA	) >
+<!ELEMENT	Clock_divider	(	#PCDATA	) >
+
+<!ELEMENT	ControlReg1	(	BitName, Address, Column) >
+<!ELEMENT	BitName	(	#PCDATA	) >
+<!ELEMENT	Address	(	#PCDATA	) >
+<!ELEMENT	Column	(	#PCDATA	) >
+
+<!ELEMENT	EBR	(	EBRBitName, EBRAddress, EBRColumn, EBRName) >
+<!ELEMENT	EBRBitName	(	#PCDATA	) >
+<!ELEMENT	EBRAddress	(	#PCDATA	) >
+<!ELEMENT	EBRColumn	(	#PCDATA	) >
+<!ELEMENT	EBRName		(	#PCDATA	) >
+
+<!ELEMENT	Persistent_fuse	(Persistent_fuse_Address, Persistent_fuse_Column) >
+<!ELEMENT	Persistent_fuse_Address	(	#PCDATA	) >
+<!ELEMENT	Persistent_fuse_Column	(	#PCDATA	) >
+
+<!ELEMENT	Multiboot_fuses (Multiboot_cfg_Address, Multiboot_chip_sel_Column, Multiboot_source_sel_Column, Multiboot_auto_add_Column) >
+<!ELEMENT	Multiboot_cfg_Address		(	#PCDATA	) >
+<!ELEMENT	Multiboot_chip_sel_Column	(	#PCDATA	) >
+<!ELEMENT	Multiboot_source_sel_Column	(	#PCDATA	) >
+<!ELEMENT	Multiboot_auto_add_Column	(	#PCDATA	) >
+
+<!ELEMENT	Sync_Ext_Done	(Sync_Ext_Done_Address, Sync_Ext_Done_Column) >
+<!ELEMENT	Sync_Ext_Done_Address	(	#PCDATA	) >
+<!ELEMENT	Sync_Ext_Done_Column	(	#PCDATA	) >
+
+<!ELEMENT	Status_Control	(	StatusBitName?, StatusControl?, StatusIndex?) >
+<!ELEMENT	StatusBitName	(	#PCDATA	) >
+<!ELEMENT	StatusControl	(	#PCDATA	) >
+<!ELEMENT	StatusIndex	(	#PCDATA	) >
+<!ELEMENT	Voltage_Control	(	VCCCore?, VCCJ?, PinList?) >
+<!ELEMENT	VCCCore	(	#PCDATA	) >
+<!ELEMENT	VCCJ	(	#PCDATA	) >
+<!ELEMENT	PinList	(	#PCDATA	) >
+<!ELEMENT	Address_range	(	#PCDATA	) >
+<!ELEMENT	SoftIP	(	#PCDATA	) >
+<!ELEMENT	EBRFile	(	#PCDATA	) >
+<!ELEMENT	Package	(	Type, PON, AliasPON?, JDFFile?, INIFile?, MCtrl?, Adapter*) >
+<!ELEMENT	Type	(	#PCDATA	) >
+<!ELEMENT	PON	(	#PCDATA	) >
+<!ELEMENT	AliasPON	(	#PCDATA	) >
+<!ELEMENT	JDFFile	(	#PCDATA	) >
+<!ELEMENT	INIFile	(	#PCDATA	) >
+<!ELEMENT	MCtrl	EMPTY >
+<!ATTLIST 	MCtrl
+		setting	CDATA #REQUIRED>
+<!ELEMENT	Adapter	EMPTY >
+<!ATTLIST	Adapter
+		vendor	CDATA	#REQUIRED
+		adapter_name CDATA #REQUIRED>
+
+<!ELEMENT	Operation	(	#PCDATA	) >
+<!ELEMENT	BypassInst	(	#PCDATA	) >
+<!ELEMENT	IDInstr		(	#PCDATA	) >
+<!ELEMENT	ISCRelease	EMPTY >
+<!ATTLIST	ISCRelease
+			value		CDATA	#REQUIRED
+			extension	CDATA	#REQUIRED>
+<!ELEMENT	XFPFile	(	#PCDATA	) >
+<!ELEMENT	ICFFile	(	#PCDATA	) >
+<!ELEMENT	Compliant1532	(	#PCDATA	) >
+<!ELEMENT	CDRFixed	(	#PCDATA	) >
+<!ELEMENT	ReInitialize	EMPTY	>
+<!ATTLIST	ReInitialize
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	DebugMode	EMPTY	>
+<!ATTLIST	DebugMode
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	Hidden	(	#PCDATA	) >
+<!ELEMENT	FamilyAliasName	(	#PCDATA	) >
+<!ELEMENT	FPGALoaderSupport (	#PCDATA	) >
+<!ELEMENT	STAPLSupport   	(	#PCDATA	) >
+<!ELEMENT	FPGADeviceFamily (	#PCDATA	) >
+<!ELEMENT	CFGPinCount (	#PCDATA	) >
+<!ELEMENT	BitstreamModelTemplate (	#PCDATA	) >
+<!ELEMENT	Programming_Mode_Control	(	#PCDATA	) >
+<!ELEMENT	LicenseControl	(	#PCDATA	) >
+<!ELEMENT	BScan_Control	(BScan_Operation?, BScan_Default_Value?) >
+<!ELEMENT	BScan_Operation (	#PCDATA	) >
+<!ELEMENT	BScan_Default_Value (	#PCDATA	) >

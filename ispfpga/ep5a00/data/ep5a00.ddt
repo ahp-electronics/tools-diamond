@@ -1,0 +1,363 @@
+// $Revision: 1.15 $ $Date: 2005/03/26 00:36:30 $
+// This is the only commenting style supported.
+// We can't add a new parameter or variable outside the REGULAR section
+// The delay unit is pico second.
+// Resistance is ohm.
+// capacitance is FF
+// Formats :
+// [ARCHITECTURE] 
+// ARCHITECTURE <arch_name>
+// [VERSION]
+// VERSION <version_nu>
+// [REGULAR]
+// <delay entries>...
+// END REGULAR
+// [MULTIPLY]
+// <multiply delay entries>
+// END MULTPLY
+//
+// [DEVICE]
+// <device type>
+// <.... delay entries>
+// END DEVICE
+// ....
+//
+// END ARCHITECTURE
+// note : one regular section, one multiply section but multiple device sections
+//        (one for each device)
+// 
+// <delay entries> := <rc_delay> | <rd_delay> | <fixed_delay> | < trd1_delay> | < trd2_delay>
+//
+// <rc_delay> :=
+// [RC]
+// <delay_id> <min_res> <max_res> <min_cap> <max_cap>
+// ...
+// END RC
+//
+// RD : resistence and delay
+// <rd_delay> :=
+// [RD]
+// <delay_id> <min_res> <max_res> <min_delay> <max_delay>
+// ...
+// END RD
+//
+// <fixed_delay> :=
+// [FIXED]
+// <delay_id> <min-rise> <max-rise> <min-fall> <max-fall>
+// ...
+// END FIXED
+//
+// < trd1_delay> :=
+// [TRD1]
+// <delay_id> <number_of_entries> <rise_time_in_double> <fall_time_in_double> 
+// <x-index...>
+// <rise_res> <fall_res> <rise_delay> <fall_delay> // for each value of x
+// .....
+// END TRD1
+//
+// < trd2_delay> :=
+// [TRD2]
+// <delay_id> <number_of_x_entries> <number_of_y_entries>
+// <x-index...>
+// <y-index...>
+// <rise_res> <fall_res> <rise_delay> <fall_delay> // for each value of x & y
+// .....
+// END TRD2
+// // The sequence for TRD2 is Txy = T(x*Ymax)+y, so for the x = 2, y =3, 
+// //   the sequence is T00,T01,T02,T10,T11,T12
+///////////////////////////////////////////////////////////////////////////////////
+// ver001 : 11/02/00
+//	1. Supporting the slew rate conversion to the rise time.
+//	2. Added input slew rate ( for rise_time and fall_time ) to the TRD1 in declartion line.
+//    3. Added driver_os and driver_ld to the table.
+//
+//
+//
+////////////////////////////////////////////////////////////////////////////////////
+
+[ARCHITECTURE] 
+ARCHITECTURE LAVA2
+
+[VERSION]
+VERSION ver001
+
+[REGULAR]
+
+// data from -5 speed grade
+[FIXED]
+// <delay_id> <min-rise> <max-rise> <min-fall> <max-fall>
+// standard voltage in mili volt
+STD_VOLTAGE	1600	1600	1600	1600
+
+// TM-files located at: /home/rel2/3_12p.240/env/ep5a00/pkg/e5a2ntm/data/
+
+// from: <slice_7.tm>
+VGB_LUT4	180	180	180	180
+VGB_LUT2	90	90	90	90
+VGB_LUT4A	341	341	341	341
+VGB_LUT4B	398	398	398	398
+VGB_LUT4C	296	296	296	296
+VGB_LUT4D	180	180	180	180
+VGB_LUT5	304	304	304	304
+VGB_LUT6	421	421	421	421
+VGB_LUT7	538	538	538	538
+VGB_LUT8	655	655	655	655
+VGB_MUXL5	124	124	124	124
+VGB_MOFX0	188	188	188	188
+VGB_MUXL6	117	117	117	117
+VGB_A1_TO_FCO	326	326	326	326
+VGB_A0_TO_FCO	388	388	388	388
+VGB_FCI_TO_F	284	284	284	284
+VGB_FCI_TO_FCO	75	75	75	75
+VGB_A1_TO_F	180	180	180	180
+VGB_A0_TO_F	284	284	284	284
+VGB_LRAM_CO	902	902	902	902
+VGB_LRAMAD_S	-245	-245	-245	-245
+VGB_LRAMAD_H	246	246	246	246
+VGB_LRAMD_S	-172	-172	-172	-172
+VGB_LRAMD_H	199	199	199	199
+VGB_LRAMWE_S	-122	-122	-122	-122
+VGB_LRAMWE_H	132	132	132	132
+VGB_LRAMCPW	500	500	500	500
+VGB_L_CO	285	285	285	285
+VGB_L_S	61	61	61	61
+VGB_L_H	2	2	2	2
+VGB_LCE_S	173	173	173	173
+VGB_LCE_H	-92	-92	-92	-92
+VGB_L_GO	285	285	285	285
+VGB_LL_S	61	61	61	61
+VGB_LL_H	2	2	2	2
+VGB_LLPD	285	285	285	285
+VGB_LASSRO	600	600	600	600
+VGB_LSSR_S	338	338	338	338
+VGB_LSSR_H	-193	-193	-193	-193
+NET_X1	189	189	189	189
+NET_X2	241	241	241	241
+NET_X6	244	244	244	244
+NET_X6X2	233	233	233	233
+NET_ISB	131	131	131	131
+
+// from: <cips_7.tm>
+NET_GCLK	726	726	726	726
+
+// from: <iologic_7.tm>
+IOB_I_CO	329	397	329	397
+IOB_I_S	171	891	171	891
+IOB_I_H	157	786	157	786
+IOB_ICE_S	4	38	4	38
+IOB_ICE_H	-22	52	-22	52
+IOB_I_GO	399	399	399	399
+IOB_IL_S	171	891	171	891
+IOB_IL_H	157	786	157	786
+IOB_ILPD	399	399	399	399
+IOB_IASRO	337	555	337	555
+IOB_O_CO	797	1773	797	1773
+IOB_O_S	-79	-79	-79	-79
+IOB_O_H	101	101	101	101
+IOB_OCE_S	4	38	4	38
+IOB_OCE_H	-22	52	-22	52
+IOB_O_GO	547	547	547	547
+IOB_OL_S	-79	-79	-79	-79
+IOB_OL_H	101	101	101	101
+IOB_OLPD	547	547	547	547
+IOB_OASRO	557	798	557	798
+
+// from: <pio_7.tm>
+IOB_IOBUF	1216	1216	1216	1216
+IOB_IOIN	577	577	577	577
+IOB_IOOEN	2301	2419	2301	2419
+IOB_IOODIS	2301	2419	2301	2419
+
+// from: <ebr_7.tm>
+RAM_EBSWAD_S	-115	-115	-115	-115
+RAM_EBSWAD_H	138	138	138	138
+RAM_EBSWCPW	1350	1700	1350	1700
+RAM_EBSWCE_S	123	123	123	123
+RAM_EBSWCE_H	-81	-81	-81	-81
+RAM_EBSWWE_S	-128	-128	-128	-128
+RAM_EBSWWE_H	139	139	139	139
+RAM_EBSWD_S	-157	-157	-157	-157
+RAM_EBSWD_H	173	173	173	173
+RAM_EBSR_CO	328	328	328	328
+RAM_EBSR_CO2	2484	2505	2484	2505
+RAM_EBSRAD_S	-115	-115	-115	-115
+RAM_EBSRAD_H	138	138	138	138
+RAM_EBSRCPW	1350	1700	1350	1700
+RAM_EBSRCE_S	123	123	123	123
+RAM_EBSRCE_H	-81	-81	-81	-81
+RAM_EBSRWE_S	-128	-128	-128	-128
+RAM_EBSRWE_H	139	139	139	139
+RAM_EBASSRO	707	1030	707	1030
+RAM_EBCS_S	12	12	12	12
+RAM_EBCS_H	11	11	11	11
+
+// from: <mult9_7.tm>
+DSP_MuPd	3177	3177	3177	3177
+DSP_MuShf	468	468	468	468
+DSP_MuC2S	774	774	774	774
+DSP_MuCO3	3087	3087	3087	3087
+DSP_MuCO2	1260	1260	1260	1260
+DSP_MuCO	495	495	495	495
+DSP_MuRst3	3159	3159	3159	3159
+DSP_MuRst2	1296	1296	1296	1296
+DSP_MuRst	594	594	594	594
+DSP_MuSu	117	117	117	117
+DSP_MuHd	18	18	18	18
+DSP_MuSu2	2178	2178	2178	2178
+DSP_MuHd2	-846	-846	-846	-846
+DSP_MuSu3	2718	2718	2718	2718
+DSP_MuHd3	-1179	-1179	-1179	-1179
+
+// from: <mult9addsub_7.tm>
+DSP_MuPd_Add	3897	3897	3897	3897
+DSP_MuCO3_Add	3807	3807	3807	3807
+DSP_MuCO2_Add	1980	1980	1980	1980
+DSP_MuRst3_Add	3879	3879	3879	3879
+DSP_MuRst2_Add	2016	2016	2016	2016
+
+// from: <mult9addsubsum_7.tm>
+DSP_MuPd_Sum	4617	4617	4617	4617
+DSP_MuCO3_Sum	4527	4527	4527	4527
+DSP_MuCO2_Sum	2700	2700	2700	2700
+DSP_MuRst3_Sum	4599	4599	4599	4599
+DSP_MuRst2_Sum	2736	2736	2736	2736
+
+// from: <mult18_7.tm>
+DSP_MuPd_18	3294	3294	3294	3294
+DSP_MuCO3_18	3204	3204	3204	3204
+DSP_MuCO2_18	1152	1152	1152	1152
+DSP_MuRst3_18	3222	3222	3222	3222
+DSP_MuRst2_18	1179	1179	1179	1179
+
+// from: <mac52_7.tm>
+DSP_MuPd_Add18	4014	4014	4014	4014
+DSP_MuCO3_Add18	3924	3924	3924	3924
+DSP_MuCO2_Add18	1872	1872	1872	1872
+DSP_MuRst3_Add18	3942	3942	3942	3942
+DSP_MuRst2_Add18	1899	1899	1899	1899
+
+// from: <mult36_7.tm>
+DSP_MuPd_36	4806	4806	4806	4806
+DSP_MuCO3_36	4734	4734	4734	4734
+DSP_MuCO2_36	2772	2772	2772	2772
+DSP_MuRst3_36	4851	4851	4851	4851
+DSP_MuRst2_36	2889	2889	2889	2889
+DSP_MuPd_Sum18	4680	4680	4680	4680
+DSP_MuCO3_Sum18	4617	4617	4617	4617
+DSP_MuCO2_Sum18	2718	2718	2718	2718
+DSP_MuRst3_Sum18	4734	4734	4734	4734
+DSP_MuRst2_Sum18	2799	2799	2799	2799
+
+// start here:  not from TM-files
+NET_FACTOR      120	120	120	120 // TUNED DATA
+NET_GSR		0	0	0	0
+IOB_PLL		0	0	0	0
+ZERODEL		0	0	0	0
+
+
+// IO Timing Adders
+IOINDLY			7980	7980	7980	7980
+// ASIC IO
+LVTTL_in		500	500	500	500
+LVCMOS_18_in		0	0	0	0
+LVCMOS_25_in		300	300	300	300
+LVCMOS_33_in		500	500	500	500
+AGP_1X_in		1000	1000	1000	1000
+BLVDS_in		500	500	500	500
+CTT25_in		1000	1000	1000	1000
+CTT33_in		1000	1000	1000	1000
+GTL+_in			500	500	500	500
+HSTL_I_in		500	500	500	500
+HSTL_III_in		1000	1000	1000	1000
+HSTL_IV_in		1000	1000	1000	1000
+LVDS_in			800	800	800	800
+LVPECL_in		800	800	800	800
+PCI_in			1000	1000	1000	1000
+PCI_X_in		1000	1000	1000	1000
+SSTL2_I_in		800	800	800	800
+SSTL2_II_in		500	500	500	500
+SSTL3_I_in		800	800	800	800
+SSTL3_II_in		800	800	800	800
+SLEW			600	600	600	600
+LVTTL_out		1000	1000	1000	1000
+LVCMOS_18_4mA_out	500	500	500	500
+LVCMOS_18_5mA_out	500	500	500	500
+LVCMOS_18_8mA_out	0	0	0	0
+LVCMOS_18_12mA_out	0	0	0	0
+LVCMOS_25_4mA_out	700	700	700	700
+LVCMOS_25_5mA_out	500	500	500	500
+LVCMOS_25_8mA_out	500	500	500	500
+LVCMOS_25_12mA_out	500	500	500	500
+LVCMOS_25_16mA_out	500	500	500	500
+LVCMOS_33_4mA_out	1000	1000	1000	1000
+LVCMOS33_5mA_out	1000	1000	1000	1000
+LVCMOS33_8mA_out	700	700	700	700
+LVCMOS33_12mA_out	500	500	500	500
+LVCMOS33_16mA_out	500	500	500	500
+LVCMOS33_24mA_out	500	500	500	500
+AGP_1X_out		500	500	500	500
+BLVDS_out		1000	1000	1000	1000
+CTT25_out		300	300	300	300
+CTT33_out		300	300	300	300
+GTL+_out		500	500	500	500
+HSTL_I_out		500	500	500	500
+HSTL_III_out		500	500	500	500
+HSTL_IV_out		700	700	700	700
+LVDS_out		1000	1000	1000	1000
+LVPECL_out		1000	1000	1000	1000
+PCI_out			500	500	500	500
+PCI_X_out		500	500	500	500
+SSTL2_I_out		500	500	500	500
+SSTL2_II_out		500	500	500	500
+SSTL3_II_out		500	500	500	500
+
+
+// 3/21/02 changed the values added gsr and clk
+IOB_GSRB	0	0	0	0
+IOB_GCLK_IN	0	0	0	0
+
+IOB_PLL		0	0	0	0
+IOB_PLLSEC_DELAY  140	140	140	140
+
+VGB_GSRB	0	0	0	0
+VGB_GCLK_IN	0	0	0	0
+
+IOB_MINDEL	1	1	1	1
+VGB_MINDEL	1	1	1	1
+MEM_MINDEL	1	1	1	1
+
+END FIXED
+
+
+// Operating Conditions
+// -1 denotes no adjustment
+// Volt * 10(V)	Temp(C)	LogicLH	LogicHL	RouteLH	RouteHL ((100 - x) * 100 %)
+[OPERATINGCONDITIONS]
+
+//16			85		9784		9774		9741		9678
+//*			85		9784		9774		9741		9678
+
+//16			100		-1			-1			-1			-1
+//*			100		-1			-1			-1			-1
+
+*			*		10000		10000		10000		10000
+
+END OPERATINGCONDITIONS
+
+END REGULAR
+
+[DEVICE]
+
+DEV_OPENV	*	*	*	*	X-M
+SPD_GRADE_FACTOR 	50
+
+DEV_OPENV	*	*	*	*	X-6
+SPD_GRADE_FACTOR 	120
+
+DEV_OPENV	*	*	*	*	X-5
+SPD_GRADE_FACTOR 	140
+
+END DEVICE
+
+END ARCHITECTURE
+

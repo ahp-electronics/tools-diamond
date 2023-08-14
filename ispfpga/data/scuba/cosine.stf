@@ -1,0 +1,4 @@
+Clock: CLK * 1;
+Reset: => 1; @100 => 0;
+ClkEn: => 0; @100; @Reset & E0; => 1;
+Theta: => 0;@100; @Reset & E0; *(num_rows + 3)@Clock => COUNT;

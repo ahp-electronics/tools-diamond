@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messageFile name="analyzer" fid="213" alias="rva" vendor="Lattice Semiconductor Corporation" stamp="08/06/2013">
+  <description text="Message database of Reveal Analyzer" />
+  <owner text="Andrew Lin, Tong.Feng" />
+  <messages>
+    <!----------------------------------------------------------------------------------------------------\>
+    <!-- Reveal Analyzer's message database---------------------------------------------------------------|>
+	<!-- Messages are divided into several groups based on components ------------------------------------|>
+    <!-- Four types of message: Error, Warning, Info, Status ---------------------------------------------|>
+	<!---Component------ Start:End------------------------------------------------------------------------|>
+	<!-- GUI------------ 0000:0099 -----------------------------------------------------------------------|>
+	<!-- OTHERS--------- 0100:0199 -----------------------------------------------------------------------|>
+    <!-- Reserve 9990 and following IDs for messages Anlayzer gets no idea -------------------------------|>
+	<!-- Please DO NOT remove any item even it is obsolete -----------------------------------------------|>	
+    <!----------------------------------------------------------------------------------------------------/>
+
+    <!-- define Error message -------------------------------------------------------------------------------------------------------------------------------->  
+    <!-- GUI 0000:0099------------------------------------------------------------------------------------->
+    <msg uid="0000" type="Status" text="Action: Program Device." />
+    <msg uid="0001" type="Status" text="RvaThread: configuring..." />
+    <msg uid="0002" type="Status" text="RvaThread: running..." />
+
+	<!-- others 0100:0199---------------------------------------------------------------------------------->
+
+    <!-- messages defined to handle ut_** -------------------------------------------------------------------------------------------------------------------->
+    <msg uid="9990" type="Error" text="$$s" />
+    <msg uid="9991" type="Warning" level="2" text="$$s" />
+    <msg uid="9992" type="Info" text="$$s" />
+    <msg uid="9993" type="Status" text="$$s" />
+    <msg uid="9994" type="Error" text="Error - $$s" />
+    <msg uid="9995" type="Warning" level="2" text="Warning - $$s" />
+    <msg uid="9996" type="Info" text="Info - $$s" />
+    <msg uid="9997" type="Status" text="Error - $$s" />
+	<msg uid="9998" type="Warning" level="2" text="There is already one rva file opened. Cannot new or open another rva file." />
+    <msg uid="9999" type="Error" text="This is a testing message with one dynamic data $$s" >
+       <help online="onlineID" web="webID" datasheet="datasheet" />
+       <navigation>
+          <!-- define navigation function that require first dynamic data and first navigation data as input -->
+          <fun menu="fun1" cmd="command line 0 1" />
+          <!-- define navigation function that require first dynamic data and second navigation data as input -->
+          <fun menu="fun2" cmd="command line 0 2" />
+       </navigation>
+    </msg>
+  </messages>
+</messageFile>

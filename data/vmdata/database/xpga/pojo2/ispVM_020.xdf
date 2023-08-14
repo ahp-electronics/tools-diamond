@@ -1,0 +1,744 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Ankit 1/21/2011
+	POJO2 sub directory
+		.Contains device database file and all the algorithm files for POJO2 technology devices.
+	 ispVM_20.xdf  support :
+		. POJO2 Family.
+	Nguyen 11/10/14
+		. Changed the Erase Times SOF-123178
+										LPTM20		LPTM21		LPTM24	LPTM27
+			Programmer V3.0 and newer		3		3.5			10		 8
+			Programmer Proposed Limits		12		15			15		24
+	Nguyen 04/29/15 Removed LPTM20			
+	Nguyen 05/03/2018 Added LPTM21L
+	Nguyen 04/02/2019 Added "FLASH CFG Erase,Program,Verify"
+        					"FLASH CFG and UFM Erase,Program,Verify"
+
+-->
+
+<ispXDF version="19.0">
+    <Family name="Platform Manager 2">
+      <FamilyAliasName>Platform Manager 2</FamilyAliasName>  
+<!--      
+      <Device name="LPTM20">
+            <Comm> JTAG </Comm>
+            <Access> PTM/FLASH </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LPTM20 </CodeName>
+            <FullName> LLPTM20 </FullName>
+            <AliasName> LPTM20_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>POJO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POJO2.svp"
+                         value="0x07"/>
+            <JtagID>0x112B9043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IspID>0x89</IspID>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 888 </ColWidth>
+            <RowWidth> 215 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  24576 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 172864 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  1200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>152</BScan_Length>  
+            <ExternalASC> 1 </ExternalASC>
+			<SysIO>
+                &quot;960&quot;
+            </SysIO>			
+            <Package>
+                <Type> All </Type>
+                <PON> LPTM20 </PON>
+                <AliasPON> LPTM20-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 128-pin TQFP </Type>
+                <PON> LPTM20-XX128 </PON>
+                <AliasPON>  LPTM20-XX128 </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 			
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0>           
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device>   
+-->         
+		<Device name="LPTM21L">
+            <Comm> JTAG </Comm>
+            <Access> PTM/FLASH </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LPTM21L </CodeName>
+            <FullName> LPTM21L </FullName>
+            <AliasName> LPTM21L_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>POJO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POJO2.svp"
+                         value="0x07"/>
+            <JtagID>0x112BA043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IspID>0x8A</IspID> 
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1080 </ColWidth>
+            <RowWidth> 333 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  65536 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 344896 </TotalFuses> 
+            <SysIO>
+                &quot;960&quot;
+            </SysIO>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>208</BScan_Length> 
+            <ExternalASC> 3 </ExternalASC>                          
+            <Package>
+                <Type> All </Type>
+                <PON> LPTM21L </PON>
+                <AliasPON> LPTM21L-ES </AliasPON>
+				<Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin caBGA </Type>
+                <PON> LPTM21L-XX100C</PON>
+                <AliasPON> LPTM21-XX100C </AliasPON>
+				<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>            
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>  		  
+        <Device name="LPTM21">
+            <Comm> JTAG </Comm>
+            <Access> PTM/FLASH </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LPTM21 </CodeName>
+            <FullName> LPTM21 </FullName>
+            <AliasName> LPTM21_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>POJO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POJO2.svp"
+                         value="0x07"/>
+            <JtagID>0x112BA043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IspID>0x8A</IspID> 
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1080 </ColWidth>
+            <RowWidth> 333 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  65536 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 344896 </TotalFuses> 
+            <SysIO>
+                &quot;960&quot;
+            </SysIO>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>208</BScan_Length> 
+            <ExternalASC> 3 </ExternalASC>                          
+            <Package>
+                <Type> All </Type>
+                <PON> LPTM21 </PON>
+                <AliasPON> LLPTM21-ES </AliasPON>
+				<Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 237-pin ftBGA </Type>
+                <PON> LPTM21-XX232C</PON>
+                <AliasPON> LPTM21-XX237C </AliasPON>
+				<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>            
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>   
+<!--        
+       <Device name="LPTM24">
+            <Comm> JTAG </Comm>
+            <Access> PTM/FLASH </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LPTM24 </CodeName>
+            <FullName> LPTM24 </FullName>
+            <AliasName> LPTM24_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>POJO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POJO2.svp"
+                         value="0x07"/>
+            <JtagID>0x112BC043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IspID>0x8B</IspID>  
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 836288 </TotalFuses> 
+            <SysIO>
+                &quot;960&quot;
+            </SysIO>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>                          
+            <Package>
+                <Type> All </Type>
+                <PON> LPTM24 </PON>
+                <AliasPON> LPTM24-ES </AliasPON>
+				<Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 232-pin ftBGA </Type>
+                <PON> LPTM24-12150A448-XXTN232C</PON>
+                <AliasPON> LPTM24-XXTN232C </AliasPON>
+				<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device>             
+       <Device name="LPTM24">
+            <Comm> JTAG </Comm>
+            <Access> PTM/FLASH </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LPTM24 </CodeName>
+            <FullName> LPTM24 </FullName>
+            <AliasName> LPTM24_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>POJO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POJO2.svp"
+                         value="0x07"/>
+            <JtagID>0x112BC043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IspID>0x8B</IspID>  
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 836288 </TotalFuses> 
+            <SysIO>
+                &quot;960&quot;
+            </SysIO>
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>                          
+            <Package>
+                <Type> All </Type>
+                <PON> LPTM24 </PON>
+                <AliasPON> LPTM24-ES </AliasPON>
+				<Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 402-ball caBGA </Type>
+                <PON> LPTM24-12230A448-XXAN402C </PON>
+                <AliasPON> PTM24-XXAN402C </AliasPON>
+				<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="LPTM27">
+            <Comm> JTAG </Comm>
+            <Access> PTM/FLASH </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LPTM27 </CodeName>
+            <FullName> LPTM27 </FullName>
+            <AliasName> LPTM27_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>POJO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POJO2.svp"
+                         value="0x07"/>
+            <JtagID>0x112BD043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IspID>0x8C</IspID> 
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1442240 </TotalFuses> 
+            <SysIO>
+                &quot;960&quot;
+            </SysIO>
+            <PWP>  10 </PWP>
+            <PWE>  2400 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>                        
+            <Package>
+                <Type> All </Type>
+                <PON> LPTM27 </PON>
+                <AliasPON> LPTM27-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 232-pin ftBGA </Type>
+                <PON> LPTM27-XXTG232 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>            
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device> 
+        <Device name="LPTM27">
+            <Comm> JTAG </Comm>
+            <Access> PTM/FLASH </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LPTM27 </CodeName>
+            <FullName> LPTM27 </FullName>
+            <AliasName> LPTM27_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>POJO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POJO2.svp"
+                         value="0x07"/>
+            <JtagID>0x112BD043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IspID>0x8C</IspID> 
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1442240 </TotalFuses> 
+            <SysIO>
+                &quot;960&quot;
+            </SysIO>
+            <PWP>  10 </PWP>
+            <PWE>  2400 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>                        
+            <Package>
+                <Type> All </Type>
+                <PON> LPTM27 </PON>
+                <AliasPON> LPTM27-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 402-ball caBGA </Type>
+                <PON> LPTM27-XXTG232 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>            
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device> 
+-->
+        <Operation>
+        	&quot;PTM Erase,Program,Verify&quot;
+        	&quot;PTM Erase,Program,Verify,Secure&quot;
+        	&quot;PTM Program&quot;        	
+        	&quot;PTM Erase Only&quot;	
+			&quot;PTM Verify Only&quot;
+	    	&quot;PTM Verify ID&quot;
+			&quot;PTM Display ID&quot;		
+	    	&quot;PTM Display USERCODE&quot;
+<!--	    	&quot;PTM Read Shadow Registers&quot;--> 
+			&quot;PTM Read and Save&quot;
+<!--			&quot;PTM Calculate Checksum&quot;-->
+			&quot;PTM Read Status Register&quot;	
+			&quot;PTM Read ASC Status&quot;
+			&quot;PTM Read FaultLog Registers&quot;
+			&quot;PTM Read FaultLog Memory&quot;
+	    	&quot;PTM FaultLog Erase Only&quot;
+			&quot;PTM Erase,Program,Verify,I2CSA&quot;
+			&quot;PTM I2CSA Program&quot;
+			&quot;PTM I2CSA Erase Only&quot;
+	    	&quot;PTM Bypass&quot;
+	    	
+	    	&quot;PTM Background Erase,Program,Verify&quot;
+	    	&quot;PTM Background Erase,Program,Verify,Refresh&quot;	    	
+	    	&quot;PTM Background Program,Verify and TransFR&quot;	    	
+        	&quot;PTM Background Erase Only&quot;	
+			&quot;PTM Background Verify Only&quot;
+	    	&quot;PTM Background Verify ID&quot;
+			&quot;PTM Background Read and Save&quot;
+			&quot;PTM Background Read Status Register&quot;	
+			&quot;PTM Background Read ASC Status&quot;
+			&quot;PTM Background Erase,Program,Verify,I2CSA&quot;
+			&quot;PTM Background Program Feature Rows&quot;
+<!--			&quot;PTM Background I2CSA Program&quot;-->
+<!--			&quot;PTM Background I2CSA Erase Only&quot;-->
+			&quot;PTM Background Bypass&quot;
+			
+			
+	    	&quot;ASC Erase,Program,Verify&quot;
+	    	&quot;ASC Program&quot;
+			&quot;ASC Erase Only&quot;			
+	    	&quot;ASC Verify Only&quot; 
+	    	&quot;ASC Verify ID&quot;   
+	    	&quot;ASC Read and Save&quot;
+	    	&quot;ASC Calculate Data CRC&quot;
+	    	&quot;ASC Read Status Register&quot;  
+	    	&quot;ASC Read FaultLog Registers&quot;
+	    	&quot;ASC Read FaultLog Memory&quot;
+	    	&quot;ASC FaultLog Erase Only&quot;	    	
+	    	&quot;ASC Erase,Program,Verify,I2CSA&quot;
+	    	&quot;ASC I2CSA Program&quot;
+	    	&quot;ASC I2CSA Erase Only&quot;
+	    	
+<!--	    	&quot;ASC Read Shadow Registers&quot;-->  
+<!--	    	&quot;ASC Refresh&quot;-->			
+<!--			&quot;ASC Tag Memory Read&quot;-->
+<!--			&quot;ASC Tag Memory Write&quot;-->
+<!--			&quot;ASC Tag Memory Verify&quot;-->
+	    	
+	    	&quot;ASC Background Erase,Program,Verify&quot;
+	    	&quot;ASC Background Erase Only&quot;			
+	    	&quot;ASC Background Verify Only&quot; 
+	    	&quot;ASC Background Verify ID&quot;   
+	    	&quot;ASC Background Read and Save&quot;
+	    	&quot;ASC Background Calculate Data CRC&quot;
+	    	&quot;ASC Background Read Status Register&quot;
+	    	&quot;ASC Background Erase,Program,Verify,I2CSA&quot;  
+	    	
+	    	&quot;FLASH Erase,Program,Verify&quot;
+        	&quot;FLASH Erase,Program,Verify,Secure&quot;
+        	&quot;FLASH Erase,Program,Verify,Secure Plus&quot;
+        	&quot;FLASH Program&quot;
+        	&quot;FLASH CFG and UFM Erase,Program,Verify&quot;			
+        	&quot;FLASH CFG Erase,Program,Verify&quot;
+        	&quot;FLASH Verify Only&quot;
+			&quot;FLASH Erase Only&quot;
+			&quot;FLASH Verify ID&quot;
+			&quot;FLASH Display ID&quot;	
+	    	&quot;FLASH Display USERCODE&quot;
+			&quot;FLASH Read and Save&quot;
+			&quot;FLASH Calculate Checksum&quot;
+			&quot;FLASH UFM Program,Verify&quot;
+			&quot;FLASH UFM Erase&quot;			
+			&quot;FLASH Verify UFM&quot;			
+<!--			&quot;FLASH UFM Read and Program&quot;-->
+			&quot;FLASH Read Status Register&quot;			
+			&quot;FLASH Secure Device&quot;
+			&quot;FLASH Secure Plus&quot;
+			&quot;FLASH Refresh&quot;
+			&quot;FLASH Bypass&quot;	
+			
+			
+			&quot;I2C Erase,Program,Verify&quot;
+	    	&quot;I2C Program&quot;
+	    	&quot;I2C Erase,Program,Verify,Secure&quot;
+	    	&quot;I2C Erase Only&quot;			
+	    	&quot;I2C Verify Only&quot;
+			&quot;I2C Verify ID&quot;
+			&quot;I2C Display ID&quot;
+			&quot;I2C Program Feature Rows&quot;
+			&quot;I2C Read Status Register&quot;
+			&quot;I2C Read ASC Status&quot;
+			&quot;I2C Erase,Program,Verify,Feature&quot;
+			&quot;I2C Recovery Erase Only&quot;	
+			&quot;I2C Background Erase,Program,Verify&quot;	 
+			&quot;I2C Background Erase,Program,Verify,Secure&quot;
+			&quot;I2C Background Program,Verify and TransFR&quot;
+	    	&quot;I2C Background Program&quot; 
+			&quot;I2C Background Erase Only&quot;
+	    	&quot;I2C Background Verify Only&quot;
+	    	&quot;I2C Background Program Feature Rows&quot;
+	    	&quot;I2C Background Read Status Register&quot;
+	    	&quot;I2C Background Read ASC Status&quot;
+	    	
+			&quot;JTAGI2C Erase,Program,Verify&quot;
+	    	&quot;JTAGI2C Program&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify,Secure&quot;
+	    	&quot;JTAGI2C Erase Only&quot;			
+	    	&quot;JTAGI2C Verify Only&quot;
+			&quot;JTAGI2C Verify ID&quot;
+			&quot;JTAGI2C Display ID&quot;
+			&quot;JTAGI2C Program Feature Rows&quot;
+			&quot;JTAGI2C Read Status Register&quot;
+			&quot;JTAGI2C Read ASC Status&quot;
+			&quot;JTAGI2C Erase,Program,Verify,Feature&quot;
+			&quot;JTAGI2C Recovery Erase Only&quot;				
+			&quot;JTAGI2C Background Erase,Program,Verify&quot;	 
+			&quot;JTAGI2C Background Erase,Program,Verify,Secure&quot;
+			&quot;JTAGI2C Background Program,Verify and TransFR&quot;
+	    	&quot;JTAGI2C Background Program&quot; 
+			&quot;JTAGI2C Background Erase Only&quot;
+	    	&quot;JTAGI2C Background Verify Only&quot;
+	    	&quot;JTAGI2C Background Program Feature Rows&quot;
+	    	&quot;JTAGI2C Background Read Status Register&quot;
+	    	&quot;JTAGI2C Background Read ASC Status&quot;
+			
+			&quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Background Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Background Erase,Program&quot;
+	    	&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Background Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Background Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Background Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;SPI Flash Bypass&quot;
+	    	&quot;Scan SPI Flash Device&quot;								    	 		
+			
+			&quot;I2CASC Erase,Program,Verify&quot;
+	    	&quot;I2CASC Erase Only&quot;			
+	    	&quot;I2CASC Verify Only&quot; 
+	    	&quot;I2CASC Verify ID&quot;   
+	    	&quot;I2CASC Read and Save&quot;
+	    	&quot;I2CASC Calculate Data CRC&quot;
+	    	&quot;I2CASC Read Status Register&quot;  
+	    	&quot;I2CASC Background Erase,Program,Verify&quot;
+	    	&quot;I2CASC Background Erase Only&quot;			
+	    	&quot;I2CASC Background Verify Only&quot; 
+	    	&quot;I2CASC Background Verify ID&quot;   
+	    	&quot;I2CASC Background Read and Save&quot;
+	    	&quot;I2CASC Background Read Status Register&quot;
+	    	
+	    	
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0xE0</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed;*.isc"/>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <STAPLSupport>YES</STAPLSupport>
+        <BitstreamModelTemplate>POJO2 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;PTM;PTM Background;FLASH;SPI;I2C;</Programming_Mode_Control>
+<!--     	<LicenseControl>LSC_CONTROL_DEVICE</LicenseControl> -->      	
+    </Family>   
+    <Family name="ASC">
+      <Device name="L-ASC10">
+            <Comm> JTAG </Comm>
+            <Access> ASC </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> L-ASC10 </CodeName>
+            <FullName> L-ASC10 </FullName>
+            <AliasName> L-ASC10_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ASC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ASC.svp"
+                         value="0x03"/>
+            <IspID>0x89</IspID>
+            <IDMask>0xFF</IDMask>
+            <IDScanMask>0xFF</IDScanMask>
+            <IDSize>8</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 64 </ColWidth>
+            <RowWidth> 14 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 960 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  100 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> L-ASC10 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> L-ASC10-XX48 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 			
+        </Device>
+        <Operation>	    	
+	    	&quot;I2C Erase,Program,Verify&quot;
+			&quot;I2C Program&quot;
+			&quot;I2C Erase Only&quot;			
+	    	&quot;I2C Verify Only&quot; 
+	    	&quot;I2C Verify ID&quot;   
+	    	&quot;I2C Read and Save&quot; 
+	    	&quot;I2C Read Status Register&quot;   
+	    	&quot;I2C Read FaultLog Registers&quot;
+	    	&quot;I2C Read FaultLog Memory&quot;
+	    	&quot;I2C FaultLog Erase Only&quot;	    	
+	    	&quot;I2C Erase,Program,Verify,I2CSA&quot;
+	    	&quot;I2C I2CSA Program&quot;
+	    	&quot;I2C I2CSA Erase Only&quot;
+	    	
+	    	&quot;I2C Background Erase,Program,Verify&quot;
+	    	&quot;I2C Background Erase Only&quot;			
+	    	&quot;I2C Background Verify Only&quot; 
+	    	&quot;I2C Background Erase,Program,Verify,I2CSA&quot; 
+	    	
+	    	&quot;JTAGI2C Erase,Program,Verify&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify,I2CSA&quot; 
+	    	&quot;JTAGI2C Erase Only&quot;			
+	    	&quot;JTAGI2C Verify Only&quot;
+			&quot;JTAGI2C Verify ID&quot;
+			&quot;JTAGI2C Background Erase,Program,Verify&quot;	
+			&quot;JTAGI2C Background Erase,Program,Verify,I2CSA&quot;  
+	    	
+<!--	    	&quot;I2C Refresh&quot;-->   	
+<!--	    	&quot;I2C Read Shadow Registers&quot;-->
+<!--			&quot;I2C Tag Memory Read&quot;-->
+<!--			&quot;I2C Tag Memory Write&quot;-->
+<!--			&quot;I2C Tag Memory Verify&quot;-->	    							    	 		
+			
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <ISCRelease value="0x01" extension="*.hex;"/>
+		<ReInitialize value="FALSE"/>
+        <Programming_Mode_Control>;I2C;</Programming_Mode_Control>
+<!--     	<LicenseControl>LSC_CONTROL_DEVICE</LicenseControl>  --> 
+     </Family>
+</ispXDF>

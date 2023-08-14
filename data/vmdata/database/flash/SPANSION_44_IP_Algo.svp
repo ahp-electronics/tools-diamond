@@ -1,0 +1,542 @@
+DATA:
+    PATTERN  (--, --, FILE(--, --));      
+    WREN   ( 1, 1, b01100000);
+    WRDI   ( 1, 1, b00100000);
+    RDSR   ( 1, 1, b10100000);
+    READ   ( 1, 1, b11000000);
+    FAST_READ   ( 1, 1, b11010000);
+    PP   ( 1, 1, b01000000);
+    BE   ( 1, 1, b11100011);
+    SE   ( 1, 1, b00011011);
+    DP   ( 1, 1, b10011101);
+    RES   ( 1, 1, b11010101);  	
+    DEVICE_ID  (1,1,FILE(ID, --)); 
+DATA_END;
+
+PROTOCOL:	PCM;
+
+SIGNAL_DECL: 
+	inout L_f_cs;
+	buffer  clock;
+SIGNAL_DECL_END;
+             
+BUS_DECL: 
+    /CE = L_f_cs;
+BUS_DECL_END;
+
+FUNCTION INITIAL;
+	clock   HIGH;
+	SET_ROW (PATTERN, 0);
+	Addr = START_ADDRESS;
+	# Shift BYPASS instruction (0xFF) 
+	SIR	8	TDI(FF) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+END_FUNCTION;
+
+FUNCTION FINALIZE;
+	SDR 19 TDI(000F0);
+	RUNTEST IDLE 3 TCK ;
+	# Shift BYPASS instruction (0xFF) 
+	SIR	8	TDI(FF) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+END_FUNCTION;
+
+FUNCTION ENABLE_ER1_DR0;
+	# Shift ER1 instruction (0x32) into JTAG IR register to select ER1
+	SIR 8 TDI(32);
+	# Shift "001001000" to the 9 bit ER1 register
+	#    bit[8:5] = "0010" to enable "PARALLEL FLASH programmer IP"
+	#    bit[4] = "0" to disable ispTRACY IP
+	#    bit[3] = "1" to select "ER2 8-bit Control Register"
+	#    bit[2:0] are readonly bits
+	# Enable ER2 CTRL
+	SDR 10 TDI(04C);
+	# Shift ER2 instruction (0x38) into JTAG IR register to select ER2
+	SIR	8	TDI(38) ;
+	# Shift "00000001" to the 8-bit ER2 control register to select DR0
+	SDR 9 TDI(000);
+	# Shift ER1 instruction (0x32) into JTAG IR register to select ER1
+	SIR 8 TDI(32);
+	# Shift "001000000" to the 9 bit ER1 register to select ER2 Data Registers
+	#    bit[8:5] = "0010" to enable "PARALLEL FLASH programmer IP"
+	#    bit[4] = "0" to disable ispTRACY IP
+	#    bit[3] = "0" to select "ER2 Data Registers"
+	#    bit[2:0] are readonly bits
+	# Enable ER2 DATA
+	SDR 10 TDI(044);
+	# Shift ER2 instruction (0x38) into JTAG IR register to select ER2
+	SIR 8 TDI(38);
+	
+END_FUNCTION;
+FUNCTION ENABLE_ER2_DR1;
+	# Shift ER1 instruction (0x32) into JTAG IR register to select ER1
+	SIR 8 TDI(32);
+	# Enable ER2 CTRL
+	SDR 10 TDI(04C);
+	# Shift ER1 instruction (0x38) into JTAG IR register to select ER2
+	SIR	8	TDI(38) ;
+	# Shift "00000001" to the 8-bit ER2 control register to select DR1
+	SDR 9 TDI(001);
+	# Shift ER1 instruction (0x32) into JTAG IR register to select ER1
+	SIR 8 TDI(32);
+	# Enable ER2 DATA
+	SDR 10 TDI(044);
+	# Shift ER2 instruction (0x38) into JTAG IR register to select ER2
+	SIR 8 TDI(38);
+	
+END_FUNCTION;
+
+FUNCTION ENABLE_ER2_DR2;
+	# Shift ER1 instruction (0x32) into JTAG IR register to select ER1
+	SIR 8 TDI(32);
+	# Enable ER2 CTRL
+	SDR 10 TDI(04C);
+	# Shift ER1 instruction (0x38) into JTAG IR register to select ER2
+	SIR	8	TDI(38) ;
+	# Shift "00000010" to the 8-bit ER2 control register to select DR2
+	SDR 9 TDI(002);
+	# Shift ER1 instruction (0x32) into JTAG IR register to select ER1
+	SIR 8 TDI(32);
+	# Enable ER2 DATA
+	SDR 10 TDI(044);
+	# Shift ER2 instruction (0x38) into JTAG IR register to select ER2
+	SIR 8 TDI(38);
+	
+END_FUNCTION;
+FUNCTION CHECK_IP_ID;
+	# Assumed the enableBitPosition is ER1 bit 6 ER1[8:5] = 0010
+	Call ENABLE_ER1_DR0;
+	# Shift out the 8-bit ER2 Data Register DR0 (ID register)
+	#    This is a readonly register.  The readback value should be:
+	#    bit[7:0] (8-bit IP functionality ID) = 00000010 ---> PARALLE Programmer IP
+	SDR 9 TDI(000) TDO(002) MASK(0FF);
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000000);
+END_FUNCTION;
+
+FUNCTION CHECK_ID;
+	# HDR 0;
+	# TDR 0;
+	# Load Address 0x555
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000555);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(000AA);
+	# Load Address 0x2AA
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(00002AA);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(00055);
+	# Load Address 0x555
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000555);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(00090);
+	# Load Address 0x001
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000001);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(10000) TDO(00000) MASK (00000);
+	SDR 19 TDI(10000) TDO(022FF) MASK(0FF00);
+	# Add reset command to exit autoselect mode for verify-only and readback
+  	SDR 19 TDI(000F0);
+END_FUNCTION;
+
+FUNCTION CHECK_RDID;
+	# HDR 0;
+	# TDR 0;
+	# Load Address 0x555
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000555);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(000AA);
+	# Load Address 0x2AA
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(00002AA);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(00055);
+	# Load Address 0x555
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000555);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(00090);
+	# Load Address 0x001
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000000);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(10000) TDO(00000) MASK (0FFFF);
+	SDR 19 TDI(10000) TDO(00001) MASK(000FF);
+	# Add reset command to exit autoselect mode for verify-only and readback
+  	SDR 19 TDI(000F0);
+END_FUNCTION;
+
+FUNCTION ERASE;
+	# Load Address 0x555
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000555);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(000AA);
+	# Load Address 0x2AA
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(00002AA);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(00055);
+	# Load Address 0x555
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000555);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(00080);
+	# Load Address 0x555
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000555);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(000AA);
+	# Load Address 0x2AA
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(00002AA);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(00055);
+	# Load Address 0x555
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000555);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(00010);
+	SDR  19 TDI(10000);
+	LOOP 2000;
+	LDELAY  IDLE 1.00E-00 SEC;
+	SDR 19 TDI(10000) TDO(10000) MASK(10000);
+	END_LOOP;
+END_FUNCTION;
+
+FUNCTION PROGRAM;
+	Addr = R_START_ADDRESS;
+	INT32 BuffAddr = 0;
+	RESET_BURST;
+	# Load Address 0x555
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000555);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(000AA);
+	# Load Address 0x2AA
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(00002AA);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(00055);
+	# Load Address 0x555
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(0000555);
+	Call ENABLE_ER2_DR2;
+	SDR  19 TDI(00020);
+	
+	# Load Start Address
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(Addr);
+	Call ENABLE_ER2_DR2;
+	REPEAT 0;
+		SDR 19 TDI(000A0);
+		SDR 19 TDI(02+PATTERN[1]+);
+		# RUNTEST	IDLE 1.00E-003 SEC;
+    END_REPEAT;
+END_FUNCTION;
+
+FUNCTION DISABLE;
+	SDR 19 TDI(00090);
+	SDR 19 TDI(00000);
+END_FUNCTION;
+
+FUNCTION VERIFY;
+	Addr = R_START_ADDRESS;
+	RESET_BURST;
+	# Load Start Address
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(Addr);
+	Call ENABLE_ER2_DR2;
+	SDR 19 TDI(30000);
+	REPEAT 0;
+		SDR 19 TDI(h030000)
+			   TDO(PATTERN[1]+)
+			   MASK(PATTERN[1]+);
+    END_REPEAT;
+END_FUNCTION;
+
+FUNCTION BLANK_CHECK;
+	Addr = R_START_ADDRESS;
+	RESET_BURST;
+	# Load Start Address
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(Addr);
+	Call ENABLE_ER2_DR2;
+	SDR 19 TDI(30000);
+	REPEAT 0;
+		SDR 19 TDI(h030000)
+			   TDO(BLANK_PATTERN[1]+)
+			   MASK(BLANK_PATTERN[1]+);
+    END_REPEAT;
+END_FUNCTION;
+
+FUNCTION READBACK;
+	Addr = R_START_ADDRESS;
+	# Load Start Address
+	Call ENABLE_ER2_DR1;
+	SDR  27 TDI(Addr);
+	Call ENABLE_ER2_DR2;
+	SDR 19 TDI(30000);
+	REPEAT 0;
+		SDR 19 TDI(h030000)
+			   TDO(SAVE_PATTERN[1]+);
+    END_REPEAT;
+END_FUNCTION;
+
+FUNCTION UPLOAD;
+	INT32 Idx1 = 0;
+	SIR	8	TDI (23) ;
+	RUNTEST	IDLE	5 TCK	1.00E-003 SEC;
+	SIR	8	TDI (23) ;
+	RUNTEST	IDLE	5 TCK	1.00E-003 SEC;
+	SIR	8	TDI (FF) ;
+	RUNTEST	IDLE	5 TCK	1.00E-000 SEC;
+END_FUNCTION;
+
+OPERATION Verify ID;
+  	INT32 Addr = 0;
+    Call INITIAL;
+	Call CHECK_IP_ID;
+	Call CHECK_RDID;
+    Call CHECK_ID;
+END_OPERATION;
+
+OPERATION Erase,Program,Verify;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ Checking Parallel FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+		
+    $ Erasing...
+	Call ERASE;
+
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+
+       
+END_OPERATION;
+
+OPERATION Erase,Program,Verify,Refresh;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ Checking Parallel FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+		
+    $ Erasing...
+	Call ERASE;
+
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+	
+	$ Uploading...
+	Call UPLOAD; 
+
+       
+END_OPERATION;
+OPERATION Program;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Checking Parallel FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+	$ IDCode Checking...
+	Call CHECK_ID;
+		
+    $ Erasing...
+	Call ERASE;
+
+	$ Programming...
+	Call PROGRAM;
+
+	# Disabling...
+	Call DISABLE;
+	
+	Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Program,Refresh;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Checking Parallel FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Erasing...
+	Call ERASE;
+
+	$ Programming...
+	Call PROGRAM;
+
+	# Disabling...
+	Call DISABLE;
+	
+	Call FINALIZE;
+	
+	$ Uploading...
+	Call UPLOAD; 
+    
+END_OPERATION;
+
+OPERATION Verify Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Checking Parallel FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Verifying...
+	Call VERIFY;
+
+	Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Read and Save;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ Checking Parallel FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Reading Back...
+	Call READBACK;
+
+	Call FINALIZE;
+	
+END_OPERATION;
+
+OPERATION Erase Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ Checking Parallel FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+		
+    $ Erasing...
+	Call ERASE;
+	
+	Call FINALIZE;
+    
+END_OPERATION;
+OPERATION Erase All;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ Checking Parallel FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Erasing All...
+	Call ERASE;
+    
+    Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Erase Sector(s) Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ Checking Parallel FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Erasing Sector(s)...
+	Call ERASE;
+    
+    Call FINALIZE;
+    
+END_OPERATION;
+OPERATION Blank Check;
+	INT32 Addr = 0;
+    
+    $ Initializing...
+	Call INITIAL;	
+	
+	$ Checking Parallel FLASH Programmer IP...
+    Call CHECK_IP_ID;
+    
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Blank Checking...
+	Call BLANK_CHECK;
+    
+    Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Disabled;
+    INT32 Idx1 = 0;
+    $ Resetting...
+    SIR	8	TDI (18) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+	$ FPGA Loader Disabled.Please Reset the target FPGA device...
+END_OPERATION;
+
+OPERATION Uploaded;
+    INT32 Idx1 = 0;
+    $ Uploading...
+    Call UPLOAD;
+    
+END_OPERATION;
+
+OPERATION Bypass;
+	INT32 Addr = 0;
+END_OPERATION;            
+            

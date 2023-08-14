@@ -1,0 +1,25 @@
+var pairs =
+{
+"distributed":{"rom":1,"read":1}
+,"distributed_rom":{"distributed":1}
+,"read":{"memory":1}
+,"implementation":{"lut":1}
+,"input":{"output":1}
+,"port":{"name":1}
+,"size":{"buses":1}
+,"reg":{"noreg":1}
+,"binary":{"hex":1}
+,"xp2":{"scm":1}
+,"scm":{"ecp":1}
+,"ecp":{"ecp2":1}
+,"ecp2":{"ecp2m":1}
+,"ecp2m":{"xo2":1}
+,"xo2":{"xo3l":1}
+,"xo3l":{"xo3lf":1}
+,"xo3lf":{"ecp3":1}
+,"ecp3":{"ecp5u":1}
+,"ecp5u":{"ecp5um":1}
+,"ecp5um":{"lptm":1}
+,"lptm":{"lptm2":1}
+}
+;Search.control.loadWordPairs(pairs);

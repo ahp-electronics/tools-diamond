@@ -1,0 +1,23 @@
+var pairs =
+{
+"working":{"components":1}
+,"components":{"section":1,"including":1,"component":1}
+,"section":{"describes":1}
+,"describes":{"operations":1}
+,"operations":{"working":1}
+,"including":{"adding":1}
+,"adding":{"deleting":1}
+,"deleting":{"moving":1}
+,"moving":{"cloning":1}
+,"cloning":{"swapping":1}
+,"swapping":{"components":1}
+,"component":{"pins":1,"logic":1}
+,"pins":{"explains":1}
+,"explains":{"logic":1}
+,"logic":{"block":1,"editing":1}
+,"block":{"view":1}
+,"view":{"view":1,"edit":1}
+,"edit":{"component":1}
+,"editing":{"component":1}
+}
+;Search.control.loadWordPairs(pairs);

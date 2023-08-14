@@ -1,0 +1,515 @@
+#include "ngdin.prp"
+#include "synopsys.prp"
+#include "orca.prp"
+
+// Ext Name    Ext type    Int Name       Int Type {Data Trans} Exclus.  Over.
+
+// Non-Black box props. All "ASIC" block properties are computed dynamically
+// in the PMs.
+
+// PIO props
+SLEWRATE       string      SLEWRATE       string                         TRUE
+IO_TYPE        string      IO_TYPE        string                         TRUE
+IO_TYPES       string      IO_TYPE        string                         TRUE
+PCICLAMP       string      PCICLAMP       string                         TRUE
+
+// IO sysConfig
+PERSISTENT     string      PERSISTENT     string                        TRUE
+PROHIBIT       string      PROHIBIT       string                        TRUE
+CONFIG_*       string      CONFIG_        string                        TRUE
+DONE_*         string      DONE           string                        TRUE
+MCCLK_FREQ     string      MCCLK_FREQ     string                        TRUE
+WAKE_UP        integer     WAKE_UP        integer                       TRUE
+COMPRESS_*     string      COMPRESS       string                        TRUE
+
+//
+NORETIME       string      NORETIME       string                        TRUE
+FREQUENCY_PIN* string      FREQUENCY_PIN  string                        TRUE
+
+// EBR, added here as all 5g based devices use them
+MEM_INIT_FILE  string      MEM_INIT_FILE  string                        TRUE
+MEM_LPC_FILE   string      MEM_LPC_FILE   string                        TRUE
+
+
+// LOGIC INSERTER property (REVEAL)
+RVL_*          string      RVL            string                        TRUE
+
+
+// Ext Name    Ext type    Int Name       Int Type {Data Trans} Exclus.  Over.
+
+// PIO props
+DRIVE          string      DRIVE          string                         TRUE
+PULLMODE       string      PULLMODE       string                         TRUE
+//VREFMODE     string      VREF           string                         TRUE
+VREF           string      VREF           string                         TRUE
+OPENDRAIN      string      OPENDRAIN      string                         TRUE
+
+// IOL props
+
+// Ext Name    Ext type    Int Name       Int Type {Data Trans} Exclus.  Over.
+// For wild cards(*), int name is irrelevant
+DATA_WIDTH*    integer     DATA_WIDTH     string                         TRUE
+RESETMODE      string      RESETMODE      string                         TRUE
+REGMODE*       string      REGMODE        string                         TRUE
+CSDECODE*      string      CSDECODE       string                         TRUE
+WRITEMODE*     string      WRITEMODE      string                         TRUE
+DISABLED_GSR   string      GSR            string                         TRUE
+GSR            string      GSR            string                         TRUE
+
+// JTAG
+USERCODE       string      USERCODE       string                         TRUE
+ER*            string      ER             string                         TRUE
+
+// DLL
+LOCK_SENSITIVITY   string    LOCK_SENSITIVITY   string                   TRUE
+ 
+// PLL
+FIN 	       string      FIN            string                       TRUE
+CLKI_DIV       integer     CLKI_DIV       string                       TRUE
+CLKI_DIV       string      CLKI_DIV       string                       TRUE
+CLKFB_DIV      integer     CLKFB_DIV      string                       TRUE	
+CLKFB_DIV      string      CLKFB_DIV      string                       TRUE	
+CLKOP_DIV      string      CLKOP_DIV      string                       TRUE
+CLKOP_DIV      integer     CLKOP_DIV      string                       TRUE
+CLKOK_DIV      string      CLKOK_DIV      string                       TRUE
+CLKOK_DIV      integer     CLKOK_DIV      string                       TRUE
+FDEL           string      FDEL           string                       TRUE
+PHASEADJ       string      PHASEADJ       string                       TRUE
+DUTY           string      DUTY           string                       TRUE
+DUTY           integer     DUTY           string                       TRUE
+//WAKE_ON_LOCK   string      WAKE_ON_LOCK   string                       TRUE
+DELAY_CNTL     string      DELAY_CNTL     string                       TRUE
+FB_MODE        string      FB_MODE        string                       TRUE
+
+// DCS
+DCSMODE        string      DCSMODE        string                       TRUE
+
+// Formerly INT_FBK.
+//PLL_FBK_ATTRIBUTE string   PLL_FBK_ATTRIBUTE string                  TRUE
+
+// FIXEDDELAY=[TRUE,FASLE] for fixed delay before the delay cell
+// INDELAY=[DEL0,...DEL15] for static delay
+FIXEDDELAY     string      FIXEDDELAY     string                       TRUE
+
+// DDR
+REGSET         string      REGSET         string                       TRUE
+
+// IO sysConfig
+//PWRSAVE        string      PWRSAVE        string                        TRUE
+INBUF          string      INBUF          string                        TRUE
+
+// CCU2
+INIT0          string      INIT0           string                        TRUE
+INIT1          string      INIT1           string                        TRUE
+INJECT1_*      string      INJECT1_       string                        TRUE
+// The following properties from edif2ngd_x2c.prp file.
+// Ext Name   Ext type   Int Name     Int Type {Data Trans} Exclus.  Over.
+// For wild cards(*), int name is irrelevant
+
+// PIO Attributes
+DIFFRESISTOR           string     DIFFRESISTOR           string        TRUE
+TERMINATEVTT           string     TERMINATEVTT           string        TRUE
+EQ_CAL                 string     EQ_CAL                 string        TRUE
+DIFFDRIVE              string     DIFFDRIVE              string        TRUE
+MULTDRIVE              string     MULTDRIVE              string        TRUE
+CLAMP                  string     CLAMP                  string        TRUE
+HYSTERESIS             string     HYSTERESIS             string        TRUE
+
+// PUR
+RST_PULSE              integer    RST_PULSE              string        TRUE
+RST_PULSE              string     RST_PULSE              string        TRUE
+
+// DDR
+CLKMODE                string     CLKMODE                string        TRUE
+ISI_CAL                string     ISI_CAL                string        TRUE
+
+// DELAY
+DEL_MODE               string     DEL_MODE               string        TRUE
+DEL_VALUE              string     DEL_VALUE              string        TRUE
+
+// EBR
+// (new in XO2)
+ASYNC_RESET_RELEASE    string     ASYNC_RESET_RELEASE    string        TRUE
+INIT_DATA              string     INIT_DATA              string        TRUE
+
+//FIFO (block RAM) 
+//EPOINTER*              string     EPOINTER               string        TRUE
+FULLPOINTER*           string     FULLPOINTER            string        TRUE
+AEPOINTER*             string     AEPOINTER              string        TRUE
+AFPOINTER*             string     AFPOINTER              string        TRUE
+
+// Clock Structure 
+DIV                    string     DIV                    string        TRUE
+NOM_FREQ               string     NOM_FREQ               float         TRUE
+
+// EFB 
+EFB_I2C1               string     EFB_I2C1               string        TRUE
+EFB_I2C2               string     EFB_I2C2               string        TRUE
+EFB_SPI                string     EFB_SPI                string        TRUE
+EFB_TC                 string     EFB_TC                 string        TRUE
+EFB_TC_PORTMODE        string     EFB_TC_PORTMODE        string        TRUE
+//EFB_PLL                string     EFB_PLL                string        TRUE
+//EFB_PLL_CNT            integer    EFB_PLL_CNT            string        TRUE
+EFB_UFM                string     EFB_UFM                string        TRUE
+EFB_WB_CLK_FREQ        string     EFB_WB_CLK_FREQ        string        TRUE
+// I2C
+I2C1_ADDRESSING        string     I2C1_ADDRESSING        string        TRUE
+I2C2_ADDRESSING        string     I2C2_ADDRESSING        string        TRUE
+I2C1_SLAVE_ADDR        string     I2C1_SLAVE_ADDR        string        TRUE
+I2C2_SLAVE_ADDR        string     I2C2_SLAVE_ADDR        string        TRUE
+I2C1_BUS_PERF          string     I2C1_BUS_PERF          string        TRUE
+I2C2_BUS_PERF          string     I2C2_BUS_PERF          string        TRUE
+//I2C1_BUS_PERF          integer    I2C1_BUS_PERF          string        TRUE
+//I2C2_BUS_PERF          integer    I2C2_BUS_PERF          string        TRUE
+I2C1_CLK_DIVIDER       integer    I2C1_CLK_DIVIDER       string        TRUE
+I2C2_CLK_DIVIDER       integer    I2C2_CLK_DIVIDER       string        TRUE
+I2C1_GEN_CALL          string     I2C1_GEN_CALL          string        TRUE
+I2C2_GEN_CALL          string     I2C2_GEN_CALL          string        TRUE
+I2C1_WAKEUP            string     I2C1_WAKEUP            string        TRUE
+I2C2_WAKEUP            string     I2C2_WAKEUP            string        TRUE
+// SPI
+SPI_MODE               string     SPI_MODE               string        TRUE
+SPI_CLK_DIVIDER        integer    SPI_CLK_DIVIDER        string        TRUE
+SPI_LSB_FIRST          string     SPI_LSB_FIRST          string        TRUE
+SPI_CLK_INV            string     SPI_CLK_INV            string        TRUE
+SPI_PHASE_ADJ          string     SPI_PHASE_ADJ          string        TRUE
+SPI_SLAVE_HANDSHAKE    string     SPI_SLAVE_HANDSHAKE    string        TRUE
+SPI_INTR_TXRDY         string     SPI_INTR_TXRDY         string        TRUE
+SPI_INTR_RXRDY         string     SPI_INTR_RXRDY         string        TRUE
+SPI_INTR_TXOVR         string     SPI_INTR_TXOVR         string        TRUE
+SPI_INTR_RXOVR         string     SPI_INTR_RXOVR         string        TRUE
+SPI_WAKEUP             string     SPI_WAKEUP             string        TRUE
+// Timer Counter 
+TC_MODE                string     TC_MODE                string        TRUE
+TC_SCLK_SEL            string     TC_SCLK_SEL            string        TRUE
+TC_CCLK_SEL            integer    TC_CCLK_SEL            string        TRUE
+TC_GSR                 string     TC_GSR                 string        TRUE
+TC_TOP_SET             integer    TC_TOP_SET             string        TRUE
+TC_OCR_SET             integer    TC_OCR_SET             string        TRUE
+TC_OC_MODE             string     TC_OC_MODE             string        TRUE
+TC_RESETN              string     TC_RESETN              string        TRUE
+TC_TOP_SEL             string     TC_TOP_SEL             string        TRUE
+TC_OV_INT              string     TC_OV_INT              string        TRUE
+TC_OCR_INT             string     TC_OCR_INT             string        TRUE
+TC_ICR_INT             string     TC_ICR_INT             string        TRUE
+TC_OVERFLOW            string     TC_OVERFLOW            string        TRUE
+TC_ICAPTURE            string     TC_ICAPTURE            string        TRUE
+// UFM
+// old attributes
+//UFM_DATA               string     UFM_DATA               string        TRUE
+//UFM_RESERVED_EBR       integer    UFM_RESERVED_EBR       string        TRUE
+//TAG_MEM_SIZE           integer    TAG_MEM_SIZE           string        TRUE
+//TAG_INITVAL_ADDRESS    string     TAG_INITVAL_ADDRESS    string        TRUE
+//UFM_INITVAL_*          string     UFM_INITSTATE          string        TRUE
+// new attributes
+UFM_INIT_PAGES         integer    UFM_INIT_PAGES         string        TRUE
+UFM_INIT_START_PAGE    integer    UFM_INIT_START_PAGE    string        TRUE
+UFM_INIT_ALL_ZEROS     string     UFM_INIT_ALL_ZEROS     string        TRUE
+UFM_INIT_FILE_NAME     string     UFM_INIT_FILE_NAME     string        TRUE
+UFM_INIT_FILE_FORMAT   string     UFM_INIT_FILE_FORMAT   string        TRUE
+
+// POWER COMPS
+STDBYOPT               string     STDBYOPT               string        TRUE
+TIMEOUT                string     TIMEOUT                string        TRUE
+WAKEUP                 string     WAKEUP                 string        TRUE
+POROFF                 string     POROFF                 string        TRUE
+BGOFF                  string     BGOFF                  string        TRUE
+BANKID                 integer    BANKID                 integer       TRUE
+
+// Config blocks
+SED_CLK_FREQ           string     SED_CLK_FREQ           string        TRUE
+CHECKALWAYS            string     CHECKALWAYS            string        TRUE
+AUTORECONFIG           string     AUTORECONFIG           string        TRUE
+DEV_DENSITY            string     DEV_DENSITY            string        TRUE
+// The following properties from edif2ngd_s5p.prp file.
+// Ext Name           Ext type    Int Name               Int Type {Data Trans} Exclus. Over.
+// For wild cards(*), int name is irrelevant
+
+
+// IODELAY
+DEL_VALUE              string     DEL_VALUE              string        TRUE
+DEL_VALUE              integer    DEL_VALUE              string        TRUE
+WAIT_FOR_EDGE          string     WAIT_FOR_EDGE          string        TRUE
+
+// DDR
+WRITE_LEVELING         string     WRITE_LEVELING         string        TRUE
+DQSW_INVERT            string     DQSW_INVERT            string        TRUE
+DQSW90_INVERT          string     DQSW90_INVERT          string        TRUE
+
+//SYSIO
+FREEZEIO               string     FREEZEIO               string        TRUE
+
+// DQSBUF
+GEARING_MODE           string     GEARING_MODE           string        TRUE
+PHASE_SHIFT            string     PHASE_SHIFT            string        TRUE
+DQS_LI_DEL_ADJ         string     DQS_LI_DEL_ADJ         string        TRUE
+DQS_LI_DEL_VAL         integer    DQS_LI_DEL_VAL         integer       TRUE
+DQS_LO_DEL_ADJ         string     DQS_LO_DEL_ADJ         string        TRUE
+DQS_LO_DEL_VAL         integer    DQS_LO_DEL_VAL         integer       TRUE
+LPDDR                  string     LPDDR                  string        TRUE
+
+// POWER COMPS
+STDBYOPT               string     STDBYOPT               string        TRUE
+TIMEOUT                string     TIMEOUT                string        TRUE
+WAKEUP                 string     WAKEUP                 string        TRUE
+POROFF                 string     POROFF                 string        TRUE
+BGOFF                  string     BGOFF                  string        TRUE
+BANKID                 integer    BANKID                 integer       TRUE
+
+// DLL
+LOCK_SENSITIVITY       string     LOCK_SENSITIVITY       string        TRUE
+FIN                    string     FIN                    string        TRUE
+FORCE_MAX_DELAY        string     FORCE_MAX_DELAY        string        TRUE
+DEL_ADJ                string     DEL_ADJ_UNUSED         string        TRUE
+DEL_VAL                integer    DEL_VAL_UNUSED         integer       TRUE
+
+// PLL
+CLKI_DIV               integer    CLKI_DIV               integer       TRUE
+CLKFB_DIV              integer    CLKFB_DIV              integer       TRUE
+CLKOP_DIV              integer    CLKOP_DIV              integer       TRUE
+CLKOS_DIV              integer    CLKOS_DIV              integer       TRUE
+CLKOS2_DIV             integer    CLKOS2_DIV             integer       TRUE
+CLKOS3_DIV             integer    CLKOS3_DIV             integer       TRUE
+CLOCK_ENABLE_PORTS     string     CLOCK_ENABLE_PORTS     string        TRUE
+CLKOP_ENABLE           string     CLKOP_ENABLE           string        TRUE
+CLKOS_ENABLE           string     CLKOS_ENABLE           string        TRUE
+CLKOS2_ENABLE          string     CLKOS2_ENABLE          string        TRUE
+CLKOS3_ENABLE          string     CLKOS3_ENABLE          string        TRUE
+VCO_BYPASS_A0          string     VCO_BYPASS_A0          string        TRUE
+VCO_BYPASS_B0          string     VCO_BYPASS_B0          string        TRUE
+VCO_BYPASS_C0          string     VCO_BYPASS_C0          string        TRUE
+VCO_BYPASS_D0          string     VCO_BYPASS_D0          string        TRUE
+CLKOP_CPHASE           integer    CLKOP_CPHASE           integer       TRUE
+CLKOS_CPHASE           integer    CLKOS_CPHASE           integer       TRUE
+CLKOS2_CPHASE          integer    CLKOS2_CPHASE          integer       TRUE
+CLKOS3_CPHASE          integer    CLKOS3_CPHASE          integer       TRUE
+CLKOP_FPHASE           integer    CLKOP_FPHASE           integer       TRUE
+CLKOS_FPHASE           integer    CLKOS_FPHASE           integer       TRUE
+CLKOS2_FPHASE          integer    CLKOS2_FPHASE          integer       TRUE
+CLKOS3_FPHASE          integer    CLKOS3_FPHASE          integer       TRUE
+CLKOP_PHASEADJ         integer    CLKOP_PHASEADJ         string        TRUE
+CLKOS_PHASEADJ         integer    CLKOS_PHASEADJ         string        TRUE
+CLKOS2_PHASEADJ        integer    CLKOS2_PHASEADJ        string        TRUE
+CLKOS3_PHASEADJ        integer    CLKOS3_PHASEADJ        string        TRUE
+CLKOP_PHASEADJ         string     CLKOP_PHASEADJ         string        TRUE
+CLKOS_PHASEADJ         string     CLKOS_PHASEADJ         string        TRUE
+CLKOS2_PHASEADJ        string     CLKOS2_PHASEADJ        string        TRUE
+CLKOS3_PHASEADJ        string     CLKOS3_PHASEADJ        string        TRUE
+FEEDBK_PATH            string     FEEDBK_PATH            string        TRUE
+FRACN_ENABLE           string     FRACN_ENABLE           string        TRUE
+FRACN_DIV              integer    FRACN_DIV              integer       TRUE
+CLKOP_TRIM_POL         string     CLKOP_TRIM_POL         string        TRUE
+CLKOP_TRIM_DELAY       integer    CLKOP_TRIM_DELAY       integer       TRUE
+CLKOS_TRIM_POL         string     CLKOS_TRIM_POL         string        TRUE
+CLKOS_TRIM_DELAY       integer    CLKOS_TRIM_DELAY       integer       TRUE
+PREDIVIDER_MUX*        integer    PREDIVIDER_MUX         integer       TRUE
+OUTDIVIDER_MUX*        string     OUTDIVIDER_MUX         string        TRUE
+PLL_USE_WB             string     PLL_USE_WB             string        TRUE
+FREQ_LOCK_ACCURACY     integer    FREQ_LOCK_ACCURACY     integer       TRUE
+PLL_LOCK_MODE          integer    PLL_LOCK_MODE          integer       TRUE
+PLL_LOCK_DELAY         integer    PLL_LOCK_DELAY         integer       TRUE
+DPHASE_SOURCE          string     DPHASE_SOURCE          string        TRUE
+CLKOP_AFREQ            string     CLKOP_AFREQ            string        TRUE
+CLKOS_AFREQ            string     CLKOS_AFREQ            string        TRUE
+CLKOS2_AFREQ           string     CLKOS2_AFREQ           string        TRUE
+CLKOS3_AFREQ           string     CLKOS3_AFREQ           string        TRUE
+INTFB_WAKE             string     INTFB_WAKE             string        TRUE
+PLLRST_ENA             string     PLLRST_ENA             string        TRUE
+CLKSEL_ENA             string     CLKSEL_ENA             string        TRUE
+MRST_ENA               string     MRST_ENA               string        TRUE
+DCRST_ENA              string     DCRST_ENA              string        TRUE
+DDRST_ENA              string     DDRST_ENA              string        TRUE
+
+//PLL properties not on primitive, but passed as attribute
+KVCO                   string     KVCO                   string        TRUE
+LPF_CAPACITOR          string     LPF_CAPACITOR          string        TRUE
+LPF_RESISTOR           string     LPF_RESISTOR           string        TRUE
+ICP_CURRENT            string     ICP_CURRENT            string        TRUE
+FRACN_ORDER            string     FRACN_ORDER            string        TRUE
+PLL_EXPERT             string     PLL_EXPERT             string        TRUE
+PLL_LOCK_MODE          string     PLL_LOCK_MODE          string        TRUE
+PLL_LOCK_DELAY         string     PLL_LOCK_DELAY         string        TRUE
+STDBY_ENABLE           string     STDBY_ENABLE           string        TRUE
+REFIN_RESET            string     REFIN_RESET            string        TRUE
+SYNC_ENABLE            string     SYNC_ENABLE            string        TRUE
+INT_LOCK_STICKY        string     INT_LOCK_STICKY        string        TRUE
+
+// OSC
+DIV                    integer    DIV                    string        TRUE
+
+// DTR
+DTR_TEMP               string     DTR_TEMP               string        TRUE
+
+// DSP 
+//
+// old from ECP/ECP2
+//
+REG_INPUTA_CLK   string      REG_INPUTA_CLK   string                      TRUE
+REG_INPUTA_CE    string      REG_INPUTA_CE    string                      TRUE
+REG_INPUTA_RST   string      REG_INPUTA_RST   string                      TRUE
+REG_INPUTB_CLK   string      REG_INPUTB_CLK   string                      TRUE
+REG_INPUTB_CE    string      REG_INPUTB_CE    string                      TRUE
+REG_INPUTB_RST   string      REG_INPUTB_RST   string                      TRUE
+REG_PIPELINE_CLK string      REG_PIPELINE_CLK string                      TRUE
+REG_PIPELINE_CE  string      REG_PIPELINE_CE  string                      TRUE
+REG_PIPELINE_RST string      REG_PIPELINE_RST string                      TRUE
+REG_OUTPUT_CLK   string      REG_OUTPUT_CLK   string                      TRUE
+REG_OUTPUT_CE    string      REG_OUTPUT_CE    string                      TRUE
+REG_OUTPUT_RST   string      REG_OUTPUT_RST   string                      TRUE
+REG_SIGNEDA_CLK  string      REG_SIGNEDA_CLK  string                      TRUE
+REG_SIGNEDA_CE   string      REG_SIGNEDA_CE   string                      TRUE
+REG_SIGNEDA_RST  string      REG_SIGNEDA_RST  string                      TRUE
+REG_SIGNEDB_CLK  string      REG_SIGNEDB_CLK  string                      TRUE
+REG_SIGNEDB_CE   string      REG_SIGNEDB_CE   string                      TRUE
+REG_SIGNEDB_RST  string      REG_SIGNEDB_RST  string                      TRUE
+GSR              string      GSR              string                      TRUE 
+//
+// old from ECP3
+//
+REG_INPUTC0_CE     string     REG_INPUTC0_CE        string                TRUE
+REG_INPUTC0_CLK    string     REG_INPUTC0_CLK       string                TRUE
+REG_INPUTC0_RST    string     REG_INPUTC0_RST       string                TRUE
+REG_INPUTC1_CE     string     REG_INPUTC1_CE        string                TRUE
+REG_INPUTC1_CLK    string     REG_INPUTC1_CLK       string                TRUE
+REG_INPUTC1_RST    string     REG_INPUTC1_RST       string                TRUE
+REG_OUTPUT0_CE     string     REG_OUTPUT0_CE        string                TRUE
+REG_OUTPUT0_CLK    string     REG_OUTPUT0_CLK       string                TRUE
+REG_OUTPUT0_RST    string     REG_OUTPUT0_RST       string                TRUE
+REG_OUTPUT1_CE     string     REG_OUTPUT1_CE        string                TRUE
+REG_OUTPUT1_CLK    string     REG_OUTPUT1_CLK       string                TRUE
+REG_OUTPUT1_RST    string     REG_OUTPUT1_RST       string                TRUE
+REG_OPCODE_0_CLK   string     REG_OPCODE_0_CLK      string                TRUE
+REG_OPCODE_0_CE    string     REG_OPCODE_0_CE       string                TRUE
+REG_OPCODE_0_RST   string     REG_OPCODE_0_RST      string                TRUE
+REG_OPCODE_1_CLK   string     REG_OPCODE_1_CLK      string                TRUE
+REG_OPCODE_1_CE    string     REG_OPCODE_1_CE       string                TRUE
+REG_OPCODE_1_RST   string     REG_OPCODE_1_RST      string                TRUE
+REG_OPCODEOP0_0_CLK string    REG_OPCODEOP0_0_CLK   string                TRUE
+REG_OPCODEOP0_0_CE  string    REG_OPCODEOP0_0_CE    string                TRUE
+REG_OPCODEOP0_0_RST string    REG_OPCODEOP0_0_RST   string                TRUE
+REG_OPCODEOP0_1_CLK string    REG_OPCODEOP0_1_CLK   string                TRUE
+REG_OPCODEOP0_1_CE  string    REG_OPCODEOP0_1_CE    string                TRUE
+REG_OPCODEOP0_1_RST string    REG_OPCODEOP0_1_RST   string                TRUE
+REG_OPCODEOP1_0_CLK string    REG_OPCODEOP1_0_CLK   string                TRUE
+//REG_OPCODEOP1_0_CE  string    REG_OPCODEOP1_0_CE    string                TRUE
+//REG_OPCODEOP1_0_RST string    REG_OPCODEOP1_0_RST   string                TRUE
+REG_OPCODEOP1_1_CLK string    REG_OPCODEOP1_1_CLK   string                TRUE
+//REG_OPCODEOP1_1_CE  string    REG_OPCODEOP1_1_CE    string                TRUE
+//REG_OPCODEOP1_1_RST string    REG_OPCODEOP1_1_RST   string                TRUE
+REG_OPCODEIN_0_CLK string     REG_OPCODEIN_0_CLK    string                TRUE
+REG_OPCODEIN_0_CE  string     REG_OPCODEIN_0_CE     string                TRUE
+REG_OPCODEIN_0_RST string     REG_OPCODEIN_0_RST    string                TRUE
+REG_OPCODEIN_1_CLK string     REG_OPCODEIN_1_CLK    string                TRUE
+REG_OPCODEIN_1_CE  string     REG_OPCODEIN_1_CE     string                TRUE
+REG_OPCODEIN_1_RST string     REG_OPCODEIN_1_RST    string                TRUE
+REG_FLAG_CLK       string     REG_FLAG_CLK          string                TRUE
+REG_FLAG_CE        string     REG_FLAG_CE           string                TRUE
+REG_FLAG_RST       string     REG_FLAG_RST          string                TRUE
+MULT_BYPASS        string     MULT_BYPASS           string                TRUE
+CAS_MATCH_REG      string     CAS_MATCH_REG         string                TRUE
+PSE17              string     PSE17                 string                TRUE
+PSE35              string     PSE35                 string                TRUE
+PSE44              string     PSE44                 string                TRUE
+PSE53              string     PSE53                 string                TRUE
+RNDPAT             string     RNDPAT                string                TRUE
+MCPAT              string     MCPAT                 string                TRUE
+MASKPAT            string     MASKPAT               string                TRUE
+MCPAT_SOURCE       string     MCPAT_SOURCE          string                TRUE
+MASKPAT_SOURCE     string     MASKPAT_SOURCE        string                TRUE
+MASK01             string     MASK01                string                TRUE
+MULT9_MODE         string     MULT9_MODE            string                TRUE
+LEGACY             string     LEGACY                string                TRUE
+FORCE_ZERO_BARREL_SHIFT string FORCE_ZERO_BARREL_SHIFT string             TRUE
+// 
+// new from ECP4 
+//
+REG_INPUTC_CE      string     REG_INPUTC_CE         string                TRUE
+REG_INPUTC_CLK     string     REG_INPUTC_CLK        string                TRUE
+REG_INPUTC_RST     string     REG_INPUTC_RST        string                TRUE
+REG_INPUTCFB_CE    string     REG_INPUTCFB_CE       string                TRUE
+REG_INPUTCFB_CLK   string     REG_INPUTCFB_CLK      string                TRUE
+REG_INPUTCFB_RST   string     REG_INPUTCFB_RST      string                TRUE
+REG_OPPRE_CE       string     REG_OPPRE_CE          string                TRUE
+REG_OPPRE_CLK      string     REG_OPPRE_CLK         string                TRUE
+REG_OPPRE_RST      string     REG_OPPRE_RST         string                TRUE
+SOURCEA_MODE       string     SOURCEA_MODE          string                TRUE
+SOURCEB_MODE       string     SOURCEB_MODE          string                TRUE
+FB_MUX             string     FB_MUX                string                TRUE
+SYMMETRY_MODE      string     SYMMETRY_MODE         string                TRUE
+CLK0_DIV           string     CLK0_DIV              string                TRUE
+CLK1_DIV           string     CLK1_DIV              string                TRUE
+CLK2_DIV           string     CLK2_DIV              string                TRUE
+CLK3_DIV           string     CLK3_DIV              string                TRUE
+HIGHSPEED_CLK      string     HIGHSPEED_CLK         string                TRUE
+// added for SB
+SBP_*              string     SBP                   string        TRUE
+
+// The following properties from edif2ngd_s5n.prp file.
+// Ext Name           Ext type    Int Name               Int Type {Data Trans} Exclus. Over.
+// For wild cards(*), int name is irrelevant
+
+
+// DDR
+WRITE_LEVELING         string     WRITE_LEVELING         string        TRUE
+
+// POWER
+CLKSRC                 string     CLKSRC                 string        TRUE
+UWDTEN                 string     UWDTEN                 string        TRUE
+UWDTMD                 string     UWDTMD                 string        TRUE
+UWDTINT                string     UWDTINT                string        TRUE
+EXTEN                  string     EXTEN                  string        TRUE
+I2CEN                  string     I2CEN                  string        TRUE
+WDTEN                  string     WDTEN                  string        TRUE
+SLPCNT                 string     SLPCNT                 string        TRUE
+PMUWDTCNT1             string     PMUWDTCNT1             string        TRUE
+PMUWDTCNT2             string     PMUWDTCNT2             string        TRUE
+PMUWDTCNT3             string     PMUWDTCNT3             string        TRUE
+
+// OSC
+HFCLKDIV               integer    HFCLKDIV               string        TRUE
+
+// I2C
+I2C_ID                 string     I2C_ID                 string        TRUE
+I2C_ADDRESSING         string     I2C_ADDRESSING         string        TRUE
+I2C_SLAVE_ADDR         string     I2C_SLAVE_ADDR         string        TRUE
+I2C_FIFO_SLAVE_ADDR    string     I2C_FIFO_SLAVE_ADDR    string        TRUE
+I2C_BUS_PERF           string     I2C_BUS_PERF           string        TRUE
+I2C_CLK_DIVIDER        integer    I2C_CLK_DIVIDER        string        TRUE
+I2C_CLK_DIVIDER        string     I2C_CLK_DIVIDER        string        TRUE
+I2C_GEN_CALL           string     I2C_GEN_CALL           string        TRUE
+I2C_WAKEUP_SLAVE       string     I2C_WAKEUP_SLAVE       string        TRUE
+I2C_WAKEUP_MASTER      string     I2C_WAKEUP_MASTER      string        TRUE
+INCLUDE_IOB_I2C        string     INCLUDE_IOB_I2C        string        TRUE
+SDA_I_DELAY            integer    SDA_I_DELAY            string        TRUE
+SDA_O_DELAY            integer    SDA_O_DELAY            string        TRUE
+SDA_I_DELAY            string     SDA_I_DELAY            string        TRUE
+SDA_O_DELAY            string     SDA_O_DELAY            string        TRUE
+I2C_INTR_ARBIT         string     I2C_INTR_ARBIT         string        TRUE
+I2C_INTR_TXRXRDY       string     I2C_INTR_TXRXRDY       string        TRUE
+I2C_INTR_NACK          string     I2C_INTR_NACK          string        TRUE
+I2C_INTR_GC            string     I2C_INTR_GC            string        TRUE
+I2C_FIFO_ENB           string     I2C_FIFO_ENB           string        TRUE
+I2C_FIFO_CLKSTR        string     I2C_FIFO_CLKSTR        string        TRUE
+I2C_FIFO_RXALMOSTF     integer    I2C_FIFO_RXALMOSTF     string        TRUE
+I2C_FIFO_TXALMOSTE     integer    I2C_FIFO_TXALMOSTE     string        TRUE
+I2C_FIFO_RXALMOSTF     string     I2C_FIFO_RXALMOSTF     string        TRUE
+I2C_FIFO_TXALMOSTE     string     I2C_FIFO_TXALMOSTE     string        TRUE
+I2C_FIFO_INTR_GC       string     I2C_FIFO_INTR_GC       string        TRUE
+I2C_FIFO_INTR_NACK     string     I2C_FIFO_INTR_NACK     string        TRUE
+I2C_FIFO_MRXRDY        string     I2C_FIFO_MRXRDY        string        TRUE
+I2C_FIFO_INTR_ARBIT    string     I2C_FIFO_INTR_ARBIT    string        TRUE
+I2C_FIFO_TXSYNC        string     I2C_FIFO_TXSYNC        string        TRUE
+I2C_FIFO_TXUNDER       string     I2C_FIFO_TXUNDER       string        TRUE
+I2C_FIFO_RXOVER        string     I2C_FIFO_RXOVER        string        TRUE
+
+// MIPIDPHY
+HSEL                   integer    HSEL                   integer       TRUE
+HS_16BIT_EN            integer    HS_16BIT_EN            integer       TRUE
+CN*                    integer    CN                     integer       TRUE
+CM*                    integer    CM                     integer       TRUE
+CO*                    integer    CO                     integer       TRUE
+HS_MODE                string     HS_MODE                string        TRUE
+ENP_DESER              integer    ENP_DESER              integer       TRUE
+SOFTTRIM               integer    SOFTTRIM               integer       TRUE
+PLL_TST*               integer    PLL_TST                integer       TRUE
+DIR_PIN*               string     DIR_PIN                string        TRUE

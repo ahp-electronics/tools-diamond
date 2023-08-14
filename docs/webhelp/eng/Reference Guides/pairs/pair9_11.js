@@ -1,0 +1,20 @@
+var pairs =
+{
+"delayc":{"primitive":1,"port":1}
+,"fixed":{"delay":1}
+,"delay":{"pio":1}
+,"architectures":{"supported":1}
+,"port":{"definition":1,"name":1}
+,"ddr":{"input":1}
+,"input":{"sysio":1}
+,"sysio":{"buffer":1}
+,"output":{"delay":1}
+,"refer":{"following":1}
+,"following":{"technical":1}
+,"technical":{"note":1}
+,"note":{"details":1}
+,"tn1180":{"latticeecp3":1}
+,"latticeecp3":{"high-speed":1}
+,"high-speed":{"interface":1}
+}
+;Search.control.loadWordPairs(pairs);

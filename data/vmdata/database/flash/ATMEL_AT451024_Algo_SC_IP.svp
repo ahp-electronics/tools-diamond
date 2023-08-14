@@ -1,0 +1,442 @@
+DATA:
+    PATTERN  (--, --, FILE(--, --));      
+    WREN   ( 1, 1, b01100000);
+    WRDI   ( 1, 1, b00100000);
+    RDSR   ( 1, 1, b11101011);
+    WRSR   ( 1, 1, b10000000);
+    READ   ( 1, 1, b11000000);
+    PP   ( 1, 1, b11110101);
+    BE   ( 1, 1, b11100011);
+    SE   ( 1, 1, b00011011);
+    RES   ( 1, 1, b11111001); 	
+    DEVICE_ID  (1,1,FILE(ID, --)); 
+DATA_END;
+
+PROTOCOL:	PCM;
+
+SIGNAL_DECL: 
+	inout L_f_cs;
+	buffer  clock;
+SIGNAL_DECL_END;
+             
+BUS_DECL: 
+    /CE = L_f_cs;
+BUS_DECL_END;
+
+FUNCTION INITIAL;
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	clock   HIGH;
+	SET_ROW (PATTERN, 0);
+	Addr = START_ADDRESS;
+	SIR	8	TDI(FF) ;
+	RUNTEST	IDLE	32 TCK	2.00E-002 SEC;
+	# Shift SPI_PROGRAM instruction 
+	SIR	8	TDI(SPI_PROGRAM) ;
+	RUNTEST	IDLE	32 TCK	2.00E-002 SEC;
+END_FUNCTION;
+
+FUNCTION FINALIZE;
+	# Shift BYPASS instruction (0xFF) 
+	SIR	8	TDI(FF) ;
+	RUNTEST	IDLE	32 TCK	2.00E-002 SEC;
+END_FUNCTION;
+
+FUNCTION CHECK_ID;
+	HDR 0;
+	TDR 0;
+	SDR 24 TDI(HDR+0000F9+TDR) TDO(DEVICE_ID+HDR+FFFF) MASK(DEVICE_ID+HDR+0000);
+END_FUNCTION;
+
+FUNCTION CHECK_RDID;
+	HDR 0;
+	TDR 0;
+	SDR 16 TDI(HDR+00F9+TDR) TDO(VENDOR_ID+HDR+FF) MASK(VENDOR_ID+HDR+00);
+END_FUNCTION;
+
+FUNCTION POWER2;
+	SDR 32 TDI(650154BC+TDR);
+	LOOP 100;
+	LDELAY  DRPAUSE 1.00 SEC;
+		SDR 16 TDI(HDR+00EB+TDR) TDO(hAD+HDR+FF) MASK(h83+HDR+00);
+	END_LOOP;
+END_FUNCTION;
+
+FUNCTION CHECKPOWER2;
+	SDR 32 TDI(650154BC+TDR);
+	
+	DELAY  10.00E SEC;
+	SDR 8 TDI(9D+TDR);
+	DELAY  10.00E SEC;
+	SDR 8 TDI(D5+TDR);
+	DELAY  10.00E SEC;
+	
+	LOOP 100;
+	LDELAY  DRPAUSE 1.00 SEC;
+		SDR 16 TDI(HDR+00EB+TDR) TDO(hAD+HDR+FF) MASK(h83+HDR+00);
+	END_LOOP;
+	
+END_FUNCTION;
+
+FUNCTION ERASE_ALL;
+	SDR 32 TDI(590129E3+TDR);
+	RUNTEST	DRPAUSE	20.00E SEC;
+	LOOP 100;
+	LDELAY  DRPAUSE 1.00E SEC;
+		SDR 16 TDI(HDR+00EB+TDR) TDO(hAD+HDR+FF) MASK(h83+HDR+00);
+	END_LOOP;
+END_FUNCTION;
+
+FUNCTION PROGRAM;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	REPEAT 0;
+	SDR 32 TDI(PATTERN[1024]+Addr+41+TDR);
+	LOOP 100;
+	LDELAY  DRPAUSE 1.00E-003 SEC;
+		SDR 16 TDI(HDR+00EB+TDR) TDO(hAD+HDR+FF) MASK(h83+HDR+00);
+	END_LOOP;
+	Addr = Addr +1024;	
+    END_REPEAT;
+END_FUNCTION;
+
+FUNCTION VERIFY;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	INT32 split = 0;
+	split = _SPLIT_VERIFY_;
+	IF (split Equal 1);
+		Call SPLIT_VERIFY;
+	ELSE;	
+		SDR 40  TDI(HDR+00+Addr+D0+TDR) TDO(PATTERN+HDR+FFFFFFFFFF) MASK(PATTERN+HDR+0000000000);
+	END_IF;
+END_FUNCTION;
+
+FUNCTION SPLIT_VERIFY;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	REPEAT 0;
+		Call ENABLE;
+		SDR 40  TDI(HDR+00+Addr+D0+TDR) TDO(PATTERN[1024]+HDR+FFFFFFFFFF) MASK(PATTERN[256]+HDR+0000000000);
+		Addr = Addr +1024;		
+    END_REPEAT;
+END_FUNCTION;
+
+FUNCTION BLANK_CHECK;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	SDR 40  TDI(HDR+00+Addr+D0+TDR) TDO(BLANK_PATTERN+HDR+FFFFFFFFFF) ;
+END_FUNCTION;
+
+FUNCTION READBACK;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	SDR 40  TDI(HDR+00+Addr+D0+TDR) TDO(SAVE_PATTERN+HDR+FFFFFFFFFF) ;
+END_FUNCTION;
+
+FUNCTION UPLOAD;
+	INT32 Idx1 = 0;
+	SIR	8	TDI (23) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+	SIR	8	TDI (FF) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+	SIR	8	TDI (23) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+	SIR	8	TDI (FF) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+END_FUNCTION;
+
+OPERATION Verify ID;
+  	INT32 Addr = 0;
+    Call INITIAL;
+    Call CHECK_RDID;
+    Call CHECK_ID;
+END_OPERATION;
+
+OPERATION Erase,Program,Verify;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ POWER of 2 Mode Checking...
+	Call CHECKPOWER2;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+       
+END_OPERATION;
+
+OPERATION Erase,Program,Verify,Refresh;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ POWER of 2 Mode Checking...
+	Call CHECKPOWER2;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+	
+	$ Uploading...
+	Call UPLOAD; 
+       
+END_OPERATION;
+
+OPERATION SPI Flash Erase,Program,Verify;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ POWER of 2 Mode Checking...
+	Call CHECKPOWER2;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+       
+END_OPERATION;
+
+OPERATION SPI Flash Erase,Program,Verify,Refresh;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ POWER of 2 Mode Checking...
+	Call CHECKPOWER2;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+	
+	$ Uploading...
+	Call UPLOAD; 
+       
+END_OPERATION;
+
+OPERATION Program;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ POWER of 2 Mode Checking...
+	Call CHECKPOWER2;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    Call FINALIZE;
+END_OPERATION;
+
+OPERATION Program,Refresh;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ POWER of 2 Mode Checking...
+	Call CHECKPOWER2;
+	
+    $ Programming...
+	Call PROGRAM;
+
+	Call FINALIZE;
+	
+	$ Uploading...
+	Call UPLOAD;
+    
+END_OPERATION;
+
+OPERATION SPI Flash Program;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ POWER of 2 Mode Checking...
+	Call CHECKPOWER2;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    Call FINALIZE;
+END_OPERATION;
+
+OPERATION SPI Flash Program,Refresh;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ POWER of 2 Mode Checking...
+	Call CHECKPOWER2;
+	
+    $ Programming...
+	Call PROGRAM;
+
+	Call FINALIZE;
+	
+	$ Uploading...
+	Call UPLOAD;
+    
+END_OPERATION;
+OPERATION Verify Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Verifying...
+	Call VERIFY;
+
+    Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Read and Save;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Reading Back...
+	Call READBACK;
+	
+	Call FINALIZE;
+	
+END_OPERATION;
+
+OPERATION Erase Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+		
+    $ Erasing...
+	Call ERASE_ALL;
+	
+	Call FINALIZE;
+    
+END_OPERATION;
+OPERATION Erase All;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+		
+    $ Erasing All...
+	Call ERASE_ALL;
+	
+    Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Erase Sector(s) Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+     $ IDCode Checking...
+	Call CHECK_ID;
+		
+    $ Erasing Sector(s)...
+	Call ERASE_ALL;
+	
+    Call FINALIZE;
+    
+END_OPERATION;
+OPERATION Blank Check;
+	INT32 Addr = 0;
+    
+    $ Initializing...
+	Call INITIAL;	
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Blank Checking...
+	Call BLANK_CHECK;
+    
+    Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Disabled;
+    INT32 Idx1 = 0;
+    $ Resetting...
+    SIR	8	TDI (18) ;
+	RUNTEST	IDLE	32 TCK	2.00E-002 SEC;
+	$ FPGA Loader Disabled.Please Reset the target FPGA device...
+END_OPERATION;
+
+OPERATION Set POWER2 Mode;  
+	INT32 Addr = 0;
+	
+	$ Initializing...
+	Call INITIAL;	
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ POWER of 2 Mode Enabling...
+	Call POWER2;
+	
+	$ Set the “Power of 2” page size completed. Please Power cycle the Device...
+END_OPERATION;
+
+OPERATION Uploaded;
+    INT32 Idx1 = 0;
+    $ Uploading...
+    Call UPLOAD;
+END_OPERATION;
+
+OPERATION Bypass;
+	INT32 Addr = 0;
+END_OPERATION;            
+            

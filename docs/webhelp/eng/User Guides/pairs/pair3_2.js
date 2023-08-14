@@ -1,0 +1,26 @@
+var pairs =
+{
+"pin":{"diamond":1,"start":1,"taskbar":1}
+,"diamond":{"start":1,"windows":1,"icon":1,"taskbar":1,"running":1}
+,"start":{"menu":1}
+,"menu":{"taskbar":1,"find":1,"pin":1,"unpin":1}
+,"windows":{"start":1}
+,"taskbar":{"open":1,"minimized":1,"diamond":1,"right-click":1,"choose":1}
+,"open":{"quickly":1}
+,"quickly":{"conveniently":1}
+,"conveniently":{"rather":1}
+,"rather":{"looking":1}
+,"looking":{"diamond":1}
+,"choose":{"windows":1,"unpin":1}
+,"find":{"diamond":1}
+,"icon":{"right-click":1,"click":1,"taskbar":1,"start":1}
+,"right-click":{"diamond":1,"pinned":1}
+,"click":{"pin":1}
+,"minimized":{"icon":1}
+,"want":{"remove":1}
+,"remove":{"pinned":1}
+,"pinned":{"diamond":1}
+,"unpin":{"start":1,"program":1}
+,"program":{"taskbar":1}
+}
+;Search.control.loadWordPairs(pairs);

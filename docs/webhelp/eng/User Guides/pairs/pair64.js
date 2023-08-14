@@ -1,0 +1,21 @@
+var pairs =
+{
+"starting":{"process":1}
+,"start":{"process":1}
+,"process":{"single":1,"following":1,"process":1,"view":1,"run":1,"choose":1,"state":1}
+,"single":{"source":1}
+,"source":{"file":1}
+,"file":{"entire":1}
+,"entire":{"project":1}
+,"select":{"process":1}
+,"view":{"choose":1}
+,"choose":{"process":1,"run":1}
+,"right-click":{"process":1}
+,"double-click":{"process":1}
+,"running":{"processes":1}
+,"forcing":{"process":1}
+,"stopping":{"process":1}
+,"refreshing":{"process":1}
+,"cleaning":{"processes":1}
+}
+;Search.control.loadWordPairs(pairs);

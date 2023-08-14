@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file defines public properties of xp,xp2,xo devices -->
+<StrategyConfig parent="base.stf" version="1.0">
+
+<!-- *************************************************************** -->
+<!-- *****************************  Property  *************************** -->
+<!-- ************************************************`*************** -->
+
+<!-- _ReadBackBitGen=A,SLIST,ReadBack
+         _ReadBackFBitGen=A,LITEM,Flash,F
+         _ReadBackSBitGen=A,LITEM,SRAM,S -->
+<Property
+	name="PROP_BIT_ReadBackBitGen"
+	tclid="bit_readback"
+	type="list">
+	<Value
+		defaultValue="Flash"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Flash" cmdline="-g ReadBack:Flash"/>
+		<Correlation driverValue="SRAM" cmdline="-g ReadBack:SRAM"/>
+	</CmdLines>
+</Property>
+
+<!-- _ReadCaptureBitGen=A,SLIST,ReadCapture
+         _ReadCaptureDBitGen=A,LITEM,Disable,D
+         _ReadCaptureEBitGen=A,LITEM,Enable,E -->
+<Property
+	name="PROP_BIT_ReadCaptureBitGen"
+	tclid="bit_read_capture"
+	type="list">
+	<Value
+		defaultValue="Disable"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Disable" cmdline="-g ReadCapture:Disable"/>
+		<Correlation driverValue="Enable" cmdline="-g ReadCapture:Enable"/>
+	</CmdLines>
+</Property>       
+
+<!-- _SynSrcBitGen=A,SLIST,SYNSRC
+         _SynSrcNBitGen=A,LITEM,No,N
+         _SynSrcYBitGen=A,LITEM,Yes,Y 
+<Property
+	name="PROP_BIT_SynSrcBitGen"
+	type="list">
+	<Value
+		defaultValue="No"
+	/>
+	<CmdLines>
+		<Correlation driverValue="No" cmdline="-g SYNSRC:No"/>
+		<Correlation driverValue="Yes" cmdline="-g SYNSRC:Yes"/>
+	</CmdLines>
+</Property> -->
+
+<!-- _PllSetBitGen=A,SLIST,PLLSET
+         _PllSetNBitGen=A,LITEM,None,N
+         _PllSetLBitGen=A,LITEM,UL,L
+         _PllSetRBitGen=A,LITEM,UR,R
+         _PllSetMBitGen=A,LITEM,LL,M
+         _PllSetSBitGen=A,LITEM,LR,S 
+<Property
+	name="PROP_BIT_PllSetBitGen"
+	type="list">
+	<Value
+		defaultValue="None"
+	/>
+	<CmdLines>
+		<Correlation driverValue="None" cmdline="-g PllSET:None"/>
+		<Correlation driverValue="UL" cmdline="-g PllSET:UL"/>
+		<Correlation driverValue="UR" cmdline="-g PllSET:UR"/>
+		<Correlation driverValue="LL" cmdline="-g PllSET:LL"/>
+		<Correlation driverValue="LR" cmdline="-g PllSET:LR"/>
+	</CmdLines>
+</Property> -->
+
+<!-- _XPDisableUESBitgen=A,BOOL,Disable UES,FALSE -->
+<Property
+	name="PROP_BIT_DisableUESBitgen"
+	tclid="bit_disable_ues"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g DisableUES:TRUE"/>
+		<Correlation driverValue="False" cmdline="-g DisableUES:FALSE"/>
+	</CmdLines>	
+</Property>
+
+<!-- _SConModBitGen=A,SLIST,Chain Mode
+         _SConModDBitGen=A,LITEM,Enable,E
+         _SConModFBitGen=A,LITEM,Serial,S 
+<Property
+	name="PROP_BIT_SConModBitGen"
+	type="list">
+	<Value
+		defaultValue="Enable"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Enable" cmdline="-g CfgMode:Enable"/>
+		<Correlation driverValue="Serial" cmdline="-g CfgMode:Serial"/>
+	</CmdLines>
+</Property>-->
+
+<!-- _SDisRAMResBitGen=A,SLIST,Reset Config RAM in re-configuration
+         _SDisRAMResBitGenC=A,LITEM,ClearDuringReConfig,E
+         _SDisRAMResBitGenN=A,LITEM,NoClearDuringReConfig,S 
+<Property
+	name="PROP_BIT_SDisRAMResBitGen"
+	type="list">
+	<Value
+		defaultValue="ClearDuringReConfig"
+	/>
+	<CmdLines>
+		<Correlation driverValue="ClearDuringReConfig" cmdline="-g ReadCapture:ClearDuringReConfig"/>
+		<Correlation driverValue="NoClearDuringReConfig" cmdline="-g ReadCapture:NoClearDuringReConfig"/>
+	</CmdLines>
+</Property>-->
+         
+<!-- *************************************************************** -->
+<!-- *****************************  Property Ui *************************** -->
+<!-- *************************************************************** -->
+
+<!-- _ReadBackBitGen=A,SLIST,ReadBack -->
+<PropertyUI	
+	label="ReadBack"
+	name="PROPUI_BIT_ReadBackBitGen"
+	propertyName="PROP_BIT_ReadBackBitGen"
+	catalog="Advanced"
+	flag="normal"
+/>
+
+<!-- _ReadCaptureBitGen=A,SLIST,ReadCapture -->
+<PropertyUI	
+	label="ReadCapture"
+	name="PROPUI_BIT_ReadCaptureBitGen"
+	propertyName="PROP_BIT_ReadCaptureBitGen"
+	catalog="Advanced"
+	flag="normal"
+/>
+
+<!-- _SynSrcBitGen=A,SLIST,SYNSRC 
+<PropertyUI	
+	label="SYNSRC"
+	name="PROPUI_BIT_SynSrcBitGen"
+	propertyName="PROP_BIT_SynSrcBitGen"
+	catalog="Advanced"
+	flag="normal"
+/> -->
+
+<!-- _PllSetBitGen=A,SLIST,PLLSET
+<PropertyUI	
+	label="PLLSET"
+	name="PROPUI_BIT_PllSetBitGen"
+	propertyName="PROP_BIT_PllSetBitGen"
+	catalog="Advanced"
+	flag="normal"
+/>  -->
+
+<!-- _XPDisableUESBitgen=A,BOOL,Disable UES,FALSE -->
+<PropertyUI	
+	label="Disable UES"
+	name="PROPUI_BIT_DisableUESBitgen"
+	propertyName="PROP_BIT_DisableUESBitgen"
+	catalog="Advanced"
+	flag="normal"
+/>
+
+<!-- _SConModBitGen=A,SLIST,Chain Mode
+<PropertyUI	
+	label="Chain Mode"
+	name="PROPUI_BIT_SConModBitGen"
+	propertyName="PROP_BIT_SConModBitGen"
+	catalog="Advanced"
+	flag="normal"
+/> -->
+
+<!-- _SDisRAMResBitGen=A,SLIST,Reset Config RAM in re-configuration 
+<PropertyUI	
+	label="Reset Config RAM in re-configuration"
+	name="PROPUI_BIT_SDisRAMResBitGen"
+	propertyName="PROP_BIT_SDisRAMResBitGen"
+	catalog="Advanced"
+	flag="normal"
+/>-->
+
+<!-- *************************************************************** -->
+<!-- *****************************  PropertySet *************************** -->
+<!-- *************************************************************** -->
+</StrategyConfig>

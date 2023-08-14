@@ -1,0 +1,600 @@
+
+         Lattice Mapping Report File for Design Module 'counter_top'
+
+
+Design Information
+------------------
+
+Command line:   map -a LatticeECP3 -p LFE3-35EA -t FPBGA484 -s 6 -oc Commercial
+     Reveal_xo2_xo3_impl1.ngd -o Reveal_xo2_xo3_impl1_map.ncd -pr
+     Reveal_xo2_xo3_impl1.prf -mp Reveal_xo2_xo3_impl1.mrp -lpf C:/Users/Public/
+     DTS/reveal_ex/MACHXO2/impl1/Reveal_xo2_xo3_impl1_synplify.lpf -lpf
+     C:/Users/Public/DTS/reveal_ex/MACHXO2/Reveal_xo2_xo3.lpf -gui 
+Target Vendor:  LATTICE
+Target Device:  LFE3-35EAFPBGA484
+Target Performance:   6
+Mapper:  ep5c00,  version:  Diamond (64-bit) 3.8.0.115.3
+Mapped on:  04/28/17  10:51:57
+
+Design Summary
+--------------
+
+   Number of registers:    405 out of 26718 (2%)
+      PFU registers:          405 out of 24948 (2%)
+      PIO registers:            0 out of  1770 (0%)
+   Number of SLICEs:       410 out of 16632 (2%)
+      SLICEs as Logic/ROM:    410 out of 16632 (2%)
+      SLICEs as RAM:            0 out of  3204 (0%)
+      SLICEs as Carry:         62 out of 16632 (0%)
+   Number of LUT4s:        580 out of 33264 (2%)
+      Number used as logic LUTs:        456
+      Number used as distributed RAM:     0
+      Number used as ripple logic:      124
+      Number used as shift registers:     0
+   Number of PIO sites used: 5 out of 295 (2%)
+   Number of PIO FIXEDDELAY:    0
+   Number of PCS (SerDes):  0 out of 1 (0%) with bonded PIO sites
+   Number of DQSDLLs:  0 out of 2 (0%)
+   Number of PLLs:  0 out of 4 (0%)
+   Number of DLLs:  0 out of 2 (0%)
+   Number of block RAMs:  2 out of 72 (3%)
+   Number of CLKDIVs:  0 out of 2 (0%)
+   Number of GSRs:  1 out of 1 (100%)
+   JTAG used :      Yes
+   Readback used :  No
+   Oscillator used :  Yes
+   Startup used :   No
+   Notes:-
+      1. Total number of LUT4s = (Number of logic LUT4s) + 2*(Number of
+     distributed RAMs) + 2*(Number of ripple logic)
+      2. Number of logic LUT4s does not include count of distributed RAM and
+     ripple logic.
+
+        Number Of Mapped DSP Components:
+   --------------------------------
+   MULT18X18C          0
+   MULT9X9C            0
+   ALU54A              0
+   ALU24A              0
+   --------------------------------
+   Number of Used DSP MULT Sites:  0 out of 128 (0 %)
+   Number of Used DSP ALU Sites:  0 out of 64 (0 %)
+   Number of clocks:  2
+
+                                    Page 1
+
+
+
+
+Design:  counter_top                                   Date:  04/28/17  10:51:57
+
+Design Summary (cont)
+---------------------
+     Net clk1: 120 loads, 120 rising, 0 falling (Driver: OSCinst0 )
+     Net jtaghub16_jtck: 129 loads, 0 rising, 129 falling (Driver:
+     ep5chub/genblk5_jtage_u )
+   Number of Clock Enables:  42
+     Net jtaghub16_ip_enable0: 28 loads, 28 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/
+     op_code8: 2 loads, 2 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/
+     mask_reg[0]_0_sqmuxa: 3 loads, 3 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/
+     compare_reg[0]_0_sqmuxa: 3 loads, 3 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/
+     tt_wr_addr_cntr_1_sqmuxa_i_0: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/
+     un1_tt_end_1_0: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/
+     tt_prog_active_1_sqmuxa_1_i_0: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/
+     te_precnte: 8 loads, 8 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/
+     te_precnt_val_0_sqmuxa: 8 loads, 8 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/
+     cnt_contig_reg_wen_1: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/
+     num_then_wen_1: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/
+     next_then_reg_wen_1: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tcnt_
+     0/reg2_0_sqmuxa: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tcnt_
+     0/reg1_0_sqmuxa: 2 loads, 2 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tcnt_
+     0/reg0_read8: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tcnt_
+     0/reg0_0_sqmuxa: 2 loads, 2 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/u
+     n1_jtdo_4_i: 8 loads, 8 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/c
+     apture_dr_d4_0_sqmuxa: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/a
+     ddr_15_0_sqmuxa: 2 loads, 2 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/c
+     apture_dr_RNIH8JG: 17 loads, 17 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/N
+     _38: 8 loads, 8 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/t
+     r_dout_bit_cnt_0_sqmuxa: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/N
+     _46_i: 8 loads, 8 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/p
+     arity_err_lat_0_sqmuxa: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/c
+     md_block_extend_1_sqmuxa_i: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/sample_
+     en_d: 11 loads, 11 LSLICEs
+     Net
+
+                                    Page 2
+
+
+
+
+Design:  counter_top                                   Date:  04/28/17  10:51:57
+
+Design Summary (cont)
+---------------------
+     counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/N_768_1_i:
+     4 loads, 4 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/N_49_i:
+     5 loads, 5 LSLICEs
+     Net
+     counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/N_768_i: 4
+     loads, 4 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trig_en
+     bl_0_sqmuxa: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_d
+     out_1_sqmuxa_i: 3 loads, 3 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/N_9_i:
+     4 loads, 4 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/force_t
+     rig_0_sqmuxa_1: 1 loads, 1 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/un1_rd_
+     dout_tm55_i: 6 loads, 6 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/N_28: 5
+     loads, 5 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/N_29_i:
+     5 loads, 5 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/num_pre
+     _trig_frm_0_sqmuxa: 4 loads, 4 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/num_pos
+     t_trig_frm_0_sqmuxa: 4 loads, 4 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/force_t
+     rig_2_sqmuxa_i_0_0: 1 loads, 1 LSLICEs
+     Net jtaghub16_jupdate: 8 loads, 8 LSLICEs
+     Net ep5chub/id_enable_0_sqmuxa: 1 loads, 1 LSLICEs
+     Net ep5chub/N_5_i: 10 loads, 10 LSLICEs
+   Number of local set/reset loads for net rstn_c merged into GSR:  32
+   Number of LSRs:  2
+     Net jtaghub16_jrstn: 126 loads, 126 LSLICEs
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/reset_rvl_n:
+     94 loads, 92 LSLICEs
+   Number of nets driven by tri-state buffers:  0
+   Top 10 highest fanout non-clock nets:
+     Net jtaghub16_jrstn: 130 loads
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/
+     VCC: 102 loads
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/reset_rvl_n:
+     94 loads
+     Net jtaghub16_jshift: 52 loads
+     Net jtaghub16_ip_enable0: 51 loads
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/addr[0]: 40
+     loads
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/addr[1]: 38
+     loads
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/addr[9]: 27
+     loads
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/N
+     _47: 27 loads
+     Net counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/pre_tri
+     g_cntr: 27 loads
+
+
+
+                                    Page 3
+
+
+
+
+Design:  counter_top                                   Date:  04/28/17  10:51:57
+
+
+
+
+   Number of warnings:  2
+   Number of errors:    0
+     
+
+Design Errors/Warnings
+----------------------
+
+WARNING - map: Using local reset signal 'rstn_c' to infer global GSR net.
+WARNING - map: The reset of EBR 'counter_top_reveal_coretop_instance/counter_top
+     _la0_inst_0/trig_u/te_0/genblk1.te_tt_ebr_ram/pmi_ram_dpEbnonesadr112112p12
+     f3a6c3_0_0_0' cannot be controlled. The local reset is not connected to any
+     control signal and set to GND. The global reset is disabled via GSR
+     property. To control the EBR reset, either connect the local reset to a
+     control signal or force the GSR property to be enabled.
+
+IO (PIO) Attributes
+-------------------
+
++---------------------+-----------+-----------+------------+------------+
+| IO Name             | Direction | Levelmode | IO         | FIXEDDELAY |
+|                     |           |  IO_TYPE  | Register   |            |
++---------------------+-----------+-----------+------------+------------+
+| LEDPIO_OUT0         | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| rstn                | INPUT     | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| LEDPIO_OUT3         | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| LEDPIO_OUT2         | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| LEDPIO_OUT1         | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+
+Removed logic
+-------------
+
+Block ep5chub/ip_enable_14 undriven or does not drive anything - clipped.
+Block ep5chub/ip_enable_15 undriven or does not drive anything - clipped.
+Block ep5chub/cdn undriven or does not drive anything - clipped.
+Block counter_top_reveal_coretop_instance/VCC_0 undriven or does not drive
+     anything - clipped.
+Block counter_top_reveal_coretop_instance/GND_0 undriven or does not drive
+     anything - clipped.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/VCC_0 undriven
+     or does not drive anything - clipped.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/GND_0 undriven
+     or does not drive anything - clipped.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr
+     _mem/scuba_vhi_inst undriven or does not drive anything - clipped.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/VCC_0
+     undriven or does not drive anything - clipped.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/GND_0
+     undriven or does not drive anything - clipped.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tcnt_0/V
+     CC_0 undriven or does not drive anything - clipped.
+
+                                    Page 4
+
+
+
+
+Design:  counter_top                                   Date:  04/28/17  10:51:57
+
+Removed logic (cont)
+--------------------
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tcnt_0/G
+     ND_0 undriven or does not drive anything - clipped.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/gen
+     blk1.te_tt_ebr_ram/scuba_vhi_inst undriven or does not drive anything -
+     clipped.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/decode_u
+     /VCC_0 undriven or does not drive anything - clipped.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/decode_u
+     /GND_0 undriven or does not drive anything - clipped.
+Signal ep5chub/jrstn_i was merged into signal jtaghub16_jrstn
+Signal ep5chub/cdn_CN was merged into signal jtaghub16_jtck
+Signal ep5chub/jtdo2_0_a4_1_am_RNO_2 was merged into signal ep5chub/ip_enable_2
+Signal rstn_c_i was merged into signal rstn_c
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/jrstn_i
+     was merged into signal jtaghub16_jrstn
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/jtck_i
+     was merged into signal jtaghub16_jtck
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/reset_n_i
+     was merged into signal
+     counter_top_reveal_coretop_instance/counter_top_la0_inst_0/reset_rvl_n
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/r_w
+     .CN was merged into signal jtaghub16_jtck
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jrs
+     tn_i was merged into signal jtaghub16_jrstn
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/res
+     et_n_i was merged into signal
+     counter_top_reveal_coretop_instance/counter_top_la0_inst_0/reset_rvl_n
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tcnt_0/
+     reset_n_i was merged into signal
+     counter_top_reveal_coretop_instance/counter_top_la0_inst_0/reset_rvl_n
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/js
+     hift_d2.CN was merged into signal jtaghub16_jtck
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/jr
+     stn_i was merged into signal jtaghub16_jrstn
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/re
+     set_n_i was merged into signal
+     counter_top_reveal_coretop_instance/counter_top_la0_inst_0/reset_rvl_n
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/re
+     set_n_i was merged into signal
+     counter_top_reveal_coretop_instance/counter_top_la0_inst_0/reset_rvl_n
+Signal ep5chub/ip_enable_14 undriven or does not drive anything - clipped.
+Signal ep5chub/jtdo2_int_m5_d undriven or does not drive anything - clipped.
+Signal ep5chub/jtdo2_int_m0 undriven or does not drive anything - clipped.
+Signal ep5chub/jtdo2_int_m7 undriven or does not drive anything - clipped.
+Signal ep5chub/jtdo2_int_m10 undriven or does not drive anything - clipped.
+Signal ep5chub/jtdo2_int_m5_d_bm undriven or does not drive anything - clipped.
+Signal ep5chub/jtdo2_int_m5_d_am undriven or does not drive anything - clipped.
+Signal ep5chub/rom_rd_addr_cry_0_S0_0 undriven or does not drive anything -
+     clipped.
+Signal ep5chub/bit_count_cry_0_COUT_3 undriven or does not drive anything -
+     clipped.
+Signal ep5chub/bit_count_cry_0_S0_0 undriven or does not drive anything -
+     clipped.
+Signal ep5chub/er2_tdo_15 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_14 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_7 undriven or does not drive anything - clipped.
+
+                                    Page 5
+
+
+
+
+Design:  counter_top                                   Date:  04/28/17  10:51:57
+
+Removed logic (cont)
+--------------------
+Signal ep5chub/er2_tdo_6 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_4 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_3 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_10 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_9 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_13 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_12 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_11 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_1 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_2 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_8 undriven or does not drive anything - clipped.
+Signal ep5chub/er2_tdo_5 undriven or does not drive anything - clipped.
+Signal ep5chub/ip_enable_15 undriven or does not drive anything - clipped.
+Signal ep5chub/genblk5_un1_jtage_u undriven or does not drive anything -
+     clipped.
+Signal ep5chub/genblk5_un1_jtage_u_1 undriven or does not drive anything -
+     clipped.
+Signal ep5chub/tdoa undriven or does not drive anything - clipped.
+Signal ep5chub/tdia undriven or does not drive anything - clipped.
+Signal ep5chub/tmsa undriven or does not drive anything - clipped.
+Signal ep5chub/tcka undriven or does not drive anything - clipped.
+Signal ep5chub/cdn undriven or does not drive anything - clipped.
+Signal ep5chub/rom_rd_addr_s_0_S1_7 undriven or does not drive anything -
+     clipped.
+Signal ep5chub/rom_rd_addr_s_0_COUT_7 undriven or does not drive anything -
+     clipped.
+Signal un3_cnt_cry_0_0_S1 undriven or does not drive anything - clipped.
+Signal un3_cnt_cry_0_0_S0 undriven or does not drive anything - clipped.
+Signal N_1 undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/VCC undriven
+     or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/GND undriven
+     or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/tm_rd_add
+     r_cntr_s_0_S1[7] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/tm_rd_add
+     r_cntr_s_0_COUT[7] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/tm_rd_add
+     r_cntr_cry_0_S0[0] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/N_1
+     undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/post_trig
+     _cntr_s_0_S1[7] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/post_trig
+     _cntr_s_0_COUT[7] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/post_trig
+     _cntr_cry_0_S0[0] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/N_2
+     undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/pre_trig_
+     cntr_s_0_S1[7] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/pre_trig_
+     cntr_s_0_COUT[7] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/pre_trig_
+     cntr_cry_0_S0[0] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/N_3
+
+                                    Page 6
+
+
+
+
+Design:  counter_top                                   Date:  04/28/17  10:51:57
+
+Removed logic (cont)
+--------------------
+     undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/tm_wr_add
+     r_cntr_s_0_S1[7] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/tm_wr_add
+     r_cntr_s_0_COUT[7] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/tm_wr_add
+     r_cntr_cry_0_S0[0] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/N_4
+     undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.t
+     r_mem/scuba_vhi undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/bit
+     _cnt_s_0_S1[5] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/bit
+     _cnt_s_0_COUT[5] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/bit
+     _cnt_cry_0_S0[0] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/N_1
+     undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/VCC
+     undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/GND
+     undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/rd_dout
+     _tcnt[4] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te
+     _precnt_s_0_S1[15] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te
+     _precnt_s_0_COUT[15] undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te
+     _precnt_cry_0_S0[0] undriven or does not drive anything - clipped.
+Signal
+     counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_1
+     undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/ge
+     nblk1.te_tt_ebr_ram/scuba_vhi undriven or does not drive anything -
+     clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/gt
+     _cry_5_0_S0 undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/gt
+     _cry_5_0_COUT undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/gt
+     _cry_3_0_S1 undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/gt
+     _cry_3_0_S0 undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/gt
+     _cry_1_0_S1 undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/gt
+     _cry_1_0_S0 undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/gt
+     _cry_0_0_S1 undriven or does not drive anything - clipped.
+Signal counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/gt
+     _cry_0_0_S0 undriven or does not drive anything - clipped.
+Signal
+     counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/N_1
+     undriven or does not drive anything - clipped.
+
+                                    Page 7
+
+
+
+
+Design:  counter_top                                   Date:  04/28/17  10:51:57
+
+Removed logic (cont)
+--------------------
+Signal un3_cnt_s_31_0_S1 undriven or does not drive anything - clipped.
+Signal un3_cnt_s_31_0_COUT undriven or does not drive anything - clipped.
+Block ep5chub/genblk5_jtage_u_RNI9U51 was optimized away.
+Block ep5chub/ip_enable_0__CN was optimized away.
+Block ep5chub/jtdo2_0_a4_1_am_RNO_2 was optimized away.
+Block rstn_pad_RNIR42A was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/jrstn_RNIH
+     98D was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/jtck_RNICM
+     68 was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/reset_n_RN
+     IGUS4 was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/pari
+     ty_calc.CN was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jrst
+     n_RNIH98D was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/rese
+     t_n_RNIGUS4 was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tcnt_0/r
+     eset_n_RNIGUS4 was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/tt_
+     wr_addr_cntr_0_.CN was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/jrs
+     tn_RNIH98D was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/res
+     et_n_RNIGUS4 was optimized away.
+Block counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/tu_0/res
+     et_n_RNIGUS4 was optimized away.
+Block ep5chub/jtdo2_int_m5_d/GATE was optimized away.
+Block ep5chub/jtdo2_int_m0 was optimized away.
+Block ep5chub/jtdo2_int_m7 was optimized away.
+Block ep5chub/jtdo2_int_m10 was optimized away.
+Block ep5chub/jtdo2_int_m5_d_bm was optimized away.
+Block ep5chub/jtdo2_int_m5_d_am was optimized away.
+
+Memory Usage
+------------
+
+/counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem:
+     
+    EBRs: 1
+    RAM SLICEs: 0
+    Logic SLICEs: 1
+    PFU Registers: 0
+    -Contains EBR pmi_ram_dpEbnonesadr6825668256p133c3638_0_0_0:  TYPE= DP16KC,
+         Width_B= 6,  Depth_A= 256,  Depth_B= 256,  REGMODE_A= OUTREG,
+         REGMODE_B= OUTREG,  WRITEMODE_A= NORMAL,  WRITEMODE_B= NORMAL,  GSR=
+         DISABLED,  MEM_LPC_FILE=
+         pmi_ram_dpEbnonesadr6825668256p133c3638__PMIP__256__6__6B
+/counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/genblk1.
+     te_tt_ebr_ram:
+    EBRs: 1
+    RAM SLICEs: 0
+    Logic SLICEs: 1
+    PFU Registers: 0
+    -Contains EBR pmi_ram_dpEbnonesadr112112p12f3a6c3_0_0_0:  TYPE= DP16KC,
+
+                                    Page 8
+
+
+
+
+Design:  counter_top                                   Date:  04/28/17  10:51:57
+
+Memory Usage (cont)
+-------------------
+         Width_B= 1,  Depth_A= 2,  Depth_B= 2,  REGMODE_A= OUTREG,  REGMODE_B=
+         OUTREG,  WRITEMODE_A= NORMAL,  WRITEMODE_B= NORMAL,  GSR= DISABLED,
+         MEM_LPC_FILE= pmi_ram_dpEbnonesadr112112p12f3a6c3__PMIP__2__1__1B
+
+OSC Summary
+-----------
+
+OSC 1:                                     Pin/Node Value
+  OSC Instance Name:                                OSCinst0
+  OSC Type:                                         OSCF
+  OSC Output:                              NODE     clk1
+  OSC Nominal Frequency (MHz):                      55.0
+
+ASIC Components
+---------------
+
+Instance Name: OSCinst0
+         Type: OSCF
+Instance Name: counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u
+     /te_0/genblk1.te_tt_ebr_ram/pmi_ram_dpEbnonesadr112112p12f3a6c3_0_0_0
+         Type: DP16KC
+Instance Name: counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/g
+     enblk4.tr_mem/pmi_ram_dpEbnonesadr6825668256p133c3638_0_0_0
+         Type: DP16KC
+Instance Name: ep5chub/genblk5_jtage_u
+         Type: JTAGE
+
+GSR Usage
+---------
+
+GSR Component:
+   The local reset signal 'rstn_c' of the design has been inferred as Global Set
+        Reset (GSR). The reset signal used for GSR control is 'rstn_c'.
+        
+
+     GSR Property:
+   The design components with GSR property set to ENABLED will respond to global
+        set reset while the components with GSR property set to DISABLED will
+        not.
+        
+
+Run Time and Memory Usage
+-------------------------
+
+   Total CPU Time: 0 secs  
+   Total REAL Time: 0 secs  
+   Peak Memory Usage: 64 MB
+        
+
+
+
+
+
+
+
+
+
+                                    Page 9
+
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+     Copyright (c) 1995 AT&T Corp.   All rights reserved.
+     Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+     Copyright (c) 2001 Agere Systems   All rights reserved.
+     Copyright (c) 2002-2016 Lattice Semiconductor Corporation,  All rights
+     reserved.

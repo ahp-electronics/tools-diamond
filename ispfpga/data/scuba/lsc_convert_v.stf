@@ -1,0 +1,611 @@
+`timescale 1 ns / 1 ps
+
+module RoundBlock
+  #(
+    parameter INPUTWIDTH = 1,
+    parameter INPUTPOINT = 0,
+    parameter OUTPUTWIDTH = 2, //=INPUTWIDTH-(INPUTPOINT-OUTPUTPOINT)+1
+    parameter OUTPUTPOINT = 0,
+    parameter UNSIGNEDINPUT = 1'b0,
+    parameter ROUND = 0
+   )
+  (
+    input [INPUTWIDTH:1] Din,
+    output [OUTPUTWIDTH:1] Dout
+  );
+
+  reg Extend;
+  reg [OUTPUTWIDTH:1] d_out;
+
+  assign Dout = d_out;
+
+  always @(Din)
+    Extend = UNSIGNEDINPUT ? 1'b0 : Din[INPUTWIDTH];
+
+  generate
+    if ((ROUND == 0) && (INPUTWIDTH > INPUTPOINT-OUTPUTPOINT))
+      always @(Din, Extend)
+      begin: truncate1
+        d_out = {Extend, Din[INPUTWIDTH : INPUTPOINT-OUTPUTPOINT+1]};
+      end //truncate1
+	 else if ((ROUND == 0) && (INPUTWIDTH == INPUTPOINT-OUTPUTPOINT))
+      always @(Din, Extend)
+      begin: truncate2
+        d_out = Extend;
+      end //truncate2
+	 else if (ROUND == 1)
+      always @(Din, Extend)
+      begin: nearest
+        reg RoundBit;
+        reg [INPUTPOINT-OUTPUTPOINT : 1] LostBits;
+        reg [INPUTPOINT-OUTPUTPOINT : 1] OneHalf;
+
+        if (INPUTPOINT-OUTPUTPOINT > 1)
+			 OneHalf = {1'b1, {(INPUTPOINT-OUTPUTPOINT-1){1'b0}}};
+		  else if (INPUTPOINT-OUTPUTPOINT == 1)
+			 OneHalf = 1'b1;
+        LostBits = Din[INPUTPOINT - OUTPUTPOINT : 1];
+
+        if ((Din[INPUTWIDTH] == 1'b1) && (~UNSIGNEDINPUT)) //-ve signed
+		  begin
+          if (LostBits > OneHalf)
+            RoundBit = 1'b1;
+          else
+            RoundBit = 1'b0;
+        end
+        else //unsigned or +ve signed
+          RoundBit = Din[INPUTPOINT-OUTPUTPOINT];
+		
+        d_out = {Extend, Din[INPUTWIDTH : INPUTPOINT-OUTPUTPOINT+1]} + RoundBit;
+	   end //nearest
+    else if (ROUND == 2)
+      always @(Din, Extend)
+      begin: convergent
+        reg RoundBit;
+        reg Half;
+
+        Half = ( Din[INPUTPOINT-OUTPUTPOINT : 1] == {1'b1, {(INPUTPOINT-OUTPUTPOINT-1){1'b0}}} );
+		
+        if (Half)
+          RoundBit = Din[INPUTPOINT-OUTPUTPOINT+1];
+        else
+          RoundBit = Din[INPUTPOINT-OUTPUTPOINT];
+
+        d_out = {Extend, Din[INPUTWIDTH : INPUTPOINT-OUTPUTPOINT+1]} + RoundBit;
+	   end //convergent
+  endgenerate
+endmodule
+
+
+//--------------------------------------------------------------------------------
+//  This version of Saturate_S2S is used when the Input Width is greater than 
+//  or equal to the Output Width
+
+module Saturate_S2S_0
+  #(
+    parameter INPUTWIDTH = 1,
+    parameter OUTPUTWIDTH = 1,
+    parameter WRAP = 1'b0
+   )
+  (
+    input [INPUTWIDTH:1] Din,
+    output [OUTPUTWIDTH:1] Dout,
+    output Overflow
+  );
+  reg Overflow_1;
+  reg [OUTPUTWIDTH:1] Saturated;
+  assign Dout = Saturated;
+  assign Overflow = Overflow_1;
+  generate
+    if (OUTPUTWIDTH < INPUTWIDTH)
+      always @(Din)
+      begin: I0_0
+        reg [INPUTWIDTH-OUTPUTWIDTH+1:1] Extended;
+        reg [INPUTWIDTH-OUTPUTWIDTH+1:1] Compare;
+        reg diff;
+		  
+        reg [OUTPUTWIDTH-1:1] MAX_SIGNED;
+        reg [OUTPUTWIDTH-1:1] MIN_SIGNED;
+	     MAX_SIGNED = {(OUTPUTWIDTH-1){1'b1}};
+	     MIN_SIGNED = {(OUTPUTWIDTH-1){1'b0}};
+
+        // check to see if saturation is required
+        Extended = {(INPUTWIDTH-OUTPUTWIDTH+1){Din[INPUTWIDTH]}};
+        Compare = Din[INPUTWIDTH:OUTPUTWIDTH];
+        diff = (Compare != Extended);
+		
+        if (WRAP) begin
+          Saturated = Din[OUTPUTWIDTH:1];
+	  Overflow_1 = (diff) ? 1'b1 : 1'b0;
+	end
+        else
+		  begin
+          if (diff)
+		    begin
+            if (Din[INPUTWIDTH] == 1'b0)
+              Saturated = {1'b0, MAX_SIGNED};
+            else
+              Saturated = {1'b1, MIN_SIGNED};
+	    Overflow_1 = 1'b1;
+          end
+          else begin
+            Saturated = {Din[INPUTWIDTH], Din[OUTPUTWIDTH-1:1]};
+	    Overflow_1 = 1'b0;
+	  end
+        end
+      end //I0_0
+    else if (OUTPUTWIDTH == INPUTWIDTH)
+      always @(Din)
+      begin: I0_2
+        Saturated = Din;
+	Overflow_1 = 1'b0;
+      end //I0_2
+  endgenerate
+endmodule
+
+
+//--------------------------------------------------------------------------------
+// This version of Saturate_S2S is used when the Output Width is greater than
+// the Input Width
+
+module Saturate_S2S_1
+  #(
+    parameter INPUTWIDTH = 1,
+    parameter OUTPUTWIDTH = 2,
+    parameter WRAP = 1'b0
+   )
+  (
+    input [INPUTWIDTH:1] Din,
+    output [OUTPUTWIDTH:1] Dout,
+    output Overflow
+  );
+
+  reg [OUTPUTWIDTH:1] Saturated;
+  assign Dout = Saturated;
+  assign Overflow = 1'b0;
+
+  generate
+    if (OUTPUTWIDTH > INPUTWIDTH)
+      always @(Din)
+      begin: I0_1
+        reg [OUTPUTWIDTH-INPUTWIDTH:1] pad_upper;
+        pad_upper = {(OUTPUTWIDTH-INPUTWIDTH){Din[INPUTWIDTH]}};
+        Saturated = {pad_upper, Din};
+      end //I0_1
+  endgenerate
+endmodule
+
+
+//--------------------------------------------------------------------------------
+// This version of Saturate_S2U is used when the Output Width is less than
+// the Input Width minus 1
+
+module Saturate_S2U_0
+  #(
+    parameter INPUTWIDTH = 3,
+    parameter OUTPUTWIDTH = 1,
+    parameter WRAP = 1'b0
+   )
+  (
+    input [INPUTWIDTH:1] Din,
+    output [OUTPUTWIDTH:1] Dout,
+    output Overflow
+  );
+
+  reg [OUTPUTWIDTH:1] Saturated;
+  reg Overflow_1;
+  assign Dout = Saturated;
+  assign Overflow = Overflow_1;
+  generate
+     
+    if (OUTPUTWIDTH < INPUTWIDTH-1)
+      always @(Din)
+	   begin: I0_0
+		  
+           reg [OUTPUTWIDTH:1] MAX_UNSIGNED;
+	   
+	   MAX_UNSIGNED = {(OUTPUTWIDTH){1'b1}};
+	   
+        if (WRAP) begin
+          Saturated = Din[OUTPUTWIDTH:1];
+	  Overflow_1 = | Din[INPUTWIDTH:OUTPUTWIDTH+1];
+	end
+        else
+	begin
+          // only need to check upper bound and zero
+          if (Din[INPUTWIDTH] == 1'b1) begin
+            Saturated = {(OUTPUTWIDTH){1'b0}};
+	    Overflow_1 = 1'b1;
+	  end
+          else if (Din > {{(INPUTWIDTH-OUTPUTWIDTH){1'b0}}, MAX_UNSIGNED})
+	  begin
+            Saturated = MAX_UNSIGNED;
+	    Overflow_1 = 1'b1;
+	  end
+          else begin
+            Saturated = Din[OUTPUTWIDTH:1];
+	    Overflow_1 = 1'b0;
+	  end
+        end
+      end //I0_0
+  endgenerate
+endmodule
+
+
+//--------------------------------------------------------------------------------
+// This version of Saturate_S2U is used when the Output Width is greate than or
+// equal to the Input Width minus 1
+
+module Saturate_S2U_1
+  #(
+    parameter INPUTWIDTH = 2,
+    parameter OUTPUTWIDTH = 1,
+    parameter WRAP = 1'b0
+   )
+  (
+    input [INPUTWIDTH:1] Din,
+    output [OUTPUTWIDTH:1] Dout,
+    output Overflow
+  );
+
+  reg [OUTPUTWIDTH:1] Saturated;
+  assign Dout = Saturated;
+  assign Overflow = 1'b0;
+
+  generate
+    if (OUTPUTWIDTH > INPUTWIDTH-1)
+      always @(Din)
+		begin: I0_1
+        reg [OUTPUTWIDTH-INPUTWIDTH:1] pad_upper;
+        pad_upper = {(OUTPUTWIDTH-INPUTWIDTH){Din[INPUTWIDTH]}};
+		  
+        if ((Din[INPUTWIDTH] == 1'b1) && (~WRAP))
+          Saturated = {(OUTPUTWIDTH){1'b0}};
+        else
+          Saturated = {pad_upper, Din};
+      end //I0_1
+    else if (OUTPUTWIDTH == INPUTWIDTH-1)
+      always @(Din)
+		begin: I0_2
+        if ((Din[INPUTWIDTH] == 1'b1) && (~WRAP))
+          Saturated = {(OUTPUTWIDTH){1'b0}};
+        else
+          Saturated = Din[INPUTWIDTH-1:1];
+      end //I0_2
+  endgenerate
+endmodule
+
+//--------------------------------------------------------------------------------
+// unsigned to signed
+
+module Saturate_U2S
+  #(
+    parameter INPUTWIDTH = 1,
+    parameter OUTPUTWIDTH = 2,
+    parameter WRAP = 1'b0
+   )
+  (
+    input [INPUTWIDTH:1] Din,
+    output [OUTPUTWIDTH:1] Dout,
+    output Overflow
+  );
+
+  reg Overflow_1;
+  reg [OUTPUTWIDTH:1] Saturated;
+  assign Dout = Saturated;
+  assign Overflow = Overflow_1;
+
+  generate
+    if (OUTPUTWIDTH-1 < INPUTWIDTH)
+      always @(Din)
+	   begin: I0_0
+        reg [OUTPUTWIDTH-1:1] MAX_SIGNED;
+        reg [OUTPUTWIDTH-1:1] MIN_SIGNED;
+        reg overflow;
+
+		  MAX_SIGNED = {(OUTPUTWIDTH-1){1'b1}};
+		  MIN_SIGNED = {(OUTPUTWIDTH-1){1'b0}};
+
+        // check to see if saturation is required
+        overflow = | Din[INPUTWIDTH:OUTPUTWIDTH];
+		  
+        if (WRAP) begin
+            Saturated = Din[OUTPUTWIDTH:1];
+	    Overflow_1 = overflow;
+	end
+        else
+		  begin
+          if (overflow) begin
+            Saturated = {1'b0, MAX_SIGNED};
+	    Overflow_1 = 1'b1;
+	  end
+          else begin
+            Saturated = {1'b0, Din[OUTPUTWIDTH-1:1]};
+	    Overflow_1 = 1'b0;
+	  end
+        end
+      end //I0_0
+    else if (OUTPUTWIDTH-1 > INPUTWIDTH)
+      always @(Din)
+		begin: I0_1
+        reg [OUTPUTWIDTH-INPUTWIDTH:1] pad_upper;
+
+        pad_upper = {(OUTPUTWIDTH-INPUTWIDTH){1'b0}};
+        Saturated = {pad_upper, Din};
+	Overflow_1 = 1'b0;
+      end //I0_1
+    else if (OUTPUTWIDTH-1 == INPUTWIDTH)
+      always @(Din)
+		begin: I0_2
+        Saturated = {1'b0, Din};
+	Overflow_1 = 1'b0;
+      end //I0_2
+  endgenerate
+endmodule
+
+//--------------------------------------------------------------------------------
+// unsigned to unsigned
+
+module Saturate_U2U
+  #(
+    parameter INPUTWIDTH = 1,
+    parameter OUTPUTWIDTH = 1,
+    parameter WRAP = 1'b0
+   )
+  (
+    input [INPUTWIDTH:1] Din,
+    output [OUTPUTWIDTH:1] Dout,
+    output Overflow
+  );
+
+  reg [OUTPUTWIDTH:1] Saturated;
+  reg Overflow_1;
+  assign Dout = Saturated;
+  assign Overflow = Overflow_1;
+
+  generate
+    if (OUTPUTWIDTH < INPUTWIDTH)
+      always @(Din)
+		begin: I0_0
+        reg [OUTPUTWIDTH:1] MAX_UNSIGNED;
+        reg overflow;
+
+		  MAX_UNSIGNED = {(OUTPUTWIDTH){1'b1}};
+
+        // check to see if saturation is required
+        overflow = | Din[INPUTWIDTH:OUTPUTWIDTH+1];
+		  
+        if (WRAP) begin
+          Saturated = Din[OUTPUTWIDTH:1];
+	  Overflow_1 = overflow;
+	end
+        else
+	begin
+          // only need to check upper bound and zero
+          if (overflow) begin
+            Saturated = MAX_UNSIGNED;
+	    Overflow_1 = 1'b1;
+	  end
+          else begin
+            Saturated = Din[OUTPUTWIDTH:1];
+	    Overflow_1 = 1'b0;
+	  end
+        end
+      end //I0_0
+    else if (OUTPUTWIDTH > INPUTWIDTH)
+      always @(Din)
+		begin: I0_1
+        reg [OUTPUTWIDTH-INPUTWIDTH:1] pad_upper;
+
+        pad_upper = {(OUTPUTWIDTH-INPUTWIDTH){1'b0}};
+        Saturated = {pad_upper, Din};
+	Overflow_1 = 1'b0;
+      end //I0_1
+    else if (OUTPUTWIDTH == INPUTWIDTH)
+      always @(Din)
+		begin: I0_2
+        Saturated = Din;
+	Overflow_1 = 1'b0;
+      end //I0_2
+  endgenerate
+endmodule
+
+
+//--------------------------------------------------------------------------------
+// Top level Saturate that instantiates various Saturate_* blocks based on
+// user selection
+
+module Saturate
+  #(
+    parameter INPUTWIDTH = 1,
+    parameter OUTPUTWIDTH = 1,
+    parameter UNSIGNED = 1'b0,
+    parameter INPUTFORMATUNSIGNED = 1'b0,
+    parameter WRAP = 1'b0
+   )
+  (
+    input [INPUTWIDTH:1] Din,
+    output [OUTPUTWIDTH:1]Dout,
+    output Overflow
+  );
+
+  generate
+    if ((INPUTFORMATUNSIGNED==0) && (UNSIGNED==0) && (INPUTWIDTH >= OUTPUTWIDTH))
+      Saturate_S2S_0
+        #(
+          .INPUTWIDTH(INPUTWIDTH),
+          .OUTPUTWIDTH(OUTPUTWIDTH),
+          .WRAP(WRAP)
+         )
+        Saturate1(
+          .Din(Din),
+          .Dout(Dout),
+          .Overflow(Overflow)
+        );
+    else if ((INPUTFORMATUNSIGNED==0) && (UNSIGNED==0) && (INPUTWIDTH < OUTPUTWIDTH))
+      Saturate_S2S_1
+        #(
+          .INPUTWIDTH(INPUTWIDTH),
+          .OUTPUTWIDTH(OUTPUTWIDTH),
+          .WRAP(WRAP)
+         )
+        Saturate1(
+          .Din(Din),
+          .Dout(Dout),
+          .Overflow(Overflow)
+        );
+    else if ((INPUTFORMATUNSIGNED==0) && (UNSIGNED==1) && (INPUTWIDTH-1 <= OUTPUTWIDTH))
+      Saturate_S2U_1
+        #(
+          .INPUTWIDTH(INPUTWIDTH),
+          .OUTPUTWIDTH(OUTPUTWIDTH),
+          .WRAP(WRAP)
+         )
+        Saturate1(
+          .Din(Din),
+          .Dout(Dout),
+          .Overflow(Overflow)
+        );
+    else if ((INPUTFORMATUNSIGNED==0) && (UNSIGNED==1) && (INPUTWIDTH-1 > OUTPUTWIDTH))
+      Saturate_S2U_0
+        #(
+          .INPUTWIDTH(INPUTWIDTH),
+          .OUTPUTWIDTH(OUTPUTWIDTH),
+          .WRAP(WRAP)
+         )
+        Saturate1(
+          .Din(Din),
+          .Dout(Dout),
+          .Overflow(Overflow)
+        );
+    else if ((INPUTFORMATUNSIGNED==1) && (UNSIGNED==0))
+      Saturate_U2S
+        #(
+          .INPUTWIDTH(INPUTWIDTH),
+          .OUTPUTWIDTH(OUTPUTWIDTH),
+          .WRAP(WRAP)
+         )
+        Saturate1(
+          .Din(Din),
+          .Dout(Dout),
+          .Overflow(Overflow)
+        );
+    else if ((INPUTFORMATUNSIGNED==1) && (UNSIGNED==1))
+      Saturate_U2U
+        #(
+          .INPUTWIDTH(INPUTWIDTH),
+          .OUTPUTWIDTH(OUTPUTWIDTH),
+          .WRAP(WRAP)
+        )
+        Saturate1(
+          .Din(Din),
+          .Dout(Dout),
+          .Overflow(Overflow)
+        );
+  endgenerate
+endmodule
+
+
+module lsc_convert
+  #(
+    parameter INPUTWIDTH = 1,
+    parameter INPUTPOINT = 0,
+    parameter OUTPUTWIDTH = 1,
+    parameter OUTPUTPOINT = 0,
+    parameter UNSIGNED = 1'b0,
+    parameter INPUTFORMATUNSIGNED = 1'b0,
+    parameter ROUND = 0,
+    parameter WRAP = 1'b0
+   )
+  (
+    input [INPUTWIDTH:1] Din,
+    output [OUTPUTWIDTH:1] Dout,
+    output Overflow
+  );
+
+  localparam ROUNDEDWIDTH = INPUTWIDTH - (INPUTPOINT - OUTPUTPOINT) + 1;
+  localparam SATINPUTWIDTH = INPUTWIDTH + OUTPUTPOINT-INPUTPOINT + 1;
+
+  wire [ROUNDEDWIDTH:1] Rounded;
+  reg [SATINPUTWIDTH:1] SatInput;
+  reg SatExtend;
+
+  // check for rounding
+  generate
+    if (INPUTPOINT > OUTPUTPOINT)
+	 begin
+      RoundBlock
+        #(
+          .INPUTWIDTH(INPUTWIDTH),
+          .INPUTPOINT(INPUTPOINT),
+          .OUTPUTWIDTH(ROUNDEDWIDTH),
+          .OUTPUTPOINT(OUTPUTPOINT),
+          .UNSIGNEDINPUT(INPUTFORMATUNSIGNED),
+          .ROUND(ROUND)
+         )
+        RoundBlock0(
+          .Din(Din),
+          .Dout(Rounded)
+        );
+
+      Saturate
+        #(
+          .INPUTWIDTH(ROUNDEDWIDTH),
+          .OUTPUTWIDTH(OUTPUTWIDTH),
+          .UNSIGNED(UNSIGNED),
+          .INPUTFORMATUNSIGNED(INPUTFORMATUNSIGNED),
+          .WRAP(WRAP)
+         )
+        Saturate0(
+          .Din(Rounded),
+          .Dout(Dout),
+          .Overflow(Overflow)
+        );
+	 end
+    else if (INPUTPOINT < OUTPUTPOINT)
+	 begin
+	   always @(Din)
+		begin
+        SatExtend = INPUTFORMATUNSIGNED ? 1'b0 : Din[INPUTWIDTH];
+        SatInput = {SatExtend, Din[INPUTWIDTH:1], {(OUTPUTPOINT-INPUTPOINT){1'b0}}};
+		end
+
+      Saturate
+        #(
+          .INPUTWIDTH(SATINPUTWIDTH),
+          .OUTPUTWIDTH(OUTPUTWIDTH),
+          .UNSIGNED(UNSIGNED),
+          .INPUTFORMATUNSIGNED(INPUTFORMATUNSIGNED),
+          .WRAP(WRAP)
+         )
+        Saturate0(
+          .Din(SatInput),
+          .Dout(Dout),
+          .Overflow(Overflow)
+        );
+    end
+    else if (INPUTPOINT == OUTPUTPOINT)
+	 begin
+      always @(Din)
+		begin
+		  SatExtend = INPUTFORMATUNSIGNED ? 1'b0 : Din[INPUTWIDTH];
+        SatInput = {SatExtend, Din[INPUTWIDTH:1]};
+		end
+		
+      Saturate
+        #(
+          .INPUTWIDTH(SATINPUTWIDTH),
+          .OUTPUTWIDTH(OUTPUTWIDTH),
+          .UNSIGNED(UNSIGNED),
+          .INPUTFORMATUNSIGNED(INPUTFORMATUNSIGNED),
+          .WRAP(WRAP)
+         )
+        Saturate0(
+          .Din(SatInput),
+          .Dout(Dout),
+          .Overflow(Overflow)
+        );
+    end
+  endgenerate
+endmodule
+

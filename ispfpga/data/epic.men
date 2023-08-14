@@ -1,0 +1,97 @@
+##############################################################################
+# Copyright 1991-1993 by NeoCAD, Inc.  All rights reserved.
+#
+# EPIC menubar and pulldown menu definitions.
+#   - Each pulldown entry can map to one EPIC command stream.  
+#   - All strings must be quoted with double quotes.  
+#   - Each menubar and pulldown button labels must be uniquely named.
+#   - Menubar button labels must start in column one.
+#   - Pulldown button labels must be preceded by white space.
+#   - Comments begin with a pound sign (#) and go to end of line.
+##############################################################################
+
+#MenuBar PullDown                EPIC commands  
+#Button  Button                  this pulldown 
+#Label   Label                   button maps to.
+#------  ----------------------  --------------------------------------------
+"File"
+	"New..."		"post new"
+	"Open..."		"post open"
+	"Save"			"unload"
+	"Save As..."		"post saveas"
+	"Save As Macro..."	"post -m saveas"
+	"New Macro..."		"post macnew"
+	"Open Macro..."		"post macopen"
+	"Exit"			"post exit"
+
+"Edit"
+	"Add"	        	"add"
+	"Add Bus"     	        "add bus"
+	"Add Path"    	        "add path"
+        "Add Macro..."          "post addmacro"
+	"Copy"			"copy"
+	"Delete"		"delete"
+        "Edit Block..."         "editblock"
+	"Swap"			"swap"
+        "Unbind"                "unbind"
+	"Undo Last Action"	"undo"
+	"Undo Last Change"	"undo -c"
+
+"View"
+	"Hilite"       		"hilite"
+	"Unhilite"     		"unhilite"
+	"Unhilite All"     	"unhilite -all"
+	"Clear"			"clear"
+	"Refresh"       	"refresh"
+	"Post Cmd..."		"post cmd"
+	"Post List..."		"post list"
+	"Post View..."		"post view"
+	"UnPost All"   		"unpost -all"
+
+"Place"
+	"AutoPlace"		"autoplace"
+	"Manual Place"        	"place"
+	"Unplace"		"unplace"
+	"AutoPlace All..." 	"post autoplaceall"
+	"Unplace All..."   	"post msg -c 'OK to unplace all components?' 'unplace -all'"
+                                
+"Route"
+	"AutoRoute"		"autoroute"
+	"Manual Route"        	"route"
+	"Unroute"		"unroute"
+	"AutoRoute All..."      "post autorouteall"
+	"Unroute All..."	"post msg -c 'OK to unroute all nets?' 'unroute -all'"
+
+"Tools"
+	"Post DRC..."		"post drc"
+	"DRC"			"drc"
+	"Delay"			"delay"
+        "Find..."       	"post find"
+        "Post Trace..."         "post trace"
+        "Post Trace Summary..." "post tracesum"
+        "Signal Probing..."     "handler signalprobe"
+        "Trace"       		"trace -r"
+
+"Scripts"
+	"Record..."		"post record"
+	"End Record"		"end"
+	"Playback..."		"post playback"
+
+"Macros"
+	"Add External Pin"	"add extpin"
+	"List External Pins"	"getattr main extpins"
+	"Set Reference Comp"	"setattr refcomp TRUE"
+	"Get Reference Comp"	"getattr main refcomp"
+
+"Misc"
+	"Post Main Attrs..."	"post attr main"
+	"Post Attributes..."	"post attr"
+	"List Attributes"	"getattr"
+	"List Aliases"  	"alias"
+        "List Buttons"  	"button"
+
+"Help"
+	"Index"		        "help"
+        "Commands Usage"        "help -c"
+
+

@@ -1,0 +1,6 @@
+Clock: CLK * 1 ;
+Aclr: => 1; @100 => 0;
+Clk_En: => 0; @ 100; @ Aclr & E0; *100 @Clock => 1; *10 @ Clock => 0; => 1;
+UpDown: => 0; *150 @ Clock => 1;
+Load: => 0; *50 @Clock; => 1; @ Clock; => 0;
+LData: => 0;

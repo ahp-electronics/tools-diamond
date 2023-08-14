@@ -1,0 +1,46 @@
+library verilog;
+use verilog.vl_types.all;
+entity rx_test_mux is
+    port(
+        serdes_char_out : out    vl_logic_vector(21 downto 0);
+        serdes_char_out_prev: in     vl_logic_vector(21 downto 0);
+        rd0             : in     vl_logic_vector(9 downto 0);
+        rck0            : in     vl_logic;
+        tck0            : in     vl_logic;
+        rlol0           : in     vl_logic;
+        rlos_hi0        : in     vl_logic;
+        rlos_lo0        : in     vl_logic;
+        pci_connect0    : in     vl_logic;
+        pci_det_done0   : in     vl_logic;
+        rd1             : in     vl_logic_vector(9 downto 0);
+        rck1            : in     vl_logic;
+        tck1            : in     vl_logic;
+        rlol1           : in     vl_logic;
+        rlos_hi1        : in     vl_logic;
+        rlos_lo1        : in     vl_logic;
+        pci_connect1    : in     vl_logic;
+        pci_det_done1   : in     vl_logic;
+        rd2             : in     vl_logic_vector(9 downto 0);
+        rck2            : in     vl_logic;
+        tck2            : in     vl_logic;
+        rlol2           : in     vl_logic;
+        rlos_hi2        : in     vl_logic;
+        rlos_lo2        : in     vl_logic;
+        pci_connect2    : in     vl_logic;
+        pci_det_done2   : in     vl_logic;
+        rd3             : in     vl_logic_vector(9 downto 0);
+        rck3            : in     vl_logic;
+        tck3            : in     vl_logic;
+        rlol3           : in     vl_logic;
+        rlos_hi3        : in     vl_logic;
+        rlos_lo3        : in     vl_logic;
+        pci_connect3    : in     vl_logic;
+        pci_det_done3   : in     vl_logic;
+        refck2core      : in     vl_logic;
+        rxrefck2core    : in     vl_logic;
+        plol            : in     vl_logic;
+        refloc          : in     vl_logic;
+        rrefloc         : in     vl_logic;
+        rx_ch           : in     vl_logic_vector(3 downto 0)
+    );
+end rx_test_mux;

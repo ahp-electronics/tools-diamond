@@ -1,0 +1,997 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<!-- 
+     08/30/04 Spinti: Added DISCHARGE instruction to ERASE function.
+	 11/01/04 Spinti: Added ENDDR DRPAUSE and ENDIR IRPAUSE to the beginning of the ISC_PROGRAM_VERIFY function.
+    03/04/05 Spinti: Changed the PROGRAM_SECURITY, PROGRAM_DONE_BIT, and ERASE_DONE_BIT pulse width to 50.
+    03/07/05 Spinti: Changed the DISABLE delay to 200ms, and DISCHARGE delay to 200ms.
+-->
+<SVF_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+	<!-- Length fields are in number if bits -->
+	<Instruction_Length value="INSTRUCTION_REGISTER_LENGTH"/> 
+	<Row_Width			value="DEVICE_ROW_WIDTH"/> 
+	<Address_Length		value="ADDRESS_REGISTER_LENGTH"/> 
+	<Address length="ADDRESS_LENGTH">
+		INI_ADDRESS			
+	</Address>
+	<ID_Length 			value="DEVICE_ID_LENGTH"/>
+	<Usercode_Length 	value="DEVICE_USERCODE_LENGTH"/>
+	<Arch_Length		value="ARCHITECH_LENGTH"/>
+	<BSCAN_Length value="BSCAN_REGISTER_LENGTH"/> 
+	<Bscan length="BSCAN_LENGTH">
+		BSCAN_DATA
+	</Bscan>
+	<BscanMask length="BSCAN_LENGTH">
+		BSCAN_MASK
+	</BscanMask>
+	<PWP	value="PROGRAMING_PULSE_WIDTH"/>
+	<PWV	value="VERIFY_PULSE_WIDTH"/>
+	<PWE	value="ERASE_PULSE_WIDTH"/>
+	<Instruction>
+		BYPASS				= 0xFF;
+		BPRELOAD 				= 0x1C;
+		IDCODE 				= 0x16;
+		USERCODE 				= 0x17;
+		EXTEST	 			= 0x00;
+		INTEST	 			= 0x2C;
+		HIGH_Z	 			= 0x18;
+		CLAMP	 				= 0x20;
+		ISC_ENABLE 				= 0x15;
+		ISC_DISABLE				= 0x1E;
+		ISC_ADDRESS_SHIFT 		= 0x01;
+		ISC_DATA_SHIFT			= 0x02;
+		ISC_ERASE 				= 0x03;
+		ISC_PROGRAM             = 0x07;
+		ISC_VERIFY              = 0x0A;
+		ISC_PROGRAM_INCR 		= 0x27;
+		ISC_READ_INCR	 		= 0x2A;
+		ISC_PROGRAM_SECURITY	= 0x09;
+		ISC_PROGRAM_DONE 		= 0x2F;
+		ISC_ERASE_DONE			= 0x24;
+		ISC_PROGRAM_USERCODE	= 0x1A;
+		ISC_ADDRESS_INIT		= 0x21;
+		ISC_NOOP				= 0x30;
+		ISC_PROGRAM_ASIC		= 0xA6;
+		ISC_READ_ASIC			= 0xAB;
+		ISC_DISCHARGE     		= 0x14;
+	</Instruction>
+</Parameter>
+<Data>
+	<DataField	name="IDTDI">
+		<FieldBlock	row_width="DEVICE_ID_LENGTH">
+			ID_DATA
+		</FieldBlock>
+	</DataField>
+</Data>
+<Operation_List label="TurboOperation0">
+	"Erase,Program,Verify" = "	INIT	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								ENABLE	! Enable the programming mode, 
+								ERASE 	! Erase the device, 
+								FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+								PROGRAM_ARCH ! Program ASIC IO,
+								PROGRAM_USERCODE	! Program USERCODE,
+								FULL_ADDRESS_VERIFY !Full Address Verify Fuse Map,
+								VERIFY_ARCH ! Verify ASIC IO, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								SYNCFUNCTION, 
+								PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+											PROGRAM_ARCH ! Program ASIC IO,
+											PROGRAM_USERCODE	! Program USERCODE,
+											FULL_ADDRESS_VERIFY !Full Address Verify Fuse Map,
+											VERIFY_ARCH ! Verify ASIC IO, 
+											VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+							PROGRAM_ARCH ! Program ASIC IO,
+							PROGRAM_USERCODE		! Program USERCODE,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+							FULL_ADDRESS_VERIFY !Full Address Verify Fuse Map,
+							VERIFY_ARCH ! Verify ASIC IO,
+							VERIFY_VERIFY_USERCODE		! Verify USERCODE,
+							SYNCFUNCTION, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Secure Device"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+							PROGRAM_SECURITY ! Secure device,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Bypass"	=	"	INIT 	! Initialize"	;
+	"Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						ENABLE	! Enable the programming mode" ;
+	"Disable Only" = "	INIT 	! Initialize, 
+						SYNCFUNCTION, 
+						DISABLE ! Exit the programming mode"	;
+</Operation_List>
+<Operation_List label="TurboOperation1">
+	"Erase,Program,Verify" = "	INIT	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								ENABLE	! Enable the programming mode, 
+								ERASE 	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_ARCH ! Program ASIC IO,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map,
+								VERIFY_ARCH ! Verify ASIC IO, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								SYNCFUNCTION, 
+								PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map,
+											PROGRAM_ARCH ! Program ASIC IO,
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map,
+											VERIFY_ARCH ! Verify ASIC IO, 
+											VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map,
+							PROGRAM_ARCH ! Program ASIC IO,
+							PROGRAM_USERCODE		! Program USERCODE,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+							VERIFY	! Verify Fuse Map,
+							VERIFY_ARCH ! Verify ASIC IO, 
+							VERIFY_VERIFY_USERCODE		! Verify USERCODE,
+							SYNCFUNCTION, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Secure Device"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+							PROGRAM_SECURITY ! Secure device,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Bypass"	=	"	INIT 	! Initialize"	;
+</Operation_List>
+<Operation_List label="TurboOperation2">
+	"Erase,Program,Verify" = "	INIT	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								ENABLE	! Enable the programming mode, 
+								ERASE 	! Erase the device, 
+								FULL_ADDRESS_PROGRAM_VERIFY	! Full Address Program and Verify Fuse Map,
+								PROGRAM_ARCH ! Program ASIC IO,
+								VERIFY_ARCH ! Verify ASIC IO,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY_USERCODE		! Verify USERCODE,
+								SYNCFUNCTION, 
+								PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											FULL_ADDRESS_PROGRAM_VERIFY	! Full Address Program and Verify Fuse Map,
+											PROGRAM_ARCH ! Program ASIC IO,
+											VERIFY_ARCH ! Verify ASIC IO,
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							FULL_ADDRESS_PROGRAM	[SEQUENTIAL] ! Full Address Program Fuse Map,
+							SYNCFUNCTION,
+							PROGRAM_ARCH ! Program ASIC IO,
+							SYNCFUNCTION,
+							PROGRAM_USERCODE		! Program USERCODE,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							FULL_ADDRESS_VERIFY	[SEQUENTIAL] ! Full Address Verify Fuse Map, 
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							VERIFY_ARCH ! Verify ASIC IO, 
+							SYNCFUNCTION,
+							VERIFY_VERIFY_USERCODE		! Verify USERCODE,
+							SYNCFUNCTION, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								VERIFY_USERCODE		! Verify USERCODE,	
+								SYNCFUNCTION, 
+		 			 			DISABLE ! Exit the programming mode"	;
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Secure Device"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+							PROGRAM_SECURITY ! Secure device,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Bypass"	=	"	INIT 	! Initialize"	;
+</Operation_List>
+<Operation_List label="TurboOperation3">
+	"Erase,Program,Verify" = "	INIT	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								ENABLE	! Enable the programming mode, 
+								ERASE 	! Erase the device, 
+								PROGRAM_VERIFY	! Program and Verify Fuse Map,
+								PROGRAM_ARCH ! Program ASIC IO,
+								VERIFY_ARCH ! Verify ASIC IO,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY_USERCODE		! Verify USERCODE,
+								SYNCFUNCTION, 
+								PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											PROGRAM_VERIFY	! Program and Verify Fuse Map,
+											PROGRAM_ARCH ! Program ASIC IO,
+											VERIFY_ARCH ! Verify ASIC IO,
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	[SEQUENTIAL] ! Program Fuse Map,
+							SYNCFUNCTION,
+							PROGRAM_ARCH ! Program ASIC IO,
+							SYNCFUNCTION,
+							PROGRAM_USERCODE		! Program USERCODE,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							VERIFY	[SEQUENTIAL] ! Verify Fuse Map, 
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							VERIFY_ARCH ! Verify ASIC IO, 
+							SYNCFUNCTION,
+							VERIFY_VERIFY_USERCODE		! Verify USERCODE,
+							SYNCFUNCTION, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								VERIFY_USERCODE		! Verify USERCODE,	
+								SYNCFUNCTION, 
+		 			 			DISABLE ! Exit the programming mode"	;
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Secure Device"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+							PROGRAM_SECURITY ! Secure device,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Bypass"	=	"	INIT 	! Initialize"	;
+</Operation_List>
+<Operation_List label="TurboOperation4">
+	"Erase,Program,Verify" = "	INIT	! Initialize, 
+								ISC_READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								ENABLE	! Enable the programming mode, 
+								ERASE 	! Erase the device, 
+								ISC_PROGRAM_VERIFY	! Program and Verify Fuse Map,
+								PROGRAM_ARCH ! Program ASIC IO,
+								ISC_PROG_USERCODE	! Program USERCODE,
+								VERIFY_ARCH ! Verify ASIC IO,
+								ISC_VERIFY_USERCODE		! Verify USERCODE,
+								SYNCFUNCTION, 
+								PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											ISC_READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											ISC_PROGRAM_VERIFY	! Program and Verify Fuse Map,
+											PROGRAM_ARCH ! Program ASIC IO,
+											ISC_PROG_USERCODE	! Program USERCODE,
+											VERIFY_ARCH ! Verify ASIC IO,
+											ISC_VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							ISC_READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	[SEQUENTIAL] ! Program Fuse Map,
+							SYNCFUNCTION,
+							PROGRAM_ARCH ! Program ASIC IO,
+							SYNCFUNCTION,
+							ISC_PROG_USERCODE		! Program USERCODE,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							ISC_READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							VERIFY	[SEQUENTIAL] ! Verify Fuse Map, 
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							VERIFY_ARCH ! Verify ASIC IO, 
+							SYNCFUNCTION,
+							ISC_VERIFY_USERCODE		! Verify USERCODE,
+							SYNCFUNCTION, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						ISC_READ_ID	! Check the IDCODE"	; 
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								ISC_READ_ID	! Check the IDCODE,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								ISC_VERIFY_USERCODE		! Verify USERCODE,	
+								SYNCFUNCTION, 
+		 			 			DISABLE ! Exit the programming mode"	;
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							ISC_READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Secure Device"	=	"	INIT 	! Initialize, 
+							ISC_READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+							PROGRAM_SECURITY ! Secure device,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Bypass"	=	"	INIT 	! Initialize"	;
+</Operation_List>
+<Script>
+<![CDATA[
+function INIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR IDLE;
+	ENDIR IDLE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+	SYNC;
+}
+function READ_ID {
+	SIR Instruction_Length 	TDI (IDCODE);
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+							TDO	(IDTDI[1])
+							MASK (DEVICE_ID_MASK);
+	SYNC;
+}
+function ISC_READ_ID {
+	SIR Instruction_Length 	TDI (IDCODE);
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+					TDO	(IDTDI[1])
+					MASK (DEVICE_ID_MASK);
+	SYNC;
+}
+function PRELOAD {				
+   // Shift in Preload instruction
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+   SYNC;
+}
+function INI_PRELOAD {				
+   // Shift in Preload instruction
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(#0^BSCAN_Length);
+   SYNC;
+}
+function SAMPLE {				
+   // Shift in Preload instruction
+   SIR Instruction_Length TDI(BPRELOAD);
+   SYNC;
+   STATE DRPAUSE;
+   STATE IDLE;
+   SYNC;
+}
+function INI_SAMPLE {				
+   // Shift in Preload instruction
+   SIR Instruction_Length TDI(BPRELOAD);
+   SYNC;
+   STATE DRPAUSE;
+   STATE IDLE;
+   SYNC;
+}
+
+function DYNAMIC {	
+   // Shift in Preload instruction
+   ENDDR DRPAUSE;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1])
+   					DMASK(BscanMask[1]);
+   ENDDR IDLE;
+   STATE IDLE;
+   SYNC;
+}
+
+function ENABLE {
+	SYNC;
+	SIR Instruction_Length TDI (ISC_ENABLE);
+	RUN_TEST	TCK 3
+				DELAY 20;
+	SYNC;
+}
+function DISABLE {
+	SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	TCK 3
+				DELAY 200;
+	SYNC;
+}
+function ERASE {
+	SYNC;
+	// Shift in Erase All instruction
+	SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	TCK 3 DELAY PWE;
+	
+	// Spinti 8/30/04 Added discharge
+	SIR Instruction_Length TDI (ISC_DISCHARGE);
+	RUN_TEST 	TCK 3 DELAY 200;
+	SYNC;
+}
+function FULL_ADDRESS_PROGRAM {
+	FuseArray_TDI.row = 1;
+	Address.row = 1;
+	
+	SIR 	Instruction_Length TDI (BYPASS);
+	SDR	1	TDI (#0);
+	SYNC;
+	
+	SIR Instruction_Length	TDI (ISC_ADDRESS_INIT);
+	SDR	1	TDI (#0);
+	
+	
+	// Program the rest of the device
+	repeat Address_Length -1 {
+		SIR Instruction_Length 	TDI (ISC_READ_INCR);	
+		SDR	Row_Width	TDI	(FuseArray_TDI);
+		SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		SYNC;
+		SIR Instruction_Length	TDI	(BYPASS);
+		SDR	1	TDI	(#0);
+	} // repeat
+	Address[1] = #1@(#0^(Address_Length-1));
+	SIR Instruction_Length 	TDI (ISC_READ_INCR);	
+	SDR	Row_Width	TDI	(FuseArray_TDI);
+	SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;	
+	SYNC;
+}
+function PROGRAM {
+	FuseArray_TDI.row = 1;
+	Address.row = 1;
+	
+	SIR 	Instruction_Length TDI (BYPASS);
+	SDR	Address_Length	TDI (#0);
+	SYNC;
+	
+	SIR Instruction_Length	TDI (ISC_ADDRESS_INIT);
+	SDR	1	TDI (#0);
+
+	repeat Address_Length -1 {
+		SIR Instruction_Length 	TDI (ISC_READ_INCR);	
+		SDR	Row_Width	TDI	(FuseArray_TDI);
+		SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		SYNC;
+		SIR Instruction_Length	TDI	(BYPASS);
+		ESDR	1	TDI (#0);
+	} // repeat
+	Address[1] = #1@(#0^(Address_Length-1));	
+	SIR Instruction_Length 	TDI (ISC_READ_INCR);	
+	SDR	Row_Width	TDI	(FuseArray_TDI);
+	SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+	SYNC;
+}
+function FULL_ADDRESS_VERIFY {
+	FuseArray_TDI.row = 1;
+	Address.row = 1;	
+
+	SIR 	Instruction_Length TDI (BYPASS);
+	SDR	1	TDI (#0);
+	SYNC;
+	
+	SIR Instruction_Length TDI (ISC_ADDRESS_SHIFT);
+	SDR	Address_Length TDI (Address[1]);
+	
+	// Verify the device 
+	repeat Address_Length -1 {
+		SIR Instruction_Length TDI (ISC_READ_INCR);
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+		SIR Instruction_Length	TDI	(ISC_READ_INCR);
+		STATE IDLE;
+		SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+								TDO	(FuseArray_TDI)
+								MASK(#1^Row_Width);
+		SYNC;
+		SIR Instruction_Length	TDI	(BYPASS);
+		SDR	1	TDI	(#0);
+	}
+	Address[1] = #1@(#0^(Address_Length-1));
+	SIR Instruction_Length TDI (ISC_READ_INCR);
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;		
+	SIR Instruction_Length 	TDI (ISC_READ_INCR);
+	STATE IDLE;
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO	(FuseArray_TDI)
+							MASK(#1^Row_Width);
+	
+	SYNC;
+}
+function VERIFY {
+	FuseArray_TDI.row = 1;
+	Address.row = 1;	
+
+	SIR 	Instruction_Length TDI (BYPASS);
+	SDR	1	TDI (#0);
+	SYNC;
+	
+	SIR Instruction_Length TDI (ISC_ADDRESS_SHIFT);
+	SDR	Address_Length TDI (Address[1]);
+	
+	// Verify the device 
+	repeat Address_Length -1 {
+		SIR Instruction_Length TDI (ISC_READ_INCR);
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+		SIR Instruction_Length	TDI	(ISC_READ_INCR);
+		STATE IDLE;
+		SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+								TDO	(FuseArray_TDI)
+								MASK(#1^Row_Width);
+		SYNC;
+		SIR Instruction_Length	TDI	(BYPASS);
+		ESDR	1	TDI (#0);
+	}
+	Address[1] = #1@(#0^(Address_Length-1));
+	SIR Instruction_Length TDI (ISC_READ_INCR);
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;		
+	SIR Instruction_Length 	TDI (ISC_READ_INCR);
+	STATE IDLE;
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO	(FuseArray_TDI)
+							MASK(#1^Row_Width);
+	SYNC;
+}
+function	PROGRAM_VERIFY	{
+	int32	Row = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;
+	
+	SIR Instruction_Length	TDI (ISC_DATA_SHIFT);
+	SDR	Row_Width	TDI	(FuseArray_TDI[Row]);
+	SYNC;
+	
+	SIR Instruction_Length 	TDI	(ISC_ADDRESS_SHIFT);
+	SDR	Address_Length	TDI (Address);
+	
+	SIR Instruction_Length	TDI	(ISC_PROGRAM_INCR);
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+	
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	SYNC;
+	repeat Address_Length - 1	{
+		SIR Instruction_Length	TDI	(ISC_DATA_SHIFT);
+		SDR_VERIFY	Row_Width	TDI	(FuseArray_TDI[Row+1])
+								TDO (FuseArray_TDI[Row]);
+		Row = Row + 1;
+		SIR Instruction_Length	TDI	(ISC_ADDRESS_SHIFT);
+		ESDR	1	TDI (#0);
+		SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		SIR Instruction_Length	TDI	(ISC_READ_INCR);
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+		SYNC;
+	}
+	SIR Instruction_Length	TDI	(ISC_DATA_SHIFT);
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO (FuseArray_TDI[Row]);
+	SYNC;
+}
+function	FULL_ADDRESS_PROGRAM_VERIFY	{
+	int32	Row = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;
+	
+	SIR Instruction_Length	TDI (ISC_DATA_SHIFT);
+	SDR	Row_Width	TDI	(FuseArray_TDI[Row]);
+	SYNC;
+	
+	SIR Instruction_Length 	TDI	(ISC_ADDRESS_SHIFT);
+	SDR	Address_Length	TDI (Address);
+	
+	SIR Instruction_Length	TDI	(ISC_PROGRAM_INCR);
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+	
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	SYNC;
+	repeat Address_Length - 1	{
+		SIR Instruction_Length	TDI	(ISC_DATA_SHIFT);
+		SDR_VERIFY	Row_Width	TDI	(FuseArray_TDI[Row+1])
+								TDO (FuseArray_TDI[Row]);
+		Row = Row + 1;
+		SIR Instruction_Length	TDI	(ISC_ADDRESS_SHIFT);
+		Address[1] = Address[1] >> 1;
+		SDR	Address_Length	TDI	(Address[1]);
+		SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		SIR Instruction_Length	TDI	(ISC_READ_INCR);
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+		SYNC;
+	}
+	Address[1] = #1@(#0^(Address_Length-1));
+	SIR Instruction_Length	TDI	(ISC_DATA_SHIFT);
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO (FuseArray_TDI[Row]);
+	SYNC;
+}
+function	ISC_PROGRAM_VERIFY	{
+	int32	Row = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;
+	
+	// Spinti 11/01/04 Added ENDDR DRPAUSE and ENDIR IRPAUSE
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	
+	SIR Instruction_Length	TDI (ISC_ADDRESS_INIT);
+	STATE IDLE;
+	
+	SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+	STATE DRPAUSE;
+	
+	SDR	Row_Width	TDI	(FuseArray_TDI[Row]);
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+				
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+				
+	// Program the rest of the device
+	repeat Address_Length - 1	{
+		SDR_VERIFY	Row_Width	TDI	(FuseArray_TDI[Row+1])
+								TDO (FuseArray_TDI[Row]);
+		Row = Row + 1;
+		SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		SIR Instruction_Length	TDI	(ISC_READ_INCR);
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+	}		
+	Address[1] = #1@(#0^(Address_Length-1));	
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO	(FuseArray_TDI[Row]);
+	SYNC;
+	
+}
+function PROGRAM_ARCH {
+	ArchArray_TDI.row = 1;
+	SYNC;
+	SIR Instruction_Length TDI(ISC_READ_ASIC);
+	SDR	Arch_Length	TDI (ArchArray_TDI[1]);
+	SYNC;
+	SIR Instruction_Length TDI(ISC_PROGRAM_ASIC);
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+	SYNC;
+}
+function VERIFY_ARCH {
+	ArchArray_TDI.row = 1;
+	SIR Instruction_Length TDI(ISC_READ_ASIC);
+	SDR_VERIFY	Arch_Length	TDI (#1^Arch_Length)
+							TDO (ArchArray_TDI);
+	SYNC;
+}
+function PROGRAM_USERCODE {
+	Usercode_TDI.row = 1;
+	SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+	SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+	SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+	SYNC;
+}
+function ISC_PROG_USERCODE {
+	Usercode_TDI.row = 1;
+	SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+	SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+	SYNC;
+}
+function VERIFY_USERCODE {
+	SYNC;
+	Usercode_TDI.row = 1;
+	SIR Instruction_Length TDI (USERCODE);
+	RUN_TEST	TCK 3
+				DELAY PWV;
+	SIR Instruction_Length TDI (USERCODE);
+	SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+								TDO	(Usercode_TDI)
+								MASK (#1^Usercode_Length);
+	SYNC;
+}
+function VERIFY_VERIFY_USERCODE {
+	SYNC;
+	Usercode_TDI.row = 1;
+	SIR Instruction_Length TDI (USERCODE);
+	RUN_TEST	TCK 3
+				DELAY PWV;
+	SIR Instruction_Length TDI (USERCODE);
+	SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+								TDO	(Usercode_TDI)
+								MASK (#0^Usercode_Length);
+	SYNC;
+}
+function ISC_VERIFY_USERCODE {
+	Usercode_TDI.row = 1;
+	SIR Instruction_Length TDI (USERCODE);
+	SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+								TDO	(Usercode_TDI);
+	SYNC;
+}
+function PROGRAM_DONE_BIT {
+	SIR	Instruction_Length 	TDI (ISC_PROGRAM_DONE);
+	RUN_TEST	TCK 3
+				DELAY 50;
+	STATE IDLE;
+	SYNC;
+}
+function ERASE_DONE_BIT {
+	SIR	Instruction_Length 	TDI (ISC_ERASE_DONE);
+	RUN_TEST	TCK 3
+				DELAY 50;
+	STATE IDLE;
+	SYNC;
+}
+function PROGRAM_SECURITY {
+	SIR Instruction_Length	TDI	(ISC_PROGRAM_SECURITY);
+	RUN_TEST	TCK 	3
+				DELAY 	50;
+	SYNC;
+}
+function SYNCFUNCTION {
+	SYNC;
+}
+]]>
+</Script>
+</SVF_Plus>

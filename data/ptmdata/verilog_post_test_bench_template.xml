@@ -1,0 +1,376 @@
+<?xml version="1.0"?>
+<VerilogTestBenchTemplate>
+   <Date>5/28/2012</Date>
+   <Version>1.0</Version>
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>TestBench</HDLProcessProtoName>
+
+      <HDLStatement>
+         <HDLText>// Target device: %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>DEVICE_NAME</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>// HDL code generated on: %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>FULL_TIME_STAMP</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>// by Lattice Diamond HDL generator: Version %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>HDLGEN_VERSION</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>// (part of Lattice Diamond version %s)</HDLText>
+         <HDLArg>
+            <HDLArgVal>DIAMOND_VERSION</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText></HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText></HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>`timescale 1ns/100ps</HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText></HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>module %s_tb();</HDLText>
+         <HDLArg>
+            <HDLArgVal>TEST_TOP_HDL_MODULE_NAME</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\treg %s;</HDLText>
+		 <HDLList>LIST_TEST_BENCH_REG</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\treg %s = 1'b0;</HDLText>
+		 <HDLList>LIST_ASC_TB_REG</HDLList>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\twire %s;</HDLText>
+		 <HDLList>LIST_TEST_BENCH_WIRE_NOSTIM</HDLList>
+      </HDLStatement>
+
+  	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\twire %s;</HDLText>
+		 <HDLList>LIST_ASC_TB_WIRE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\twire %s;</HDLText>
+		 <HDLList>LIST_ASC_TB_GPIO_REG</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\treg %s;</HDLText>
+		 <HDLList>LIST_ASC_TB_GPIO_NOINI_REG</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\treg %s = %s'%s%s;</HDLText>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIMNODE_SIGNAME</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIMNODE_SIGWIDTH</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIMNODE_VALBASE</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIMNODE_VALUE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\tassign %s = %s_SIMnode;</HDLText>
+		 <HDLList>LIST_ASC_TB_GPIO_REG</HDLList>
+		 <HDLList>LIST_ASC_TB_GPIO_REG</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_ASC_CLOCK_TB</HDLProcessName>
+         <HDLList>LIST_ASCSIM_TB_CLK_SIGNAME</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_CLK_SIGWIDTH</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_CLK_VALUE</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_CLK_TIME</HDLList>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+         <HDLText>reg %s %s = %s'%s%s;</HDLText>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIGVECFORM</HDLList>
+         <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIGNAME</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIGWIDTH</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_VALBASE</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_VALUE</HDLList>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>initial</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>begin</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\tfork</HDLText>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_ASC_INPORT_TB</HDLProcessName>
+         <HDLArg>
+            <HDLArgVal>INCREASE_ASCPORTSIM_NUM</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\tjoin</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>end</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>%s %s_inst(</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>TEST_TOP_HDL_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>TEST_TOP_HDL_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLList>LIST_TEST_TOP_IN</HDLList>
+		 <HDLList>LIST_TEST_TOP_IN</HDLList>
+	  </HDLStatement>
+
+  	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t.%s(%s),</HDLText>
+		 <HDLList>LIST_TEST_TOP_VEC_IN</HDLList>
+		 <HDLList>LIST_TEST_TOP_VEC_IN</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLList>LIST_TB_TEST_TOP_OUT</HDLList>
+		 <HDLList>LIST_TB_TEST_TOP_OUT</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLList>LIST_TB_TEST_TOP_INOUT</HDLList>
+		 <HDLList>LIST_TB_TEST_TOP_INOUT</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t.%s(%s)</HDLText>
+		 <HDLList>LIST_ASC_PORT</HDLList>
+		 <HDLList>LIST_ASC_PORT</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+	     <HDLText>);</HDLText>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>endmodule</HDLText>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_ASC_CLOCK_TB</HDLProcessProtoName>	  
+	  
+	  <HDLStatement>
+	     <HDLText>initial</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>begin</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t%s = %s'b%s;</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG1</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG2</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\tforever</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\tbegin</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t#%s %s = !%s;</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG3</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\tend</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>end</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+
+
+   <HDLProcessProto>	  
+      <HDLProcessProtoName>P_ASC_INPORT_TB</HDLProcessProtoName>	  
+
+	  <HDLStatement>
+	     <HDLText>\t\tbegin</HDLText>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_ASC_INPORT_SINGLE_TB</HDLProcessName>
+		 <HDLList>ASCLIST_SIM_TB_INPORT_SIGNAME</HDLList>
+		 <HDLList>ASCLIST_SIM_TB_INPORT_SIGWIDTH</HDLList>
+		 <HDLList>ASCLIST_SIM_TB_INPORT_VALBASE</HDLList>
+		 <HDLList>ASCLIST_SIM_TB_INPORT_VALUE</HDLList>
+		 <HDLList>ASCLIST_SIM_TB_INPORT_TIME</HDLList>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\tend</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+
+
+   <HDLProcessProto>	  
+      <HDLProcessProtoName>P_ASC_INPORT_SINGLE_TB</HDLProcessProtoName>	  
+   
+	  <HDLStatement>
+	     <HDLText>\t\t\t#%s  %s = %s'%s%s;</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG4</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG1</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG2</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG3</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+   
+</VerilogTestBenchTemplate>

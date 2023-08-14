@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messageFile name="toolhle" fid="207" alias="hle" vendor="Lattice Semiconductor Corporation" stamp="Date and Time">
+  <description text="this message file contains messages for tool HDL Diagram"/>
+  <!-- owner of this message file -->
+  <owner text="wchen1" />
+  <messages>
+    
+	<!--design-->
+	
+	<!--Parsing-->
+	<msg uid="1001" type="Info" text="Root modules/entities/cells ($$d): \n$$s" />
+	<!--System-->
+	<msg uid="1002" type="Warning" text="Could not add a sticky note from the project file.\n\t Node: $$s\n\t File: $$s\n\t Reason: $$s" />
+	<msg uid="1003" type="Warning" text="Could not add an attribute from the project file.\n\t Node: $$s\n\t Attribute: $$s\n\t Reason: $$s" />
+	
+	<!--Module-->
+	
+	<!--Parsing-->
+	<msg uid="3001" type="Info" text="$$s Port $$s is in the port list for module $$s, but it has not been declared or defined." />
+	<msg uid="3002" type="Info" text="$$s Port $$s is declared for module $$s, but it is not in the port list." />
+	<msg uid="3003" type="Warning" text="No module definition for $$s is instantiated by:\n$$s" />
+	
+	
+	<!--Instance-->
+	
+	<msg uid="4001" type="Error" text="$$s Unable to find port $$s on module $$s.\nReferenced by instance $$s in module $$s." />
+	<msg uid="4002" type="Error" text="$$s Too many pins connected on module $$s.\nReferenced by instance $$s in module $$s." />
+	
+	<!--pin-->
+	
+	<!--Connectivity BKM check-->
+	<msg uid="2001" type="Error" text="$$s $$s is $$s unconnected." />	<!--input pin-->
+	<msg uid="2002" type="Warning" text="$$s $$s is $$s unconnected." /> <!--output pin-->	
+	<msg uid="2003" type="Warning" text="$$s $$s is $$s unconnected." /> <!--io pin-->
+	<msg uid="2004" type="Error" text="$$s Input pin connection widths do not match: Port $$s is $$s bit(s) wide.\nInstance $$s attempts to connect $$s bit(s) to $$s bit(s) via $$s." />
+	<msg uid="2005" type="Warning" text="$$s Output pin connection widths do not match: Port $$s is $$s bit(s) wide.\nInstance $$s attempts to connect $$s bit(s) to $$s bit(s) via $$s." />
+	<msg uid="2006" type="Warning" text="$$s I/O pin connection widths do not match: Port $$s is $$s bit(s) wide.\nInstance $$s attempts to connect $$s bit(s) to $$s bit(s) via $$s." />
+	
+	<!--port-->
+	
+	<!--Connectivity BKM check-->
+	<msg uid="7001" type="Warning" text="$$s $$s is unconnected internally." /> <!--input port-->
+	<msg uid="7002" type="Error" text="$$s $$s is unconnected internally." /> <!--output port-->
+	<msg uid="7003" type="Error" text="$$s $$s is unconnected internally." /> <!--io port-->
+	<!--Parsing-->
+	<msg uid="7004" type="Error" text="$$s The following port(s) direction could not be determined.\n$$s" />
+	
+	<!--net-->
+	
+	<!--Max Fan Out BKM check-->
+	<msg uid="5001" type="Warning" text="$$s Inferring net $$s of width $$s."/>
+	<msg uid="5002" type="Warning" text="$$s Inferring scalar net $$s." />
+	<msg uid="5003" type="Warning" text="$$s $$s violates the Max Fanout Rule with a load of $$s pins. $$s" />
+	<msg uid="5004" type="Error" text="$$s $$s has multiple ($$d) non-tristate drivers. $$s" />
+	<msg uid="5005" type="Error" text="$$s $$s has multiple ($$d) assignments driving it. $$s" />
+	<!--parsing-->
+	<msg uid="5006" type="Error" text="$$s Cannot create nets across language barriers $$s." />
+	
+	<!--behavioral-->
+	
+	<!--Synthesis BKM-->
+	<msg uid="6001" type="Warning" text="$$s Right-hand side of assignment is larger then the left. Possible truncation &quot;$$s &lt; $$s&quot;." />
+	<msg uid="6002" type="Error" text="$$s $$s does not have a delay or sensitivity list. Possible simulation hang." />
+	<msg uid="6003" type="Warning" text="$$s $$s has the following blocking assigment with driving signals that are not in the sensitivity list. Possible simulation/synthesis mismatch.\n$$s" />
+	<msg uid="6004" type="Warning" text="$$s $$s has the following signal(s) in a conditional expression, yet they are not in the sensitivity list. Possible simulation/synthesis mismatch.$$s" />
+	<msg uid="6005" type="Warning" text="$$s $$s has the following level-based signals in the sensitivity list that are not read in the $$s. $$s" />
+	<msg uid="6006" type="Warning" text="$$s $$s has the following registers that are not assigned a value in every path, thus latches may be inferred.\n$$s" /> <!--behavioralBlock Level-->
+	<msg uid="6007" type="Warning" text="$$s $$s is not assigned a value in the following branches. Latches may be inferred." /> <!--signal Level-->
+	
+	<!--Sunburst Design-->
+	<msg uid="0001" type="Warning" text="$$s $$s has an edge-based sensitivity list, but it has the following $$s assignments. Possible simulation/synthesis mismatch.\n$$s" />
+	<msg uid="0002" type="Warning" text="$$s $$s has a level-based sensitivity list, but it has the following $$s assignments. Possible simulation/synthesis mismatch.\n$$s" />
+	<msg uid="0003" type="Warning" text="$$s $$s has the following combination of $$s assignments. Possible simulation/synthesis mismatch.\n$$s" />
+	<msg uid="0004" type="Warning" text="$$s Signal $$s is assigned a value in multiple $$s blocks. Possible race condition. $$s"/>
+	
+	<!--File List-->
+	<msg uid="1101" type="Warning" text="File $$s does not exist. Skipping the file in the file list." />
+	<msg uid="1102" type="Warning" text="Problem changing the directory for option &quot;-$$s $$s&quot;." />
+	<msg uid="1103" type="Error" text="The file list $$s does not represent a known file type."/>
+	<msg uid="1104" type="Warning" text="Invalid package type: -package=$$s."/>
+	<msg uid="1105" type="Warning" text="Ignoring option &quot;-$$s&quot;"/>
+	<msg uid="1106" type="Warning" text="Cross-language file list manipulation. To container is $$s and the following files are not: $$s"/>
+	<msg uid="1107" type="Warning" text="Work library mismatch, $$s vs $$s. Keeping $$s."/>
+	<msg uid="1108" type="Warning" text="Lattice library mismatch, $$s vs $$s. Keeping $$s."/>
+	<msg uid="1109" type="Warning" text="Languange difference, $$s vs $$s. Keeping $$s."/>
+	<msg uid="1110" type="Warning" text="VHDL standard difference, VHDL $$s vs $$s. Keeping $$s."/>
+	<msg uid="1111" type="Warning" text="Verilog standard difference, Verilog $$s vs $$s. Keeping $$s."/>
+	<msg uid="1112" type="Warning" text="-f File $$s is recursive."/>
+	<msg uid="1113" type="Warning" text="$$s: Error loading the list file settings in the project file (see previous messages). Loading the backup set of files stored in the project file."/>
+	
+	<!--System-->
+	<msg uid="1200" type="Info" text="Loading initializiation file $$s."/>
+	<msg uid="1201" type="Warning" text="Initialization file $$s exists, but is not readable."/>
+	<msg uid="1202" type="Error" text="Initialization file '&&s' exists, but ran with a Tcl error.\n$$s"/>
+	<msg uid="1203" type="Warning" text="Initialization file $$s does not exist."/>
+	<msg uid="1204" type="Info" text="Loading project file $$s."/>
+	<msg uid="1205" type="Info" text="Saving project file $$s."/>
+	<msg uid="1206" type="Info" text="Saving list file $$s."/>
+	<msg uid="1207" type="Info" text="Creating the default template configuration file. Previous file $$s is missing."/>
+	<msg uid="1208" type="Error" text="Cannot create the template configuration file $$s."/>
+	<msg uid="1209" type="Error" text="Error saving the template configuration file $$s-$$s."/>
+	<msg uid="1210" type="Error" text="Cannot open for reading: template configuration file $$s."/>
+	<msg uid="1211" type="Info" text="Saving template configuration file $$s."/>
+	<msg uid="1212" type="Info" text="$$s($$d, $$d) Cannot read template configuration file $$s."/>
+	<msg uid="1213" type="Info" text="Cannot read template configuration file $$s."/>
+	<msg uid="1214" type="Warning" text="Attempting to load a project file from an older version of the tool. Version found was $$ ($$s expected)."/>
+	<msg uid="1215" type="Info" text="Setting log file to $$s."/>
+	<msg uid="1216" type="Error" text="Could not open log file $$s."/>
+	<msg uid="1217" type="Warning" text="Problem parsing command line: $$s."/>
+	
+	<!--BKM-->
+	<msg uid="1301" type="Warning" text="Possible problem in BKM scripts: $$s."/>
+	<msg uid="1302" type="Error" text="Error running BKM Tcl file $$s.\n$$s"/>
+	<msg uid="1303" type="Error" text="Error running '$$s' BKM command '$$s' on '$$s'.\n$$s"/>
+	<msg uid="1304" type="Info" text="Loading BKM file $$s."/>
+	<msg uid="1305" type="Error" text="BKM file $$s exists, but ran with a Tcl error.\n$$s"/>
+	<msg uid="1306" type="Warning" text="For BKM $$s script file $$s could not be loaded. BKM will be disabled."/>
+	
+	<!--Licensing-->
+	<msg uid="1500" type="Info" text="Feature $$s will expire in $$d days.  Please contact sales at $$s."/>
+	<msg uid="1501" type="Warning" text="Feature $$s will expire in $$d days.  Please contact sales at $$s immediately."/>
+	
+	<!--Displaying-->
+	<msg uid="1600" type="Error" text="Cannot display a design hierarchy based on your specific top $$s. The diagram shown is from the parsed hierarchy."/>
+	
+	<!-- messages defined to handle ut -->
+    <msg uid="9990" type="Error" text="$$s" />
+    <msg uid="9991" type="Warning" text="$$s" />
+    <msg uid="9992" type="Info" text="$$s" />
+    <msg uid="9993" type="Status" text="$$s" />
+	
+  </messages>
+</messageFile>
+
+

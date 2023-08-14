@@ -1,0 +1,438 @@
+<?xml version="1.0"?>
+<VHDLTestBenchTemplate>
+   <Date>5/30/2012</Date>
+   <Version>1.0</Version>
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>TestBench</HDLProcessProtoName>
+
+      <HDLStatement>
+         <HDLText>-- Target device: %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>DEVICE_NAME</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>-- HDL code generated on: %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>FULL_TIME_STAMP</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>-- by Lattice Diamond HDL generator: Version %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>HDLGEN_VERSION</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>-- (part of Lattice Diamond version %s)</HDLText>
+         <HDLArg>
+            <HDLArgVal>DIAMOND_VERSION</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText></HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText></HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>LIBRARY ieee;</HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>USE ieee.std_logic_1164.all;</HDLText>
+      </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLText>USE ieee.numeric_std.all;</HDLText>
+      </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLText>USE ieee.std_logic_unsigned.all;</HDLText>
+      </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLText>USE ieee.std_logic_arith.all;</HDLText>
+      </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLText></HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>ENTITY %s_tb IS</HDLText>
+         <HDLArg>
+            <HDLArgVal>TEST_TOP_HDL_MODULE_NAME</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>END ENTITY %s_tb;</HDLText>
+         <HDLArg>
+            <HDLArgVal>TEST_TOP_HDL_MODULE_NAME</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLText>ARCHITECTURE behav OF %s_tb IS</HDLText>
+         <HDLArg>
+            <HDLArgVal>TEST_TOP_HDL_MODULE_NAME</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>COMPONENT %s</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>TEST_TOP_HDL_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>PORT(</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t%s : IN STD_LOGIC;</HDLText>
+		 <HDLList>LIST_TEST_TOP_IN</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t%s : IN STD_LOGIC_VECTOR(%s DOWNTO 0);</HDLText>
+		 <HDLList>LIST_TEST_TOP_VEC_IN</HDLList>
+		 <HDLList>LIST_TEST_TOP_VEC_IN_HIGHBIT</HDLList>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t%s : OUT STD_LOGIC;</HDLText>
+		 <HDLList>LIST_TB_TEST_TOP_OUT</HDLList>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t%s : INOUT STD_LOGIC;</HDLText>
+		 <HDLList>LIST_TB_TEST_TOP_INOUT</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t%s : %s STD_LOGIC</HDLText>
+		 <HDLList>LIST_ASC_PORT</HDLList>
+		 <HDLList>LIST_ASC_PORT_DIR_VHDL</HDLList>
+		 <HDLSeparater>;</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>END COMPONENT;</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>SIGNAL %s : STD_LOGIC;</HDLText>
+		 <HDLList>LIST_TEST_BENCH_REG_NOSTIM</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>SIGNAL %s : STD_LOGIC;</HDLText>
+		 <HDLList>LIST_TEST_BENCH_OUT_REG</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>SIGNAL %s : STD_LOGIC;</HDLText>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIGNAME</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>SIGNAL %s : STD_LOGIC := '0';</HDLText>
+		 <HDLList>LIST_ASC_TB_REG</HDLList>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>SIGNAL %s : STD_LOGIC;</HDLText>
+		 <HDLList>LIST_TEST_BENCH_WIRE_NOSTIM</HDLList>
+      </HDLStatement>
+
+      <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>SIGNAL %s : STD_LOGIC;</HDLText>
+		 <HDLList>LIST_TEST_BENCH_OUT_WIRE</HDLList>
+      </HDLStatement>
+	  
+  	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>SIGNAL %s : STD_LOGIC;</HDLText>
+		 <HDLList>LIST_ASC_TB_WIRE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>SIGNAL %s : STD_LOGIC;</HDLText>
+		 <HDLList>LIST_ASC_TB_GPIO_REG</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>SIGNAL %s : STD_LOGIC;</HDLText>
+		 <HDLList>LIST_ASC_TB_GPIO_NOINI_REG</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>SIGNAL %s : STD_LOGIC := "%s";</HDLText>
+		 <HDLList>LIST_ASCSIM_TB_CLK_SIGNAME</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_CLK_VALUE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>BEGIN</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>%s ??= %s;</HDLText>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIMNODE_SIGNAME</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIMNODE_VALUE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>%s ??= %s_SIMnode;</HDLText>
+		 <HDLList>LIST_ASC_TB_GPIO_REG</HDLList>
+		 <HDLList>LIST_ASC_TB_GPIO_REG</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_ASC_CLOCK_TB</HDLProcessName>
+         <HDLList>LIST_ASCSIM_TB_CLK_SIGNAME</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_CLK_SIGWIDTH</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_CLK_VALUE</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_CLK_TIME</HDLList>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_ASC_INPORT_TB</HDLProcessName>
+		 <HDLArg>
+		    <HDLArgVal>INCREASE_ASCPORTSIM_NUM</HDLArgVal>
+		 </HDLArg>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_SIGNAME_VHDL</HDLList>
+		 <HDLList>LIST_ASCSIM_TB_INPORT_FIRST_VALUE_VHDL</HDLList>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>%s_inst : %s</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>TEST_TOP_HDL_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>TEST_TOP_HDL_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>PORT MAP (</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t%s =??? %s,</HDLText>
+		 <HDLList>LIST_TEST_TOP_IN</HDLList>
+		 <HDLList>LIST_TEST_TOP_IN</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t%s =??? %s,</HDLText>
+		 <HDLList>LIST_TEST_TOP_OUT</HDLList>
+		 <HDLList>LIST_TEST_TOP_OUT</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t%s =??? %s,</HDLText>
+		 <HDLList>LIST_TEST_TOP_INOUT</HDLList>
+		 <HDLList>LIST_TEST_TOP_INOUT</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t%s =??? %s</HDLText>
+		 <HDLList>LIST_ASC_PORT</HDLList>
+		 <HDLList>LIST_ASC_PORT</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+	     <HDLText>);</HDLText>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>END;</HDLText>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_ASC_CLOCK_TB</HDLProcessProtoName>	  
+	  
+	  <HDLStatement>
+	     <HDLText>tb_%s : PROCESS</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>BEGIN</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t%s ??= NOT %s;</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\tWAIT FOR %s NS;</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG3</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>END PROCESS;</HDLText>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+
+
+   <HDLProcessProto>	  
+      <HDLProcessProtoName>P_ASC_INPORT_TB</HDLProcessProtoName>	  
+	  
+	  <HDLStatement>
+	     <HDLText>tb_%s : PROCESS</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>BEGIN</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t%s ??= %s;</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG1</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG2</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_ASC_INPORT_SINGLE_TB</HDLProcessName>
+		 <HDLList>ASCLIST_SIM_TB_INPORT_SIGNAME_VHDL</HDLList>
+		 <HDLList>ASCLIST_SIM_TB_INPORT_VALUE_VHDL</HDLList>
+		 <HDLList>ASCLIST_SIM_TB_INPORT_TIME</HDLList>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\tWAIT;</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>END PROCESS;</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+
+
+   <HDLProcessProto>	  
+      <HDLProcessProtoName>P_ASC_INPORT_SINGLE_TB</HDLProcessProtoName>	  
+   
+      <HDLStatement>
+	     <HDLText>\tWAIT FOR %s NS;</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG2</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t%s ??= %s;</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG1</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+   </HDLProcessProto>
+   
+</VHDLTestBenchTemplate>

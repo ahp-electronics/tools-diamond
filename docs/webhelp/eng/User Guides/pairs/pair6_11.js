@@ -1,0 +1,21 @@
+var pairs =
+{
+"resolving":{"sdc":1}
+,"sdc":{"constraints":1}
+,"constraints":{"constraints":1,"multiple":1,"diamond":1,"refer":1}
+,"multiple":{"flow":1,"sources":1,"entry":1}
+,"sources":{"constraints":1}
+,"diamond":{"software":1}
+,"software":{"follows":1}
+,"follows":{"specific":1}
+,"specific":{"rules":1}
+,"rules":{"resolve":1}
+,"resolve":{"conflicting":1}
+,"conflicting":{"constraints":1}
+,"refer":{"preference":1}
+,"preference":{"conflict":1}
+,"conflict":{"resolution":1}
+,"entry":{"constraint":1}
+,"constraint":{"flow":1}
+}
+;Search.control.loadWordPairs(pairs);

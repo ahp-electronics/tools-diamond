@@ -1,0 +1,434 @@
+
+map -a "MachXO2" -p LCMXO2-1200HC -t CSBGA132 -s 5 -oc Commercial  "control_SoC_demo_impl1.ngd" -o "control_SoC_demo_impl1_map.ncd" -pr "control_SoC_demo_impl1.prf" -mp "control_SoC_demo_impl1.mrp" "C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/control_soc_demo.lpf" -c 0            
+map:  version Diamond_1.3_Production (92)
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+     Copyright (c) 1995 AT&T Corp.   All rights reserved.
+     Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+     Copyright (c) 2001 Agere Systems   All rights reserved.
+     Copyright (c) 2002-2011 Lattice Semiconductor Corporation,  All rights reserved.
+   Process the file: control_SoC_demo_impl1.ngd
+   Picdevice="LCMXO2-1200HC"
+   Pictype="CSBGA132"
+   Picspeed=5
+   Remove unused logic
+   Do not produce over sized NCDs.
+Part used: LCMXO2-1200HCCSBGA132, Speed used: 5.
+Loading device for application map from file 'xo2c1200.nph' in environment: C:/lscc/1.3_20110802-1_3p.92/diamond/1.3/ispfpga.
+Package Status:               Final          Version 1.32
+
+Running general design DRC...
+WARNING - map: logical net 'adc_wb_inst/adc_inst/SSD_ADC/sigma_760_add_4_1/CI' has no driver
+WARNING - map: logical net 'adc_wb_inst/adc_inst/SSD_ADC/counter_761_add_4_1/CI' has no driver
+WARNING - map: logical net 'adc_wb_inst/adc_inst/SSD_ADC/box_ave/add_497_1/CI' has no driver
+WARNING - map: logical net 'TIME_INST/minutes_755_add_4_1/CI' has no driver
+WARNING - map: logical net 'TIME_INST/seconds_754_add_4_1/CI' has no driver
+WARNING - map: logical net 'TIME_INST/hours_756_add_4_1/CI' has no driver
+WARNING - map: logical net 'TIME_INST/counter_753_add_4_1/CI' has no driver
+WARNING - map: logical net 'SPI_INST/data_cnt_752_add_4_1/CI' has no driver
+WARNING - map: logical net 'UART_INST/u_txmitt/sub_10_add_2_1/CI' has no driver
+WARNING - map: logical net 'UART_INST/u_rxcver/add_505_1/CI' has no driver
+WARNING - map: logical net 'UART_INST/u_rxcver/equal_17_0/CI' has no driver
+WARNING - map: logical net 'UART_INST/u_rxcver/add_513_1/CI' has no driver
+WARNING - map: logical net 'lm8_inst/u1_isp8/u1_isp8_flow_cntl/add_491_1/CI' has no driver
+Removing unused logic...
+Optimizing...
+224 CCU2 constant inputs absorbed.
+WARNING - map: OSCH 'OSCH_inst' has mismatching FREQUENCY preference value of 2.08 MHz and NOM_FREQ value of 24.18 MHz.
+
+
+
+Design Summary:
+   Number of registers:    466
+      PFU registers:    460
+      PIO registers:    6
+   Number of SLICEs:           473 out of   640 (74%)
+      SLICEs(logic/ROM):       160 out of   160 (100%)
+      SLICEs(logic/ROM/RAM):   313 out of   480 (65%)
+          As RAM:           45 out of   480 (9%)
+          As Logic/ROM:    268 out of   480 (56%)
+   Number of logic LUT4s:     659
+   Number of distributed RAM:  45 (90 LUT4s)
+   Number of ripple logic:     92 (184 LUT4s)
+   Number of shift registers:   0
+   Total number of LUT4s:     933
+   Number of PIO sites used: 26 out of 105 (25%)
+      Number of PIO sites used for single ended IOs: 24
+      Number of PIO sites used for differential IOs: 2 (represented by 1 PIO comps in NCD)
+   Number of block RAMs:  3 out of 7 (43%)
+   Number of GSRs:  1 out of 1 (100%)
+   EFB used :       No
+   JTAG used :      No
+   Readback used :  No
+   Oscillator used :  Yes
+   Startup used :   No
+   POR :            On
+   Bandgap :        On
+   Number of Power Controller:  0 out of 1 (0%)
+   Number of Dynamic Bank Controller (BCINRD):  0 out of 4 (0%)
+   Number of Dynamic Bank Controller (BCLVDSO):  0 out of 1 (0%)
+   Number of DCCA:  0 out of 8 (0%)
+   Number of DCMA:  0 out of 2 (0%)
+   Number of PLLs:  0 out of 1 (0%)
+   Number of DQSDLLs:  0 out of 2 (0%)
+   Number of CLKDIVC:  0 out of 4 (0%)
+   Number of ECLKSYNCA:  0 out of 4 (0%)
+   Number of ECLKBRIDGECS:  0 out of 2 (0%)
+   Notes:-
+      1. Total number of LUT4s = (Number of logic LUT4s) + 2*(Number of distributed RAMs) + 2*(Number of ripple logic)
+      2. Number of logic LUT4s does not include count of distributed RAM and ripple logic.
+   Number of clocks:  3
+     Net clk_c: 284 loads, 261 rising, 23 falling (Driver: OSCH_inst )
+     Net uart_rx_c: 1 loads, 1 rising, 0 falling (Driver: PIO uart_rx )
+     Net TIME_INST/sec_clock: 13 loads, 13 rising, 0 falling (Driver: TIME_INST/sec_clock )
+   Number of Clock Enables:  43
+     Net adc_wb_inst/adc_inst/latch_result: 4 loads, 4 LSLICEs
+     Net adc_wb_inst/adc_inst/SSD_ADC/rollover: 4 loads, 4 LSLICEs
+     Net adc_wb_inst/adc_inst/SSD_ADC/box_ave/accumulate: 8 loads, 8 LSLICEs
+     Net TIME_INST/n3378: 9 loads, 9 LSLICEs
+     Net n10684: 2 loads, 2 LSLICEs
+     Net n10664: 4 loads, 0 LSLICEs
+     Net SPI_INST/n9100: 1 loads, 1 LSLICEs
+     Net SPI_INST/n3464: 2 loads, 2 LSLICEs
+     Net SPI_INST/n69: 3 loads, 3 LSLICEs
+     Net SPI_INST/n3395: 1 loads, 1 LSLICEs
+     Net SPI_INST/n3472: 4 loads, 4 LSLICEs
+     Net SPI_INST/n49: 4 loads, 4 LSLICEs
+     Net SPI_INST/rx_latch_flag: 4 loads, 4 LSLICEs
+     Net reg_rd: 7 loads, 7 LSLICEs
+     Net SPI_INST/n290: 1 loads, 1 LSLICEs
+     Net n2642: 1 loads, 1 LSLICEs
+     Net n10236: 5 loads, 5 LSLICEs
+     Net n2976: 1 loads, 1 LSLICEs
+     Net n9219: 1 loads, 1 LSLICEs
+     Net rom_ce: 2 loads, 0 LSLICEs
+     Net UART_INST/u_txmitt/n562: 1 loads, 1 LSLICEs
+     Net UART_INST/u_txmitt/n10254: 9 loads, 9 LSLICEs
+     Net UART_INST/u_txmitt/n3421: 6 loads, 6 LSLICEs
+     Net n1506: 4 loads, 4 LSLICEs
+     Net UART_INST/u_txmitt/n10269: 1 loads, 1 LSLICEs
+     Net UART_INST/n3397: 2 loads, 2 LSLICEs
+     Net UART_INST/u_rxcver/n3513: 1 loads, 1 LSLICEs
+     Net UART_INST/u_rxcver/n3469: 4 loads, 4 LSLICEs
+     Net UART_INST/u_rxcver/n8452: 1 loads, 1 LSLICEs
+     Net UART_INST/u_rxcver/n3503: 1 loads, 1 LSLICEs
+     Net UART_INST/n10267: 6 loads, 6 LSLICEs
+     Net UART_INST/u_rxcver/n3382: 2 loads, 2 LSLICEs
+     Net UART_INST/u_modem/dsrn_d1: 1 loads, 1 LSLICEs
+     Net n3377: 4 loads, 4 LSLICEs
+     Net div_wr_strobe: 4 loads, 4 LSLICEs
+     Net n2694: 2 loads, 2 LSLICEs
+     Net lm8_inst/u1_isp8/n3423: 2 loads, 2 LSLICEs
+     Net lm8_inst/u1_isp8/data_cyc: 5 loads, 5 LSLICEs
+     Net lm8_inst/u1_isp8/n9328: 1 loads, 1 LSLICEs
+     Net lm8_inst/u1_isp8/n8409: 1 loads, 1 LSLICEs
+     Net lm8_inst/u1_isp8/addr_cyc: 6 loads, 6 LSLICEs
+     Net lm8_inst/u1_isp8/u1_isp8_flow_cntl/prom_enable: 4 loads, 0 LSLICEs
+     Net lm8_inst/u1_isp8/u1_isp8_flow_cntl/n3388: 2 loads, 2 LSLICEs
+   Number of LSRs:  23
+     Net rst_n_c: 52 loads, 52 LSLICEs
+     Net adc_wb_inst/adc_inst/SSD_ADC/rollover: 5 loads, 5 LSLICEs
+     Net wb_rst: 10 loads, 9 LSLICEs
+     Net SPI_INST/n804: 4 loads, 4 LSLICEs
+     Net wb_ack_10: 2 loads, 2 LSLICEs
+     Net SPI_INST/n1585: 3 loads, 3 LSLICEs
+     Net SPI_INST/n10252: 1 loads, 1 LSLICEs
+     Net SPI_INST/reg_ssmask_0: 1 loads, 0 LSLICEs
+     Net SPI_INST/n9126: 1 loads, 1 LSLICEs
+     Net n10659: 1 loads, 1 LSLICEs
+     Net wb_ack_0: 1 loads, 1 LSLICEs
+     Net n10236: 1 loads, 1 LSLICEs
+     Net n4411: 5 loads, 5 LSLICEs
+     Net UART_INST/u_txmitt/n3670: 5 loads, 5 LSLICEs
+     Net UART_INST/n10204: 2 loads, 2 LSLICEs
+     Net UART_INST/u_txmitt/n3: 1 loads, 1 LSLICEs
+     Net UART_INST/u_rxcver/n7637: 6 loads, 6 LSLICEs
+     Net UART_INST/u_rxcver/hunt: 1 loads, 1 LSLICEs
+     Net UART_INST/u_rxcver/n3691: 1 loads, 1 LSLICEs
+     Net UART_INST/u_intface/n10260: 1 loads, 1 LSLICEs
+     Net UART_INST/u_intface/rbr_rd: 1 loads, 1 LSLICEs
+     Net lm8_rst: 1 loads, 1 LSLICEs
+     Net lm8_inst/u1_isp8/rst_n_reg: 44 loads, 44 LSLICEs
+   Number of nets driven by tri-state buffers:  0
+   Top 10 highest fanout non-clock nets:
+     Net TIME_INST/GND_net: 104 loads
+     Net wb_addr_0: 54 loads
+     Net rst_n_c: 52 loads
+     Net wb_addr_1: 49 loads
+     Net lm8_inst/u1_isp8/rst_n_reg: 45 loads
+     Net adc_wb_inst/adc_inst/SSD_ADC/GND_net: 42 loads
+     Net lm8_inst/u1_isp8/instr_13: 34 loads
+     Net lm8_inst/u1_isp8/instr_0: 30 loads
+     Net wb_addr_2: 30 loads
+     Net addr_20: 28 loads
+ 
+   Number of warnings:  14
+   Number of errors:    0
+
+
+
+INFO: Design contains EBR with GSR enabled. The GSR is only applicable for output registers except FIFO. 
+
+Total CPU Time: 0 secs  
+Total REAL Time: 0 secs  
+Peak Memory Usage: 42 MB
+
+Dumping design to file control_SoC_demo_impl1_map.ncd.
+
+mpartrce -p "control_SoC_demo_impl1.p2t" -f "control_SoC_demo_impl1.p3t" -tf "control_SoC_demo_impl1.pt" "control_SoC_demo_impl1_map.ncd" "control_SoC_demo_impl1.ncd"
+
+---- MParTrce Tool ----
+Removing old design directory at request of -rem command line option to this program.
+Running par. Please wait . . .
+
+Lattice Place and Route Report for Design "control_SoC_demo_impl1_map.ncd"
+Tue Oct 25 14:13:55 2011
+
+PAR: Place And Route Diamond_1.3_Production (92).
+Command Line: C:/lscc/1.3_20110802-1_3p.92/diamond/1.3/ispfpga\bin\nt\par -f
+control_SoC_demo_impl1.p2t control_SoC_demo_impl1_map.ncd
+control_SoC_demo_impl1.dir control_SoC_demo_impl1.prf
+Preference file: control_SoC_demo_impl1.prf.
+Placement level-cost: 5-1.
+Routing Iterations: 3
+
+Loading design for application par from file control_SoC_demo_impl1_map.ncd.
+Design name: control_soc_demo
+NCD version: 3.2
+Vendor:      LATTICE
+Device:      LCMXO2-1200HC
+Package:     CSBGA132
+Speed:       5
+Loading device for application par from file 'xo2c1200.nph' in environment: C:/lscc/1.3_20110802-1_3p.92/diamond/1.3/ispfpga.
+Package Status:               Final          Version 1.32
+Speed Hardware Data Status:   Preliminary    Version 18.4
+License checked out.
+
+
+Ignore Preference Error(s):  True
+Device utilization summary:
+
+   PIO (prelim)      26/108          24% used
+                     26/105          24% bonded
+   IOLOGIC            6/108           5% used
+
+   SLICE            473/640          73% used
+
+   GSR                1/1           100% used
+   OSC                1/1           100% used
+   EBR                3/7            42% used
+
+
+Number of Signals: 1541
+Number of Connections: 4437
+
+Pin Constraint Summary:
+   25 out of 25 pins locked (100% locked).
+
+The following 2 signals are selected to use the primary clock routing resources:
+    clk_c (driver: OSCH_inst, clk load #: 284)
+    TIME_INST/sec_clock (driver: TIME_INST/SLICE_208, clk load #: 13)
+
+
+The following 3 signals are selected to use the secondary clock routing resources:
+    rst_n_c (driver: rst_n, clk load #: 0, sr load #: 52, ce load #: 0)
+    lm8_inst/u1_isp8/rst_n_reg (driver: SLICE_338, clk load #: 0, sr load #: 44, ce load #: 0)
+    wb_rst (driver: SLICE_397, clk load #: 0, sr load #: 10, ce load #: 0)
+
+WARNING - par: Signal "rst_n_c" is selected to use Secondary clock resources; however its driver comp "rst_n" is located at "K2", which is not a dedicated pin for connecting to Secondary clock resources.  General routing has to be used to route this signal, and it may suffer from excessive delay or skew.
+Signal wb_rst is selected as Global Set/Reset.
+Starting Placer Phase 0.
+.........
+Finished Placer Phase 0.  REAL time: 5 secs 
+
+Starting Placer Phase 1.
+.....................
+Placer score = 188883.
+Finished Placer Phase 1.  REAL time: 13 secs 
+
+Starting Placer Phase 2.
+.
+Placer score =  187898
+Finished Placer Phase 2.  REAL time: 13 secs 
+
+
+------------------ Clock Report ------------------
+
+Global Clock Resources:
+  CLK_PIN    : 0 out of 8 (0%)
+  General PIO: 1 out of 108 (0%)
+  PLL        : 0 out of 1 (0%)
+  DCM        : 0 out of 2 (0%)
+  DCC        : 0 out of 8 (0%)
+
+Quadrants All (TL, TR, BL, BR) - Global Clocks:
+  PRIMARY "clk_c" from OSC on comp "OSCH_inst" on site "OSC", clk load = 284
+  PRIMARY "TIME_INST/sec_clock" from Q0 on comp "TIME_INST/SLICE_208" on site "R2C13D", clk load = 13
+  SECONDARY "rst_n_c" from comp "rst_n" on PIO site "K2 (PL8D)", clk load = 0, ce load = 0, sr load = 52
+  SECONDARY "wb_rst" from Q0 on comp "SLICE_397" on site "R7C12D", clk load = 0, ce load = 0, sr load = 10
+  SECONDARY "lm8_inst/u1_isp8/rst_n_reg" from Q0 on comp "SLICE_338" on site "R7C12B", clk load = 0, ce load = 0, sr load = 44
+
+  PRIMARY  : 2 out of 8 (25%)
+  SECONDARY: 3 out of 8 (37%)
+
+Edge Clocks:
+  No edge clock selected.
+
+--------------- End of Clock Report ---------------
+
+
+I/O Usage Summary (final):
+   26 out of 108 (24.1%) PIO sites used.
+   26 out of 105 (24.8%) bonded PIO sites used.
+   Number of PIO comps: 25; differential: 1
+   Number of Vref pins used: 0
+
+I/O Bank Usage Summary:
++----------+----------------+------------+-----------+
+| I/O Bank | Usage          | Bank Vccio | Bank Vref |
++----------+----------------+------------+-----------+
+| 0        | 5 / 26 ( 19%)  | 3.3V       | -         |
+| 1        | 0 / 26 (  0%)  | -          | -         |
+| 2        | 7 / 28 ( 25%)  | 3.3V       | -         |
+| 3        | 14 / 25 ( 56%) | 3.3V       | -         |
++----------+----------------+------------+-----------+
+
+Total placer CPU time: 12 secs 
+
+Dumping design to file control_SoC_demo_impl1.dir/5_1.ncd.
+
+0 connections routed; 4437 unrouted.
+Starting router resource preassignment
+
+Completed router resource preassignment. Real time: 16 secs 
+Starting iterative routing.
+
+For each routing iteration the number inside the parenthesis is the
+total time (in picoseconds) the design is failing the timing constraints.
+For each routing iteration the router will attempt to reduce this number
+until the number of routing iterations is completed or the value is 0
+meaning the design has fully met the timing constraints.
+
+End of iteration 1
+4437 successful; 0 unrouted; (0) real time: 19 secs 
+Dumping design to file control_SoC_demo_impl1.dir/5_1.ncd.
+Total CPU time 17 secs 
+Total REAL time: 19 secs 
+Completely routed.
+End of route.  4437 routed (100.00%); 0 unrouted.
+Checking DRC ... 
+No errors found.
+
+Timing score: 0 
+
+Dumping design to file control_SoC_demo_impl1.dir/5_1.ncd.
+
+
+par done!
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2011 Lattice Semiconductor Corporation,  All rights reserved.
+Exiting par with exit code 0
+Exiting mpartrce with exit code 0
+
+trce -f "control_SoC_demo_impl1.pt" -o "control_SoC_demo_impl1.twr" "control_SoC_demo_impl1.ncd" "control_SoC_demo_impl1.prf"
+trce:  version Diamond_1.3_Production (92)
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+     Copyright (c) 1995 AT&T Corp.   All rights reserved.
+     Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+     Copyright (c) 2001 Agere Systems   All rights reserved.
+     Copyright (c) 2002-2011 Lattice Semiconductor Corporation,  All rights reserved.
+
+Loading design for application trce from file control_soc_demo_impl1.ncd.
+Design name: control_soc_demo
+NCD version: 3.2
+Vendor:      LATTICE
+Device:      LCMXO2-1200HC
+Package:     CSBGA132
+Speed:       5
+Loading device for application trce from file 'xo2c1200.nph' in environment: C:/lscc/1.3_20110802-1_3p.92/diamond/1.3/ispfpga.
+Package Status:               Final          Version 1.32
+Speed Hardware Data Status:   Preliminary    Version 18.4
+Setup and Hold Report
+
+--------------------------------------------------------------------------------
+Lattice TRACE Report - Setup, Version Diamond_1.3_Production (92)
+Tue Oct 25 14:14:17 2011
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2011 Lattice Semiconductor Corporation,  All rights reserved.
+
+Report Information
+------------------
+Command line:    trce -v 10 -gt -sethld -sp 5 -sphld m -o control_SoC_demo_impl1.twr control_SoC_demo_impl1.ncd control_SoC_demo_impl1.prf 
+Design file:     control_soc_demo_impl1.ncd
+Preference file: control_soc_demo_impl1.prf
+Device,speed:    LCMXO2-1200HC,5
+Report level:    verbose report, limited to 10 items per preference
+--------------------------------------------------------------------------------
+
+BLOCK ASYNCPATHS
+BLOCK RESETPATHS
+--------------------------------------------------------------------------------
+
+
+
+Timing summary (Setup):
+---------------
+
+Timing errors: 0  Score: 0
+Cumulative negative slack: 0
+
+Constraints cover 38323 paths, 1 nets, and 4294 connections (96.8% coverage)
+
+--------------------------------------------------------------------------------
+Lattice TRACE Report - Hold, Version Diamond_1.3_Production (92)
+Tue Oct 25 14:14:17 2011
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2011 Lattice Semiconductor Corporation,  All rights reserved.
+
+Report Information
+------------------
+Command line:    trce -v 10 -gt -sethld -sp 5 -sphld m -o control_SoC_demo_impl1.twr control_SoC_demo_impl1.ncd control_SoC_demo_impl1.prf 
+Design file:     control_soc_demo_impl1.ncd
+Preference file: control_soc_demo_impl1.prf
+Device,speed:    LCMXO2-1200HC,m
+Report level:    verbose report, limited to 10 items per preference
+--------------------------------------------------------------------------------
+
+BLOCK ASYNCPATHS
+BLOCK RESETPATHS
+--------------------------------------------------------------------------------
+
+
+
+Timing summary (Hold):
+---------------
+
+Timing errors: 0  Score: 0
+Cumulative negative slack: 0
+
+Constraints cover 38323 paths, 1 nets, and 4294 connections (96.8% coverage)
+
+
+
+Timing summary (Setup and Hold):
+---------------
+
+Timing errors: 0 (setup), 0 (hold)
+Score: 0 (setup), 0 (hold)
+Cumulative negative slack: 0 (0+0)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+Total time: 2 secs 

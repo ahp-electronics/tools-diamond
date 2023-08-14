@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="base_ec" include="baseflow">
+  <!-- Close the security setting -->
+  <VariableDef name="Support_SSO" value="true" />
+  <VariableDef name="Bitgen:security" value="" />
+  <VariableDef name="Export_PROM" value="true" />
+  <CommandFileDef id="Bitgen_T2BCmd" name="${report_base}.t2b" clean="TRUE" >
+	<line>-g ReadBack:SRAM</line>
+	<line>#PROP_BIT_RunDRCBitGen</line>
+	<line>#PROP_BIT_CreateBitFile</line>
+	<line>#PROP_BIT_OutFormatBitGen</line>
+	<line>#PROP_BIT_NoHeader</line>
+	<line>#PROP_BIT_ConModBitGen</line>
+	<line>#PROP_BIT_DisRAMResBitGen</line>
+	<line>-g ES:No</line>
+  </CommandFileDef>
+  <CommandDef id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <CommandFile using_def="Bitgen_T2BCmd"/>
+    <cmd_str>bitgen -w "${report_base}.ncd" -f "${report_base}.t2b" !Bitgen:security "${report_base}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc bitgen {args} {
+			set msg "bitgen $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+</BaliFlowDef>

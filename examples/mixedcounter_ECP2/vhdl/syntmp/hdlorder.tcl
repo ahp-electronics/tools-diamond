@@ -1,0 +1,2 @@
+set_option -top_module work.typecount
+project -fileorder "C:/lscc/diamond/1.0/cae_library/synthesis/vhdl/ecp2.vhd" "C:/Documents\ and\ Settings/bcaslis/My\ Documents/balidesigns/mixedcounter/vhdl/reveal_workspace/tmpreveal/typecount_rvl_top.vhd" 

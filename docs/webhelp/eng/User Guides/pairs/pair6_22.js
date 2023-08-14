@@ -1,0 +1,22 @@
+var pairs =
+{
+"svf":{"debugger":1,"file":1,"stapl":1}
+,"creating":{"new":1}
+,"new":{"svf":1,"empty":1,"open":1}
+,"create":{"new":1}
+,"empty":{"svf":1}
+,"download":{"debugger":1}
+,"debugger":{"choose":1,"edit":1}
+,"choose":{"file":1}
+,"file":{"new":1,"options":1}
+,"open":{"svf":1}
+,"edit":{"window":1}
+,"window":{"create":1}
+,"options":{"dialog":1}
+,"dialog":{"box":1}
+,"box":{"opens":1}
+,"debugging":{"svf":1}
+,"stapl":{"vme":1}
+,"vme":{"files":1}
+}
+;Search.control.loadWordPairs(pairs);

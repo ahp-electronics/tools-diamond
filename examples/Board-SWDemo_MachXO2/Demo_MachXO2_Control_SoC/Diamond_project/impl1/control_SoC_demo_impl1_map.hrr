@@ -1,0 +1,293 @@
+---------------------------------------------------
+Report for cell control_soc_demo
+   Instance path: control_soc_demo
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     470.00        100.0
+                                 IOLGC	       6.00        100.0
+                                  LUT4	     652.00        100.0
+                               DISTRAM	      45.00        100.0
+                                 IOREG	          6        100.0
+                                 IOBUF	         25        100.0
+                                PFUREG	        460        100.0
+                                RIPPLE	         92        100.0
+                                   EBR	          3        100.0
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                                adc_wb	          1         6.6
+uptime_wb(CLK_FREQ=24180000,CLK_IN_HZ=25)	          1        11.9
+uart_core(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0)	          1        27.6
+spi(SHIFT_DIRECTION=0,CLOCK_PHASE=0,CLOCK_POLARITY=0,CLOCK_SEL=1,MASTER=1,SLAVE_NUMBER=1,DATA_LENGTH=8,DELAY_TIME=2,CLKCNT_WIDTH=5,INTERVAL_LENGTH=2)	          1        12.9
+                             reset_gen	          1         0.6
+    lm8_wb(LM8_ADDR_W=24,NUM_DECODE=4)	          1         5.7
+                             led_sw_wb	          1         0.0
+isp8(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16)	          1        34.2
+---------------------------------------------------
+Report for cell adc_wb
+   Instance path: control_soc_demo/adc_wb_inst
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      30.90         6.6
+                                  LUT4	      14.00         2.1
+                                PFUREG	         63        13.7
+                                RIPPLE	         18        19.6
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                               ADC_top	          1         6.6
+---------------------------------------------------
+Report for cell ADC_top
+   Instance path: control_soc_demo/adc_wb_inst/adc_inst
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      30.90         6.6
+                                  LUT4	      14.00         2.1
+                                PFUREG	         63        13.7
+                                RIPPLE	         18        19.6
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+sigmadelta_adc(ADC_WIDTH=8,ACCUM_BITS=10,LPF_DEPTH_BITS=3)	          1         6.0
+---------------------------------------------------
+Report for cell sigmadelta_adc(ADC_WIDTH=8,ACCUM_BITS=10,LPF_DEPTH_BITS=3)
+   Instance path: control_soc_demo/adc_wb_inst/adc_inst/SSD_ADC
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      28.23         6.0
+                                  LUT4	      14.00         2.1
+                                PFUREG	         55        12.0
+                                RIPPLE	         18        19.6
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+ box_ave(ADC_WIDTH=8,LPF_DEPTH_BITS=3)	          1         2.6
+---------------------------------------------------
+Report for cell box_ave(ADC_WIDTH=8,LPF_DEPTH_BITS=3)
+   Instance path: control_soc_demo/adc_wb_inst/adc_inst/SSD_ADC/box_ave
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      12.17         2.6
+                                  LUT4	       7.00         1.1
+                                PFUREG	         24         5.2
+                                RIPPLE	          6         6.5
+---------------------------------------------------
+Report for cell uptime_wb(CLK_FREQ=24180000,CLK_IN_HZ=25)
+   Instance path: control_soc_demo/TIME_INST
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      56.00        11.9
+                                  LUT4	      70.00        10.7
+                                PFUREG	         74        16.1
+                                RIPPLE	         28        30.4
+---------------------------------------------------
+Report for cell reset_gen
+   Instance path: control_soc_demo/reset_gen_inst
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       3.00         0.6
+                                  LUT4	       6.00         0.9
+                                PFUREG	          5         1.1
+---------------------------------------------------
+Report for cell led_sw_wb
+   Instance path: control_soc_demo/led_sw_inst
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                 IOLGC	       4.00        66.7
+                                 IOREG	          4        66.7
+---------------------------------------------------
+Report for cell spi(SHIFT_DIRECTION=0,CLOCK_PHASE=0,CLOCK_POLARITY=0,CLOCK_SEL=1,MASTER=1,SLAVE_NUMBER=1,DATA_LENGTH=8,DELAY_TIME=2,CLKCNT_WIDTH=5,INTERVAL_LENGTH=2)
+   Instance path: control_soc_demo/SPI_INST
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      60.83        12.9
+                                 IOLGC	       1.00        16.7
+                                  LUT4	      94.00        14.4
+                                 IOREG	          1        16.7
+                                PFUREG	         81        17.6
+                                RIPPLE	          4         4.3
+---------------------------------------------------
+Report for cell lm8_wb(LM8_ADDR_W=24,NUM_DECODE=4)
+   Instance path: control_soc_demo/lm8_wb_inst
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      26.83         5.7
+                                  LUT4	      37.00         5.7
+                                PFUREG	         34         7.4
+                                   EBR	          1        33.3
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+               pmi_romXhmenusdn8101024	          1         0.0
+---------------------------------------------------
+Report for cell pmi_romXhmenusdn8101024
+   Instance path: control_soc_demo/lm8_wb_inst/pmi_rompmi_romXO2hexmenu.hexsyncdisablenoreg8101024
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                   EBR	          1        33.3
+---------------------------------------------------
+Report for cell uart_core(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0)
+   Instance path: control_soc_demo/UART_INST
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     129.65        27.6
+                                 IOLGC	       1.00        16.7
+                                  LUT4	     200.33        30.7
+                                 IOREG	          1        16.7
+                                PFUREG	        141        30.7
+                                RIPPLE	         31        33.7
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+            txmitt(DATAWIDTH=8,FIFO=0)	          1         8.6
+            rxcver(DATAWIDTH=8,FIFO=0)	          1        13.8
+                    modem(DATAWIDTH=8)	          1         0.2
+intface(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0)	          1         5.0
+---------------------------------------------------
+Report for cell txmitt(DATAWIDTH=8,FIFO=0)
+   Instance path: control_soc_demo/UART_INST/u_txmitt
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      40.58         8.6
+                                  LUT4	      68.00        10.4
+                                PFUREG	         44         9.6
+                                RIPPLE	          9         9.8
+---------------------------------------------------
+Report for cell rxcver(DATAWIDTH=8,FIFO=0)
+   Instance path: control_soc_demo/UART_INST/u_rxcver
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      64.75        13.8
+                                 IOLGC	       1.00        16.7
+                                  LUT4	      90.33        13.9
+                                 IOREG	          1        16.7
+                                PFUREG	         58        12.6
+                                RIPPLE	         22        23.9
+---------------------------------------------------
+Report for cell modem(DATAWIDTH=8)
+   Instance path: control_soc_demo/UART_INST/u_modem
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       1.00         0.2
+                                PFUREG	          2         0.4
+---------------------------------------------------
+Report for cell intface(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0)
+   Instance path: control_soc_demo/UART_INST/u_intface
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      23.32         5.0
+                                  LUT4	      42.00         6.4
+                                PFUREG	         37         8.0
+---------------------------------------------------
+Report for cell isp8(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16)
+   Instance path: control_soc_demo/lm8_inst
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     160.70        34.2
+                                  LUT4	     225.67        34.6
+                               DISTRAM	      45.00        100.0
+                                PFUREG	         62        13.5
+                                RIPPLE	         11        12.0
+                                   EBR	          2        66.7
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+      pmi_distributed_spramXbnonen8532	          1         2.1
+isp8_core(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16)	          1        32.1
+---------------------------------------------------
+Report for cell pmi_distributed_spramXbnonen8532
+   Instance path: control_soc_demo/lm8_inst/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg8532
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       9.93         2.1
+                                  LUT4	      10.00         1.5
+                               DISTRAM	      12.00        26.7
+---------------------------------------------------
+Report for cell isp8_core(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16)
+   Instance path: control_soc_demo/lm8_inst/u1_isp8
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     150.77        32.1
+                                  LUT4	     215.67        33.1
+                               DISTRAM	      33.00        73.3
+                                PFUREG	         62        13.5
+                                RIPPLE	         11        12.0
+                                   EBR	          2        66.7
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+      pmi_distributed_dpramXbnonen8532	          2         7.2
+isp8_flow_cntl(PGM_STACK_AW=4,PGM_STACK_AD=16,PROM_AW=10,FAMILY_NAME="XO2")	          1        10.2
+               isp8_io_cntl(PORT_AW=8)	          1         3.0
+                 isp8_idec(PROM_AW=10)	          1         0.4
+           isp8_alu(FAMILY_NAME="XO2")	          1         8.1
+---------------------------------------------------
+Report for cell pmi_distributed_dpramXbnonen8532
+   Instance path: control_soc_demo/lm8_inst/u1_isp8/i53
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      17.03         3.6
+                                  LUT4	      10.00         1.5
+                               DISTRAM	      12.00        26.7
+---------------------------------------------------
+Report for cell pmi_distributed_dpramXbnonen8532
+   Instance path: control_soc_demo/lm8_inst/u1_isp8/pmi_distributed_dprampmi_distributed_dpramXO2binarynonenoreg8532
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      14.50         3.1
+                                  LUT4	       9.00         1.4
+                               DISTRAM	      12.00        26.7
+---------------------------------------------------
+Report for cell isp8_io_cntl(PORT_AW=8)
+   Instance path: control_soc_demo/lm8_inst/u1_isp8/u1_isp8_io_cntl
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      13.98         3.0
+                                  LUT4	      28.17         4.3
+                                PFUREG	         12         2.6
+---------------------------------------------------
+Report for cell isp8_idec(PROM_AW=10)
+   Instance path: control_soc_demo/lm8_inst/u1_isp8/u1_isp8_idec
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       1.83         0.4
+                                  LUT4	       3.50         0.5
+---------------------------------------------------
+Report for cell isp8_flow_cntl(PGM_STACK_AW=4,PGM_STACK_AD=16,PROM_AW=10,FAMILY_NAME="XO2")
+   Instance path: control_soc_demo/lm8_inst/u1_isp8/u1_isp8_flow_cntl
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      48.00        10.2
+                                  LUT4	      55.00         8.4
+                               DISTRAM	       9.00        20.0
+                                PFUREG	         40         8.7
+                                RIPPLE	          6         6.5
+                                   EBR	          2        66.7
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+         pmi_romXhprom_initadn18101024	          1         0.0
+     pmi_distributed_spramXbnonen12416	          1         1.9
+---------------------------------------------------
+Report for cell pmi_distributed_spramXbnonen12416
+   Instance path: control_soc_demo/lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       9.00         1.9
+                               DISTRAM	       9.00        20.0
+---------------------------------------------------
+Report for cell pmi_romXhprom_initadn18101024
+   Instance path: control_soc_demo/lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                   EBR	          2        66.7
+---------------------------------------------------
+Report for cell isp8_alu(FAMILY_NAME="XO2")
+   Instance path: control_soc_demo/lm8_inst/u1_isp8/u1_isp8_alu
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      38.08         8.1
+                                  LUT4	      73.50        11.3
+                                RIPPLE	          5         5.4
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                        pmi_addsubXo88	          1         1.1
+---------------------------------------------------
+Report for cell pmi_addsubXo88
+   Instance path: control_soc_demo/lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       5.33         1.1
+                                  LUT4	       0.50         0.1
+                                RIPPLE	          5         5.4

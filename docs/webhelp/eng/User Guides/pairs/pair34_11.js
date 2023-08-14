@@ -1,0 +1,20 @@
+var pairs =
+{
+"saving":{"serdes":1}
+,"serdes":{"debug":1,"register":1}
+,"debug":{"settings":1,"tab":1}
+,"save":{"serdes":1,"file":1}
+,"settings":{"later":1}
+,"tab":{"click":1}
+,"click":{"export":1,"save":1}
+,"export":{"serdes":1}
+,"register":{"file":1}
+,"file":{"dialog":1,"name":1}
+,"dialog":{"box":1}
+,"box":{"opens":1}
+,"browse":{"want":1}
+,"want":{"save":1}
+,"type":{"name":1}
+,"name":{"file":1,"box":1}
+}
+;Search.control.loadWordPairs(pairs);

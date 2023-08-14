@@ -1,0 +1,23 @@
+var pairs =
+{
+"activating":{"ldc":1}
+,"ldc":{"file":1}
+,"apply":{"synthesis":1}
+,"synthesis":{"constraints":1}
+,"constraints":{"need":1}
+,"need":{"identify":1}
+,"identify":{".ldc":1}
+,".ldc":{"file":1}
+,"file":{"active":1,"implementation":1,"name":1,"compiled":1}
+,"active":{"implementation":1,"ldc":1,".ldc":1}
+,"activate":{".ldc":1}
+,"right-click":{"file":1}
+,"name":{"choose":1}
+,"choose":{"active":1}
+,"default":{"active":1}
+,"compiled":{"synthesize":1}
+,"synthesize":{"design":1}
+,"managing":{"constraint":1}
+,"constraint":{"files":1}
+}
+;Search.control.loadWordPairs(pairs);

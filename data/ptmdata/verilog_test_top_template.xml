@@ -1,0 +1,353 @@
+<?xml version="1.0"?>
+<VerilogTestTopTemplate>
+   <Date>4/10/2012</Date>
+   <Version>1.0</Version>
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>TestTopDesign</HDLProcessProtoName>
+
+      <HDLStatement>
+         <HDLText>// Target device: %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>DEVICE_NAME</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>// HDL code generated on: %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>FULL_TIME_STAMP</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>// by Lattice Diamond HDL generator: Version %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>HDLGEN_VERSION</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>// (part of Lattice Diamond version %s)</HDLText>
+         <HDLArg>
+            <HDLArgVal>DIAMOND_VERSION</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText></HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText></HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>module %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>TEST_TOP_HDL_MODULE_NAME</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>(</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\tinput %s,</HDLText>
+		 <HDLList>LIST_TEST_TOP_IN</HDLList>
+	  </HDLStatement>
+
+  	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\tinput [%s:0] %s,</HDLText>
+		 <HDLList>LIST_TEST_TOP_VEC_HIGH_BIT</HDLList>
+		 <HDLList>LIST_TEST_TOP_VEC_IN</HDLList>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\toutput %s,</HDLText>
+		 <HDLList>LIST_TEST_TOP_OUT</HDLList>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\tinout %s,</HDLText>
+		 <HDLList>LIST_TEST_TOP_INOUT</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t%s %s</HDLText>
+		 <HDLList>LIST_ASC_PORT_DIR</HDLList>
+		 <HDLList>LIST_ASC_PORT</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>wire %s;</HDLText>
+		 <HDLList>LIST_TEST_TOP_CONNECTION</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>wire [%s:0] %s;</HDLText>
+		 <HDLList>LIST_TEST_TOP_VEC_LEN</HDLList>
+		 <HDLList>LIST_TEST_TOP_VEC_CONN</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICOSYS_EFB_I2C1_USED</HDLCondition>
+		 <HDLText>pullup pullup_inst1(%s);</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C1_SCL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICOSYS_EFB_I2C1_USED</HDLCondition>
+		 <HDLText>pullup pullup_inst2(%s);</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C1_SDA_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_ECP5_FL_MICO_USED</HDLCondition>
+		 <HDLText>pullup pullup_inst3(%s);</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FLASH_MCSN_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+      <HDLAlternative>1</HDLAlternative>
+      <HDLCondition>B_HAS_USERCLOCK_TO_TOP</HDLCondition>
+      <HDLText>pullup pullup_inst4(%s);</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FLASH_CLK_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_ECP5_FL_MICO_USED</HDLCondition>
+		 <HDLText>pullup pullup_inst5(%s);</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FLASH_MOSI_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_ECP5_FL_MICO_USED</HDLCondition>
+		 <HDLText>pullup pullup_inst6(%s);</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FLASH_MISO_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_PMBUS_USED</HDLCondition>
+		 <HDLText>pullup pullup_inst3(%s);</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_CLK_NAME</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_PMBUS_USED</HDLCondition>
+		 <HDLText>pullup pullup_inst4(%s);</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_DAT_NAME</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>GSR GSR_INST(.GSR(1'b1));</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>PUR PUR_INST(.PUR(1'b1));</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_FAN_USED</HDLCondition>
+         <HDLText>defparam %s_inst.fanctl_inst.SIMULATE_IP = 1;</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>TOP_HDL_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>%s %s_inst(</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>TOP_HDL_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>TOP_HDL_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t.%s(%s)</HDLText>
+		 <HDLList>LIST_DESIGN_PORT</HDLList>
+		 <HDLList>LIST_DESIGN_PORTSIG</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+		 <HDLSepCondition>B_HAS_LIST_DESIGN_NODE</HDLSepCondition>
+		 <HDLSepCondition>B_HAS_SPI_UFM_USED</HDLSepCondition>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t.%s(%s)</HDLText>
+		 <HDLList>LIST_DESIGN_NODE</HDLList>
+		 <HDLList>LIST_DESIGN_NODESIG</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+		 <HDLSepCondition>B_HAS_SPI_UFM_USED</HDLSepCondition>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_SPI_UFM_USED</HDLCondition>
+	     <HDLText>\t.%s(1'b1)</HDLText>
+		 <HDLArg>
+			<HDLArgVal>EFB_UFM_SN_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+	     <HDLText>);</HDLText>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_ASC_INSTANT</HDLProcessName>
+         <HDLArg>
+            <HDLArgVal>INCREASE_ASC_NUM</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>endmodule</HDLText>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+	  
+	  
+   <HDLProcessProto>	  
+      <HDLProcessProtoName>P_ASC_INSTANT</HDLProcessProtoName>	  
+	  
+	  <HDLStatement>
+	     <HDLText>ASC</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>#(</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.CFG_EEPROM("cfg_eeprom%s.hex"),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLText>\t.TRIM_EEPROM("trim_eeprom%s.hex"),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+	     <HDLText>\t.FLUT_EEPROM("flut_eeprom%s.hex"),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+	     <HDLText>\t.I2CADDRESS("i2caddress%s.hex")</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>)</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>ASC_%s_inst(</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+         <HDLText>\t.%s(%s)</HDLText>
+         <HDLList>ASCLIST_ASC_PORT</HDLList>
+         <HDLList>ASCLIST_ASCINST_PORTSIG</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+		 <HDLSepCondition>B_HAS_ASCLIST_ASC_NODE</HDLSepCondition>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+         <HDLText>\t.%s(%s)</HDLText>
+         <HDLList>ASCLIST_ASC_NODE</HDLList>
+		 <HDLList>ASCLIST_ASCINST_NODESIG</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+</VerilogTestTopTemplate>

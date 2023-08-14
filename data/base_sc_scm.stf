@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file defines public properties of sc/scm devices -->
+<StrategyConfig parent="base.stf" version="1.0">
+
+<!-- *************************************************************** -->
+<!-- *****************************  Property  *************************** -->
+<!-- ************************************************`*************** -->
+
+<!--  _EdfHardtimer=S,SLIST,Hardware Evaluation -->
+<!--	_EdfHardtimerY=S,LITEM,Enable,E -->
+<!--	_EdfHardtimerN=S,LITEM,Disable,D -->
+<Property
+	name="PROP_BD_EdfHardtimer"
+	tclid="bd_hardware_eval"
+	type="list">
+	<Value
+		defaultValue="Enable"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Enable" cmdline=""/>
+		<Correlation driverValue="Disable" cmdline="-dt"/>
+	</CmdLines>
+</Property>
+
+<!--	_EdfFanout=A,INT,Fanout Limit,100 -->
+<Property
+	name="PROP_SYN_EdfFanout"
+	tclid="syn_fanout_limit"
+	type="int"
+	cmdline="set_option -maxfan %CurrentValue%">
+	<Value
+		defaultValue="100"
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- *****************************  Bitgen  *************************** -->
+<!-- _SysClockConBitGen=A,SLIST,Sysbus Clock Config
+         _SysClockConRBitGen=A,LITEM,ResetDuringReConfig,R
+         _SysClockConNBitGen=A,LITEM,NoResetDuringReConfig,N -->
+<Property
+	name="PROP_BIT_SysClockConBitGen"
+	tclid="bit_sysbus_clk_conf"
+	type="list">
+	<Value
+		defaultValue="ResetDuringReConfig"
+	/>
+	<CmdLines>
+    <Correlation driverValue="ResetDuringReConfig" cmdline="-g SysbusclkCfg:ResetDuringReConfig"/>		
+		<Correlation driverValue="NoResetDuringReConfig" cmdline="-g SysbusclkCfg:NoResetDuringReConfig"/>
+	</CmdLines>
+</Property>
+         
+<!-- _SysConBitGen=A,SLIST,Sysbus Config
+         _SysConRBitGen=A,LITEM,ResetDuringReConfig,R
+         _SysConNBitGen=A,LITEM,NoResetDuringReConfig,N -->
+<Property
+	name="PROP_BIT_SysConBitGen"
+	tclid="bit_sysbus_conf"
+	type="list">
+	<Value
+		defaultValue="ResetDuringReConfig"
+	/>
+	<CmdLines>
+    <Correlation driverValue="ResetDuringReConfig" cmdline="-g SysbusCfg:ResetDuringReConfig"/>		
+		<Correlation driverValue="NoResetDuringReConfig" cmdline="-g SysbusCfg:NoResetDuringReConfig"/>
+	</CmdLines>
+</Property>         
+         
+<!-- _RemZeroFramesBitGen=A,BOOL,Output Zero Frames,FALSE -->
+<Property
+	name="PROP_BIT_RemZeroFramesBitGen"
+	tclid="bit_remove_zero_frames"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g ZeroFrames:Yes"/>
+		<Correlation driverValue="False" cmdline="-g ZeroFrames:No"/>
+	</CmdLines>
+</Property>
+
+
+<!-- _GSREnableBitGen=A,SLIST,Register Configuration
+         _GSREnableABitGen=A,LITEM,ResetDuringReConfig,A
+         _GSREnableBBitGen=A,LITEM,NoResetDuringReConfig,B -->
+<Property
+	name="PROP_BIT_GSREnableBitGen"
+	tclid="bit_gsr"
+	type="list">
+	<Value
+		defaultValue="ResetDuringReConfig"
+	/>
+	<CmdLines>
+    <Correlation driverValue="ResetDuringReConfig" cmdline="-g RegisterCfg:ResetDuringReConfig"/>		
+		<Correlation driverValue="NoResetDuringReConfig" cmdline="-g RegisterCfg:NoResetDuringReConfig"/>
+	</CmdLines>
+</Property>         
+         
+<!--_DisRAMResBitGen2=A,SLIST,Reset Config RAM in re-configuration
+         _DisRAMResABitGen=A,LITEM,ClearDuringReConfig,A
+         _DisRAMResBBitGen=A,LITEM,NoClearDuringReConfig,B -->
+<Property
+	name="PROP_BIT_DisRAMResBitGen2"
+	tclid="bit_reset_in_reconf"
+	type="list">
+	<Value
+		defaultValue="ClearDuringReConfig"
+	/>
+	<CmdLines>
+		<Correlation driverValue="ClearDuringReConfig" cmdline="-g RamCfg:ClearDuringReConfig"/>
+		<Correlation driverValue="NoClearDuringReConfig" cmdline="-g RamCfg:NoClearDuringReConfig"/>
+	</CmdLines>
+</Property>
+
+<!-- _SPIStartAddBitGen=A,STRLIST,SPI Start Address [Hex number],0x00000000 -->
+<Property
+	name="PROP_BIT_SPIStartAddBitGen"
+	tclid="bit_spi_start_addr"
+	type="string"
+	cmdline="-g SPI_RECONFIG_START_ADDRESS:%CurrentValue%" 
+  reversedcmdline="">
+	<Value
+		defaultValue="0x00000000"
+	/>
+</Property>
+
+<!--_XResCalibrationCtrl=A,SLIST,XRES Calibration Control
+         _XResCalibrationCtrlINIT=A,LITEM,INIT,I
+         _XResCalibrationCtrlON=A,LITEM,ON,N
+         _XResCalibrationCtrlOFF=A,LITEM,OFF,F -->
+<Property
+	name="PROP_BIT_XResCalibrationCtrl"
+	tclid="bit_xres_ctrl"
+	type="list">
+	<Value
+		defaultValue="INIT"
+	/>
+	<CmdLines>
+		<Correlation driverValue="INIT" cmdline="-g XRES:INIT"/>
+		<Correlation driverValue="ON" cmdline="-g XRES:ON"/>
+		<Correlation driverValue="OFF" cmdline="-g XRES:OFF"/>
+	</CmdLines>
+</Property>
+         
+<!-- _GSREnableBitGen=A,SLIST,GSR during re-configuration
+         _GSREnableABitGen=A,LITEM,True,A
+         _GSREnableBBitGen=A,LITEM,False,B -->
+<Property
+	name="PROP_BIT_GSREnableBitGen"
+	tclid="bit_gsr"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g RegisterCfg:ResetDuringReConfig"/>
+		<Correlation driverValue="False" cmdline="-g RegisterCfg:NoResetDuringReConfig"/>
+	</CmdLines>
+</Property>
+
+<!-- _SysConBitGen=A,SLIST,Sysbus Config
+         _SysConRBitGen=A,LITEM,Reset,R
+         _SysConNBitGen=A,LITEM,NoReset,N -->
+<Property
+	name="PROP_BIT_SysConBitGen"
+	tclid="bit_sysbus_conf"
+	type="list">
+	<Value
+		defaultValue="Reset"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Reset" cmdline="-g SysbusCfg:ResetDuringReConfig"/>		
+		<Correlation driverValue="NoReset" cmdline="-g SysbusCfg:NoResetDuringReConfig"/>
+	</CmdLines>
+</Property> 
+
+<!-- _SysClockConBitGen=A,SLIST,Sysbus Clock Config
+         _SysClockConRBitGen=A,LITEM,Reset,R
+         _SysClockConNBitGen=A,LITEM,NoReset,N -->
+<Property
+	name="PROP_BIT_SysClockConBitGen"
+	tclid="bit_sysbus_clk_conf"
+	type="list">
+	<Value
+		defaultValue="Reset"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Reset" cmdline="-g SysbusclkCfg:ResetDuringReConfig"/>		
+		<Correlation driverValue="NoReset" cmdline="-g SysbusclkCfg:NoResetDuringReConfig"/>
+	</CmdLines>
+</Property>
+
+<!-- *************************************************************** -->
+<!-- *****************************  Property Ui *************************** -->
+<!-- *************************************************************** -->
+
+<!-- _DisRAMResBitGen2=A,SLIST,Reset Config RAM in re-configuration -->
+<PropertyUI	
+	label="Reset Config RAM in re-configuration"
+	name="PROPUI_BIT_DisRAMResBitGen2"
+	propertyName="PROP_BIT_DisRAMResBitGen2"
+	catalog="Advanced"
+	flag="normal"
+/>
+
+<!-- _SPIStartAddBitGen=A,STRLIST,SPI Start Address [Hex number],0x00000000 -->
+<PropertyUI	
+	label="SPI Start Address [Hex number]"
+	name="PROPUI_BIT_SPIStartAddBitGen"
+	propertyName="PROP_BIT_SPIStartAddBitGen"
+	catalog="Advanced"
+	flag="normal"
+/>
+
+<!--_XResCalibrationCtrl=A,SLIST,XRES Calibration Control -->
+<PropertyUI	
+	label="XRES Calibration Control"
+	name="PROPUI_BIT_XResCalibrationCtrl"
+	propertyName="PROP_BIT_XResCalibrationCtrl"
+	catalog="Advanced"
+	flag="normal"
+/>
+
+<!-- _GSREnableBitGen=A,SLIST,Register Configuration
+         _GSREnableABitGen=A,LITEM,ResetDuringReConfig,A
+         _GSREnableBBitGen=A,LITEM,NoResetDuringReConfig,B -->
+<PropertyUI	
+	label="Register Configuration"
+	name="PROPUI_BIT_GSREnableBitGen"
+	propertyName="PROP_BIT_GSREnableBitGen"
+	catalog="Advanced"
+/>         
+
+<!-- _RemZeroFramesBitGen=A,BOOL,Output Zero Frames,FALSE -->
+<PropertyUI	
+	label="Output Zero Frames"
+	name="PROPUI_BIT_RemZeroFramesBitGen"
+	propertyName="PROP_BIT_RemZeroFramesBitGen"
+	catalog="Advanced"
+/> 
+
+<!-- _SysConBitGen=A,SLIST,Sysbus Config
+         _SysConRBitGen=A,LITEM,ResetDuringReConfig,R
+         _SysConNBitGen=A,LITEM,NoResetDuringReConfig,N -->
+<PropertyUI	
+	label="Sysbus Config"
+	name="PROPUI_BIT_SysConBitGen"
+	propertyName="PROP_BIT_SysConBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _SysClockConBitGen=A,SLIST,Sysbus Clock Config
+         _SysClockConRBitGen=A,LITEM,ResetDuringReConfig,R
+         _SysClockConNBitGen=A,LITEM,NoResetDuringReConfig,N -->
+<PropertyUI	
+	label="Sysbus Clock Config"
+	name="PROPUI_BIT_SysClockConBitGen"
+	propertyName="PROP_BIT_SysClockConBitGen"
+	catalog="Advanced"
+/>         
+         
+<!-- *************************************************************** -->
+<!-- *****************************  PropertySet *************************** -->
+<!-- *************************************************************** -->
+
+<!-- *****************************  Place & Route *************************** -->
+<!-- exclude _PlcInputLimit _PlcInputNeighborSize _RoutingOpt _PARClockSkew _parPathBased  -->
+<PropertySet	
+	name="PROPSET_PlaceRoute" >
+  <Include>
+      <PropertyUIItem> PROPUI_PAR_EffortParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RoutePassParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_NewRouteParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RemoveDir </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_DisableTDParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_CrDlyStFileParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PrefErrorOut </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RoutingCDP </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RoutingCDR </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PlcIterParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PlcStCostTblParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_SaveBestRsltParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RouteResOptParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RouteDlyRedParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_ParRunPlaceOnly </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_ParMultiNodeList </PropertyUIItem>
+<!--  <PropertyUIItem> PROPUI_PAR_ParNCDGuideFile </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_ParMatchFact </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_ParGuideRepMatch </PropertyUIItem> -->
+      <PropertyUIItem> PROPUI_PAR_parHold </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PARModArgs </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RunParWithTrce </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_StopZero </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_MultiSeedSortMode </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RunTimeReduction </PropertyUIItem>
+  </Include>		
+</PropertySet>
+
+<!-- *****************************  Bitgen *************************** -->
+<!-- exclude: _ConModBitGen -->>
+<PropertySet	
+	name="PROPSET_BITGEN" >
+  <Include>
+      <PropertyUIItem> PROPUI_BIT_RunDRCBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_CreateBitFile </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_OutFormatBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_OutFormatPromGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_ByteWideBitMirror </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_NoHeader </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_SearchPthBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_LenBitsBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_ExtClockBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_EnIOBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_DisRAMResBitGen2 </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_GSREnableBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_StartUpClkBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_AddressBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_RemZeroFramesBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_SysConBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_SysClockConBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_WaitStTimBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_GranTimBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_SPIStartAddBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_XResCalibrationCtrl </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TMCHK_EnableCheck </PropertyUIItem>
+  </Include>
+</PropertySet>
+
+<!-- *****************************  Timing Simulation *************************** -->
+<PropertySet	
+	name="PROPSET_TIMSIMFILE" >
+  <Include>
+<!--      <PropertyUIItem> PROPUI_TIM_TimSimFormat </PropertyUIItem> -->
+      <PropertyUIItem> PROUIP_TIM_TimSimHierSep </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_WriteVerboseNetlist </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_NegStupHldTim </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_TimSimGenX </PropertyUIItem>
+	  <PropertyUIItem> PROPUI_TIM_TimSimGenPUR </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_MinSpeedGrade </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_TrgtSpeedGrade </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_ModPreSimDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_MaxDelSimDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_TransportModeOfPathDelay </PropertyUIItem>
+  </Include>            
+</PropertySet>
+
+</StrategyConfig>

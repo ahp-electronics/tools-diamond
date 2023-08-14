@@ -1,0 +1,470 @@
+// $Revision: 1.15 $ $Date: 2005/03/26 00:36:30 $
+// This is the only commenting style supported.
+// We can't add a new parameter or variable outside the REGULAR section
+// The delay unit is pico second.
+// Resistance is ohm.
+// capacitance is FF
+// Formats :
+// [ARCHITECTURE] 
+// ARCHITECTURE <arch_name>
+// [VERSION]
+// VERSION <version_nu>
+// [REGULAR]
+// <delay entries>...
+// END REGULAR
+// [MULTIPLY]
+// <multiply delay entries>
+// END MULTPLY
+//
+// [DEVICE]
+// <device type>
+// <.... delay entries>
+// END DEVICE
+// ....
+//
+// END ARCHITECTURE
+// note : one regular section, one multiply section but multiple device sections
+//        (one for each device)
+// 
+// <delay entries> := <rc_delay> | <rd_delay> | <fixed_delay> | < trd1_delay> | < trd2_delay>
+//
+// <rc_delay> :=
+// [RC]
+// <delay_id> <min_res> <max_res> <min_cap> <max_cap>
+// ...
+// END RC
+//
+// RD : resistence and delay
+// <rd_delay> :=
+// [RD]
+// <delay_id> <min_res> <max_res> <min_delay> <max_delay>
+// ...
+// END RD
+//
+// <fixed_delay> :=
+// [FIXED]
+// <delay_id> <min-rise> <max-rise> <min-fall> <max-fall>
+// ...
+// END FIXED
+//
+// < trd1_delay> :=
+// [TRD1]
+// <delay_id> <number_of_entries> <rise_time_in_double> <fall_time_in_double> 
+// <x-index...>
+// <rise_res> <fall_res> <rise_delay> <fall_delay> // for each value of x
+// .....
+// END TRD1
+//
+// < trd2_delay> :=
+// [TRD2]
+// <delay_id> <number_of_x_entries> <number_of_y_entries>
+// <x-index...>
+// <y-index...>
+// <rise_res> <fall_res> <rise_delay> <fall_delay> // for each value of x & y
+// .....
+// END TRD2
+// // The sequence for TRD2 is Txy = T(x*Ymax)+y, so for the x = 2, y =3, 
+// //   the sequence is T00,T01,T02,T10,T11,T12
+///////////////////////////////////////////////////////////////////////////////////
+// ver001 : 11/02/00
+//	1. Supporting the slew rate conversion to the rise time.
+//	2. Added input slew rate ( for rise_time and fall_time ) to the TRD1 in declartion line.
+//    3. Added driver_os and driver_ld to the table.
+//
+//
+//
+////////////////////////////////////////////////////////////////////////////////////
+
+[ARCHITECTURE] 
+ARCHITECTURE SNOW
+
+[VERSION]
+VERSION ver001
+
+[REGULAR]
+
+// data from -6 speed grade
+[FIXED]
+// <delay_id> <min-rise> <max-rise> <min-fall> <max-fall>
+// standard voltage in mili volt
+STD_VOLTAGE	1600	1600	1600	1600
+
+// TM-files located at:
+
+// start here:  not from TM-files
+NET_FACTOR      125	125	125	125 // TUNED DATA
+NET_GSR		0	0	0	0
+IOB_PLL		0	0	0	0
+ZERODEL		0	0	0	0
+
+
+// IO Timing Adders
+IOINDLY			7980	7980	7980	7980
+// ASIC IO
+LVTTL_in		500	500	500	500
+LVCMOS_18_in		0	0	0	0
+LVCMOS_25_in		300	300	300	300
+LVCMOS_33_in		500	500	500	500
+AGP_1X_in		1000	1000	1000	1000
+BLVDS_in		500	500	500	500
+CTT25_in		1000	1000	1000	1000
+CTT33_in		1000	1000	1000	1000
+GTL+_in			500	500	500	500
+HSTL_I_in		500	500	500	500
+HSTL_III_in		1000	1000	1000	1000
+HSTL_IV_in		1000	1000	1000	1000
+LVDS_in			800	800	800	800
+LVPECL_in		800	800	800	800
+PCI_in			1000	1000	1000	1000
+PCI_X_in		1000	1000	1000	1000
+SSTL2_I_in		800	800	800	800
+SSTL2_II_in		500	500	500	500
+SSTL3_I_in		800	800	800	800
+SSTL3_II_in		800	800	800	800
+SLEW			600	600	600	600
+LVTTL_out		1000	1000	1000	1000
+LVCMOS_18_4mA_out	500	500	500	500
+LVCMOS_18_5mA_out	500	500	500	500
+LVCMOS_18_8mA_out	0	0	0	0
+LVCMOS_18_12mA_out	0	0	0	0
+LVCMOS_25_4mA_out	700	700	700	700
+LVCMOS_25_5mA_out	500	500	500	500
+LVCMOS_25_8mA_out	500	500	500	500
+LVCMOS_25_12mA_out	500	500	500	500
+LVCMOS_25_16mA_out	500	500	500	500
+LVCMOS_33_4mA_out	1000	1000	1000	1000
+LVCMOS33_5mA_out	1000	1000	1000	1000
+LVCMOS33_8mA_out	700	700	700	700
+LVCMOS33_12mA_out	500	500	500	500
+LVCMOS33_16mA_out	500	500	500	500
+LVCMOS33_24mA_out	500	500	500	500
+AGP_1X_out		500	500	500	500
+BLVDS_out		1000	1000	1000	1000
+CTT25_out		300	300	300	300
+CTT33_out		300	300	300	300
+GTL+_out		500	500	500	500
+HSTL_I_out		500	500	500	500
+HSTL_III_out		500	500	500	500
+HSTL_IV_out		700	700	700	700
+LVDS_out		1000	1000	1000	1000
+LVPECL_out		1000	1000	1000	1000
+PCI_out			500	500	500	500
+PCI_X_out		500	500	500	500
+SSTL2_I_out		500	500	500	500
+SSTL2_II_out		500	500	500	500
+SSTL3_II_out		500	500	500	500
+
+
+// 3/21/02 changed the values added gsr and clk
+IOB_GSRB	0	0	0	0
+IOB_GCLK_IN	0	0	0	0
+
+IOB_PLL		0	0	0	0
+IOB_PLLSEC_DELAY  140	140	140	140
+
+VGB_GSRB	0	0	0	0
+VGB_GCLK_IN	0	0	0	0
+
+IOB_MINDEL	1	1	1	1
+VGB_MINDEL	1	1	1	1
+MEM_MINDEL	1	1	1	1
+
+END FIXED
+
+
+// Operating Conditions
+// -1 denotes no adjustment
+// Volt * 10(V)	Temp(C)	LogicLH	LogicHL	RouteLH	RouteHL ((100 - x) * 100 %)
+[OPERATINGCONDITIONS]
+
+//16			85		9784		9774		9741		9678
+//*			85		9784		9774		9741		9678
+
+//16			100		-1			-1			-1			-1
+//*			100		-1			-1			-1			-1
+
+*			*		10000		10000		10000		10000
+
+END OPERATINGCONDITIONS
+
+END REGULAR
+
+[DEVICE]
+
+// extract from the ratios of GBB slice LUT A0 to F0.
+
+DEV_OPENV       *       *       *       *       X-M
+SPD_GRADE_FACTOR        40
+
+DEV_OPENV       *       *       *       *       X-6
+SPD_GRADE_FACTOR        100
+
+END DEVICE
+
+END ARCHITECTURE
+// TM-files located at: /home/rel2/3_12p.240/env/sn5w00/pkg/s5n2ntm/data/
+
+// from: <slice_M.tm>
+VGB_LUT4	79	79	79	79
+VGB_LUT2	39.5	39.5	39.5	39.5
+VGB_LUT4A	189	189	189	189
+VGB_LUT4B	189	189	189	189
+VGB_LUT4C	138	138	138	138
+VGB_LUT4D	79	79	79	79
+VGB_LUT5	136	136	136	136
+VGB_LUT6	216	216	216	216
+VGB_LUT7	296	296	296	296
+VGB_LUT8	376	376	376	376
+VGB_MUXL5	57	57	57	57
+VGB_MOFX0	84	84	84	84
+VGB_MUXL6	80	80	80	80
+VGB_A1_TO_FCO	155	155	155	155
+VGB_A0_TO_FCO	155	155	155	155
+VGB_FCI_TO_F	153	153	153	153
+VGB_FCI_TO_FCO	24	24	24	24
+VGB_A1_TO_F	79	79	79	79
+VGB_A0_TO_F	217	217	217	217
+VGB_LRAM_CO	306	504	306	504
+VGB_LRAMAD_S	-116	-100	-116	-100
+VGB_LRAMAD_H	114	319	114	319
+VGB_LRAMD_S	-89	-71	-89	-71
+VGB_LRAMD_H	89	294	89	294
+VGB_LRAMWE_S	90	99	90	99
+VGB_LRAMWE_H	-69	130	-69	130
+VGB_LRAMCPW	500	500	500	500
+VGB_L_CO	159	169	159	169
+VGB_L_S	-117	-104	-117	-104
+VGB_L_H	112	315	112	315
+VGB_LCE_S	-29	-16	-29	-16
+VGB_LCE_H	31	234	31	234
+VGB_L_GO	159	169	159	169
+VGB_LL_S	-117	-104	-117	-104
+VGB_LL_H	112	315	112	315
+VGB_LLPD	159	169	159	169
+VGB_LASSRO	313	314	313	314
+VGB_LSSR_S	107	116	107	116
+VGB_LSSR_H	-69	131	-69	131
+NET_X1	177	177	177	177
+NET_X2	132	132	132	132
+NET_X6	157	157	157	157
+NET_X6X2	125	125	125	125
+NET_ISB	75	75	75	75
+RAM_WAD_SET	-116	-100	-116	-100
+RAM_WAD_HLD	114	319	114	319
+RAM_WRE_SET	90	99	90	99
+RAM_WRE_HLD	-69	130	-69	130
+
+// from: <iologic_M.tm>
+IOB_I_CO	209	209	209	209
+IOB_I_CO2	284	461	284	461
+IOB_I_S	2	259	2	259
+IOB_I_H	-6	184	-6	184
+IOB_ICE_S	-48	-43	-48	-43
+IOB_ICE_H	54	241	54	241
+IOB_ILPD	281	281	281	281
+IOB_IASRO	243	243	243	243
+IOB_O_CO	284	461	284	461
+IOB_OG_S	-99	-58	-99	-58
+IOB_OG_H	64	117	64	117
+IOB_OCE_S	-48	-43	-48	-43
+IOB_OCE_H	54	241	54	241
+IOB_O_GO	538	538	538	538
+IOB_O_S	-58	-58	-58	-58
+IOB_O_H	64	64	64	64
+IOB_OLPD	538	538	538	538
+IOB_OASRO	471	471	471	471
+IOB_CLK2ECLK_S	103	111	103	111
+IOB_CLK2ECLK_H	-96	-91	-96	-91
+IOB_I4_CO	231	231	231	231
+IOB_I4_S	-49	48	-49	48
+IOB_I4_H	78	245	78	245
+IOB_I4_R2O	403	403	403	403
+IOB_O4_CO	473	474	473	474
+IOB_O4_S	-99	-92	-99	-92
+IOB_O4_H	117	117	117	117
+IOB_O4_R2O	378	635	378	635
+
+// from: <pio_M.tm>
+IOB_IOBUF	468	468	468	468
+IOB_IOIN	168	168	168	168
+IOB_IOOEN	3103	3103	3103	3103
+
+// from: <ebr_M.tm>
+RAM_EBSWCPW	647	911	647	911
+RAM_EBSWCE_S	62	79	62	79
+RAM_EBSWCE_H	184	191	184	191
+RAM_EBSWWE_S	37	50	37	50
+RAM_EBSWWE_H	211	217	211	217
+RAM_EBSWD_S	56	72	56	72
+RAM_EBSWD_H	168	177	168	177
+RAM_EBSRAD_S	44	61	44	61
+RAM_EBSRAD_H	203	211	203	211
+RAM_EBCS_S	-2	11	-2	11
+RAM_EBCS_H	208	215	208	215
+RAM_EBSR_CO	250	255	250	255
+RAM_EBSR_CO2	1377	1383	1377	1383
+RAM_EBSR_CO3	1377	1383	1377	1383
+RAM_EBSR_R2O	646	652	646	652
+RAM_EBSWAD_S	44	61	44	61
+RAM_EBSWAD_H	203	211	203	211
+RAM_EBSRWE_S	37	50	37	50
+RAM_EBSRWE_H	211	217	211	217
+RAM_EBSRCS_S	-2	11	-2	11
+RAM_EBSRCS_H	208	215	208	215
+RAM_EBSRCE_S	62	79	62	79
+RAM_EBSRCE_H	184	191	184	191
+RAM_EBSRST_S	161	174	161	174
+RAM_EBSRST_H	-138	121	-138	121
+RAM_EBSRCS_S2	-38	-35	-38	-35
+RAM_EBSRCS_H2	262	283	262	283
+RAM_EBSRCE_S2	94	105	94	105
+RAM_EBSRCE_H2	169	202	169	202
+RAM_EBSRST_S2	166	180	166	180
+RAM_EBSRST_H2	-135	125	-135	125
+RAM_EBSWAD_S2	27	39	27	39
+RAM_EBSWAD_H2	213	248	213	248
+RAM_EBSWD_S2	28	37	28	37
+RAM_EBSWD_H2	189	221	189	221
+RAM_EBSRWE_S2	69	77	69	77
+RAM_EBSRWE_H2	191	222	191	222
+RAM_EBSCS_S	-2	11	-2	11
+RAM_EBSCS_H	208	215	208	215
+RAM_EBSCS_S2	-38	-35	-38	-35
+RAM_EBSCS_H2	262	283	262	283
+
+// from: <ddr_M.tm>
+IOB_DDRDLL_C2O_DEL	133	133	133	133
+IOB_DDRDLL_RST2LOCK_DEL	193	193	193	193
+
+// from: <pll_M.tm>
+IOB_PLL	0	200	0	200
+IOB_PLL_I2P	0	200	0	200
+IOB_PLL_I2S	0	200	0	200
+IOB_PLL_I2S2	0	200	0	200
+IOB_PLL_I2S3	0	200	0	200
+IOB_PLL_B2P	0	0	0	0
+IOB_PLL_B2S	0	0	0	0
+IOB_PLL_B2S2	0	0	0	0
+IOB_PLL_B2S3	0	0	0	0
+IOB_PLL_REF2C	0	0	0	0
+
+// from: <clock_M.tm>
+DSP_DccPd	0	0	0	0
+VGB_CLK_MUX	413	413	413	413
+VGB_SEL_MUX	363	363	363	363
+VGB_CLKDIV_LSR_SET	76	76	76	76
+VGB_CLKDIV_LSR_HLD	-44	-44	-44	-44
+VGB_CLKDIV_CLK2O	230	230	230	230
+DSP_EclksynCO	0	0	0	0
+
+// start here:  not from TM-files
+NET_FACTOR      125	125	125	125 // TUNED DATA
+NET_GSR		0	0	0	0
+IOB_PLL		0	0	0	0
+ZERODEL		0	0	0	0
+
+
+// IO Timing Adders
+IOINDLY			7980	7980	7980	7980
+// ASIC IO
+LVTTL_in		500	500	500	500
+LVCMOS_18_in		0	0	0	0
+LVCMOS_25_in		300	300	300	300
+LVCMOS_33_in		500	500	500	500
+AGP_1X_in		1000	1000	1000	1000
+BLVDS_in		500	500	500	500
+CTT25_in		1000	1000	1000	1000
+CTT33_in		1000	1000	1000	1000
+GTL+_in			500	500	500	500
+HSTL_I_in		500	500	500	500
+HSTL_III_in		1000	1000	1000	1000
+HSTL_IV_in		1000	1000	1000	1000
+LVDS_in			800	800	800	800
+LVPECL_in		800	800	800	800
+PCI_in			1000	1000	1000	1000
+PCI_X_in		1000	1000	1000	1000
+SSTL2_I_in		800	800	800	800
+SSTL2_II_in		500	500	500	500
+SSTL3_I_in		800	800	800	800
+SSTL3_II_in		800	800	800	800
+SLEW			600	600	600	600
+LVTTL_out		1000	1000	1000	1000
+LVCMOS_18_4mA_out	500	500	500	500
+LVCMOS_18_5mA_out	500	500	500	500
+LVCMOS_18_8mA_out	0	0	0	0
+LVCMOS_18_12mA_out	0	0	0	0
+LVCMOS_25_4mA_out	700	700	700	700
+LVCMOS_25_5mA_out	500	500	500	500
+LVCMOS_25_8mA_out	500	500	500	500
+LVCMOS_25_12mA_out	500	500	500	500
+LVCMOS_25_16mA_out	500	500	500	500
+LVCMOS_33_4mA_out	1000	1000	1000	1000
+LVCMOS33_5mA_out	1000	1000	1000	1000
+LVCMOS33_8mA_out	700	700	700	700
+LVCMOS33_12mA_out	500	500	500	500
+LVCMOS33_16mA_out	500	500	500	500
+LVCMOS33_24mA_out	500	500	500	500
+AGP_1X_out		500	500	500	500
+BLVDS_out		1000	1000	1000	1000
+CTT25_out		300	300	300	300
+CTT33_out		300	300	300	300
+GTL+_out		500	500	500	500
+HSTL_I_out		500	500	500	500
+HSTL_III_out		500	500	500	500
+HSTL_IV_out		700	700	700	700
+LVDS_out		1000	1000	1000	1000
+LVPECL_out		1000	1000	1000	1000
+PCI_out			500	500	500	500
+PCI_X_out		500	500	500	500
+SSTL2_I_out		500	500	500	500
+SSTL2_II_out		500	500	500	500
+SSTL3_II_out		500	500	500	500
+
+
+// 3/21/02 changed the values added gsr and clk
+IOB_GSRB	0	0	0	0
+IOB_GCLK_IN	0	0	0	0
+
+IOB_PLL		0	0	0	0
+IOB_PLLSEC_DELAY  140	140	140	140
+
+VGB_GSRB	0	0	0	0
+VGB_GCLK_IN	0	0	0	0
+
+IOB_MINDEL	1	1	1	1
+VGB_MINDEL	1	1	1	1
+MEM_MINDEL	1	1	1	1
+
+END FIXED
+
+
+// Operating Conditions
+// -1 denotes no adjustment
+// Volt * 10(V)	Temp(C)	LogicLH	LogicHL	RouteLH	RouteHL ((100 - x) * 100 %)
+[OPERATINGCONDITIONS]
+
+//16			85		9784		9774		9741		9678
+//*			85		9784		9774		9741		9678
+
+//16			100		-1			-1			-1			-1
+//*			100		-1			-1			-1			-1
+
+*			*		10000		10000		10000		10000
+
+END OPERATINGCONDITIONS
+
+END REGULAR
+
+[DEVICE]
+
+// extract from the ratios of GBB slice LUT A0 to F0.
+
+DEV_OPENV       *       *       *       *       X-M
+SPD_GRADE_FACTOR        40
+
+DEV_OPENV       *       *       *       *       X-6
+SPD_GRADE_FACTOR        100
+
+END DEVICE
+
+END ARCHITECTURE

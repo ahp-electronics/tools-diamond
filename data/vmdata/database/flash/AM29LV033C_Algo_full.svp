@@ -1,0 +1,498 @@
+DATA:
+    PATTERN  (--, --, FILE(--, --));      
+    MASK  (1,1,h00);
+    DEVICE_ID  (1,1,FILE(ID, --)); 
+DATA_END;
+
+PROTOCOL:	PCM;
+
+SIGNAL_DECL: 
+	inout L_f_data_0;
+	inout L_f_data_1;
+	inout L_f_data_2;
+	inout L_f_data_3;
+	inout L_f_data_4;
+	inout L_f_data_5;
+	inout L_f_data_6;
+	inout L_f_data_7;
+	inout L_f_addr_0;
+    inout L_f_addr_1;
+  	inout L_f_addr_2;
+  	inout L_f_addr_3;
+  	inout L_f_addr_4;
+  	inout L_f_addr_5;
+  	inout L_f_addr_6;
+  	inout L_f_addr_7;
+	inout L_f_addr_8;
+    inout L_f_addr_9;
+	inout L_f_addr_10;
+  	inout L_f_addr_11;
+  	inout L_f_addr_12;
+  	inout L_f_addr_13;
+  	inout L_f_addr_14;
+  	inout L_f_addr_15;
+  	inout L_f_addr_16;
+	inout L_f_addr_17;
+	inout L_f_addr_18;
+    inout L_f_addr_19;
+	inout L_f_addr_20;
+	inout L_f_addr_21;
+	inout L_f_oe;
+	inout L_f_ce;
+	inout L_f_we;
+	in L_f_reset;
+	in L_f_ready;
+	buffer  clock;
+SIGNAL_DECL_END;
+             
+BUS_DECL: 
+    D[7..0] = L_f_data_7, L_f_data_6, L_f_data_5, L_f_data_4, L_f_data_3, L_f_data_2, L_f_data_1, L_f_data_0;
+    D[0..7] = L_f_data_0, L_f_data_1, L_f_data_2, L_f_data_3, L_f_data_4, L_f_data_5, L_f_data_6, L_f_data_7;
+    Address = L_f_addr_21, L_f_addr_20, L_f_addr_19, L_f_addr_18, L_f_addr_17, L_f_addr_16, L_f_addr_15, L_f_addr_14, L_f_addr_13, L_f_addr_12, 
+	      L_f_addr_11, L_f_addr_10, L_f_addr_9, L_f_addr_8, L_f_addr_7, L_f_addr_6, L_f_addr_5, L_f_addr_4, L_f_addr_3, L_f_addr_2, 
+	      L_f_addr_1, L_f_addr_0 ;
+    /WE = L_f_we;
+    /CE = L_f_ce;
+    /OE = L_f_oe; 
+    /RESET = L_f_reset;
+    /BUSY = L_f_ready;
+    D7  = L_f_data_7;
+BUS_DECL_END;
+
+
+
+FUNCTION INITIAL;
+	SIR	8	TDI (1C) ;
+	RUNTEST	IDLE	3 TCK	2.00E-002 SEC;
+	clock   HIGH;
+	D[7..0] hXX;
+	Address hXXXXXXXX;
+    CYCLE;
+	SIR	8	TDI (00) ;
+	RUNTEST	IDLE	3 TCK	2.00E-002 SEC;
+	SETPIN jtagTRST_PIN 0;
+	/CE     b0;
+	/WE     b1;
+	/OE     b1;
+	/RESET  bX;
+	/BUSY   bX;
+	SET_ROW (PATTERN, 0);
+	Address h00000000;
+    CYCLE;
+END_FUNCTION;
+
+FUNCTION FINALIZE;
+	/CE     bX;
+	/WE     bX;
+	/OE     bX;
+	D[7..0] hXX;
+	Address hXXXXXXXX;
+    CYCLE;
+END_FUNCTION;
+
+FUNCTION RESET;	
+	/WE     b0;
+	D[7..0] hF0;
+	CYCLE;
+    /WE     b1;
+    CYCLE;
+END_FUNCTION;
+
+FUNCTION CHECK_ID;
+	/WE     b0;
+    D[7..0] hAA;
+    CYCLE;
+	/WE     b1;
+    CYCLE;
+    /WE     b0;
+    D[7..0] h55;
+    CYCLE;
+	/WE     b1;
+    CYCLE;
+    /WE     b0;
+    D[7..0] h90;
+    CYCLE;
+	/WE     b1;
+    CYCLE;	
+	D[7..0] bXXXXXXXX;
+    /OE     b0;
+	Address function(counter, Address_Counter, 0, clock, true);
+	CYCLE;
+	clock   LOW;
+    > (D[7..0], 1,--,--,--,h01, --); 
+    D[7..0] bXXXXXXXX;
+	/OE     b1;
+    CYCLE;
+   
+ 	Address function(counter, Address_Counter, 0, clock,false);
+	CYCLE;
+	clock   LOW;
+    /OE     b0;
+	CYCLE;
+	> (D[7..0], 1,--,--,--,DEVICE_ID, --);
+	D[7..0] bXXXXXXXX;
+	/OE     b1;
+	CYCLE;
+	Call RESET;
+
+END_FUNCTION;
+
+FUNCTION ERASE;
+	Address h000000;
+    CYCLE;
+	/WE     b0;
+    D[7..0] hAA;
+    CYCLE;
+	/WE     b1;
+    CYCLE;
+    /WE     b0;
+    D[7..0] h55;
+    CYCLE;
+	/WE     b1;
+    CYCLE;
+	/WE     b0;
+    D[7..0] h80;
+    CYCLE;
+	/WE     b1;
+    CYCLE;
+    /WE     b0;
+    D[7..0] hAA;
+    CYCLE;
+	/WE     b1;
+    CYCLE;
+    /WE     b0;
+    D[7..0] h55;
+    CYCLE;
+	/WE     b1;
+    CYCLE;
+    /WE     b0;
+    D[7..0] h10;
+    CYCLE;
+	/WE     b1;
+    CYCLE;
+
+    D[7..0]	bXXXXXXXX;
+	Address function(counter, Address_Counter, 0, clock,true);
+	/OE	b0;
+	CYCLE;
+	clock   LOW;
+    LOOP 100;
+	LDELAY IDLE 3 TCK  1.00E SEC;
+	> (D7, 1,--,--,--,h80, --);  
+	END_LOOP; 
+	D[7..0] hAA;
+	/OE	b1;
+	CYCLE;
+    Call RESET;
+
+END_FUNCTION;
+
+FUNCTION SHIFT_PROGRAM_COMMAND;
+	/WE     b0;
+	D[7..0] hA0;
+	Address h000000;
+	CYCLE;
+	/WE     b1;
+    CYCLE;
+END_FUNCTION;
+
+FUNCTION CHECK_PROGRAM_STATUS;
+	IF BUSYCONNECTED;
+	Address h000000;
+	D[7..0]	bXXXXXXXX;
+	/BUSY   bX;
+	/OE	b0;
+	CYCLE;
+    LOOP 25;
+		LDELAY IDLE 1 TCK;
+    	> (/BUSY, 1,--,--,--,h80, --);  
+    END_LOOP;
+    /BUSY   bX; 
+    D[7..0] hA0;
+    /OE	b1;
+	CYCLE;
+	END_IF;
+END_FUNCTION;
+
+FUNCTION CHECK_PROGRAM_PATTERN;
+	IF (PATTERN[Idx1] NotEqual hFF);
+		Call SHIFT_PROGRAM_COMMAND;
+		/WE     b0;
+		Address function(counter, Address_Counter, 0, clock, false);
+		<Idx1-1(D[0..7], 1,  --,  --,--,PATTERN, --);
+		clock   LOW;
+		/WE     b1;
+    	CYCLE;
+    	Call CHECK_PROGRAM_STATUS;
+	ELSE;
+		Address function(counter, Address_Counter, 0, clock, false);
+		CYCLE (-1);
+		clock   LOW;
+	END_IF;
+	
+END_FUNCTION;
+    	
+FUNCTION PROGRAM;
+	Address h000000;	
+	CYCLE;
+	/WE     b0;
+    D[7..0] hAA;
+	CYCLE;
+	/WE     b1;
+    CYCLE;
+    /WE     b0;
+    D[7..0] h55;
+	CYCLE;
+	/WE     b1;
+    CYCLE;
+    /WE     b0;
+    D[7..0] h20;
+	CYCLE;
+	/WE     b1;
+    CYCLE;
+	Build SHIFT_PROGRAM_COMMAND;	
+    /WE     b0;
+	Address function(counter, Address_Counter, 0,clock, true);
+    <1(D[0..7], 1,--,--,--,PATTERN, --);
+	clock   LOW;
+	/WE     b1;
+    CYCLE;
+  	Call CHECK_PROGRAM_STATUS;
+    REPEAT 0;
+	    Idx1 = Idx1 - 1;
+    	Call CHECK_PROGRAM_PATTERN;
+    END_REPEAT;
+    	
+END_FUNCTION;
+
+FUNCTION DISABLE;
+	Address h000000;
+	CYCLE;
+    /WE     b0;
+	D[7..0] h90;
+    CYCLE;
+	/WE     b1;
+    CYCLE;
+    /WE     b0;
+	D[7..0] h00;
+    CYCLE;
+	/WE     b1;
+    CYCLE;
+END_FUNCTION;
+
+FUNCTION VERIFY;
+	Idx1 = 0;
+	/CE     b0;
+	/OE     b0;
+	D[7..0] bXXXXXXXX;
+	Address function(counter, Address_Counter, 0, clock,true);
+	CYCLE;
+	clock   LOW;	
+	D[7..0] bXXXXXXXX;
+	Address function(counter, Address_Counter, 0, clock,false);
+	> 1(D[0..7], 1,--,--,--,PATTERN, --);
+	
+    REPEAT 0;
+        Idx1 = Idx1 - 1;
+		D[7..0] bXXXXXXXX;
+		Address function(counter, Address_Counter, 0, clock,false);
+		> Idx1-1(D[0..7], 1,  --,  --,--,PATTERN, --);
+		clock   LOW;
+    END_REPEAT;
+	/OE     b1;
+	CYCLE;
+END_FUNCTION;
+
+FUNCTION BLANK_CHECK;
+	Idx1 = 0;
+	/CE     b0;
+	/OE     b0;
+	D[7..0] bXXXXXXXX;
+	Address function(counter, Address_Counter, 0, clock,true);
+	CYCLE;
+	clock   LOW;	
+	D[7..0] bXXXXXXXX;
+	Address function(counter, Address_Counter, 0, clock,false);
+	> 1(D[0..7], 1,--,--,--,hFF, --);
+	
+    REPEAT 0;
+        D[7..0] bXXXXXXXX;
+		Address function(counter, Address_Counter, 0, clock,false);
+		> 1(D[0..7], 1,  --,  --,--,hFF, --);
+		clock   LOW;
+    END_REPEAT;
+	/OE     b1;
+	CYCLE;
+END_FUNCTION;
+
+FUNCTION READBACK;
+	/CE	b0;
+	/OE     b0;
+	D[7..0] bXXXXXXXX;
+	Address function(counter, Address_Counter, 0, clock,true);
+	CYCLE;
+	clock   LOW;
+	D[7..0] bXXXXXXXX;
+	Address function(counter, Address_Counter, 0, clock,false);
+	SET_MASK MASK;
+	> 1(D[7..0], 1,  --,  --,--,?, --);
+	UNSET_MASK;
+	
+    REPEAT 0;
+    	D[7..0] bXXXXXXXX;
+		Address function(counter, Address_Counter, 0, clock,false);
+		SET_MASK MASK;
+		> 1(D[7..0], 1,  --,  --,--,?, --);
+		UNSET_MASK;
+		clock   LOW;
+    END_REPEAT;
+	/OE     b1;
+	CYCLE;
+END_FUNCTION;
+
+OPERATION Verify ID;
+  	INT32 Idx1 = 0;
+    Call INITIAL;
+    Build RESET;	
+    Call CHECK_ID;
+END_OPERATION;
+
+OPERATION Erase,Program,Verify;
+  	INT32 Idx1 = 0;
+    $ Initializing...
+	Call INITIAL;	
+    $ Resetting...
+	Build RESET;
+	
+    $ IDCode Checking...
+	Call CHECK_ID;
+    	
+    $ Erasing...
+	Call ERASE;
+
+    $ Programming...
+	Call PROGRAM;
+
+    #DISABLE
+	Call DISABLE;
+
+    #RESET
+	Call RESET;
+
+    $ Verifying...
+	Call VERIFY;
+
+    $ Resetting...
+	Call RESET;
+	Call FINALIZE;
+        
+END_OPERATION;
+
+OPERATION Program;
+	INT32 Idx1 = 0;
+    $ Initializing...
+	Call INITIAL;	
+    $ Resetting...
+	Build RESET;
+	
+    $ IDCode Checking...
+	Call CHECK_ID;
+    	
+    $ Erasing...
+	Call ERASE;
+
+    $ Programming...
+	Call PROGRAM;
+
+    #DISABLE
+	Call DISABLE;
+
+    $ Resetting...
+	Call RESET;
+	Call FINALIZE;
+END_OPERATION;
+
+OPERATION Verify Only;
+	INT32 Idx1 = 0;
+    $ Initializing...
+	Call INITIAL;	
+    $ Resetting...
+	Build RESET;
+	
+    $ IDCode Checking...
+	Call CHECK_ID;
+
+    $ Verifying...
+	Call VERIFY;
+
+    $ Resetting...
+	Call RESET;
+	Call FINALIZE;
+
+END_OPERATION;
+
+OPERATION Read and Save;
+	INT32 Idx1 = 0;
+    $ Initializing...
+	Call INITIAL;	
+    $ Resetting...
+	Build RESET;
+	
+    $ IDCode Checking...
+	Call CHECK_ID;
+
+    $ Reading Back...
+	Call READBACK;
+
+    $ Resetting...
+	Call RESET;
+	Call FINALIZE;
+END_OPERATION;
+
+OPERATION Erase Only;
+	INT32 Idx1 = 0;
+    $ Initializing...
+	Call INITIAL;	
+    $ Resetting...
+	Build RESET;
+	
+    $ IDCode Checking...
+	Call CHECK_ID;
+    	
+    $ Erasing...
+	Call ERASE;
+    $ Resetting...
+	Call RESET;
+	Call FINALIZE;
+END_OPERATION;
+
+OPERATION Blank Check;
+	INT32 Idx1 = 0;
+    $ Initializing...
+	Call INITIAL;	
+    $ Resetting...
+	Build RESET;
+	
+    $ IDCode Checking...
+	Call CHECK_ID;
+
+    $ Blank Checking...
+	Call BLANK_CHECK;
+    
+    $ Resetting...
+	Call RESET;
+	Call FINALIZE;
+END_OPERATION;
+
+OPERATION Disabled;
+    INT32 Idx1 = 0;
+    $ Resetting...
+    SIR	8	TDI (18) ;
+	RUNTEST	IDLE	3 TCK	2.00E-002 SEC;
+	$ FPGA Loader Disabled.Please Reset the target FPGA device...
+END_OPERATION;      
+
+OPERATION Bypass;
+    INT32 Idx1 = 0;
+END_OPERATION;            
+            

@@ -1,0 +1,805 @@
+library IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.std_logic_arith.ALL;
+USE IEEE.std_logic_unsigned.ALL;
+
+
+entity RoundBlock is
+  generic (
+    InputWidth : integer;
+    InputPoint : integer;
+    OutputWidth : integer;
+    OutputPoint : integer;
+    UnsignedInput : boolean;
+    Round : natural
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1)
+  );
+end RoundBlock;
+
+architecture BEH of RoundBlock is
+signal Extend : std_logic;
+begin
+  Extend <= '0' when UnsignedInput else Din(InputWidth);
+  truncate: if (Round = 0) generate
+    Dout <= Extend & Din(InputWidth downto InputPoint-OutputPoint+1);
+  end generate truncate;
+
+  nearest: if (Round = 1) generate
+    process(Din, Extend) 
+      variable RoundBit : std_logic;
+      variable LostBits : std_logic_vector(InputPoint - OutputPoint downto 1);
+      variable OneHalf : std_logic_vector(InputPoint - OutputPoint downto 1) := (others=>'0');
+    begin
+      OneHalf(InputPoint - OutputPoint) := '1';
+      LostBits := Din(InputPoint - OutputPoint downto 1);
+
+      if (Din(InputWidth) = '1') and (not UnsignedInput) then -- -ve signed
+        if unsigned(LostBits) > unsigned(OneHalf) then 
+          RoundBit := '1';
+        else
+          RoundBit := '0';
+        end if;
+      else -- unsigned or +ve signed
+        RoundBit := Din(InputPoint-OutputPoint);
+      end if;
+      Dout <= (Extend & Din(InputWidth downto InputPoint-OutputPoint+1)) + RoundBit;
+    end process;
+  end generate nearest;
+
+  convergent: if (Round = 2) generate
+    process(Din, Extend) 
+      variable RoundBit: std_logic;
+      variable Half : boolean;
+    begin
+      Half := (Din(InputPoint-OutputPoint downto 1)) = ('1' & (InputPoint-OutputPoint-1 downto 1 => '0'));
+      if (Half) then
+        RoundBit := Din(InputPoint-OutputPoint+1);
+      else
+        RoundBit := Din(InputPoint-OutputPoint);
+      end if;
+      Dout <= (Extend & Din(InputWidth downto InputPoint-OutputPoint+1)) + RoundBit;
+    end process;
+  end generate convergent;
+
+end BEH;
+
+--------------------------------------------------------------------------------
+library IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.std_logic_arith.ALL;
+USE IEEE.std_logic_unsigned.ALL;
+
+--  This version of Saturate_S2S is used when the Input Width is greater than 
+--  or equal to the Output Width
+entity Saturate_S2S_0 is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end Saturate_S2S_0;
+
+architecture BEH of Saturate_S2S_0 is
+  signal Saturated : std_logic_vector(OutputWidth downto 1);
+  signal Extended : std_logic_vector(Din'length - OutputWidth+1 downto 1);
+  signal Compare : std_logic_vector(Din'length - OutputWidth+1 downto 1);
+  signal diff : boolean;
+
+begin
+
+  Dout <= Saturated;
+
+  I0_0: if (Dout'length < Din'length) generate
+    process(Extended, Compare, diff, Din)
+        variable MAX_SIGNED :  std_logic_vector(OutputWidth-1 downto 1) := (others=>'1');	
+        variable MIN_SIGNED :  std_logic_vector(OutputWidth-1 downto 1) := (others=>'0');	
+        begin
+        -- check to see if saturation is required
+        Extended <=(Din'length - OutputWidth +1 downto 1=>Din(Din'length));
+        Compare <= Din(Din'length downto OutputWidth);
+        diff <= Compare /= Extended;
+        if (Wrap) then
+            Saturated <= Din(OutputWidth downto 1);
+	    if (diff) then
+	       Overflow <= '1';
+	    else
+	       Overflow <= '0';
+	    end if;
+        else
+            if ( diff and not Wrap) then
+                if (Din(Din'length) = '0') then
+                    Saturated <= '0' & MAX_SIGNED;
+                else
+                    Saturated <= '1' & MIN_SIGNED;
+                end if;
+		Overflow <= '1';
+            else
+                Saturated <= Din(Din'length) & Din(OutputWidth-1 downto 1);
+		Overflow <= '0';
+            end if;
+        end if;
+      end process;
+    end generate I0_0;
+
+  I0_2: if (Dout'length = Din'length) generate
+    process(Din) begin
+        Saturated <= Din;
+	Overflow <= '0';
+    end process;
+  end generate I0_2;
+
+end BEH;
+--------------------------------------------------------------------------------
+library IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.std_logic_arith.ALL;
+USE IEEE.std_logic_unsigned.ALL;
+
+
+-- This version of Saturate_S2S is used when the Output Width is greater than
+-- the Input Width --rag
+
+entity Saturate_S2S_1 is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end Saturate_S2S_1;
+
+architecture BEH of Saturate_S2S_1 is
+  signal Saturated : std_logic_vector(OutputWidth downto 1);
+  signal diff : boolean;
+
+begin
+
+  Dout <= Saturated;
+  Overflow <= '0';
+
+  I0_1: if (Dout'length > Din'length) generate
+      process(Din) 
+        variable pad_upper:  std_logic_vector(Dout'length-Din'length downto 1);
+        begin
+            pad_upper := (others=>Din(Din'length));
+            Saturated <= pad_upper & Din;
+        end process;
+    end generate I0_1;
+
+end BEH;
+--------------------------------------------------------------------------------
+library IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.std_logic_arith.ALL;
+USE IEEE.std_logic_unsigned.ALL;
+
+-- This version of Saturate_S2U is used when the Output Width is less than
+-- the Input Width minus 1 --rag
+entity Saturate_S2U_0 is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end Saturate_S2U_0;
+
+architecture BEH of Saturate_S2U_0 is
+  signal Saturated : std_logic_vector(OutputWidth downto 1);
+  signal Extended : std_logic_vector(Din'length - OutputWidth+1 downto 1);
+  function OR_reduce(inp: std_logic_vector) return std_logic is
+    variable dout : std_logic;
+    begin
+        dout := '0';
+        for i in inp'range loop
+            dout := dout or inp(i);
+        end loop;
+        return dout;
+    end OR_reduce;
+begin
+
+  Dout <= Saturated;
+
+  I0_0: if (Dout'length < Din'length-1) generate
+    process(Extended, Din)
+        variable MAX_UNSIGNED :  std_logic_vector(OutputWidth downto 1) := (others=>'1');	
+    begin
+        Extended <=(Din'length - OutputWidth +1 downto 1=>Din(Din'length));
+        if (Wrap) then
+            Saturated <= Din(OutputWidth downto 1);
+	    Overflow <= OR_reduce(Din(Inputwidth downto OutputWidth+1));
+        else
+            -- only need to check upper bound and zero
+            if (Din(Din'length)='1') then
+                Saturated <= (others=>'0');
+		Overflow <= '1';
+            elsif ((Din > (Extended & MAX_UNSIGNED)) and not Wrap) then
+	        -- NOTE: Extended = (others => '0'). Wrap = false
+                Saturated <= MAX_UNSIGNED;
+		Overflow <= '1';
+            else
+                Saturated <= Din(OutputWidth downto 1);
+		Overflow <= '0';
+            end if;
+        end if;	
+      end process;
+    end generate I0_0;
+    
+end BEH;
+
+--------------------------------------------------------------------------------
+
+library IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.std_logic_arith.ALL;
+USE IEEE.std_logic_unsigned.ALL;
+
+-- This version of Saturate_S2U is used when the Output Width is greate than or equal to 
+-- the Input Width minus 1 --rag
+
+entity Saturate_S2U_1 is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end Saturate_S2U_1;
+
+architecture BEH of Saturate_S2U_1 is
+  signal Saturated : std_logic_vector(OutputWidth downto 1);
+--  signal Extended : std_logic_vector(Din'length - OutputWidth+1 downto 1);
+--  signal Compare : std_logic_vector(Din'length - OutputWidth+1 downto 1);
+--  signal diff : boolean;
+
+begin
+
+  Dout <= Saturated;
+  Overflow <= '0';
+  
+  I0_1: if (Dout'length > Din'length-1) generate
+      process(Din) 
+        variable pad_upper:  std_logic_vector(Dout'length-Din'length downto 1);
+        begin
+            pad_upper := (others=>(Din(Din'length)));
+            if ((Din(Din'length)='1') and not WRAP) then
+                Saturated <= (others=>'0');
+            else
+                Saturated <= pad_upper & Din;
+            end if;
+        end process;
+    end generate I0_1;
+
+  I0_2: if (Dout'length = Din'length-1) generate
+    process(Din) begin
+        if ((Din(Din'length)='1') and not WRAP) then
+            Saturated <= (others=>'0');
+        else
+            Saturated <= Din(Din'length-1 downto 1);
+        end if;
+    end process;
+  end generate I0_2;
+
+end BEH;
+--------------------------------------------------------------------------------
+
+library IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.std_logic_arith.ALL;
+USE IEEE.std_logic_unsigned.ALL;
+
+-- unsigned to signed --rag
+
+entity Saturate_U2S is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end Saturate_U2S;
+
+architecture BEH of Saturate_U2S is
+
+  function OR_reduce(inp: std_logic_vector) return boolean is
+    variable dout : std_logic;
+    begin
+        dout := '0';
+        for i in inp'range loop
+            dout := dout or inp(i);
+        end loop;
+        return dout='1';
+    end OR_reduce;
+
+    signal Saturated : std_logic_vector(OutputWidth downto 1);
+
+begin
+
+  Dout <= Saturated;
+
+  I0_0: if (Dout'length-1 < Din'length) generate
+    process(Din)
+        variable MAX_SIGNED :  std_logic_vector(OutputWidth-1 downto 1) := (others=>'1');	
+        variable MIN_SIGNED :  std_logic_vector(OutputWidth-1 downto 1) := (others=>'0');	
+        variable v_Overflow : boolean;
+        begin
+        -- check to see if saturation is required
+        v_Overflow := OR_reduce(Din(Din'length downto Dout'length));
+        if (Wrap) then
+            Saturated <= Din(Dout'length downto 1);
+	    if v_Overflow then
+	       Overflow <= '1';
+            else
+	       Overflow <= '0';
+	    end if;
+        else
+            if (v_Overflow and not Wrap) then
+                Saturated <= '0' & MAX_SIGNED;
+		Overflow <= '1';
+            else
+                Saturated <= '0' & Din(Dout'length-1 downto 1);
+		Overflow <= '0';
+            end if;
+        end if;
+      end process;
+    end generate I0_0;
+
+  I0_1: if (Dout'length-1 > Din'length) generate
+      process(Din) 
+        variable pad_upper:  std_logic_vector(Dout'length-Din'length downto 1);
+        begin
+            pad_upper := (others=>'0');
+            Saturated <= pad_upper & Din;
+	    Overflow <= '0';
+        end process;
+    end generate I0_1;
+
+  I0_2: if (Dout'length-1 = Din'length) generate
+    process(Din) begin
+        Saturated <= '0' & Din;
+	Overflow <= '0';
+    end process;
+  end generate I0_2;
+
+end BEH;
+--------------------------------------------------------------------------------
+
+library IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.std_logic_arith.ALL;
+USE IEEE.std_logic_unsigned.ALL;
+
+-- unsigned to unsigned  --rag
+
+entity Saturate_U2U is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end Saturate_U2U;
+
+architecture BEH of Saturate_U2U is
+  function OR_reduce(inp: std_logic_vector) return boolean is
+    variable dout : std_logic;
+    begin
+        dout := '0';
+        for i in inp'range loop
+            dout := dout or inp(i);
+        end loop;
+        return dout='1';
+    end OR_reduce;
+
+  signal Saturated : std_logic_vector(OutputWidth downto 1);
+
+begin
+
+  Dout <= Saturated;
+
+  I0_0: if (Dout'length < Din'length) generate
+    process(Din)
+        variable MAX_UNSIGNED :  std_logic_vector(OutputWidth downto 1) := (others=>'1');	
+        variable v_Overflow : boolean;
+        begin
+        -- check to see if saturation is required
+        v_Overflow := OR_reduce(Din(Din'length downto Dout'length+1));
+        if (Wrap) then
+            Saturated <= Din(OutputWidth downto 1);
+	    if (v_Overflow) then
+	      Overflow <= '1';
+	    else
+	      Overflow <= '0';
+	    end if;
+        else
+            -- only need to check upper bound and zero
+            if (v_Overflow and not Wrap) then
+                Saturated <= MAX_UNSIGNED;
+		Overflow <= '1';
+            else
+                Saturated <= Din(OutputWidth downto 1);
+		Overflow <= '0';
+            end if;
+        end if;
+      end process;
+    end generate I0_0;
+
+  I0_1: if (Dout'length > Din'length) generate
+      process(Din) 
+        variable pad_upper:  std_logic_vector(Dout'length-Din'length downto 1);
+        begin
+            pad_upper := (others=>'0');
+            Saturated <= pad_upper & Din;
+	    Overflow <= '0';
+        end process;
+    end generate I0_1;
+
+  I0_2: if (Dout'length = Din'length) generate
+    process(Din) begin
+        Saturated <= Din;
+	Overflow <= '0';
+    end process;
+  end generate I0_2;
+
+end BEH;
+--------------------------------------------------------------------------------
+
+-- Top level Saturate that instantiates various Saturate_* blocks based on 
+-- user selection.
+
+library IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.std_logic_arith.ALL;
+USE IEEE.std_logic_unsigned.ALL;
+
+
+entity Saturate is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Unsigned : boolean;
+    InputFormatUnsigned : boolean;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end Saturate;
+
+architecture BEH of Saturate is
+
+component Saturate_S2S_0 is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end component Saturate_S2S_0;
+
+component Saturate_S2S_1 is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end component Saturate_S2S_1;
+
+component Saturate_S2U_0 is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end component Saturate_S2U_0;
+
+component Saturate_S2U_1 is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end component Saturate_S2U_1;
+
+component Saturate_U2S is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end component Saturate_U2S;
+
+component Saturate_U2U is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end component Saturate_U2U;
+
+begin
+
+  I0_0_0: if (not InputFormatUnsigned and  not Unsigned and (InputWidth >= OutputWidth )) generate
+    Saturate1: component Saturate_S2S_0
+        generic map (
+        InputWidth => InputWidth,
+        OutputWidth => OutputWidth,
+        Wrap => Wrap
+        )
+        port map (
+        Din => Din,
+        Dout => Dout,
+        Overflow => Overflow
+        );
+    end generate I0_0_0;
+
+  I0_0_1: if (not InputFormatUnsigned and  not Unsigned and (InputWidth < OutputWidth )) generate
+    Saturate1: component Saturate_S2S_1
+        generic map (
+        InputWidth => InputWidth,
+        OutputWidth => OutputWidth,
+        Wrap => Wrap
+        )
+        port map (
+        Din => Din,
+        Dout => Dout,
+        Overflow => Overflow
+        );
+    end generate I0_0_1;
+
+      I0_1_1: if (not InputFormatUnsigned and Unsigned and (InputWidth-1 <= OutputWidth )) generate
+    Saturate1: component Saturate_S2U_1
+        generic map (
+        InputWidth => InputWidth,
+        OutputWidth => OutputWidth,
+        Wrap => Wrap
+        )
+        port map (
+        Din => Din,
+        Dout => Dout,
+        Overflow => Overflow
+        );
+    end generate I0_1_1;
+    
+      I0_1_0: if (not InputFormatUnsigned and Unsigned and (InputWidth-1 > OutputWidth )) generate
+    Saturate1: component Saturate_S2U_0
+        generic map (
+        InputWidth => InputWidth,
+        OutputWidth => OutputWidth,
+        Wrap => Wrap
+        )
+        port map (
+        Din => Din,
+        Dout => Dout,
+        Overflow => Overflow
+        );
+    end generate I0_1_0;    
+
+    I0_2: if (InputFormatUnsigned and  not Unsigned) generate
+    Saturate1: component Saturate_U2S
+        generic map (
+        InputWidth => InputWidth,
+        OutputWidth => OutputWidth,
+        Wrap => Wrap
+        )
+        port map (
+        Din => Din,
+        Dout => Dout,
+        Overflow => Overflow
+        );
+    end generate I0_2;
+
+    I0_3: if (InputFormatUnsigned and  Unsigned) generate
+    Saturate1: component Saturate_U2U
+        generic map (
+        InputWidth => InputWidth,
+        OutputWidth => OutputWidth,
+        Wrap => Wrap
+        )
+        port map (
+        Din => Din,
+        Dout => Dout,
+        Overflow => Overflow
+        );
+    end generate I0_3;
+
+
+end BEH;
+--------------------------------------------------------------------------------
+
+library IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.std_logic_arith.ALL;
+USE IEEE.std_logic_unsigned.ALL;
+
+entity lsc_convert is
+  generic (
+    InputWidth : integer;
+    InputPoint : integer;
+    OutputWidth : integer;
+    OutputPoint : integer;
+    Unsigned : boolean;
+    InputFormatUnsigned : boolean;
+    Round : natural;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end lsc_convert;
+
+architecture BEH of lsc_convert is
+
+component RoundBlock is
+  generic (
+    InputWidth : integer;
+    InputPoint : integer;
+    OutputWidth : integer;
+    OutputPoint : integer;
+    UnsignedInput : boolean;
+    Round : natural
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1)
+  );
+end component RoundBlock;
+
+component Saturate is
+  generic (
+    InputWidth : integer;
+    OutputWidth : integer;
+    Unsigned : boolean;
+    InputFormatUnsigned : boolean;
+    Wrap : boolean
+  );
+  port (
+    Din : in  std_logic_vector(InputWidth downto 1);
+    Dout : OUT  std_logic_vector(OutputWidth downto 1);
+    Overflow : OUT STD_LOGIC
+  );
+end component Saturate;
+
+    constant RoundedWidth : integer := InputWidth - (InputPoint - OutputPoint) + 1;
+    constant SatInputWidth : integer := InputWidth + OutputPoint-InputPoint + 1;
+    
+    signal Rounded : std_logic_vector(RoundedWidth downto 1);
+    signal SatInput : std_logic_vector(SatInputWidth downto 1);
+    signal Overflow_l : std_logic;
+signal SatExtend : std_logic;
+
+    begin
+
+   -- check for rounding
+  I1_0: if (InputPoint > OutputPoint) generate
+    RoundBlock0: component RoundBlock
+    generic map (
+      InputWidth => InputWidth,
+      InputPoint => InputPoint,
+      OutputWidth => RoundedWidth,
+      OutputPoint => OutputPoint,
+      UnsignedInput => InputFormatUnsigned,
+      Round => Round
+      )
+    port map (
+      Din => Din,
+      Dout => Rounded
+    );
+   Saturate0: component Saturate
+    generic map (
+      InputWidth => RoundedWidth,
+      OutputWidth => OutputWidth,
+      Unsigned => Unsigned,
+      InputFormatUnsigned => InputFormatUnsigned,
+      Wrap => Wrap
+      )
+    port map (
+      Din => Rounded,
+      Dout => Dout,
+      Overflow => Overflow_l
+    );
+
+ end generate I1_0;
+   
+  I1_1: if (InputPoint < OutputPoint) generate
+    SatExtend <= '0' when InputFormatUnsigned else Din(Din'length);
+    SatInput <= SatExtend & Din(InputWidth downto 1) & (OutputPoint-InputPoint downto 1 => '0');
+  Saturate0: component Saturate
+    generic map (
+      InputWidth => SatInputWidth,
+      OutputWidth => OutputWidth,
+      Unsigned => Unsigned,
+      InputFormatUnsigned => InputFormatUnsigned,
+      Wrap => Wrap
+      )
+    port map (
+      Din => SatInput,
+      Dout => Dout,
+      Overflow => Overflow_l
+    );
+  end generate I1_1;
+
+  I1_2: if (InputPoint = OutputPoint) generate
+    SatExtend <= '0' when InputFormatUnsigned else Din(Din'length);
+    SatInput <= SatExtend & Din(InputWidth downto 1);
+  Saturate0: component Saturate
+    generic map (
+      InputWidth => SatInputWidth,
+      OutputWidth => OutputWidth,
+      Unsigned => Unsigned,
+      InputFormatUnsigned => InputFormatUnsigned,
+      Wrap => Wrap
+      )
+    port map (
+      Din => SatInput,
+      Dout => Dout,
+      Overflow => Overflow_l
+    );
+
+  end generate I1_2;
+    
+  Overflow <= Overflow_l;
+end BEH;
+
+

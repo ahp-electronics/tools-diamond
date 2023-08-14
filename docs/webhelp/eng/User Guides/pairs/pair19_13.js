@@ -1,0 +1,27 @@
+var pairs =
+{
+"adding":{"device":1}
+,"orca":{"devices":1}
+,"device":{"chain":1,"existing":1,"click":1,"family":1,"device":1,"column":1,"active":1}
+,"add":{"device":1}
+,"existing":{"chain":1}
+,"diamond":{"programmer":1}
+,"programmer":{"choose":1}
+,"choose":{"edit":1,"add":1}
+,"edit":{"add":1}
+,"click":{"button":1}
+,"button":{"toolbar":1}
+,"toolbar":{"right-click":1}
+,"right-click":{"choose":1}
+,"select":{"device":1}
+,"family":{"device":1,"column":1}
+,"column":{"dropdown":1}
+,"dropdown":{"menu":1}
+,"software":{"inserts":1}
+,"inserts":{"new":1}
+,"new":{"device":1}
+,"active":{"chain":1}
+,"using":{"diamond":1}
+,"programming":{"fpga":1}
+}
+;Search.control.loadWordPairs(pairs);

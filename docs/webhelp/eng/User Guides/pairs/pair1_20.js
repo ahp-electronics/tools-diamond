@@ -1,0 +1,24 @@
+var pairs =
+{
+"floorplan":{"view":1}
+,"view":{"physical":1,"partition":1,"display":1,"loads":1}
+,"physical":{"view":1}
+,"partition":{"support":1,"information":1,"view":1}
+,"display":{"partition":1}
+,"information":{"support":1,"loaded":1}
+,"support":{"incremental":1,"diamond":1}
+,"incremental":{"design":1}
+,"design":{"flow":1}
+,"flow":{"partitions":1,"data":1}
+,"partitions":{"edited":1,"floorplan":1,"physical":1}
+,"edited":{"floorplan":1}
+,"loads":{"partition":1}
+,"loaded":{"memory":1,"translate":1}
+,"memory":{"data":1}
+,"data":{"loaded":1}
+,"translate":{"process":1}
+,"process":{"displaying":1}
+,"displaying":{"partitions":1}
+,"diamond":{"incremental":1}
+}
+;Search.control.loadWordPairs(pairs);

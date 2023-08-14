@@ -1,0 +1,1173 @@
+<Folder treetype="root" label="System Templates" >
+<SubFolder treetype="node" label="PMI" >
+<Template treetype="leaf" label="add" >pmi_add
+	#(.pmi_data_width(),
+	.pmi_result_width(),
+	.pmi_sign(),		//"on", "off"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.DataA(),
+	.DataB(),
+	.Cin(),
+	.Result(),
+	.Cout(),
+	.Overflow()
+	);</Template>
+<Template treetype="leaf" label="addsub" >pmi_addsub 
+	#(.pmi_data_width(),
+	.pmi_result_width(),
+	.pmi_sign(),		//"on", "off"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.DataA(),
+	.DataB(),
+	.Cin(),
+	.Add_Sub(),
+	.Result(),
+	.Cout(),
+	.Overflow()
+	);</Template>
+<Template treetype="leaf" label="complex_mult" >pmi_complex_mult 
+	#(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_sign(),					//"on", "off"
+	.pmi_additional_pipeline(),
+	.pmi_input_reg(),				//"on", "off"
+	.pmi_output_reg(),			//"on", "off"
+	.pmi_family(),
+	.pmi_mult_mode(),
+	.pmi_implementation()		//"DSP", "LUT"
+	)		
+	&lt;your_inst_label>(.DataA_Re(),
+	.DataA_Im(),
+	.DataB_Re(),
+	.DataB_Im(),
+	.Clock(), 
+	.ClkEn(), 
+	.Aclr(),
+	.Result_Re(),
+	.Result_Im()
+	);</Template>    
+<Template treetype="leaf" label="constant_mult" >pmi_constant_mult
+	#(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_sign(),		//"on", "off"
+	.pmi_additional_pipeline(),
+	.pmi_constant_value(),
+	.pmi_input_reg(),	//"on", "off"
+	.pmi_output_reg(),	//"on", "off"
+	.pmi_family(),
+	.pmi_implementation()	//"DSP", "LUT"
+	)		
+	&lt;your_inst_label>(.DataA(),
+	.Clock(), 
+	.ClkEn(), 
+	.Aclr(),
+	.Result()
+	);</Template>
+<Template treetype="leaf" label="counter" >pmi_counter
+	#(.pmi_data_width(),
+	.pmi_updown(),		//"up", "down", "up-down"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.Clock(),
+	.Clk_En(),
+	.Aclr(),
+	.UpDown(),
+	.Q()
+	);</Template>
+<Template treetype="leaf" label="distributed_dpram" >pmi_distributed_dpram
+	#(.pmi_addr_depth(),
+	.pmi_addr_width(),
+	.pmi_data_width(),
+	.pmi_regmode(),	//"reg", "noreg"
+	.pmi_init_file(),
+	.pmi_init_file_format(),	//"binary", "hex"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.WrAddress(),
+	.Data(),
+	.WrClock(),
+	.WE(),
+	.WrClockEn(),
+	.RdAddress(),
+	.RdClock(),
+	.RdClockEn(),
+	.Reset(),
+	.Q()
+	);</Template>
+<Template treetype="leaf" label="distributed_rom" >pmi_distributed_rom
+	#(.pmi_addr_depth(),
+	.pmi_addr_width(),
+	.pmi_data_width(),
+	.pmi_regmode(),	//"reg", "noreg"
+	.pmi_init_file(),
+	.pmi_init_file_format(),	//"binary", "hex"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.Address(),
+	.OutClock(),
+	.OutClockEn(),
+	.Reset(),
+	.Q()
+	);</Template>
+<Template treetype="leaf" label="distributed_shift_reg" >pmi_distributed_shift_reg
+	#(.pmi_data_width(),
+	.pmi_regmode(),	//"reg", "noreg"
+	.pmi_shiftreg_type(),	//"fixed", "variable", "lossless"
+	.pmi_num_shift(),
+	.pmi_num_width(),
+	.pmi_max_shift(),
+	.pmi_max_width(),
+	.pmi_init_file(),
+	.pmi_init_file_format(),	//"binary", "hex"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.Din(),
+	.Addr(),
+	.Clock(),
+	.ClockEn(),
+	.Reset(),
+	.Q()
+	);</Template>
+<Template treetype="leaf" label="distributed_spram" >pmi_distributed_spram
+	#(.pmi_addr_depth(),
+	.pmi_addr_width(),
+	.pmi_data_width(),
+	.pmi_regmode(),	//"reg", "noreg"
+	.pmi_init_file(),
+	.pmi_init_file_format(),	//"binary", "hex"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.Address(),
+	.Data(),
+	.Clock(),
+	.ClockEn(),
+	.WE(),
+	.Reset(),
+	.Q()
+	);</Template>
+<Template treetype="leaf" label="dsp_casmultaddsub" >pmi_dsp_casmultaddsub
+	#(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_additional_pipeline(),
+	.pmi_input_reg(),				//"on", "off"
+	.pmi_output_reg(),			//"on", "off"
+	.pmi_family(),
+	.pmi_gsr(),						//"enable", "disable"
+	.pmi_reg_inputa0_clk(),		//"CLK0", "CLK1", "CLK2", "CLK3"
+	.pmi_reg_inputa0_ce(),		//"CE0", "CE1", "CE2", "CE3"
+	.pmi_reg_inputa0_rst(),		//"RST0", "RST1", "RST2", "RST3"
+	.pmi_reg_inputa1_clk(),
+	.pmi_reg_inputa1_ce(),
+	.pmi_reg_inputa1_rst(),
+	.pmi_reg_inputb0_clk(),
+	.pmi_reg_inputb0_ce(),
+	.pmi_reg_inputb0_rst(),
+	.pmi_reg_inputb1_clk(),
+	.pmi_reg_inputb1_ce(),
+	.pmi_reg_inputb1_rst(),
+	.pmi_reg_pipeline0_clk(),
+	.pmi_reg_pipeline0_ce(),
+	.pmi_reg_pipeline0_rst(),
+	.pmi_reg_pipeline1_clk(),
+	.pmi_reg_pipeline1_ce(),
+	.pmi_reg_pipeline1_rst(),
+	.pmi_reg_output_clk(),
+	.pmi_reg_output_ce(),
+	.pmi_reg_output_rst(),
+	.pmi_reg_signeda_0_clk(),
+	.pmi_reg_signeda_0_ce(),
+	.pmi_reg_signeda_0_rst(),
+	.pmi_reg_signeda_1_clk(),
+	.pmi_reg_signeda_1_ce(),
+	.pmi_reg_signeda_1_rst(),
+	.pmi_reg_signedb_0_clk(),
+	.pmi_reg_signedb_0_ce(),
+	.pmi_reg_signedb_0_rst(),
+	.pmi_reg_signedb_1_clk(),
+	.pmi_reg_signedb_1_ce(),
+	.pmi_reg_signedb_1_rst(),
+	.pmi_reg_addnsub_0_clk(),
+	.pmi_reg_addnsub_0_ce(),
+	.pmi_reg_addnsub_0_rst(),
+	.pmi_reg_addnsub_1_clk(),
+	.pmi_reg_addnsub_1_ce(),
+	.pmi_reg_addnsub_1_rst()
+	)
+	&lt;your_inst_label>(.A0(),
+	.A1(),
+	.B0(), 
+	.B1(),
+	.SRIA(),
+	.SRIB(),
+	.CLK0(),
+	.CLK1(),
+	.CLK2(),
+	.CLK3(),
+	.CE0(),
+	.CE1(),
+	.CE2(),
+	.CE3(),
+	.RST0(),
+	.RST1(),
+	.RST2(),
+	.RST3(),
+	.SignA(),
+	.SignB(),
+	.ShiftA0(),
+	.ShiftA1(),
+	.ShiftB0(),
+	.ShiftB1(),
+	.ADDNSUB(),
+	.SignCIN(),
+	.CIN(),
+	.SignSUM(),
+	.SUM(),
+	.SROA(),
+	.SROB()
+	);</Template>
+<Template treetype="leaf" label="dsp_mac " >pmi_dsp_mac 
+	#(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_additional_pipeline(),
+	.pmi_input_reg(),	//"on", "off"
+	.pmi_family(),
+	.pmi_gsr(),		//"enable", "disable"
+	.pmi_source_control_a(),	//"parallel", "shift"
+	.pmi_source_control_b(),
+	.pmi_reg_inputa_clk(),	//"CLK0", "CLK1", "CLK2", "CLK3"
+	.pmi_reg_inputa_ce(),	//"CE0", "CE1", "CE2", "CE3"
+	.pmi_reg_inputa_rst(),	//"RST0", "RST1", "RST2", "RST3"
+	.pmi_reg_inputb_clk(),
+	.pmi_reg_inputb_ce(),
+	.pmi_reg_inputb_rst(),
+	.pmi_reg_pipeline_clk(),
+	.pmi_reg_pipeline_ce(),
+	.pmi_reg_pipeline_rst(),
+	.pmi_reg_output_clk(),
+	.pmi_reg_output_ce(),
+	.pmi_reg_output_rst(),
+	.pmi_reg_signeda_0_clk(),
+	.pmi_reg_signeda_0_ce(),
+	.pmi_reg_signeda_0_rst(),
+	.pmi_reg_signeda_1_clk(),
+	.pmi_reg_signeda_1_ce(),
+	.pmi_reg_signeda_1_rst(),
+	.pmi_reg_signedb_0_clk(),
+	.pmi_reg_signedb_0_ce(),
+	.pmi_reg_signedb_0_rst(),
+	.pmi_reg_signedb_1_clk(),
+	.pmi_reg_signedb_1_ce(),
+	.pmi_reg_signedb_1_rst(),
+	.pmi_reg_addnsub_0_clk(),
+	.pmi_reg_addnsub_0_ce(),
+	.pmi_reg_addnsub_0_rst(),
+	.pmi_reg_addnsub_1_clk(),
+	.pmi_reg_addnsub_1_ce(),
+	.pmi_reg_addnsub_1_rst(),
+	.pmi_reg_accumsload_0_clk(),
+	.pmi_reg_accumsload_0_ce(),
+	.pmi_reg_accumsload_0_rst(),
+	.pmi_reg_accumsload_1_clk(),
+	.pmi_reg_accumsload_1_ce(),
+	.pmi_reg_accumsload_1_rst()
+	)
+	&lt;your_inst_label>(.A(),
+	.B(),
+	.SRIA(),
+	.SRIB(),
+	.CLK0(),
+	.CLK1(),
+	.CLK2(),
+	.CLK3(),
+	.CE0(),
+	.CE1(),
+	.CE2(),
+	.CE3(),
+	.RST0(),
+	.RST1(),
+	.RST2(),
+	.RST3(),
+	.SignA(),
+	.SignB(),
+	.SourceA(),
+	.SourceB(),
+	.ADDNSUB(),
+	.LD(),
+	.ACCUMSLOAD(),
+	.ACCUM(),
+	.OVERFLOW(),
+	.SROA(),
+	.SROB()
+	);</Template>
+<Template treetype="leaf" label="dsp_mult" >pmi_dsp_mult
+	#(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_additional_pipeline(),
+	.pmi_input_reg(),	//"on", "off"
+	.pmi_output_reg(),	//"on", "off"
+	.pmi_family(),
+	.pmi_gsr(),		//"enable", "disable"
+	.pmi_source_control_a(),	//"parallel", "shift"
+	.pmi_source_control_b(),
+	.pmi_reg_inputa_clk(),	//"CLK0", "CLK1", "CLK2", "CLK3"
+	.pmi_reg_inputa_ce(),	//"CE0", "CE1", "CE2", "CE3"
+	.pmi_reg_inputa_rst(),	//"RST0", "RST1", "RST2", "RST3"
+	.pmi_reg_inputb_clk(),
+	.pmi_reg_inputb_ce(),
+	.pmi_reg_inputb_rst(),
+	.pmi_reg_pipeline_clk(),
+	.pmi_reg_pipeline_ce(),
+	.pmi_reg_pipeline_rst(),
+	.pmi_reg_output_clk(),
+	.pmi_reg_output_ce(),
+	.pmi_reg_output_rst(),
+	.pmi_reg_signeda_clk(),
+	.pmi_reg_signeda_ce(),
+	.pmi_reg_signeda_rst(),
+	.pmi_reg_signedb_clk(),
+	.pmi_reg_signedb_ce(),
+	.pmi_reg_signedb_rst(),
+	.pmi_pipelined_mode()
+	)
+	&lt;your_inst_label>(.A(),
+	.B(),
+	.SRIA(),
+	.SRIB(),
+	.CLK0(),
+	.CLK1(),
+	.CLK2(),
+	.CLK3(),
+	.CE0(),
+	.CE1(),
+	.CE2(),
+	.CE3(),
+	.RST0(),
+	.RST1(),
+	.RST2(),
+	.RST3(),
+	.SignA(),
+	.SignB(),
+	.SourceA(),
+	.SourceB(),
+	.P(),
+	.SROA(),
+	.SROB()
+	);</Template>
+<Template treetype="leaf" label="dsp_multaddsub" >pmi_dsp_multaddsub
+	#(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_additional_pipeline(),
+	.pmi_input_reg(),	//"on", "off"
+	.pmi_output_reg(),	//"on", "off"
+	.pmi_family(),
+	.pmi_gsr(),		//"enable", "disable"
+	.pmi_source_control_a0(),	//"parallel", "shift"
+	.pmi_source_control_a1(),
+	.pmi_source_control_b0(),
+	.pmi_source_control_b1(),
+	.pmi_reg_inputa0_clk(),	//"CLK0", "CLK1", "CLK2", "CLK3"
+	.pmi_reg_inputa0_ce(),	//"CE0", "CE1", "CE2", "CE3"
+	.pmi_reg_inputa0_rst(),	//"RST0", "RST1", "RST2", "RST3"
+	.pmi_reg_inputa1_clk(),
+	.pmi_reg_inputa1_ce(),
+	.pmi_reg_inputa1_rst(),
+	.pmi_reg_inputb0_clk(),
+	.pmi_reg_inputb0_ce(),
+	.pmi_reg_inputb0_rst(),
+	.pmi_reg_inputb1_clk(),
+	.pmi_reg_inputb1_ce(),
+	.pmi_reg_inputb1_rst(),
+	.pmi_reg_pipeline0_clk(),
+	.pmi_reg_pipeline0_ce(),
+	.pmi_reg_pipeline0_rst(),
+	.pmi_reg_pipeline1_clk(),
+	.pmi_reg_pipeline1_ce(),
+	.pmi_reg_pipeline1_rst(),
+	.pmi_reg_output_clk(),
+	.pmi_reg_output_ce(),
+	.pmi_reg_output_rst(),
+	.pmi_reg_signeda_0_clk(),
+	.pmi_reg_signeda_0_ce(),
+	.pmi_reg_signeda_0_rst(),
+	.pmi_reg_signeda_1_clk(),
+	.pmi_reg_signeda_1_ce(),
+	.pmi_reg_signeda_1_rst(),
+	.pmi_reg_signedb_0_clk(),
+	.pmi_reg_signedb_0_ce(),
+	.pmi_reg_signedb_0_rst(),
+	.pmi_reg_signedb_1_clk(),
+	.pmi_reg_signedb_1_ce(),
+	.pmi_reg_signedb_1_rst(),
+	.pmi_reg_addnsub_0_clk(),
+	.pmi_reg_addnsub_0_ce(),
+	.pmi_reg_addnsub_0_rst(),
+	.pmi_reg_addnsub_1_clk(),
+	.pmi_reg_addnsub_1_ce(),
+	.pmi_reg_addnsub_1_rst()
+	)
+	&lt;your_inst_label>(.A0(),
+	.A1(),
+	.B0(), 
+	.B1(),
+	.SRIA(),
+	.SRIB(),
+	.CLK0(),
+	.CLK1(),
+	.CLK2(),
+	.CLK3(),
+	.CE0(),
+	.CE1(),
+	.CE2(),
+	.CE3(),
+	.RST0(),
+	.RST1(),
+	.RST2(),
+	.RST3(),
+	.SignA(),
+	.SignB(),
+	.ShiftA0(),
+	.ShiftA1(),
+	.ShiftB0(),
+	.ShiftB1(),
+	.ADDNSUB(),
+	.SUM(),
+	.SROA(),
+	.SROB()
+	);</Template>
+<Template treetype="leaf" label="dsp_multaddsubsum" >pmi_dsp_multaddsubsum
+	#(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_additional_pipeline(),
+	.pmi_input_reg(),	//"on", "off"
+	.pmi_output_reg(),	//"on", "off"
+	.pmi_family(),             	
+	.pmi_gsr(),		//"enable", "disable"
+	.pmi_source_control_a0(),	//"parallel", "shift"
+	.pmi_source_control_a1(),
+	.pmi_source_control_a2(),
+	.pmi_source_control_a3(),
+	.pmi_source_control_b0(),
+	.pmi_source_control_b1(),
+	.pmi_source_control_b2(),
+	.pmi_source_control_b3(),
+	.pmi_reg_inputa0_clk(),	//"CLK0", "CLK1", "CLK2", "CLK3" 
+	.pmi_reg_inputa0_ce(),	//"CE0", "CE1", "CE2", "CE3"
+	.pmi_reg_inputa0_rst(),	//"RST0", "RST1", "RST2", "RST3" 
+	.pmi_reg_inputa1_clk(),
+	.pmi_reg_inputa1_ce(),
+	.pmi_reg_inputa1_rst(),
+	.pmi_reg_inputa2_clk(),
+	.pmi_reg_inputa2_ce(),
+	.pmi_reg_inputa2_rst(),
+	.pmi_reg_inputa3_clk(),
+	.pmi_reg_inputa3_ce(),
+	.pmi_reg_inputa3_rst(),
+	.pmi_reg_inputb0_clk(),
+	.pmi_reg_inputb0_ce(),
+	.pmi_reg_inputb0_rst(),
+	.pmi_reg_inputb1_clk(),
+	.pmi_reg_inputb1_ce(),
+	.pmi_reg_inputb1_rst(),
+	.pmi_reg_inputb2_clk(),
+	.pmi_reg_inputb2_ce(),
+	.pmi_reg_inputb2_rst(),
+	.pmi_reg_inputb3_clk(),
+	.pmi_reg_inputb3_ce(),
+	.pmi_reg_inputb3_rst(),
+	.pmi_reg_pipeline0_clk(),
+	.pmi_reg_pipeline0_ce(),
+	.pmi_reg_pipeline0_rst(),
+	.pmi_reg_pipeline1_clk(),
+	.pmi_reg_pipeline1_ce(),
+	.pmi_reg_pipeline1_rst(),
+	.pmi_reg_pipeline2_clk(),
+	.pmi_reg_pipeline2_ce(),
+	.pmi_reg_pipeline2_rst(),
+	.pmi_reg_pipeline3_clk(),
+	.pmi_reg_pipeline3_ce(),
+	.pmi_reg_pipeline3_rst(),
+	.pmi_reg_output_clk(),
+	.pmi_reg_output_ce(),
+	.pmi_reg_output_rst(),
+	.pmi_reg_signeda_0_clk(),
+	.pmi_reg_signeda_0_ce(),
+	.pmi_reg_signeda_0_rst(),
+	.pmi_reg_signeda_1_clk(),
+	.pmi_reg_signeda_1_ce(),
+	.pmi_reg_signeda_1_rst(),
+	.pmi_reg_signedb_0_clk(),
+	.pmi_reg_signedb_0_ce(),
+	.pmi_reg_signedb_0_rst(),
+	.pmi_reg_signedb_1_clk(),
+	.pmi_reg_signedb_1_ce(),
+	.pmi_reg_signedb_1_rst(),
+	.pmi_reg_addnsub1_0_clk(),
+	.pmi_reg_addnsub1_0_ce(),
+	.pmi_reg_addnsub1_0_rst(),
+	.pmi_reg_addnsub1_1_clk(),
+	.pmi_reg_addnsub1_1_ce(),
+	.pmi_reg_addnsub1_1_rst(),
+	.pmi_reg_addnsub3_0_clk(),
+	.pmi_reg_addnsub3_0_ce(),
+	.pmi_reg_addnsub3_0_rst(),
+	.pmi_reg_addnsub3_1_clk(),
+	.pmi_reg_addnsub3_1_ce(),
+	.pmi_reg_addnsub3_1_rst()
+	)
+	&lt;your_inst_label>(.A0(),
+	.A1(), 
+	.A2(), 
+	.A3(),
+	.B0(), 
+	.B1(), 
+	.B2(), 
+	.B3(),
+	.SRIA(),
+	.SRIB(),
+	.CLK0(),
+	.CLK1(),
+	.CLK2(),
+	.CLK3(),
+	.CE0(),
+	.CE1(),
+	.CE2(),
+	.CE3(),
+	.RST0(),
+	.RST1(),
+	.RST2(),
+	.RST3(),
+	.SignA(),
+	.SignB(),
+	.ShiftA0(),
+	.ShiftA1(),
+	.ShiftA2(),
+	.ShiftA3(),
+	.ShiftB0(),
+	.ShiftB1(),
+	.ShiftB2(),
+	.ShiftB3(),
+	.ADDNSUB1(),
+	.ADDNSUB3(),
+	.SUM(),
+	.SROA(),
+	.SROB()
+	);</Template>
+<Template treetype="leaf" label="fifo " >pmi_fifo 
+	#(.pmi_data_width(),
+	.pmi_data_depth(),
+	.pmi_full_flag(),
+	.pmi_empty_flag(),
+	.pmi_almost_full_flag(),
+	.pmi_almost_empty_flag(),
+	.pmi_regmode(),		//"reg", "noreg"
+	.pmi_family(),
+	.pmi_implementation()		//"EBR", "LUT"
+	)		
+	&lt;your_inst_label>(.Data(),
+	.Clock(),
+	.WrEn(),
+	.RdEn(),
+	.Reset(),
+	.Q(),
+	.Empty(),
+	.Full(),
+	.AlmostEmpty(),
+	.AlmostFull()
+	);</Template>
+<Template treetype="leaf" label="fifo_dc" >pmi_fifo_dc 
+	#(.pmi_data_width_w(),
+	.pmi_data_width_r(),
+	.pmi_data_depth_w(),
+	.pmi_data_depth_r(),
+	.pmi_full_flag(),
+	.pmi_empty_flag(),
+	.pmi_almost_full_flag(),
+	.pmi_almost_empty_flag(),
+	.pmi_regmode(),		//"reg", "noreg"
+	.pmi_resetmode(),		//"async", "sync"
+	.pmi_family(),
+	.pmi_implementation()		//"EBR", "LUT"
+	)	
+	&lt;your_inst_label>(.Data(),
+	.WrClock(),
+	.RdClock(),
+	.WrEn(),
+	.RdEn(),
+	.Reset(),
+	.RPReset(),
+	.Q(),
+	.Empty(),
+	.Full(),
+	.AlmostEmpty(),
+	.AlmostFull()
+	);</Template>
+<Template treetype="leaf" label="mac " >pmi_mac 
+	#(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_accum_width(),
+	.pmi_sign(),		//"on", "off"
+	.pmi_additional_pipeline(),
+	.pmi_add_sub(),		//"add", "sub"
+	.pmi_input_reg(),	//"on", "off"
+	.pmi_family(),
+	.pmi_implementation()	//"DSP", "LUT"
+	)
+	&lt;your_inst_label>(.DataA(),
+	.DataB(),
+	.Clock(), 
+	.ClkEn(), 
+	.Aclr(),
+	.Result()
+	);</Template>
+<Template treetype="leaf" label="mult " >pmi_mult 
+	#(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_sign(),		//"on", "off"
+	.pmi_additional_pipeline(),
+	.pmi_input_reg(),	//"on", "off"
+	.pmi_output_reg(),	//"on", "off"
+	.pmi_family(),
+	.pmi_implementation()	//"DSP", "LUT"
+	)
+	&lt;your_inst_label>(.DataA(),
+	.DataB(),
+	.Clock(), 
+	.ClkEn(), 
+	.Aclr(),
+	.Result()
+	);</Template>
+<Template treetype="leaf" label="multaddsub " >pmi_multaddsub 
+	#(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_sign(),		//"on", "off"
+	.pmi_additional_pipeline(),
+	.pmi_add_sub(),		//"add", "sub"
+	.pmi_input_reg(),	//"on", "off"
+	.pmi_output_reg(),	//"on", "off"
+	.pmi_family(),
+	.pmi_implementation()	//"DSP", "LUT"
+	)		
+	&lt;your_inst_label>(.DataA0(),
+	.DataA1(),
+	.DataB0(),
+	.DataB1(),
+	.Clock(), 
+	.ClkEn(), 
+	.Aclr(),
+	.Result()
+	);</Template>
+<Template treetype="leaf" label="multaddsubsum " >pmi_multaddsubsum
+    #(.pmi_dataa_width(),
+	.pmi_datab_width(),
+	.pmi_sign(), //"on", "off"
+	.pmi_additional_pipeline(),
+	.pmi_add_sub0(),        //"add", "sub"
+	.pmi_add_sub1(),
+	.pmi_input_reg(),    //"on", "off"
+	.pmi_output_reg(),   //"on", "off"
+	.pmi_family(),
+	.pmi_implementation()               //"DSP", "LUT"
+	)
+	&lt;your_inst_label>(.DataA0(),
+	.DataA1(),
+	.DataA2(),
+	.DataA3(),
+	.DataB0(),
+	.DataB1(),
+	.DataB2(),
+	.DataB3(),
+	.Clock(), 
+	.ClkEn(),
+	.Aclr(),
+	.Result()
+	); </Template>
+<Template treetype="leaf" label="pll" >pmi_pll
+	#(.pmi_freq_clki(),
+	.pmi_freq_clkfb(),
+	.pmi_freq_clkop(),
+	.pmi_freq_clkos(),
+	.pmi_freq_clkok(),
+	.pmi_family(),
+	.pmi_phase_adj(),
+	.pmi_duty_cycle(),
+	.pmi_clkfb_source(),	//"INTERNAL", "CLKOP", "USERCLOCK"
+	.pmi_fdel(),		//"on", "off"
+	.pmi_fdel_val()
+	)
+	&lt;your_inst_label>(.CLKI(),
+	.CLKFB(),
+	.RESET(),
+	.CLKOP(),
+	.CLKOS(),
+	.CLKOK(),
+	.CLKOK2(),
+	.LOCK()
+	);</Template>
+<Template treetype="leaf" label="pll_fp" >pmi_pll_fp
+	#(.pmi_freq_clki(),
+	.pmi_freq_clkfb(),
+	.pmi_freq_clkop(),
+	.pmi_freq_clkos(),
+	.pmi_freq_clkok(),
+	.pmi_family(),
+	.pmi_phase_adj(),
+	.pmi_duty_cycle(),
+	.pmi_clkfb_source(),		//"INTERNAL", "CLKOP", "USERCLOCK", "CLKOS"
+	.pmi_fdel(),				//"on", "off"
+	.pmi_fdel_val()
+	)
+	&lt;your_inst_label>(.CLKI(),
+	.CLKFB(),
+	.RESET(),
+	.CLKOP(),
+	.CLKOS(),
+	.CLKOK(),
+	.CLKOK2(),
+	.LOCK()
+	);</Template>
+<Template treetype="leaf" label="ram_dp" >pmi_ram_dp
+	#(.pmi_wr_addr_depth(),
+	.pmi_wr_addr_width(),
+	.pmi_wr_data_width(),
+	.pmi_rd_addr_depth(),
+	.pmi_rd_addr_width(),
+	.pmi_rd_data_width(),
+	.pmi_regmode(),	//"reg", "noreg"
+	.pmi_gsr(),		//"enable", "disable"
+	.pmi_resetmode(),	//"async", "sync"
+	.pmi_optimization(),   //"speed", "area"
+	.pmi_init_file(),
+	.pmi_init_file_format(),	//"binary", "hex"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.Data(),
+	.WrAddress(),
+	.RdAddress(),
+	.WrClock(),
+	.RdClock(),
+	.WrClockEn(),
+	.RdClockEn(),
+	.WE(),
+	.Reset(),
+	.Q()
+	);</Template>
+<Template treetype="leaf" label="ram_dp_true" >pmi_ram_dp_true
+	#(.pmi_addr_depth_a(),
+	.pmi_addr_width_a(),
+	.pmi_data_width_a(),
+	.pmi_addr_depth_b(),
+	.pmi_addr_width_b(),
+	.pmi_data_width_b(),
+	.pmi_regmode_a(),	//"reg", "noreg"
+	.pmi_regmode_b(),
+	.pmi_gsr(),		//"enable", "disable"
+	.pmi_resetmode(),	//"async", "sync"
+	.pmi_optimization(),    //"area", "speed"
+	.pmi_init_file(),
+	.pmi_init_file_format(),	//"binary", "hex"
+	.pmi_write_mode_a(),	//"normal", "writethrough", "readbeforewrite"
+	.pmi_write_mode_b(),
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.DataInA(),
+	.DataInB(),
+	.AddressA(),
+	.AddressB(),
+	.ClockA(),
+	.ClockB(),
+	.ClockEnA(),
+	.ClockEnB(),
+	.WrA(),
+	.WrB(),
+	.ResetA(),
+	.ResetB(),
+	.QA(),
+	.QB()
+	);</Template>
+<Template treetype="leaf" label="ram_dq" >pmi_ram_dq
+	#(.pmi_addr_depth(),
+	.pmi_addr_width(),
+	.pmi_data_width(),
+	.pmi_regmode(),	//"reg", "noreg"
+	.pmi_gsr(),		//"enable", "disable"
+	.pmi_resetmode(),	//"async", "sync"
+	.pmi_optimization(),    //"area", "speed"
+	.pmi_init_file(),
+	.pmi_init_file_format(),	//"binary", "hex"
+	.pmi_write_mode(),	//"normal", "writethrough", "readbeforewrite"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.Data(),
+	.Address(),
+	.Clock(),
+	.ClockEn(),
+	.WE(),
+	.Reset(),
+	.Q()
+	);</Template>
+<Template treetype="leaf" label="rom" >pmi_rom
+	#(.pmi_addr_depth(),
+	.pmi_addr_width(),
+	.pmi_data_width(),
+	.pmi_regmode(),	//"reg", "noreg"
+	.pmi_gsr(),		//"enable", "disable"
+	.pmi_resetmode(),	//"async", "sync"
+	.pmi_optimization(),   //"speed", "area"
+	.pmi_init_file(),
+	.pmi_init_file_format(),	//"binary", "hex"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.Address(),
+	.OutClock(),
+	.OutClockEn(),
+	.Reset(),
+	.Q()
+	);</Template>
+<Template treetype="leaf" label="sub" >pmi_sub
+	#(.pmi_data_width(),
+	.pmi_result_width(),
+	.pmi_sign(),		//"on", "off"
+	.pmi_family()
+	)
+	&lt;your_inst_label>(.DataA(),
+	.DataB(),
+	.Cin(),
+	.Result(),
+	.Cout(),
+	.Overflow()
+	);</Template>
+</SubFolder>
+<SubFolder treetype="node" label="Common" >
+<Template treetype="leaf" label="Always block" >always @( &lt;event_expression> )
+  begin
+    // procedural assignment statements
+    // if statements
+    // case, casex, and casez statements
+    // while, repeat, and for loops
+    // task and function calls
+  end</Template>
+<Template treetype="leaf" label="Blocking Assignment" >&lt;?result_signal?> = &lt;?expression?>; </Template>
+<Template treetype="leaf" label="Case Statement" >case ( &lt;expression> )
+	&lt;constant_value>:
+	  begin
+		// add your statements here
+	  end
+	&lt;constant_value>, ... , &lt;constant_value>:
+	  begin
+		/* add your statements here */
+	  end
+	default:
+	  begin
+		/* add your statements here */
+	  end
+endcase</Template>
+<Template treetype="leaf" label="Casex Statement" >casex ( &lt;expression> )
+	&lt;constant_value>:
+	  begin
+		// add your statements here
+	  end
+	&lt;constant_value>, ... , &lt;constant_value>:
+	  begin
+		/* add your statements here */
+	  end
+	default:
+	  begin
+		/* add your statements here */
+	  end
+endcase</Template>
+<Template treetype="leaf" label="Casez Statement" >casez ( &lt;expression> )
+	&lt;constant_value>:
+	  begin
+		// add your statements here
+	  end
+	&lt;constant_value>, ... , &lt;constant_value>:
+	  begin
+		/* add your statements here */
+	  end
+	default:
+	  begin
+		/* add your statements here */
+	  end
+endcase</Template>
+<Template treetype="leaf" label="Conditional Expression" >assign &lt;identify_name> = ( &lt;op_name> == &lt;value> ) ? &lt;value_1> : &lt;value_2>;</Template>
+<Template treetype="leaf" label="Conditional Operator" >(&lt;condition_expression>) ? &lt;true_clause_expression> : &lt;false_clause_expression>;</Template>
+<Template treetype="leaf" label="Continuous Assignment" >// Declare the assigned signal as a wire:
+wire [&lt;msb:lsb>] &lt;result_signal>;
+
+// Specify your assignment with the assign keyword, 
+// and give the expression (value) to assign.
+assign &lt;result_signal> = &lt;expression>;</Template>
+<Template treetype="leaf" label="Design:Counter" >module &lt;module_name> (&lt;data>, &lt;clk>, &lt;clrn>, &lt;ena>, &lt;ld>, &lt;count>);
+
+  input [&lt;data_msb>:&lt;data_lsb>] &lt;data>;
+  input &lt;clk>;
+  input &lt;clrn>;
+  input &lt;ena>;
+  input &lt;ld>;
+  output [&lt;count_msb>:&lt;count_lsb>] &lt;count>;
+
+  reg [&lt;tmp_count_msb>:&lt;tmp_count_lsb>] &lt;tmp_count>;
+
+  always @(posedge &lt;clk> or posedge &lt;clrn>)
+    begin
+      if (&lt;clrn>)
+        &lt;tmp_count> = 'b0;
+      else if (&lt;ld>)
+        &lt;tmp_count> = &lt;data>;
+      else if (&lt;ena>)
+        &lt;tmp_count> = &lt;tmp_count> + 'b1;
+    end
+
+  assign &lt;count> = &lt;tmp_count>;
+
+endmodule</Template>
+<Template treetype="leaf" label="Event control" >// Asynchronous, active-high set (rising-edge clock)
+@(posedge &lt;clk> or posedge &lt;set>)
+
+// Asynchronous, active-low reset (rising-edge clock)
+@(posedge &lt;clk> or negedge &lt;reset>)
+
+// Asynchronous, active-low set and active-high reset (rising-edge clock)
+@(posedge &lt;clk> or negedge &lt;set> or posedge &lt;reset>)</Template>
+<Template treetype="leaf" label="Falling Edge" >negedge &lt;clock_name></Template>
+<Template treetype="leaf" label="For Statement" >for (&lt;index> = &lt;low_range>; &lt;index> &lt; &lt;high_range>; &lt;index> = &lt;index> + &lt;step>)
+  begin
+	// add your statements here
+  end</Template>
+<Template treetype="leaf" label="Function Calling" >&lt;function_name> (&lt;parameter_list>)</Template>
+<Template treetype="leaf" label="Function Declaration" >function [&lt;range_msb>:&lt;range_lsb>] &lt;function_name>;
+
+  // input port declaration
+
+  // reg declaration
+
+  // wire declaration
+
+  begin
+	// add your codes here
+  end
+
+endfunction</Template>
+<Template treetype="leaf" label="Header" >//
+// File            : &lt;filename>.v
+// Author          : &lt;author>
+// Date            : &lt;month>/&lt;day>/&lt;year>
+// Version         : &lt;major>.&lt;minor>
+// Abstract        : &lt;description>
+//
+// Modification History:
+// Date        By       Version    Change Description
+//
+// ===========================================================
+// 00/00/00    xxx      x.x        Original
+// 
+// ===========================================================</Template>
+<Template treetype="leaf" label="If Statement" >if ( &lt;boolean_condition> )
+  begin
+	// add statements here
+  end
+else if ( &lt;boolean_condition> )
+  begin
+	// add alternate statements here
+  end
+else
+  begin
+	// add alternate statements here
+  end</Template>
+<Template treetype="leaf" label="Inout Declaration" >inout &lt;port_name>, ... , &lt;port_name>;
+// For example,
+// inout A;
+// inout [2:0] B;</Template>
+<Template treetype="leaf" label="Input Declaration" >input &lt;port_name>, ... , &lt;port_name>;
+// For example,
+// input A;
+// input [2:0] B;</Template>
+<Template treetype="leaf" label="Integer Declaration" >integer &lt;integer_name>;</Template>
+<Template treetype="leaf" label="Logical Function : And" >and (&lt;output_signal>, &lt;input_signal_1>, &lt;input_signal_2>, ...);</Template>
+<Template treetype="leaf" label="Logical Function : Buf" >buf (&lt;output_signal>, &lt;input_signal>);</Template>
+<Template treetype="leaf" label="Logical Function : NAND" >nand (&lt;output_signal>, &lt;input_signal_1>, &lt;input_signal_2>, ...);</Template>
+<Template treetype="leaf" label="Logical Function : NOR" >nor (&lt;output_signal>, &lt;input_signal_1>, &lt;input_signal_2>, ...);</Template>
+<Template treetype="leaf" label="Logical Function : Not" >not (&lt;output_signal>, &lt;input_signal>);</Template>
+<Template treetype="leaf" label="Logical Function : Or" >or (&lt;output_signal>, &lt;input_signal_1>, &lt;input_signal_2>, ...);</Template>
+<Template treetype="leaf" label="Logical Function : XNOR" >xnor (&lt;output_signal>, &lt;input_signal_1>, &lt;input_signal_2>, ...);</Template>
+<Template treetype="leaf" label="Logical Function : XOR" >xor (&lt;output_signal>, &lt;input_signal_1>, &lt;input_signal_2>, ...);</Template>
+<Template treetype="leaf" label="Module Declaration" >module &lt;module_name> ( &lt;input_name>, &lt;input_name>,
+                       &lt;output_name>, &lt;output_name>,
+                       &lt;inout_name>, &lt;inout_name> );
+
+ /* Port declarations.  Followed by wire,
+  * reg, integer, task and function declarations
+  */
+
+ /* Describe hardware with one or more continuous 
+  * assignments, always blocks, module instantiations 
+  * and gate instantiations
+  */
+
+  // Continuous assignment:
+  wire &lt;result_signal_name>;
+  assign &lt;result_signal_name> = &lt;expression>;
+
+  // Always block:
+  always @(&lt;event expression>)
+    begin
+      // procedural assignments  
+      // if statements  
+      // case, casex, and casez statements  
+      // while, repeat, and for loops  
+      // user task and user function calls
+    end
+
+  // Module instantiation:
+  &lt;module_name> &lt;instance_name> (&lt;port list>);
+
+  // Gate instantiation:
+  &lt;gate_type_keyword>  (&lt;port list>);
+
+endmodule
+</Template>
+<Template treetype="leaf" label="Module Instantiation" >&lt;module_name> &lt;instance_name> ( .&lt;module_port_name>( &lt;signal_name> ),
+                                .&lt;module_port_name>( &lt;signal_name> ),
+                                .&lt;module_port_name>( &lt;signal_name> ) );
+
+defparam &lt;instance_name>.&lt;parameter_name> = &lt;parameter_value>;
+defparam &lt;instance_name>.&lt;parameter_name> = &lt;parameter_value>;
+</Template>
+<Template treetype="leaf" label="Module Structure" >// Module declaration
+
+  // Port declaration
+
+  // Reg declaration (optional)
+
+  // Integer declaration (optional)
+
+  // Wire declaration (optional)
+
+  // Wand declaration (optional)
+
+  // Wor declaration (optional)
+
+  // Tri declaration (optional)
+
+  // Parameter declaration (optional)
+
+  // Function declaration (optional)
+
+  // Task declaration (optional)
+
+  // Module instantiation optional)
+
+  // Always block (optional)
+
+    // If statement (optional)
+
+    // Case/casex/casez statement (optional)
+
+    // For statement (optional)
+
+    // While statement (optional)
+
+  // Continuous assignment statement (optional)
+
+</Template>
+<Template treetype="leaf" label="Net Declaration" >&lt;net_type> &lt;wire_name>, ... , &lt;wire_name>;
+//
+// net_type can be one of:
+// 	wire, tri, wand, wor, supply0, supply1
+//
+// For example,
+// 	wire A, C;
+// 	tri [2:0] B;
+</Template>
+<Template treetype="leaf" label="Output Declaration" >output &lt;port_name>, ... , &lt;port_name>;
+// For example,
+// output A;
+// output [7:0] B;
+</Template>
+<Template treetype="leaf" label="Parameter Declaration" >parameter &lt;parameter_name> = &lt;parameter_value>;
+</Template>
+<Template treetype="leaf" label="Port Declaration" >input &lt;input_name>;
+input [&lt;input_range_msb>:&lt;input_range_lsb>] &lt;input_name>;
+output &lt;output_name>;
+inout &lt;inout_name>;
+</Template>
+<Template treetype="leaf" label="Register Declaration" >reg &lt;reg_name>;
+reg [&lt;reg_range_msb>:&lt;reg_range_lsb>] &lt;reg_name>;
+// For example,
+//   reg A;
+//   reg [7:0] B;
+</Template>
+<Template treetype="leaf" label="Rising Edge" >posedge &lt;clock_name></Template>
+<Template treetype="leaf" label="supply0 Declaration" >supply0 &lt;gnd_name>;
+</Template>
+<Template treetype="leaf" label="supply1 Declaration" >supply1 &lt;power_name>;
+</Template>
+<Template treetype="leaf" label="Task Statement" >task &lt;task_name>;
+
+  // Input port declaration
+
+  // Output port declaration
+
+  // Inout port declaration
+
+  // Reg declaration
+
+  // Wire declaration
+
+  begin
+    // statements here
+  end
+
+endtask
+</Template>
+<Template treetype="leaf" label="Test Fixture: Sample 1" >// Verilog Stimulus Data
+
+// Time units/resolution of #delays used in this file.  For example,
+//`timescale 1 ps / 1 ps
+
+// Define Module for Test Fixture
+
+module t;  // The name of this module is "t" to allow cross-probing.
+
+// May include test fixture declaration file here, for example,
+//`include "p2_top.tfi"
+
+// Initialize Inputs
+initial begin
+	// For example,
+	//clk = 1;
+	//sel = 0;
+        //ldpre = 0;
+	//xreset = 0;
+	//ldcomp = 0;
+end
+
+// May generate clock here.  For example,
+//always #(clock_period / 2) clk = ~clk;
+
+
+// Main body of the stimulus.
+// write code for all top level Inputs and BiDirs here.
+// Various begin and end counts are loaded into the design.
+
+  initial begin
+    // write stimulus here, for example,
+    //my_reset[0:1] = 2 'h 1; #22500;
+    //my_reset[0:1] = 2 'h 2; #15500;
+    //my_reset[0:1] = 2 'h 3; #28500;
+  end
+
+endmodule // t</Template>
+<Template treetype="leaf" label="Tri Declaration" >tri &lt;tri_name>;</Template>
+<Template treetype="leaf" label="Wand Declaration" >wand &lt;wand_name>;</Template>
+<Template treetype="leaf" label="While Statement" >while ( &lt;expression> )
+  begin
+    // statements here
+  end</Template>
+<Template treetype="leaf" label="Wire Declaration" >wire &lt;wire_name>;
+wire [&lt;wire_range_msb>:&lt;wire_range_lsb>] &lt;wire_name>;</Template>
+<Template treetype="leaf" label="Wor Declaration" >wor &lt;wor_name>;</Template>
+</SubFolder>
+</Folder>

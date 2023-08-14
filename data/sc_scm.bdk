@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="sc_scm" include="baseflow">
+  <VariableDef name="Support_SSO" value="true" />
+  <VariableDef name="Export_PROM" value="true" />
+  <CommandDef id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <CommandFile name="${report_base}.t2b" clean="TRUE" >
+	  <line>#PROP_BIT_RunDRCBitGen</line>
+	  <line>#PROP_BIT_CreateBitFile</line>
+	  <line>#PROP_BIT_OutFormatBitGen</line>
+	  <line>#PROP_BIT_NoHeader</line>
+	  <line>-path "${project_dir}" #PROP_BIT_SearchPthBitGen</line>
+	  <line>#PROP_BIT_LenBitsBitGen</line>
+	  <line>#PROP_BIT_ExtClockBitGen</line>
+	  <line>#PROP_BIT_EnIOBitGen</line>
+	  <line>#PROP_BIT_DisRAMResBitGen2</line>
+	  <line>#PROP_BIT_GSREnableBitGen</line>
+	  <line>#PROP_BIT_StartUpClkBitGen</line>
+	  <line>#PROP_BIT_AddressBitGen</line>
+	  <line>#PROP_BIT_RemZeroFramesBitGen</line>
+	  <line>#PROP_BIT_SysConBitGen</line>
+	  <line>#PROP_BIT_SysClockConBitGen</line>
+	  <line>#PROP_BIT_WaitStTimBitGen</line>
+	  <line>#PROP_BIT_GranTimBitGen</line>
+	  <line>#PROP_BIT_SPIStartAddBitGen</line>
+      <line>#PROP_BIT_XResCalibrationCtrl</line>
+	  <line>!Bitgen:pcs_path</line>
+	</CommandFile>
+    <cmd_str>bitgen -w "${report_base}.ncd" -f "${report_base}.t2b" "${report_base}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc bitgen {args} {
+			set msg "bitgen $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+</BaliFlowDef>

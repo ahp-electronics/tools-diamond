@@ -1,0 +1,536 @@
+# Copyright (c) 2012-2013 by Lattice Semiconductor Corporation
+# %HEADER%
+#
+proc cmpl_vhd {device} {
+upvar script_path script_path
+upvar target_path target_path
+#global script_path target_path
+
+switch $device {
+
+ec {
+#
+# Compile the EC/XP libraries
+#
+#exec echo Refreshing the EC/XP black-boxes... >$target_path/ec.log
+file delete -force $target_path/ec
+file copy $script_path/../blackbox/jtagb_work $target_path/ec
+exec vlog -refresh -work $target_path/ec >>$target_path/ec.log
+#
+#exec echo Compiling the EC/XP Component File... >>$target_path/ec.log
+exec vcom -87 -explicit -work $target_path/ec $script_path/../vhdl/ec/src/ORCACOMP.vhd >>$target_path/ec.log
+#exec echo Compiling the EC/XP Sequential Cells... >>$target_path/ec.log
+exec vcom -87 -explicit -work $target_path/ec $script_path/../vhdl/ec/src/ORCA_SEQ.vhd >>$target_path/ec.log
+#exec echo Compiling the EC/XP I/Os... >>$target_path/ec.log
+exec vcom -87 -explicit -work $target_path/ec $script_path/../vhdl/ec/src/ORCA_IO.vhd >>$target_path/ec.log
+#exec echo Compiling the EC/XP Combinatorial... >>$target_path/ec.log
+exec vcom -87 -explicit -work $target_path/ec $script_path/../vhdl/ec/src/ORCA_CMB.vhd >>$target_path/ec.log
+#exec echo Compiling the EC/XP Counters... >>$target_path/ec.log
+exec vcom -87 -explicit -work $target_path/ec $script_path/../vhdl/ec/src/ORCA_CNT.vhd >>$target_path/ec.log
+#exec echo Compiling the EC/XP Memories... >>$target_path/ec.log
+exec vcom -87 -explicit -work $target_path/ec $script_path/../vhdl/ec/src/ORCA_MEM.vhd >>$target_path/ec.log
+#exec echo Compiling the EC/XP Miscillaneous cells... >>$target_path/ec.log
+exec vcom -87 -explicit -work $target_path/ec $script_path/../vhdl/ec/src/ORCA_MISC.vhd >>$target_path/ec.log
+#exec echo Compiling the EC/XP LUTs... >>$target_path/ec.log
+exec vcom -87 -explicit -work $target_path/ec $script_path/../vhdl/ec/src/ORCA_LUT.vhd >>$target_path/ec.log
+}
+
+ecp { 
+#
+# Compile the ECP library
+#
+#exec echo Refreshing the ECP black-boxes... >$target_path/ecp.log
+file delete -force $target_path/ecp
+file copy $script_path/../blackbox/jtagb_work $target_path/ecp
+exec vlog -refresh -work $target_path/ecp >>$target_path/ecp.log
+#
+#exec echo Compiling the ECP Component File... >>$target_path/ecp.log
+exec vcom -87 -explicit -work $target_path/ecp $script_path/../vhdl/ecp/src/ORCACOMP.vhd >>$target_path/ecp.log
+#exec echo Compiling the ECP Sequential Cells... >>$target_path/ecp.log
+exec vcom -87 -explicit -work $target_path/ecp $script_path/../vhdl/ecp/src/ORCA_SEQ.vhd >>$target_path/ecp.log
+#exec echo Compiling the ECP I/Os... >>$target_path/ecp.log
+exec vcom -87 -explicit -work $target_path/ecp $script_path/../vhdl/ecp/src/ORCA_IO.vhd >>$target_path/ecp.log
+#exec echo Compiling the ECP Combinatorial... >>$target_path/ecp.log
+exec vcom -87 -explicit -work $target_path/ecp $script_path/../vhdl/ecp/src/ORCA_CMB.vhd >>$target_path/ecp.log
+#exec echo Compiling the ECP Counters... >>$target_path/ecp.log
+exec vcom -87 -explicit -work $target_path/ecp $script_path/../vhdl/ecp/src/ORCA_CNT.vhd >>$target_path/ecp.log
+#exec echo Compiling the ECP Memories... >>$target_path/ecp.log
+exec vcom -87 -explicit -work $target_path/ecp $script_path/../vhdl/ecp/src/ORCA_MEM.vhd >>$target_path/ecp.log
+#exec echo Compiling the ECP Miscillaneous cells... >>$target_path/ecp.log
+exec vcom -87 -explicit -work $target_path/ecp $script_path/../vhdl/ecp/src/ORCA_MISC.vhd >>$target_path/ecp.log
+#exec echo Compiling the ECP LUTs... >>$target_path/ecp.log
+exec vcom -87 -explicit -work $target_path/ecp $script_path/../vhdl/ecp/src/ORCA_LUT.vhd >>$target_path/ecp.log
+#exec echo Compiling the ECP MULTs... >>$target_path/ecp.log
+exec vcom -87 -explicit -work $target_path/ecp $script_path/../vhdl/ecp/src/ORCA_MULT.vhd >>$target_path/ecp.log
+}
+
+ecp2 {
+#
+# Compile the ECP2/M library
+#
+#exec echo Refreshing the ECP2/M black-boxes... >$target_path/ecp2.log
+file delete -force $target_path/ecp2
+file copy $script_path/../blackbox/jtagc_work $target_path/ecp2
+exec vlog -refresh -work $target_path/ecp2 >>$target_path/ecp2.log
+#
+#exec echo Compiling the ECP2/M Component File... >>$target_path/ecp2.log
+exec vcom -explicit -work $target_path/ecp2 $script_path/../vhdl/ecp2/src/ECP2COMP.vhd >>$target_path/ecp2.log
+#exec echo Compiling the ECP2/M Sequential Cells... >>$target_path/ecp2.log
+exec vcom -explicit -work $target_path/ecp2 $script_path/../vhdl/ecp2/src/ECP2_SEQ.vhd >>$target_path/ecp2.log
+#exec echo Compiling the ECP2/M I/Os... >>$target_path/ecp2.log
+exec vcom -explicit -work $target_path/ecp2 $script_path/../vhdl/ecp2/src/ECP2_IO.vhd >>$target_path/ecp2.log
+#exec echo Compiling the ECP2/M Combinational Cells... >>$target_path/ecp2.log
+exec vcom -explicit -work $target_path/ecp2 $script_path/../vhdl/ecp2/src/ECP2_CMB.vhd >>$target_path/ecp2.log
+#exec echo Compiling the ECP2/M Counters... >>$target_path/ecp2.log
+exec vcom -explicit -work $target_path/ecp2 $script_path/../vhdl/ecp2/src/ECP2_CNT.vhd >>$target_path/ecp2.log
+#exec echo Compiling the ECP2/M Memory Elements... >>$target_path/ecp2.log
+exec vcom -explicit -work $target_path/ecp2 $script_path/../vhdl/ecp2/src/ECP2_MEM.vhd >>$target_path/ecp2.log
+#exec echo Compiling the ECP2/M Miscillaneous cells... >>$target_path/ecp2.log
+exec vcom -explicit -work $target_path/ecp2 $script_path/../vhdl/ecp2/src/ECP2_MISC.vhd >>$target_path/ecp2.log
+#exec echo Compiling the ECP2/M LUTs... >>$target_path/ecp2.log
+exec vcom -explicit -work $target_path/ecp2 $script_path/../vhdl/ecp2/src/ECP2_LUT.vhd >>$target_path/ecp2.log
+#exec echo Compiling the ECP2/M MULTs cells... >>$target_path/ecp2.log
+exec vcom -explicit -work $target_path/ecp2 $script_path/../vhdl/ecp2/src/ECP2_MULT.vhd >>$target_path/ecp2.log
+#exec echo Compiling the ECP2/M Backanno cells... >>$target_path/ecp2.log
+exec vcom -explicit -work $target_path/ecp2 $script_path/../vhdl/ecp2/src/ECP2_SL.vhd >>$target_path/ecp2.log
+}
+
+ecp3 {
+#
+# Compile the ECP3 library
+#
+#exec echo Refreshing the ECP3 black-boxes... >$target_path/ecp3.log
+file delete -force $target_path/ecp3
+file copy $script_path/../blackbox/jtage_work $target_path/ecp3
+exec vlog -refresh -work $target_path/ecp3 >>$target_path/ecp3.log
+#
+#exec echo Compiling the ECP3 Component File... >>$target_path/ecp3.log
+exec vcom -explicit -work $target_path/ecp3 $script_path/../vhdl/ecp3/src/ECP3COMP.vhd >>$target_path/ecp3.log
+#exec echo Compiling the ECP3 Sequential Cells... >>$target_path/ecp3.log
+exec vcom -explicit -work $target_path/ecp3 $script_path/../vhdl/ecp3/src/ECP3_SEQ.vhd >>$target_path/ecp3.log
+#exec echo Compiling the ECP3 I/Os... >>$target_path/ecp3.log
+exec vcom -explicit -work $target_path/ecp3 $script_path/../vhdl/ecp3/src/ECP3_IO.vhd >>$target_path/ecp3.log
+#exec echo Compiling the ECP3 Combinational Cells... >>$target_path/ecp3.log
+exec vcom -explicit -work $target_path/ecp3 $script_path/../vhdl/ecp3/src/ECP3_CMB.vhd >>$target_path/ecp3.log
+#exec echo Compiling the ECP3 Counters... >>$target_path/ecp3.log
+exec vcom -explicit -work $target_path/ecp3 $script_path/../vhdl/ecp3/src/ECP3_CNT.vhd >>$target_path/ecp3.log
+#exec echo Compiling the ECP3 Memory Elements... >>$target_path/ecp3.log
+exec vcom -explicit -work $target_path/ecp3 $script_path/../vhdl/ecp3/src/ECP3_MEM.vhd >>$target_path/ecp3.log
+#exec echo Compiling the ECP3 Miscillaneous cells... >>$target_path/ecp3.log
+exec vcom -explicit -work $target_path/ecp3 $script_path/../vhdl/ecp3/src/ECP3_MISC.vhd >>$target_path/ecp3.log
+#exec echo Compiling the ECP3 LUTs... >>$target_path/ecp3.log
+exec vcom -explicit -work $target_path/ecp3 $script_path/../vhdl/ecp3/src/ECP3_LUT.vhd >>$target_path/ecp3.log
+#exec echo Compiling the ECP3 MULTs cells... >>$target_path/ecp3.log
+exec vcom -explicit -work $target_path/ecp3 $script_path/../vhdl/ecp3/src/ECP3_MULT.vhd >>$target_path/ecp3.log
+#exec echo Compiling the ECP3 Backanno cells... >>$target_path/ecp3.log
+exec vcom -explicit -work $target_path/ecp3 $script_path/../vhdl/ecp3/src/ECP3_SL.vhd >>$target_path/ecp3.log
+}
+
+ecp5u {
+#
+# Compile the ECP5U/M library
+#
+#exec echo Refreshing the ECP5U/M black-boxes... >$target_path/ecp5u.log
+file delete -force $target_path/ecp5u
+file copy $script_path/../blackbox/ecp5u_black_boxes $target_path/ecp5u
+exec vlog -refresh -work $target_path/ecp5u >>$target_path/ecp5u.log
+#
+#exec echo Compiling the ECP5U/M Component File... >>$target_path/ecp5u.log
+exec vcom -explicit -work $target_path/ecp5u $script_path/../vhdl/ecp5u/src/ECP5UCOMP.vhd >>$target_path/ecp5u.log
+#exec echo Compiling the ECP5U/M Sequential Cells... >>$target_path/ecp5u.log
+exec vcom -explicit -work $target_path/ecp5u $script_path/../vhdl/ecp5u/src/ECP5U_SEQ.vhd >>$target_path/ecp5u.log
+#exec echo Compiling the ECP5U/M I/Os... >>$target_path/ecp5u.log
+exec vcom -explicit -work $target_path/ecp5u $script_path/../vhdl/ecp5u/src/ECP5U_IO.vhd >>$target_path/ecp5u.log
+#exec echo Compiling the ECP5U/M Combinational Cells... >>$target_path/ecp5u.log
+exec vcom -explicit -work $target_path/ecp5u $script_path/../vhdl/ecp5u/src/ECP5U_CMB.vhd >>$target_path/ecp5u.log
+#exec echo Compiling the ECP5U/M Memory Elements... >>$target_path/ecp5u.log
+exec vcom -explicit -work $target_path/ecp5u $script_path/../vhdl/ecp5u/src/ECP5U_MEM.vhd >>$target_path/ecp5u.log
+#exec echo Compiling the ECP5U/M Miscillaneous cells... >>$target_path/ecp5u.log
+exec vcom -explicit -work $target_path/ecp5u $script_path/../vhdl/ecp5u/src/ECP5U_MISC.vhd >>$target_path/ecp5u.log
+#exec echo Compiling the ECP5U/M LUTs... >>$target_path/ecp5u.log
+exec vcom -explicit -work $target_path/ecp5u $script_path/../vhdl/ecp5u/src/ECP5U_LUT.vhd >>$target_path/ecp5u.log
+#exec echo Compiling the ECP5U/M mixed-HDL primitives... >>$target_path/ecp5u.log
+exec vcom -work $target_path/ecp5u $script_path/../vhdl/ecp5u/src/gsr_pur_assign.vhd >>$target_path/ecp5u.log
+set ecp5u_list [open "$target_path/ecp5u.f" w]
+set ecp5u_files [glob "$script_path/../vhdl/ecp5u/src/*.v"]
+puts $ecp5u_list "$ecp5u_files"
+close $ecp5u_list
+exec vlog -work $target_path/ecp5u +define+mixed_hdl -f $target_path/ecp5u.f >>$target_path/ecp5u.log
+#exec vlog -work $target_path/ecp5u +define+mixed_hdl $script_path/../vhdl/ecp5u/src/*.v >>$target_path/ecp5u.log
+#exec echo Compiling the ECP5U/M Backanno cells... >>$target_path/ecp5u.log
+exec vcom -explicit -work $target_path/ecp5u $script_path/../vhdl/ecp5u/src/ECP5U_SL.vhd >>$target_path/ecp5u.log
+}
+
+lptm {
+#
+# Compile the MACHXO/LPTM libraries
+#
+#exec echo Refreshing the MACHXO/LPTM black-boxes... >$target_path/lptm.log
+file delete -force $target_path/lptm
+file copy $script_path/../blackbox/jtagd_work $target_path/lptm
+exec vlog -refresh -work $target_path/lptm >>$target_path/lptm.log
+#
+#exec echo Compiling the MACHXO/LPTM Component File... >>$target_path/lptm.log
+exec vcom -87 -explicit -work $target_path/lptm $script_path/../vhdl/lptm/src/MACHXOCOMP.vhd >>$target_path/lptm.log
+#exec echo Compiling the MACHXO/LPTM Sequential Cells... >>$target_path/lptm.log
+exec vcom -87 -explicit -work $target_path/lptm $script_path/../vhdl/lptm/src/MACHXO_SEQ.vhd >>$target_path/lptm.log
+#exec echo Compiling the MACHXO/LPTM I/Os... >>$target_path/lptm.log
+exec vcom -87 -explicit -work $target_path/lptm $script_path/../vhdl/lptm/src/MACHXO_IO.vhd >>$target_path/lptm.log
+#exec echo Compiling the MACHXO/LPTM Memory Elements... >>$target_path/lptm.log
+exec vcom -87 -explicit -work $target_path/lptm $script_path/../vhdl/lptm/src/MACHXO_MEM.vhd >>$target_path/lptm.log
+#exec echo Compiling the MACHXO/LPTM Combinational Cells... >>$target_path/lptm.log
+exec vcom -87 -explicit -work $target_path/lptm $script_path/../vhdl/lptm/src/MACHXO_CMB.vhd >>$target_path/lptm.log
+#exec echo Compiling the MACHXO/LPTM Counters... >>$target_path/lptm.log
+exec vcom -87 -explicit -work $target_path/lptm $script_path/../vhdl/lptm/src/MACHXO_CNT.vhd >>$target_path/lptm.log
+#exec echo Compiling the MACHXO/LPTM Miscillaneous cells... >>$target_path/lptm.log
+exec vcom -87 -explicit -work $target_path/lptm $script_path/../vhdl/lptm/src/MACHXO_MISC.vhd >>$target_path/lptm.log
+#exec echo Compiling the MACHXO/LPTM LUT cells... >>$target_path/lptm.log
+exec vcom -87 -explicit -work $target_path/lptm $script_path/../vhdl/lptm/src/MACHXO_LUT.vhd >>$target_path/lptm.log
+}
+
+lptm2 {
+#
+# Compile the LPTM2 library
+#
+#exec echo Refreshing the LPTM2 black-boxes... >$target_path/lptm2.log
+file delete -force $target_path/lptm2
+file copy $script_path/../blackbox/lptm2_black_boxes_vhdlib $target_path/lptm2
+exec vlog -refresh -work $target_path/lptm2 >>$target_path/lptm2.log
+#
+#exec echo Compiling the LPTM2 Component File... >>$target_path/lptm2.log
+exec vcom -explicit -work $target_path/lptm2 $script_path/../vhdl/lptm2/src/MACHXO2COMP.vhd >>$target_path/lptm2.log
+#exec echo Compiling the LPTM2 Sequential Cells... >>$target_path/lptm2.log
+exec vcom -explicit -work $target_path/lptm2 $script_path/../vhdl/lptm2/src/MACHXO2_SEQ.vhd >>$target_path/lptm2.log
+#exec echo Compiling the LPTM2 I/Os... >>$target_path/lptm2.log
+exec vcom -explicit -work $target_path/lptm2 $script_path/../vhdl/lptm2/src/MACHXO2_IO.vhd >>$target_path/lptm2.log
+#exec echo Compiling the LPTM2 Combinational Cells... >>$target_path/lptm2.log
+exec vcom -explicit -work $target_path/lptm2 $script_path/../vhdl/lptm2/src/MACHXO2_CMB.vhd >>$target_path/lptm2.log
+#exec echo Compiling the LPTM2 Counters... >>$target_path/lptm2.log
+exec vcom -explicit -work $target_path/lptm2 $script_path/../vhdl/lptm2/src/MACHXO2_CNT.vhd >>$target_path/lptm2.log
+#exec echo Compiling the LPTM2 Memory Elements... >>$target_path/lptm2.log
+exec vcom -explicit -work $target_path/lptm2 $script_path/../vhdl/lptm2/src/MACHXO2_MEM.vhd >>$target_path/lptm2.log
+#exec echo Compiling the LPTM2 Miscillaneous cells... >>$target_path/lptm2.log
+exec vcom -explicit -work $target_path/lptm2 $script_path/../vhdl/lptm2/src/MACHXO2_MISC.vhd >>$target_path/lptm2.log
+#exec echo Compiling the LPTM2 LUTs... >>$target_path/lptm2.log
+exec vcom -explicit -work $target_path/lptm2 $script_path/../vhdl/lptm2/src/MACHXO2_LUT.vhd >>$target_path/lptm2.log
+#exec echo Compiling the gsr_pur_assign primitive - only for EFB VHDL sim... >>$target_path/lptm2.log
+exec vcom -work $target_path/lptm2 $script_path/../vhdl/lptm2/src/gsr_pur_assign.vhd >>$target_path/lptm2.log
+}
+
+machxo {
+#
+# Compile the MACHXO/LPTM libraries
+#
+#exec echo Refreshing the MACHXO/LPTM black-boxes... >$target_path/machxo.log
+file delete -force $target_path/machxo
+file copy $script_path/../blackbox/jtagd_work $target_path/machxo
+exec vlog -refresh -work $target_path/machxo >>$target_path/machxo.log
+#
+#exec echo Compiling the MACHXO/LPTM Component File... >>$target_path/machxo.log
+exec vcom -87 -explicit -work $target_path/machxo $script_path/../vhdl/machxo/src/MACHXOCOMP.vhd >>$target_path/machxo.log
+#exec echo Compiling the MACHXO/LPTM Sequential Cells... >>$target_path/machxo.log
+exec vcom -87 -explicit -work $target_path/machxo $script_path/../vhdl/machxo/src/MACHXO_SEQ.vhd >>$target_path/machxo.log
+#exec echo Compiling the MACHXO/LPTM I/Os... >>$target_path/machxo.log
+exec vcom -87 -explicit -work $target_path/machxo $script_path/../vhdl/machxo/src/MACHXO_IO.vhd >>$target_path/machxo.log
+#exec echo Compiling the MACHXO/LPTM Memory Elements... >>$target_path/machxo.log
+exec vcom -87 -explicit -work $target_path/machxo $script_path/../vhdl/machxo/src/MACHXO_MEM.vhd >>$target_path/machxo.log
+#exec echo Compiling the MACHXO/LPTM Combinational Cells... >>$target_path/machxo.log
+exec vcom -87 -explicit -work $target_path/machxo $script_path/../vhdl/machxo/src/MACHXO_CMB.vhd >>$target_path/machxo.log
+#exec echo Compiling the MACHXO/LPTM Counters... >>$target_path/machxo.log
+exec vcom -87 -explicit -work $target_path/machxo $script_path/../vhdl/machxo/src/MACHXO_CNT.vhd >>$target_path/machxo.log
+#exec echo Compiling the MACHXO/LPTM Miscillaneous cells... >>$target_path/machxo.log
+exec vcom -87 -explicit -work $target_path/machxo $script_path/../vhdl/machxo/src/MACHXO_MISC.vhd >>$target_path/machxo.log
+#exec echo Compiling the MACHXO/LPTM LUT cells... >>$target_path/machxo.log
+exec vcom -87 -explicit -work $target_path/machxo $script_path/../vhdl/machxo/src/MACHXO_LUT.vhd >>$target_path/machxo.log
+}
+
+machxo2 {
+#
+# Compile the MACHXO2 library
+#
+#exec echo Refreshing the MACHXO2 black-boxes... >$target_path/machxo2.log
+file delete -force $target_path/machxo2
+file copy $script_path/../blackbox/machxo2_black_boxes_vhdlib $target_path/machxo2
+exec vlog -refresh -work $target_path/machxo2 >>$target_path/machxo2.log
+#
+#exec echo Compiling the MACHXO2 Component File... >>$target_path/machxo2.log
+exec vcom -explicit -work $target_path/machxo2 $script_path/../vhdl/machxo2/src/MACHXO2COMP.vhd >>$target_path/machxo2.log
+#exec echo Compiling the MACHXO2 Sequential Cells... >>$target_path/machxo2.log
+exec vcom -explicit -work $target_path/machxo2 $script_path/../vhdl/machxo2/src/MACHXO2_SEQ.vhd >>$target_path/machxo2.log
+#exec echo Compiling the MACHXO2 I/Os... >>$target_path/machxo2.log
+exec vcom -explicit -work $target_path/machxo2 $script_path/../vhdl/machxo2/src/MACHXO2_IO.vhd >>$target_path/machxo2.log
+#exec echo Compiling the MACHXO2 Combinational Cells... >>$target_path/machxo2.log
+exec vcom -explicit -work $target_path/machxo2 $script_path/../vhdl/machxo2/src/MACHXO2_CMB.vhd >>$target_path/machxo2.log
+#exec echo Compiling the MACHXO2 Counters... >>$target_path/machxo2.log
+exec vcom -explicit -work $target_path/machxo2 $script_path/../vhdl/machxo2/src/MACHXO2_CNT.vhd >>$target_path/machxo2.log
+#exec echo Compiling the MACHXO2 Memory Elements... >>$target_path/machxo2.log
+exec vcom -explicit -work $target_path/machxo2 $script_path/../vhdl/machxo2/src/MACHXO2_MEM.vhd >>$target_path/machxo2.log
+#exec echo Compiling the MACHXO2 Miscillaneous cells... >>$target_path/machxo2.log
+exec vcom -explicit -work $target_path/machxo2 $script_path/../vhdl/machxo2/src/MACHXO2_MISC.vhd >>$target_path/machxo2.log
+#exec echo Compiling the MACHXO2 LUTs... >>$target_path/machxo2.log
+exec vcom -explicit -work $target_path/machxo2 $script_path/../vhdl/machxo2/src/MACHXO2_LUT.vhd >>$target_path/machxo2.log
+#exec echo Compiling the gsr_pur_assign primitive - only for EFB VHDL sim... >>$target_path/machxo2.log
+exec vcom -work $target_path/machxo2 $script_path/../vhdl/machxo2/src/gsr_pur_assign.vhd >>$target_path/machxo2.log
+}
+
+machxo3l {
+#
+# Compile the MACHXO3L library
+#
+#exec echo Refreshing the MACHXO3L black-boxes... >$target_path/machxo3l.log
+file delete -force $target_path/machxo3l
+file copy $script_path/../blackbox/machxo3l_black_boxes_vhdlib $target_path/machxo3l
+exec vlog -refresh -work $target_path/machxo3l >>$target_path/machxo3l.log
+#
+#exec echo Compiling the MACHXO3L Component File... >>$target_path/machxo3l.log
+exec vcom -explicit -work $target_path/machxo3l $script_path/../vhdl/machxo3l/src/MACHXO3LCOMP.vhd >>$target_path/machxo3l.log
+#exec echo Compiling the MACHXO3L Sequential Cells... >>$target_path/machxo3l.log
+exec vcom -explicit -work $target_path/machxo3l $script_path/../vhdl/machxo3l/src/MACHXO3L_SEQ.vhd >>$target_path/machxo3l.log
+#exec echo Compiling the MACHXO3L I/Os... >>$target_path/machxo3l.log
+exec vcom -explicit -work $target_path/machxo3l $script_path/../vhdl/machxo3l/src/MACHXO3L_IO.vhd >>$target_path/machxo3l.log
+#exec echo Compiling the MACHXO3L Combinational Cells... >>$target_path/machxo3l.log
+exec vcom -explicit -work $target_path/machxo3l $script_path/../vhdl/machxo3l/src/MACHXO3L_CMB.vhd >>$target_path/machxo3l.log
+#exec echo Compiling the MACHXO3L Counters... >>$target_path/machxo3l.log
+exec vcom -explicit -work $target_path/machxo3l $script_path/../vhdl/machxo3l/src/MACHXO3L_CNT.vhd >>$target_path/machxo3l.log
+#exec echo Compiling the MACHXO3L Memory Elements... >>$target_path/machxo3l.log
+exec vcom -explicit -work $target_path/machxo3l $script_path/../vhdl/machxo3l/src/MACHXO3L_MEM.vhd >>$target_path/machxo3l.log
+#exec echo Compiling the MACHXO3L Miscillaneous cells... >>$target_path/machxo3l.log
+exec vcom -explicit -work $target_path/machxo3l $script_path/../vhdl/machxo3l/src/MACHXO3L_MISC.vhd >>$target_path/machxo3l.log
+#exec echo Compiling the MACHXO3L LUTs... >>$target_path/machxo3l.log
+exec vcom -explicit -work $target_path/machxo3l $script_path/../vhdl/machxo3l/src/MACHXO3L_LUT.vhd >>$target_path/machxo3l.log
+#exec echo Compiling the gsr_pur_assign primitive - only for EFB VHDL sim... >>$target_path/machxo3l.log
+exec vcom -work $target_path/machxo3l $script_path/../vhdl/machxo3l/src/gsr_pur_assign.vhd >>$target_path/machxo3l.log
+}
+
+sc {
+#
+# Compile the SC/M library
+#
+#exec echo Refreshing the SC/M black-boxes... >$target_path/sc.log
+file delete -force $target_path/sc
+file copy $script_path/../blackbox/jtaga_work $target_path/sc
+exec vlog -refresh -work $target_path/sc >>$target_path/sc.log
+#
+#exec echo Compiling the SC/M Component File... >>$target_path/sc.log
+exec vcom -explicit -work $target_path/sc $script_path/../vhdl/sc/src/ORCACOMP.vhd >>$target_path/sc.log
+#exec echo Compiling the SC/M Sequential Cells... >>$target_path/sc.log
+exec vcom -explicit -work $target_path/sc $script_path/../vhdl/sc/src/ORCA_SEQ.vhd >>$target_path/sc.log
+#exec echo Compiling the SC/M I/Os... >>$target_path/sc.log
+exec vcom -explicit -work $target_path/sc $script_path/../vhdl/sc/src/ORCA_IO.vhd >>$target_path/sc.log
+#exec echo Compiling the SC/M Memory Elements... >>$target_path/sc.log
+exec vcom -explicit -work $target_path/sc $script_path/../vhdl/sc/src/ORCA_MEM.vhd >>$target_path/sc.log
+#exec echo Compiling the SC/M Combinational Cells... >>$target_path/sc.log
+exec vcom -explicit -work $target_path/sc $script_path/../vhdl/sc/src/ORCA_CMB.vhd >>$target_path/sc.log
+#exec echo Compiling the SC/M Counters... >>$target_path/sc.log
+exec vcom -explicit -work $target_path/sc $script_path/../vhdl/sc/src/ORCA_CNT.vhd >>$target_path/sc.log
+#exec echo Compiling the SC/M Miscillaneous cells... >>$target_path/sc.log
+exec vcom -explicit -work $target_path/sc $script_path/../vhdl/sc/src/ORCA_MIS.vhd >>$target_path/sc.log
+#exec echo Compiling the SC/M Backanno cells... >>$target_path/sc.log
+exec vcom -explicit -work $target_path/sc $script_path/../vhdl/sc/src/ORCA_SL.vhd >>$target_path/sc.log
+}
+
+scm {
+#
+# Compile the SC/M library
+#
+#exec echo Refreshing the SC/M black-boxes... >$target_path/scm.log
+file delete -force $target_path/scm
+file copy $script_path/../blackbox/jtaga_work $target_path/scm
+exec vlog -refresh -work $target_path/scm >>$target_path/scm.log
+#
+#exec echo Compiling the SC/M Component File... >>$target_path/scm.log
+exec vcom -explicit -work $target_path/scm $script_path/../vhdl/scm/src/ORCACOMP.vhd >>$target_path/scm.log
+#exec echo Compiling the SC/M Sequential Cells... >>$target_path/scm.log
+exec vcom -explicit -work $target_path/scm $script_path/../vhdl/scm/src/ORCA_SEQ.vhd >>$target_path/scm.log
+#exec echo Compiling the SC/M I/Os... >>$target_path/scm.log
+exec vcom -explicit -work $target_path/scm $script_path/../vhdl/scm/src/ORCA_IO.vhd >>$target_path/scm.log
+#exec echo Compiling the SC/M Memory Elements... >>$target_path/scm.log
+exec vcom -explicit -work $target_path/scm $script_path/../vhdl/scm/src/ORCA_MEM.vhd >>$target_path/scm.log
+#exec echo Compiling the SC/M Combinational Cells... >>$target_path/scm.log
+exec vcom -explicit -work $target_path/scm $script_path/../vhdl/scm/src/ORCA_CMB.vhd >>$target_path/scm.log
+#exec echo Compiling the SC/M Counters... >>$target_path/scm.log
+exec vcom -explicit -work $target_path/scm $script_path/../vhdl/scm/src/ORCA_CNT.vhd >>$target_path/scm.log
+#exec echo Compiling the SC/M Miscillaneous cells... >>$target_path/scm.log
+exec vcom -explicit -work $target_path/scm $script_path/../vhdl/scm/src/ORCA_MIS.vhd >>$target_path/scm.log
+#exec echo Compiling the SC/M Backanno cells... >>$target_path/scm.log
+exec vcom -explicit -work $target_path/scm $script_path/../vhdl/scm/src/ORCA_SL.vhd >>$target_path/scm.log
+}
+
+xp {
+#
+# Compile the EC/XP libraries
+#
+#exec echo Refreshing the EC/XP black-boxes... >$target_path/xp.log
+file delete -force $target_path/xp
+file copy $script_path/../blackbox/jtagb_work $target_path/xp
+exec vlog -refresh -work $target_path/xp >>$target_path/xp.log
+#
+#exec echo Compiling the EC/XP Component File... >>$target_path/xp.log
+exec vcom -87 -explicit -work $target_path/xp $script_path/../vhdl/xp/src/ORCACOMP.vhd >>$target_path/xp.log
+#exec echo Compiling the EC/XP Sequential Cells... >>$target_path/xp.log
+exec vcom -87 -explicit -work $target_path/xp $script_path/../vhdl/xp/src/ORCA_SEQ.vhd >>$target_path/xp.log
+#exec echo Compiling the EC/XP I/Os... >>$target_path/xp.log
+exec vcom -87 -explicit -work $target_path/xp $script_path/../vhdl/xp/src/ORCA_IO.vhd >>$target_path/xp.log
+#exec echo Compiling the EC/XP Combinatorial... >>$target_path/xp.log
+exec vcom -87 -explicit -work $target_path/xp $script_path/../vhdl/xp/src/ORCA_CMB.vhd >>$target_path/xp.log
+#exec echo Compiling the EC/XP Counters... >>$target_path/xp.log
+exec vcom -87 -explicit -work $target_path/xp $script_path/../vhdl/xp/src/ORCA_CNT.vhd >>$target_path/xp.log
+#exec echo Compiling the EC/XP Memories... >>$target_path/xp.log
+exec vcom -87 -explicit -work $target_path/xp $script_path/../vhdl/xp/src/ORCA_MEM.vhd >>$target_path/xp.log
+#exec echo Compiling the EC/XP Miscillaneous cells... >>$target_path/xp.log
+exec vcom -87 -explicit -work $target_path/xp $script_path/../vhdl/xp/src/ORCA_MISC.vhd >>$target_path/xp.log
+#exec echo Compiling the EC/XP LUTs... >>$target_path/xp.log
+exec vcom -87 -explicit -work $target_path/xp $script_path/../vhdl/xp/src/ORCA_LUT.vhd >>$target_path/xp.log
+}
+
+xp2 {
+#
+# Compile the XP2 library
+#
+#exec echo Refreshing the XP2 black-boxes... >$target_path/xp2.log
+file delete -force $target_path/xp2
+file copy $script_path/../blackbox/jtage_sspia_work $target_path/xp2
+exec vlog -refresh -work $target_path/xp2 >>$target_path/xp2.log
+#
+#exec echo Compiling the XP2 Component File... >>$target_path/xp2.log
+exec vcom -explicit -work $target_path/xp2 $script_path/../vhdl/xp2/src/XP2COMP.vhd >>$target_path/xp2.log
+#exec echo Compiling the XP2 Sequential Cells... >>$target_path/xp2.log
+exec vcom -explicit -work $target_path/xp2 $script_path/../vhdl/xp2/src/XP2_SEQ.vhd >>$target_path/xp2.log
+#exec echo Compiling the XP2 I/Os... >>$target_path/xp2.log
+exec vcom -explicit -work $target_path/xp2 $script_path/../vhdl/xp2/src/XP2_IO.vhd >>$target_path/xp2.log
+#exec echo Compiling the XP2 Combinational Cells... >>$target_path/xp2.log
+exec vcom -explicit -work $target_path/xp2 $script_path/../vhdl/xp2/src/XP2_CMB.vhd >>$target_path/xp2.log
+#exec echo Compiling the XP2 Counters... >>$target_path/xp2.log
+exec vcom -explicit -work $target_path/xp2 $script_path/../vhdl/xp2/src/XP2_CNT.vhd >>$target_path/xp2.log
+#exec echo Compiling the XP2 Memory Elements... >>$target_path/xp2.log
+exec vcom -explicit -work $target_path/xp2 $script_path/../vhdl/xp2/src/XP2_MEM.vhd >>$target_path/xp2.log
+#exec echo Compiling the XP2 Miscillaneous cells... >>$target_path/xp2.log
+exec vcom -explicit -work $target_path/xp2 $script_path/../vhdl/xp2/src/XP2_MISC.vhd >>$target_path/xp2.log
+#exec echo Compiling the XP2 LUTs... >>$target_path/xp2.log
+exec vcom -explicit -work $target_path/xp2 $script_path/../vhdl/xp2/src/XP2_LUT.vhd >>$target_path/xp2.log
+#exec echo Compiling the XP2 MULTs cells... >>$target_path/xp2.log
+exec vcom -explicit -work $target_path/xp2 $script_path/../vhdl/xp2/src/XP2_MULT.vhd >>$target_path/xp2.log
+#exec echo Compiling the XP2 Backanno cells... >>$target_path/xp2.log
+exec vcom -explicit -work $target_path/xp2 $script_path/../vhdl/xp2/src/XP2_SL.vhd >>$target_path/xp2.log
+}
+
+machxo3d {
+#
+# Compile the MACHXO3D library
+#
+#exec echo Refreshing the MACHXO3D black-boxes... >$target_path/machxo3d.log
+file delete -force $target_path/machxo3d
+file copy $script_path/../blackbox/machxo3d_black_boxes_vhdlib $target_path/machxo3d
+exec vlog -refresh -work $target_path/machxo3d >>$target_path/machxo3d.log
+#
+#exec echo Compiling the MACHXO3D Component File... >>$target_path/machxo3d.log
+exec vcom -explicit -work $target_path/machxo3d $script_path/../vhdl/machxo3d/src/MACHXO3DCOMP.vhd >>$target_path/machxo3d.log
+#exec echo Compiling the MACHXO3D Sequential Cells... >>$target_path/machxo3d.log
+exec vcom -explicit -work $target_path/machxo3d $script_path/../vhdl/machxo3d/src/MACHXO3D_SEQ.vhd >>$target_path/machxo3d.log
+#exec echo Compiling the MACHXO3D I/Os... >>$target_path/machxo3d.log
+exec vcom -explicit -work $target_path/machxo3d $script_path/../vhdl/machxo3d/src/MACHXO3D_IO.vhd >>$target_path/machxo3d.log
+#exec echo Compiling the MACHXO3D Combinational Cells... >>$target_path/machxo3d.log
+exec vcom -explicit -work $target_path/machxo3d $script_path/../vhdl/machxo3d/src/MACHXO3D_CMB.vhd >>$target_path/machxo3d.log
+#exec echo Compiling the MACHXO3D Counters... >>$target_path/machxo3d.log
+exec vcom -explicit -work $target_path/machxo3d $script_path/../vhdl/machxo3d/src/MACHXO3D_CNT.vhd >>$target_path/machxo3d.log
+#exec echo Compiling the MACHXO3D Memory Elements... >>$target_path/machxo3d.log
+exec vcom -explicit -work $target_path/machxo3d $script_path/../vhdl/machxo3d/src/MACHXO3D_MEM.vhd >>$target_path/machxo3d.log
+#exec echo Compiling the MACHXO3D Miscillaneous cells... >>$target_path/machxo3d.log
+exec vcom -explicit -work $target_path/machxo3d $script_path/../vhdl/machxo3d/src/MACHXO3D_MISC.vhd >>$target_path/machxo3d.log
+#exec echo Compiling the MACHXO3D LUTs... >>$target_path/machxo3d.log
+exec vcom -explicit -work $target_path/machxo3d $script_path/../vhdl/machxo3d/src/MACHXO3D_LUT.vhd >>$target_path/machxo3d.log
+#exec echo Compiling the gsr_pur_assign primitive - only for EFB VHDL sim... >>$target_path/machxo3d.log
+exec vcom -work $target_path/machxo3d $script_path/../vhdl/machxo3d/src/gsr_pur_assign.vhd >>$target_path/machxo3d.log
+}
+
+lifmd {
+#
+# Compile the LIFMD library
+#
+#exec echo Refreshing the LIFMD black-boxes... >$target_path/lifmd.log
+file delete -force $target_path/lifmd
+file copy $script_path/../blackbox/machxo3d_black_boxes_vhdlib $target_path/lifmd
+exec vlog -refresh -work $target_path/lifmd >>$target_path/lifmd.log
+#
+#exec echo Compiling the LIFMD Component File... >>$target_path/lifmd.log
+exec vcom -explicit -work $target_path/lifmd $script_path/../vhdl/lifmd/src/LIFMDCOMP.vhd >>$target_path/lifmd.log
+#exec echo Compiling the LIFMD Sequential Cells... >>$target_path/lifmd.log
+exec vcom -explicit -work $target_path/lifmd $script_path/../vhdl/lifmd/src/LIFMD_SEQ.vhd >>$target_path/lifmd.log
+#exec echo Compiling the LIFMD I/Os... >>$target_path/lifmd.log
+exec vcom -explicit -work $target_path/lifmd $script_path/../vhdl/lifmd/src/LIFMD_IO.vhd >>$target_path/lifmd.log
+#exec echo Compiling the LIFMD Combinational Cells... >>$target_path/lifmd.log
+exec vcom -explicit -work $target_path/lifmd $script_path/../vhdl/lifmd/src/LIFMD_CMB.vhd >>$target_path/lifmd.log
+#exec echo Compiling the LIFMD Counters... >>$target_path/lifmd.log
+exec vcom -explicit -work $target_path/lifmd $script_path/../vhdl/lifmd/src/LIFMD_SL.vhd >>$target_path/lifmd.log
+#exec echo Compiling the LIFMD Memory Elements... >>$target_path/lifmd.log
+exec vcom -explicit -work $target_path/lifmd $script_path/../vhdl/lifmd/src/LIFMD_MEM.vhd >>$target_path/lifmd.log
+#exec echo Compiling the LIFMD Miscillaneous cells... >>$target_path/lifmd.log
+exec vcom -explicit -work $target_path/lifmd $script_path/../vhdl/lifmd/src/LIFMD_MISC.vhd >>$target_path/lifmd.log
+#exec echo Compiling the LIFMD LUTs... >>$target_path/lifmd.log
+exec vcom -explicit -work $target_path/lifmd $script_path/../vhdl/lifmd/src/LIFMD_LUT.vhd >>$target_path/lifmd.log
+#exec echo Compiling the gsr_pur_assign primitive - only for EFB VHDL sim... >>$target_path/lifmd.log
+exec vcom -work $target_path/lifmd $script_path/../vhdl/lifmd/src/gsr_pur_assign.vhd >>$target_path/lifmd.log
+exec vlog -work $target_path/lifmd +define+mixed_hdl $script_path/../vhdl/lifmd/src/*.v >>$target_path/lifmd.log
+}
+
+lifmdf {
+#
+# Compile the LIFMDF library
+#
+#exec echo Refreshing the LIFMDF black-boxes... >$target_path/lifmdf.log
+file delete -force $target_path/lifmdf
+file copy $script_path/../blackbox/machxo3d_black_boxes_vhdlib $target_path/lifmdf
+exec vlog -refresh -work $target_path/lifmdf >>$target_path/lifmdf.log
+#
+#exec echo Compiling the LIFMDF Component File... >>$target_path/lifmdf.log
+exec vcom -explicit -work $target_path/lifmdf $script_path/../vhdl/lifmdf/src/LIFMDFCOMP.vhd >>$target_path/lifmdf.log
+#exec echo Compiling the LIFMDF Sequential Cells... >>$target_path/lifmdf.log
+exec vcom -explicit -work $target_path/lifmdf $script_path/../vhdl/lifmdf/src/LIFMDF_SEQ.vhd >>$target_path/lifmdf.log
+#exec echo Compiling the LIFMDF I/Os... >>$target_path/lifmdf.log
+exec vcom -explicit -work $target_path/lifmdf $script_path/../vhdl/lifmdf/src/LIFMDF_IO.vhd >>$target_path/lifmdf.log
+#exec echo Compiling the LIFMDF Combinational Cells... >>$target_path/lifmdf.log
+exec vcom -explicit -work $target_path/lifmdf $script_path/../vhdl/lifmdf/src/LIFMDF_CMB.vhd >>$target_path/lifmdf.log
+#exec echo Compiling the LIFMDF Counters... >>$target_path/lifmdf.log
+exec vcom -explicit -work $target_path/lifmdf $script_path/../vhdl/lifmdf/src/LIFMDF_SL.vhd >>$target_path/lifmdf.log
+#exec echo Compiling the LIFMDF Memory Elements... >>$target_path/lifmdf.log
+exec vcom -explicit -work $target_path/lifmdf $script_path/../vhdl/lifmdf/src/LIFMDF_MEM.vhd >>$target_path/lifmdf.log
+#exec echo Compiling the LIFMDF Miscillaneous cells... >>$target_path/lifmdf.log
+exec vcom -explicit -work $target_path/lifmdf $script_path/../vhdl/lifmdf/src/LIFMDF_MISC.vhd >>$target_path/lifmdf.log
+#exec echo Compiling the LIFMDF LUTs... >>$target_path/lifmdf.log
+exec vcom -explicit -work $target_path/lifmdf $script_path/../vhdl/lifmdf/src/LIFMDF_LUT.vhd >>$target_path/lifmdf.log
+#exec echo Compiling the gsr_pur_assign primitive - only for EFB VHDL sim... >>$target_path/lifmdf.log
+exec vcom -work $target_path/lifmdf $script_path/../vhdl/lifmdf/src/gsr_pur_assign.vhd >>$target_path/lifmdf.log
+exec vlog -work $target_path/lifmdf +define+mixed_hdl $script_path/../vhdl/lifmdf/src/*.v >>$target_path/lifmdf.log
+}
+
+lfmnx {
+#
+# Compile the LFMNX library
+#
+#exec echo Refreshing the LFMNX black-boxes... >$target_path/lfmnx.log
+file delete -force $target_path/lfmnx
+file copy $script_path/../blackbox/machxo3d_black_boxes_vhdlib $target_path/lfmnx
+exec vlog -refresh -work $target_path/lfmnx >>$target_path/lfmnx.log
+#
+#exec echo Compiling the LFMNX Component File... >>$target_path/lfmnx.log
+exec vcom -explicit -work $target_path/lfmnx $script_path/../vhdl/lfmnx/src/LFMNXCOMP.vhd >>$target_path/lfmnx.log
+#exec echo Compiling the LFMNX Sequential Cells... >>$target_path/lfmnx.log
+exec vcom -explicit -work $target_path/lfmnx $script_path/../vhdl/lfmnx/src/LFMNX_SEQ.vhd >>$target_path/lfmnx.log
+#exec echo Compiling the LFMNX I/Os... >>$target_path/lfmnx.log
+exec vcom -explicit -work $target_path/lfmnx $script_path/../vhdl/lfmnx/src/LFMNX_IO.vhd >>$target_path/lfmnx.log
+#exec echo Compiling the LFMNX Combinational Cells... >>$target_path/lfmnx.log
+exec vcom -explicit -work $target_path/lfmnx $script_path/../vhdl/lfmnx/src/LFMNX_CMB.vhd >>$target_path/lfmnx.log
+#exec echo Compiling the LFMNX Counters... >>$target_path/lfmnx.log
+exec vcom -explicit -work $target_path/lfmnx $script_path/../vhdl/lfmnx/src/LFMNX_CNT.vhd >>$target_path/lfmnx.log
+#exec echo Compiling the LFMNX Memory Elements... >>$target_path/lfmnx.log
+exec vcom -explicit -work $target_path/lfmnx $script_path/../vhdl/lfmnx/src/LFMNX_MEM.vhd >>$target_path/lfmnx.log
+#exec echo Compiling the LFMNX Miscillaneous cells... >>$target_path/lfmnx.log
+exec vcom -explicit -work $target_path/lfmnx $script_path/../vhdl/lfmnx/src/LFMNX_MISC.vhd >>$target_path/lfmnx.log
+#exec echo Compiling the LFMNX LUTs... >>$target_path/lfmnx.log
+exec vcom -explicit -work $target_path/lfmnx $script_path/../vhdl/lfmnx/src/LFMNX_LUT.vhd >>$target_path/lfmnx.log
+#exec echo Compiling the gsr_pur_assign primitive - only for EFB VHDL sim... >>$target_path/lfmnx.log
+exec vcom -work $target_path/lfmnx $script_path/../vhdl/lfmnx/src/gsr_pur_assign.vhd >>$target_path/lfmnx.log
+}
+
+}
+}

@@ -1,0 +1,1069 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!--
+	Spinti 04/30/03
+	XPGA/XPLD sub directory
+		.Contains new release device database file and all the algorithm files for ispXPLD technology devices.
+	 ispVM_006a.xdf  support :
+		. ispXPLD family.
+
+	Ong 10/20/03
+		. Added 256fpBGA and 484fpBGA socket adapter listing to LC5768MX Family.
+			. 256fpBGA - PA-F256/LC5512MX			
+			. 484fpBGA - PA-F484/LC5512MX
+	Spinti 08/14/03
+		. Added LC5768MX devices.
+	Spinti 07/25/03
+		. Changed PWP from 10 to 13 in V13.1.
+	Ong 06/05/03
+	LC5256MX Family
+		. Masked out 208TQFP package listing.
+		. Added 256fpBGA socket adapter listing, PA-F256/LC5512MX.
+	Spinti 07/25/03
+		. Changed PWP from 10 to 13 in V13.1.
+	Spinti 08/14/03
+		. Added LC5768MX devices.
+	Spinti 03/02/04
+		. Added <FamilyAliasName>ispXPLD5000MX</FamilyAliasName>.
+	Nguyen 03/18/04
+		. Added FPGALoaderSupport field for ispXPLD 5000MX family
+	Spinti 04/21/04
+		. Added ALL packages.
+	Spinti 07/23/04
+		. Added <DebugMode>YES</DebugMode>
+	Spinti 08/25/04
+		. Corrected BSCAN length for the LC5768Mx devices. Changed it from 294 to 646.
+	Nguyen 11/18/04 Added "Voltage_Control" field
+      Ong   .12/10/04
+            . Updated Vcc Listing for LCXXXMV(B) devices from "3.3V-2.5V" to "3.3V(2.5V)".
+		. Commented out pin listing.
+	Ong   .03/16/06
+		. Commented out the SRAM Verify Only and SRAM Verify USERCODE operations.
+	Ong	. 10/04/06
+		. Added 672 fpBGA socket adapter listing for LC51024MX family, PN-F672/L51024MX.
+	10/17/06 Nguyen Removed FPGA Loader support			
+	
+-->
+<ispXDF version="13.1">
+    <Comment>XPGA/XPLD technology Devices List</Comment>
+    <Family name="ispXPLD 5000MX">
+        <FamilyAliasName>ispXPLD5000MX</FamilyAliasName>
+        <Device name="LC5256MV(B)">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5256MV(B) </CodeName>
+            <FullName> LC5256MV(B) </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x01855043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 656 </ColWidth>
+            <RowWidth> 326 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 213856 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>294</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;324&quot;
+                &quot;325&quot;
+                &quot;326&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC5256MV/B </PON>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V(2.5V)</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC5256MV">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5256MV </CodeName>
+            <FullName> LC5256MV </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x01855043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 656 </ColWidth>
+            <RowWidth> 326 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 213856 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>294</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;324&quot;
+                &quot;325&quot;
+                &quot;326&quot;
+            </SysIO>
+<!--
+            <Package>
+                <Type> 208-pin TQFP  </Type>
+                <PON> LC5256MV-XXT208  </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+-->
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC5256MV-XXF256  </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC5256MB">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5256MB </CodeName>
+            <FullName> LC5256MB </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x01855043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 656 </ColWidth>
+            <RowWidth> 326 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 213856 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>294</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;324&quot;
+                &quot;325&quot;
+                &quot;326&quot;
+            </SysIO>
+<!--
+            <Package>
+                <Type> 208-pin TQFP  </Type>
+                <PON> LC5256MB-XXT208  </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+-->
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC5256MB-XXF256  </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC5256MC">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5256MC </CodeName>
+            <FullName> LC5256MC </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x01854043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+             <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 656 </ColWidth>
+            <RowWidth> 326 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 213856 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>294</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;324&quot;
+                &quot;325&quot;
+                &quot;326&quot;
+            </SysIO>
+<!--
+            <Package>
+                <Type> 208-pin TQFP  </Type>
+                <PON> LC5256MC-XXT208  </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+-->
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC5256MC-XXF256  </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC5512MV(B)">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5512MV(B) </CodeName>
+            <FullName> LC5512MV(B) </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x0185D043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8            </IRLength>
+            <ColWidth> 1312            </ColWidth>
+            <RowWidth> 348            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 456576    </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>518</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;346&quot;
+                &quot;347&quot;
+                &quot;348&quot;
+            </SysIO>
+            <Package>
+                <Type> All          </Type>
+                <PON> LC5512MV/B </PON>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP  (3.3V) </Type>
+                <PON> LC5512MV-XXQ208    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-Q208/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP  (2.5V) </Type>
+                <PON> LC5512MB-XXQ208    </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-Q208/LC5512MX"/>
+            </Package>            
+            <Package>
+                <Type> 256-ball fpBGA  (3.3V) </Type>
+                <PON> LC5512MV-XXF256    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA  (2.5V) </Type>
+                <PON> LC5512MB-XXF256    </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>            
+            <Package>
+                <Type> 484-ball fpBGA  (3.3V) </Type>
+                <PON> LC5512MV-XXF484    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA  (2.5V) </Type>
+                <PON> LC5512MB-XXF484    </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>     
+            <Voltage_Control>
+            	<VCCCore>3.3V(2.5V)</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>   
+        </Device>
+        <Device name="LC5512MV">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5512MV </CodeName>
+            <FullName> LC5512MV </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x0185D043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8            </IRLength>
+            <ColWidth> 1312            </ColWidth>
+            <RowWidth> 348            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 456576    </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>518</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;346&quot;
+                &quot;347&quot;
+                &quot;348&quot;
+            </SysIO>
+            <Package>
+                <Type> All          </Type>
+                <PON> LC5512MV </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+	    <Package>
+                <Type> 208-pin PQFP          </Type>
+                <PON> LC5512MV-XXQ208    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-Q208/LC5512MX"/>
+            </Package>
+	    <Package>
+                <Type> 256-ball fpBGA          </Type>
+                <PON> LC5512MV-XXF256    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA          </Type>
+                <PON> LC5512MV-XXF484    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+           	 <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC5512MB">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5512MB </CodeName>
+            <FullName> LC5512MB </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x0185D043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8            </IRLength>
+            <ColWidth> 1312            </ColWidth>
+            <RowWidth> 348            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 456576    </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>518</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;346&quot;
+                &quot;347&quot;
+                &quot;348&quot;
+            </SysIO>
+            <Package>
+                <Type> All          </Type>
+                <PON> LC5512MB </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP          </Type>
+                <PON> LC5512MB-XXQ208    </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-Q208/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA          </Type>
+                <PON> LC5512MB-XXF256    </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA          </Type>
+                <PON> LC5512MB-XXF484    </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC5512MC">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5512MC </CodeName>
+            <FullName> LC5512MC </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x0185C043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8            </IRLength>
+            <ColWidth> 1312            </ColWidth>
+            <RowWidth> 348            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 456576    </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>518</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;346&quot;
+                &quot;347&quot;
+                &quot;348&quot;
+            </SysIO>
+            <Package>
+                <Type> All          </Type>
+                <PON> LC5512MC </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP          </Type>
+                <PON> LC5512MC-XXQ208    </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-Q208/LC5512MX "/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA          </Type>
+                <PON> LC5512MC-XXF256    </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA          </Type>
+                <PON> LC5512MC-XXF484    </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC5768MV(B)">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5768MV(B) </CodeName>
+            <FullName> LC5768MV(B) </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x01861043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1968 </ColWidth>
+            <RowWidth>  368 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 724224 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>646</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;366&quot;
+                &quot;367&quot;
+                &quot;368&quot;
+            </SysIO>
+            <Package>
+                <Type> All  </Type>
+                <PON> LC5768MV/B  </PON>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V(2.5V)</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC5768MV">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5768MV </CodeName>
+            <FullName> LC5768MV </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x01861043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1968 </ColWidth>
+            <RowWidth>  368 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 724224 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>646</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;366&quot;
+                &quot;367&quot;
+                &quot;368&quot;
+            </SysIO>
+            <Package>
+                <Type> All          </Type>
+                <PON> LC5768MV </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC5768MV-XXF256  </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA  </Type>
+                <PON> LC5768MV-XXF484  </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC5768MB">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5768MB </CodeName>
+            <FullName> LC5768MB </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x01861043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1968 </ColWidth>
+            <RowWidth>  368 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 724224 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>646</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;366&quot;
+                &quot;367&quot;
+                &quot;368&quot;
+            </SysIO>
+            <Package>
+                <Type> All          </Type>
+                <PON> LC5768MB </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC5768MB-XXF256  </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA  </Type>
+                <PON> LC5768MB-XXF484  </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC5768MC">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC5768MC </CodeName>
+            <FullName> LC5768MC </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x01860043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+             <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1968 </ColWidth>
+            <RowWidth>  368 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 724224 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>646</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;366&quot;
+                &quot;367&quot;
+                &quot;368&quot;
+            </SysIO>
+            <Package>
+                <Type> All          </Type>
+                <PON> LC5768MC </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC5768MC-XXF256  </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA  </Type>
+                <PON> LC5768MC-XXF484  </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC51024MV(B)">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC51024MV(B) </CodeName>
+            <FullName> LC51024MV(B) </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x01865043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2624 </ColWidth>
+            <RowWidth>  388 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1018112 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>774</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;386&quot;
+                &quot;387&quot;
+                &quot;388&quot;
+            </SysIO>
+            <Package>
+                <Type> All  </Type>
+                <PON> LC51024MV/B </PON>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V(2.5V)</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC51024MV">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC51024MV </CodeName>
+            <FullName> LC51024MV </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x01865043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8            </IRLength>
+            <ColWidth> 2624            </ColWidth>
+            <RowWidth> 388            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1018112    </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>774</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;386&quot;
+                &quot;387&quot;
+                &quot;388&quot;
+            </SysIO>
+            <Package>
+                <Type> All          </Type>
+                <PON> LC51024MV </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA  </Type>
+                <PON> LC51024MV-XXF484  </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA  </Type>
+                <PON> LC51024MV-XXF672  </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672/LC51024MX"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC51024MB">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC51024MB </CodeName>
+            <FullName> LC51024MB </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x01865043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8            </IRLength>
+            <ColWidth> 2624            </ColWidth>
+            <RowWidth> 388            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1018112    </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>774</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;386&quot;
+                &quot;387&quot;
+                &quot;388&quot;
+            </SysIO>
+            <Package>
+                <Type> All          </Type>
+                <PON> LC51024MB </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA  </Type>
+                <PON> LC51024MB-XXF484  </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>        
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LC51024MB-XXF672  </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672/LC51024MX"/>
+            </Package>        
+            <Voltage_Control>
+            	<VCCCore>2.5V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LC51024MC">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC51024MC </CodeName>
+            <FullName> LC51024MC </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XPLD.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XPLD.svp"
+                         value="0x1F"/>
+            <JtagID>0x01864043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8            </IRLength>
+            <ColWidth> 2624            </ColWidth>
+            <RowWidth> 388            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1018112    </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>774</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;386&quot;
+                &quot;387&quot;
+                &quot;388&quot;
+            </SysIO>
+            <Package>
+                <Type> All          </Type>
+                <PON> LC51024MC </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA  </Type>
+                <PON> LC51024MC-XXF484  </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LC5512MX"/>
+            </Package>        
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LC51024MC-XXF672  </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672/LC51024MX"/>
+            </Package>      
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!-- <PinList>TCK,TMS,TDI,TDO,DONE,PROGRAMB</PinList> -->
+            </Voltage_Control>  
+        </Device>
+        <Operation>
+       
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+            &quot;Read DONE bit&quot;
+            &quot;Erase DONE bit&quot;
+            &quot;Program DONE bit&quot;
+            &quot;Refresh&quot;
+        
+            &quot;XEE Erase,Program,Verify&quot;
+            &quot;XEE Erase,Program,Verify,Refresh&quot;
+            &quot;XEE Erase,Program,Verify,Secure&quot;
+            &quot;XEE Verify ID&quot;
+            &quot;XEE Display ID&quot;
+            &quot;XEE Verify Only&quot;
+            &quot;XEE Erase Only&quot;
+            &quot;XEE Bypass&quot;
+            &quot;XEE Calculate Checksum&quot;
+            &quot;XEE Verify USERCODE&quot;
+            &quot;XEE Display USERCODE&quot;
+            &quot;XEE Read and Save&quot;
+            &quot;XEE Read DONE bit&quot;
+            &quot;XEE Erase DONE bit&quot;
+            &quot;XEE Program DONE bit&quot;
+            
+            &quot;SRAM Program,Verify&quot;
+            &quot;SRAM Program Only&quot;
+            &quot;SRAM Verify ID&quot;
+            &quot;SRAM Display ID&quot;
+<!--        &quot;SRAM Verify Only&quot; -->
+            &quot;SRAM Erase Only&quot;
+            &quot;SRAM Bypass&quot;
+            &quot;SRAM Calculate Checksum&quot;
+<!--        &quot;SRAM Verify USERCODE&quot; -->
+            &quot;SRAM Display USERCODE&quot;
+            &quot;SRAM Read and Save&quot;
+            &quot;SRAM Read DONE bit&quot;
+            &quot;SRAM Erase DONE bit&quot;
+            &quot;SRAM Program DONE bit&quot;
+<!--
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Verify Only&quot;
+            &quot;XSRAM Bypass&quot;
+            &quot;XSRAM Calculate Checksum&quot;
+            &quot;XSRAM Verify USERCODE&quot;
+            &quot;XSRAM Display USERCODE&quot;
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Read DONE bit&quot;
+       
+            &quot;PCM Erase,Program,Verify&quot;
+            &quot;PCM Erase,Program,Verify,Secure&quot;
+            &quot;PCM Verify Only&quot;
+            &quot;PCM Bypass&quot;
+            &quot;PCM Calculate Checksum&quot;
+            &quot;PCM Verify USERCODE&quot;
+-->
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed"/>
+	  <XFPFile>SCBitGen.xfp</XFPFile>
+	  <Compliant1532>YES</Compliant1532>
+	  <DebugMode>YES</DebugMode>
+<!--	  <FPGALoaderSupport>YES</FPGALoaderSupport>-->
+	  <CFGPinCount>1</CFGPinCount>
+	  <BitstreamModelTemplate>SuperCool Template</BitstreamModelTemplate>
+	  <LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+</ispXDF>

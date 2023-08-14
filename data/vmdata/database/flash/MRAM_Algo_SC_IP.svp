@@ -1,0 +1,322 @@
+DATA:
+    PATTERN  (--, --, FILE(--, --));      
+    WREN   ( 1, 1, b01100000);
+    WRDI   ( 1, 1, b00100000);
+    RDSR   ( 1, 1, b10100000);
+    READ   ( 1, 1, b11000000);
+    WRITE   ( 1, 1, b01000000);
+    DEVICE_ID  (1,1,FILE(ID, --)); 
+DATA_END;
+
+PROTOCOL:	PCM;
+
+SIGNAL_DECL: 
+	inout L_f_cs;
+	buffer  clock;
+SIGNAL_DECL_END;
+             
+BUS_DECL: 
+    /CE = L_f_cs;
+BUS_DECL_END;
+
+FUNCTION INITIAL;
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	clock   HIGH;
+	SET_ROW (PATTERN, 0);
+	Addr = START_ADDRESS;
+	SIR	8	TDI(FF) ;
+	RUNTEST	IDLE	32 TCK	2.00E-002 SEC;
+	# Shift SPI_PROGRAM instruction 
+	SIR	8	TDI(SPI_PROGRAM) ;
+	RUNTEST	IDLE	32 TCK	2.00E-002 SEC;
+END_FUNCTION;
+
+FUNCTION FINALIZE;
+	# Shift BYPASS instruction (0xFF) 
+	SIR	8	TDI(FF) ;
+	RUNTEST	IDLE	32 TCK	2.00E-002 SEC;
+END_FUNCTION;
+
+FUNCTION ENABLE;
+	SDR 8 TDI(60+TDR);
+END_FUNCTION;
+
+FUNCTION PROGRAM;
+	Addr = START_ADDRESS;
+	INT32 BuffAddr = 0;
+	RESET_BURST;
+	SDR 32 TDI(PATTERN[-1]+Addr+40+TDR);
+END_FUNCTION;
+
+FUNCTION DISABLE;
+	SDR 8 TDI(20+TDR);
+END_FUNCTION;
+
+FUNCTION VERIFY;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	SDR 40  TDI(HDR+00+Addr+C0+TDR) TDO(PATTERN+HDR+FFFFFFFFFF) MASK(PATTERN+HDR+0000000000);
+END_FUNCTION;
+
+FUNCTION BLANK_CHECK;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	SDR 40  TDI(HDR+00+Addr+C0+TDR) TDO(BLANK_PATTERN+HDR+FFFFFFFFFF) ;
+END_FUNCTION;
+
+FUNCTION READBACK;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	SDR 40  TDI(HDR+00+Addr+C0+TDR) TDO(SAVE_PATTERN+HDR+FFFFFFFFFF) ;
+END_FUNCTION;
+
+FUNCTION UPLOAD;
+	INT32 Idx1 = 0;
+	SIR	8	TDI (23) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+	SIR	8	TDI (FF) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+	SIR	8	TDI (23) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+	SIR	8	TDI (FF) ;
+	RUNTEST	IDLE	5 TCK	2.00E-002 SEC;
+END_FUNCTION;
+
+OPERATION Verify ID;
+  	INT32 Addr = 0;
+    Call INITIAL;
+END_OPERATION;
+
+OPERATION Program,Verify;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		    
+	$ Enabling...
+	Call ENABLE;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+       
+END_OPERATION;
+
+OPERATION Program,Verify,Refresh;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		    
+	$ Enabling...
+	Call ENABLE;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+	
+	$ Uploading...
+	Call UPLOAD; 
+
+       
+END_OPERATION;
+OPERATION Program;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+    $ Enabling...
+	Call ENABLE;
+    	
+    $ Programming...
+	Call PROGRAM;
+
+	# Disabling...
+	Call DISABLE;
+	
+	Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Program,Refresh;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+    $ Enabling...
+	Call ENABLE;
+    	    
+    $ Programming...
+	Call PROGRAM;
+
+	# Disabling...
+	Call DISABLE;
+	
+	Call FINALIZE;
+	
+	$ Uploading...
+	Call UPLOAD; 
+    
+END_OPERATION;
+
+OPERATION SPI MRAM Program,Verify;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ Enabling...
+	Call ENABLE;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+       
+END_OPERATION;
+
+OPERATION SPI MRAM Program,Verify,Refresh;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+		
+    $ Enabling...
+	Call ENABLE;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+	
+	$ Uploading...
+	Call UPLOAD; 
+
+       
+END_OPERATION;
+OPERATION SPI MRAM Program;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Enabling...
+	Call ENABLE;
+    	
+    $ Programming...
+	Call PROGRAM;
+
+	# Disabling...
+	Call DISABLE;
+	
+	Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION SPI MRAM Program,Refresh;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Enabling...
+	Call ENABLE;
+    	
+    $ Programming...
+	Call PROGRAM;
+
+	# Disabling...
+	Call DISABLE;
+	
+	Call FINALIZE;
+	
+	$ Uploading...
+	Call UPLOAD; 
+    
+END_OPERATION;
+OPERATION Verify Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Read and Save;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ Reading Back...
+	Call READBACK;
+	
+	Call FINALIZE;
+	
+END_OPERATION;
+
+OPERATION Erase Only;
+	INT32 Addr = 0;    
+END_OPERATION;
+OPERATION Erase All;
+	INT32 Addr = 0;    
+END_OPERATION;
+
+OPERATION Erase Sector(s) Only;
+	INT32 Addr = 0;    
+END_OPERATION;
+OPERATION Blank Check;
+	INT32 Addr = 0;
+    
+    $ Initializing...
+	Call INITIAL;	
+	
+	$ Blank Checking...
+	Call BLANK_CHECK;
+    
+    Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Disabled;
+    INT32 Idx1 = 0;
+    $ Resetting...
+    SIR	8	TDI (18) ;
+	RUNTEST	IDLE	32 TCK	2.00E-002 SEC;
+	$ FPGA Loader Disabled.Please Reset the target FPGA device...
+END_OPERATION;
+
+OPERATION Uploaded;
+    INT32 Idx1 = 0;
+    $ Uploading...
+    Call UPLOAD;
+END_OPERATION;
+
+OPERATION Bypass;
+	INT32 Addr = 0;
+END_OPERATION;            
+            

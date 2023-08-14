@@ -1,0 +1,24 @@
+var pairs =
+{
+"clki_div":{"hdl":1,"value":1}
+,"hdl":{"attribute":1,"adding":1}
+,"input":{"clock":1}
+,"clock":{"divider":1}
+,"divider":{"setting":1}
+,"setting":{"attached":1}
+,"attached":{"pll":1,"dll":1}
+,"pll":{"element":1}
+,"element":{"ehxpllb":1,"cidlla":1}
+,"ehxpllb":{"latticesc":1}
+,"latticesc":{"latticeecp2":1}
+,"latticeecp2":{"devices":1}
+,"devices":{"attached":1}
+,"dll":{"element":1}
+,"device":{"support":1}
+,"generic":{"examples":1}
+,"examples":{"fpga":1}
+,"fpga":{"attributes":1}
+,"attributes":{"hdl":1}
+,"adding":{"fpga":1}
+}
+;Search.control.loadWordPairs(pairs);

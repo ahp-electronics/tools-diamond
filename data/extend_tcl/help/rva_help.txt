@@ -1,0 +1,117 @@
+[rva]
+Reveal Analyzer extended Tcl commands
+For more information on a specific command, type help command-name:
+rva_trace        Reveal Analyzer trace commands
+rva_core         Reveal Analyzer core commands
+rva_tu           Reveal Analyzer tu commands
+rva_te           Reveal Analyzer te commands
+rva_tokenmgr     Reveal Analyzer tokenmgr commands
+rva_trigoptn     Reveal Analyzer trigger options
+rva_project      Reveal Analyzer project commands
+rva_pcs          Reveal Analyzer PCS/SERDES commands
+
+[rva_trace]
+rva_trace             Reveal Analyzer trace command
+     get              Lists all trace signals in a core
+
+[rva_core]
+rva_core              Reveal Analyzer core command
+     set              No arguments return list of core.
+       -name (name)   Select core. Needed for other actions
+       -run (on/off)  Turns run option on/off for core
+
+[rva_tu]
+rva_tu                                  Reveal Analyzer tu commands
+     rename (name) (new name)           Renames TU
+     set                                No arguments, return list of TU.
+       -name (name)                     Select TU. If no options, return options
+                                        and value for the selected TU.
+       -operator (comparison operator)  Sets TU operator ==,!=,<,<=,>,>=,rising edge,falling edge
+       -value (value)                   Sets TU value
+       -radix (bin/oct/dec/hex/token)   Sets TU radix
+
+[rva_te]
+rva_te                                  Reveal Analyzer te commands
+     rename (name) (new name)           Renames TE
+     set                                No arguments return list of TE.
+       -name (name)                     Select TE If no options, return options
+                                        and value for the selected TE.
+       -expression (expression list)    Sets TE expression
+       -enable (on/off)                 Enables/disables TE
+
+[rva_tokenmgr] 				
+rva_tokenmgr                                 Reveal Analyzer tokenmgr commands	
+     set_tokenset (tokenset name)            Select specific token set
+       -name (new token set name)            Rename a token set
+       -bits (new token bits)                Set token set bits
+     add_tokenset                            No arguments, add a tokenset with default name and bits
+       -tokenset (tokenset name)             Set token set name
+       -bits (token bits)                    Set token set bits
+       -token (name=value)                   Add extra tokens
+     del_tokenset
+       -all                                  Delete all tokenset
+       (token set name)                      Delete the specific tokenset
+     set_token (tokenset name) (token name)  Select specific token in specific token set
+       -name (new token name)                Set token name
+       -value (new token value)              Set token value
+     add_token (tokenset name) (name=value)  Add a token with new name and value in a specific token set
+     del_token (tokenset name) (token name)  Delete a specific token in a specific token set
+     export (file name)                      Export all token set to a specific file
+     import (file name)                      Import and merge all token set from a specific file
+
+[rva_trigoptn]
+rva_trigoptn                               Reveal Analyzer trigger options
+     set                                   No arguments, return options and values
+       -teall (AND/OR)                     Sets AND ALL or OR ALL for all TEs
+       -finalcounter (on/off)              Turns final trigger counter on/off
+       -finalcountervalue (value)          Sets final trigger counter value
+       -samples (value)                    Sets number of samples to capture
+       -numtriggers (value)                Sets number of triggers to capture
+       -position (pre/center/post/value)   Sets trigger position to pre-selected or user value
+
+[rva_project]
+rva_project                                Reveal Analyzer project commands
+     open (rva file)                       Open rva file
+       save (rva file)                     Save rva file
+       new
+         -rva (rva file) -rvl (rvl file)   Create new rva file with required options;
+         -dev (device:id) -port (number)   xcf file is required for multiple devices
+         -cable (LATTICE/USB/USB2)         but optional for single device on cable.
+         -xcf (xcf file)
+       close                               Close current rva file
+       export
+         -vcd (file name) -module (name)   Export VCD file; optional to include module name,
+                                           by default <unknown> is used.
+         -txt (file name) -siglist (list)  Export TEXT file; optional to export selected signal 
+                                           list only, by default all signals are exported.
+       set                                 No arguments return options.
+         -frequency (frequency value)      Set frequency value for sample clock in MHz.
+         -period (period value)            Set period value for sample clock in ns or ps.
+         -tckdelay (1...10)                Set TCK Low Pulse Width Delay.
+         -cabletype (LATTICE/USB/USB2)     Set cable type of hardware connection.
+         -cableport (number)               Set cable port of hardware connection.
+       run                                 Run
+       manualtrig                          Manual Trigger
+       stop                                Stop
+
+[rva_pcs]
+rva_pcs                                              Reveal Analyzer PCS/SERDES commands
+     export (file name)                              Export SRV file.
+     import (file name)                              Import SRV file.
+     set                                             No arguments return options and values.
+       -control (label) -option (value)              Set option value of SERDES control label:
+                                                     dcua,channel,cont_read,loopback,
+                                                     tx_pll_reset,macro_reset,dcu_reset,
+                                                     tx_pcs_reset,rx_pcs_reset,rx_cdr_reset,
+                                                     tx_precur,tx_postcur,tx_diffamp,
+                                                     tx_invert,tx_term,tx_losslock,
+                                                     rx_leq,rx_channellength,rx_datarate,
+                                                     rx_invert,rx_term,rx_losslock,
+                                                     rx_los_thres,rx_coupling.
+     run                                             Apply changes to SERDES control.
+       -config_sram                                  Reload all registers in current DCU with values from config SRAM.
+       -file (tcl file)                              Run SERDES commands from Tcl file.
+     read -byte 1 -addr (address)                    Read one byte of data from address in hex.
+     write -byte 1 -addr (address) -data (value)     Write one byte of data to address in hex.
+     open                                            Open connection to Lattice device before read/write began.
+     close                                           Close connection to Lattice device after read/write finished.

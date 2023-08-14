@@ -1,0 +1,1144 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!--
+	Spinti 05/01/03
+	JTAG/CPLD sub directory
+		.Contains device database file and all the algorithm files for CPLD ispLSI 2000E/V/VE/VL devices.
+	 ispVM_003e.xdf  support :
+		. ispLSI 2000E family
+		. ispLSI 2000VE family
+
+	Spinti 01/08/04
+		. Changed ispLSI2032E-48Pin ALL PON from ispLSI2032E to ispLSI2032E-48Pin to provide it with a unique PON.
+		. Changed ispLSI2064VE-44Pin ALL PON from ispLSI2064VE to ispLSI2064VE-44Pin to provide it with a unique PON.
+		. Changed ispLSI2064VE/VL-44Pin ALL PON from ispLSI2064VE/VL to ispLSI2064VE/VL-44Pin to provide it with a unique PON.
+		. Changed ispLSI2128VE/VL-100Pin ALL PON from ispLSI2128VE to ispLSI2128VE/VL-100Pin to provide it with a unique PON.
+		. Changed ispLSI2128VE-100Pin ALL PON from ispLSI2128VE to ispLSI2128VE-100Pin to provide it with a unique PON.
+
+	Spinti 04/21/04
+		. Moved the ispLSI 2000V/VL family to mature family (ispVM_003d9.xdf).
+	Spinti 07/23/04
+		. Added <DebugMode>YES</DebugMode>
+	Nguyen 11/18/04 Added the "Voltage_Control" field
+      Ong    12/13/04
+            . Rename ENABLE Pin to BSCAN.
+            . Removed TRST from Pin List for 2000E.
+-->
+<ispXDF version="13.1">
+    <Comment>JTAG/CPLD Devices List</Comment>
+    <Family name="ispLSI 2000E">
+        <Device name="ispLSI 2032E">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2032E    </CodeName>
+            <FullName> ispLSI 2032E </FullName>
+            <AlgoTemplate>JEVEN.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_JEVEN.svp"
+                         value="0x0F"/>
+            <JtagID>0x00527043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 80            </ColWidth>
+            <RowWidth> 102            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 8160        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2032E    </PON>
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 44-pin PLCC  </Type>
+                <PON> ispLSI2032E-XXLJ44    </PON>
+                <JDFFile> 2032EJ44.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-J44"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-44-28-03P-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 44-pin TQFP    </Type>
+                <PON> ispLSI2032E-XXLT44    </PON>
+                <JDFFile> 2032ET44.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T44/2032VE"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-44-28-02Q-600-YAM"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>5.0V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2032E-48Pin">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2032E48    </CodeName>
+            <FullName> ispLSI 2032E </FullName>
+            <AlgoTemplate>JEVEN.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_JEVEN.svp"
+                         value="0x0F"/>
+            <JtagID>0x0052C043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 80            </ColWidth>
+            <RowWidth> 102            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 8160        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2032E-48Pin </PON>
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP    </Type>
+                <PON> ispLSI2032E-XXLT48    </PON>
+                <JDFFile> 2032ET48.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T48/2032VE"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>5.0V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2064E">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2064E    </CodeName>
+            <FullName> ispLSI 2064E </FullName>
+            <AlgoTemplate>JEVEN.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_JEVEN.svp"
+                         value="0x0F"/>
+            <JtagID>0x0052D043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 160            </ColWidth>
+            <RowWidth> 118            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 18880        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2064E    </PON>
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP          </Type>
+                <PON> ispLSI2064E-XXLT100    </PON>
+                <JDFFile> 2064ET10.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T100/2064E"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>5.0V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2096E">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2096E    </CodeName>
+            <FullName> ispLSI 2096E </FullName>
+            <AlgoTemplate>JEVEN.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_JEVEN.svp"
+                         value="0x0F"/>
+            <JtagID>0x0052E043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 240            </ColWidth>
+            <RowWidth> 134            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 32160        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2096E    </PON>
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 128-pin PQFP          </Type>
+                <PON> ispLSI2096E-XXLQ128    </PON>
+                <JDFFile> 2096EQ12.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-Q128/2096E"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP          </Type>
+                <PON> ispLSI2096E-XXLT128    </PON>
+                <JDFFile> 2096ET12.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T128/2096E"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>5.0V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2128E">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2128E    </CodeName>
+            <FullName> ispLSI 2128E </FullName>
+            <AlgoTemplate>JEVEN.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_JEVEN.svp"
+                         value="0x0F"/>
+            <JtagID>0x0052F043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 320            </ColWidth>
+            <RowWidth> 150            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 48000        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2128E    </PON>
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 176-pin TQFP          </Type>
+                <PON> ispLSI2128E-XXLT176    </PON>
+                <JDFFile> 2128ET17.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00110100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T176/2128E"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>5.0V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save JEDEC&quot;
+        </Operation>
+        <BypassInst>11111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+	  	<DebugMode>YES</DebugMode>
+	  	<LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+    <Family name="ispLSI 2000VE">
+        <Device name="ispLSI 2032VE/VL">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2032VE(VL)    </CodeName>
+            <FullName> ispLSI 2032VE/VL </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10301043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 80            </ColWidth>
+            <RowWidth> 102            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 8160        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>102</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2032VE/VL    </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 44-pin PLCC          </Type>
+                <PON> ispLSI2032VE/VL-XXLJ44   </PON>
+                <JDFFile> 2032VEJ4.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-J44"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-44-28-03P-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 44-pin TQFP          </Type>
+                <PON> ispLSI2032VE/VL-XXLT44    </PON>
+                <JDFFile> 2032VET4.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T44/2032VE"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-44-28-02Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP          </Type>
+                <PON> ispLSI2032VE/VL-XXLT48    </PON>
+                <JDFFile> 2032VET8.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T48/2032VE"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-48-28-01Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 49-ball BGA          </Type>
+                <PON> ispLSI2032VE/VL-XXLB49    </PON>
+                <JDFFile> 2032VEB4.JDF </JDFFile>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Contact Vendor"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2032VE">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2032VE    </CodeName>
+            <FullName> ispLSI 2032VE </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10301043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 80            </ColWidth>
+            <RowWidth> 102            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 8160        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>102</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2032VE    </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 44-pin PLCC          </Type>
+                <PON> ispLSI2032VE-XXLJ44   </PON>
+                <JDFFile> 2032VEJ4.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-J44"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-44-28-03P-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 44-pin TQFP          </Type>
+                <PON> ispLSI2032VE-XXLT44    </PON>
+                <JDFFile> 2032VET4.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T44/2032VE"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-44-28-02Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP          </Type>
+                <PON> ispLSI2032VE-XXLT48    </PON>
+                <JDFFile> 2032VET8.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T48/2032VE"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-48-28-01Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 49-ball BGA          </Type>
+                <PON> ispLSI2032VE-XXLB49    </PON>
+                <JDFFile> 2032VEB4.JDF </JDFFile>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Contact Vendor"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2064VE/VL">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2064VE(VL)    </CodeName>
+            <FullName> ispLSI 2064VE/VL </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10302043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 160            </ColWidth>
+            <RowWidth> 118            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 18880        </TotalFuses>
+            <PWP> 12    </PWP>
+            <PWE> 220    </PWE>
+            <PWV>  1    </PWV>
+            <BScan_Length>202</BScan_Length>
+		<Package>
+                <Type> All  </Type>
+                <PON> ispLSI2064VE/VL    </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP              </Type>
+                <PON> ispLSI2064VE/VL-XXLT100    </PON>
+                <JDFFile> 2064VET1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T100/2128V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-100-28-04Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 100-ball BGA          </Type>
+                <PON> ispLSI2064VE/VL-XXLB100    </PON>
+                <JDFFile> 2064VEB1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-FBO/2064VE"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2064VE">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2064VE    </CodeName>
+            <FullName> ispLSI 2064VE </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10302043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 160            </ColWidth>
+            <RowWidth> 118            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 18880        </TotalFuses>
+            <PWP> 12    </PWP>
+            <PWE> 220    </PWE>
+            <PWV>  1    </PWV>
+            <BScan_Length>202</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2064VE    </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP              </Type>
+                <PON> ispLSI2064VE-XXLT100    </PON>
+                <JDFFile> 2064VET1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T100/2128V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-100-28-04Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 100-ball BGA          </Type>
+                <PON> ispLSI2064VE-XXLB100    </PON>
+                <JDFFile> 2064VEB1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-FBO/2064VE"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2064VE/VL-44Pin">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2064VE(VL)-44Pin    </CodeName>
+            <FullName> ispLSI 2064VE/VL </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10306043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 160            </ColWidth>
+            <RowWidth> 110            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17632        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>103</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2064VE/VL-44Pin </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 44-pin PLCC          </Type>
+                <PON> ispLSI2064VE/VL-XXLJ44    </PON>
+                <JDFFile> 2064VEJ4.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-J44"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-44-28-03P-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 44-pin TQFP              </Type>
+                <PON> ispLSI2064VE/VL-XXLT44    </PON>
+                <JDFFile> 2064VET4.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T44/2032VE"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-44-28-02Q-600-YAM"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2064VE-44Pin">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2064VE-44Pin    </CodeName>
+            <FullName> ispLSI 2064VE </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10306043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 160            </ColWidth>
+            <RowWidth> 110            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17632        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>103</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2064VE-44Pin </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 44-pin PLCC          </Type>
+                <PON> ispLSI2064VE-XXLJ44    </PON>
+                <JDFFile> 2064VEJ4.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-J44"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-44-28-03P-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 44-pin TQFP              </Type>
+                <PON> ispLSI2064VE-XXLT44    </PON>
+                <JDFFile> 2064VET4.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T44/2032VE"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-44-28-02Q-600-YAM"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2096VE/VL">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2096VE(VL)    </CodeName>
+            <FullName> ispLSI 2096VE/VL </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10303043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 240            </ColWidth>
+            <RowWidth> 134            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 32160        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>300</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2096VE/VL    </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP          </Type>
+                <PON> ispLSI2096VE/VL-XXLT128    </PON>
+                <JDFFile> 2096VET1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T128/2096V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-128-28-04Q-600-YAM"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2096VE">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2096VE    </CodeName>
+            <FullName> ispLSI 2096VE </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10303043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 240            </ColWidth>
+            <RowWidth> 134            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 32160        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>300</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2096VE    </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP          </Type>
+                <PON> ispLSI2096VE-XXLT128    </PON>
+                <JDFFile> 2096VET1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T128/2096V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-128-28-04Q-600-YAM"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2128VE/VL">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2128VE(VL)    </CodeName>
+            <FullName> ispLSI 2128VE/VL </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10304043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 320            </ColWidth>
+            <RowWidth> 150            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 48000        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>398</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2128VE/VL    </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 176-pin TQFP          </Type>
+                <PON> ispLSI2128VE/VL-XXLT176    </PON>
+                <JDFFile> 2128VET7.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T176/2128V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-176-28-02Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 160-pin PQFP              </Type>
+                <PON> ispLSI2128VE/VL-XXLQ160    </PON>
+                <JDFFile> 2128VEQ1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-Q160/2128V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-160-28-03Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 208-ball BGA              </Type>
+                <PON> ispLSI2128VE/VL-XXLB208    </PON>
+                <JDFFile> 2128VEB2.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-FB208-B1"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2128VE">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2128VE    </CodeName>
+            <FullName> ispLSI 2128VE </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10304043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 320            </ColWidth>
+            <RowWidth> 150            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 48000        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>398</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2128VE    </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 176-pin TQFP          </Type>
+                <PON> ispLSI2128VE-XXLT176    </PON>
+                <JDFFile> 2128VET7.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T176/2128V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-176-28-02Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 160-pin PQFP              </Type>
+                <PON> ispLSI2128VE-XXLQ160    </PON>
+                <JDFFile> 2128VEQ1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-Q160/2128V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-160-28-03Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 208-ball BGA              </Type>
+                <PON> ispLSI2128VE-XXLB208    </PON>
+                <JDFFile> 2128VEB2.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-FB208-B1"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2128VE/VL-100Pin">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2128VE(VL)-100Pin    </CodeName>
+            <FullName> ispLSI 2128VE/VL </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10308043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 320            </ColWidth>
+            <RowWidth> 134            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 42912        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>206</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2128VE/VL-100Pin </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP              </Type>
+                <PON> ispLSI2128VE/VL-XXLT100    </PON>
+                <JDFFile> 2128VET0.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T100/2128V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-100-28-04Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 100-ball BGA          </Type>
+                <PON> ispLSI2128VE/VL-XXLB100    </PON>
+                <JDFFile> 2128VEB1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Contact Vendor"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2128VE-100Pin">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2128VE-100Pin    </CodeName>
+            <FullName> ispLSI 2128VE </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10308043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 320            </ColWidth>
+            <RowWidth> 134            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 42912        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>206</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2128VE-100Pin </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP              </Type>
+                <PON> ispLSI2128VE-XXLT100    </PON>
+                <JDFFile> 2128VET0.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T100/2128V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-100-28-04Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 100-ball BGA          </Type>
+                <PON> ispLSI2128VE-XXLB100    </PON>
+                <JDFFile> 2128VEB1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Contact Vendor"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2192VE/VL">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2192VE(VL)    </CodeName>
+            <FullName> ispLSI 2192VE/VL </FullName>
+            <AlgoTemplate>2192VE.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_2192VE.svp"
+                         value="0x0F"/>
+            <JtagID>0x00309043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 480            </ColWidth>
+            <RowWidth> 158            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 75840        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>306</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2192VE/VL    </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP          </Type>
+                <PON> ispLSI2192VE/VL-XXLT128    </PON>
+                <JDFFile> 2192VET1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T128/2096V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-128-28-04Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 144-ball BGA          </Type>
+                <PON> ispLSI2192VE/VL-XXLB144    </PON>
+                <JDFFile> 2192VEB1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-FB144-A1"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispLSI 2192VE">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> 2192VE    </CodeName>
+            <FullName> ispLSI 2192VE </FullName>
+            <AlgoTemplate>2192VE.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_2192VE.svp"
+                         value="0x0F"/>
+            <JtagID>0x00309043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 480            </ColWidth>
+            <RowWidth> 158            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 75840        </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>306</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ispLSI2192VE    </PON>
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP          </Type>
+                <PON> ispLSI2192VE-XXLT128    </PON>
+                <JDFFile> 2192VET1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T128/2096V"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-128-28-04Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 144-ball BGA          </Type>
+                <PON> ispLSI2192VE-XXLB144    </PON>
+                <JDFFile> 2192VEB1.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00100100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-FB144-A1"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,BSCAN</PinList>
+            </Voltage_Control>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save JEDEC&quot;
+        </Operation>
+        <BypassInst>11111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed"/>
+	  	<DebugMode>YES</DebugMode>
+	  	<LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+</ispXDF>

@@ -1,0 +1,442 @@
+[SYM.ACTIVE]
+PLSI_SymAttr=Y
+PinNumber=Y
+PULLUP=Y
+PULL=Y
+SLOWSLEW=Y
+SLEW=Y
+IO_TYPES=Y
+Critical=Y
+Register_Type=Y
+REG_POWERUP=Y
+Power=Y
+OSM_Bypass=Y
+Fast_Bypass=Y
+Input_Register=Y
+
+;mghuang 5/19/04
+MAX_AREA=Y
+NODE_COLLAPSING=Y
+XOR_SYNTHESIS=Y
+MAX_PTERM_LIMIT=Y
+MAX_FANIN=Y
+LOGIC_OPT_EFFORT=Y
+CLOCK_ENABLE_OPTIMIZATION=Y
+DUAL_FUNCTION_MACROCELL=Y
+Balanced_Partitioning=Y
+Max_GLB_Input_Percent=Y
+Zore_hold_time=Y
+SVF_ERASE_PROGRAM_VERIFY=Y
+SVF_ERASE_PROGRAM_VERIFY_SECURE=Y
+SVF_VERIFY_ONLY=Y
+Auto_Buffering_for_High_GLB_Fanin=Y
+
+;mghuang 9/6/04
+ORP_Bypass=Y
+
+;mghuang 12/01/04
+Spread_Placement=Y
+
+;mghuang 01/06/05
+Pin_Feedback=Y
+
+[SYM.PLSI.ACTIVE]
+;
+; and, for the sake of backward-compatibility
+Clock_Type=Y
+PROTECT=Y
+Use_XOR=Y
+;5k
+OPENDRAIN=Y
+OUTDELAY=Y
+VOLTAGE=Y
+;5k,8k add by JAQ May 26,1999
+XOR=Y
+;8k add by JAQ May 26,1999
+BFM=Y
+;8k add by JAQ May 29,1999
+;SLP_ON=Y
+;ELP_ON=Y
+;SLP_OFF=Y
+;ELP_OFF=Y
+;8k add by JAQ August 12, 1999
+LOCK_BFM=Y
+LOCK_GRP=Y
+
+[SYM.Tags]
+SLOWSLEW=Y
+PULLUP=Y
+Critical=Y
+CRIT=Y
+;following tagged "NET" attr can be used in "PLSI_SymAttr"
+PRESERVE=Y
+ECP=Y
+
+[SYM.PLSI.Tags]
+Use_XOR=Y
+LXOR2=Y
+PROTECT=Y
+;5k
+OUTDELAY=Y
+VOLTAGE=Y
+;it is strange that "OPENDRAIN" does not has entry in plsi.ini
+OPENDRAIN=Y
+;5k,8k add by JAQ May 26,1999
+XOR=Y
+;8k add by JAQ May 29,1999
+;SLP_ON=Y
+;ELP_ON=Y
+;SLP_OFF=Y
+;ELP_OFF=Y
+;8k add by JAQ August 12, 1999
+LOCK_BFM=Y
+LOCK_GRP=Y
+
+[SYM.Value_Expand]
+PLSI_SymAttr=;
+;BANK_NAME is 6k symbol attribute, used only in PLSI_SymAttr
+
+[SYM.Name_Alias]
+PinNumber=LOCK
+LOC=LOCK
+;SlowSlew=SLEW
+;PullUp=PULL
+Critical=CRIT
+OSM_BYPASS=OSMBypass
+Register_Type=REGTYPE
+INPUT_REGISTER=InputReg
+FAST_BYPASS=FastBypass
+LOC_ALL=LOCK
+REG_POWERUP=Register_Powerup
+Reserve=RESERVATION
+LOGIC_OPT_EFFORT=LOGIC_OPTIMIZATION_EFFORT
+ORP_Bypass=ORPBypass
+
+[SYM.Lattice.Name_Alias]
+SlowSlew=SLEW
+PullUp=PULL
+
+[SYM.PLSI.Name_Alias]
+Clock_Type=CLK
+Use_XOR=LXOR2
+
+; add by szq Nov 24,1998
+[PLSI.AttachNet]
+PROTECT=output
+LXOR2=output
+
+
+[PLSI.ListNets]
+CLK=external
+SAP=output
+EAP=output
+SCP=output
+SNP=output
+ENP=output
+GROUP=output
+; commented by SZQ, Nov 30, 1998 
+;LXOR2=output
+OPENDRAIN=external
+;OPTIMIZE=output
+; commented by SZQ, Nov 28, 1998 
+;PROTECT=output
+; commented by SZQ, Nov 28, 1998 
+;REGTYPE=output
+;5k
+OUTDELAY=external
+VOLTAGE=external
+;5/8k
+SLP=output
+ELP=output
+STP=output
+ETP=output
+;5k,8k add by JAQ May 26,1999
+XOR=output
+;8k add by JAQ May 26,1999
+BFM=output
+;8k add by JAQ May 29,1999
+;SLP_ON=output
+;ELP_ON=output
+;SLP_OFF=output
+;ELP_OFF=output
+;8k add by JAQ August 12, 1999
+LOCK_BFM=external
+LOCK_GRP=external
+
+[ListNets]
+PRESERVE=output
+LOCK=external
+PULLUP=external
+PULL=external
+SLOWSLEW=external
+SLEW=external
+IO_TYPES=external
+CRIT=external
+REGTYPE=output
+REG_POWERUP=external
+ECP=external
+;mghuang 9/6/04
+OSMBypass=external
+ORPBypass=external
+;mghuang 1/6/05
+Pin_Feedback=external
+
+[SYM.Lattice.Value_Alias]
+SLEW.@-NONE=SLOW
+PULL.@-NONE=UP
+
+[NET.ACTIVE]
+PLSI_NetAttr=Y
+LOCK=Y
+Preserve=Y
+CRIT=Y
+CriticalPath=Y
+Group=Y
+
+[NET.Lattice.ACTIVE]
+OPT=Y
+
+[NET.PLSI.ACTIVE]
+; and, for the sake of backward-compatibility
+AsyncPath=Y
+NoMinimizePath=Y
+;5/8k
+LowPowerPath=Y
+TurboPath=Y
+;8k add by JAQ May 26,1999
+BFM=Y
+;8k add by JAQ May 29,1999
+;SLP_ON=Y
+;ELP_ON=Y
+;SLP_OFF=Y
+;ELP_OFF=Y
+;8k add by JAQ August 12, 1999
+LOCK_BFM=Y
+LOCK_GRP=Y
+
+[NET.Tags]
+Preserve=Y
+CRIT=Y
+CriticalPath=Y
+SLOWSLEW=Y
+PULLUP=Y
+
+[NET.PLSI.Tags]
+;following 9 tagged "SYM" attrs can be used in "PLSI_NetAttr" 
+OPENDRAIN=Y
+LXOR2=Y
+PROTECT=Y
+;5k
+OUTDELAY=Y
+VOLTAGE=Y
+;5k,8k add by JAQ May 26,1999
+XOR=Y
+;8k add by JAQ May 29,1999
+;SLP_ON=Y
+;ELP_ON=Y
+;SLP_OFF=Y
+;ELP_OFF=Y
+;8k add by JAQ August 12, 1999
+LOCK_BFM=Y
+LOCK_GRP=Y
+
+[NET.Value_Expand]
+PLSI_NetAttr=;
+
+[NET.Name_Alias]
+OSM_BYPASS=CRIT
+CriticalPath=ECP
+FAST_BYPASS=ECP
+OPT=PRESERVE
+
+[NET.Lattice.Name_Alias]
+Group=GROUPING
+Preserve=PRESERVE
+
+[NET.PLSI.Name_Alias]
+
+; add by jaq May 20,1999
+[PLSI.Value_Empty]
+ECP=Y
+
+; add by jaq July 14,2000
+[SUBLEVEL_IGNORE]
+LOCK=Y
+
+; add by Samuel Feb 26, 2003 for PLL support in Verilog Model
+[SYM.Verilog.Map]
+DCSMODE=DCSMODE,,NEG,
+NOM_FREQ=NOM_FREQ,,2.08,
+PLLFREQ=in_freq,,100,
+;PLLOUTPIN=clk_out_to_pin,,OFF,
+PLLMULT=mult,,2,
+PLLDIV=div,,2,
+PLLPOST=post,,1,
+PLLSECDIV=secdiv,,,
+PLLDELAY=pll_dly,,0,
+;PLLWAKE=wake_on_lock,,OFF,
+
+; add by Samuel Feb 26, 2003 for PLL support in VHDL Model
+[SYM.VHDL.Map]
+DCSMODE=DCSMODE,,NEG,
+NOM_FREQ=NOM_FREQ,,2.08,
+PLLFREQ=IN_FREQ,,100,
+;PLLOUTPIN=CLK_OUT_TO_PIN,,OFF,
+PLLMULT=MULT,,2,
+PLLDIV=DIV,,2,
+PLLPOST=POST,,1,
+PLLSECDIV=SECDIV,,,
+PLLDELAY=PLL_DLY,,0,
+;PLLWAKE=WAKE_ON_LOCK,,OFF,
+
+;*********************************
+;           FPGA
+;*********************************
+[NET.Verilog.Attr]
+LOC=loc
+IO_Type=IO_TYPE
+Impedance=IMPEDANCE
+TerminateVccio=TERMINATEVCCIO
+TerminateGnd=TERMINATEGND
+TerminateVtt=TERMINATEVTT
+VCMT=VCMT
+Drive=DRIVE
+Slewrate=SLEWRATE
+DiffResistor=DIFFRESISTOR
+DiffCurrent=DIFFCURRENT
+Pullmode=PULLMODE
+RefCircuit=REFCIRCUIT
+PowerSave=POWERSAVE
+PCIClamp=PCICLAMP
+OPENDRAIN=OPENDRAIN
+SCHMITT_TRIGGER=SCHMITT_TRIGGER
+
+[NET.VHDL.Attr]
+LOC=LOC
+IO_Type=IO_TYPE
+Impedance=IMPEDANCE
+TerminateVccio=TERMINATEVCCIO
+TerminateGnd=TERMINATEGND
+TerminateVtt=TERMINATEVTT
+VCMT=VCMT
+Drive=DRIVE
+Slewrate=SLEWRATE
+DiffResistor=DIFFRESISTOR
+DiffCurrent=DIFFCURRENT
+Pullmode=PULLMODE
+RefCircuit=REFCIRCUIT
+PowerSave=POWERSAVE
+PCIClamp=PCICLAMP
+OPENDRAIN=OPENDRAIN
+SCHMITT_TRIGGER=SCHMITT_TRIGGER
+
+;;; R6.1 - 4.2.1.1 - Predefined Support of Net and Symbol Attributes
+[NET.Attr]
+LOC=LOC
+IO_Type=IO_TYPE
+Impedance=IMPEDANCE
+TerminateVccio=TERMINATEVCCIO
+TerminateGnd=TERMINATEGND
+TerminateVtt=TERMINATEVTT
+VCMT=VCMT
+Drive=DRIVE
+Slewrate=SLEWRATE
+DiffResistor=DIFFRESISTOR
+DiffCurrent=DIFFCURRENT
+Pullmode=PULLMODE
+RefCircuit=REFCIRCUIT
+PowerSave=POWERSAVE
+PCIClamp=PCICLAMP
+OPENDRAIN=OPENDRAIN
+SCHMITT_TRIGGER=SCHMITT_TRIGGER
+;; ****** R6.1
+BLOCKNET=blocknet
+BUS=bus
+ENDPOINT=endpoint
+FIXEDDELAY=fixeddelay
+FREQUENCY=frequency
+MAXDELAY=maxdelay
+NOCLIP=noclip
+NOMERGE=nomerge
+PERIOD=period
+STARTPOINT=startpoint
+
+[NET.Integer]
+syn_maxfan=syn_maxfan
+
+[NET.Boolean]
+nopad=NOPAD
+preserve_driver=PRESERVE_DRIVER
+preserve_signal=PRESERVE_SIGNAL
+syn_direct_enable=syn_direct_enable
+syn_force_pads=syn_force_pads
+syn_keep=syn_keep
+syn_noclockbuf=syn_noclockbuf
+syn_preserve=syn_preserve
+syn_useioff=syn_useioff
+
+[NET.Boolean.Value_Alias]
+;; ******* R7.0 SP1 - #38027
+syn_keep=1
+
+[NET.Bus.Single]
+;; ******* B1.1 - #47672
+preserve_driver=y
+preserve_signal=y
+syn_keep=y
+
+;;----SYM---
+[SYM.Attr]
+hierarchy=HIERARCHY
+DIN=din
+;; *** CR_38673
+GSR=gsr
+DOUT=dout
+ENDPOINT=endpoint
+LOAD=load
+NORETIME=noretime
+UGROUP=ugroup
+TERMINATEGND=terminategnd
+TERMINATEVCCIO=terminatevccio
+TERMINATEVTT=terminatevtt
+VCMT=vcmt
+;; ******* R7.1
+BBOX=bbox
+BBOXTYPE=bboxtype
+RBBOX=rbbox
+REGION=region
+LOC=loc
+syn_hier=syn_hier
+syn_netlist_hierarchy=syn_netlist_hierarchy
+syn_noarrayports=syn_noarrayports
+COMP=comp
+SLEW=slew
+DCSMODE=dcsmode
+DIFFCURRENT=diffcurrent
+DIFFRESISTOR=diffresistor
+HGROUP=hgroup
+HULOC=huloc
+HURLOC=hurloc
+IMPEDANCE=impedance
+IMPEDANCEGND=impedancegnd
+IMPEDANCEVCCIO=impedancevccio
+INBUF=inbuf
+INITSTATE=initstate
+;; *** CR_38673
+;INTERFACE=interface
+PWRSAVE=pwrsave
+REFCIRCUIT=refcircuit
+SCHMITT_TRIGGER=schmitt_trigger
+COARSE=coarse
+DELAYTYPE=delaytype
+FINE=fine
+NOM_FREQ=NOM_FREQ
+
+[SYM.Integer]
+
+[SYM.Boolean]
+black_box=BLACK_BOX
+don't_touch=DONT_TOUCH
+noopt=NOOPT
+syn_black_box=syn_black_box
+syn_noprune=syn_noprune

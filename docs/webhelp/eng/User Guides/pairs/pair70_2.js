@@ -1,0 +1,26 @@
+var pairs =
+{
+"schematic":{"editor":1}
+,"sheets":{"schematics":1,"drawing":1,"schematic":1,"deletes":1}
+,"re-sequencing":{"sheets":1}
+,"resequence":{"sheet":1,"sheets":1,"click":1}
+,"sheet":{"command":1,"sheets":1,"operating":1}
+,"command":{"sequentially":1}
+,"sequentially":{"renumber":1}
+,"renumber":{"starting":1}
+,"starting":{"sheet":1}
+,"drawing":{"remove":1}
+,"remove":{"skipped":1}
+,"skipped":{"numbers":1}
+,"choose":{"edit":1}
+,"edit":{"sheet":1}
+,"operating":{"dialog":1}
+,"dialog":{"box":1}
+,"box":{"click":1}
+,"click":{"resequence":1}
+,"editor":{"resequences":1}
+,"resequences":{"sheets":1}
+,"deletes":{"unused":1}
+,"unused":{"skipped":1}
+}
+;Search.control.loadWordPairs(pairs);

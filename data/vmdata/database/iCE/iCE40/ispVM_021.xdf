@@ -1,0 +1,1478 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Nguyen 07/31/12
+     	. Added iCE40 devices
+	EGZ 12/16/2013
+		. updated iCE40LM1K device data to iCE40LM4K because it is virtual device of 4K.
+	EGZ 03/05/2014
+		. added NCVM operations for iCE5LP devices.
+	Nguyen 04/07/14
+		. added "Fast Program,Read and Save without DONE bit" and    
+        	    "CRAM Read and Save" operations 
+	EGZ 06/30/2014
+		. added iCE40UL device data
+	EGZ 07/14/2014
+	    . updated iCE40UL device chip ID, total number of fuse.
+	EGZ 08/14/2014
+		. added iCE40UL640 virtual device.
+	EGZ 10/10/2014
+		. added iCE40UL1K-CM225 package.
+	EGZ 10/21/2014
+		. removed all iCE5LP in UMG20 package type based on Jonathan Ley device list update.
+	EGZ 11/05/2014
+		. reorder the devices by moving virtual devices which have smaller LUT numbers to front of their real devices. 
+	EGZ 11/13/2014
+		. Added iCE5LP 36ufcBGA package.
+		
+	EGZ 01/28/2015
+		. Changed iCE40UL family to "Free"
+		. Added iCE5LP SG48 package.
+		. Replaced iCE5LP UFG36 package with CM36.
+	EGZ 01/30/2014
+	    . Added CM36A package to iCE40UL device family based on Jonathan's iCE40 device list update on 01/30/2015. 
+	Nguyen 10/20/2015
+		. added iCE40UL UltraPlus device family	    
+-->
+
+<ispXDF version="19.0">
+    <Family name="iCE40">
+       <FamilyAliasName>iCE40-ES</FamilyAliasName>  
+       <Device name="iCE40LP384">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40LP384 </CodeName>
+            <FullName> iCE40LP384 </FullName>
+            <AliasName> iCE40LP384_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11184639</JtagID>
+            <IspID>0x90</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 14576 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <UESPhysicalBits> 8 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>0</jtagUSERCODELogicalBits>
+            <TotalFuses> 62976 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40LP384 </PON>
+                <AliasPON> iCE40LP384-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 36-ball csBGA </Type>
+                <PON> iCE40LP384-CM36 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 49-ball csBGA </Type>
+                <PON> iCE40LP384-CM49 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>     
+            <Package>
+                <Type> 81-ball csBGA </Type>
+                <PON> iCE40LP384-CM81 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 32-pin QFP </Type>
+                <PON> iCE40LP384-QN32 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>                  
+        </Device>
+       <Device name="iCE40LP640_SWG16">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40LP640_SWG16 </CodeName>
+            <FullName> iCE40LP640_SWG16 </FullName>
+            <AliasName> iCE40LP640 </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11001639</JtagID>
+            <IspID>0xF0</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 47824 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  8208 </ArchLength>
+            <UESPhysicalBits> 8 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>0</jtagUSERCODELogicalBits>
+            <TotalFuses> 272896 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40LP640_SWG16 </PON>
+                <AliasPON> iCE40LP640_SWG16-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 16-ball WLCSP </Type>
+                <PON> iCE40LP640-SWG16 </PON>
+                <PON> iCE40LP640-SWG16TR </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       	</Device>
+       <Device name="iCE40LP1K_SWG16">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40LP1K_SWG16 </CodeName>
+            <FullName> iCE40LP1K_SWG16 </FullName>
+            <AliasName> iCE40LP1K </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11001639</JtagID>
+            <IspID>0x70</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 47824 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  8208 </ArchLength>
+            <UESPhysicalBits> 8 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>0</jtagUSERCODELogicalBits>
+            <TotalFuses> 272896 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40LP1K_SWG16 </PON>
+                <AliasPON> iCE40LP1K_SWG16-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 16-ball WLCSP </Type>
+                <PON> iCE40LP1K-SWG16 </PON>
+                <AliasPON> iCE40LP1K-SWG16TR </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       </Device> 
+       <Device name="iCE40LP1K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40LP1K </CodeName>
+            <FullName> iCE40LP1K </FullName>
+            <AliasName> iCE40LP1K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11001639</JtagID>
+            <IspID>0x10</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 47824 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  8208 </ArchLength>
+            <UESPhysicalBits> 8 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>0</jtagUSERCODELogicalBits>
+            <TotalFuses> 272896 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40LP1K </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 36-ball csBGA </Type>
+                <PON> iCE40LP1K-CM36 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 49-ball csBGA </Type>
+                <PON> iCE40LP1K-CM49 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 81-ball csBGA </Type>
+                <PON> iCE40LP1K-CM81 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 121-ball csBGA </Type>
+                <PON> iCE40LP1K-CM121 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 84-pin QFP </Type>
+                <PON> iCE40LP1K-QN84 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       </Device> 
+       <Device name="iCE40HX1K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40HX1K </CodeName>
+            <FullName> iCE40HX1K </FullName>
+            <AliasName> iCE40HX1K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11001639</JtagID>
+            <IspID>0x10</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 47824 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  8208 </ArchLength>
+            <UESPhysicalBits> 8 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>0</jtagUSERCODELogicalBits>
+            <TotalFuses> 272896 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40HX1K </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 132-ball BGA </Type>
+                <PON> iCE40HX1K-CB132 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 100-pin QFP </Type>
+                <PON> iCE40HX1K-VQ100 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>          
+       </Device>                        
+       <Device name="iCE40LP4K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40LP4K </CodeName>
+            <FullName> iCE40LP4K </FullName>
+            <AliasName> iCE40LP4K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11008639</JtagID>
+            <IspID>0xE0</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 237200 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  16400 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 1091584 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40LP4K </PON>
+                <AliasPON> iCE40LP4K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 81-ball csBGA </Type>
+                <PON> iCE40LP4K-CM81 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 121-ball csBGA </Type>
+                <PON> iCE40LP4K-CM121 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 225-ball csBGA </Type>
+                <PON> iCE40LP4K-CM225 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>   
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>          
+       </Device>  
+       <Device name="iCE40HX4K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40HX4K </CodeName>
+            <FullName> iCE40HX4K </FullName>
+            <AliasName> iCE40HX4K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11008639</JtagID>
+            <IspID>0xE0</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 237200 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  16400 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 1091584 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40HX4K </PON>
+                <AliasPON> iCE40HX4K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 132-ball BGA </Type>
+                <PON> iCE40HX4K-CB132 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       </Device> 
+       <Device name="iCE40LP8K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40LP8K </CodeName>
+            <FullName> iCE40LP8K </FullName>
+            <AliasName> iCE40LP8K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11008639</JtagID>
+            <IspID>0x60</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 237200 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  16400 </ArchLength>
+            <UESPhysicalBits> 8 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>0</jtagUSERCODELogicalBits>
+            <TotalFuses> 1091584 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40LP8K </PON>
+                <AliasPON> iCE40LP8K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 81-ball csBGA </Type>
+                <PON> iCE40LP8K-CM81 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 121-ball csBGA </Type>
+                <PON> iCE40LP8K-CM122 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 225-ball csBGA </Type>
+                <PON> iCE40LP8K-CM225 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>             
+       </Device> 
+       <Device name="iCE40HX8K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40HX8K </CodeName>
+            <FullName> iCE40HX8K </FullName>
+            <AliasName> iCE40HX8K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11008639</JtagID>
+            <IspID>0x60</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 237200 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  16400 </ArchLength>
+            <UESPhysicalBits> 8 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>0</jtagUSERCODELogicalBits>
+            <TotalFuses> 1091584 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40HX8K </PON>
+                <AliasPON> iCE40HX8K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 81-ball csBGA </Type>
+                <PON> iCE40HX8K-CM81 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 225-ball BGA </Type>
+                <PON> iCE40HX8K-CM225 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>      
+            <Package>
+                <Type> 132-ball BGA </Type>
+                <PON> iCE40HX8K-CB132 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 256-ball BGA </Type>
+                <PON> iCE40HX8K-CT256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>                     
+        </Device>      
+        <Operation>
+        	&quot;Fast Program&quot;
+        	&quot;Program,Verify&quot;
+        	&quot;Verify ID&quot;
+        	&quot;Fast Program,Read and Save without DONE bit&quot;   
+        	&quot;Fast Program,Read and Save&quot;    
+        	&quot;CRAM Read and Save&quot;     
+        	
+        	
+        	&quot;NVCM Program,Verify,Secure&quot;
+            &quot;NVCM Program,Verify&quot;
+        	&quot;NVCM Program&quot;
+        	&quot;NVCM Verify Only&quot; 
+        	&quot;NVCM Blank Check&quot;
+            &quot;NVCM Secure&quot;    
+            &quot;NVCM Read Device Properties&quot;
+            &quot;NVCM Read DONE bit&quot; 
+            &quot;NVCM Verify ID&quot;       
+            
+            &quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;Scan SPI Flash Device&quot;
+                                									 		    	
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x00</IDInstr>
+        <ISCRelease value="0x01" extension="*.hex;*.bin;*.nvcm"/>
+		<Programming_Mode_Control>;CRAM;NVCM;SPI;</Programming_Mode_Control>     	
+    </Family>   
+    <Family name="iCE40_ENG">          
+        <Device name="iCE40LP640">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40LP640 </CodeName>
+            <FullName> iCE40LP640 </FullName>
+            <AliasName> iCE40LP640_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11001639</JtagID>
+            <IspID>0x30</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 47824 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  8208 </ArchLength>
+            <UESPhysicalBits> 8 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>0</jtagUSERCODELogicalBits>
+            <TotalFuses> 272896 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40LP640 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 36-ball csBGA </Type>
+                <PON> iCE40LP640-CM36 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 49-ball csBGA </Type>
+                <PON> iCE40LP640-CM49 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 81-ball csBGA </Type>
+                <PON> iCE40LP640-CM81 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       	</Device> 
+        <Device name="iCE40MX16K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40MX16K </CodeName>
+            <FullName> iCE40MX16K </FullName>
+            <AliasName> iCE40MX16K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x51010639</JtagID>
+            <IspID>0xD0</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 470032 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  106512 </ArchLength>
+            <UESPhysicalBits> 8 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>0</jtagUSERCODELogicalBits>
+            <TotalFuses> 2861056 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40MX16K </PON>
+                <AliasPON> iCE40MX16K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 225-ball BGA </Type>
+                <PON> iCE40MX16K-CM225 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>      
+            <Package>
+                <Type> 132-ball BGA </Type>
+                <PON> iCE40MX16K-CB132 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 256-ball BGA </Type>
+                <PON> iCE40MX16K-CT256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>                     
+        </Device>                               
+        <Operation>
+        	&quot;Fast Program&quot;
+        	&quot;Program,Verify&quot;
+<!--        	&quot;Verify ID&quot; -->
+        	&quot;Fast Program,Read and Save without DONE bit&quot;   
+        	&quot;Fast Program,Read and Save&quot;     
+        	&quot;CRAM Read and Save&quot; 
+        	           	
+        	&quot;NVCM Program,Verify,Secure&quot;
+            &quot;NVCM Program,Verify&quot;
+        	&quot;NVCM Program&quot;
+        	&quot;NVCM Verify Only&quot; 
+        	&quot;NVCM Blank Check&quot;
+            &quot;NVCM Secure&quot;    
+            &quot;NVCM Read Device Properties&quot;
+            &quot;NVCM Read DONE bit&quot; 
+            &quot;NVCM Verify ID&quot;       
+            
+            &quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;Scan SPI Flash Device&quot;
+                                									 		    	
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x00</IDInstr>
+        <ISCRelease value="0x01" extension="*.hex;*.bin;*.nvcm"/>
+		<Programming_Mode_Control>;CRAM;NVCM;SPI;</Programming_Mode_Control>     
+		<LicenseControl>LSC_CONTROL_DEVICE</LicenseControl>  	
+    </Family> 
+    <Family name="iCE40LM">   
+    	<Device name="iCE40LM1K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40LM1K </CodeName>
+            <FullName> iCE40LM1K </FullName>
+            <AliasName> iCE40LM1K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11008639</JtagID>
+            <IspID>0xB0</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 115472 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  10256 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>0</jtagUSERCODELogicalBits>
+            <TotalFuses> 545792 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40LM1K </PON>
+                <AliasPON> iCE40LM1K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 25-ball WLCSP </Type>
+                <PON> iCE40LM1K-SWG25 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       </Device>        
+       <Device name="iCE40LM2K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40LM2K </CodeName>
+            <FullName> iCE40LM2K </FullName>
+            <AliasName> iCE40LM2K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11008639</JtagID>
+            <IspID>0xB0</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 115472 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  10256 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 545792 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40LM2K </PON>
+                <AliasPON> iCE40LM2K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 25-ball WLCSP </Type>
+                <PON> iCE40LM2K-SWG25 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       </Device> 
+       <Device name="iCE40LM4K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40LM4K </CodeName>
+            <FullName> iCE40LM4K </FullName>
+            <AliasName> iCE40LM4K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11008639</JtagID>
+            <IspID>0xB0</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 115472 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  10256 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 545792 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40LM4K </PON>
+                <AliasPON> iCE40LM4K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 25-ball WLCSP </Type>
+                <PON> iCE40LM4K-SWG25 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 25-ball WLCSP </Type>
+                <PON> iCE40LM4K-UMG225 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       	</Device>   
+   		 <Operation>	
+        	&quot;Fast Program&quot;
+        	&quot;Program,Verify&quot;
+<!--        	&quot;Verify ID&quot; -->
+        	&quot;Fast Program,Read and Save without DONE bit&quot;   
+        	&quot;Fast Program,Read and Save&quot;  
+        	&quot;CRAM Read and Save&quot;               	
+        	            
+            &quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;Scan SPI Flash Device&quot;
+                                									 		    	
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x00</IDInstr>
+        <ISCRelease value="0x01" extension="*.hex;*.bin"/>
+		<Programming_Mode_Control>;CRAM;SPI;</Programming_Mode_Control>       	
+    </Family>
+    <Family name="iCE5LP">   
+       <Device name="iCE5LP1K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE5LP1K </CodeName>
+            <FullName> iCE5LP1K </FullName>
+            <AliasName> iCE5LP1K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11008639</JtagID>
+            <IspID>0x08</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 121808 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  10256 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 587776 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE5LP1K </PON>
+                <AliasPON> iCE5LP1K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 30-ball WLCSP </Type>
+                <PON> iCE5LP1K-SWG30 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 36-ball csBGA </Type>
+                <PON> iCE5LP1K-CM36 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 36-ball WLCSP </Type>
+                <PON> iCE5LP1K-SWG36 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 48-ball QFN </Type>
+                <PON> iCE5LP1K-SG48 </PON>
+                <MCtrl setting="00011100"/>
+                 <Adapter vendor="Lattice Semiconductor"
+                          adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       	</Device>   
+       <Device name="iCE5LP2K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE5LP2K </CodeName>
+            <FullName> iCE5LP2K </FullName>
+            <AliasName> iCE5LP2K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11008639</JtagID>
+            <IspID>0x88</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 121808 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  10256 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 587776 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE5LP2K </PON>
+                <AliasPON> iCE5LP2K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 30-ball WLCSP </Type>
+                <PON> iCE5LP2K-SWG30 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 36-ball csBGA </Type>
+                <PON> iCE5LP2K-CM36 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 36-ball WLCSP </Type>
+                <PON> iCE5LP2K-SWG36 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                 <Type> 48-ball QFN </Type>
+                 <PON> iCE5LP2K-SG48 </PON>
+                 <MCtrl setting="00011100"/>
+                 <Adapter vendor="Lattice Semiconductor"     
+                          adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       	</Device>   
+       <Device name="iCE5LP4K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE5LP4K </CodeName>
+            <FullName> iCE5LP4K </FullName>
+            <AliasName> iCE5LP4K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>iCE40.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11008639</JtagID>
+            <IspID>0x48</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 121808 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  10256 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 587776 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE5LP4K </PON>
+                <AliasPON> iCE5LP4K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 30-ball WLCSP </Type>
+                <PON> iCE5LP4K-SWG30 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 36-ball csBGA </Type>
+                <PON> iCE5LP4K-CM36 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 36-ball WLCSP </Type>
+                <PON> iCE5LP4K-SWG36 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                 <Type> 48-ball QFN </Type>
+                 <PON> iCE5LP4K-SG48 </PON>
+                 <MCtrl setting="00011100"/>
+                 <Adapter vendor="Lattice Semiconductor"
+                           adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 225-ball csBGA </Type>
+                <PON> iCE5LP4K-CM225 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       	</Device>   
+   		 <Operation>	
+        	&quot;Fast Program&quot;
+        	&quot;Program,Verify&quot;
+<!--        	&quot;Verify ID&quot; -->
+        	&quot;Fast Program,Read and Save without DONE bit&quot;   
+        	&quot;Fast Program,Read and Save&quot;    
+        	&quot;CRAM Read and Save&quot;             	
+        	
+			&quot;NVCM Program,Verify,Secure&quot;
+            &quot;NVCM Program,Verify&quot;
+        	&quot;NVCM Program&quot;
+        	&quot;NVCM Verify Only&quot; 
+        	&quot;NVCM Blank Check&quot;
+            &quot;NVCM Secure&quot;    
+            &quot;NVCM Read Device Properties&quot;
+            &quot;NVCM Read DONE bit&quot; 
+            &quot;NVCM Verify ID&quot; 
+
+            &quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;Scan SPI Flash Device&quot;
+                                									 		    	
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x00</IDInstr>
+        <ISCRelease value="0x01" extension="*.hex;*.bin"/>
+		<Programming_Mode_Control>;CRAM;NVCM;SPI;</Programming_Mode_Control>       	
+    </Family>
+    <Family name="iCE40UL">   
+       <Device name="iCE40UL640">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40UL640 </CodeName>
+            <FullName> iCE40UL640 </FullName>
+            <AliasName> iCE40UL640_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>bolt.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11101639</JtagID>
+            <IspID>0xA8</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 41232 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  6160 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 272896 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40UL640 </PON>
+                <AliasPON> iCE40UL640-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 16-ball WLCSP </Type>
+                <PON> iCE40UL640-SWG16 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       	</Device> 
+       <Device name="iCE40UL1K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40UL1K </CodeName>
+            <FullName> iCE40UL1K </FullName>
+            <AliasName> iCE40UL1K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>bolt.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11101639</JtagID>
+            <IspID>0x28</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 41232 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  6160 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 272896 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40UL1K </PON>
+                <AliasPON> iCE40UL1K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 16-ball WLCSP </Type>
+                <PON> iCE40UL1K-SWG16 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+               <Type> 36-ball csBGA </Type>
+               <PON> ICE40UL1K-CM36A </PON>    
+               <MCtrl setting="00011100"/>       
+               <Adapter vendor="Lattice Semiconductor"
+                                  adapter_name="Not Applicable"/>
+                </Package>
+            <Package>
+                <Type> 36-ball csBGA </Type>
+                <PON> ICE40UL1K-CM36 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 225-ball csBGA </Type>
+                <PON> ICE40UL1K-CM225 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       	</Device> 
+   		 <Operation>	
+        	&quot;Fast Program&quot;
+        	&quot;Program,Verify&quot;
+<!--        	&quot;Verify ID&quot; -->
+        	&quot;Fast Program,Read and Save without DONE bit&quot;   
+        	&quot;Fast Program,Read and Save&quot;    
+        	&quot;CRAM Read and Save&quot;             	
+        	
+			&quot;NVCM Program,Verify,Secure&quot;
+            &quot;NVCM Program,Verify&quot;
+        	&quot;NVCM Program&quot;
+        	&quot;NVCM Verify Only&quot; 
+        	&quot;NVCM Blank Check&quot;
+            &quot;NVCM Secure&quot;    
+            &quot;NVCM Read Device Properties&quot;
+            &quot;NVCM Read DONE bit&quot; 
+            &quot;NVCM Verify ID&quot; 
+
+            &quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;Scan SPI Flash Device&quot;
+                                									 		    	
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x00</IDInstr>
+        <ISCRelease value="0x01" extension="*.hex;*.bin"/>
+		<Programming_Mode_Control>;CRAM;NVCM;SPI;</Programming_Mode_Control>    
+		<LicenseControl></LicenseControl>   	  	
+    </Family>
+	<Family name="iCE40 UltraPlus">   
+       <Device name="iCE40UP3K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40UP3K </CodeName>
+            <FullName> iCE40UP3K </FullName>
+            <AliasName> iCE40UP3K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>bolt.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11200639</JtagID>
+            <IspID>0x84</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 232528 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  20496 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 839680 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40UP3K </PON>
+                <AliasPON> iCE40UP3K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 30-ball WLCSP </Type>
+                <PON> iCE40UP3K-UWG30 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type>48-ball QFN </Type>
+                <PON> iCE40UP3K-SG48 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       	</Device> 
+        <Device name="iCE40UP5K">
+            <Comm> JTAG </Comm>
+            <Access> CRAM/NVCM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> iCE40UP5K </CodeName>
+            <FullName> iCE40UP5K </FullName>
+            <AliasName> iCE40UP5K_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>bolt.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_iCE40.svp"
+                         value="0x01"/>
+            <JtagID>0x11200639</JtagID>
+            <IspID>0x04</IspID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 232528 </ColWidth>
+            <RowWidth> 4 </RowWidth>
+            <ArchRow>      8 </ArchRow>
+            <ArchLength>  20496 </ArchLength>
+            <UESPhysicalBits> 0 </UESPhysicalBits>
+            <TotalFuses> 839680 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> All </Type>
+                <PON> iCE40UP5K </PON>
+                <AliasPON> iCE40UP5K-ES </AliasPON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 30-ball WLCSP </Type>
+                <PON> iCE40UP5K-UWG30 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 48-ball QFN </Type>
+                <PON> iCE40UP5K-SG48 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 225-ball csBGA </Type>
+                <PON> iCE40UP5K-CM225 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>SPI_SCK,SPI_SDI,SPI_SDO,SPI_SS_B</PinList>
+            </Voltage_Control>              
+       	</Device> 
+   		 <Operation>	
+        	&quot;Fast Program&quot;
+        	&quot;Program,Verify&quot;
+        	&quot;Fast Program,Read and Save without DONE bit&quot;   
+        	&quot;Fast Program,Read and Save&quot;    
+        	&quot;CRAM Read and Save&quot;             	
+        	
+			&quot;NVCM Program,Verify,Secure&quot;
+            &quot;NVCM Program,Verify&quot;
+        	&quot;NVCM Program&quot;
+        	&quot;NVCM Verify Only&quot; 
+        	&quot;NVCM Blank Check&quot;
+            &quot;NVCM Secure&quot;    
+            &quot;NVCM Read Device Properties&quot;
+            &quot;NVCM Read DONE bit&quot; 
+            &quot;NVCM Verify ID&quot; 
+
+            &quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;Scan SPI Flash Device&quot;
+                                									 		    	
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x00</IDInstr>
+        <ISCRelease value="0x01" extension="*.hex;*.bin"/>
+		<Programming_Mode_Control>;CRAM;NVCM;SPI;</Programming_Mode_Control>    
+		<LicenseControl></LicenseControl>   	  	
+    </Family>
+</ispXDF>

@@ -1,0 +1,1464 @@
+<HTML>
+<HEAD><TITLE>Project Summary</TITLE>
+<STYLE TYPE="text/css">
+<!--
+ body,pre{    font-family:'Courier New', monospace;    color: #000000;    font-size:88%;    background-color: #ffffff;}h1 {    font-weight: bold;    margin-top: 24px;    margin-bottom: 10px;    border-bottom: 3px solid #000;    font-size: 1em;}h2 {    font-weight: bold;    margin-top: 18px;    margin-bottom: 5px;    font-size: 0.90em;}h3 {    font-weight: bold;    margin-top: 12px;    margin-bottom: 5px;    font-size: 0.80em;}p {    font-size:78%;}P.Table {    margin-top: 4px;    margin-bottom: 4px;    margin-right: 4px;    margin-left: 4px;}table{    border-width: 1px 1px 1px 1px;    border-style: solid solid solid solid;    border-color: black black black black;    border-collapse: collapse;}th {    font-weight:bold;    padding: 4px;    border-width: 1px 1px 1px 1px;    border-style: solid solid solid solid;    border-color: black black black black;    vertical-align:top;    text-align:left;    font-size:78%;}td {    padding: 4px;    border-width: 1px 1px 1px 1px;    border-style: solid solid solid solid;    border-color: black black black black;    vertical-align:top;    font-size:78%;}a {    color:#013C9A;    text-decoration:none;}a:visited {    color:#013C9A;}a:hover, a:active {    text-decoration:underline;    color:#5BAFD4;}.pass{background-color: #00ff00;}.fail{background-color: #ff0000;}.comment{    font-size: 90%;    font-style: italic;}
+-->
+</STYLE>
+</HEAD>
+<PRE><A name="Mrp"></A>              Lattice Mapping Report File for Design 'typecount'
+
+
+<A name="mrp_di"></A><B><U><big>Design Information</big></U></B>
+
+Command line:   map -a LatticeECP2 -p LFE2-35E -t FPBGA672 -s 5 -oc Commercial
+     mixedcounter_vhdl.ngd -o mixedcounter_vhdl_map.ncd -pr
+     mixedcounter_vhdl.prf -mp mixedcounter_vhdl.mrp C:/Documents and
+     Settings/bcaslis/My Documents/balidesigns/mixedcounter/mixedcounter_v.lpf
+Target Vendor:  LATTICE
+Target Device:  LFE2-35EFPBGA672
+Target Speed:   5
+Mapper:  ep5a00,  version:  ispLever_v8.1_ALPHA_Build (558)
+Mapped on:  03/08/10  17:32:29
+
+
+<A name="mrp_ds"></A><B><U><big>Design Summary</big></U></B>
+   Number of registers:    603
+      PFU registers:    603
+      PIO registers:    0
+   Number of SLICEs:           524 out of 16128 (3%)
+      SLICEs(logic/ROM):       512 out of 13104 (4%)
+      SLICEs(logic/ROM/RAM):    12 out of  3024 (0%)
+          As RAM:           12 out of  3024 (0%)
+          As Logic/ROM:      0 out of  3024 (0%)
+   Number of logic LUT4s:     534
+   Number of distributed RAM:  12 (24 LUT4s)
+   Number of ripple logic:     55 (110 LUT4s)
+   Number of shift registers:   0
+   Total number of LUT4s:     668
+   Number of PIO sites used: 59 out of 450 (13%)
+   Number of PIO FIXEDDELAY:    0
+   Number of DQSDLLs:  0 out of 2 (0%)
+   Number of PLLs:  0 out of 2 (0%)
+   Number of DLLs:  0 out of 2 (0%)
+   Number of block RAMs:  8 out of 18 (44%)
+   Number of CLKDIVs:  0 out of 2 (0%)
+   Number of GSRs:  1 out of 1 (100%)
+   JTAG used :      Yes
+   Readback used :  No
+   Oscillator used :  No
+   Startup used :   No
+   Notes:-
+      1. Total number of LUT4s = (Number of logic LUT4s) + 2*(Number of
+     distributed RAMs) + 2*(Number of ripple logic)
+      2. Number of logic LUT4s does not include count of distributed RAM and
+     ripple logic.
+
+   Number Of Mapped DSP Components:
+   --------------------------------
+   MULT36X36B          0
+   MULT18X18B          0
+   MULT18X18MACB       0
+   MULT18X18ADDSUBB    0
+   MULT18X18ADDSUBSUMB 0
+   MULT9X9B            0
+   MULT9X9ADDSUBB      0
+   MULT9X9ADDSUBSUMB   0
+   --------------------------------
+   Number of Used DSP Sites:  0 out of 64 (0 %)
+
+   Number of clocks:  2
+     Net clk_c: 216 loads, 216 rising, 0 falling (Driver: PIO clk )
+     Net jtaghub16_jtck: 143 loads, 0 rising, 143 falling (Driver:
+     ep5ahub/genblk0_genblk3_jtagc_u )
+   Number of Clock Enables:  41
+     Net reset_c: 12 loads, 12 LSLICEs
+     Net jtaghub16_ip_enable0: 20 loads, 20 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/tu_0/op_code8: 2 loads,
+     2 LSLICEs
+     Net
+     typecount_reveal_coretop_instance/core0/trig_u/tu_0/mask_reg_0__1_sqmuxa: 1
+     loads, 1 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/tu_0/compare_reg_0__1_sq
+     muxa: 1 loads, 1 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/tu_1/op_code8: 2 loads,
+     2 LSLICEs
+     Net
+     typecount_reveal_coretop_instance/core0/trig_u/tu_1/mask_reg_0__1_sqmuxa: 1
+     loads, 1 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/tu_1/compare_reg_0__1_sq
+     muxa: 1 loads, 1 LSLICEs
+     Net
+     typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_regwre_0: 3
+     loads, 3 LSLICEs
+     Net
+     typecount_reveal_coretop_instance/core0/trig_u/te_0/cnt_contig_reg_wen_1: 2
+     loads, 2 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/te_0/num_then_wen_1: 1
+     loads, 1 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/te_0/state_cntr_p1_2_sqm
+     uxa_i: 2 loads, 2 LSLICEs
+     Net
+     typecount_reveal_coretop_instance/core0/trig_u/te_0/next_then_reg_wen_1: 2
+     loads, 2 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/te_0/N_185_i: 4 loads, 4
+     LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/te_out_RNINEA7_0:
+     2 loads, 2 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/reg2_0_sqmuxa: 1
+     loads, 1 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/reg1_0_sqmuxa: 2
+     loads, 2 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/N_48_i: 1 loads,
+     1 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/N_37_i: 2 loads,
+     2 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/jtag_int_u/N_426_i: 2 loads, 2
+     LSLICEs
+     Net typecount_reveal_coretop_instance/core0/jtag_int_u/N_286_i_2: 22 loads,
+     22 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/jtag_int_u/N_286_i: 24 loads,
+     24 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/jtag_int_u/N_286_i_1: 22 loads,
+     22 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/jtag_int_u/shift_regce_15: 11
+     loads, 11 LSLICEs
+
+     Net typecount_reveal_coretop_instance/core0/jtag_int_u/N_430_i: 1 loads, 1
+     LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/sample_en_d: 11 loads, 11
+     LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/N_581_i: 5 loads, 5
+     LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/tm_wr_addr_cntre: 5 loads,
+     5 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/N_12_i: 5 loads, 5 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/trig_enbl_0_sqmuxa: 1
+     loads, 1 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/N_428_i: 5 loads, 5
+     LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/force_trig_0_sqmuxa_1: 1
+     loads, 1 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/N_14_i: 6 loads, 6 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/N_28: 5 loads, 5 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/N_26: 5 loads, 5 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/num_pre_trig_frm_0_sqmuxa:
+     5 loads, 5 LSLICEs
+     Net
+     typecount_reveal_coretop_instance/core0/tm_u/num_post_trig_frm_0_sqmuxa: 5
+     loads, 5 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/tm_u/N_59: 1 loads, 1 LSLICEs
+     Net jtaghub16_jupdate: 8 loads, 8 LSLICEs
+     Net ep5ahub/id_enable_0_sqmuxa: 1 loads, 1 LSLICEs
+     Net ep5ahub/N_45_i: 10 loads, 10 LSLICEs
+   Number of local set/reset loads for net reset_c merged into GSR:  32
+   Number of LSRs:  4
+     Net reset_c: 9 loads, 9 LSLICEs
+     Net jtaghub16_jrstn: 135 loads, 135 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/N_3_i: 179 loads, 165 LSLICEs
+     Net typecount_reveal_coretop_instance/core0/trig_u/te_0/cnt_reg_wen: 4
+     loads, 4 LSLICEs
+   Number of nets driven by tri-state buffers:  0
+   Top 10 highest fanout non-clock nets:
+     Net typecount_reveal_coretop_instance/core0/N_3_i: 179 loads
+     Net jtaghub16_jrstn: 137 loads
+     Net typecount_reveal_coretop_instance/core0/addr_1: 48 loads
+     Net typecount_reveal_coretop_instance/core0/jtag_int_u/jshift_d1: 44 loads
+     Net typecount_reveal_coretop_instance/core0/jtag_int_u/jshift_d1_rep2: 44
+     loads
+     Net typecount_reveal_coretop_instance/core0/addr_0: 40 loads
+     Net typecount_reveal_coretop_instance/core0/jtag_int_u/jshift_d1_rep1: 40
+     loads
+     Net typecount_reveal_coretop_instance/core0/tm_u/VCC: 40 loads
+     Net typecount_reveal_coretop_instance/core0/clear: 36 loads
+     Net typecount_reveal_coretop_instance/core0/addr_2: 35 loads
+
+
+
+
+   Number of warnings:  20
+   Number of errors:    0
+
+
+
+
+
+
+<A name="mrp_dwe"></A><B><U><big>Design Errors/Warnings</big></U></B>
+
+WARNING:  logical net 'ep5ahub/tcka' has no driver
+WARNING:  logical net 'ep5ahub/tmsa' has no driver
+WARNING:  logical net 'ep5ahub/tdia' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_1' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_2' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_3' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_4' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_5' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_6' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_7' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_8' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_9' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_10' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_11' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_12' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_13' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_14' has no driver
+WARNING:  logical net 'ep5ahub/er2_tdo_15' has no driver
+WARNING:  Using local reset signal 'reset_c' to infer global GSR net.
+WARNING:  The reset of EBR 'typecount_reveal_coretop_instance/core0/trig_u/te_0/
+     genblk0_genblk2_genblk3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+
+
+
+<A name="mrp_ioa"></A><B><U><big>IO (PIO) Attributes</big></U></B>
+
++---------------------+-----------+-----------+------------+------------+
+| IO Name             | Direction | Levelmode | IO         | FIXEDDELAY |
+|                     |           |  IO_TYPE  | Register   |            |
++---------------------+-----------+-----------+------------+------------+
+| count_0             | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| clk                 | INPUT     | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_31           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_30           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_29           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_28           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_27           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_26           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_25           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_24           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_23           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+
+| count3_22           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_21           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_20           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_19           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_18           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_17           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_16           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_15           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_14           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_13           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_12           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_11           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_10           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_9            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_8            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_7            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_6            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_5            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_4            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_3            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_2            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_1            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count3_0            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_15           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_14           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_13           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_12           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_11           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+
+| count2_10           | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_9            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_8            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_7            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_6            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_5            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_4            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_3            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_2            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_1            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count2_0            | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count_7             | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count_6             | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count_5             | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count_4             | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count_3             | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count_2             | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| count_1             | OUTPUT    | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| direction           | INPUT     | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+| reset               | INPUT     | LVCMOS25  |            |            |
++---------------------+-----------+-----------+------------+------------+
+
+
+
+<A name="mrp_rm"></A><B><U><big>Removed logic</big></U></B>
+
+Block ep5ahub/ip_enable_14 undriven or does not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/VCC_0 undriven or does not drive
+     anything - clipped.
+Block ep5ahub/ip_enable_15 undriven or does not drive anything - clipped.
+Block ep5ahub/cdn undriven or does not drive anything - clipped.
+Block typecount_reveal_coretop_instance/GND_0 undriven or does not drive
+     anything - clipped.
+Block typecount_reveal_coretop_instance/VCC_0 undriven or does not drive
+     anything - clipped.
+Block typecount_reveal_coretop_instance/core0/GND_0 undriven or does not drive
+     anything - clipped.
+Block typecount_reveal_coretop_instance/core0/tm_u/trigger_RNIVVB4 undriven or
+
+     does not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/GND_0 undriven or
+     does not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/VCC_0 undriven or
+     does not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/trig_lat_RNO
+     undriven or does not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/trig_lat undriven or
+     does not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_1_ram_0
+     /RAM2 undriven or does not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_ram_0/R
+     AM2 undriven or does not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genblk
+     3_te_tt_ebr_ram/scuba_vhi_inst undriven or does not drive anything -
+     clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/tu_1/GND_0 undriven or does
+     not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/tu_1/VCC_0 undriven or does
+     not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/tu_0/GND_0 undriven or does
+     not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/tu_0/VCC_0 undriven or does
+     not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/decode_u/GND_0 undriven or
+     does not drive anything - clipped.
+Block typecount_reveal_coretop_instance/core0/trig_u/decode_u/VCC_0 undriven or
+     does not drive anything - clipped.
+Signal ep5ahub/jrstn_i was merged into signal jtaghub16_jrstn
+Signal ep5ahub/jtck_i_0 was merged into signal jtaghub16_jtck
+Signal ep5ahub/genblk0_genblk3_jtagc_u_RNO_6 was merged into signal
+     ep5ahub/ip_enable_2
+Signal reset_c_i was merged into signal reset_c
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r11 was merged
+     into signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r10 was merged
+     into signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r9 was merged into
+     signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r8 was merged into
+     signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r7 was merged into
+     signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r6 was merged into
+     signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r5 was merged into
+     signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r4 was merged into
+     signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r3 was merged into
+     signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r2 was merged into
+     signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r1 was merged into
+     signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r0 was merged into
+
+     signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/tm_u/jrstn_i was merged into
+     signal jtaghub16_jrstn
+Signal typecount_reveal_coretop_instance/core0/tm_u/jtck_i was merged into
+     signal jtaghub16_jtck
+Signal typecount_reveal_coretop_instance/core0/tm_u/reset_n_i_r12 was merged
+     into signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/r_w_CN was merged into
+     signal jtaghub16_jtck
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_i_r7 was merged
+     into signal jtaghub16_jrstn
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_i_r6 was merged
+     into signal jtaghub16_jrstn
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_i_r5 was merged
+     into signal jtaghub16_jrstn
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_i_r4 was merged
+     into signal jtaghub16_jrstn
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_i_r3 was merged
+     into signal jtaghub16_jrstn
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_i_r2 was merged
+     into signal jtaghub16_jrstn
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_i_r1 was merged
+     into signal jtaghub16_jrstn
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_i_r0 was merged
+     into signal jtaghub16_jrstn
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/reset_n_i was merged
+     into signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/reset_n_i was
+     merged into signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/reset_n_i was merged
+     into signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/trig_u/tu_1/reset_n_i was merged
+     into signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal typecount_reveal_coretop_instance/core0/trig_u/tu_0/reset_n_i was merged
+     into signal typecount_reveal_coretop_instance/core0/N_3_i
+Signal ep5ahub/ip_enable_14 undriven or does not drive anything - clipped.
+Signal ep5ahub/jtdo2_int_m0 undriven or does not drive anything - clipped.
+Signal ep5ahub/jtdo2_int_m4 undriven or does not drive anything - clipped.
+Signal ep5ahub/jtdo2_int_m7 undriven or does not drive anything - clipped.
+Signal ep5ahub/jtdo2_int_m10 undriven or does not drive anything - clipped.
+Signal ep5ahub/jtdo2_int_m3_0_1 undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/scu
+     ba_vlo undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/scuba_vlo undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/VCC undriven or does not drive
+     anything - clipped.
+Signal ep5ahub/rom_rd_addr_s_0_S1_7 undriven or does not drive anything -
+     clipped.
+Signal ep5ahub/rom_rd_addr_s_0_COUT_7 undriven or does not drive anything -
+     clipped.
+Signal ep5ahub/er2_tdo_11 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_2 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_8 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_5 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_15 undriven or does not drive anything - clipped.
+
+Signal ep5ahub/er2_tdo_14 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_10 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_9 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_7 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_6 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_4 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_3 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_1 undriven or does not drive anything - clipped.
+Signal ep5ahub/ip_enable_15 undriven or does not drive anything - clipped.
+Signal ep5ahub/genblk0_genblk3_un1_jtagc_u undriven or does not drive anything -
+     clipped.
+Signal ep5ahub/genblk0_genblk3_un1_jtagc_u_2 undriven or does not drive anything
+     - clipped.
+Signal ep5ahub/genblk0_genblk3_un1_jtagc_u_1 undriven or does not drive anything
+     - clipped.
+Signal ep5ahub/tdoa undriven or does not drive anything - clipped.
+Signal ep5ahub/tdia undriven or does not drive anything - clipped.
+Signal ep5ahub/tmsa undriven or does not drive anything - clipped.
+Signal ep5ahub/tcka undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_13 undriven or does not drive anything - clipped.
+Signal ep5ahub/er2_tdo_12 undriven or does not drive anything - clipped.
+Signal ep5ahub/cdn undriven or does not drive anything - clipped.
+Signal ep5ahub/rom_rd_addr_cry_0_S0_0 undriven or does not drive anything -
+     clipped.
+Signal typecount_reveal_coretop_instance/VCC undriven or does not drive anything
+     - clipped.
+Signal typecount_reveal_coretop_instance/core0/GND undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/tm_rd_addr_cntr_s_0_S1_9
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/tm_rd_addr_cntr_s_0_COUT_9
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/tm_wr_addr_cntr_cry_0_S0_0
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/tm_wr_addr_cntr_s_0_S1_9
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/tm_wr_addr_cntr_s_0_COUT_9
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/pre_trig_cntr_cry_0_S0_0
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/pre_trig_cntr_s_0_S1_9
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/pre_trig_cntr_s_0_COUT_9
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/post_trig_cntr_cry_0_S0_0
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/post_trig_cntr_s_0_S1_9
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/post_trig_cntr_s_0_COUT_9
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trigger_out undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA17 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA16 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA15 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA14 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA13 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA12 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA11 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA10 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA9 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA8 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA7 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA6 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA5 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA4 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA3 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA2 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA1 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_5_1/DOA0 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA17 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA16 undriven or does not drive
+     anything - clipped.
+
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA15 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA14 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA13 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA12 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA11 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA10 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA9 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA8 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA7 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA6 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA5 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA4 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA3 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA2 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA1 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_4_2/DOA0 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA17 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA16 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA15 undriven or does not drive
+
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA14 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA13 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA12 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA11 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA10 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA9 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA8 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA7 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA6 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA5 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA4 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA3 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA2 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA1 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_3_3/DOA0 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA17 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA16 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA15 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA14 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA13 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA12 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA11 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA10 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA9 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA8 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA7 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA6 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA5 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA4 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA3 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA2 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA1 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_2_4/DOA0 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA17 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA16 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA15 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA14 undriven or does not drive
+     anything - clipped.
+
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA13 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA12 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA11 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA10 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA9 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA8 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA7 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA6 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA5 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA4 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA3 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA2 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA1 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_1_5/DOA0 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA17 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA16 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA15 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA14 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA13 undriven or does not drive
+
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA12 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA11 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA10 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA9 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA8 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA7 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA6 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA5 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA4 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA3 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA2 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA1 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_0_6/DOA0 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB17 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB16 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB15 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB14 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB13 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB12 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB11 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB10 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB9 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB8 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB7 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOB6 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA17 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA16 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA15 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA14 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA13 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA12 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA11 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA10 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA9 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA8 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA7 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA6 undriven or does not drive
+     anything - clipped.
+
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA5 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA4 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA3 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA2 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA1 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/pmi
+     _ram_dpEbnonesadr114101024114101024_0_6_0/DOA0 undriven or does not drive
+     anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/tm_u/tm_rd_addr_cntr_cry_0_S0_0
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/bit_cnt_cry_0_S0_0
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/bit_cnt_s_0_S1_5
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/bit_cnt_s_0_COUT_5
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/tr_dout_bit_cnt_cry_0_
+     S0_0 undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/tr_dout_bit_cnt_s_0_S1
+     _7 undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/jtag_int_u/tr_dout_bit_cnt_s_0_CO
+     UT_7 undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/rd_dout_tcnt_4 undriven or
+     does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/VCC undriven or
+     does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/trig_lat undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/N_10_i undriven or
+     does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_cry_0_S0_0
+     undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_cry_0_COUT
+     _3 undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_1_ram_
+     0_DO2 undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_1_ram_
+     0_DO3 undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_1_ram_
+     0_DO1 undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_ram_0_
+     DO2 undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_ram_0_
+     DO3 undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_ram_0_
+     DO1 undriven or does not drive anything - clipped.
+
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/scuba_vhi undriven or does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB17 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB16 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB15 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB14 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB13 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB12 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB11 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB10 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB9 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB8 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB7 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB6 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB5 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOB4 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA17 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA16 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA15 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA14 undriven or does
+     not drive anything - clipped.
+
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA13 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA12 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA11 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA10 undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA9 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA8 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA7 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA6 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA5 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA4 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA3 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA2 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA1 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genbl
+     k3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0/DOA0 undriven or does not
+     drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/rd_dout_tu_3 undriven or
+     does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/tu_1/VCC undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/rd_dout_tu_0_3 undriven or
+     does not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/tu_0/VCC undriven or does
+     not drive anything - clipped.
+Signal typecount_reveal_coretop_instance/core0/trig_u/decode_u/VCC undriven or
+     does not drive anything - clipped.
+Signal counter8/countai_s_0_S1_7 undriven or does not drive anything - clipped.
+Signal counter8/countai_s_0_COUT_7 undriven or does not drive anything -
+     clipped.
+Signal counter8/countai_cry_0_S0_0 undriven or does not drive anything -
+
+     clipped.
+Signal counter16/count2ai_cry_0_S0_0 undriven or does not drive anything -
+     clipped.
+Signal counter16/count2ai_s_0_S1_15 undriven or does not drive anything -
+     clipped.
+Signal counter16/count2ai_s_0_COUT_15 undriven or does not drive anything -
+     clipped.
+Block ep5ahub/genblk0_genblk3_jtagc_u_RNIGOU1 was optimized away.
+Block ep5ahub/jtck_inferred_clock_RNINV91 was optimized away.
+Block ep5ahub/genblk0_genblk3_jtagc_u_RNO_6 was optimized away.
+Block reset_pad_RNI5OA was optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_11 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_2 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406 was optimized
+     away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_0 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_3 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_10 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_7 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_6 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_5 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_4 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_9 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_1 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/jrstn_RNI7V4 was optimized
+     away.
+Block typecount_reveal_coretop_instance/core0/tm_u/jtck_RNI002 was optimized
+     away.
+Block typecount_reveal_coretop_instance/core0/tm_u/reset_n_RNI406_8 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/jtag_int_u/parity_calc_CN was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_RNI7V4_5 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_RNI7V4_2 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_RNI7V4_1 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_RNI7V4 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_RNI7V4_0 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_RNI7V4_3 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_RNI7V4_6 was
+
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/jtag_int_u/jrstn_RNI7V4_4 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/jtag_int_u/reset_n_RNI406 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/trig_u/tcnt_0/reset_n_RNI406 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/trig_u/te_0/reset_n_RNI406 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/trig_u/tu_1/reset_n_RNI406 was
+     optimized away.
+Block typecount_reveal_coretop_instance/core0/trig_u/tu_0/reset_n_RNI406 was
+     optimized away.
+Block ep5ahub/jtdo2_int_m0_0 was optimized away.
+Block ep5ahub/jtdo2_int_m4_0 was optimized away.
+Block ep5ahub/jtdo2_int_m7_0 was optimized away.
+Block ep5ahub/jtdo2_int_m10_0 was optimized away.
+Block ep5ahub/jtdo2_int_m3_0_1 was optimized away.
+Block typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem/scub
+     a_vlo_inst was optimized away.
+Block typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genblk
+     3_te_tt_ebr_ram/scuba_vlo_inst was optimized away.
+
+
+
+<A name="mrp_mem"></A><B><U><big>Memory Usage</big></U></B>
+
+    INFO: Design contains EBR with ASYNC Reset Mode that has a limitation:
+    The use of the EBR block asynchronous reset requires that certain timing
+    be met between the clock and the reset within the memory block.
+    See the device specific data sheet for additional details.
+
+
+
+
+/typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr_mem:
+    EBRs: 7
+    RAM SLICEs: 0
+    Logic SLICEs: 1
+    PFU Registers: 0
+    -Contains EBR pmi_ram_dpEbnonesadr114101024114101024_0_6_0:  TYPE= DP16KB,
+         Width_B= 6,  Depth_A= 1024,  Depth_B= 1024,  REGMODE_A= OUTREG,
+         REGMODE_B= OUTREG,  RESETMODE= ASYNC,  WRITEMODE_A= NORMAL,
+         WRITEMODE_B= NORMAL,  GSR= DISABLED,  MEM_LPC_FILE=
+         pmi_ram_dpEbnonesadr114101024114101024__PMIP__1024__114__114B
+    -Contains EBR pmi_ram_dpEbnonesadr114101024114101024_0_0_6:  TYPE= DP16KB,
+         Width_B= 18,  Depth_A= 1024,  Depth_B= 1024,  REGMODE_A= OUTREG,
+         REGMODE_B= OUTREG,  RESETMODE= ASYNC,  WRITEMODE_A= NORMAL,
+         WRITEMODE_B= NORMAL,  GSR= DISABLED,  MEM_LPC_FILE=
+         pmi_ram_dpEbnonesadr114101024114101024__PMIP__1024__114__114B
+    -Contains EBR pmi_ram_dpEbnonesadr114101024114101024_0_1_5:  TYPE= DP16KB,
+         Width_B= 18,  Depth_A= 1024,  Depth_B= 1024,  REGMODE_A= OUTREG,
+         REGMODE_B= OUTREG,  RESETMODE= ASYNC,  WRITEMODE_A= NORMAL,
+         WRITEMODE_B= NORMAL,  GSR= DISABLED,  MEM_LPC_FILE=
+         pmi_ram_dpEbnonesadr114101024114101024__PMIP__1024__114__114B
+    -Contains EBR pmi_ram_dpEbnonesadr114101024114101024_0_2_4:  TYPE= DP16KB,
+
+         Width_B= 18,  Depth_A= 1024,  Depth_B= 1024,  REGMODE_A= OUTREG,
+         REGMODE_B= OUTREG,  RESETMODE= ASYNC,  WRITEMODE_A= NORMAL,
+         WRITEMODE_B= NORMAL,  GSR= DISABLED,  MEM_LPC_FILE=
+         pmi_ram_dpEbnonesadr114101024114101024__PMIP__1024__114__114B
+    -Contains EBR pmi_ram_dpEbnonesadr114101024114101024_0_3_3:  TYPE= DP16KB,
+         Width_B= 18,  Depth_A= 1024,  Depth_B= 1024,  REGMODE_A= OUTREG,
+         REGMODE_B= OUTREG,  RESETMODE= ASYNC,  WRITEMODE_A= NORMAL,
+         WRITEMODE_B= NORMAL,  GSR= DISABLED,  MEM_LPC_FILE=
+         pmi_ram_dpEbnonesadr114101024114101024__PMIP__1024__114__114B
+    -Contains EBR pmi_ram_dpEbnonesadr114101024114101024_0_4_2:  TYPE= DP16KB,
+         Width_B= 18,  Depth_A= 1024,  Depth_B= 1024,  REGMODE_A= OUTREG,
+         REGMODE_B= OUTREG,  RESETMODE= ASYNC,  WRITEMODE_A= NORMAL,
+         WRITEMODE_B= NORMAL,  GSR= DISABLED,  MEM_LPC_FILE=
+         pmi_ram_dpEbnonesadr114101024114101024__PMIP__1024__114__114B
+    -Contains EBR pmi_ram_dpEbnonesadr114101024114101024_0_5_1:  TYPE= DP16KB,
+         Width_B= 18,  Depth_A= 1024,  Depth_B= 1024,  REGMODE_A= OUTREG,
+         REGMODE_B= OUTREG,  RESETMODE= ASYNC,  WRITEMODE_A= NORMAL,
+         WRITEMODE_B= NORMAL,  GSR= DISABLED,  MEM_LPC_FILE=
+         pmi_ram_dpEbnonesadr114101024114101024__PMIP__1024__114__114B
+/typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_1_ram:
+    EBRs: 0
+    RAM SLICEs: 3
+    Logic SLICEs: 0
+    PFU Registers: 0
+/typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_1_ram_0:
+    EBRs: 0
+    RAM SLICEs: 2
+    Logic SLICEs: 0
+    PFU Registers: 0
+/typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_1_ram_0/RAMW
+     :
+    EBRs: 0
+    RAM SLICEs: 1
+    Logic SLICEs: 0
+    PFU Registers: 0
+/typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_ram:
+    EBRs: 0
+    RAM SLICEs: 3
+    Logic SLICEs: 0
+    PFU Registers: 0
+/typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_ram_0:
+    EBRs: 0
+    RAM SLICEs: 2
+    Logic SLICEs: 0
+    PFU Registers: 0
+/typecount_reveal_coretop_instance/core0/trig_u/te_0/event_cntr_reg_ram_0/RAMW:
+    EBRs: 0
+    RAM SLICEs: 1
+    Logic SLICEs: 0
+    PFU Registers: 0
+/typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genblk2_genblk3_te_
+     tt_ebr_ram:
+    EBRs: 1
+    RAM SLICEs: 0
+    Logic SLICEs: 0
+    PFU Registers: 0
+
+    -Contains EBR pmi_ram_dpEbnonesadr424424_0_0_0:  TYPE= DP16KB,  Width_B= 4,
+         Depth_A= 4,  Depth_B= 4,  REGMODE_A= OUTREG,  REGMODE_B= OUTREG,
+         RESETMODE= ASYNC,  WRITEMODE_A= NORMAL,  WRITEMODE_B= NORMAL,  GSR=
+         DISABLED,  MEM_LPC_FILE= pmi_ram_dpEbnonesadr424424__PMIP__4__4__4B
+
+
+
+<A name="mrp_asic"></A><B><U><big>ASIC Components</big></U></B>
+---------------
+
+Instance Name: typecount_reveal_coretop_instance/core0/trig_u/te_0/genblk0_genbl
+     k2_genblk3_te_tt_ebr_ram/pmi_ram_dpEbnonesadr424424_0_0_0
+         Type: DP16KB
+Instance Name: typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr
+     _mem/pmi_ram_dpEbnonesadr114101024114101024_0_6_0
+         Type: DP16KB
+Instance Name: typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr
+     _mem/pmi_ram_dpEbnonesadr114101024114101024_0_0_6
+         Type: DP16KB
+Instance Name: typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr
+     _mem/pmi_ram_dpEbnonesadr114101024114101024_0_1_5
+         Type: DP16KB
+Instance Name: typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr
+     _mem/pmi_ram_dpEbnonesadr114101024114101024_0_2_4
+         Type: DP16KB
+Instance Name: typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr
+     _mem/pmi_ram_dpEbnonesadr114101024114101024_0_3_3
+         Type: DP16KB
+Instance Name: typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr
+     _mem/pmi_ram_dpEbnonesadr114101024114101024_0_4_2
+         Type: DP16KB
+Instance Name: typecount_reveal_coretop_instance/core0/tm_u/genblk10_genblk11_tr
+     _mem/pmi_ram_dpEbnonesadr114101024114101024_0_5_1
+         Type: DP16KB
+Instance Name: ep5ahub/genblk0_genblk3_jtagc_u
+         Type: JTAGC
+
+
+
+<A name="mrp_gsr"></A><B><U><big>GSR Usage</big></U></B>
+---------
+
+GSR Component:
+   The local reset signal 'reset_c' of the design has been inferred as Global
+        Set Reset (GSR). The reset signal used for GSR control is 'reset_c'.
+
+GSR Property:
+   The design components with GSR property set to ENABLED will respond to global
+        set reset while the components with GSR property set to DISABLED will
+        not.
+
+Components on inferred reset domain with GSR Property disabled
+--------------------------------------------------------------
+
+These components have the GSR property set to DISABLED and are on the inferred
+     reset domain. The components will respond to the reset signal 'reset_c' via
+     the local reset on the component and not the GSR component.
+
+Type and number of components of the type:
+   Register = 42
+
+Type and instance name of component:
+   Register : typecount_reveal_coretop_instance/core0/trig_u/tu_1/input_a_d1_0
+   Register : typecount_reveal_coretop_instance/core0/tm_u/trace_din_d_113
+   Register : counter16/count2_0
+
+   Register : counter16/count2_1
+   Register : counter16/count2_2
+   Register : counter16/count2_4
+   Register : counter16/count2_3
+   Register : counter16/count2_5
+   Register : counter16/count2_6
+   Register : counter16/count2_7
+   Register : counter16/count2_8
+   Register : counter16/count2_9
+   Register : counter16/count2_10
+   Register : counter16/count2_11
+   Register : counter16/count2_12
+   Register : counter16/count2_13
+   Register : counter16/count2_14
+   Register : counter16/count2_15
+   Register : counter8/count_7
+   Register : counter8/count_0
+   Register : counter8/count_1
+   Register : counter8/count_2
+   Register : counter8/count_3
+   Register : counter8/count_4
+   Register : counter8/count_5
+   Register : counter8/count_6
+   Register : counter8/countai_6
+   Register : counter8/countai_5
+   Register : counter8/countai_4
+   Register : counter8/countai_0
+   Register : counter8/countbi_7
+   Register : counter8/countbi_6
+   Register : counter8/countai_3
+   Register : counter8/countbi_5
+   Register : counter8/countbi_4
+   Register : counter8/countbi_3
+   Register : counter8/countai_2
+   Register : counter8/countai_1
+   Register : counter8/countbi_2
+   Register : counter8/countbi_1
+   Register : counter8/countbi_0
+   Register : counter8/countai_7
+
+
+
+<A name="mrp_runtime"></A><B><U><big>Run Time and Memory Usage</big></U></B>
+-------------------------
+
+   Total CPU Time: 1 secs
+   Total REAL Time: 2 secs
+   Peak Memory Usage: 83 MB
+
+
+
+
+
+
+
+
+
+
+
+
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995
+     AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent
+     Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems
+     All rights reserved.
+Copyright (c) 2002-2010 Lattice Semiconductor
+     Corporation,  All rights reserved.
+
+
+
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+</PRE></FONT>
+</BODY>
+</HTML>

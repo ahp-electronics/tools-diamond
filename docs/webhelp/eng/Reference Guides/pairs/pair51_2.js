@@ -1,0 +1,24 @@
+var pairs =
+{
+"hdl":{"attribute":1}
+,"maxdelay":{"xxx":1,"preference":1,"net":1}
+,"net":{"attribute":1,"bus":1,"netname":1}
+,"attribute":{"identifies":1}
+,"identifies":{"maximum":1}
+,"maximum":{"total":1}
+,"total":{"delay":1}
+,"delay":{"net":1}
+,"bus":{"path":1}
+,"path":{"design":1}
+,"design":{"translated":1}
+,"translated":{"mapper":1}
+,"mapper":{"maxdelay":1}
+,"xxx":{"value":1}
+,"value":{"expressed":1}
+,"expressed":{"nanoseconds":1}
+,"nanoseconds":{"resultant":1}
+,"resultant":{"preference":1}
+,"netname":{"xxx":1}
+,"device":{"support":1}
+}
+;Search.control.loadWordPairs(pairs);

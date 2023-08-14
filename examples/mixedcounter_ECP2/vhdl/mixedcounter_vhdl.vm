@@ -1,0 +1,1324 @@
+//
+// Written by Synplify
+// Product Version "C-2009.03L-1"
+// Program "Synplify Pro", Mapper "map400lat, Build 146R"
+// Tue Mar 09 10:43:54 2010
+//
+// Source file index table:
+// Object locations will have the form <file>:<line>
+// file 0 "noname"
+// file 1 "\c:\lscc\diamond\1.0\synpbase\lib\vhd\std.vhd "
+// file 2 "\c:\lscc\diamond\1.0\cae_library\synthesis\vhdl\ecp2.vhd "
+// file 3 "\c:\lscc\diamond\1.0\synpbase\lib\vhd\std1164.vhd "
+// file 4 "\c:\documents and settings\bcaslis\my documents\balidesigns\mixedcounter\vhdl\reveal_workspace\tmpreveal\typecount_rvl_top.vhd "
+// file 5 "\c:\lscc\diamond\1.0\synpbase\lib\vhd\numeric.vhd "
+
+`timescale 100 ps/100 ps
+module reveal_coretop (
+  clk,
+  reset_n,
+  trigger_din,
+  trace_din
+)
+;
+input clk ;
+input reset_n ;
+input [1:0] trigger_din ;
+input [113:0] trace_din ;
+wire clk ;
+wire reset_n ;
+wire [0:0] jtck;
+wire [0:0] jrstn;
+wire [0:0] jce2;
+wire [0:0] jtdi;
+wire [0:0] er2_tdo;
+wire [0:0] jshift;
+wire [0:0] jupdate;
+wire [0:0] ip_enable;
+wire GND ;
+wire VCC ;
+wire GND_Z ;
+wire VCC_Z ;
+  VHI VCC_0 (
+	.Z(VCC)
+);
+  VLO GND_0 (
+	.Z(GND)
+);
+// @4:174
+  jtagconn16 jtag0 (
+	.jtck(jtck[0]),
+	.jtdi(jtdi[0]),
+	.jshift(jshift[0]),
+	.jupdate(jupdate[0]),
+	.jrstn(jrstn[0]),
+	.jce2(jce2[0]),
+	.ip_enable(ip_enable[0]),
+	.er2_tdo(er2_tdo[0])
+);
+// @4:172
+  mixedcounter_mixedcounter_la0 core0 (
+	.clk(clk),
+	.reset_n(VCC),
+	.jtck(jtck[0]),
+	.jrstn(jrstn[0]),
+	.jce2(jce2[0]),
+	.jtdi(jtdi[0]),
+	.er2_tdo(er2_tdo[0]),
+	.jshift(jshift[0]),
+	.jupdate(jupdate[0]),
+	.trigger_din_0(trigger_din[0]),
+	.trigger_din_1(trigger_din[1]),
+	.trace_din({trigger_din[1], trigger_din[0], trace_din[103], trace_din[102], 
+   trace_din[101], trace_din[100], trace_din[99], trace_din[98], trace_din[97], 
+   trace_din[96], trace_din[103], trace_din[102], trace_din[101], trace_din[100], 
+   trace_din[99], trace_din[98], trace_din[97], trace_din[96], trace_din[32], 
+   trace_din[33], trace_din[34], trace_din[35], trace_din[36], trace_din[37], 
+   trace_din[38], trace_din[39], trace_din[40], trace_din[41], trace_din[42], 
+   trace_din[43], trace_din[44], trace_din[45], trace_din[46], trace_din[47], 
+   trace_din[48], trace_din[49], trace_din[50], trace_din[51], trace_din[52], 
+   trace_din[53], trace_din[54], trace_din[55], trace_din[56], trace_din[57], 
+   trace_din[58], trace_din[59], trace_din[60], trace_din[61], trace_din[62], 
+   trace_din[63], trace_din[63], trace_din[62], trace_din[61], trace_din[60], 
+   trace_din[59], trace_din[58], trace_din[57], trace_din[56], trace_din[55], 
+   trace_din[54], trace_din[53], trace_din[52], trace_din[51], trace_din[50], 
+   trace_din[49], trace_din[48], trace_din[47], trace_din[46], trace_din[45], 
+   trace_din[44], trace_din[43], trace_din[42], trace_din[41], trace_din[40], 
+   trace_din[39], trace_din[38], trace_din[37], trace_din[36], trace_din[35], 
+   trace_din[34], trace_din[33], trace_din[32], trace_din[15], trace_din[14], 
+   trace_din[13], trace_din[12], trace_din[11], trace_din[10], trace_din[9], 
+   trace_din[8], trace_din[7], trace_din[6], trace_din[5], trace_din[4], 
+   trace_din[3], trace_din[2], trace_din[1], trace_din[0], trace_din[15], 
+   trace_din[14], trace_din[13], trace_din[12], trace_din[11], trace_din[10], 
+   trace_din[9], trace_din[8], trace_din[7], trace_din[6], trace_din[5], 
+   trace_din[4], trace_din[3], trace_din[2], trace_din[1], trace_din[0]}),
+	.ip_enable(ip_enable[0])
+);
+  assign GND_Z = 1'b0;
+  assign VCC_Z = 1'b1;
+endmodule /* reveal_coretop */
+
+module count8_uniq_0 (
+  countt_1,
+  GND,
+  N_1_i_c,
+  reset_c_i,
+  VCC,
+  reset_c,
+  clk_c
+)
+;
+output [7:0] countt_1 ;
+input GND ;
+input N_1_i_c ;
+input reset_c_i ;
+input VCC ;
+input reset_c ;
+input clk_c ;
+wire GND ;
+wire N_1_i_c ;
+wire reset_c_i ;
+wire VCC ;
+wire reset_c ;
+wire clk_c ;
+wire [7:0] countai;
+wire [7:0] countbi;
+wire [7:0] countbi_QN;
+wire [7:0] count_QN;
+wire [7:0] countai_s;
+wire [7:0] countai_QN;
+wire [6:0] countai_cry;
+wire [7:7] countai_s_0_COUT;
+wire [7:7] countai_s_0_S1;
+wire [0:0] countai_cry_0_S0;
+wire NN_1 ;
+wire NN_2 ;
+  FD1S3DX \countbi_Z[0]  (
+	.D(countai[0]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countbi[0])
+);
+  FD1P3AX \count_Z[0]  (
+	.D(countbi[0]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(countt_1[0])
+);
+  FD1S3DX \countbi_Z[1]  (
+	.D(countai[1]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countbi[1])
+);
+  FD1P3AX \count_Z[1]  (
+	.D(countbi[1]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(countt_1[1])
+);
+  FD1S3DX \countbi_Z[2]  (
+	.D(countai[2]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countbi[2])
+);
+  FD1S3DX \countai_Z[1]  (
+	.D(countai_s[1]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countai[1])
+);
+  FD1S3DX \countai_Z[2]  (
+	.D(countai_s[2]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countai[2])
+);
+  FD1P3AX \count_Z[2]  (
+	.D(countbi[2]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(countt_1[2])
+);
+  FD1S3DX \countbi_Z[3]  (
+	.D(countai[3]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countbi[3])
+);
+  FD1P3AX \count_Z[3]  (
+	.D(countbi[3]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(countt_1[3])
+);
+  FD1S3DX \countbi_Z[4]  (
+	.D(countai[4]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countbi[4])
+);
+  FD1S3DX \countbi_Z[5]  (
+	.D(countai[5]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countbi[5])
+);
+  FD1S3DX \countai_Z[3]  (
+	.D(countai_s[3]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countai[3])
+);
+  FD1P3AX \count_Z[4]  (
+	.D(countbi[4]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(countt_1[4])
+);
+  FD1P3AX \count_Z[5]  (
+	.D(countbi[5]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(countt_1[5])
+);
+  FD1P3AX \count_Z[6]  (
+	.D(countbi[6]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(countt_1[6])
+);
+  FD1S3DX \countbi_Z[6]  (
+	.D(countai[6]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countbi[6])
+);
+  FD1S3DX \countbi_Z[7]  (
+	.D(countai[7]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countbi[7])
+);
+  FD1S3DX \countai_Z[0]  (
+	.D(countai_s[0]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countai[0])
+);
+  FD1S3DX \countai_Z[4]  (
+	.D(countai_s[4]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countai[4])
+);
+  FD1S3DX \countai_Z[5]  (
+	.D(countai_s[5]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countai[5])
+);
+  FD1S3DX \countai_Z[6]  (
+	.D(countai_s[6]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countai[6])
+);
+  FD1P3AX \count_Z[7]  (
+	.D(countbi[7]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(countt_1[7])
+);
+  FD1S3DX \countai_Z[7]  (
+	.D(countai_s[7]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(countai[7])
+);
+// @4:667
+  CCU2B \countai_s_0[7]  (
+	.A0(N_1_i_c),
+	.B0(countai[7]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(GND),
+	.B1(GND),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(countai_cry[6]),
+	.COUT(countai_s_0_COUT[7]),
+	.S0(countai_s[7]),
+	.S1(countai_s_0_S1[7])
+);
+defparam \countai_s_0[7] .INIT0=16'h090a;
+defparam \countai_s_0[7] .INIT1=16'h0a0c;
+defparam \countai_s_0[7] .INJECT1_0="NO";
+defparam \countai_s_0[7] .INJECT1_1="NO";
+// @4:667
+  CCU2B \countai_cry_0[5]  (
+	.A0(N_1_i_c),
+	.B0(countai[5]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(countai[6]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(countai_cry[4]),
+	.COUT(countai_cry[6]),
+	.S0(countai_s[5]),
+	.S1(countai_s[6])
+);
+defparam \countai_cry_0[5] .INIT0=16'h0905;
+defparam \countai_cry_0[5] .INIT1=16'h0905;
+defparam \countai_cry_0[5] .INJECT1_0="NO";
+defparam \countai_cry_0[5] .INJECT1_1="NO";
+// @4:667
+  CCU2B \countai_cry_0[3]  (
+	.A0(N_1_i_c),
+	.B0(countai[3]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(countai[4]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(countai_cry[2]),
+	.COUT(countai_cry[4]),
+	.S0(countai_s[3]),
+	.S1(countai_s[4])
+);
+defparam \countai_cry_0[3] .INIT0=16'h0905;
+defparam \countai_cry_0[3] .INIT1=16'h0905;
+defparam \countai_cry_0[3] .INJECT1_0="NO";
+defparam \countai_cry_0[3] .INJECT1_1="NO";
+// @4:667
+  CCU2B \countai_cry_0[1]  (
+	.A0(N_1_i_c),
+	.B0(countai[1]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(countai[2]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(countai_cry[0]),
+	.COUT(countai_cry[2]),
+	.S0(countai_s[1]),
+	.S1(countai_s[2])
+);
+defparam \countai_cry_0[1] .INIT0=16'h0905;
+defparam \countai_cry_0[1] .INIT1=16'h0905;
+defparam \countai_cry_0[1] .INJECT1_0="NO";
+defparam \countai_cry_0[1] .INJECT1_1="NO";
+  CCU2B \countai_cry_0[0]  (
+	.A0(GND),
+	.B0(N_1_i_c),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(countai[0]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(GND),
+	.COUT(countai_cry[0]),
+	.S0(countai_cry_0_S0[0]),
+	.S1(countai_s[0])
+);
+defparam \countai_cry_0[0] .INIT0=16'h0a0c;
+defparam \countai_cry_0[0] .INIT1=16'h0905;
+defparam \countai_cry_0[0] .INJECT1_0="NO";
+defparam \countai_cry_0[0] .INJECT1_1="NO";
+  assign NN_1 = 1'b0;
+  assign NN_2 = 1'b1;
+endmodule /* count8_uniq_0 */
+
+module count16_uniq_0 (
+  count2t_1,
+  GND,
+  N_1_i_c,
+  reset_c_i,
+  VCC,
+  reset_c,
+  clk_c
+)
+;
+output [15:0] count2t_1 ;
+input GND ;
+input N_1_i_c ;
+input reset_c_i ;
+input VCC ;
+input reset_c ;
+input clk_c ;
+wire GND ;
+wire N_1_i_c ;
+wire reset_c_i ;
+wire VCC ;
+wire reset_c ;
+wire clk_c ;
+wire [15:0] count2ai;
+wire [15:0] count2bi;
+wire [15:0] count2bi_QN;
+wire [15:0] count2_QN;
+wire [15:0] count2ai_s;
+wire [15:0] count2ai_QN;
+wire [14:0] count2ai_cry;
+wire [15:15] count2ai_s_0_COUT;
+wire [15:15] count2ai_s_0_S1;
+wire [0:0] count2ai_cry_0_S0;
+wire NN_1 ;
+wire NN_2 ;
+  FD1S3DX \count2bi_Z[0]  (
+	.D(count2ai[0]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[0])
+);
+  FD1P3AX \count2_Z[0]  (
+	.D(count2bi[0]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[0])
+);
+  FD1S3DX \count2bi_Z[1]  (
+	.D(count2ai[1]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[1])
+);
+  FD1P3AX \count2_Z[1]  (
+	.D(count2bi[1]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[1])
+);
+  FD1P3AX \count2_Z[2]  (
+	.D(count2bi[2]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[2])
+);
+  FD1S3DX \count2bi_Z[2]  (
+	.D(count2ai[2]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[2])
+);
+  FD1S3DX \count2bi_Z[3]  (
+	.D(count2ai[3]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[3])
+);
+  FD1S3DX \count2bi_Z[4]  (
+	.D(count2ai[4]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[4])
+);
+  FD1P3AX \count2_Z[4]  (
+	.D(count2bi[4]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[4])
+);
+  FD1S3DX \count2bi_Z[5]  (
+	.D(count2ai[5]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[5])
+);
+  FD1S3DX \count2bi_Z[6]  (
+	.D(count2ai[6]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[6])
+);
+  FD1S3DX \count2bi_Z[7]  (
+	.D(count2ai[7]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[7])
+);
+  FD1S3DX \count2bi_Z[8]  (
+	.D(count2ai[8]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[8])
+);
+  FD1S3DX \count2ai_Z[0]  (
+	.D(count2ai_s[0]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[0])
+);
+  FD1S3DX \count2ai_Z[1]  (
+	.D(count2ai_s[1]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[1])
+);
+  FD1S3DX \count2ai_Z[2]  (
+	.D(count2ai_s[2]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[2])
+);
+  FD1P3AX \count2_Z[3]  (
+	.D(count2bi[3]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[3])
+);
+  FD1P3AX \count2_Z[5]  (
+	.D(count2bi[5]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[5])
+);
+  FD1P3AX \count2_Z[6]  (
+	.D(count2bi[6]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[6])
+);
+  FD1P3AX \count2_Z[7]  (
+	.D(count2bi[7]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[7])
+);
+  FD1S3DX \count2bi_Z[11]  (
+	.D(count2ai[11]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[11])
+);
+  FD1S3DX \count2bi_Z[12]  (
+	.D(count2ai[12]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[12])
+);
+  FD1S3DX \count2ai_Z[3]  (
+	.D(count2ai_s[3]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[3])
+);
+  FD1P3AX \count2_Z[8]  (
+	.D(count2bi[8]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[8])
+);
+  FD1S3DX \count2bi_Z[9]  (
+	.D(count2ai[9]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[9])
+);
+  FD1S3DX \count2bi_Z[10]  (
+	.D(count2ai[10]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[10])
+);
+  FD1S3DX \count2bi_Z[13]  (
+	.D(count2ai[13]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[13])
+);
+  FD1S3DX \count2bi_Z[14]  (
+	.D(count2ai[14]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[14])
+);
+  FD1S3DX \count2bi_Z[15]  (
+	.D(count2ai[15]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2bi[15])
+);
+  FD1S3DX \count2ai_Z[4]  (
+	.D(count2ai_s[4]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[4])
+);
+  FD1S3DX \count2ai_Z[5]  (
+	.D(count2ai_s[5]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[5])
+);
+  FD1S3DX \count2ai_Z[6]  (
+	.D(count2ai_s[6]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[6])
+);
+  FD1S3DX \count2ai_Z[7]  (
+	.D(count2ai_s[7]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[7])
+);
+  FD1S3DX \count2ai_Z[8]  (
+	.D(count2ai_s[8]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[8])
+);
+  FD1P3AX \count2_Z[9]  (
+	.D(count2bi[9]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[9])
+);
+  FD1S3DX \count2ai_Z[9]  (
+	.D(count2ai_s[9]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[9])
+);
+  FD1P3AX \count2_Z[10]  (
+	.D(count2bi[10]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[10])
+);
+  FD1S3DX \count2ai_Z[10]  (
+	.D(count2ai_s[10]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[10])
+);
+  FD1P3AX \count2_Z[11]  (
+	.D(count2bi[11]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[11])
+);
+  FD1S3DX \count2ai_Z[11]  (
+	.D(count2ai_s[11]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[11])
+);
+  FD1P3AX \count2_Z[12]  (
+	.D(count2bi[12]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[12])
+);
+  FD1S3DX \count2ai_Z[12]  (
+	.D(count2ai_s[12]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[12])
+);
+  FD1S3DX \count2ai_Z[13]  (
+	.D(count2ai_s[13]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[13])
+);
+  FD1P3AX \count2_Z[13]  (
+	.D(count2bi[13]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[13])
+);
+  FD1S3DX \count2ai_Z[14]  (
+	.D(count2ai_s[14]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[14])
+);
+  FD1P3AX \count2_Z[14]  (
+	.D(count2bi[14]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[14])
+);
+  FD1S3DX \count2ai_Z[15]  (
+	.D(count2ai_s[15]),
+	.CK(clk_c),
+	.CD(reset_c),
+	.Q(count2ai[15])
+);
+  FD1P3AX \count2_Z[15]  (
+	.D(count2bi[15]),
+	.SP(reset_c_i),
+	.CK(clk_c),
+	.Q(count2t_1[15])
+);
+// @4:688
+  CCU2B \count2ai_s_0[15]  (
+	.A0(N_1_i_c),
+	.B0(count2ai[15]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(GND),
+	.B1(GND),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(count2ai_cry[14]),
+	.COUT(count2ai_s_0_COUT[15]),
+	.S0(count2ai_s[15]),
+	.S1(count2ai_s_0_S1[15])
+);
+defparam \count2ai_s_0[15] .INIT0=16'h090a;
+defparam \count2ai_s_0[15] .INIT1=16'h0a0c;
+defparam \count2ai_s_0[15] .INJECT1_0="NO";
+defparam \count2ai_s_0[15] .INJECT1_1="NO";
+// @4:688
+  CCU2B \count2ai_cry_0[13]  (
+	.A0(N_1_i_c),
+	.B0(count2ai[13]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(count2ai[14]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(count2ai_cry[12]),
+	.COUT(count2ai_cry[14]),
+	.S0(count2ai_s[13]),
+	.S1(count2ai_s[14])
+);
+defparam \count2ai_cry_0[13] .INIT0=16'h0905;
+defparam \count2ai_cry_0[13] .INIT1=16'h0905;
+defparam \count2ai_cry_0[13] .INJECT1_0="NO";
+defparam \count2ai_cry_0[13] .INJECT1_1="NO";
+// @4:688
+  CCU2B \count2ai_cry_0[11]  (
+	.A0(N_1_i_c),
+	.B0(count2ai[11]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(count2ai[12]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(count2ai_cry[10]),
+	.COUT(count2ai_cry[12]),
+	.S0(count2ai_s[11]),
+	.S1(count2ai_s[12])
+);
+defparam \count2ai_cry_0[11] .INIT0=16'h0905;
+defparam \count2ai_cry_0[11] .INIT1=16'h0905;
+defparam \count2ai_cry_0[11] .INJECT1_0="NO";
+defparam \count2ai_cry_0[11] .INJECT1_1="NO";
+// @4:688
+  CCU2B \count2ai_cry_0[9]  (
+	.A0(N_1_i_c),
+	.B0(count2ai[9]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(count2ai[10]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(count2ai_cry[8]),
+	.COUT(count2ai_cry[10]),
+	.S0(count2ai_s[9]),
+	.S1(count2ai_s[10])
+);
+defparam \count2ai_cry_0[9] .INIT0=16'h0905;
+defparam \count2ai_cry_0[9] .INIT1=16'h0905;
+defparam \count2ai_cry_0[9] .INJECT1_0="NO";
+defparam \count2ai_cry_0[9] .INJECT1_1="NO";
+// @4:688
+  CCU2B \count2ai_cry_0[7]  (
+	.A0(N_1_i_c),
+	.B0(count2ai[7]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(count2ai[8]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(count2ai_cry[6]),
+	.COUT(count2ai_cry[8]),
+	.S0(count2ai_s[7]),
+	.S1(count2ai_s[8])
+);
+defparam \count2ai_cry_0[7] .INIT0=16'h0905;
+defparam \count2ai_cry_0[7] .INIT1=16'h0905;
+defparam \count2ai_cry_0[7] .INJECT1_0="NO";
+defparam \count2ai_cry_0[7] .INJECT1_1="NO";
+// @4:688
+  CCU2B \count2ai_cry_0[5]  (
+	.A0(N_1_i_c),
+	.B0(count2ai[5]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(count2ai[6]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(count2ai_cry[4]),
+	.COUT(count2ai_cry[6]),
+	.S0(count2ai_s[5]),
+	.S1(count2ai_s[6])
+);
+defparam \count2ai_cry_0[5] .INIT0=16'h0905;
+defparam \count2ai_cry_0[5] .INIT1=16'h0905;
+defparam \count2ai_cry_0[5] .INJECT1_0="NO";
+defparam \count2ai_cry_0[5] .INJECT1_1="NO";
+// @4:688
+  CCU2B \count2ai_cry_0[3]  (
+	.A0(N_1_i_c),
+	.B0(count2ai[3]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(count2ai[4]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(count2ai_cry[2]),
+	.COUT(count2ai_cry[4]),
+	.S0(count2ai_s[3]),
+	.S1(count2ai_s[4])
+);
+defparam \count2ai_cry_0[3] .INIT0=16'h0905;
+defparam \count2ai_cry_0[3] .INIT1=16'h0905;
+defparam \count2ai_cry_0[3] .INJECT1_0="NO";
+defparam \count2ai_cry_0[3] .INJECT1_1="NO";
+// @4:688
+  CCU2B \count2ai_cry_0[1]  (
+	.A0(N_1_i_c),
+	.B0(count2ai[1]),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(count2ai[2]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(count2ai_cry[0]),
+	.COUT(count2ai_cry[2]),
+	.S0(count2ai_s[1]),
+	.S1(count2ai_s[2])
+);
+defparam \count2ai_cry_0[1] .INIT0=16'h0905;
+defparam \count2ai_cry_0[1] .INIT1=16'h0905;
+defparam \count2ai_cry_0[1] .INJECT1_0="NO";
+defparam \count2ai_cry_0[1] .INJECT1_1="NO";
+  CCU2B \count2ai_cry_0[0]  (
+	.A0(GND),
+	.B0(N_1_i_c),
+	.C0(GND),
+	.D0(VCC),
+	.A1(N_1_i_c),
+	.B1(count2ai[0]),
+	.C1(GND),
+	.D1(VCC),
+	.CIN(GND),
+	.COUT(count2ai_cry[0]),
+	.S0(count2ai_cry_0_S0[0]),
+	.S1(count2ai_s[0])
+);
+defparam \count2ai_cry_0[0] .INIT0=16'h0a0c;
+defparam \count2ai_cry_0[0] .INIT1=16'h0905;
+defparam \count2ai_cry_0[0] .INJECT1_0="NO";
+defparam \count2ai_cry_0[0] .INJECT1_1="NO";
+  assign NN_1 = 1'b0;
+  assign NN_2 = 1'b1;
+endmodule /* count16_uniq_0 */
+
+module typecount (
+  clk,
+  reset,
+  direction,
+  count,
+  count2,
+  count3
+)
+;
+input clk ;
+input reset ;
+input direction ;
+output [7:0] count ;
+output [15:0] count2 ;
+output [31:0] count3 ;
+wire clk ;
+wire reset ;
+wire direction ;
+wire [31:0] count3_c;
+wire N_1_i_c ;
+wire GND ;
+wire VCC ;
+wire clk_c ;
+wire reset_c ;
+wire reset_c_i ;
+wire GND_Z ;
+wire VCC_Z ;
+  PUR PUR_INST (
+	.PUR(VCC)
+);
+  GSR GSR_INST (
+	.GSR(VCC)
+);
+  VHI VCC_0 (
+	.Z(VCC)
+);
+  VLO GND_0 (
+	.Z(GND)
+);
+// @4:499
+  INV reset_pad_RNI5OA (
+	.A(reset_c),
+	.Z(reset_c_i)
+);
+// @4:345
+  OB \count3_pad[31]  (
+	.I(count3_c[31]),
+	.O(count3[31])
+);
+// @4:345
+  OB \count3_pad[30]  (
+	.I(count3_c[30]),
+	.O(count3[30])
+);
+// @4:345
+  OB \count3_pad[29]  (
+	.I(count3_c[29]),
+	.O(count3[29])
+);
+// @4:345
+  OB \count3_pad[28]  (
+	.I(count3_c[28]),
+	.O(count3[28])
+);
+// @4:345
+  OB \count3_pad[27]  (
+	.I(count3_c[27]),
+	.O(count3[27])
+);
+// @4:345
+  OB \count3_pad[26]  (
+	.I(count3_c[26]),
+	.O(count3[26])
+);
+// @4:345
+  OB \count3_pad[25]  (
+	.I(count3_c[25]),
+	.O(count3[25])
+);
+// @4:345
+  OB \count3_pad[24]  (
+	.I(count3_c[24]),
+	.O(count3[24])
+);
+// @4:345
+  OB \count3_pad[23]  (
+	.I(count3_c[23]),
+	.O(count3[23])
+);
+// @4:345
+  OB \count3_pad[22]  (
+	.I(count3_c[22]),
+	.O(count3[22])
+);
+// @4:345
+  OB \count3_pad[21]  (
+	.I(count3_c[21]),
+	.O(count3[21])
+);
+// @4:345
+  OB \count3_pad[20]  (
+	.I(count3_c[20]),
+	.O(count3[20])
+);
+// @4:345
+  OB \count3_pad[19]  (
+	.I(count3_c[19]),
+	.O(count3[19])
+);
+// @4:345
+  OB \count3_pad[18]  (
+	.I(count3_c[18]),
+	.O(count3[18])
+);
+// @4:345
+  OB \count3_pad[17]  (
+	.I(count3_c[17]),
+	.O(count3[17])
+);
+// @4:345
+  OB \count3_pad[16]  (
+	.I(count3_c[16]),
+	.O(count3[16])
+);
+// @4:345
+  OB \count3_pad[15]  (
+	.I(count3_c[7]),
+	.O(count3[15])
+);
+// @4:345
+  OB \count3_pad[14]  (
+	.I(count3_c[6]),
+	.O(count3[14])
+);
+// @4:345
+  OB \count3_pad[13]  (
+	.I(count3_c[5]),
+	.O(count3[13])
+);
+// @4:345
+  OB \count3_pad[12]  (
+	.I(count3_c[4]),
+	.O(count3[12])
+);
+// @4:345
+  OB \count3_pad[11]  (
+	.I(count3_c[3]),
+	.O(count3[11])
+);
+// @4:345
+  OB \count3_pad[10]  (
+	.I(count3_c[2]),
+	.O(count3[10])
+);
+// @4:345
+  OB \count3_pad[9]  (
+	.I(count3_c[1]),
+	.O(count3[9])
+);
+// @4:345
+  OB \count3_pad[8]  (
+	.I(count3_c[0]),
+	.O(count3[8])
+);
+// @4:345
+  OB \count3_pad[7]  (
+	.I(count3_c[7]),
+	.O(count3[7])
+);
+// @4:345
+  OB \count3_pad[6]  (
+	.I(count3_c[6]),
+	.O(count3[6])
+);
+// @4:345
+  OB \count3_pad[5]  (
+	.I(count3_c[5]),
+	.O(count3[5])
+);
+// @4:345
+  OB \count3_pad[4]  (
+	.I(count3_c[4]),
+	.O(count3[4])
+);
+// @4:345
+  OB \count3_pad[3]  (
+	.I(count3_c[3]),
+	.O(count3[3])
+);
+// @4:345
+  OB \count3_pad[2]  (
+	.I(count3_c[2]),
+	.O(count3[2])
+);
+// @4:345
+  OB \count3_pad[1]  (
+	.I(count3_c[1]),
+	.O(count3[1])
+);
+// @4:345
+  OB \count3_pad[0]  (
+	.I(count3_c[0]),
+	.O(count3[0])
+);
+// @4:344
+  OB \count2_pad[15]  (
+	.I(count3_c[31]),
+	.O(count2[15])
+);
+// @4:344
+  OB \count2_pad[14]  (
+	.I(count3_c[30]),
+	.O(count2[14])
+);
+// @4:344
+  OB \count2_pad[13]  (
+	.I(count3_c[29]),
+	.O(count2[13])
+);
+// @4:344
+  OB \count2_pad[12]  (
+	.I(count3_c[28]),
+	.O(count2[12])
+);
+// @4:344
+  OB \count2_pad[11]  (
+	.I(count3_c[27]),
+	.O(count2[11])
+);
+// @4:344
+  OB \count2_pad[10]  (
+	.I(count3_c[26]),
+	.O(count2[10])
+);
+// @4:344
+  OB \count2_pad[9]  (
+	.I(count3_c[25]),
+	.O(count2[9])
+);
+// @4:344
+  OB \count2_pad[8]  (
+	.I(count3_c[24]),
+	.O(count2[8])
+);
+// @4:344
+  OB \count2_pad[7]  (
+	.I(count3_c[23]),
+	.O(count2[7])
+);
+// @4:344
+  OB \count2_pad[6]  (
+	.I(count3_c[22]),
+	.O(count2[6])
+);
+// @4:344
+  OB \count2_pad[5]  (
+	.I(count3_c[21]),
+	.O(count2[5])
+);
+// @4:344
+  OB \count2_pad[4]  (
+	.I(count3_c[20]),
+	.O(count2[4])
+);
+// @4:344
+  OB \count2_pad[3]  (
+	.I(count3_c[19]),
+	.O(count2[3])
+);
+// @4:344
+  OB \count2_pad[2]  (
+	.I(count3_c[18]),
+	.O(count2[2])
+);
+// @4:344
+  OB \count2_pad[1]  (
+	.I(count3_c[17]),
+	.O(count2[1])
+);
+// @4:344
+  OB \count2_pad[0]  (
+	.I(count3_c[16]),
+	.O(count2[0])
+);
+// @4:343
+  OB \count_pad[7]  (
+	.I(count3_c[7]),
+	.O(count[7])
+);
+// @4:343
+  OB \count_pad[6]  (
+	.I(count3_c[6]),
+	.O(count[6])
+);
+// @4:343
+  OB \count_pad[5]  (
+	.I(count3_c[5]),
+	.O(count[5])
+);
+// @4:343
+  OB \count_pad[4]  (
+	.I(count3_c[4]),
+	.O(count[4])
+);
+// @4:343
+  OB \count_pad[3]  (
+	.I(count3_c[3]),
+	.O(count[3])
+);
+// @4:343
+  OB \count_pad[2]  (
+	.I(count3_c[2]),
+	.O(count[2])
+);
+// @4:343
+  OB \count_pad[1]  (
+	.I(count3_c[1]),
+	.O(count[1])
+);
+// @4:343
+  OB \count_pad[0]  (
+	.I(count3_c[0]),
+	.O(count[0])
+);
+// @4:342
+  IB direction_pad (
+	.I(direction),
+	.O(N_1_i_c)
+);
+// @4:341
+  IB reset_pad (
+	.I(reset),
+	.O(reset_c)
+);
+// @4:340
+  IB clk_pad (
+	.I(clk),
+	.O(clk_c)
+);
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:501
+//@4:500
+//@4:500
+//@4:500
+//@4:500
+//@4:500
+//@4:500
+//@4:500
+//@4:500
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+//@4:499
+// @4:658
+  reveal_coretop typecount_reveal_coretop_instance (
+	.clk(clk_c),
+	.reset_n(VCC),
+	.trigger_din({reset_c, N_1_i_c}),
+	.trace_din({reset_c, N_1_i_c, count3_c[7], count3_c[6], count3_c[5], count3_c[4], 
+   count3_c[3], count3_c[2], count3_c[1], count3_c[0], count3_c[7], count3_c[6], 
+   count3_c[5], count3_c[4], count3_c[3], count3_c[2], count3_c[1], count3_c[0], 
+   count3_c[0], count3_c[1], count3_c[2], count3_c[3], count3_c[4], count3_c[5], 
+   count3_c[6], count3_c[7], count3_c[0], count3_c[1], count3_c[2], count3_c[3], 
+   count3_c[4], count3_c[5], count3_c[6], count3_c[7], count3_c[16], count3_c[17], 
+   count3_c[18], count3_c[19], count3_c[20], count3_c[21], count3_c[22], 
+   count3_c[23], count3_c[24], count3_c[25], count3_c[26], count3_c[27], 
+   count3_c[28], count3_c[29], count3_c[30], count3_c[31], count3_c[31], 
+   count3_c[30], count3_c[29], count3_c[28], count3_c[27], count3_c[26], 
+   count3_c[25], count3_c[24], count3_c[23], count3_c[22], count3_c[21], 
+   count3_c[20], count3_c[19], count3_c[18], count3_c[17], count3_c[16], 
+   count3_c[7], count3_c[6], count3_c[5], count3_c[4], count3_c[3], count3_c[2], 
+   count3_c[1], count3_c[0], count3_c[7], count3_c[6], count3_c[5], count3_c[4], 
+   count3_c[3], count3_c[2], count3_c[1], count3_c[0], count3_c[31], count3_c[30], 
+   count3_c[29], count3_c[28], count3_c[27], count3_c[26], count3_c[25], 
+   count3_c[24], count3_c[23], count3_c[22], count3_c[21], count3_c[20], 
+   count3_c[19], count3_c[18], count3_c[17], count3_c[16], count3_c[31], 
+   count3_c[30], count3_c[29], count3_c[28], count3_c[27], count3_c[26], 
+   count3_c[25], count3_c[24], count3_c[23], count3_c[22], count3_c[21], 
+   count3_c[20], count3_c[19], count3_c[18], count3_c[17], count3_c[16]})
+);
+// @4:652
+  count8_uniq_0 counter8 (
+	.countt_1({count3_c[7], count3_c[6], count3_c[5], count3_c[4], count3_c[3], 
+   count3_c[2], count3_c[1], count3_c[0]}),
+	.GND(GND),
+	.N_1_i_c(N_1_i_c),
+	.reset_c_i(reset_c_i),
+	.VCC(VCC),
+	.reset_c(reset_c),
+	.clk_c(clk_c)
+);
+// @4:653
+  count16_uniq_0 counter16 (
+	.count2t_1({count3_c[31], count3_c[30], count3_c[29], count3_c[28], count3_c[27], 
+   count3_c[26], count3_c[25], count3_c[24], count3_c[23], count3_c[22], 
+   count3_c[21], count3_c[20], count3_c[19], count3_c[18], count3_c[17], 
+   count3_c[16]}),
+	.GND(GND),
+	.N_1_i_c(N_1_i_c),
+	.reset_c_i(reset_c_i),
+	.VCC(VCC),
+	.reset_c(reset_c),
+	.clk_c(clk_c)
+);
+  assign GND_Z = 1'b0;
+  assign VCC_Z = 1'b1;
+endmodule /* typecount */
+

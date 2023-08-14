@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 7.0/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="ipexpress_tab.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> PLL</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<H4 CLASS="Heading3">
+<A NAME="0_pgfId-1180178"></A><A NAME="0_WP0158"></A>PLL</H4>
+<DIV>
+<H6 CLASS="HeadingRunIn">
+<A NAME="0_pgfId-1180179"></A>Description:</H6>
+<P CLASS="Body">
+<A NAME="0_pgfId-1180180"></A>Implements a Phase Locked Loop (PLL).</P>
+</DIV>
+
+<DIV>
+<H6 CLASS="HeadingRunIn">
+<A NAME="0_pgfId-1180181"></A>Devices Supported:</H6>
+<P CLASS="Body">
+<A NAME="0_pgfId-1180182"></A>ECP5U, ECP5UM,
+LatticeEC, LatticeECP, LatticeECP2, LatticeECP2M, LatticeECP3,
+LatticeSC, LatticeSCM, LatticeXP, LatticeXP2, LIFMD, LIFMDF,
+MachXO, MachXO2, MachXO3D, MachXO3L, Platform Manager 2</P>
+</DIV>
+
+<DIV>
+<H6 CLASS="HeadingRunIn">
+<A NAME="0_pgfId-1180183"></A>Version: </H6>
+  <P CLASS="Body"><A NAME="0_pgfId-1180184"></A>5.8</P>
+</DIV>
+
+<DIV>
+<H6 CLASS="HeadingRunIn">
+<A NAME="0_pgfId-1180185"></A>Revision History:</H6>
+  <P CLASS="Body"><A NAME="0_pgfId-1180158"></A>
+    5.8: Improved divider calculation speed. Added LIFMD support. Added MachXO3D support.</P>
+  <P CLASS="Body"><A NAME="0_pgfId-1180158"></A>
+    5.7: Bug fixes for ECP5 frequency calculation.</P>
+  <P CLASS="Body"><A NAME="0_pgfId-1180158"></A>
+    5.6: Added IO_TYPE support to the reference clock CLKI. Added ECP5 support.</P>
+  <P CLASS="Body"><A NAME="0_pgfId-1180158"></A>
+    5.5: Added MachXO3L support.</P>
+  <P CLASS="Body"><A NAME="0_pgfId-1180281"></A>
+    5.4: Added bandwidth calculation.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180158"></A>
+  5.3: LatticeECP4 update.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180158"></A>
+  5.2: Added FEEDBK_PATH for LatticeECP3.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180158"></A>
+  5.1: Modified frequency range per latest LatticeECP3 data sheet.
+  Added support for CLKOS feedback for LatticeECP2/M. 
+  Changed VHDL "dont_touch" attribute to boolean instead of string.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180158"></A>
+  5.0: Modified frequency range per latest LatticeECP3 data sheet.
+  It now allows configuration for SMPTE settings.
+  Fixed PLL phase control setting (when CLKOS is not used) for LatticeXP2.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180158"></A>
+  4.2: Fixed CLKOS feedback for LatticeECP3.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180186"></A>
+  4.1: For LatticeECP2, the dialog box was changed to suggest a CLKOP divider for an optimal fVCO.
+  For LatticeECP3, added support for CLKOS feedback. For LatticeSC, fixed issue with low frequency input.
+  For LatticeXP2, fixed default CLKOP_TRIM_DELAY.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180186"></A>
+  4.0: Added Bypass mode for LatticeSC/M. Fixed issue with LatticeSC/M low frequency inputs (2-15 MHz).
+  For LatticeECP2, added user control for SPLL and GPLL. Fixed defaults for LatticeXP2 (duty trim).
+  Added "wire" declaration in Verilog output.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180186"></A>
+  3.7: Modified engine to generate error (rather than illegal netlist) for LatticeSC/M PLLs
+  in low frequency with high phase (315) for CLKOS.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1181778"></A>
+  3.6: Added syn_noprune for I/O Assistant flow (LatticeECP2). Updated PLL range (ECP2*).
+  Fixed issues with LatticeECP2S and LatticeECP2MS.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1181749"></A>
+  3.5: Added option for high bandwidth.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1181744"></A>
+  3.4: For LatticeSC/M, the frequency for CLKI and user clock can be as low as 2 MHz (previous lower limit was 15 MHz).</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180211"></A>
+  3.3: For LatticeECP2, when using static delay, netlist now instantiates an EHXPLLD element.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180187"></A>
+  3.2: Additional device support.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180188"></A>
+  3.1: LatticeSC/M: Changed divider calculation to set the internal VCO to operate at a lower value.
+  LatticeECP/EC, LatticeXP: Minor bug fixes for divider mode.
+  LatticeECP2: Changed algorithm to generate EPLLD over EHXPLLD.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180189"></A>
+  3.0: LatticeSC: Changed divider calculation to set the internal VCO to operate at a higher value.
+  LatticeECP2: minor fixes for external capacitor mode.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180190"></A>
+  2.0: Updated for compatibility with IPexpress.</P>
+<P CLASS="Body"><A NAME="0_pgfId-1180191"></A>
+  1.0: Original released version.</P>
+</DIV>
+
+<DIV>
+<H6 CLASS="HeadingRunIn">
+<A NAME="0_pgfId-1180192"></A>References</H6>
+<P CLASS="Body">
+  <A NAME="0_pgfId-1180106"></A><SPAN CLASS="Hyperlink">
+  <A HREF="http://www.latticesemi.com/view_document?document_id=50465" CLASS="URL">TN1263</A></SPAN>
+  - ECP5 sysCLOCK PLL/DLL Design and Usage Guide</P>
+<P CLASS="Body">
+  <A NAME="0_pgfId-1180194"></A><SPAN CLASS="Hyperlink">
+  <A HREF="http://www.latticesemi.com/lit/docs/technotes/tn1049.pdf" CLASS="URL">TN1049</A></SPAN>
+  - LatticeECP/EC and LatticeXP sysCLOCK PLL Design and Usage Guide</P>
+<P CLASS="Body">
+  <A NAME="0_pgfId-1180200"></A><SPAN CLASS="Hyperlink">
+  <A HREF="http://www.latticesemi.com/lit/docs/technotes/tn1089.pdf" CLASS="URL">TN1089</A></SPAN>
+  - MachXO sysCLOCK Design and Usage Guide</P>
+<P CLASS="Body">
+  <A NAME="0_pgfId-1180198"></A><SPAN CLASS="Hyperlink">
+  <A HREF="http://www.latticesemi.com/view_document?document_id=19018" CLASS="URL">TN1098</A></SPAN>
+  - LatticeSC sysCLOCK PLL/DLL User's Guide</P>
+<P CLASS="Body">
+  <A NAME="0_pgfId-1180196"></A><SPAN CLASS="Hyperlink">
+  <A HREF="http://www.latticesemi.com/lit/docs/technotes/tn1103.pdf" CLASS="URL">TN1103</A></SPAN>
+  - LatticeECP2/M sysCLOCK PLL/DLL Design and Usage Guide</P>
+<P CLASS="Body">
+  <A NAME="0_pgfId-1181724"></A><SPAN CLASS="Hyperlink">
+  <A HREF="http://www.latticesemi.com/dynamic/view_document.cfm?document_id=23975" CLASS="URL">TN1126</A></SPAN>
+  - LatticeXP2 sysCLOCK PLL Design and Usage Guide</P>
+<P CLASS="Body">
+  <A NAME="0_pgfId-1180106"></A><SPAN CLASS="Hyperlink">
+  <A HREF="http://www.latticesemi.com/view_document?document_id=32318" CLASS="URL">TN1178</A></SPAN>
+  - LatticeECP3 sysCLOCK PLL/DLL Design and Usage Guide</P>
+<P CLASS="Body">
+  <A NAME="0_pgfId-1180106"></A><SPAN CLASS="Hyperlink">
+  <A HREF="http://www.latticesemi.com/view_document?document_id=39080" CLASS="URL">TN1199</A></SPAN>
+  - MachXO2 sysCLOCK PLL Design and Usage Guide</P>
+<P CLASS="Body">
+  <A NAME="0_pgfId-1180106"></A><SPAN CLASS="Hyperlink">
+  <A HREF="http://www.latticesemi.com/view_document?document_id=50124" CLASS="URL">TN1282</A></SPAN>
+  - MachXO3L sysCLOCK PLL Design and Usage Guide</P>
+  <P CLASS="Body">
+  <A NAME="0_pgfId-1176034"></A><SPAN CLASS="Hyperlink">
+  <A HREF="http://www.latticesemi.com/view_document?document_id=51656" CLASS="URL">TN1304</A></SPAN>
+  - CrossLink sysCLOCK PLL/DLL Design and Usage Guide</P>
+</DIV>
+</DIV>
+</BODY>
+</HTML>

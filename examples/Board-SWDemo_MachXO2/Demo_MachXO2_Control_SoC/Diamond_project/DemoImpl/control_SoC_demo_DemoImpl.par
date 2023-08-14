@@ -1,0 +1,180 @@
+PAR: Place And Route Diamond_1.3_Production (92).
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2011 Lattice Semiconductor Corporation,  All rights reserved.
+Tue Oct 25 14:02:50 2011
+
+C:/lscc/1.3_20110802-1_3p.92/diamond/1.3/ispfpga\bin\nt\par -f
+control_SoC_demo_DemoImpl.p2t control_SoC_demo_DemoImpl_map.ncd
+control_SoC_demo_DemoImpl.dir control_SoC_demo_DemoImpl.prf
+
+Preference file: control_SoC_demo_DemoImpl.prf.
+
+Level/      Number      Timing      Run         NCD
+Cost [ncd]  Unrouted    Score       Time        Status
+----------  --------    --------    -----       ------------
+5_1   *     0           0           20          Complete        
+
+
+* : Design saved.
+
+par done!
+
+Lattice Place and Route Report for Design "control_SoC_demo_DemoImpl_map.ncd"
+Tue Oct 25 14:02:50 2011
+
+PAR: Place And Route Diamond_1.3_Production (92).
+Command Line: C:/lscc/1.3_20110802-1_3p.92/diamond/1.3/ispfpga\bin\nt\par -f
+control_SoC_demo_DemoImpl.p2t control_SoC_demo_DemoImpl_map.ncd
+control_SoC_demo_DemoImpl.dir control_SoC_demo_DemoImpl.prf
+Preference file: control_SoC_demo_DemoImpl.prf.
+Placement level-cost: 5-1.
+Routing Iterations: 3
+
+Loading design for application par from file control_SoC_demo_DemoImpl_map.ncd.
+Design name: control_soc_demo
+NCD version: 3.2
+Vendor:      LATTICE
+Device:      LCMXO2-1200HC
+Package:     CSBGA132
+Speed:       5
+Loading device for application par from file 'xo2c1200.nph' in environment: C:/lscc/1.3_20110802-1_3p.92/diamond/1.3/ispfpga.
+Package Status:               Final          Version 1.32
+Speed Hardware Data Status:   Preliminary    Version 18.4
+License checked out.
+
+
+Ignore Preference Error(s):  True
+Device utilization summary:
+
+   PIO (prelim)      26/108          24% used
+                     26/105          24% bonded
+   IOLOGIC            6/108           5% used
+
+   SLICE            473/640          73% used
+
+   GSR                1/1           100% used
+   OSC                1/1           100% used
+   EBR                3/7            42% used
+
+
+Number of Signals: 1541
+Number of Connections: 4437
+WARNING - par: Placement timing preferences are hard to meet.  However, placement will continue.  Use static timing analysis to identify errors.  For more information, see online help subjects "Place & Route TRACE Report"  or the "TRACE" application.
+
+Pin Constraint Summary:
+   25 out of 25 pins locked (100% locked).
+
+The following 2 signals are selected to use the primary clock routing resources:
+    clk_c (driver: OSCH_inst, clk load #: 284)
+    TIME_INST/sec_clock (driver: TIME_INST/SLICE_208, clk load #: 13)
+
+
+The following 3 signals are selected to use the secondary clock routing resources:
+    rst_n_c (driver: rst_n, clk load #: 0, sr load #: 52, ce load #: 0)
+    lm8_inst/u1_isp8/rst_n_reg (driver: SLICE_338, clk load #: 0, sr load #: 44, ce load #: 0)
+    wb_rst (driver: SLICE_397, clk load #: 0, sr load #: 10, ce load #: 0)
+
+WARNING - par: Signal "rst_n_c" is selected to use Secondary clock resources; however its driver comp "rst_n" is located at "K2", which is not a dedicated pin for connecting to Secondary clock resources.  General routing has to be used to route this signal, and it may suffer from excessive delay or skew.
+Signal wb_rst is selected as Global Set/Reset.
+Starting Placer Phase 0.
+..........
+Finished Placer Phase 0.  REAL time: 4 secs 
+
+Starting Placer Phase 1.
+....................
+Placer score = 198764.
+Finished Placer Phase 1.  REAL time: 13 secs 
+
+Starting Placer Phase 2.
+.
+Placer score =  196301
+Finished Placer Phase 2.  REAL time: 14 secs 
+
+
+------------------ Clock Report ------------------
+
+Global Clock Resources:
+  CLK_PIN    : 0 out of 8 (0%)
+  General PIO: 1 out of 108 (0%)
+  PLL        : 0 out of 1 (0%)
+  DCM        : 0 out of 2 (0%)
+  DCC        : 0 out of 8 (0%)
+
+Quadrants All (TL, TR, BL, BR) - Global Clocks:
+  PRIMARY "clk_c" from OSC on comp "OSCH_inst" on site "OSC", clk load = 284
+  PRIMARY "TIME_INST/sec_clock" from Q0 on comp "TIME_INST/SLICE_208" on site "R2C13A", clk load = 13
+  SECONDARY "rst_n_c" from comp "rst_n" on PIO site "K2 (PL8D)", clk load = 0, ce load = 0, sr load = 52
+  SECONDARY "wb_rst" from Q0 on comp "SLICE_397" on site "R10C2A", clk load = 0, ce load = 0, sr load = 10
+  SECONDARY "lm8_inst/u1_isp8/rst_n_reg" from Q0 on comp "SLICE_338" on site "R7C12C", clk load = 0, ce load = 0, sr load = 44
+
+  PRIMARY  : 2 out of 8 (25%)
+  SECONDARY: 3 out of 8 (37%)
+
+Edge Clocks:
+  No edge clock selected.
+
+--------------- End of Clock Report ---------------
+
+
+I/O Usage Summary (final):
+   26 out of 108 (24.1%) PIO sites used.
+   26 out of 105 (24.8%) bonded PIO sites used.
+   Number of PIO comps: 25; differential: 1
+   Number of Vref pins used: 0
+
+I/O Bank Usage Summary:
++----------+----------------+------------+-----------+
+| I/O Bank | Usage          | Bank Vccio | Bank Vref |
++----------+----------------+------------+-----------+
+| 0        | 5 / 26 ( 19%)  | 3.3V       | -         |
+| 1        | 0 / 26 (  0%)  | -          | -         |
+| 2        | 7 / 28 ( 25%)  | 3.3V       | -         |
+| 3        | 14 / 25 ( 56%) | 3.3V       | -         |
++----------+----------------+------------+-----------+
+
+Total placer CPU time: 12 secs 
+
+Dumping design to file control_SoC_demo_DemoImpl.dir/5_1.ncd.
+
+0 connections routed; 4437 unrouted.
+Starting router resource preassignment
+
+Completed router resource preassignment. Real time: 16 secs 
+Starting iterative routing.
+
+For each routing iteration the number inside the parenthesis is the
+total time (in picoseconds) the design is failing the timing constraints.
+For each routing iteration the router will attempt to reduce this number
+until the number of routing iterations is completed or the value is 0
+meaning the design has fully met the timing constraints.
+
+End of iteration 1
+4437 successful; 0 unrouted; (0) real time: 19 secs 
+Dumping design to file control_SoC_demo_DemoImpl.dir/5_1.ncd.
+Total CPU time 17 secs 
+Total REAL time: 19 secs 
+Completely routed.
+End of route.  4437 routed (100.00%); 0 unrouted.
+Checking DRC ... 
+No errors found.
+
+Timing score: 0 
+
+Total REAL time to completion: 20 secs 
+
+Dumping design to file control_SoC_demo_DemoImpl.dir/5_1.ncd.
+
+
+All signals are completely routed.
+
+
+par done!
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2011 Lattice Semiconductor Corporation,  All rights reserved.

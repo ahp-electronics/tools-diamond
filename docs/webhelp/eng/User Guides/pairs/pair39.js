@@ -1,0 +1,22 @@
+var pairs =
+{
+"setting":{"active":1}
+,"active":{"strategy":1}
+,"strategies":{"project":1,"dialog":1}
+,"project":{"choose":1,"active":1}
+,"choose":{"active":1,"project":1,"settings":1}
+,"right-click":{"target":1}
+,"target":{"strategy":1}
+,"strategy":{"choose":1,"submenu":1}
+,"want":{"view":1}
+,"view":{"settings":1,"strategies":1,"edit":1}
+,"settings":{"active":1,"want":1,"chosen":1}
+,"submenu":{"choose":1}
+,"dialog":{"box":1}
+,"box":{"opens":1}
+,"opens":{"settings":1}
+,"chosen":{"view":1}
+,"edit":{"values":1}
+,"values":{"settings":1}
+}
+;Search.control.loadWordPairs(pairs);

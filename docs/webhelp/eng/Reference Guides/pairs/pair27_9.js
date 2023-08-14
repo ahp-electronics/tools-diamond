@@ -1,0 +1,22 @@
+var pairs =
+{
+"mux21":{"primitive":1}
+,"2-to-1":{"mux":1}
+,"architectures":{"supported":1}
+,"platform":{"manager":1}
+,"usage":{"related":1}
+,"related":{"technical":1}
+,"technical":{"notes":1,"support":1}
+,"notes":{"contact":1}
+,"contact":{"technical":1}
+,"truth":{"table":1}
+,"don\u2019t":{"care":1}
+,"primitive":{"available":1}
+,"available":{"schematic":1}
+,"schematic":{"symbol":1,"using":1,"editor":1}
+,"symbol":{"add":1,"command":1}
+,"add":{"schematic":1,"symbol":1}
+,"using":{"add":1}
+,"command":{"schematic":1}
+}
+;Search.control.loadWordPairs(pairs);

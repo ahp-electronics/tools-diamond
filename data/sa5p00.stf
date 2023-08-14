@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file defines properties of machxo devices -->
+<StrategyConfig parent="ep5c00.stf" version="1.0">
+
+<!-- *************************************************************** -->
+<!-- Synplify Property --> 
+<!-- *************************************************************** -->
+
+<!-- *****************************  Bitgen *************************** -->
+<!-- _XPDisableUESBitgen=A,BOOL,Disable UES,FALSE -->
+<Property
+	name="PROP_BIT_DisableUESBitgen"
+	tclid="bit_disable_ues"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g DisableUES:TRUE"/>
+		<Correlation driverValue="False" cmdline="-g DisableUES:FALSE"/>
+	</CmdLines>	
+</Property>
+
+<!-- _XPDisableUESBitgen=A,BOOL,Disable UES,FALSE -->
+<PropertyUI	
+	label="Disable UES"
+	name="PROPUI_BIT_DisableUESBitgen"
+	propertyName="PROP_BIT_DisableUESBitgen"
+	catalog="Advanced"
+	flag="normal"
+/>
+
+<PropertySet	
+	name="PROPSET_BITGEN" >
+  <Include>
+      <PropertyUIItem> PROPUI_BIT_RunDRCBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_CreateBitFile </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_OutFormatBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_ByteWideBitMirror </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_NoHeader </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_ConModBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_DisRAMResBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_DisableUESBitgen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TMCHK_EnableCheck </PropertyUIItem>
+  </Include>
+</PropertySet>
+
+<!-- *************************************************************** -->
+<!-- *****************************  Strategy Ui *************************** -->
+<!-- *************************************************************** -->	
+<!-- "parent" value must be defined before use it -->
+<StrategyUI name="STYUI_Normal">			
+	<Group name="GROUP_Synthesis" parent="root" label="Synthesize Design" type="0" data="" />
+		<Group name="GROUP_Synplify" parent="GROUP_Synthesis" label="Synplify Pro" type="1" data="PROPSET_Synplify" />
+		<!--<Group name="GROUP_Precision" parent="GROUP_Synthesis" label="Precision" type="1" data="PROPSET_Precision" />-->	
+		<Group name="GROUP_LST" parent="GROUP_Synthesis" label="LSE" type="1" data="PROPSET_LST" />
+	<Group name="GROUP_BuildDatabase" parent="root" label="Translate Design" type="1" data="PROPSET_Edif" />
+	<Group name="GROUP_MapDesign" parent="root" label="Map Design" type="1" data="PROPSET_Map" />
+        <Group name="GROUP_MapSTA" parent="GROUP_MapDesign" label="Map Trace" type="1" data="PROPSET_MAPTRACE" />
+	<Group name="GROUP_PLACE" parent="root" label="Place &amp; Route Design" type="1" data="PROPSET_PlaceRoute" />
+	   <Group name="GROUP_PARSTA" parent="GROUP_PLACE" label="Place &amp; Route Trace" type="1" data="PROPSET_PARTRACE" />
+	   <Group name="GROUP_IOTIMING" parent="GROUP_PLACE" label="IO Timing Analysis" type="1" data="PROPSET_IOTIMING" />
+	<Group name="GROUP_TIMSIM" parent="root" label="Timing Simulation" type="1" data="PROPSET_TIMSIMFILE" />
+	<Group name="GROUP_BITGEN" parent="root" label="Bitstream" type="1" data="PROPSET_BITGEN" />
+</StrategyUI>
+
+</StrategyConfig>

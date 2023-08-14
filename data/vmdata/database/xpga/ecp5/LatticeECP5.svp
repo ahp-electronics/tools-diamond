@@ -1,0 +1,4880 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<!--   comments
+	egz, 04/08/2014, update function read_id mask per Roger's request.
+	egz, 03/11/2015, added "ChainSVFOperation" and "ChainSVFOperationRevC" operation lists.
+-->
+<SVF_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+	<Instruction_Length value="INSTRUCTION_REGISTER_LENGTH"/> 
+	<Row_Width			value="DEVICE_ROW_WIDTH"/> 
+	<Address_Length		value="ADDRESS_REGISTER_LENGTH"/> 
+	<Address length="ADDRESS_LENGTH">
+		INI_ADDRESS			
+	</Address>
+	<ID_Length 			value="DEVICE_ID_LENGTH"/>
+	<Usercode_Length 	value="DEVICE_USERCODE_LENGTH"/>
+	<BSCAN_Length value="BSCAN_REGISTER_LENGTH"/> 
+	<Bscan length="BSCAN_LENGTH">
+		BSCAN_DATA
+	</Bscan>
+	<BscanMask length="BSCAN_LENGTH">
+		BSCAN_MASK
+	</BscanMask>
+	<TotalFuse value="TOTAL_FUSE_MAP"/>
+	<PWP	value="PROGRAMING_PULSE_WIDTH"/>
+	<PWV	value="VERIFY_PULSE_WIDTH"/>
+	<PWE	value="ERASE_PULSE_WIDTH"/>
+	<SkipRow value="1"/>
+	<KeyLock value="SECURITY_KEYLOCK"/>
+	<EncryptOnly value="ENCRYPTED_ONLY"/>
+	<MDRDelay value="MDR_DELAY"/>
+	<Instruction>
+		EXTEST	 			= 0x15;
+		EXTEST_PULSE        = 0x2D;
+		EXTEST_TRAIN        = 0x2E;
+		INTEST              = 0x2C;
+		CLAMP               = 0x78;
+		HIGHZ               = 0x18;
+		LSC_PRELOAD         = 0x1C;
+		LSC_SAMPLE          = 0x1C;
+		BYPASS              = 0xFF;
+		VERIFY_ID			= 0xE2;
+		IDCODE_PUB          = 0xE0;
+		LSC_UIDCODE_PUB     = 0x19;
+		USERCODE            = 0xC0;
+		LSC_READ_TEMP       = 0xE8;
+		LSC_DEVICE_CTRL     = 0x7D;
+		LSC_READ_STATUS     = 0x3C;
+		LSC_CHECK_BUSY      = 0xF0;
+		LSC_REFRESH         = 0x79;
+		LSC_I2CI_CRBR_WT    = 0x9C;
+		LSC_I2CI_TXDR_WT    = 0x9D;
+		LSC_I2CI_RXDR_RD    = 0x9E;
+		LSC_I2CI_SR_RD      = 0x9F;
+		LSC_IP_A            = 0x32;
+		LSC_IP_B            = 0x38;
+		LSC_IPTEST_A        = 0x33;
+		LSC_IPTEST_B        = 0x39;
+		LSC_PROG_SPI        = 0x3A;
+		LSC_PROG_SPI1       = 0x3E;
+		LSC_IDCODE_PRV      = 0x16;
+		LSC_READ_PES        = 0x11;
+		LSC_MANUFACTURE_SHIFT = 0x90;
+		ISC_ENABLE          = 0xC6;
+		LSC_ENABLE_X        = 0x74;
+		ISC_DISABLE         = 0x26;
+		ISC_PROGRAM         = 0x67;
+		ISC_NOOP            = 0x30;
+		ISC_PROGRAM_USERCODE = 0xC2;
+		ISC_READ            = 0x80;
+		ISC_ERASE           = 0x0E;
+		ISC_DISCHARGE       = 0x14;
+		ISC_PROGRAM_DONE    = 0x5E;
+		ISC_ERASE_DONE      = 0x24;
+		ISC_PROGRAM_SECURITY = 0xCE;
+		LSC_PROGRAM_SECPLUS = 0xCF;
+		ISC_DATA_SHIFT      = 0x05;
+		ISC_ADDRESS_SHIFT   = 0x42;
+		LSC_INIT_ADDRESS    = 0x46;
+		LSC_WRITE_ADDRESS   = 0xB4;
+		LSC_PROG_INCR_RTI   = 0x82;
+		LSC_PROG_INCR_ENC   = 0xB6;
+		LSC_PROG_INCR_CMP   = 0xB8;
+		LSC_PROG_INCR_CNE   = 0xBA;
+		LSC_VERIFY_INCR_RTI = 0x6A;
+		LSC_PROG_CTRL0      = 0x22;
+		LSC_READ_CTRL0      = 0x20;
+		LSC_RESET_CRC       = 0x3B;
+		LSC_READ_CRC        = 0x60;
+		LSC_PROG_SED_CRC    = 0xA2;
+		LSC_READ_SED_CRC    = 0xA4;
+		LSC_SHIFT_PASSWORD  = 0xBC;
+		LSC_PROG_PASSWORD   = 0xF1;
+		LSC_READ_PASSWORD   = 0xF2;
+		LSC_PROG_CIPHER_KEY = 0xF3;
+		LSC_READ_CIPHER_KEY = 0xF4;
+		LSC_PROG_FEATURE    = 0xE4;          
+		LSC_READ_FEATURE    = 0xE7;      
+		LSC_PROG_FEABITS    = 0xF8;
+		LSC_READ_FEABITS    = 0xFB;
+		LSC_PROG_OTP        = 0xF9;
+		LSC_READ_OTP        = 0xFA;
+		LSC_WRITE_COMP_DIC  = 0x02;
+		LSC_WRITE_BUS_ADDR  = 0xF6;
+		LSC_PCS_WRITE       = 0x72;
+		LSC_PCS_READ        = 0xF7;
+		LSC_EBR_WRITE       = 0xB2;
+		LSC_EBR_READ        = 0xB0;
+		LSC_PROG_INCR_NV    = 0x70;
+		LSC_READ_INCR_NV    = 0x73;
+		LSC_INIT_ADDR_UFM   = 0x47;
+		LSC_READ_TAG        = 0xCA;
+		LSC_ERASE_UFM       = 0xCB;
+		LSC_PROG_UFM        = 0xC9;
+		LSC_READ_UFM        = 0xCA;
+		LSC_STORE           = 0xD0;
+		LSC_BITSTREAM_BURST = 0x7A;
+		LSC_PROG_PES        = 0xD0;
+		LSC_PROG_MES        = 0xD1;
+		LSC_PROG_MAIN_RED   = 0xD3;
+		LSC_PROG_MAIN_RCR   = 0xD4;
+		LSC_PROG_MAIN_RMR   = 0xD5;
+		LSC_PROG_NV_RED     = 0xD6;
+		LSC_PROG_NV_RMR     = 0xD7;
+		LSC_READ_MES        = 0xD8; 
+		LSC_READ_TRIM       = 0xD1;
+		LSC_PROG_TRIM       = 0xD1;
+		LSC_READ_MAIN_RED   = 0xDA;
+		LSC_READ_MAIN_RCR   = 0xDC;
+		LSC_READ_MAIN_RMR   = 0xDC;
+		LSC_READ_NV_RED     = 0xDD;
+		LSC_READ_NV_RMR     = 0xDE;
+		LSC_MFG_MTEST       = 0x96;
+		LSC_MFG_MTRIM       = 0x69;
+		LSC_MFG_MDATA       = 0x8F;
+		LSC_ISCAN           = 0xDF;			
+	</Instruction>
+</Parameter>
+<Data>
+	<DataField	name="IDTDI">
+		<FieldBlock	row_width="DEVICE_ID_LENGTH">
+			ID_DATA
+		</FieldBlock>
+	</DataField>
+	<DataField	name="BSCANTDO">
+		<FieldBlock	row_width="BSCAN_REGISTER_LENGTH">
+			0x00000000000000000000000000000000000000000000000000000000000
+		000000000000000000000000000000000000000000000000000000000000
+		000000000000000000000000000000000000000000000000000000000000
+		000000000000000000000000000000000000000000000000000000000000
+		000000000000000000000000000002880000000000000000000000000000
+		000000
+		</FieldBlock>
+	</DataField>
+	<DataField	name="BSCANMASK">
+		<FieldBlock	row_width="BSCAN_REGISTER_LENGTH">
+			0x00000000000000000000000000000000000000000000000000000000000
+		000000000000000000000000000000000000000000000000000000000000
+		000000000000000000000000000000000000000000000000000000000000
+		000000000000000000000000000000000000000000000000000000000000
+		000000000000000000000000000002880000000000000000000000000000
+		000000
+		</FieldBlock>
+	</DataField>
+</Data>
+<Operation_List>
+					
+	"Security Read TraceID" = "INIT 	! Initialize, 
+							   READ_ID	! Check the IDCODE,
+						   	   READ_TRACEID ! Read TraceID" ;
+	
+	"Security Program TraceID" = "INIT 	! Initialize, 
+								  READ_ID	! Check the IDCODE,
+								  EFUSE_ENABLE	! Enable the programming mode,
+								  CHECK_KEYLOCK ! Check the Key Lock,
+								  PROGRAM_TRACEID ! Program the TraceID,
+								  DISABLE ! Exit the programming mode" ;
+						  					   
+	"Security Read Status Register" = "INIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 SAVE_ID,
+					 			 EFUSE_ENABLE	! Enable the programming mode,
+					 			 SAVE_STATUS,
+					 			 DISABLE ! Exit the programming mode";
+					 			 
+	"Security Program Encryption Key Only" = "INIT 	! Initialize, 
+							  READ_ID	! Check the IDCODE,
+							  EFUSE_ENABLE	! Enable the programming mode,
+							  CHECK_KEYLOCK ! Check the Key Lock,
+							  PROGRAM_SECURITY_KEY_NO_FEATURE_LOCK !Program the encryption Key,
+							  DISABLE ! Exit the programming mode" ;
+							  
+	"Security Program Encryption Key with Lock" = "INIT 	! Initialize, 
+							  READ_ID	! Check the IDCODE,
+							  EFUSE_ENABLE	! Enable the programming mode,
+							  CHECK_KEYLOCK ! Check the Key Lock,
+							  PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK !Program the Security Key,
+							  DISABLE ! Exit the programming mode" ;
+							  							  
+	
+	"Security Read Encryption Key" = "INIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   EFUSE_TRANSPARENT_ENABLE	! Enable the programming mode,
+						   READ_SECURITY_KEY ! Check the Security Key,
+						   DISABLE ! Exit the programming mode" ;
+						   						  								  
+	
+	"Security Program Feature Lock" = "INIT 	! Initialize, 
+						  READ_ID	! Check the IDCODE,
+						  EFUSE_ENABLE	! Enable the programming mode,
+						  CHECK_KEYLOCK ! Check the Key Lock,
+						  PROGRAM_LOCK_FUSES ! Program the Lock Fuses,
+						  DISABLE ! Exit the programming mode" ;
+						  	
+	"Security Program Feature Encryption Lock" = "INIT 	! Initialize, 
+												  READ_ID	! Check the IDCODE,
+												  EFUSE_ENABLE	! Enable the programming mode,
+												  CHECK_KEYLOCK ! Check the Key Lock,
+												  PROGRAM_DECRYPTION_FUSES ! Program the Encryption Lock Fuses,
+												  DISABLE ! Exit the programming mode" ;
+						  					  
+	"Security Fast Program with Encryption Option" = "INIT 	! Initialize, 
+													  READ_ID	! Check the IDCODE,
+													  IO_STATE ! Program Bscan register,
+													  EFUSE_ENABLE  ! Enable the Efuse mode,
+													  CHECK_KEYLOCK ! Check the Key Lock,
+													  PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK !Program the Security Key,	
+													  SRAM_ENABLE	! Enable the programming mode,
+													  SRAM_ERASE	! Erase the SRAM,  													  													  									  
+													  BURST_PROGRAM	! Program Fuse Map,
+													  VERIFY_USERCODE		! Verify USERCODE,
+													  DISABLE ! Exit the programming mode,
+					 								  VERIFY_STATUS ! Verify Status Register" ;													  	
+							  
+	"Manufacturing Read Status Register" = " INIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   SAVE_ID,
+									   EFUSE_ENABLE	! Enable the programming mode,
+									   READ_STATUS_FUSES ! Read the Status Register Fuses,
+									   DISABLE ! Exit the programming mode" ;
+									   
+	"Manufacturing Read CONFIG Register" = " INIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   SAVE_ID,
+									   EFUSE_ENABLE	! Enable the programming mode,
+									   READ_TRIM_FUSES ! Read the Trim Fuses,
+									   DISABLE ! Exit the programming mode" ;
+	
+	"Manufacturing Program CONFIG Register" = " INIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   PSUEDO_SRAM_ENABLE	! Enable the programming mode,
+									   PROGRAM_TRIM_FUSES ! Program the Trim Fuses,
+									   DISABLE ! Exit the programming mode" ;
+									   									   
+									   									   
+    "Read Manufacturing Register" = "INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									SAVE_ID,
+									EFUSE_ENABLE	! Enable the programming mode, 
+									READ_MANUFACTURING_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+						
+	"Program Manufacturing Register" = "INIT 	! Initialize, 
+									  READ_ID	! Check the IDCODE,
+									  PSUEDO_SRAM_ENABLE	! Enable the programming mode,
+									  PROGRAM_MANUFACTURING_REGISTER ! Program the Manufacturing Register,
+									  DISABLE ! Exit the programming mode" ;
+
+								  
+	"Manufacturing Read MES Fuses" = "INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									SAVE_ID,
+									EFUSE_ENABLE	! Enable the programming mode,
+									READ_MES_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses" = "INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									SAVE_ID,
+									EFUSE_ENABLE	! Enable the programming mode,
+									READ_DTR_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses Only" = "INIT 	! Initialize, 
+										   READ_ID	! Check the IDCODE,
+										   SAVE_ID,
+										   READ_DTR_REGISTER_ONLY ! Read the Manufacturing Register" ;
+																	
+	"Enable SPI" = " INIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 SRAM_ENABLE	! Enable SRAM programming mode,
+					 SRAM_ERASE	! Erase the SRAM, 
+					 DISABLE ! Exit the programming mode" ;
+		 			 
+	"Erase Only"	=	"			INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									DISABLE ! Exit the programming mode"	;
+									
+	"Verify ID" = 					"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+										
+	"Bypass" = 						"INIT 	! Initialize" ;				
+										
+	"Fast Program" 				= "	INIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode,
+					 				VERIFY_STATUS ! Verify Status Register"	;
+								
+	"Erase,Program,Verify" = "		INIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode,
+									CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit,
+									DISABLE ! Exit the programming mode,
+					 				VERIFY_STATUS ! Verify Status Register"	;	
+									
+	
+	"Program Only" = "		INIT 	! Initialize,   
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode,
+							CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+							SRAM_ERASE	! Erase the SRAM, 
+							PROGRAM_CONTROL0	! Program Control Register,
+							SRAM_PROGRAM	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit,
+							DISABLE ! Exit the programming mode,
+					 		VERIFY_STATUS ! Verify Status Register"	;
+									
+	"Verify Only"				=	"INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,  
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									SRAM_VERIFY_USERCODE		! Verify USERCODE, 
+									DISABLE ! Exit the programming mode"	;
+									
+	
+	"Display ID" = 						"INIT, READ_ID, SAVE_ID";
+	"Display USERCODE"				="	INIT, READ_ID, SAVE_ID,SAVE_USERCODE";	
+	
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_VERIFY_USERCODE		! Verify USERCODE"	;
+								 
+	"Program USERCODE"	=	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						SRAM_ENABLE	! Enable SRAM programming mode,
+						PROGRAM_USERCODE	! Program USERCODE,
+						DISABLE ! Exit the programming mode"	; 
+							
+	"Read and Save"	=				"	INIT, 
+										READ_ID, 
+										SAVE_ID, 
+										IO_STATE ! Program Bscan register,
+										SRAM_ENABLE, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE, 
+										DISABLE";
+	"Display Control Register0" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SAVE_CONTROL0 !Read Control Register 0,
+										DISABLE";	
+	
+	"Read Control Register0" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SAVE_CONTROL0 !Read Control Register 0,
+										DISABLE";	
+																							             
+	"Program Control Register0" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										PROGRAM_CONTROL0 ! Program Control Register 0,
+										DISABLE";	
+																	 
+	"Read Status Register" 				="INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_ENABLE, 
+										SAVE_STATUS,
+										DISABLE";	
+										
+	"Display Status Register" 			="INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_ENABLE, 
+										SAVE_STATUS,
+										DISABLE";	
+																				
+	"Refresh"					 = " 	INIT !Initialize,
+										READ_ID !Check the IDCODE,
+										IO_STATE ! Program Bscan register,
+										REFRESH_FUNCTION ! Refresh";
+										
+	"Refresh from FLASH" = "INIT !Initialize,
+							READ_ID !Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							REFRESH_FUNCTION ! Refresh";
+															
+										
+	"Re-Initialize" = " INIT 	! Initialize,
+						SRAM_ENABLE	! Enable the programming mode, 
+						SRAM_ERASE	! Erase the SRAM,  
+	 			 		DISABLE ! Exit the programming mode"	;
+	 
+	"Calculate Data CRC"	=	"INIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+					 			 SRAM_ENABLE	! Enable programming mode, 
+					             SAVE_CONTROL0,
+					             SRAM_SAVE_ARRAY,
+					             SAVE_USERCODE,
+		 						 DISABLE";
+		 						 			 												
+	"Capture Only" = "	INIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+						
+	"Serial Program" = "	INIT 	! Initialize,   
+							SERIAL_PROGRAM	! Program Fuse Map"	;
+	"Serial Disable Only" = "INIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Serial Enable Only" = "INIT 	! Initialize, 
+							SRAM_ENABLE	! Enable the programming mode"	;
+	"Serial Read DONE bit" = "	INIT 	! Initialize, 
+								SERIAL_READ_DONE_BIT 	! Read DONE Bit"	;
+														
+						
+	"FLASH TransFR" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						IO_STATE ! Program Bscan register,
+						SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+						TRANSFR_FUNCTION ! FLASH Transparent Field Reconfiguration"	;
+						
+	"XSRAM Fast Program" 				= "	INIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode"	;
+	
+	"XSRAM SEI Fast Program" 	= "	INIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									SRAM_TRANSPARENT_READ_REFRESH_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									BURST_PROGRAM	! Program Fuse Map,
+									DISABLE ! Exit the programming mode,
+									VERIFY_STATUS ! Verify Status Register"	;
+																
+	"XSRAM Erase,Program,Verify" = "		INIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit,
+									DISABLE ! Exit the programming mode"	;
+									
+	"XSRAM Erase Only"	=	"			INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									DISABLE ! Exit the programming mode"	;									
+															
+	"XSRAM Disable Only" = "	INIT 	! Initialize, 
+	 			 				DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+					!		SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT mode"	;
+																  
+	"XSRAM Verify Only"			=	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,  
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode,  
+										SRAM_VERIFY	! Verify Fuse Map, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE, 
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Verify ID" 			= 	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	"XSRAM Verify USERCODE"		=	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE,
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Read and Save"			=	"INIT, 
+										READ_ID, 
+										SAVE_ID, 
+										SRAM_TRANSPARENT_READ_ENABLE, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE, 
+										DISABLE";					
+	"XSRAM Display ID" 					= "INIT, READ_ID, SAVE_ID";							
+
+	"XSRAM Read Status Register" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+										SAVE_STATUS,
+										DISABLE ! Exit the programming mode";
+	
+	"XSRAM Display Status Register" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+										SAVE_STATUS,
+										DISABLE ! Exit the programming mode";
+																			
+											
+	"XSRAM Bypass"	=					"	INIT 	! Initialize"	;
+	"XSRAM Refresh" = 					"	INIT 	! Initialize,   
+										READ_ID	! Check the ,
+										REFRESH_FUNCTION ! Refresh" ;
+	"XSRAM Display USERCODE"	=	"INIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SAVE_USERCODE, DISABLE";
+	
+	"XSRAM Calculate Data CRC"	=	"INIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+						 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode, 
+						             SAVE_CONTROL0,
+						             SRAM_SAVE_ARRAY,
+						             SAVE_USERCODE,
+			 						 DISABLE";
+			 						 
+	"XSRAM Read Control Register0" = "INIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+								 SAVE_ID,
+					 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode,  
+					             SAVE_CONTROL0 !Read Control Register 0,
+					             DISABLE";
+	"XSRAM Display Control Register0" = "INIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+								 SAVE_ID,
+					 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode,  
+					             SAVE_CONTROL0 !Read Control Register 0,
+					             DISABLE";					             
+	"XSRAM Capture Only" = "	INIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+						
+	
+	
+	"Slave SPI Program Encryption Key" = "SPI_INIT 	! Initialize,  
+							 			SPI_READ_ID	! Check the IDCODE,
+							  			SPI_EFUSE_ENABLE	! Enable the programming mode,
+							  			SPI_CHECK_KEYLOCK ! Check the Key Lock,
+							  			SPI_PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK ! Program the encryption Key,
+							  			SPI_DISABLE ! Exit the programming mode" ;							  			  
+	
+	"Slave SPI Program Feature Lock" = "SPI_INIT 	! Initialize,  
+							 			SPI_READ_ID	! Check the IDCODE,
+						  				SPI_EFUSE_ENABLE	! Enable the programming mode,
+						  				SPI_CHECK_KEYLOCK ! Check the Key Lock,
+						  				SPI_PROGRAM_LOCK_FUSES ! Program the Lock Fuses,
+						  				SPI_DISABLE ! Exit the programming mode" ;
+						  
+						  
+						  					
+	"Slave SPI Disable Only" = "SPI_INIT 	! Initialize, 
+	 			 				SPI_DISABLE ! Exit the programming mode"	;
+	"Slave SPI Enable Only" = "SPI_INIT 	! Initialize, 
+						   	   SPI_READ_ID	! Check the IDCODE,
+						  	   SPI_ENABLE	! Enable XPROGRAM mode"	;
+						   
+	"Slave SPI Re-Initialize" = "SPI_INIT 	! Initialize,  
+							 SPI_READ_ID	! Check the IDCODE,
+						  	 SPI_ENABLE	! Enable programming mode, 
+							 SPI_ERASE	! Erase the device, 
+							 SPI_DISABLE ! Exit the programming mode"	;
+	 
+	"Slave SPI Display USERCODE" =	"SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SAVE_ID, 
+								 SPI_SAVE_USERCODE";								
+											 		  	 								
+	"Slave SPI Fast Program" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,								 
+								SPI_ENABLE	! Enable programming mode,
+								SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+								SPI_ERASE	! Erase the device, 
+								SPI_PROGRAM	! Program Fuse Map,
+								SPI_VERIFY_STATUS ! Read the status bit,
+								SPI_DISABLE ! Exit the programming mode"	;			
+	
+	"Slave SPI SEI Fast Program" 	= "	SPI_INIT 	! Initialize, 
+									SPI_READ_ID	! Check the IDCODE,	
+									SPI_SRAM_TRANSPARENT_READ_REFRESH_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									SPI_PROGRAM	! Program Fuse Map,	
+									SPI_VERIFY_STATUS ! Read the status bit,	
+									SPI_DISABLE ! Exit the programming mode"	;
+												 			 			
+	"Slave SPI Fast Program,Refresh" = "	SPI_INIT 	! Initialize, 
+													SPI_READ_ID	! Check the IDCODE, 
+													SPI_ENABLE	! Enable programming mode, 
+													SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+													SPI_ERASE	! Erase the device, 
+													SPI_PROGRAM	! Program Fuse Map,
+													SPI_VERIFY_STATUS ! Read the status bit,
+													SPI_DISABLE ! Exit the programming mode,
+													SPI_REFRESH ! Refresh"	;
+										
+	"Slave SPI Erase Only"	=	"SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,
+								SPI_ENABLE	! Enable programming mode,
+								SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+								SPI_ERASE	! Erase the device, 
+								SPI_DISABLE ! Exit the programming mode"	;	
+								
+								
+	"Slave SPI Read and Save"	=	"SPI_INIT, 
+									 SPI_READ_ID, 
+									 SPI_SAVE_ID, 
+									 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									 SPI_SAVE_CONTROL, 
+									 SPI_SAVE_ARRAY, 
+									 SPI_SAVE_USERCODE,
+									 SPI_DISABLE ! Exit the programming mode";												 
+									 																															
+	"Slave SPI Verify ID" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE";
+	"Slave SPI Display ID" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,
+								SPI_SAVE_ID";								
+					 			 									
+	"Slave SPI Read Status Register" = " SPI_INIT ! Initialize,
+										 SPI_READ_ID, 
+										 SPI_SAVE_ID, 
+							             SPI_SAVE_STATUS !Read Status Register";		 
+	"Slave SPI Upload to Static RAM" = "SPI_INIT !Initialize,
+										SPI_READ_ID !Check the IDCODE,
+										SPI_REFRESH ! Refresh";	
+										
+	"Slave SPI Display Control Register0" = "SPI_INIT ! Initialize,
+							     SPI_READ_ID	! Check the IDCODE,
+							     SPI_SAVE_ID,
+							     SPI_ENABLE	! Enable programming mode, 
+					 		     SPI_SAVE_CONTROL,
+					 		     SPI_DISABLE ! Exit the programming mode";									 
+	
+	
+	"I2C Verify ID" = "	I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE";
+	
+	"I2C Erase,Program,Verify" =   "I2CINIT 	! Initialize, 
+									I2CREAD_ID	! Check the IDCODE, 
+									I2C_ENABLE	! Enable the SRAM,
+									I2C_ERASE	! Erase the SRAM,
+									I2CCHECK_STATUS ! Read the status bit,
+				 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+									I2CPROGRAM_USERCODE	! Program USERCODE,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2C_VERIFY	! Verify CFG,
+									I2CVERIFY_USERCODE		! Verify USERCODE,									
+									I2CCHECK_STATUS ! Read the status bit,		 		
+									I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		I2CDISABLE ! Exit the programming mode"	;
+
+	"I2C Fast Program" =   "I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+	 			 		I2CBURST_PROGRAM	! Program SRAM,
+	 			 		I2CPROGRAM_USERCODE	! Program USERCODE,
+	 			 		I2CCHECK_STATUS ! Read the status bit,
+						I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+	 			 		I2CDISABLE ! Exit the programming mode"	;			 			 		
+				 			 		
+	"I2C Verify Only" = "	I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE, 
+							I2C_ENABLE	! Enable the SRAM,
+							I2C_VERIFY	! Verify the SRAM, 
+							I2CVERIFY_USERCODE	! Verify USERCODE, 
+							I2CCHECK_STATUS ! Read the status bit, 
+							I2CVERIFY_DONE_BIT ! Verify Done Bit,
+							I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C Erase Only"	=	"I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE,
+							I2C_ENABLE	! Enable the SRAM, 
+							I2C_ERASE	! Erase the SRAM,
+							I2CCHECK_STATUS ! Read the status bit,
+		 			 		I2CDISABLE ! Exit the programming mode"	;
+			 			 						 			 								
+	
+	"I2C Refresh"	=	"I2CINIT 	! Initialize, 
+						 I2CREAD_ID	! Check the IDCODE,	
+						 I2CREFRESH ! Refresh";	
+						 
+</Operation_List>
+<Operation_List label="SingleSVFOperation">
+
+	"Security Read TraceID" = "SVFINIT 	! Initialize, 
+						   	   READ_ID	! Check the IDCODE,
+						       SVF_READ_TRACEID ! Read TraceID" ;
+	
+	"Security Program TraceID" = "SVFINIT 	! Initialize, 
+								  READ_ID	! Check the IDCODE,
+								  EFUSE_ENABLE	! Enable the programming mode,
+								  CHECK_KEYLOCK ! Check the Key Lock,
+								  SVF_PROGRAM_TRACEID ! Program the TraceID,
+								  DISABLE ! Exit the programming mode" ;
+								  
+	"Security Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 EFUSE_ENABLE	! Enable the programming mode,
+					 			 SVF_SAVE_STATUS,
+					 			 DISABLE ! Exit the programming mode";
+					 			 
+	"Security Program Encryption Key Only" = "SVFINIT 	! Initialize, 
+							  READ_ID	! Check the IDCODE,
+							  EFUSE_ENABLE	! Enable the programming mode,
+							  CHECK_KEYLOCK ! Check the Key Lock,
+							  SVFPROGRAM_SECURITY_KEY_NO_FEATURE_LOCK !Program the encryption Key,
+							  DISABLE ! Exit the programming mode" ;
+							  
+	"Security Program Encryption Key with Lock" = "SVFINIT 	! Initialize, 
+							  READ_ID	! Check the IDCODE,
+							  EFUSE_ENABLE	! Enable the programming mode,
+							  CHECK_KEYLOCK ! Check the Key Lock,
+							  SVFPROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK !Program the Security Key,
+							  DISABLE ! Exit the programming mode" ;
+							  							  
+	
+	"Security Read Encryption Key" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   EFUSE_TRANSPARENT_ENABLE	! Enable the programming mode,
+						   READ_SECURITY_KEY ! Check the Security Key,
+						   DISABLE ! Exit the programming mode" ;
+						   						  								  
+	
+	"Security Program Feature Lock" = "SVFINIT 	! Initialize, 
+						  READ_ID	! Check the IDCODE,
+						  EFUSE_ENABLE	! Enable the programming mode,
+						  CHECK_KEYLOCK ! Check the Key Lock,
+						  PROGRAM_LOCK_FUSES ! Program the Lock Fuses,
+						  DISABLE ! Exit the programming mode" ;
+						  
+	
+	"Security Program Feature Encryption Lock" = "SVFINIT 	! Initialize, 
+												  READ_ID	! Check the IDCODE,
+												  EFUSE_ENABLE	! Enable the programming mode,
+												  CHECK_KEYLOCK ! Check the Key Lock,
+												  PROGRAM_DECRYPTION_FUSES ! Program the Encryption Lock,
+												  DISABLE ! Exit the programming mode" ;
+						  					  
+	"Security Fast Program with Encryption Option" = "SVFINIT 	! Initialize, 
+													  READ_ID	! Check the IDCODE,
+													  IO_STATE ! Program Bscan register,
+													  EFUSE_ENABLE ! Enable the Efuse mode,
+													  CHECK_KEYLOCK ! Check the Key Lock,
+													  PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK !Program the Security Key,	
+													  SRAM_ENABLE	! Enable the programming mode,
+													  SRAM_ERASE	! Erase the SRAM,  													  									  
+													  BURST_PROGRAM	! Program Fuse Map,
+													  VERIFY_USERCODE		! Verify USERCODE,
+													  DISABLE ! Exit the programming mode,
+					 								  VERIFY_STATUS ! Verify Status Register" ;													  	
+							   
+													  
+	"Manufacturing Read Status Register" = "SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode,
+									   SVF_READ_STATUS_FUSES ! Read the Status Register Fuses,
+									   DISABLE ! Exit the programming mode" ;
+									   
+	"Manufacturing Read PES Fuses" = " SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode,
+									   SVF_READ_PES_FUSES ! Read the PES Fuses,
+									   DISABLE ! Exit the programming mode" ;
+	
+	"Manufacturing Program PES Fuses" = " SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode,
+									   PROGRAM_PES_FUSES ! Program the PES Fuses,
+									   DISABLE ! Exit the programming mode" ;
+									   									   
+									   									   
+    "Read Manufacturing Register" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_MANUFACTURING_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+						
+	"Program Manufacturing Register" = "SVFINIT 	! Initialize, 
+									  READ_ID	! Check the IDCODE,
+									  PSUEDO_SRAM_ENABLE	! Enable the programming mode, 
+									  PROGRAM_MANUFACTURING_REGISTER ! Program the Manufacturing Register,
+									  DISABLE ! Exit the programming mode" ;
+
+								  
+	"Manufacturing Read MES Fuses" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_MES_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_DTR_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+	
+	"Manufacturing Read DTR Fuses Only" = "SVFINIT 	! Initialize, 
+										   READ_ID	! Check the IDCODE,
+										   SAVE_ID,
+										   SVF_READ_DTR_REGISTER_ONLY ! Read the Manufacturing Register" ;
+										   								 			 			 			 
+    "Erase Only"	=	"			SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									DISABLE ! Exit the programming mode"	;
+									
+	"Bypass" = 						"SVFINIT 	! Initialize" ;	
+										
+	"Fast Program" 				= "	SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode,
+					 				VERIFY_STATUS ! Verify Status Register"	;
+								
+	"Erase,Program,Verify" = "		SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit,
+									DISABLE ! Exit the programming mode,
+					 				VERIFY_STATUS ! Verify Status Register"	;
+										
+	"Program Only" = "		SVFINIT 	! Initialize,   
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode,
+							CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+							SRAM_ERASE	! Erase the SRAM, 
+							PROGRAM_CONTROL0	! Program Control Register,
+							SRAM_PROGRAM	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit,
+							DISABLE ! Exit the programming mode,
+					 		VERIFY_STATUS ! Verify Status Register"	;									
+									
+	"Verify Only"				=	"SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,  
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									SRAM_VERIFY_USERCODE		! Verify USERCODE, 
+									DISABLE ! Exit the programming mode"	;
+	
+	"Verify ID" = 					"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 								
+	"Enable SPI" = " SVFINIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 SRAM_ENABLE	! Enable SRAM programming mode,
+					 SRAM_ERASE	! Erase the SRAM, 
+					 DISABLE ! Exit the programming mode" ;
+	
+	"Re-Initialize" = " SVFINIT 	! Initialize,
+						SRAM_ENABLE	! Enable the programming mode, 
+						SRAM_ERASE	! Erase the device, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Display ID" = 						"SVFINIT, READ_ID";
+	"Display USERCODE"				="	SVFINIT, READ_ID, SVF_SAVE_USERCODE";		
+	"Read and Save"	=				"	SVFINIT, 
+										READ_ID, 
+										SRAM_ENABLE, 
+										SVF_SAVE_CONTROL0,
+										SVF_SRAM_SAVE_ARRAY, 
+										SVF_SAVE_USERCODE, 
+										DISABLE";
+	
+	"Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_VERIFY_USERCODE		! Verify USERCODE"	;
+								 
+	"Program USERCODE"	=	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						SRAM_ENABLE	! Enable SRAM programming mode,
+						PROGRAM_USERCODE	! Program USERCODE,
+						DISABLE ! Exit the programming mode"	; 
+															
+	"Calculate Data CRC"	=	"SVFINIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+					 			 SRAM_ENABLE	! Enable programming mode, 
+					             SVF_SAVE_CONTROL0,
+					             SVF_SRAM_SAVE_ARRAY, 
+					             SVF_SAVE_USERCODE,
+		 						 DISABLE";
+		 						 										
+	"Display Control Register0" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SVF_SAVE_CONTROL0 !Read Control Register 0,
+										DISABLE";					             
+	"Program Control Register0" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										PROGRAM_CONTROL0 ! Program Control Register 0,
+										DISABLE";								 
+	"Read Status Register" 				="SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SVF_SAVE_STATUS,
+										DISABLE";	
+	"Refresh"					 = " 	SVFINIT !Initialize,
+										READ_ID !Check the IDCODE,
+										IO_STATE ! Program Bscan register,
+										REFRESH_FUNCTION ! Refresh";
+	
+	"Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+	
+	"Serial Program" = "	SVFINIT 	! Initialize,   
+							SERIAL_PROGRAM	! Program Fuse Map"	;
+	"Serial Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Serial Enable Only" = "SVFINIT 	! Initialize, 
+							SRAM_ENABLE	! Enable the programming mode"	;
+	"Serial Read DONE bit" = "	SVFINIT 	! Initialize, 
+								SERIAL_READ_DONE_BIT 	! Read DONE Bit"	;
+								
+									
+	"FLASH TransFR" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						IO_STATE ! Program Bscan register,
+						SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+						TRANSFR_FUNCTION ! FLASH Transparent Field Reconfiguration"	;
+						
+	"XSRAM Fast Program" 				= "SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode"	;
+	
+	"XSRAM SEI Fast Program" 	= "	SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									SRAM_TRANSPARENT_READ_REFRESH_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									BURST_PROGRAM	! Program Fuse Map,
+									DISABLE ! Exit the programming mode,
+									VERIFY_STATUS ! Verify Status Register"	;
+																
+	"XSRAM Erase,Program,Verify" = "SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit,
+									DISABLE ! Exit the programming mode"	;
+									
+	"XSRAM Erase Only"	=	"		SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									DISABLE ! Exit the programming mode"	;	
+									
+																				  
+	"XSRAM Verify Only"			=	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,  
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode,  
+										SRAM_VERIFY	! Verify Fuse Map, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE, 
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Verify ID" 			= 	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	"XSRAM Verify USERCODE"		=	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE,
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Read and Save"			=	"SVFINIT, 
+										READ_ID, 
+										SRAM_TRANSPARENT_READ_ENABLE, 
+										SVF_SAVE_CONTROL0,
+										SVF_SRAM_SAVE_ARRAY, 
+										SVF_SAVE_USERCODE, 
+										DISABLE";		
+	"XSRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+						 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode, 
+						             SVF_SAVE_CONTROL0,
+						             SVF_SRAM_SAVE_ARRAY, 
+						             SVF_SAVE_USERCODE,
+			 						 DISABLE";
+			 						 													
+	"XSRAM Display ID" 					= "SVFINIT, READ_ID, SAVE_ID";							
+	"XSRAM Read Status Register" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+										SVF_SAVE_STATUS,
+										DISABLE ! Exit the programming mode";	
+	"XSRAM Bypass"	=					"	SVFINIT 	! Initialize"	;
+	"XSRAM Refresh" = 					"	SVFINIT 	! Initialize,   
+										READ_ID	! Check the IDCODE,
+										REFRESH_FUNCTION ! Refresh" ;
+	"XSRAM Display USERCODE"		=	"SVFINIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SVF_SAVE_USERCODE, DISABLE";
+	
+	"XSRAM Display Control Register0" = "SVFINIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+								 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode,  
+					             SVF_SAVE_CONTROL0 !Read Control Register 0,
+					             DISABLE";					             
+	"XSRAM Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+						
+	
+	"Slave SPI Program Encryption Key" = "SPI_INIT 	! Initialize,  
+							 			SPI_READ_ID	! Check the IDCODE,
+							  			SPI_EFUSE_ENABLE	! Enable the programming mode,
+							  			SPI_CHECK_KEYLOCK ! Check the Key Lock,
+							  			SPI_PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK ! Program the encryption Key,
+							  			SPI_DISABLE ! Exit the programming mode" ;							  			  
+	
+	"Slave SPI Program Feature Lock" = "SPI_INIT 	! Initialize,  
+							 			SPI_READ_ID	! Check the IDCODE,
+						  				SPI_EFUSE_ENABLE	! Enable the programming mode,
+						  				SPI_CHECK_KEYLOCK ! Check the Key Lock,
+						  				SPI_PROGRAM_LOCK_FUSES ! Program the Lock Fuses,
+						  				SPI_DISABLE ! Exit the programming mode" ;
+						  				
+	"Slave SPI Disable Only" = "SPI_INIT 	! Initialize, 
+	 			 				SPI_DISABLE ! Exit the programming mode"	;
+	"Slave SPI Enable Only" = "SPI_INIT 	! Initialize, 
+						   	   SPI_READ_ID	! Check the IDCODE,
+						  	   SPI_ENABLE	! Enable XPROGRAM mode"	;
+						   
+	"Slave SPI Re-Initialize" = "SPI_INIT 	! Initialize,  
+							 SPI_READ_ID	! Check the IDCODE,
+						  	 SPI_ENABLE	! Enable programming mode, 
+							 SPI_ERASE	! Erase the device, 
+							 SPI_DISABLE ! Exit the programming mode"	;
+	 
+	"Slave SPI Display USERCODE" =	"SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SAVE_ID, 
+								 SPI_SVFSAVE_USERCODE";								
+											 		  	 								
+	"Slave SPI Fast Program" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE, 
+								SPI_ENABLE	! Enable programming mode, 
+								SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+								SPI_ERASE	! Erase the device, 
+								SPI_PROGRAM	! Program Fuse Map,
+								SPI_VERIFY_STATUS ! Read the status bit,
+								SPI_DISABLE ! Exit the programming mode"	;			
+	
+	"Slave SPI SEI Fast Program" 	= "	SPI_INIT 	! Initialize, 
+									SPI_READ_ID	! Check the IDCODE,	
+									SPI_SRAM_TRANSPARENT_READ_REFRESH_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									SPI_PROGRAM	! Program Fuse Map,			
+									SPI_DISABLE ! Exit the programming mode"	;
+												 			 			
+	"Slave SPI Fast Program,Refresh" = "	SPI_INIT 	! Initialize, 
+													SPI_READ_ID	! Check the IDCODE, 
+													SPI_ENABLE	! Enable programming mode, 
+													SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+													SPI_ERASE	! Erase the device, 
+													SPI_PROGRAM	! Program Fuse Map,
+													SPI_VERIFY_STATUS ! Read the status bit,
+													SPI_DISABLE ! Exit the programming mode,
+													SPI_REFRESH ! Refresh"	;
+										
+	"Slave SPI Erase Only"	=	"SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,
+								SPI_ENABLE	! Enable programming mode,
+								SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+								SPI_ERASE	! Erase the device, 
+								SPI_DISABLE ! Exit the programming mode"	;
+									
+	"Slave SPI Read and Save"	=	"SPI_INIT, 
+									 SPI_READ_ID, 
+									 SPI_SAVE_ID, 
+									 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable programming mode,
+									 SPI_SAVE_CONTROL, 
+									 SPI_SAVE_ARRAY, 
+									 SPI_SAVE_USERCODE,
+									 SPI_DISABLE ! Exit the programming mode";													 
+									 																															
+	"Slave SPI Verify ID" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE";
+	"Slave SPI Display ID" = "	SPI_INIT 	! Initialize, 
+								SPI_SAVE_ID";								
+					 			 									
+	"Slave SPI Read Status Register" = " SPI_INIT ! Initialize,
+										 SPI_READ_ID,  
+							             SPI_SVFSAVE_STATUS !Read Status Register";		 
+	"Slave SPI Upload to Static RAM" = "SPI_INIT !Initialize,
+										SPI_READ_ID !Check the IDCODE,
+										SPI_REFRESH ! Refresh";	
+	"Slave SPI Display Control Register0" = "SPI_INIT ! Initialize,
+							     SPI_READ_ID	! Check the IDCODE,
+							     SPI_SAVE_ID,
+							     SPI_ENABLE	! Enable programming mode, 
+					 		     SPI_SVFSAVE_CONTROL,
+					 		     SPI_DISABLE ! Exit the programming mode";	
+	
+	"I2C Verify ID" = "	I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE";
+	
+	"I2C Erase,Program,Verify" =   "I2CINIT 	! Initialize, 
+									I2CREAD_ID	! Check the IDCODE, 
+									I2C_ENABLE	! Enable the SRAM,
+									I2C_ERASE	! Erase the SRAM,
+									I2CCHECK_STATUS ! Read the status bit,
+				 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+									I2CPROGRAM_USERCODE	! Program USERCODE,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2C_VERIFY	! Verify CFG,
+									I2CVERIFY_USERCODE		! Verify USERCODE,									
+									I2CCHECK_STATUS ! Read the status bit,		 		
+									I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		I2CDISABLE ! Exit the programming mode"	;
+
+	"I2C Fast Program" =   "I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+	 			 		I2CBURST_PROGRAM	! Program SRAM,
+	 			 		I2CPROGRAM_USERCODE	! Program USERCODE,
+	 			 		I2CCHECK_STATUS ! Read the status bit,
+						I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+	 			 		I2CDISABLE ! Exit the programming mode"	;			 			 		
+				 			 		
+	"I2C Verify Only" = "	I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE, 
+							I2C_ENABLE	! Enable the SRAM,
+							I2C_VERIFY	! Verify the SRAM, 
+							I2CVERIFY_USERCODE	! Verify USERCODE, 
+							I2CCHECK_STATUS ! Read the status bit, 
+							I2CVERIFY_DONE_BIT ! Verify Done Bit,
+							I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C Erase Only"	=	"I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE,
+							I2C_ENABLE	! Enable the SRAM, 
+							I2C_ERASE	! Erase the SRAM,
+							I2CCHECK_STATUS ! Read the status bit,
+		 			 		I2CDISABLE ! Exit the programming mode"	;
+			 			 						 			 								
+	
+	"I2C Refresh"	=	"I2CINIT 	! Initialize, 
+						 I2CREAD_ID	! Check the IDCODE,	
+						 I2CREFRESH ! Refresh";	
+						 				 		     
+</Operation_List>
+<Operation_List label="TurboOperation">
+									
+	"Enable SPI" = " INIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 SRAM_ERASE	! Erase the SRAM" ;
+		 			 
+    "Erase Only"	=	"			INIT 	! Initialize, 
+									SRAM_ERASE	! Erase the SRAM"	;
+									
+	"Verify ID" = 					"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	
+	"Bypass" = 						"INIT 	! Initialize" ;	
+										
+	"Fast Program" 				= "	INIT 	! Initialize,   
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE"	;
+								
+	"Erase,Program,Verify" = "		INIT 	! Initialize,   
+									CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit"	;	
+									
+	
+	"Program Only" = "		INIT 	! Initialize,   
+							CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+							SRAM_ERASE	! Erase the SRAM, 
+							PROGRAM_CONTROL0	! Program Control Register,
+							SRAM_PROGRAM	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+									
+	"Verify Only"				=	"INIT 	! Initialize, 
+									SRAM_VERIFY	! Verify Fuse Map, 
+									SRAM_VERIFY_USERCODE		! Verify USERCODE"	;
+									
+	
+	"Display ID" = 						"INIT, READ_ID, SAVE_ID";
+	"Display USERCODE"				="	INIT, READ_ID, SAVE_ID,SAVE_USERCODE";
+	
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_VERIFY_USERCODE		! Verify USERCODE"	;
+								 
+	"Program USERCODE"	=	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						PROGRAM_USERCODE	! Program USERCODE"	; 
+								
+	"Read and Save"	=				"	INIT, 
+										READ_ID, 
+										SAVE_ID, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE";
+	"Display Control Register0" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SAVE_CONTROL0 !Read Control Register 0";					             
+	"Program Control Register0" 		= "INIT ! Initialize,
+										PROGRAM_CONTROL0 ! Program Control Register 0";								 
+	"Read Status Register" 				="INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SAVE_STATUS";	
+	"Refresh"					 = " 	INIT !Initialize,
+										READ_ID !Check the IDCODE,
+										REFRESH_FUNCTION ! Refresh";
+							  
+	"XSRAM Verify Only"			=	"	INIT 	! Initialize, 
+										SRAM_VERIFY	! Verify Fuse Map, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Verify ID" 			= 	"	INIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	"XSRAM Verify USERCODE"		=	"	INIT 	! Initialize, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Read and Save"			=	"INIT, 
+										READ_ID, 
+										SAVE_ID, 
+										SAVE_CONTROL0,
+										SRAM_SAVE_ARRAY, 
+										SAVE_USERCODE";					
+	"XSRAM Display ID" 					= "INIT, READ_ID, SAVE_ID";							
+
+	"XSRAM Read Status Register" 		= "INIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SAVE_ID,
+										SAVE_STATUS";	
+	"XSRAM Bypass"	=					"	INIT 	! Initialize"	;
+	"XSRAM Refresh" = 					"	INIT 	! Initialize,   
+										READ_ID	! Check the ,
+										REFRESH_FUNCTION ! Refresh" ;
+	"XSRAM Display USERCODE"	=	"INIT, READ_ID, SAVE_USERCODE";
+</Operation_List>
+<Operation_List label="ChainSVFOperation">
+	"Security Read TraceID" = "SVFINIT 	! Initialize, 
+						   	   READ_ID	! Check the IDCODE,
+						       SVF_READ_TRACEID ! Read TraceID" ;
+	
+	"Security Program TraceID" = "SVFINIT 	! Initialize, 
+								  READ_ID	! Check the IDCODE,
+								  EFUSE_ENABLE	! Enable the programming mode,
+								  CHECK_KEYLOCK ! Check the Key Lock,
+								  SVF_PROGRAM_TRACEID ! Program the TraceID,
+								  DISABLE ! Exit the programming mode" ;
+								  
+	"Security Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 EFUSE_ENABLE	! Enable the programming mode,
+					 			 SVF_SAVE_STATUS,
+					 			 DISABLE ! Exit the programming mode";
+					 			 
+	"Security Program Encryption Key Only" = "SVFINIT 	! Initialize, 
+							  READ_ID	! Check the IDCODE,
+							  EFUSE_ENABLE	! Enable the programming mode,
+							  CHECK_KEYLOCK ! Check the Key Lock,
+							  SVFPROGRAM_SECURITY_KEY_NO_FEATURE_LOCK !Program the encryption Key,
+							  DISABLE ! Exit the programming mode" ;
+							  
+	"Security Program Encryption Key with Lock" = "SVFINIT 	! Initialize, 
+							  READ_ID	! Check the IDCODE,
+							  EFUSE_ENABLE	! Enable the programming mode,
+							  CHECK_KEYLOCK ! Check the Key Lock,
+							  SVFPROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK !Program the Security Key,
+							  DISABLE ! Exit the programming mode" ;
+							  							  
+	
+	"Security Read Encryption Key" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   EFUSE_TRANSPARENT_ENABLE	! Enable the programming mode,
+						   READ_SECURITY_KEY ! Check the Security Key,
+						   DISABLE ! Exit the programming mode" ;
+						   						  								  
+	
+	"Security Program Feature Lock" = "SVFINIT 	! Initialize, 
+						  READ_ID	! Check the IDCODE,
+						  EFUSE_ENABLE	! Enable the programming mode,
+						  CHECK_KEYLOCK ! Check the Key Lock,
+						  PROGRAM_LOCK_FUSES ! Program the Lock Fuses,
+						  DISABLE ! Exit the programming mode" ;
+						  
+	
+	"Security Program Feature Encryption Lock" = "SVFINIT 	! Initialize, 
+												  READ_ID	! Check the IDCODE,
+												  EFUSE_ENABLE	! Enable the programming mode,
+												  CHECK_KEYLOCK ! Check the Key Lock,
+												  PROGRAM_DECRYPTION_FUSES ! Program the Encryption Lock,
+												  DISABLE ! Exit the programming mode" ;
+						  					  
+	"Security Fast Program with Encryption Option" = "SVFINIT 	! Initialize, 
+													  READ_ID	! Check the IDCODE,
+													  IO_STATE ! Program Bscan register,
+													  EFUSE_ENABLE ! Enable the Efuse mode,
+													  CHECK_KEYLOCK ! Check the Key Lock,
+													  PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK !Program the Security Key,	
+													  SRAM_ENABLE	! Enable the programming mode,
+													  SRAM_ERASE	! Erase the SRAM,  													  									  
+													  BURST_PROGRAM	! Program Fuse Map,
+													  VERIFY_USERCODE		! Verify USERCODE,
+													  DISABLE ! Exit the programming mode,
+					 								  VERIFY_STATUS ! Verify Status Register" ;													  	
+							   
+													  
+	"Manufacturing Read Status Register" = "SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode,
+									   SVF_READ_STATUS_FUSES ! Read the Status Register Fuses,
+									   DISABLE ! Exit the programming mode" ;
+									   
+	"Manufacturing Read PES Fuses" = " SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode,
+									   SVF_READ_PES_FUSES ! Read the PES Fuses,
+									   DISABLE ! Exit the programming mode" ;
+	
+	"Manufacturing Program PES Fuses" = " SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode,
+									   PROGRAM_PES_FUSES ! Program the PES Fuses,
+									   DISABLE ! Exit the programming mode" ;
+									   									   
+									   									   
+    "Read Manufacturing Register" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_MANUFACTURING_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+						
+	"Program Manufacturing Register" = "SVFINIT 	! Initialize, 
+									  READ_ID	! Check the IDCODE,
+									  PSUEDO_SRAM_ENABLE	! Enable the programming mode, 
+									  PROGRAM_MANUFACTURING_REGISTER ! Program the Manufacturing Register,
+									  DISABLE ! Exit the programming mode" ;
+
+								  
+	"Manufacturing Read MES Fuses" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_MES_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_DTR_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+	
+	"Manufacturing Read DTR Fuses Only" = "SVFINIT 	! Initialize, 
+										   READ_ID	! Check the IDCODE,
+										   SAVE_ID,
+										   SVF_READ_DTR_REGISTER_ONLY ! Read the Manufacturing Register" ;
+										   								 			 			 			 
+    "Erase Only"	=	"			SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									DISABLE ! Exit the programming mode"	;
+									
+	"Bypass" = 						"SVFINIT 	! Initialize" ;	
+										
+	"Fast Program" 				= "	SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode,
+					 				VERIFY_STATUS ! Verify Status Register"	;
+								
+	"Erase,Program,Verify" = "		SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit,
+									DISABLE ! Exit the programming mode,
+					 				VERIFY_STATUS ! Verify Status Register"	;
+										
+	"Program Only" = "		SVFINIT 	! Initialize,   
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode,
+							CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+							SRAM_ERASE	! Erase the SRAM, 
+							PROGRAM_CONTROL0	! Program Control Register,
+							SRAM_PROGRAM	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit,
+							DISABLE ! Exit the programming mode,
+					 		VERIFY_STATUS ! Verify Status Register"	;									
+									
+	"Verify Only"				=	"SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,  
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									SRAM_VERIFY_USERCODE		! Verify USERCODE, 
+									DISABLE ! Exit the programming mode"	;
+	
+	"Verify ID" = 					"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 								
+	"Enable SPI" = " SVFINIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 SRAM_ENABLE	! Enable SRAM programming mode,
+					 SRAM_ERASE	! Erase the SRAM, 
+					 DISABLE ! Exit the programming mode" ;
+	
+	"Re-Initialize" = " SVFINIT 	! Initialize,
+						SRAM_ENABLE	! Enable the programming mode, 
+						SRAM_ERASE	! Erase the device, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Display ID" = 						"SVFINIT, READ_ID";
+	"Display USERCODE"				="	SVFINIT, READ_ID, SVF_SAVE_USERCODE";		
+	"Read and Save"	=				"	SVFINIT, 
+										READ_ID, 
+										SRAM_ENABLE, 
+										SVF_SAVE_CONTROL0,
+										SVF_SRAM_SAVE_ARRAY, 
+										SVF_SAVE_USERCODE, 
+										DISABLE";
+	
+	"Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_VERIFY_USERCODE		! Verify USERCODE"	;
+								 
+	"Program USERCODE"	=	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						SRAM_ENABLE	! Enable SRAM programming mode,
+						PROGRAM_USERCODE	! Program USERCODE,
+						DISABLE ! Exit the programming mode"	; 
+															
+	"Calculate Data CRC"	=	"SVFINIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+					 			 SRAM_ENABLE	! Enable programming mode, 
+					             SVF_SAVE_CONTROL0,
+					             SVF_SRAM_SAVE_ARRAY, 
+					             SVF_SAVE_USERCODE,
+		 						 DISABLE";
+		 						 										
+	"Display Control Register0" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SVF_SAVE_CONTROL0 !Read Control Register 0,
+										DISABLE";					             
+	"Program Control Register0" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										PROGRAM_CONTROL0 ! Program Control Register 0,
+										DISABLE";								 
+	"Read Status Register" 				="SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SVF_SAVE_STATUS,
+										DISABLE";	
+	"Refresh"					 = " 	SVFINIT !Initialize,
+										READ_ID !Check the IDCODE,
+										IO_STATE ! Program Bscan register,
+										REFRESH_FUNCTION ! Refresh";
+	
+	"Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+	
+	"Serial Program" = "	SVFINIT 	! Initialize,   
+							SERIAL_PROGRAM	! Program Fuse Map"	;
+	"Serial Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Serial Enable Only" = "SVFINIT 	! Initialize, 
+							SRAM_ENABLE	! Enable the programming mode"	;
+	"Serial Read DONE bit" = "	SVFINIT 	! Initialize, 
+								SERIAL_READ_DONE_BIT 	! Read DONE Bit"	;
+								
+									
+	"FLASH TransFR" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						IO_STATE ! Program Bscan register,
+						SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+						TRANSFR_FUNCTION ! FLASH Transparent Field Reconfiguration"	;
+						
+	"XSRAM Fast Program" 				= "SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode"	;
+	
+	"XSRAM SEI Fast Program" 	= "	SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									SRAM_TRANSPARENT_READ_REFRESH_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									BURST_PROGRAM	! Program Fuse Map,
+									DISABLE ! Exit the programming mode,
+									VERIFY_STATUS ! Verify Status Register"	;
+																
+	"XSRAM Erase,Program,Verify" = "SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit,
+									DISABLE ! Exit the programming mode"	;
+									
+	"XSRAM Erase Only"	=	"		SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									DISABLE ! Exit the programming mode"	;	
+									
+																				  
+	"XSRAM Verify Only"			=	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,  
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode,  
+										SRAM_VERIFY	! Verify Fuse Map, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE, 
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Verify ID" 			= 	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	"XSRAM Verify USERCODE"		=	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE,
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Read and Save"			=	"SVFINIT, 
+										READ_ID, 
+										SRAM_TRANSPARENT_READ_ENABLE, 
+										SVF_SAVE_CONTROL0,
+										SVF_SRAM_SAVE_ARRAY, 
+										SVF_SAVE_USERCODE, 
+										DISABLE";		
+	"XSRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+						 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode, 
+						             SVF_SAVE_CONTROL0,
+						             SVF_SRAM_SAVE_ARRAY, 
+						             SVF_SAVE_USERCODE,
+			 						 DISABLE";
+			 						 													
+	"XSRAM Display ID" 					= "SVFINIT, READ_ID, SAVE_ID";							
+	"XSRAM Read Status Register" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+										SVF_SAVE_STATUS,
+										DISABLE ! Exit the programming mode";	
+	"XSRAM Bypass"	=					"	SVFINIT 	! Initialize"	;
+	"XSRAM Refresh" = 					"	SVFINIT 	! Initialize,   
+										READ_ID	! Check the IDCODE,
+										REFRESH_FUNCTION ! Refresh" ;
+	"XSRAM Display USERCODE"		=	"SVFINIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SVF_SAVE_USERCODE, DISABLE";
+	
+	"XSRAM Display Control Register0" = "SVFINIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+								 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode,  
+					             SVF_SAVE_CONTROL0 !Read Control Register 0,
+					             DISABLE";					             
+	"XSRAM Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+						
+	
+	"Slave SPI Program Encryption Key" = "SPI_INIT 	! Initialize,  
+							 			SPI_READ_ID	! Check the IDCODE,
+							  			SPI_EFUSE_ENABLE	! Enable the programming mode,
+							  			SPI_CHECK_KEYLOCK ! Check the Key Lock,
+							  			SPI_PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK ! Program the encryption Key,
+							  			SPI_DISABLE ! Exit the programming mode" ;							  			  
+	
+	"Slave SPI Program Feature Lock" = "SPI_INIT 	! Initialize,  
+							 			SPI_READ_ID	! Check the IDCODE,
+						  				SPI_EFUSE_ENABLE	! Enable the programming mode,
+						  				SPI_CHECK_KEYLOCK ! Check the Key Lock,
+						  				SPI_PROGRAM_LOCK_FUSES ! Program the Lock Fuses,
+						  				SPI_DISABLE ! Exit the programming mode" ;
+						  				
+	"Slave SPI Disable Only" = "SPI_INIT 	! Initialize, 
+	 			 				SPI_DISABLE ! Exit the programming mode"	;
+	"Slave SPI Enable Only" = "SPI_INIT 	! Initialize, 
+						   	   SPI_READ_ID	! Check the IDCODE,
+						  	   SPI_ENABLE	! Enable XPROGRAM mode"	;
+						   
+	"Slave SPI Re-Initialize" = "SPI_INIT 	! Initialize,  
+							 SPI_READ_ID	! Check the IDCODE,
+						  	 SPI_ENABLE	! Enable programming mode, 
+							 SPI_ERASE	! Erase the device, 
+							 SPI_DISABLE ! Exit the programming mode"	;
+	 
+	"Slave SPI Display USERCODE" =	"SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SAVE_ID, 
+								 SPI_SVFSAVE_USERCODE";								
+											 		  	 								
+	"Slave SPI Fast Program" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE, 
+								SPI_ENABLE	! Enable programming mode, 
+								SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+								SPI_ERASE	! Erase the device, 
+								SPI_PROGRAM	! Program Fuse Map,
+								SPI_VERIFY_STATUS ! Read the status bit,
+								SPI_DISABLE ! Exit the programming mode"	;			
+	
+	"Slave SPI SEI Fast Program" 	= "	SPI_INIT 	! Initialize, 
+									SPI_READ_ID	! Check the IDCODE,	
+									SPI_SRAM_TRANSPARENT_READ_REFRESH_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									SPI_PROGRAM	! Program Fuse Map,	
+									SPI_DISABLE ! Exit the programming mode"	;
+												 			 			
+	"Slave SPI Fast Program,Refresh" = "	SPI_INIT 	! Initialize, 
+													SPI_READ_ID	! Check the IDCODE, 
+													SPI_ENABLE	! Enable programming mode, 
+													SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+													SPI_ERASE	! Erase the device, 
+													SPI_PROGRAM	! Program Fuse Map,
+													SPI_VERIFY_STATUS ! Read the status bit,
+													SPI_DISABLE ! Exit the programming mode,
+													SPI_REFRESH ! Refresh"	;
+										
+	"Slave SPI Erase Only"	=	"SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,
+								SPI_ENABLE	! Enable programming mode,
+								SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+								SPI_ERASE	! Erase the device, 
+								SPI_DISABLE ! Exit the programming mode"	;
+									
+	"Slave SPI Read and Save"	=	"SPI_INIT, 
+									 SPI_READ_ID, 
+									 SPI_SAVE_ID, 
+									 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable programming mode, 
+									 SPI_SAVE_CONTROL, 
+									 SPI_SAVE_ARRAY, 
+									 SPI_SAVE_USERCODE,
+									 SPI_DISABLE ! Exit the programming mode";												 
+									 																															
+	"Slave SPI Verify ID" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE";
+	"Slave SPI Display ID" = "	SPI_INIT 	! Initialize, 
+								SPI_SAVE_ID";								
+					 			 									
+	"Slave SPI Read Status Register" = " SPI_INIT ! Initialize,
+										 SPI_READ_ID,  
+							             SPI_SVFSAVE_STATUS !Read Status Register";		 
+	"Slave SPI Upload to Static RAM" = "SPI_INIT !Initialize,
+										SPI_READ_ID !Check the IDCODE,
+										SPI_REFRESH ! Refresh";	
+	"Slave SPI Display Control Register0" = "SPI_INIT ! Initialize,
+							     SPI_READ_ID	! Check the IDCODE,
+							     SPI_SAVE_ID,
+							     SPI_ENABLE	! Enable programming mode, 
+					 		     SPI_SVFSAVE_CONTROL,
+					 		     SPI_DISABLE ! Exit the programming mode";	
+	
+	"I2C Verify ID" = "	I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE";
+	
+	"I2C Erase,Program,Verify" =   "I2CINIT 	! Initialize, 
+									I2CREAD_ID	! Check the IDCODE, 
+									I2C_ENABLE	! Enable the SRAM,
+									I2C_ERASE	! Erase the SRAM,
+									I2CCHECK_STATUS ! Read the status bit,
+				 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+									I2CPROGRAM_USERCODE	! Program USERCODE,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2C_VERIFY	! Verify CFG,
+									I2CVERIFY_USERCODE		! Verify USERCODE,									
+									I2CCHECK_STATUS ! Read the status bit,		 		
+									I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		I2CDISABLE ! Exit the programming mode"	;
+
+	"I2C Fast Program" =   "I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+	 			 		I2CBURST_PROGRAM	! Program SRAM,
+	 			 		I2CPROGRAM_USERCODE	! Program USERCODE,
+	 			 		I2CCHECK_STATUS ! Read the status bit,
+						I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+	 			 		I2CDISABLE ! Exit the programming mode"	;			 			 		
+				 			 		
+	"I2C Verify Only" = "	I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE, 
+							I2C_ENABLE	! Enable the SRAM,
+							I2C_VERIFY	! Verify the SRAM, 
+							I2CVERIFY_USERCODE	! Verify USERCODE, 
+							I2CCHECK_STATUS ! Read the status bit, 
+							I2CVERIFY_DONE_BIT ! Verify Done Bit,
+							I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C Erase Only"	=	"I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE,
+							I2C_ENABLE	! Enable the SRAM, 
+							I2C_ERASE	! Erase the SRAM,
+							I2CCHECK_STATUS ! Read the status bit,
+		 			 		I2CDISABLE ! Exit the programming mode"	;
+			 			 						 			 								
+	
+	"I2C Refresh"	=	"I2CINIT 	! Initialize, 
+						 I2CREAD_ID	! Check the IDCODE,	
+						 I2CREFRESH ! Refresh";	
+						 				 		     
+</Operation_List>
+<Operation_List label="SingleSVFOperationRevC">
+	
+	"Security Read TraceID" = "SVFINIT 	! Initialize, 
+						   	   READ_ID	! Check the IDCODE,
+						       SVF_READ_TRACEID ! Read TraceID" ;
+	
+	"Security Program TraceID" = "SVFINIT 	! Initialize, 
+								  READ_ID	! Check the IDCODE,
+								  EFUSE_ENABLE	! Enable the programming mode,
+								  CHECK_KEYLOCK ! Check the Key Lock,
+								  SVF_PROGRAM_TRACEID ! Program the TraceID,
+								  DISABLE ! Exit the programming mode" ;
+								  
+	"Security Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 EFUSE_ENABLE	! Enable the programming mode,
+					 			 SVF_SAVE_STATUS,
+					 			 DISABLE ! Exit the programming mode";
+					 			 
+	"Security Program Encryption Key Only" = "SVFINIT 	! Initialize, 
+							  READ_ID	! Check the IDCODE,
+							  EFUSE_ENABLE	! Enable the programming mode,
+							  CHECK_KEYLOCK ! Check the Key Lock,
+							  SVFPROGRAM_SECURITY_KEY_NO_FEATURE_LOCK !Program the encryption Key,
+							  DISABLE ! Exit the programming mode" ;
+							  
+	"Security Program Encryption Key with Lock" = "SVFINIT 	! Initialize, 
+							  READ_ID	! Check the IDCODE,
+							  EFUSE_ENABLE	! Enable the programming mode,
+							  CHECK_KEYLOCK ! Check the Key Lock,
+							  SVFPROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK !Program the Security Key,
+							  DISABLE ! Exit the programming mode" ;
+							  							  
+	
+	"Security Read Encryption Key" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   EFUSE_TRANSPARENT_ENABLE	! Enable the programming mode,
+						   READ_SECURITY_KEY ! Check the Security Key,
+						   DISABLE ! Exit the programming mode" ;
+						   						  								  
+	
+	"Security Program Feature Lock" = "SVFINIT 	! Initialize, 
+						  READ_ID	! Check the IDCODE,
+						  EFUSE_ENABLE	! Enable the programming mode,
+						  CHECK_KEYLOCK ! Check the Key Lock,
+						  PROGRAM_LOCK_FUSES ! Program the Lock Fuses,
+						  DISABLE ! Exit the programming mode" ;
+						  
+	
+	"Security Program Feature Encryption Lock" = "SVFINIT 	! Initialize, 
+												  READ_ID	! Check the IDCODE,
+												  EFUSE_ENABLE	! Enable the programming mode,
+												  CHECK_KEYLOCK ! Check the Key Lock,
+												  PROGRAM_DECRYPTION_FUSES ! Program the Encryption Lock,
+												  DISABLE ! Exit the programming mode" ;
+						  					  
+	"Security Fast Program with Encryption Option" = "SVFINIT 	! Initialize, 
+													  READ_ID	! Check the IDCODE,
+													  IO_STATE ! Program Bscan register,
+													  EFUSE_ENABLE ! Enable the Efuse mode,
+													  CHECK_KEYLOCK ! Check the Key Lock,
+													  PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK !Program the Security Key,	
+													  SRAM_ENABLE	! Enable the programming mode,
+													  SRAM_ERASE	! Erase the SRAM,  													  									  
+													  BURST_PROGRAM	! Program Fuse Map,
+													  VERIFY_USERCODE		! Verify USERCODE,
+													  DISABLE ! Exit the programming mode,
+					 								  VERIFY_STATUS ! Verify Status Register" ;													  	
+							   
+													  
+	"Manufacturing Read Status Register" = "SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode, 
+									   SVF_READ_STATUS_FUSES ! Read the Status Register Fuses,
+									   DISABLE ! Exit the programming mode" ;
+									   
+	"Manufacturing Read PES Fuses" = " SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode,
+									   SVF_READ_PES_FUSES ! Read the PES Fuses,
+									   DISABLE ! Exit the programming mode" ;
+	
+	"Manufacturing Program PES Fuses" = " SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode,
+									   PROGRAM_PES_FUSES ! Program the PES Fuses,
+									   DISABLE ! Exit the programming mode" ;
+									   									   
+									   									   
+    "Read Manufacturing Register" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_MANUFACTURING_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+						
+	"Program Manufacturing Register" = "SVFINIT 	! Initialize, 
+									  READ_ID	! Check the IDCODE,
+									  PSUEDO_SRAM_ENABLE	! Enable the programming mode,
+									  PROGRAM_MANUFACTURING_REGISTER ! Program the Manufacturing Register,
+									  DISABLE ! Exit the programming mode" ;
+
+								  
+	"Manufacturing Read MES Fuses" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_MES_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_DTR_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses Only" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									SVF_READ_DTR_REGISTER_ONLY ! Read the Manufacturing Register" ;
+																	
+	"Enable SPI" = " SVFINIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 SRAM_ENABLE	! Enable SRAM programming mode,
+					 SRAM_ERASE	! Erase the SRAM, 
+					 DISABLE ! Exit the programming mode" ;
+	
+	"Re-Initialize" = " SVFINIT 	! Initialize,
+						SRAM_ENABLE	! Enable the programming mode, 
+						SRAM_ERASE	! Erase the device, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 			 			 
+    "Erase Only"	=	"			SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode,
+									CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+									SRAM_ERASE	! Erase the SRAM, 
+									DISABLE ! Exit the programming mode"	;
+									
+	"Verify ID" = 					"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	
+	"Bypass" = 						"SVFINIT 	! Initialize" ;	
+										
+	"Fast Program" 				= "	SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode,
+					 				VERIFY_STATUS ! Verify Status Register"	;
+								
+	"Erase,Program,Verify" = "		SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit,
+									DISABLE ! Exit the programming mode,
+					 				VERIFY_STATUS ! Verify Status Register"	;
+										
+	"Program Only" = "		SVFINIT 	! Initialize,   
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode,
+							CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+							SRAM_ERASE	! Erase the SRAM, 
+							PROGRAM_CONTROL0	! Program Control Register,
+							SRAM_PROGRAM	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit,
+							DISABLE ! Exit the programming mode,
+					 		VERIFY_STATUS ! Verify Status Register"	;									
+									
+	"Verify Only"				=	"SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,  
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									SRAM_VERIFY_USERCODE		! Verify USERCODE, 
+									DISABLE ! Exit the programming mode"	;
+	
+	"Display ID" = 						"SVFINIT, READ_ID";
+	"Display USERCODE"				="	SVFINIT, READ_ID, SVF_SAVE_USERCODE";	
+	
+	"Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_VERIFY_USERCODE		! Verify USERCODE"	;
+								 
+	"Program USERCODE"	=	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						SRAM_ENABLE	! Enable SRAM programming mode,
+						PROGRAM_USERCODE	! Program USERCODE,
+						DISABLE ! Exit the programming mode"	; 
+							
+	"Read and Save"	=				"	SVFINIT, 
+										READ_ID, 
+										SRAM_ENABLE, 
+										SVF_SAVE_CONTROL0,
+										SVF_SRAM_SAVE_ARRAY, 
+										SVF_SAVE_USERCODE, 
+										DISABLE";
+										
+	"Calculate Data CRC"	=	"SVFINIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+					 			 SRAM_ENABLE	! Enable programming mode, 
+					             SVF_SAVE_CONTROL0,
+					             SVF_SRAM_SAVE_ARRAY, 
+					             SVF_SAVE_USERCODE,
+		 						 DISABLE";
+		 						 										
+	"Display Control Register0" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SVF_SAVE_CONTROL0 !Read Control Register 0,
+										DISABLE";					             
+	"Program Control Register0" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										PROGRAM_CONTROL0 ! Program Control Register 0,
+										DISABLE";								 
+	"Read Status Register" 				="SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SVF_SAVE_STATUS,
+										DISABLE";	
+	"Refresh"					 = " 	SVFINIT !Initialize,
+										READ_ID !Check the IDCODE,
+										IO_STATE ! Program Bscan register,
+										REFRESH_FUNCTION ! Refresh";
+	
+	"Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+	
+	"Serial Program" = "	SVFINIT 	! Initialize,   
+							SERIAL_PROGRAM	! Program Fuse Map"	;
+	"Serial Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Serial Enable Only" = "SVFINIT 	! Initialize, 
+							SRAM_ENABLE	! Enable the programming mode"	;
+	"Serial Read DONE bit" = "	SVFINIT 	! Initialize, 
+								SERIAL_READ_DONE_BIT 	! Read DONE Bit"	;
+								
+								
+	"FLASH TransFR" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						IO_STATE ! Program Bscan register,
+						SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+						TRANSFR_FUNCTION ! FLASH Transparent Field Reconfiguration"	;
+						
+	"XSRAM Fast Program" 				= "SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode"	;
+	
+	"XSRAM SEI Fast Program" 	= "	SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									SRAM_TRANSPARENT_READ_REFRESH_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									BURST_PROGRAM	! Program Fuse Map,
+									DISABLE ! Exit the programming mode,
+									VERIFY_STATUS ! Verify Status Register"	;
+																
+	"XSRAM Erase,Program,Verify" = "SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit,
+									DISABLE ! Exit the programming mode"	;
+									
+	"XSRAM Erase Only"	=	"		SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									DISABLE ! Exit the programming mode"	;	
+									
+																				  
+	"XSRAM Verify Only"			=	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,  
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode,  
+										SRAM_VERIFY	! Verify Fuse Map, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE, 
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Verify ID" 			= 	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	"XSRAM Verify USERCODE"		=	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE,
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Read and Save"			=	"SVFINIT, 
+										READ_ID, 
+										SRAM_TRANSPARENT_READ_ENABLE, 
+										SVF_SAVE_CONTROL0,
+										SVF_SRAM_SAVE_ARRAY, 
+										SVF_SAVE_USERCODE, 
+										DISABLE";		
+	"XSRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+						 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode, 
+						             SVF_SAVE_CONTROL0,
+						             SVF_SRAM_SAVE_ARRAY, 
+						             SVF_SAVE_USERCODE,
+			 						 DISABLE";
+			 						 													
+	"XSRAM Display ID" 					= "SVFINIT, READ_ID, SAVE_ID";							
+	"XSRAM Read Status Register" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+										SVF_SAVE_STATUS,
+										DISABLE ! Exit the programming mode";	
+	"XSRAM Bypass"	=					"	SVFINIT 	! Initialize"	;
+	"XSRAM Refresh" = 					"	SVFINIT 	! Initialize,   
+										READ_ID	! Check the IDCODE,
+										REFRESH_FUNCTION ! Refresh" ;
+	"XSRAM Display USERCODE"		=	"SVFINIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SVF_SAVE_USERCODE, DISABLE";
+	
+	"XSRAM Display Control Register0" = "SVFINIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+								 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode,  
+					             SVF_SAVE_CONTROL0 !Read Control Register 0,
+					             DISABLE";					             
+	"XSRAM Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+						
+	
+	"Slave SPI Program Encryption Key" = "SPI_INIT 	! Initialize,  
+							 			SPI_READ_ID	! Check the IDCODE,
+							  			SPI_EFUSE_ENABLE	! Enable the programming mode,
+							  			SPI_CHECK_KEYLOCK ! Check the Key Lock,
+							  			SPI_PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK ! Program the encryption Key,
+							  			SPI_DISABLE ! Exit the programming mode" ;							  			  
+	
+	"Slave SPI Program Feature Lock" = "SPI_INIT 	! Initialize,  
+							 			SPI_READ_ID	! Check the IDCODE,
+						  				SPI_EFUSE_ENABLE	! Enable the programming mode,
+						  				SPI_CHECK_KEYLOCK ! Check the Key Lock,
+						  				SPI_PROGRAM_LOCK_FUSES ! Program the Lock Fuses,
+						  				SPI_DISABLE ! Exit the programming mode" ;
+						  				
+	"Slave SPI Disable Only" = "SPI_INIT 	! Initialize, 
+	 			 				SPI_DISABLE ! Exit the programming mode"	;
+	"Slave SPI Enable Only" = "SPI_INIT 	! Initialize, 
+						   	   SPI_READ_ID	! Check the IDCODE,
+						  	   SPI_ENABLE	! Enable XPROGRAM mode"	;
+						   
+	"Slave SPI Re-Initialize" = "SPI_INIT 	! Initialize,  
+							 SPI_READ_ID	! Check the IDCODE,
+						  	 SPI_ENABLE	! Enable programming mode, 
+							 SPI_ERASE	! Erase the device, 
+							 SPI_DISABLE ! Exit the programming mode"	;
+	 
+	"Slave SPI Display USERCODE" =	"SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SAVE_ID, 
+								 SPI_SVFSAVE_USERCODE";								
+											 		  	 								
+	"Slave SPI Fast Program" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE, 
+								SPI_ENABLE	! Enable programming mode,
+								SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+								SPI_ERASE	! Erase the device, 
+								SPI_PROGRAM	! Program Fuse Map,
+								SPI_VERIFY_STATUS ! Read the status bit,
+								SPI_DISABLE ! Exit the programming mode"	;			
+	
+	"Slave SPI SEI Fast Program" 	= "	SPI_INIT 	! Initialize, 
+									SPI_READ_ID	! Check the IDCODE,	
+									SPI_SRAM_TRANSPARENT_READ_REFRESH_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									SPI_PROGRAM	! Program Fuse Map,		
+									SPI_DISABLE ! Exit the programming mode"	;
+												 			 			
+	"Slave SPI Fast Program,Refresh" = "	SPI_INIT 	! Initialize, 
+													SPI_READ_ID	! Check the IDCODE, 
+													SPI_ENABLE	! Enable programming mode, 
+													SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+													SPI_ERASE	! Erase the device, 
+													SPI_PROGRAM	! Program Fuse Map,
+													SPI_VERIFY_STATUS ! Read the status bit,
+													SPI_DISABLE ! Exit the programming mode,
+													SPI_REFRESH ! Refresh"	;
+										
+	"Slave SPI Erase Only"	=	"SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,
+								SPI_ENABLE	! Enable programming mode,
+								SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+								SPI_ERASE	! Erase the device, 
+								SPI_DISABLE ! Exit the programming mode"	;	
+									 								
+	"Slave SPI Read and Save"	=	"SPI_INIT, 
+									 SPI_READ_ID,  
+									 SPI_SAVE_ID,
+									 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable programming mode, 
+									 SPI_SVFSAVE_CONTROL, 
+									 SPI_SVFSAVE_ARRAY, 
+									 SPI_SVFSAVE_USERCODE,
+									 SPI_DISABLE ! Exit the programming mode";												 
+									 																															
+	"Slave SPI Verify ID" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE";
+	"Slave SPI Display ID" = "	SPI_INIT 	! Initialize, 
+								SPI_SAVE_ID";								
+					 			 									
+	"Slave SPI Read Status Register" = " SPI_INIT ! Initialize,
+										 SPI_READ_ID,  
+							             SPI_SVFSAVE_STATUS !Read Status Register";		 
+	"Slave SPI Upload to Static RAM" = "SPI_INIT !Initialize,
+										SPI_READ_ID !Check the IDCODE,
+										SPI_REFRESH ! Refresh";	
+	"Slave SPI Display Control Register0" = "SPI_INIT ! Initialize,
+							     SPI_READ_ID	! Check the IDCODE,
+							     SPI_SAVE_ID,
+							     SPI_ENABLE	! Enable programming mode, 
+					 		     SPI_SVFSAVE_CONTROL,
+					 		     SPI_DISABLE ! Exit the programming mode";	
+					 		     
+	"I2C Verify ID" = "	I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE";
+	
+	"I2C Erase,Program,Verify" =   "I2CINIT 	! Initialize, 
+									I2CREAD_ID	! Check the IDCODE, 
+									I2C_ENABLE	! Enable the SRAM,
+									I2C_ERASE	! Erase the SRAM,
+									I2CCHECK_STATUS ! Read the status bit,
+				 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+									I2CPROGRAM_USERCODE	! Program USERCODE,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2C_VERIFY	! Verify CFG,
+									I2CVERIFY_USERCODE		! Verify USERCODE,									
+									I2CCHECK_STATUS ! Read the status bit,		 		
+									I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		I2CDISABLE ! Exit the programming mode"	;
+
+	"I2C Fast Program" =   "I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+	 			 		I2CBURST_PROGRAM	! Program SRAM,
+	 			 		I2CPROGRAM_USERCODE	! Program USERCODE,
+	 			 		I2CCHECK_STATUS ! Read the status bit,
+						I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+	 			 		I2CDISABLE ! Exit the programming mode"	;			 			 		
+				 			 		
+	"I2C Verify Only" = "	I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE, 
+							I2C_ENABLE	! Enable the SRAM,
+							I2C_VERIFY	! Verify the SRAM, 
+							I2CVERIFY_USERCODE	! Verify USERCODE, 
+							I2CCHECK_STATUS ! Read the status bit, 
+							I2CVERIFY_DONE_BIT ! Verify Done Bit,
+							I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C Erase Only"	=	"I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE,
+							I2C_ENABLE	! Enable the SRAM, 
+							I2C_ERASE	! Erase the SRAM,
+							I2CCHECK_STATUS ! Read the status bit,
+		 			 		I2CDISABLE ! Exit the programming mode"	;
+			 			 						 			 								
+	
+	"I2C Refresh"	=	"I2CINIT 	! Initialize, 
+						 I2CREAD_ID	! Check the IDCODE,	
+						 I2CREFRESH ! Refresh";						 		     
+</Operation_List>
+<Operation_List label="ChainSVFOperationRevC">
+	"Security Read TraceID" = "SVFINIT 	! Initialize, 
+						   	   READ_ID	! Check the IDCODE,
+						       SVF_READ_TRACEID ! Read TraceID" ;
+	
+	"Security Program TraceID" = "SVFINIT 	! Initialize, 
+								  READ_ID	! Check the IDCODE,
+								  EFUSE_ENABLE	! Enable the programming mode,
+								  CHECK_KEYLOCK ! Check the Key Lock,
+								  SVF_PROGRAM_TRACEID ! Program the TraceID,
+								  DISABLE ! Exit the programming mode" ;
+								  
+	"Security Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 EFUSE_ENABLE	! Enable the programming mode,
+					 			 SVF_SAVE_STATUS,
+					 			 DISABLE ! Exit the programming mode";
+					 			 
+	"Security Program Encryption Key Only" = "SVFINIT 	! Initialize, 
+							  READ_ID	! Check the IDCODE,
+							  EFUSE_ENABLE	! Enable the programming mode,
+							  CHECK_KEYLOCK ! Check the Key Lock,
+							  SVFPROGRAM_SECURITY_KEY_NO_FEATURE_LOCK !Program the encryption Key,
+							  DISABLE ! Exit the programming mode" ;
+							  
+	"Security Program Encryption Key with Lock" = "SVFINIT 	! Initialize, 
+							  READ_ID	! Check the IDCODE,
+							  EFUSE_ENABLE	! Enable the programming mode,
+							  CHECK_KEYLOCK ! Check the Key Lock,
+							  SVFPROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK !Program the Security Key,
+							  DISABLE ! Exit the programming mode" ;
+							  							  
+	
+	"Security Read Encryption Key" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   EFUSE_TRANSPARENT_ENABLE	! Enable the programming mode,
+						   READ_SECURITY_KEY ! Check the Security Key,
+						   DISABLE ! Exit the programming mode" ;
+						   						  								  
+	
+	"Security Program Feature Lock" = "SVFINIT 	! Initialize, 
+						  READ_ID	! Check the IDCODE,
+						  EFUSE_ENABLE	! Enable the programming mode,
+						  CHECK_KEYLOCK ! Check the Key Lock,
+						  PROGRAM_LOCK_FUSES ! Program the Lock Fuses,
+						  DISABLE ! Exit the programming mode" ;
+						  
+	
+	"Security Program Feature Encryption Lock" = "SVFINIT 	! Initialize, 
+												  READ_ID	! Check the IDCODE,
+												  EFUSE_ENABLE	! Enable the programming mode,
+												  CHECK_KEYLOCK ! Check the Key Lock,
+												  PROGRAM_DECRYPTION_FUSES ! Program the Encryption Lock,
+												  DISABLE ! Exit the programming mode" ;
+						  					  
+	"Security Fast Program with Encryption Option" = "SVFINIT 	! Initialize, 
+													  READ_ID	! Check the IDCODE,
+													  IO_STATE ! Program Bscan register,
+													  EFUSE_ENABLE ! Enable the Efuse mode,
+													  CHECK_KEYLOCK ! Check the Key Lock,
+													  PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK !Program the Security Key,	
+													  SRAM_ENABLE	! Enable the programming mode,
+													  SRAM_ERASE	! Erase the SRAM,  													  									  
+													  BURST_PROGRAM	! Program Fuse Map,
+													  VERIFY_USERCODE		! Verify USERCODE,
+													  DISABLE ! Exit the programming mode,
+					 								  VERIFY_STATUS ! Verify Status Register" ;													  	
+							   
+													  
+	"Manufacturing Read Status Register" = "SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode, 
+									   SVF_READ_STATUS_FUSES ! Read the Status Register Fuses,
+									   DISABLE ! Exit the programming mode" ;
+									   
+	"Manufacturing Read PES Fuses" = " SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode,
+									   SVF_READ_PES_FUSES ! Read the PES Fuses,
+									   DISABLE ! Exit the programming mode" ;
+	
+	"Manufacturing Program PES Fuses" = " SVFINIT 	! Initialize, 
+									   READ_ID	! Check the IDCODE,
+									   EFUSE_ENABLE ! Enable the Efuse mode,
+									   PROGRAM_PES_FUSES ! Program the PES Fuses,
+									   DISABLE ! Exit the programming mode" ;
+									   									   
+									   									   
+    "Read Manufacturing Register" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_MANUFACTURING_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+						
+	"Program Manufacturing Register" = "SVFINIT 	! Initialize, 
+									  READ_ID	! Check the IDCODE,
+									  PSUEDO_SRAM_ENABLE	! Enable the programming mode,
+									  PROGRAM_MANUFACTURING_REGISTER ! Program the Manufacturing Register,
+									  DISABLE ! Exit the programming mode" ;
+
+								  
+	"Manufacturing Read MES Fuses" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_MES_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									EFUSE_ENABLE ! Enable the Efuse mode,
+									SVF_READ_DTR_REGISTER ! Read the Manufacturing Register,
+									DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses Only" = "SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									SVF_READ_DTR_REGISTER_ONLY ! Read the Manufacturing Register" ;
+																	
+	"Enable SPI" = " SVFINIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 SRAM_ENABLE	! Enable SRAM programming mode,
+					 SRAM_ERASE	! Erase the SRAM, 
+					 DISABLE ! Exit the programming mode" ;
+	
+	"Re-Initialize" = " SVFINIT 	! Initialize,
+						SRAM_ENABLE	! Enable the programming mode, 
+						SRAM_ERASE	! Erase the device, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 			 			 
+    "Erase Only"	=	"			SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode,
+									CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+									SRAM_ERASE	! Erase the SRAM, 
+									DISABLE ! Exit the programming mode"	;
+									
+	"Verify ID" = 					"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	
+	"Bypass" = 						"SVFINIT 	! Initialize" ;	
+										
+	"Fast Program" 				= "	SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode,
+					 				VERIFY_STATUS ! Verify Status Register"	;
+								
+	"Erase,Program,Verify" = "		SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit,
+									DISABLE ! Exit the programming mode,
+					 				VERIFY_STATUS ! Verify Status Register"	;
+										
+	"Program Only" = "		SVFINIT 	! Initialize,   
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode,
+							CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+							SRAM_ERASE	! Erase the SRAM, 
+							PROGRAM_CONTROL0	! Program Control Register,
+							SRAM_PROGRAM	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit,
+							DISABLE ! Exit the programming mode,
+					 		VERIFY_STATUS ! Verify Status Register"	;									
+									
+	"Verify Only"				=	"SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,  
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									SRAM_VERIFY_USERCODE		! Verify USERCODE, 
+									DISABLE ! Exit the programming mode"	;
+	
+	"Display ID" = 						"SVFINIT, READ_ID";
+	"Display USERCODE"				="	SVFINIT, READ_ID, SVF_SAVE_USERCODE";	
+	
+	"Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_VERIFY_USERCODE		! Verify USERCODE"	;
+								 
+	"Program USERCODE"	=	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						SRAM_ENABLE	! Enable SRAM programming mode,
+						PROGRAM_USERCODE	! Program USERCODE,
+						DISABLE ! Exit the programming mode"	; 
+							
+	"Read and Save"	=				"	SVFINIT, 
+										READ_ID, 
+										SRAM_ENABLE, 
+										SVF_SAVE_CONTROL0,
+										SVF_SRAM_SAVE_ARRAY, 
+										SVF_SAVE_USERCODE, 
+										DISABLE";
+										
+	"Calculate Data CRC"	=	"SVFINIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+					 			 SRAM_ENABLE	! Enable programming mode, 
+					             SVF_SAVE_CONTROL0,
+					             SVF_SRAM_SAVE_ARRAY, 
+					             SVF_SAVE_USERCODE,
+		 						 DISABLE";
+		 						 										
+	"Display Control Register0" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SVF_SAVE_CONTROL0 !Read Control Register 0,
+										DISABLE";					             
+	"Program Control Register0" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										PROGRAM_CONTROL0 ! Program Control Register 0,
+										DISABLE";								 
+	"Read Status Register" 				="SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_ENABLE	! Enable SRAM programming mode, 
+										SVF_SAVE_STATUS,
+										DISABLE";	
+	"Refresh"					 = " 	SVFINIT !Initialize,
+										READ_ID !Check the IDCODE,
+										IO_STATE ! Program Bscan register,
+										REFRESH_FUNCTION ! Refresh";
+	
+	"Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+	
+	"Serial Program" = "	SVFINIT 	! Initialize,   
+							SERIAL_PROGRAM	! Program Fuse Map"	;
+	"Serial Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Serial Enable Only" = "SVFINIT 	! Initialize, 
+							SRAM_ENABLE	! Enable the programming mode"	;
+	"Serial Read DONE bit" = "	SVFINIT 	! Initialize, 
+								SERIAL_READ_DONE_BIT 	! Read DONE Bit"	;
+								
+								
+	"FLASH TransFR" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						IO_STATE ! Program Bscan register,
+						SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+						TRANSFR_FUNCTION ! FLASH Transparent Field Reconfiguration"	;
+						
+	"XSRAM Fast Program" 				= "SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									BURST_PROGRAM	! Program Fuse Map,
+									VERIFY_USERCODE		! Verify USERCODE,
+									DISABLE ! Exit the programming mode"	;
+	
+	"XSRAM SEI Fast Program" 	= "	SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									SRAM_TRANSPARENT_READ_REFRESH_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									BURST_PROGRAM	! Program Fuse Map,
+									DISABLE ! Exit the programming mode,
+									VERIFY_STATUS ! Verify Status Register"	;
+																
+	"XSRAM Erase,Program,Verify" = "SVFINIT 	! Initialize,   
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+									SRAM_ERASE	! Erase the SRAM, 
+									PROGRAM_CONTROL0	! Program Control Register,
+									SRAM_PROGRAM	! Program Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,
+									SRAM_VERIFY	! Verify Fuse Map, 
+									VERIFY_USERCODE		! Verify USERCODE, 
+									PROGRAM_DONE_BIT	! Program DONE bit,
+									DISABLE ! Exit the programming mode"	;
+									
+	"XSRAM Erase Only"	=	"		SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									IO_STATE ! Program Bscan register,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									CHECK_ENCRYPTION ! Verify the Encryption Enable,
+									SRAM_ERASE	! Erase the SRAM, 
+									DISABLE ! Exit the programming mode"	;	
+									
+																				  
+	"XSRAM Verify Only"			=	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,  
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode,  
+										SRAM_VERIFY	! Verify Fuse Map, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE, 
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Verify ID" 			= 	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE"	; 
+	"XSRAM Verify USERCODE"		=	"	SVFINIT 	! Initialize, 
+										READ_ID	! Check the IDCODE,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+										SRAM_VERIFY_USERCODE		! Verify USERCODE,
+										DISABLE ! Exit the programming mode"	;
+	"XSRAM Read and Save"			=	"SVFINIT, 
+										READ_ID, 
+										SRAM_TRANSPARENT_READ_ENABLE, 
+										SVF_SAVE_CONTROL0,
+										SVF_SRAM_SAVE_ARRAY, 
+										SVF_SAVE_USERCODE, 
+										DISABLE";		
+	"XSRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+						 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode, 
+						             SVF_SAVE_CONTROL0,
+						             SVF_SRAM_SAVE_ARRAY, 
+						             SVF_SAVE_USERCODE,
+			 						 DISABLE";
+			 						 													
+	"XSRAM Display ID" 					= "SVFINIT, READ_ID, SAVE_ID";							
+	"XSRAM Read Status Register" 		= "SVFINIT ! Initialize,
+										READ_ID	! Check the IDCODE,
+										SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+										SVF_SAVE_STATUS,
+										DISABLE ! Exit the programming mode";	
+	"XSRAM Bypass"	=					"	SVFINIT 	! Initialize"	;
+	"XSRAM Refresh" = 					"	SVFINIT 	! Initialize,   
+										READ_ID	! Check the IDCODE,
+										REFRESH_FUNCTION ! Refresh" ;
+	"XSRAM Display USERCODE"		=	"SVFINIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SVF_SAVE_USERCODE, DISABLE";
+	
+	"XSRAM Display Control Register0" = "SVFINIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+								 SRAM_TRANSPARENT_READ_ENABLE	! Enable TRANSPARENT programming mode,  
+					             SVF_SAVE_CONTROL0 !Read Control Register 0,
+					             DISABLE";					             
+	"XSRAM Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+						
+	
+	"Slave SPI Program Encryption Key" = "SPI_INIT 	! Initialize,  
+							 			SPI_READ_ID	! Check the IDCODE,
+							  			SPI_EFUSE_ENABLE	! Enable the programming mode,
+							  			SPI_CHECK_KEYLOCK ! Check the Key Lock,
+							  			SPI_PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK ! Program the encryption Key,
+							  			SPI_DISABLE ! Exit the programming mode" ;							  			  
+	
+	"Slave SPI Program Feature Lock" = "SPI_INIT 	! Initialize,  
+							 			SPI_READ_ID	! Check the IDCODE,
+						  				SPI_EFUSE_ENABLE	! Enable the programming mode,
+						  				SPI_CHECK_KEYLOCK ! Check the Key Lock,
+						  				SPI_PROGRAM_LOCK_FUSES ! Program the Lock Fuses,
+						  				SPI_DISABLE ! Exit the programming mode" ;
+						  				
+	"Slave SPI Disable Only" = "SPI_INIT 	! Initialize, 
+	 			 				SPI_DISABLE ! Exit the programming mode"	;
+	"Slave SPI Enable Only" = "SPI_INIT 	! Initialize, 
+						   	   SPI_READ_ID	! Check the IDCODE,
+						  	   SPI_ENABLE	! Enable XPROGRAM mode"	;
+						   
+	"Slave SPI Re-Initialize" = "SPI_INIT 	! Initialize,  
+							 SPI_READ_ID	! Check the IDCODE,
+						  	 SPI_ENABLE	! Enable programming mode, 
+							 SPI_ERASE	! Erase the device, 
+							 SPI_DISABLE ! Exit the programming mode"	;
+	 
+	"Slave SPI Display USERCODE" =	"SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SAVE_ID, 
+								 SPI_SVFSAVE_USERCODE";								
+											 		  	 								
+	"Slave SPI Fast Program" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE, 
+								SPI_ENABLE	! Enable programming mode,
+								SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable, 
+								SPI_ERASE	! Erase the device, 
+								SPI_PROGRAM	! Program Fuse Map,
+								SPI_VERIFY_STATUS ! Read the status bit,
+								SPI_DISABLE ! Exit the programming mode"	;			
+	
+	"Slave SPI SEI Fast Program" 	= "	SPI_INIT 	! Initialize, 
+									SPI_READ_ID	! Check the IDCODE,	
+									SPI_SRAM_TRANSPARENT_READ_REFRESH_ENABLE	! Enable SRAM TRANSPARENT mode, 
+									SPI_PROGRAM	! Program Fuse Map,			
+									SPI_DISABLE ! Exit the programming mode"	;
+												 			 			
+	"Slave SPI Fast Program,Refresh" = "	SPI_INIT 	! Initialize, 
+													SPI_READ_ID	! Check the IDCODE, 
+													SPI_ENABLE	! Enable programming mode, 
+													SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+													SPI_ERASE	! Erase the device, 
+													SPI_PROGRAM	! Program Fuse Map,
+													SPI_VERIFY_STATUS ! Read the status bit,
+													SPI_DISABLE ! Exit the programming mode,
+													SPI_REFRESH ! Refresh"	;
+										
+	"Slave SPI Erase Only"	=	"SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,
+								SPI_ENABLE	! Enable programming mode,
+								SPI_CHECK_ENCRYPTION ! Verify the Encryption Enable,
+								SPI_ERASE	! Erase the device, 
+								SPI_DISABLE ! Exit the programming mode"	;
+									
+	"Slave SPI Read and Save"	=	"SPI_INIT, 
+									 SPI_READ_ID,
+									 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable programming mode, 
+									 SPI_SVFSAVE_CONTROL, 
+									 SPI_SVFSAVE_ARRAY, 
+									 SPI_SVFSAVE_USERCODE,
+									 SPI_DISABLE ! Exit the programming mode";												 
+									 																															
+	"Slave SPI Verify ID" = "	SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE";
+	"Slave SPI Display ID" = "	SPI_INIT 	! Initialize, 
+								SPI_SAVE_ID";								
+					 			 									
+	"Slave SPI Read Status Register" = " SPI_INIT ! Initialize,
+										 SPI_READ_ID,  
+							             SPI_SVFSAVE_STATUS !Read Status Register";		 
+	"Slave SPI Upload to Static RAM" = "SPI_INIT !Initialize,
+										SPI_READ_ID !Check the IDCODE,
+										SPI_REFRESH ! Refresh";	
+	"Slave SPI Display Control Register0" = "SPI_INIT ! Initialize,
+							     SPI_READ_ID	! Check the IDCODE,
+							     SPI_ENABLE	! Enable programming mode, 
+					 		     SPI_SVFSAVE_CONTROL,
+					 		     SPI_DISABLE ! Exit the programming mode";	
+					 		     
+	"I2C Verify ID" = "	I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE";
+	
+	"I2C Erase,Program,Verify" =   "I2CINIT 	! Initialize, 
+									I2CREAD_ID	! Check the IDCODE, 
+									I2C_ENABLE	! Enable the SRAM,
+									I2C_ERASE	! Erase the SRAM,
+									I2CCHECK_STATUS ! Read the status bit,
+				 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+									I2CPROGRAM_USERCODE	! Program USERCODE,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2C_VERIFY	! Verify CFG,
+									I2CVERIFY_USERCODE		! Verify USERCODE,									
+									I2CCHECK_STATUS ! Read the status bit,		 		
+									I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		I2CDISABLE ! Exit the programming mode"	;
+
+	"I2C Fast Program" =   "I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+	 			 		I2CBURST_PROGRAM	! Program SRAM,
+	 			 		I2CPROGRAM_USERCODE	! Program USERCODE,
+	 			 		I2CCHECK_STATUS ! Read the status bit,
+						I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+	 			 		I2CDISABLE ! Exit the programming mode"	;			 			 		
+				 			 		
+	"I2C Verify Only" = "	I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE, 
+							I2C_ENABLE	! Enable the SRAM,
+							I2C_VERIFY	! Verify the SRAM, 
+							I2CVERIFY_USERCODE	! Verify USERCODE, 
+							I2CCHECK_STATUS ! Read the status bit, 
+							I2CVERIFY_DONE_BIT ! Verify Done Bit,
+							I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C Erase Only"	=	"I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE,
+							I2C_ENABLE	! Enable the SRAM, 
+							I2C_ERASE	! Erase the SRAM,
+							I2CCHECK_STATUS ! Read the status bit,
+		 			 		I2CDISABLE ! Exit the programming mode"	;
+			 			 						 			 								
+	
+	"I2C Refresh"	=	"I2CINIT 	! Initialize, 
+						 I2CREAD_ID	! Check the IDCODE,	
+						 I2CREFRESH ! Refresh";						 		     
+
+</Operation_List>
+<Script>
+<![CDATA[
+function INIT 
+{
+	! Row_Width	  : DEVICE_ROW_WIDTH; 
+	! Address_Length : ADDRESS_REGISTER_LENGTH; 
+	HDR HDR_LENGTH TDI(HDR_PATTERN);
+	HIR HIR_LENGTH TDI(HIR_PATTERN);
+	TDR TDR_LENGTH TDI(TDR_PATTERN);
+	TIR TIR_LENGTH TDI(TIR_PATTERN);
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+}
+function SVFINIT {
+	! Row_Width	  : DEVICE_ROW_WIDTH; 
+	! Address_Length : ADDRESS_REGISTER_LENGTH; 
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+}
+function READ_ID 
+{
+	! Shift in IDCODE_PUB(0xE0) instruction;
+    SIR Instruction_Length 	TDI (IDCODE_PUB);
+	SDR_VERIFY	ID_Length	TDI (#0^ID_Length)
+					        TDO	(IDTDI[1])
+					        MASK (DEVICE_ID_MASK);
+}
+
+function PRELOAD {
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+}
+function INI_PRELOAD {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   SDR BSCAN_Length TDI(#1^BSCAN_Length);
+}
+function SAMPLE {				
+   ! Shift in Sample(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   STATE DRPAUSE;
+   STATE IDLE;
+}
+function INI_SAMPLE {				
+   ! Shift in Sample(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   STATE DRPAUSE;
+   STATE IDLE;
+}
+function CAPTURE {	
+	datastream SavedBScanTDO[1][BSCAN_Length];	
+	file NewFile = "FILE_SAVE";		
+   ! Shift in Sample(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   SDR BSCAN_Length TDI(#1^BSCAN_Length)
+   					TDO(SavedBScanTDO[1]);
+   Bscan[1] = SavedBScanTDO[1];	
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+   // Write To file 
+   fopen NewFile att "w"
+					 format "SVF_Plus";	
+   fwrite NewFile (BSCAN_TDO, Bscan);
+   fclose 	NewFile;
+   
+}
+function DYNAMIC {	
+   ENDDR DRPAUSE;
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(LSC_PRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1])
+   					DMASK(BscanMask[1]);
+   STATE IDLE;
+}
+function PSUEDO_SRAM_ENABLE {
+	! Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x04);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+}
+function SRAM_TRANSPARENT_READ_ENABLE {
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+    SIR Instruction_Length TDI (LSC_ENABLE_X);
+    SDR 8 TDI(0x00);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+}
+function SRAM_TRANSPARENT_READ_REFRESH_ENABLE {
+	! Shift in LSC_REFRESH(0x79) instruction;
+    SIR Instruction_Length	TDI (LSC_REFRESH);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+    SIR Instruction_Length TDI (LSC_ENABLE_X);
+    SDR 8 TDI(0x00);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+}
+function SRAM_ENABLE {
+	! Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x00);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+}
+function EFUSE_ENABLE {
+	! Shift in ISC ENABLE(0xC6) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+    SDR 8 TDI(0x02);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+}
+function EFUSE_TRANSPARENT_ENABLE {
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+    SIR Instruction_Length TDI (LSC_ENABLE_X);
+    SDR 8 TDI(0x03);
+	RUN_TEST	IDLE	TCK 2 DELAY PWP;
+}
+function SRAM_ERASE {
+	! Shift in ISC ERASE(0x0E) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+    SDR 8 TDI(0x01);
+	RUN_TEST 	TCK 2 DELAY PWE;	
+}
+function SERIAL_PROGRAM {
+	FuseArray_TDI.row = 1;
+	SDR	TotalFuse	TDI	(FuseArray_TDI[1]);
+	RUN_TEST	TCK 	1000 ;
+}
+function BURST_PROGRAM {
+	FuseArray_TDI.row = 1;	
+	IF (ISENCRYPTED == 1)
+	{
+	}
+	ELSE
+	{
+		TRY 1 {
+			! Shift in LSC_READ_STATUS(0x3C) instruction;
+			SIR Instruction_Length TDI (LSC_READ_STATUS);
+		    SDR_VERIFY	32	TDI(#0^32)
+							TDO(0x00000000)
+							MASK(0x0000B000);
+		}
+		ELSE
+		{
+			! Shift in ISC DISABLE(0x26) instruction;
+		    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+			RUN_TEST	IDLE  TCK 2 DELAY 200;         
+			print (1,"The Encryption Only fuses are programmed. Only Encrypted bitstream can be used.");
+		}
+	}
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+    SDR 8 TDI(0x01);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	
+	! Shift in LSC_BITSTREAM_BURST(0x7A) instruction;
+    SIR Instruction_Length	TDI (LSC_BITSTREAM_BURST);
+    RUN_TEST	IDLE TCK 2 DELAY PWP;
+	! Shift in TOTAL_FUSE_MAP bits;
+    SDR	TotalFuse		TDI	(FuseArray_TDI);
+    ! Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length	TDI (BYPASS);
+	RUN_TEST	IDLE TCK 100 DELAY PWP;
+}
+function PROGRAM_CONTROL0 {
+	IF (Control_Register_0_TDI.row = 1)
+	{
+		Control_Register_0_TDI[1] = $Control_Register_0_TDI[1];
+		! Shift in LSC_PROG_CTRL0(0x22) instruction;
+	    SIR Instruction_Length TDI (LSC_PROG_CTRL0);
+		SDR 32 TDI(Control_Register_0_TDI[1]);
+		RUN_TEST IDLE TCK 2 DELAY PWP; 
+		! Shift in LSC_READ_CTRL0(0x20) instruction;
+	    SIR Instruction_Length TDI (LSC_READ_CTRL0);
+		RUN_TEST IDLE TCK 2 DELAY PWV; 
+		SDR_VERIFY  32 TDI(0x00000000)
+					   TDO(Control_Register_0_TDI[1])
+					   MASK(0xFFFFFFFF);
+	}
+}
+function SRAM_PROGRAM {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;	
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	! Shift in LSC_PROG_INCR_RTI(0x82) instruction;
+    SIR Instruction_Length	TDI	(LSC_PROG_INCR_RTI);
+	repeat Address_Length {
+		! Shift Out Data Row = RowCount;
+	    SDR	Row_Width	TDI	(FuseArray_TDI);	    
+	    RUN_TEST	IDLE TCK 2 DELAY 	PWP;						
+		RowCount = RowCount +1;
+	}				
+}
+function PROGRAM_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+		Usercode_TDI[1] = $Usercode_TDI[1];
+	 	! Shift in READ USERCODE(0xC0) instruction;
+	    SIR Instruction_Length TDI (USERCODE);
+		SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+		! Shift in ISC PROGRAM USERCODE(0xC2) instruction;
+	    SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+		RUN_TEST	TCK 2   DELAY 	PWP;
+	}
+}
+function PROGRAM_DONE_BIT {
+	! Shift in ISC PROGRAM DONE(0x5E) instruction;
+    SIR	Instruction_Length 	TDI (ISC_PROGRAM_DONE);
+	RUN_TEST	IDLE TCK 2 DELAY PWP;				
+	! Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (BYPASS)
+									TDO(0x04)
+									MASK(0xC4);
+}
+function SRAM_VERIFY_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+		Usercode_TDI[1] = $Usercode_TDI[1];
+		! Shift in READ USERCODE(0xC0) instruction;
+	    SIR Instruction_Length TDI (USERCODE);
+	    RUN_TEST	TCK 2  DELAY 	PWV;
+		SDR_VERIFY 	Usercode_Length TDI (#0^Usercode_Length)
+									TDO	(Usercode_TDI[1])
+									MASK(0xFFFFFFFF);
+	}
+}
+function VERIFY_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+		! Shift in READ USERCODE(0xC0) instruction;
+	    SIR Instruction_Length TDI (USERCODE);
+	    RUN_TEST	TCK 2  DELAY 	PWV;
+		SDR_VERIFY 	Usercode_Length TDI (#0^Usercode_Length)
+									TDO	(Usercode_TDI)
+									MASK(0xFFFFFFFF);
+	}
+}
+function SRAM_VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	FuseArray_MASK.row = 1;
+	TRY 1 {
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+    	SDR 8 TDI(0x00);
+		RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+		! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+	    SIR Instruction_Length	TDI	(LSC_VERIFY_INCR_RTI);
+		repeat Address_Length {
+			RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+			! Shift Out Data Row = RowCount;
+		    SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+									TDO	(FuseArray_TDI)
+									MASK(FuseArray_MASK);
+			RowCount = RowCount +1;
+		}
+	}
+	ELSE
+	{
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY 1;
+		print (1, "Failed in Function VERIFY /see log file for more details/ ");
+	}				
+}
+function PROGRAM_TRACEID
+{
+	datastream FeatureArray[1][64];
+	IF (Config_Register_TDI.row = 1)
+	{
+		print (0,Config_Register_TDI);
+		//Config_Register_TDI[1] = $Config_Register_TDI[1];
+		FeatureArray[1] = (#0^24) @ Config_Register_TDI[1] @ (#0^32);
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	    SDR 8 TDI(0x02);
+		RUN_TEST	IDLE TCK 2 DELAY 	1;
+		! Shift in LSC_PROG_FEATURE( 0xE4) instruction;
+	    SIR Instruction_Length	TDI (LSC_PROG_FEATURE);
+	    SDR 64 TDI(FeatureArray[1]);
+	    RUN_TEST IDLE TCK 2 ;
+	    ! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+    	SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+		loop PWP {
+			RUN_TEST IDLE DELAY 1;
+			SDR_VERIFY 1 TDI(#0) TDO(#0);
+		}	  
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+	    SIR Instruction_Length	TDI (LSC_READ_FEATURE);
+	    RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+	    SDR_VERIFY 64   TDI(#0^64)
+	    				TDO(FeatureArray[1])
+	    				MASK(0x000000FF00000000);
+	} 	
+}
+function SVF_PROGRAM_TRACEID
+{
+	datastream FeatureArray[1][64];
+	IF (Config_Register_TDI.row = 1)
+	{
+		print (0,Config_Register_TDI);
+		//Config_Register_TDI[1] = $Config_Register_TDI[1];
+		FeatureArray[1] = (#0^24) @ Config_Register_TDI[1] @ (#0^32);
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	    SDR 8 TDI(0x02);
+		RUN_TEST	IDLE TCK 2 DELAY 	1;
+		! Shift in LSC_PROG_FEATURE( 0xE4) instruction;
+	    SIR Instruction_Length	TDI (LSC_PROG_FEATURE);
+	    SDR 64 TDI(FeatureArray[1]);
+	    RUN_TEST IDLE TCK 2 ;
+	    ! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+    	SIR Instruction_Length TDI (LSC_CHECK_BUSY);
+		loop PWP {
+			RUN_TEST IDLE DELAY 1;
+			SDR_VERIFY 1 TDI(#0) TDO(#0);
+		}	  
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+	    SIR Instruction_Length	TDI (LSC_READ_FEATURE);
+	    RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+	    SDR_VERIFY 64   TDI(#0^64)
+	    				TDO(FeatureArray[1])
+	    				MASK(0x000000FF00000000);
+	} 
+}
+function READ_TRACEID
+{
+	datastream SavedTraceID[1][64];
+	file	NewFile = "FILE_SAVE"; 
+	! Shift in UIDCODE_PUB(0x19) instruction;
+    SIR Instruction_Length	TDI	(LSC_UIDCODE_PUB);
+	SDR	64	TDI (#0^64)
+			TDO	(SavedTraceID[1]);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedTraceID);
+	fclose 	NewFile;
+}
+function SVF_READ_TRACEID
+{
+	! Shift in UIDCODE_PUB(0x19) instruction;
+    SIR Instruction_Length	TDI	(LSC_UIDCODE_PUB);
+	SDR	64	TDI (#0^64)
+			TDO	(#0^64)
+			MASK(#0^64);
+}
+function SAVE_ID	{
+	datastream SavedID[1][ID_Length];
+	file	NewFile = "FILE_SAVE"; 
+	! Shift in IDCODE_PUB(0xE0) instruction;
+    SIR Instruction_Length	TDI	(IDCODE_PUB);
+	SDR	ID_Length	TDI (#0^ID_Length)
+					TDO	(SavedID);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedID);
+	fclose 	NewFile;
+}
+function SAVE_USERCODE {
+	datastream SavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	! Shift in READ USERCODE(0xC0) instruction;
+    SIR Instruction_Length	TDI (USERCODE);
+    RUN_TEST	TCK 2 DELAY 	PWV;
+	SDR	Usercode_Length	TDI(#0^Usercode_Length)
+						TDO(SavedUsercode);
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (Usercode_TDI, SavedUsercode);
+	fclose 	NewFile;
+}
+function SVF_SAVE_USERCODE {
+	! Shift in READ USERCODE(0xC0) instruction;
+    SIR Instruction_Length	TDI (USERCODE);
+    RUN_TEST	TCK 2 DELAY 	PWV;
+	SDR_VERIFY	Usercode_Length	TDI(#0^Usercode_Length)
+								TDO(#0^Usercode_Length)
+								MASK(#0^Usercode_Length);	
+}
+function SERIAL_READ_DONE_BIT {
+	datastream SavedDONE_BIT[1][1];
+	file	NewFile = "FILE_SAVE"; 
+	
+	SDR 1	TDI	(0x00)
+			TDO (SavedDONE_BIT);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (DONE_BIT, SavedDONE_BIT);
+	fclose 	NewFile;
+}
+function SAVE_CONTROL0 {
+	datastream SavedControl0[1][32];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in LSC_READ_CTRL0(0x20) instruction;
+    SIR Instruction_Length TDI (LSC_READ_CTRL0);
+	RUN_TEST IDLE TCK 2 DELAY PWV; 
+	SDR  32 TDI(0x00000000)
+			TDO(SavedControl0);
+				  
+	// Write To File 
+	fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (Control_Register_0_TDI, SavedControl0);
+	fclose 	NewFile;
+}
+function SVF_SAVE_CONTROL0 {	
+	! Shift in LSC_READ_CTRL0(0x20) instruction;
+    SIR Instruction_Length TDI (LSC_READ_CTRL0);
+	RUN_TEST IDLE TCK 2 DELAY PWV; 
+	SDR_VERIFY  32 TDI(0x00000000)
+				   TDO(0x00000000)
+				   MASK(0x00000000);	
+}
+function SRAM_SAVE_ARRAY {
+	int32	RowCount = 1;
+	datastream SavedFuseMap[Address_Length][Row_Width];
+	file NewFile = "FILE_SAVE";
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(LSC_VERIFY_INCR_RTI);
+    RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+    SDR	Row_Width	TDI	(#0^Row_Width);
+    ! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(LSC_VERIFY_INCR_RTI);
+	repeat Address_Length{	
+		RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+		! Shift Out Data Row = RowCount;
+		SDR	Row_Width	TDI	(#0^Row_Width)
+						TDO	(SavedFuseMap);
+		RowCount = RowCount +1;
+	}
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+	fclose 	NewFile;
+}
+function SVF_SRAM_SAVE_ARRAY {
+	int32	RowCount = 1;	
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(LSC_VERIFY_INCR_RTI);
+    RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+    SDR	Row_Width	TDI	(#0^Row_Width);
+    ! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(LSC_VERIFY_INCR_RTI);
+	repeat Address_Length{	
+		RUN_TEST	IDLE TCK 2 DELAY 	PWV;
+		! Shift Out Data Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+								TDO	(#0^Row_Width)
+								MASK(#0^Row_Width);
+		RowCount = RowCount +1;
+	}	
+}
+function VERIFY_STATUS {
+	TRY 1 {
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SIR Instruction_Length TDI (LSC_READ_STATUS);
+	    SDR_VERIFY	32	TDI(#0^32)
+						TDO(0x00000100)
+						MASK(0x00002100);
+	}
+	ELSE
+	{
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY 200;         
+		print (1, "Failed to Program DONE bit /see log file for more details/ ");
+	}
+	
+}
+function SAVE_STATUS {
+	datastream SavedSTATUS[1][32];
+	file NewFile = "FILE_SAVE";
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SIR Instruction_Length TDI (LSC_READ_STATUS);
+	SDR	32	TDI(#0^32)
+			TDO(SavedSTATUS);
+	print (0,SavedSTATUS);
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (STATUS_BIT, SavedSTATUS);
+	fclose 	NewFile;
+}
+function SVF_SAVE_STATUS
+{
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SIR Instruction_Length TDI (LSC_READ_STATUS);
+	SDR_VERIFY	32	TDI(#0^32)
+					TDO(#0^32)
+					MASK(#0^32);
+}
+function REFRESH_FUNCTION {
+	! Shift in LSC_REFRESH(0x79) instruction;
+    SIR Instruction_Length	TDI (LSC_REFRESH);
+    RUN_TEST IDLE TCK 2 DELAY 200; 
+
+	! Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length	TDI (BYPASS);
+	RUN_TEST IDLE TCK 100 DELAY 1;
+}
+function TRANSFR_FUNCTION{
+    ! Shift in LSC_REFRESH(0x79) instruction;
+    SIR Instruction_Length	TDI (LSC_REFRESH);
+    RUN_TEST IDLE TCK 2 DELAY 1000; 
+	
+	! Shift in ISC DISABLE(0x26) instruction;
+    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	IDLE  TCK 2 DELAY 200;     
+	     
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST IDLE TCK 2 DELAY MDRDelay;
+}
+function DISABLE {
+	! Shift in ISC DISABLE(0x26) instruction;
+    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	IDLE  TCK 2 DELAY 200;     
+	     
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 2 DELAY 1;
+}
+
+function READ_STATUS_FUSES
+{
+	datastream SavedStatusFuse[1][128];
+	file	NewFile = "FILE_SAVE"; 
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000000000000000006D);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    ! Shift in LSC_READ_STATUS(0x3C) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_STATUS);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR	 128	TDI(#0^128)
+				TDO(SavedStatusFuse[1]);	
+	print (0,SavedStatusFuse);
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x00000000000000000000000000000000);  
+    fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, SavedStatusFuse);
+	fclose 	NewFile;	
+}
+function SVF_READ_STATUS_FUSES
+{
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000000000000000006D);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    ! Shift in LSC_READ_STATUS(0x3C) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_STATUS);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR_VERIFY	 128	TDI(#0^128)
+				        TDO(#0^128)
+				        MASK(#0^128);
+	
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x00000000000000000000000000000000); 
+	 	
+}
+function READ_MANUFACTURING_REGISTER
+{
+	datastream Manufacturing[1][128];
+	datastream _Manufacturing[1][120];
+	file	NewFile = "FILE_SAVE"; 
+			    
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000000000000000006D)
+    	    TDO(Manufacturing[1]);	 
+   	_Manufacturing[1] = (Manufacturing[1] >> 8) ;
+   	Manufacturing[1] = (_Manufacturing[1]) @ (0x4D);
+   	print (0,Manufacturing);
+    fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, Manufacturing);
+	fclose 	NewFile;
+}
+function SVF_READ_MANUFACTURING_REGISTER
+{	    
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR_VERIFY 128 TDI(0x0000000000000000000000000000006D)
+    	           TDO(0x00000000000000000000000000000000)
+    	           MASK(0x00000000000000000000000000000000);	     
+}
+function PROGRAM_MANUFACTURING_REGISTER
+{
+	IF (Config_Register_TDI.row = 1)
+	{
+		print (0,Config_Register_TDI);
+		! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+	    SDR 128 TDI(Config_Register_TDI[1]);
+	    RUN_TEST IDLE TCK 2 DELAY 200;
+	}
+}
+function READ_MES_REGISTER
+{
+	datastream MESArray[1][64];
+	file	NewFile = "FILE_SAVE";
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000000000000000016D);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+	! Shift in LSC_READ_PES(0x11) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_PES);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR 64 TDI(0x0000000000000000)
+    	   TDO(MESArray[1]);
+   	 print (0,MESArray);
+    fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, MESArray);
+	fclose 	NewFile;
+}
+function SVF_READ_MES_REGISTER
+{
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000000000000000016D);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+	! Shift in LSC_READ_PES(0x11) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_PES);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR 64 TDI(0x0000000000000000)
+    	    TDO(0x0000000000000000)
+    	    MASK(0x0000000000000000);    
+}
+function READ_DTR_REGISTER
+{
+	datastream DTRArray[1][8];
+	datastream Manufacturing[1][128];
+	file	NewFile = "FILE_SAVE"; 
+			    
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000800000000000006D);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+	! Shift in LSC_READ_TEMP(0xE8) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_TEMP);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR 8 TDI(#1^8)
+    	  TDO(DTRArray[1]);
+    print (0,DTRArray);   
+    fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, DTRArray);
+	fclose 	NewFile;
+}
+function SVF_READ_DTR_REGISTER
+{
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000800000000000006D);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+	! Shift in LSC_READ_TEMP(0xE8) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_TEMP);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR 8 TDI(#1^8)
+    	  TDO(0x00)
+    	  MASK(0x00); 
+}
+function READ_DTR_REGISTER_ONLY
+{
+	datastream DTRArray[1][8];
+	file	NewFile = "FILE_SAVE"; 		    
+	! Shift in LSC_READ_TEMP(0xE8) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_TEMP);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR 8 TDI(#1^8)
+    	  TDO(DTRArray[1]);
+    print (0,DTRArray);   
+    fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, DTRArray);
+	fclose 	NewFile;
+}
+function SVF_READ_DTR_REGISTER_ONLY
+{
+	! Shift in LSC_READ_TEMP(0xE8) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_TEMP);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR 8 TDI(#1^8)
+    	  TDO(0x00)
+    	  MASK(0x00); 
+}
+function READ_PES_FUSES
+{
+	datastream SavedPESFuse[1][32];
+	file	NewFile = "FILE_SAVE"; 
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000000000000000036D);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+	! Shift in LSC_READ_PES(0x11) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_PES);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR	 32	TDI(#0^32)
+			TDO(SavedPESFuse[1]);	
+	print (0,SavedPESFuse);
+	fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, SavedPESFuse);
+	fclose 	NewFile; 	 	
+}
+function SVF_READ_PES_FUSES
+{
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000000000000000036D);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+	! Shift in LSC_READ_PES(0x11) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_PES);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR	 32	TDI(#0^32)
+			TDO(#0^32)
+			MASK(#0^32);		 	
+}
+function READ_TRIM_FUSES
+{
+	datastream SavedPESFuse[1][64];
+	file	NewFile = "FILE_SAVE"; 
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000000000000000036D);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+	! Shift in LSC_READ_PES(0x11) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_PES);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR	 64	TDI(#0^64)
+			TDO(SavedPESFuse[1]);	
+	print (0,SavedPESFuse);
+	fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, SavedPESFuse);
+	fclose 	NewFile; 	 	
+}
+function SVF_READ_TRIM_FUSES
+{
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    SDR 128 TDI(0x0000000000000000000000000000036D);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+	! Shift in LSC_READ_PES(0x11) instruction;
+    SIR Instruction_Length	TDI (LSC_READ_PES);
+    RUN_TEST IDLE TCK 2 DELAY 200;
+    SDR	 64	TDI(#0^64)
+			TDO(#0^64)
+			MASK(#0^64);	 	
+}
+function PROGRAM_PES_FUSES
+{
+	IF (Config_Register_TDI.row = 1)
+	{
+		print (0,Config_Register_TDI);
+		! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+	    SDR 128 TDI(0x000000000000000000000000000036D);
+	    RUN_TEST IDLE TCK 2 DELAY 200;
+	    ! Shift in LSC_PROG_PES(0xD0) instruction;
+    	SIR Instruction_Length	TDI (LSC_PROG_PES);
+	    SDR 32 TDI(Config_Register_TDI[1]);
+	    RUN_TEST IDLE TCK 2 DELAY 200;
+	    TRY 1 {
+		    ! Shift in LSC_READ_PES(0x11) instruction;
+	    	SIR Instruction_Length	TDI (LSC_READ_PES);
+	    	RUN_TEST IDLE TCK 2 DELAY 200;
+	    	SDR	 32	TDI(#0^32)
+					TDO(Config_Register_TDI[1]);
+			! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+			SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    		SDR 128 TDI(0x00000000000000000000000000000000); 
+		}
+		ELSE
+		{
+			! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+			SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+		    SDR 128 TDI(0x00000000000000000000000000000000); 
+			! Shift in ISC DISABLE(0x26) instruction;
+		    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+			RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+			print (1, "Failed to Program PES /see log file for more details/ ");
+		}	
+	} 	
+}
+function PROGRAM_TRIM_FUSES
+{
+	IF (Config_Register_TDI.row = 1)
+	{
+		print (0,Config_Register_TDI);
+		! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	    SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+	    SDR 128 TDI(0x0000000000000000000000000000036D);
+	    RUN_TEST IDLE TCK 2 DELAY 200;
+	    ! Shift in LSC_PROG_TRIM(0xD0) instruction;
+    	SIR Instruction_Length	TDI (LSC_PROG_PES);
+	    SDR 64 TDI(Config_Register_TDI[1]);
+	    RUN_TEST IDLE TCK 2 DELAY 200;
+	    TRY 1 {
+		    ! Shift in LSC_READ_PES(0x11) instruction;
+	    	SIR Instruction_Length	TDI (LSC_READ_PES);
+	    	RUN_TEST IDLE TCK 2 DELAY 200;
+	    	SDR	 64	TDI(#0^64)
+					TDO(Config_Register_TDI[1]);
+			! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+			SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+    		SDR 128 TDI(0x00000000000000000000000000000000); 
+		}
+		ELSE
+		{
+			! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+			SIR Instruction_Length	TDI (LSC_MANUFACTURE_SHIFT);
+		    SDR 128 TDI(0x00000000000000000000000000000000); 
+			! Shift in ISC DISABLE(0x26) instruction;
+		    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+			RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+			print (1, "Failed to Program PES /see log file for more details/ ");
+		}	
+	} 	
+}
+function CHECK_ENCRYPTION 
+{
+	TRY 1{
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SIR Instruction_Length TDI (LSC_READ_STATUS);
+		RUN_TEST IDLE TCK 2 DELAY PWV; 
+		SDR_VERIFY  32 	TDI(#0^32)
+				  	TDO(0x00000000)
+				  	MASK(0x00024040);
+	}
+	ELSE
+	{				  
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY PWV;          
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY PWV;
+		print (1,"The OTP is set. Cannot continue.");
+	}
+	
+}
+function CHECK_KEYLOCK 
+{
+	TRY 1{
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SIR Instruction_Length TDI (LSC_READ_STATUS);
+		RUN_TEST IDLE TCK 2 DELAY PWV; 
+		SDR_VERIFY  32 	TDI(#0^32)
+				  	TDO(0x00000000)
+				  	MASK(0x00024040);
+	}
+	ELSE
+	{				  
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY PWV;          
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY PWV;
+		print (1,"The OTP is set. Cannot continue.");
+	}
+	TRY 1{
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SIR Instruction_Length TDI (LSC_READ_STATUS);
+		RUN_TEST IDLE TCK 2 DELAY PWV; 
+		SDR_VERIFY  32 	TDI(#0^32)
+				  		TDO (0x00000C00)
+				  		MASK(0x00003C00);
+	}
+	ELSE
+	{				  
+		! Shift in ISC DISABLE(0x26) instruction;
+		SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 5 DELAY 10;
+		print (1,"The device Lock fuses are programmed. Cannot continue.");
+	}
+}
+function READ_SECURITY_KEY
+{
+	datastream SavedKEY1Fuse[1][128];
+	! Shift in LSC_READ_CIPHER_KEY(0xF4) instruction;
+	SIR Instruction_Length	TDI (LSC_READ_CIPHER_KEY);
+    RUN_TEST IDLE TCK 5 DELAY PWV;
+    SDR	 128	TDI(#0^128)
+				TDO(SavedKEY1Fuse[1]);
+	IF (SavedKEY1Fuse[1] == 0x0043F1B445A3EA6CAE17F20F695153D5)
+	{
+		print (0,"Security fuses are not programmed.");
+		SavedKEY1Fuse[1] = (#0^128);
+		print (0,SavedKEY1Fuse);
+	}
+	ELSE
+	{
+		print (0,"Security fuses already programmed.");
+		print (0,SavedKEY1Fuse);
+	}	
+}
+function PROGRAM_SECURITY_KEY_NO_FEATURE_LOCK 
+{
+	datastream KeysFuses[1][128];
+	datastream SavedKEY1Fuse[1][128];
+	SecurityKey.row = 1;	
+	KeysFuses[1] = SecurityKey[1];
+	KeysFuses[1] = $KeysFuses[1];
+	
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	
+	! Shift in LSC_READ_CIPHER_KEY(0xF4) instruction;
+	SIR Instruction_Length	TDI (LSC_READ_CIPHER_KEY);
+    RUN_TEST IDLE TCK 5 DELAY PWV;
+    SDR	 128	TDI(#0^128)
+				TDO(SavedKEY1Fuse[1]);
+				
+	IF (SavedKEY1Fuse[1] == 0x0043F1B445A3EA6CAE17F20F695153D5)
+	{
+		print (0,"Programming the Encryption Keys...");		
+		! Shift in LSC_PROG_CIPHER_KEY(0xF3) instruction;
+	    SIR Instruction_Length	TDI (LSC_PROG_CIPHER_KEY);
+	    ! Shift in Data; 
+	    SDR	 128	TDI(KeysFuses[1]);
+		RUN_TEST	IDLE TCK 100 DELAY 5000;	
+	}
+	ELSE
+	{
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY PWV;
+		print (1,"Security fuses already programmed. Cannot continue.");		
+	}	
+	IF (EncryptOnly == 1)
+	{
+		print (0,"Programming the Encrypted Bitstream Only Fuses...");
+		! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+		SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+		! Shift in Data; 
+		SDR 16 TDI(0x0002);
+		RUN_TEST	IDLE TCK 2 DELAY 2000;
+		print (0,"Verify the Encrypted Bitstream Only fuses...");
+		TRY 1 {
+			! Shift in LSC_READ_FEABITS(0xFB) instruction;
+			SIR Instruction_Length TDI (LSC_READ_FEABITS);
+			RUN_TEST IDLE TCK 2 DELAY PWV; 
+			SDR_VERIFY  16 	TDI(#0^16)
+				  			TDO (0x0002)
+				  		MASK(0x0002);					  		  		    
+		}
+		ELSE {		  
+			! Shift in ISC DISABLE(0x26) instruction;
+		    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+			RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+			! Shift in BYPASS(0xFF) instruction;
+		    SIR	Instruction_Length 	TDI (BYPASS);
+			RUN_TEST	IDLE  TCK 2 DELAY PWV;
+			print (1,"Failed to Program the Encrypted Bitstream Only Fuses.");
+		}
+	}
+	IF (KeyLock == 1)
+	{
+		print (0, "Programming the Feature lock...");
+		! Programming the Feature lock;
+		! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+		SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+		! Shift in Data; 
+		SDR 16 TDI(0x0001);
+		RUN_TEST	IDLE TCK 2 DELAY 2000;
+		
+		print (0,"Verify the Feature lock...");
+		! Verify the Feature lock;
+		TRY 1 {
+		    ! Shift in LSC_READ_FEABITS(0xFB) instruction;
+			SIR Instruction_Length TDI (LSC_READ_FEABITS);
+			RUN_TEST IDLE TCK 2 DELAY PWV; 
+			SDR_VERIFY  16 	TDI(#0^16)
+				  		TDO (0x0001)
+				  		MASK(0x0001);				  		  		    
+		}
+		ELSE {		  
+			! Shift in ISC DISABLE(0x26) instruction;
+		    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+			RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+			! Shift in BYPASS(0xFF) instruction;
+		    SIR	Instruction_Length 	TDI (BYPASS);
+			RUN_TEST	IDLE  TCK 2 DELAY PWV;
+			print (1,"Failed to Program the Encryption lock and Keylock.");
+		}
+	}				
+}
+
+function SVFPROGRAM_SECURITY_KEY_NO_FEATURE_LOCK 
+{
+	datastream KeysFuses[1][128];
+	SecurityKey.row = 1;	
+	KeysFuses[1] = SecurityKey[1];
+	KeysFuses[1] = $KeysFuses[1];
+	
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	print (0,"Programming the Encryption Keys...");	
+	! Programming the Encryption Keys;	
+	! Shift in LSC_PROG_CIPHER_KEY(0xF3) instruction;
+    SIR Instruction_Length	TDI (LSC_PROG_CIPHER_KEY);
+    ! Shift in Data; 
+    SDR	 128	TDI(KeysFuses[1]);
+	RUN_TEST	IDLE TCK 100 DELAY 5000;
+	
+	IF (EncryptOnly == 1)
+	{
+		print (0,"Programming the Encrypted Bitstream Only Fuses...");
+		! Programming the Encrypted Bitstream Only Fuses;
+		! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+		SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+		! Shift in Data; 
+		SDR 16 TDI(0x0002);
+		RUN_TEST	IDLE TCK 2 DELAY 2000;
+		print (0,"Verify the Encrypted Bitstream Only fuses...");
+		! Verify the Encrypted Bitstream Only fuses;
+		! Shift in LSC_READ_FEABITS(0xFB) instruction;
+		SIR Instruction_Length TDI (LSC_READ_FEABITS);
+		RUN_TEST IDLE TCK 2 DELAY PWV; 
+		SDR_VERIFY  16 	TDI(#0^16)
+			  		TDO (0x0002)
+			  		MASK(0x0002);					  		  		   	
+	}
+	IF (KeyLock == 1)
+	{
+		print (0, "Programming the Feature lock...");
+		! Programming the Feature lock;
+		! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+		SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+		! Shift in Data; 
+		SDR 16 TDI(0x0001);
+		RUN_TEST	IDLE TCK 2 DELAY 2000;
+		
+		print (0,"Verify the Feature lock...");
+		! Verify the Feature lock;
+		! Shift in LSC_READ_FEABITS(0xFB) instruction;
+		SIR Instruction_Length TDI (LSC_READ_FEABITS);
+		RUN_TEST IDLE TCK 2 DELAY PWV; 
+		SDR_VERIFY  16 	TDI(#0^16)
+			  		TDO (0x0001)
+			  		MASK(0x0001);				  		  		    
+	}	
+							
+}
+function PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK 
+{
+	datastream KeysFuses[1][128];
+	datastream SavedKEY1Fuse[1][128];
+	SecurityKey.row = 1;	
+	KeysFuses[1] = SecurityKey[1];
+	KeysFuses[1] = $KeysFuses[1];
+	
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	
+	! Shift in LSC_READ_CIPHER_KEY(0xF4) instruction;
+	SIR Instruction_Length	TDI (LSC_READ_CIPHER_KEY);
+    RUN_TEST IDLE TCK 5 DELAY PWV;
+    SDR	 128	TDI(#0^128)
+				TDO(SavedKEY1Fuse[1]);
+				
+	IF (SavedKEY1Fuse[1] == 0x0043F1B445A3EA6CAE17F20F695153D5)
+	{
+		print (0,"Programming the Encryption Keys...");	
+		! Shift in LSC_PROG_CIPHER_KEY(0xF3) instruction;
+	    SIR Instruction_Length	TDI (LSC_PROG_CIPHER_KEY);
+	    ! Shift in Data; 
+	    SDR	 128	TDI(KeysFuses[1]);
+		RUN_TEST	IDLE TCK 100 DELAY 5000;
+		IF (EncryptOnly == 1)
+		{
+			print (0,"Programming the Encrypted Bitstream Only fuses...");
+			! Programming the Encrypted Bitstream Only fuses;
+			! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+			SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+			! Shift in Data; 
+			SDR 16 TDI(0x0002);
+			RUN_TEST	IDLE TCK 2 DELAY 2000;
+			print (0,"Verify the Encrypted Bitstream Only fuses...");
+			! Verify the Encrypted Bitstream Only fuses;
+			TRY 1 {
+			    ! Shift in LSC_READ_FEABITS(0xFB) instruction;
+				SIR Instruction_Length TDI (LSC_READ_FEABITS);
+				RUN_TEST IDLE TCK 2 DELAY PWV; 
+				SDR_VERIFY  16 	TDI(#0^16)
+					  		TDO (0x0002)
+					  		MASK(0x0002);				  		  		    
+			}
+			ELSE {		  
+				! Shift in ISC DISABLE(0x26) instruction;
+			    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+				RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+				! Shift in BYPASS(0xFF) instruction;
+			    SIR	Instruction_Length 	TDI (BYPASS);
+				RUN_TEST	IDLE  TCK 2 DELAY PWV;
+				print (1,"Failed to Program the Encrypted Bitstream Only fuses.");
+			}		
+		}			
+		print (0, "Programming the Feature lock...");
+		! Programming the Feature lock;
+		! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+		SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+		! Shift in Data; 
+		SDR 16 TDI(0x0001);
+		RUN_TEST	IDLE TCK 2 DELAY 2000;
+		
+		print (0,"Verify the Feature lock...");
+		! Verify the Feature lock;
+		TRY 1 {
+		    ! Shift in LSC_READ_FEABITS(0xFB) instruction;
+			SIR Instruction_Length TDI (LSC_READ_FEABITS);
+			RUN_TEST IDLE TCK 2 DELAY PWV; 
+			SDR_VERIFY  16 	TDI(#0^16)
+				  		TDO (0x0001)
+				  		MASK(0x0001);				  		  		    
+		}
+		ELSE {		  
+			! Shift in ISC DISABLE(0x26) instruction;
+		    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+			RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+			! Shift in BYPASS(0xFF) instruction;
+		    SIR	Instruction_Length 	TDI (BYPASS);
+			RUN_TEST	IDLE  TCK 2 DELAY PWV;
+			print (1,"Failed to Program the Encryption lock and Keylock.");
+		}	
+	}
+	ELSE
+	{
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY PWV;
+		print (1,"Security fuses already programmed. Cannot continue.");		
+	}	
+						
+}
+function SVFPROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK 
+{
+	datastream KeysFuses[1][128];
+	datastream SavedKEY1Fuse[1][128];
+	SecurityKey.row = 1;	
+	KeysFuses[1] = SecurityKey[1];
+	KeysFuses[1] = $KeysFuses[1];
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;
+	
+	print (0,"Programming the Encryption Keys...");	
+	! Programming the Encryption Keys;
+	! Shift in LSC_PROG_CIPHER_KEY(0xF3) instruction;
+    SIR Instruction_Length	TDI (LSC_PROG_CIPHER_KEY);
+    ! Shift in Data; 
+    SDR	 128	TDI(KeysFuses[1]);
+	RUN_TEST	IDLE TCK 100 DELAY 5000;
+	
+	IF (EncryptOnly == 1)
+	{
+		print (0,"Programming the Encrypted Bitstream Only option...");
+		! Programming the Encrypted Bitstream Only option;
+		! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+		SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+		! Shift in Data; 
+		SDR 16 TDI(0x0002);
+		RUN_TEST	IDLE TCK 2 DELAY 2000;
+		print (0,"Verify the Encrypted Bitstream Only fuses...");
+		! Verify the Encrypted Bitstream Only fuses;
+		TRY 1 {
+		    ! Shift in LSC_READ_FEABITS(0xFB) instruction;
+			SIR Instruction_Length TDI (LSC_READ_FEABITS);
+			RUN_TEST IDLE TCK 2 DELAY PWV; 
+			SDR_VERIFY  16 	TDI(#0^16)
+				  		TDO (0x0002)
+				  		MASK(0x0002);				  		  		    
+		}
+		ELSE {		  
+			! Shift in ISC DISABLE(0x26) instruction;
+		    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+			RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+			! Shift in BYPASS(0xFF) instruction;
+		    SIR	Instruction_Length 	TDI (BYPASS);
+			RUN_TEST	IDLE  TCK 2 DELAY PWV;
+			print (1,"Failed to Program the Encrypted Bitstream Only fuses.");
+		}
+	}			
+	print (0, "Programming the Feature lock...");
+	! Programming the Feature lock;
+	! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+	SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+	! Shift in Data; 
+	SDR 16 TDI(0x0001);
+	RUN_TEST	IDLE TCK 2 DELAY 2000;
+	print (0,"Verify the Feature lock...");
+	! Verify the Feature lock;
+	! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	SIR Instruction_Length TDI (LSC_READ_FEABITS);
+	RUN_TEST IDLE TCK 2 DELAY PWV; 
+	SDR_VERIFY  16 	TDI(#0^16)
+		  			TDO (0x0001)
+		  			MASK(0x0001);				  		  		    						
+}
+function PROGRAM_LOCK_FUSES
+{
+	print (0, "Programming the Feature Lock...");
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;	
+	
+	! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+	SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+	! Shift in Data; 
+	SDR 16 TDI(0x0001);
+	RUN_TEST	IDLE TCK 2 DELAY 2000;
+	
+	print (0,"Verify the Feature Lock...");
+	! Verify the Feature Lock;
+	TRY 1 {
+		! Shift in LSC_READ_FEABITS(0xFB) instruction;
+		SIR Instruction_Length TDI (LSC_READ_FEABITS);
+		RUN_TEST IDLE TCK 2 DELAY PWV; 
+		SDR_VERIFY  16 	TDI(#0^16)
+			  			TDO (0x0001)
+			  			MASK(0x0001);					  		  		    
+	}
+	ELSE {		  
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY PWV;
+		print (1,"Failed to Program the Feature Lock.");
+	}	
+}
+function PROGRAM_DECRYPTION_FUSES
+{
+	! Verify the Encryption lock;
+	TRY 1 {
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SIR Instruction_Length TDI (LSC_READ_STATUS);
+		RUN_TEST IDLE TCK 2 DELAY PWV; 
+		SDR_VERIFY  32 	TDI(#0^32)
+				  		TDO (0x00000000)
+				  		MASK(0x00008000);				  		  		    
+	}
+	ELSE {		  
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY PWV;
+		print (1,"The Encryption Fuses already enabled. Cannot continue.");
+	}
+	
+	print (0, "Programming the Encryption lock...");
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SIR Instruction_Length	TDI (LSC_INIT_ADDRESS);
+	SDR 8 TDI(0x00);
+	RUN_TEST	IDLE TCK 2 DELAY 	PWP;	
+	
+	! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+	SIR Instruction_Length	TDI (LSC_PROG_FEABITS);
+	! Shift in Data; 
+	SDR 16 TDI(0x0002);
+	RUN_TEST	IDLE TCK 2 DELAY 2000;
+	
+	print (0,"Verify the Encryption lock Fuses...");
+	! Verify the Encryption lock;
+	TRY 1 {
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SIR Instruction_Length TDI (LSC_READ_STATUS);
+		RUN_TEST IDLE TCK 2 DELAY PWV; 
+		SDR_VERIFY  32 	TDI(#0^32)
+				  		TDO (0x00008000)
+				  		MASK(0x0000B000);				  		  		    
+	}
+	ELSE {		  
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY PWP;         
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY PWV;
+		print (1,"Failed to Program the Encryption lock Fuses.");
+	}	
+}
+function SPI_INIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	FREQUENCY 1E6 HZ;
+	setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	setpin ISPEN HIGH;
+}
+function SPI_READ_ID {
+	IDTDI[1] = $IDTDI[1];
+	setpin ISPEN LOW;
+	! Shift in IDCODE_PUB(0xE0) opcode;
+	SDR	32	TDI (0x00000007);
+	SDR_VERIFY	32	TDI (0x00000000)
+					TDO	(IDTDI[1])
+					MASK (0xFFFFFFFF);		
+	setpin ISPEN HIGH;				        
+}
+function SPI_SAVE_ID	{
+	datastream SavedID[1][ID_Length];
+	file	NewFile = "FILE_SAVE";
+	setpin ISPEN LOW; 
+	! Shift in IDCODE_PUB(0xE0) opcode;
+    SDR 32 	TDI (0x00000007);
+	SDR	ID_Length	TDI (#0^ID_Length)
+					TDO	(SavedID);
+	setpin ISPEN HIGH;
+	SavedID[1] = $SavedID[1];					
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedID);
+	fclose 	NewFile;
+}
+function SPI_SVFSAVE_ID	{
+	setpin ISPEN LOW; 
+	! Shift in IDCODE_PUB(0xE0) opcode;
+    SDR 32 	TDI (0x00000007);
+	SDR	ID_Length	TDI (#0^ID_Length)
+					TDO	(#0^ID_Length)
+					MASK(#0^ID_Length);
+	setpin ISPEN HIGH;					
+}
+function SPI_ENABLE {
+	setpin ISPEN LOW;
+	! Shift in ISC ENABLE(0xC6) instruction;
+    SDR 24 TDI (0x000063);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWV;
+}
+function SPI_EFUSE_ENABLE {
+	setpin ISPEN LOW;
+	! Shift in ISC ENABLE(0xC6) instruction;
+    SDR 24 TDI (0x004063);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWV;    
+}
+function SPI_SRAM_TRANSPARENT_READ_ENABLE {
+	setpin ISPEN LOW;
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+    SDR 24 TDI (0x00002E);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWV;
+}
+function SPI_SRAM_TRANSPARENT_READ_REFRESH_ENABLE {
+	setpin ISPEN LOW;
+	! Shift in LSC_REFRESH(0x79) instruction;
+    SDR 24	TDI (0x00009E);
+    setpin ISPEN HIGH;
+    setpin ISPEN LOW;
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+    SDR 24 TDI (0x00002E);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWV;
+}
+function SPI_DISABLE {
+	setpin ISPEN LOW;
+	! Shift in ISC DISABLE(0x26) instruction;
+    SDR	24 	TDI (0x000064);
+    setpin ISPEN HIGH;
+    RUN_TEST DELAY 200;
+    setpin ISPEN LOW;
+	! Shift in NO-OP(0xFF) instruction;
+    SDR	32 	TDI (0xFFFFFFFF);
+    setpin ISPEN HIGH;
+}
+function SPI_VERIFY_STATUS {
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO (0x00800000)
+			  	MASK(0x008C0000);
+	setpin ISPEN HIGH;				  	
+}
+function SPI_ERASE {
+	setpin ISPEN LOW;	
+	! Shift in ISC ERASE(0x0E) instruction;
+    SDR 32 TDI (0x00008070);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWE;		   
+}
+function SPI_PROGRAM {
+	FuseArray_TDI.row = 1;
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+    setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	! Shift in LSC_BITSTREAM_BURST(0x7A) instruction;
+    SDR 32	TDI (0x0000005E);
+	! Shift in TOTAL_FUSE_MAP bits;
+    SDR	TotalFuse		TDI	(FuseArray_TDI);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWP;
+}
+function SPI_REFRESH {
+	setpin ISPEN LOW;
+	! Shift in LSC_REFRESH(0x79) instruction;
+    SDR 24	TDI (0x00009E);
+    setpin ISPEN HIGH;
+    RUN_TEST DELAY 200; 
+}
+function SPI_VERIFY_USERCODE {	
+	IF (Usercode_TDI.row = 1)
+	{
+		setpin ISPEN LOW;
+		! Shift in READ USERCODE(0xC0) instruction;
+	    SDR 32 TDI (0x00000003);
+	    SavedUsercode[1] = Usercode_TDI[1];
+	    SavedUsercode[1] = $SavedUsercode[1];
+	    SDR_VERIFY 	Usercode_Length TDI (#0^Usercode_Length)
+									TDO	(SavedUsercode[1])
+									MASK(0xFFFFFFFF);
+		setpin ISPEN HIGH;									
+	}
+}
+function SPI_VERIFY_DONE_BIT {
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO (0x00800000)
+			  	MASK(0x008C0000);
+	setpin ISPEN HIGH;
+}
+function SPI_VERIFY_CONTROL {
+	IF (Control_Register_0_TDI.row = 1)
+	{
+		setpin ISPEN LOW;
+		! Shift in LSCC READ CONTROL 0(0x20) instruction;
+	    SDR 32 TDI (0x00000004);
+		SDR_VERIFY  32 TDI(0x00000000)
+				   	   TDO(Control_Register_0_TDI[1])
+				       MASK(0xFFFFFFFF);
+		setpin ISPEN HIGH;
+	}
+}
+function SPI_VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	FuseArray_MASK.row = 1;
+	TRY 1 {
+		setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    	SDR 32	TDI (0x00000062);
+    	setpin ISPEN HIGH; 
+    	setpin ISPEN LOW;
+		! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+	    SDR 32	TDI	(0xFFFF0856);
+    	SDR 	Row_Width	TDI	(#0^Row_Width);
+    	repeat Address_Length {
+			! Shift Out Data Row = RowCount;
+		    SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+									TDO	(FuseArray_TDI)
+									MASK(FuseArray_MASK);
+			RowCount = RowCount +1;
+		}
+		setpin ISPEN HIGH;
+	}
+	ELSE
+	{
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SDR	24 	TDI (0x000064);
+		setpin ISPEN HIGH;
+		print (1, "Failed in Function VERIFY /see log file for more details/ ");
+	}		
+}
+
+function SPI_SAVE_ARRAY {
+	int32	RowCount = 1;
+	datastream SavedFuseMap[Address_Length][Row_Width];
+	file NewFile = "FILE_SAVE";
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH; 
+	setpin ISPEN LOW;
+	! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+	SDR 8	TDI	(0x56);
+	SDR 24	TDI	(0xFFFF00);
+	repeat Address_Length {	
+		SDR 	Row_Width	TDI	(#1^Row_Width)
+						TDO	(SavedFuseMap[RowCount]);
+		
+		SDR 32	TDI	(0xFFFFFF);
+		RowCount = RowCount +1;
+	}
+	setpin ISPEN HIGH;
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+	fclose 	NewFile;
+}
+function SPI_SVFSAVE_ARRAY {
+	setpin ISPEN LOW; 	
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH; 
+	setpin ISPEN LOW;
+	! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+    SDR 32	TDI	(0x00000056);
+	SDR 	Row_Width	TDI	(#0^Row_Width);	
+	repeat Address_Length {
+		SDR_VERIFY 	Row_Width	TDI	(#0^Row_Width)
+							TDO	(#0^Row_Width)
+							MASK(#0^Row_Width);								
+	}
+	setpin ISPEN HIGH;	
+}
+
+function SPI_SAVE_USERCODE {
+	datastream SavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	setpin ISPEN LOW;
+	! Shift in READ USERCODE(0xC0) instruction;
+    SDR 32	TDI (0x00000003);
+    SDR	Usercode_Length	TDI(#0^Usercode_Length)
+						TDO(SavedUsercode);
+	setpin ISPEN HIGH;
+	SavedUsercode[1] = $SavedUsercode[1];						
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (Usercode_TDI, SavedUsercode);
+	fclose 	NewFile;
+}
+function SPI_SVFSAVE_USERCODE {
+	setpin ISPEN LOW;
+	! Shift in READ USERCODE(0xC0) instruction;
+    SDR 32	TDI (0x00000003);
+	SDR_VERIFY	Usercode_Length	TDI(#0^Usercode_Length)
+								TDO(#0^Usercode_Length)
+								MASK(#0^Usercode_Length);
+	setpin ISPEN HIGH;						
+}
+function SPI_SAVE_CONTROL0 {
+	datastream SavedControl[1][32];
+	file	NewFile = "FILE_SAVE"; 
+	setpin ISPEN LOW;
+	! Shift in LSCC READ CONTROL 0(0x20) instruction;
+	SDR 32 TDI (0x00000004);
+	SDR  32 TDI(0xFFFFFFFF)
+			TDO(SavedControl);
+	setpin ISPEN HIGH;	  
+	// Write To File 
+	fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (Control_Register_0_TDI, SavedControl);
+	fclose 	NewFile;
+}
+function SPI_SAVE_CONTROL {
+	datastream SavedControl[1][32];
+	file	NewFile = "FILE_SAVE"; 
+	setpin ISPEN LOW;
+	! Shift in LSCC READ CONTROL 0(0x20) instruction;
+	SDR 32 TDI (0x00000004);
+	SDR  32 TDI(0xFFFFFFFF)
+			TDO(SavedControl);
+	setpin ISPEN HIGH;	  
+	SavedControl[1] = $SavedControl[1];
+	// Write To File 
+	fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (Control_Register_0_TDI, SavedControl);
+	fclose 	NewFile;
+}
+function SPI_SVFSAVE_CONTROL 
+{
+	setpin ISPEN LOW;
+	! Shift in LSCC READ CONTROL 0(0x20) instruction;
+	SDR 32 TDI (0x00000004);
+	SDR_VERIFY  32 TDI(0x00000000)
+				   TDO(0x00000000)
+				   MASK(0x00000000);
+	setpin ISPEN HIGH;	
+}
+function SPI_SAVE_STATUS {
+	datastream SavedSTATUS[1][32];
+	file NewFile = "FILE_SAVE";
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	SDR	32	TDI(#0^32)
+			TDO(SavedSTATUS);
+	setpin ISPEN HIGH;			
+	print (0,SavedSTATUS);
+	SavedSTATUS[1] = $SavedSTATUS[1];	
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (STATUS_BIT, SavedSTATUS);
+	fclose 	NewFile;			  	
+}
+function SPI_SVFSAVE_STATUS {
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	SDR_VERIFY  32 TDI(0x00000000)
+				  TDO(0x00000000)
+				  MASK(0x00000000);
+	setpin ISPEN HIGH;				  	
+}
+function SPI_CHECK_ENCRYPTION {
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_VERIFY  32 	TDI(#0^32)
+				  		TDO(0x00000000)
+				  		MASK(0x02024000);
+		setpin ISPEN HIGH;				  	
+	}
+	ELSE
+	{	
+		setpin ISPEN HIGH;		
+		setpin ISPEN LOW;	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SDR	24 	TDI (0x000064);
+	    setpin ISPEN HIGH;
+    	print (1,"The OTP is set. Cannot continue.");
+	}
+	
+}
+function SPI_CHECK_KEYLOCK 
+{
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_VERIFY  32 	TDI(#0^32)
+				  		TDO(0x00000000)
+				  		MASK(0x02024000);
+		setpin ISPEN HIGH;				   		
+	}
+	ELSE
+	{				  
+		setpin ISPEN HIGH;		
+		setpin ISPEN LOW;	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SDR	24 	TDI (0x000064);
+	    setpin ISPEN HIGH;
+    	print (1,"The OTP is set. Cannot continue.");
+	}
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_VERIFY  32 	TDI(#0^32)
+				  		TDO(0x00000000)
+				  		MASK(0x003C0000);
+		setpin ISPEN HIGH;			
+	}
+	ELSE
+	{				  
+		setpin ISPEN HIGH;		
+		setpin ISPEN LOW;	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SDR	24 	TDI (0x000064);
+	    setpin ISPEN HIGH;
+		print (1,"The device Lock fuses are programmed. Cannot continue.");
+	}
+}
+function SPI_PROGRAM_SECURITY_KEY_WITH_FEATURE_LOCK 
+{
+	datastream KeysFuses[1][128];
+	datastream SavedKEY1Fuse[1][128];
+	SecurityKey.row = 1;	
+	KeysFuses[1] = SecurityKey[1];	
+	
+	setpin ISPEN LOW; 	
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH; 
+	
+	print (0,"Programming the Encryption Keys...");	
+	setpin ISPEN LOW;
+	! Shift in LSC_PROG_CIPHER_KEY(0xF3) instruction;
+	SDR 32	TDI (0x000000CF);
+	! Shift in Data; 
+	SDR	 128	TDI(KeysFuses[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 5000;			
+	IF (EncryptOnly == 1)
+	{
+		print (0,"Programming the Encrypted Bitstream Only fuses...");
+		! Programming the Encrypted Bitstream Only fuses;
+		setpin ISPEN LOW;
+		! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+		SDR 32	TDI (0x0000001F);
+		! Shift in Data; 
+		SDR 16 TDI(0x4000);
+		setpin ISPEN HIGH;
+		RUN_TEST DELAY 1000;
+		print (0,"Verify the Encrypted Bitstream Only fuses...");
+		! Verify the Encrypted Bitstream Only fuses;
+		TRY 1 {
+			setpin ISPEN LOW;
+		    ! Shift in LSC_READ_FEABITS(0xFB) instruction;
+		    SDR 32	TDI (0x000000DF);
+			SDR_VERIFY  16 	TDI(#0^16)
+				  			TDO (0x4000)
+				  			MASK(0x4000);	
+			setpin ISPEN HIGH;				  						  		  		    
+		}
+		ELSE {		  
+			setpin ISPEN HIGH;		
+			setpin ISPEN LOW;	  
+			! Shift in ISC DISABLE(0x26) instruction;
+		    SDR	24 	TDI (0x000064);
+		    setpin ISPEN HIGH;
+			print (1,"Failed to Program the Encrypted Bitstream Only fuses.");
+		}		
+	}
+	IF (KeyLock == 1)
+	{			
+		print (0, "Programming the Feature lock...");
+		! Programming the Feature lock;
+		setpin ISPEN LOW;
+		! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+		SDR 32	TDI (0x0000001F);
+		! Shift in Data; 
+		SDR 16 TDI(0x8000);
+		setpin ISPEN HIGH;
+		RUN_TEST DELAY 1000;
+		
+		print (0,"Verify the Feature lock...");
+		! Verify the Feature lock;
+		TRY 1 {
+			setpin ISPEN LOW;
+		    ! Shift in LSC_READ_FEABITS(0xFB) instruction;
+		    SDR 32	TDI (0x000000DF);
+			SDR_VERIFY  16 	TDI(#0^16)
+				  			TDO (0x8000)
+				  			MASK(0x8000);
+			setpin ISPEN HIGH;			  							  		  		    
+		}
+		ELSE {		  
+			setpin ISPEN HIGH;		
+			setpin ISPEN LOW;	  
+			! Shift in ISC DISABLE(0x26) instruction;
+		    SDR	24 	TDI (0x000064);
+		    setpin ISPEN HIGH;		
+			print (1,"Failed to Program the Encryption lock and Keylock.");
+		}
+	}								
+}
+function SPI_PROGRAM_LOCK_FUSES
+{
+	print (0, "Programming the Feature Lock...");
+	setpin ISPEN LOW; 	
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH; 	
+	
+	setpin ISPEN LOW;
+	! Shift in LSC_PROG_FEABITS(0xF8) instruction;
+	SDR 32	TDI (0x0000001F);
+	! Shift in Data; 
+	SDR 16 TDI(0x8000);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 1000;
+	
+	print (0,"Verify the Feature lock...");
+	! Verify the Feature lock;
+	TRY 1 {
+		setpin ISPEN LOW;
+	    ! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	    SDR 32	TDI (0x000000DF);
+		SDR_VERIFY  16 	TDI(#0^16)
+			  			TDO (0x8000)
+			  			MASK(0x8000);
+		setpin ISPEN HIGH;			  							  		  		    
+	}
+	ELSE {		  
+		setpin ISPEN HIGH;		
+		setpin ISPEN LOW;	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SDR	24 	TDI (0x000064);
+	    setpin ISPEN HIGH;
+		print (1,"Failed to Program the Feature Lock.");
+	}	
+}
+function I2CINIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	FREQUENCY 1E6 HZ;	
+}
+function I2CREAD_ID {
+	IDTDI[1] = $IDTDI[1];
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in IDCODE_PUB(0xE0) opcode;
+	SDR	32	TDI (0x00000007);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR_VERIFY	32	TDI (0x00000000)
+					TDO	(IDTDI[1])
+					MASK (0xFFFFFFFF);					
+	I2C_STOP;				        
+}
+function I2CSAVE_ID	{
+	datastream SavedID[1][ID_Length];
+	file	NewFile = "FILE_SAVE";
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in IDCODE_PUB(0xE0) opcode;
+    SDR 32 	TDI (0x00000007);
+    I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR	ID_Length	TDI (#0^ID_Length)
+					TDO	(SavedID);
+	I2C_STOP;				
+	SavedID[1] = $SavedID[1];	
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedID);
+	fclose 	NewFile;
+}
+function I2C_ENABLE	{
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in ISC ENABLE(0xC6) instruction;
+    SDR 32 TDI (0x00000063);
+    I2C_STOP;
+}
+function I2CDISABLE	{
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in ISC DISABLE(0x26) instruction;
+    SDR	24 	TDI (0x000064);
+    I2C_STOP;
+    RUN_TEST DELAY 200;    	    	
+}
+function I2C_ERASE {	
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);		
+	! Shift in ISC ERASE(0x0E) instruction;
+    SDR 32 TDI (0x00000070);
+    RUN_TEST DELAY 5000;
+    I2C_STOP;    
+}
+function I2C_PROGRAM_STATUS {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+    I2C_STOP;	
+	repeat Address_Length{
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_PROG_INCR_NV(0x70) instruction;
+    	SDR 32	TDI (0x0000000E);    
+    	! Shift in Data Row = RowCount; 			
+		SDR	Row_Width	TDI	(FuseArray_TDI[RowCount]);
+		RUN_TEST DELAY PWV;
+		I2C_STOP;
+		RowCount = RowCount +1;			
+	} 	
+	I2C_STOP;
+}
+
+function I2CBURST_PROGRAM {
+	FuseArray_TDI.row = 1;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+    I2C_STOP;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_BITSTREAM_BURST(0x7A) instruction;
+    SDR 32	TDI (0x0000005E);
+	! Shift in TOTAL_FUSE_MAP bits;
+    SDR	TotalFuse		TDI	(FuseArray_TDI);
+    I2C_STOP;
+	RUN_TEST DELAY PWP;
+}
+function I2CPROGRAM_USERCODE {
+	datastream SavedUsercode[1][Usercode_Length];
+	IF (Usercode_TDI.row = 1)
+	{
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	 	! Shift in ISC PROGRAM USERCODE(0xC2) instruction;
+	    SDR 32	TDI (0x00000043);
+	    SavedUsercode[1] = Usercode_TDI[1];
+	    SavedUsercode[1] = $SavedUsercode[1];
+	    SDR Usercode_Length	TDI	(SavedUsercode[1]);
+		I2C_STOP;	
+		RUN_TEST DELAY 1;
+	}
+}
+function I2C_PROGRAM_DONE_BIT {
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in ISC PROGRAM DONE(0x5E) instruction;
+    SDR	32 	TDI (0x0000007A);
+	I2C_STOP;	
+	RUN_TEST DELAY PWP;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO(0x00800000)
+			  	MASK(0x008C0000);
+	I2C_STOP;
+}
+function I2CCHECK_STATUS {
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO(0x00000000)
+			  	MASK(0x000C0000);
+	I2C_STOP;
+}
+function I2C_VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	TRY 1 {
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    	SDR 32	TDI (0x00000062);
+    	I2C_STOP;    
+    	I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+    	! Shift in LSC_READ_INCR_NV(0x73) instruction;
+    	SDR 32	TDI	(0xFFFF08CE);
+	    I2C_RESTART;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+		SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+								TDO (#0^Row_Width)
+								MASK(#0^Row_Width);
+		repeat Address_Length{
+			! Shift out Data Row = RowCount; 			
+			SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+									TDO	(FuseArray_TDI[RowCount]);
+			RowCount = RowCount +1;
+		}		
+		I2C_STOP;
+	}
+	ELSE
+	{
+		I2C_STOP;
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SDR	24 	TDI (0x000064);
+		I2C_STOP;		
+		print (1, "Failed in Function VERIFY /see log file for more details/ ");
+	}				
+}
+function I2CVERIFY_USERCODE {
+	datastream SavedUsercode[1][Usercode_Length];
+	IF (Usercode_TDI.row = 1)
+	{
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+		! Shift in READ USERCODE(0xC0) instruction;
+	    SDR 32 TDI (0x00000003);
+	    SavedUsercode[1] = Usercode_TDI[1];
+	    SavedUsercode[1] = $SavedUsercode[1];
+	    I2C_RESTART;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+	    SDR_VERIFY 	Usercode_Length TDI (#0^Usercode_Length)
+									TDO	(SavedUsercode[1])
+									MASK(0xFFFFFFFF);
+		I2C_STOP;									
+	}
+}
+function I2CVERIFY_DONE_BIT {	
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO (0x00800000)
+			  	MASK(0x008C0000);
+	I2C_STOP;  	      	
+}
+function I2C_SAVE_STATUS	{
+	datastream SavedSTATUS[1][32];
+	file NewFile = "FILE_SAVE";
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR	32	TDI(#0^32)
+			TDO(SavedSTATUS);
+	I2C_STOP;			
+	print (0,SavedSTATUS);
+	SavedSTATUS[1] = $SavedSTATUS[1];
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (STATUS_BIT, SavedSTATUS);
+	fclose 	NewFile;
+}
+function I2CREFRESH {
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+	! Shift in LSC_REFRESH(0x79) instruction;
+    SDR 32	TDI (0x0000009E);
+    I2C_STOP;
+    RUN_TEST DELAY 200;	
+}
+]]>
+</Script>
+</SVF_Plus>

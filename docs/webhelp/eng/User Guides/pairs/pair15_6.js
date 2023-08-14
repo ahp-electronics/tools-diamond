@@ -1,0 +1,23 @@
+var pairs =
+{
+"hierarchy":{"sheets":1}
+,"creating":{"hierarchical":1,"schematic":1}
+,"hierarchical":{"design":1}
+,"design":{"creating":1,"single":1}
+,"schematic":{"multiple":1,"add":1}
+,"multiple":{"sheets":1}
+,"sheets":{"schematic":1,"desired":1,"add":1,"contained":1}
+,"add":{"sheets":1,"components":1}
+,"desired":{"extend":1}
+,"extend":{"beyond":1}
+,"beyond":{"original":1}
+,"original":{"sheet":1}
+,"sheet":{"however":1}
+,"however":{"regardless":1}
+,"regardless":{"sheets":1}
+,"components":{"design":1}
+,"single":{"level":1}
+,"level":{"sheets":1}
+,"contained":{"module":1}
+}
+;Search.control.loadWordPairs(pairs);

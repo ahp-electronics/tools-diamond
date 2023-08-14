@@ -1,0 +1,63 @@
+# A transform file that only looks at bins
+# It has three Bin rules plus the first rule to catch the UCDB names
+# (Note: does not collect unmatched differences)
+# Note that equal bin counts won't generate a diff in the first place
+# Bin count in first file is 0
+# Bin count in second file is 0
+# All other bin count differences
+# Use the DiffCounts Column Layout to view this one
+
+# This rule transforms the command echo comment
+# It is used so that the GUI has a rule to display the two UCDB input
+# file names.
+# There will be 0 or 1 match - 0 if the -nocomments option is in effect
+transform {\-\- vcover diff (\S*) (\S*) (.*) \-\-$} {
+          field msg {First UCDB: $1 Second UCDB: $2}
+          field severity {Note}
+          field time {0}
+          field DiffArgs {$3}
+          field DiffType {Comment}
+}
+
+#Example: < <> Bin BranchBin "branch#738#1#" "true_branch" Count 0 1
+transform {<> Bin (\w+) "([^"\r\n]*)" "([^"\r\n]*)" Count 0 (\d+)$} {
+          field msg {Zero bin count in first database}
+          field severity {Note}
+          field time {0}
+          field UCDBType {$1}
+          field ScopeName {$2}
+          field BinName {$3}
+          field FirstCount {0}
+          field SecondCount {$4}
+          field DiffType {Count}
+          field CompositeType {Bin}
+}
+
+#Example: < <> Bin BranchBin "branch#738#1#" "true_branch" Count 1 0
+transform {<> Bin (\w+) "([^"\r\n]*)" "([^"\r\n]*)" Count (\d+) 0$} {
+          field msg {Zero bin count in second database}
+          field severity {Note}
+          field time {0}
+          field UCDBType {$1}
+          field ScopeName {$2}
+          field BinName {$3}
+          field FirstCount {$4}
+          field SecondCount {0}
+          field DiffType {Count}
+          field CompositeType {Bin}
+}
+
+#Example: < <> Bin ToggleBin "branch#738#1#" "toggle_low" Count 3 15
+transform {<> Bin (\w+) "([^"\r\n]*)" "([^"\r\n]*)" Count (\d+) (\d+)$} {
+          field msg {Non-zero bin count diffs}
+          field severity {Note}
+          field time {0}
+          field UCDBType {$1}
+          field ScopeName {$2}
+          field BinName {$3}
+          field FirstCount {$4}
+          field SecondCount {$5}
+          field DiffType {Count}
+          field CompositeType {Bin}
+}
+

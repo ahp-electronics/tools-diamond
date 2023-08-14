@@ -1,0 +1,60 @@
+# $Revision: $
+#-- Synplicity, Inc.
+#-- Version Synplify for Lattice 8.8L2
+#-- Written on Mon Dec 10 15:54:57 2007
+
+
+#add_file options
+add_file -verilog "../../source/isp8_alu.v"
+add_file -verilog "../../source/isp8_core.v"
+add_file -verilog "../../source/isp8_flow_cntl.v"
+add_file -verilog "../../source/isp8_idec.v"
+add_file -verilog "../../source/isp8_io_cntl.v"
+add_file -verilog "../../source/config3/isp8_cfg.v"
+add_file -verilog "../../models/pmi/pmi_addsub.v"
+add_file -verilog "../../models/pmi/pmi_ram_dq.v"
+add_file -verilog "../../models/pmi/pmi_distributed_spram.v"
+add_file -verilog "../../models/pmi/pmi_distributed_dpram.v"
+add_file -verilog "../../models/pmi/pmi_rom.v"
+
+
+#implementation: "rev_1"
+impl -add rev_1 -type fpga
+
+#device options
+set_option -technology LATTICE-XP
+set_option -part LFXP3C
+set_option -package Q208
+set_option -speed_grade -5
+
+#compilation/mapping options
+set_option -default_enum_encoding default
+set_option -resource_sharing 1
+
+#map options
+set_option -frequency 1.000
+set_option -fanout_limit 100
+set_option -disable_io_insertion 0
+set_option -force_gsr auto
+
+
+#sequential_optimizations options
+set_option -symbolic_fsm_compiler 1
+
+#simulation options
+set_option -write_verilog 0
+set_option -write_vhdl 0
+
+#automatic place and route (vendor) options
+set_option -write_apr_constraint 1
+
+#set result format/file last
+project -result_format "edif"
+project -result_file "rev_1/isp8_cfg.edn"
+
+#
+#implementation attributes
+
+set_option -vlog_std v2001
+set_option -project_relative_includes 1
+impl -active "rev_1"

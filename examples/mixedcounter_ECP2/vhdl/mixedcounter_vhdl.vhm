@@ -1,0 +1,1398 @@
+--
+-- Written by Synplicity
+-- Product Version "C-2009.03L-1"
+-- Program "Synplify Pro", Mapper "map400lat, Build 146R"
+-- Tue Mar 09 10:43:54 2010
+--
+
+--
+-- Written by Synplify Pro version Build 146R
+-- Tue Mar 09 10:43:54 2010
+--
+
+-- No definition of black box work.jtagconn16.syn_black_box
+-- No definition of black box work.mixedcounter_mixedcounter_la0.syn_black_box
+--
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library synplify;
+use synplify.components.all;
+library ecp2;
+use ecp2.components.all;
+
+entity count16_uniq_0 is
+port(
+  count2t_1 : out std_logic_vector(15 downto 0);
+  GND :  in std_logic;
+  N_1_i_c :  in std_logic;
+  reset_c_i :  in std_logic;
+  VCC :  in std_logic;
+  reset_c :  in std_logic;
+  clk_c :  in std_logic);
+end count16_uniq_0;
+
+architecture beh of count16_uniq_0 is
+  signal COUNT2AI : std_logic_vector(15 downto 0);
+  signal COUNT2BI : std_logic_vector(15 downto 0);
+  signal COUNT2BI_QN : std_logic_vector(15 downto 0);
+  signal COUNT2_QN : std_logic_vector(15 downto 0);
+  signal COUNT2AI_S : std_logic_vector(15 downto 0);
+  signal COUNT2AI_QN : std_logic_vector(15 downto 0);
+  signal COUNT2AI_CRY : std_logic_vector(14 downto 0);
+  signal COUNT2AI_S_0_COUT : std_logic_vector(15 to 15);
+  signal COUNT2AI_S_0_S1 : std_logic_vector(15 to 15);
+  signal COUNT2AI_CRY_0_S0 : std_logic_vector(0 to 0);
+  signal NN_1 : std_logic ;
+  signal NN_2 : std_logic ;
+begin
+\COUNT2BI[0]_REG_Z143\: FD1S3DX port map (
+    D => COUNT2AI(0),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(0));
+\COUNT2[0]_REG_Z145\: FD1P3AX port map (
+    D => COUNT2BI(0),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(0));
+\COUNT2BI[1]_REG_Z147\: FD1S3DX port map (
+    D => COUNT2AI(1),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(1));
+\COUNT2[1]_REG_Z149\: FD1P3AX port map (
+    D => COUNT2BI(1),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(1));
+\COUNT2[2]_REG_Z151\: FD1P3AX port map (
+    D => COUNT2BI(2),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(2));
+\COUNT2BI[2]_REG_Z153\: FD1S3DX port map (
+    D => COUNT2AI(2),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(2));
+\COUNT2BI[3]_REG_Z155\: FD1S3DX port map (
+    D => COUNT2AI(3),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(3));
+\COUNT2BI[4]_REG_Z157\: FD1S3DX port map (
+    D => COUNT2AI(4),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(4));
+\COUNT2[4]_REG_Z159\: FD1P3AX port map (
+    D => COUNT2BI(4),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(4));
+\COUNT2BI[5]_REG_Z161\: FD1S3DX port map (
+    D => COUNT2AI(5),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(5));
+\COUNT2BI[6]_REG_Z163\: FD1S3DX port map (
+    D => COUNT2AI(6),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(6));
+\COUNT2BI[7]_REG_Z165\: FD1S3DX port map (
+    D => COUNT2AI(7),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(7));
+\COUNT2BI[8]_REG_Z167\: FD1S3DX port map (
+    D => COUNT2AI(8),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(8));
+\COUNT2AI[0]_REG_Z169\: FD1S3DX port map (
+    D => COUNT2AI_S(0),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(0));
+\COUNT2AI[1]_REG_Z171\: FD1S3DX port map (
+    D => COUNT2AI_S(1),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(1));
+\COUNT2AI[2]_REG_Z173\: FD1S3DX port map (
+    D => COUNT2AI_S(2),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(2));
+\COUNT2[3]_REG_Z175\: FD1P3AX port map (
+    D => COUNT2BI(3),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(3));
+\COUNT2[5]_REG_Z177\: FD1P3AX port map (
+    D => COUNT2BI(5),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(5));
+\COUNT2[6]_REG_Z179\: FD1P3AX port map (
+    D => COUNT2BI(6),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(6));
+\COUNT2[7]_REG_Z181\: FD1P3AX port map (
+    D => COUNT2BI(7),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(7));
+\COUNT2BI[11]_REG_Z183\: FD1S3DX port map (
+    D => COUNT2AI(11),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(11));
+\COUNT2BI[12]_REG_Z185\: FD1S3DX port map (
+    D => COUNT2AI(12),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(12));
+\COUNT2AI[3]_REG_Z187\: FD1S3DX port map (
+    D => COUNT2AI_S(3),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(3));
+\COUNT2[8]_REG_Z189\: FD1P3AX port map (
+    D => COUNT2BI(8),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(8));
+\COUNT2BI[9]_REG_Z191\: FD1S3DX port map (
+    D => COUNT2AI(9),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(9));
+\COUNT2BI[10]_REG_Z193\: FD1S3DX port map (
+    D => COUNT2AI(10),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(10));
+\COUNT2BI[13]_REG_Z195\: FD1S3DX port map (
+    D => COUNT2AI(13),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(13));
+\COUNT2BI[14]_REG_Z197\: FD1S3DX port map (
+    D => COUNT2AI(14),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(14));
+\COUNT2BI[15]_REG_Z199\: FD1S3DX port map (
+    D => COUNT2AI(15),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2BI(15));
+\COUNT2AI[4]_REG_Z201\: FD1S3DX port map (
+    D => COUNT2AI_S(4),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(4));
+\COUNT2AI[5]_REG_Z203\: FD1S3DX port map (
+    D => COUNT2AI_S(5),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(5));
+\COUNT2AI[6]_REG_Z205\: FD1S3DX port map (
+    D => COUNT2AI_S(6),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(6));
+\COUNT2AI[7]_REG_Z207\: FD1S3DX port map (
+    D => COUNT2AI_S(7),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(7));
+\COUNT2AI[8]_REG_Z209\: FD1S3DX port map (
+    D => COUNT2AI_S(8),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(8));
+\COUNT2[9]_REG_Z211\: FD1P3AX port map (
+    D => COUNT2BI(9),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(9));
+\COUNT2AI[9]_REG_Z213\: FD1S3DX port map (
+    D => COUNT2AI_S(9),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(9));
+\COUNT2[10]_REG_Z215\: FD1P3AX port map (
+    D => COUNT2BI(10),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(10));
+\COUNT2AI[10]_REG_Z217\: FD1S3DX port map (
+    D => COUNT2AI_S(10),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(10));
+\COUNT2[11]_REG_Z219\: FD1P3AX port map (
+    D => COUNT2BI(11),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(11));
+\COUNT2AI[11]_REG_Z221\: FD1S3DX port map (
+    D => COUNT2AI_S(11),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(11));
+\COUNT2[12]_REG_Z223\: FD1P3AX port map (
+    D => COUNT2BI(12),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(12));
+\COUNT2AI[12]_REG_Z225\: FD1S3DX port map (
+    D => COUNT2AI_S(12),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(12));
+\COUNT2AI[13]_REG_Z227\: FD1S3DX port map (
+    D => COUNT2AI_S(13),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(13));
+\COUNT2[13]_REG_Z229\: FD1P3AX port map (
+    D => COUNT2BI(13),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(13));
+\COUNT2AI[14]_REG_Z231\: FD1S3DX port map (
+    D => COUNT2AI_S(14),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(14));
+\COUNT2[14]_REG_Z233\: FD1P3AX port map (
+    D => COUNT2BI(14),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(14));
+\COUNT2AI[15]_REG_Z235\: FD1S3DX port map (
+    D => COUNT2AI_S(15),
+    CK => clk_c,
+    CD => reset_c,
+    Q => COUNT2AI(15));
+\COUNT2[15]_REG_Z237\: FD1P3AX port map (
+    D => COUNT2BI(15),
+    SP => reset_c_i,
+    CK => clk_c,
+    Q => count2t_1(15));
+\COUNT2AI_S_0[15]\: CCU2B 
+generic map(
+  INIT0 => "0x090a",
+  INIT1 => "0x0a0c",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+  A0 => N_1_i_c,
+  B0 => COUNT2AI(15),
+  C0 => GND,
+  D0 => VCC,
+  A1 => GND,
+  B1 => GND,
+  C1 => GND,
+  D1 => VCC,
+  CIN => COUNT2AI_CRY(14),
+  COUT => COUNT2AI_S_0_COUT(15),
+  S0 => COUNT2AI_S(15),
+  S1 => COUNT2AI_S_0_S1(15));
+\COUNT2AI_CRY_0[13]\: CCU2B 
+generic map(
+  INIT0 => "0x0905",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+  A0 => N_1_i_c,
+  B0 => COUNT2AI(13),
+  C0 => GND,
+  D0 => VCC,
+  A1 => N_1_i_c,
+  B1 => COUNT2AI(14),
+  C1 => GND,
+  D1 => VCC,
+  CIN => COUNT2AI_CRY(12),
+  COUT => COUNT2AI_CRY(14),
+  S0 => COUNT2AI_S(13),
+  S1 => COUNT2AI_S(14));
+\COUNT2AI_CRY_0[11]\: CCU2B 
+generic map(
+  INIT0 => "0x0905",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+  A0 => N_1_i_c,
+  B0 => COUNT2AI(11),
+  C0 => GND,
+  D0 => VCC,
+  A1 => N_1_i_c,
+  B1 => COUNT2AI(12),
+  C1 => GND,
+  D1 => VCC,
+  CIN => COUNT2AI_CRY(10),
+  COUT => COUNT2AI_CRY(12),
+  S0 => COUNT2AI_S(11),
+  S1 => COUNT2AI_S(12));
+\COUNT2AI_CRY_0[9]\: CCU2B 
+generic map(
+  INIT0 => "0x0905",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+  A0 => N_1_i_c,
+  B0 => COUNT2AI(9),
+  C0 => GND,
+  D0 => VCC,
+  A1 => N_1_i_c,
+  B1 => COUNT2AI(10),
+  C1 => GND,
+  D1 => VCC,
+  CIN => COUNT2AI_CRY(8),
+  COUT => COUNT2AI_CRY(10),
+  S0 => COUNT2AI_S(9),
+  S1 => COUNT2AI_S(10));
+\COUNT2AI_CRY_0[7]\: CCU2B 
+generic map(
+  INIT0 => "0x0905",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+  A0 => N_1_i_c,
+  B0 => COUNT2AI(7),
+  C0 => GND,
+  D0 => VCC,
+  A1 => N_1_i_c,
+  B1 => COUNT2AI(8),
+  C1 => GND,
+  D1 => VCC,
+  CIN => COUNT2AI_CRY(6),
+  COUT => COUNT2AI_CRY(8),
+  S0 => COUNT2AI_S(7),
+  S1 => COUNT2AI_S(8));
+\COUNT2AI_CRY_0[5]\: CCU2B 
+generic map(
+  INIT0 => "0x0905",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+  A0 => N_1_i_c,
+  B0 => COUNT2AI(5),
+  C0 => GND,
+  D0 => VCC,
+  A1 => N_1_i_c,
+  B1 => COUNT2AI(6),
+  C1 => GND,
+  D1 => VCC,
+  CIN => COUNT2AI_CRY(4),
+  COUT => COUNT2AI_CRY(6),
+  S0 => COUNT2AI_S(5),
+  S1 => COUNT2AI_S(6));
+\COUNT2AI_CRY_0[3]\: CCU2B 
+generic map(
+  INIT0 => "0x0905",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+  A0 => N_1_i_c,
+  B0 => COUNT2AI(3),
+  C0 => GND,
+  D0 => VCC,
+  A1 => N_1_i_c,
+  B1 => COUNT2AI(4),
+  C1 => GND,
+  D1 => VCC,
+  CIN => COUNT2AI_CRY(2),
+  COUT => COUNT2AI_CRY(4),
+  S0 => COUNT2AI_S(3),
+  S1 => COUNT2AI_S(4));
+\COUNT2AI_CRY_0[1]\: CCU2B 
+generic map(
+  INIT0 => "0x0905",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+  A0 => N_1_i_c,
+  B0 => COUNT2AI(1),
+  C0 => GND,
+  D0 => VCC,
+  A1 => N_1_i_c,
+  B1 => COUNT2AI(2),
+  C1 => GND,
+  D1 => VCC,
+  CIN => COUNT2AI_CRY(0),
+  COUT => COUNT2AI_CRY(2),
+  S0 => COUNT2AI_S(1),
+  S1 => COUNT2AI_S(2));
+\COUNT2AI_CRY_0[0]\: CCU2B 
+generic map(
+  INIT0 => "0x0a0c",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+  A0 => GND,
+  B0 => N_1_i_c,
+  C0 => GND,
+  D0 => VCC,
+  A1 => N_1_i_c,
+  B1 => COUNT2AI(0),
+  C1 => GND,
+  D1 => VCC,
+  CIN => GND,
+  COUT => COUNT2AI_CRY(0),
+  S0 => COUNT2AI_CRY_0_S0(0),
+  S1 => COUNT2AI_S(0));
+NN_1 <= '0';
+NN_2 <= '1';
+end beh;
+
+--
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library synplify;
+use synplify.components.all;
+library ecp2;
+use ecp2.components.all;
+
+entity count8_uniq_0 is
+port(
+countt_1 : out std_logic_vector(7 downto 0);
+GND :  in std_logic;
+N_1_i_c :  in std_logic;
+reset_c_i :  in std_logic;
+VCC :  in std_logic;
+reset_c :  in std_logic;
+clk_c :  in std_logic);
+end count8_uniq_0;
+
+architecture beh of count8_uniq_0 is
+signal COUNTAI : std_logic_vector(7 downto 0);
+signal COUNTBI : std_logic_vector(7 downto 0);
+signal COUNTBI_QN : std_logic_vector(7 downto 0);
+signal COUNT_QN : std_logic_vector(7 downto 0);
+signal COUNTAI_S : std_logic_vector(7 downto 0);
+signal COUNTAI_QN : std_logic_vector(7 downto 0);
+signal COUNTAI_CRY : std_logic_vector(6 downto 0);
+signal COUNTAI_S_0_COUT : std_logic_vector(7 to 7);
+signal COUNTAI_S_0_S1 : std_logic_vector(7 to 7);
+signal COUNTAI_CRY_0_S0 : std_logic_vector(0 to 0);
+signal NN_1 : std_logic ;
+signal NN_2 : std_logic ;
+begin
+\COUNTBI[0]_REG_Z83\: FD1S3DX port map (
+  D => COUNTAI(0),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTBI(0));
+\COUNT[0]_REG_Z85\: FD1P3AX port map (
+  D => COUNTBI(0),
+  SP => reset_c_i,
+  CK => clk_c,
+  Q => countt_1(0));
+\COUNTBI[1]_REG_Z87\: FD1S3DX port map (
+  D => COUNTAI(1),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTBI(1));
+\COUNT[1]_REG_Z89\: FD1P3AX port map (
+  D => COUNTBI(1),
+  SP => reset_c_i,
+  CK => clk_c,
+  Q => countt_1(1));
+\COUNTBI[2]_REG_Z91\: FD1S3DX port map (
+  D => COUNTAI(2),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTBI(2));
+\COUNTAI[1]_REG_Z93\: FD1S3DX port map (
+  D => COUNTAI_S(1),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTAI(1));
+\COUNTAI[2]_REG_Z95\: FD1S3DX port map (
+  D => COUNTAI_S(2),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTAI(2));
+\COUNT[2]_REG_Z97\: FD1P3AX port map (
+  D => COUNTBI(2),
+  SP => reset_c_i,
+  CK => clk_c,
+  Q => countt_1(2));
+\COUNTBI[3]_REG_Z99\: FD1S3DX port map (
+  D => COUNTAI(3),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTBI(3));
+\COUNT[3]_REG_Z101\: FD1P3AX port map (
+  D => COUNTBI(3),
+  SP => reset_c_i,
+  CK => clk_c,
+  Q => countt_1(3));
+\COUNTBI[4]_REG_Z103\: FD1S3DX port map (
+  D => COUNTAI(4),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTBI(4));
+\COUNTBI[5]_REG_Z105\: FD1S3DX port map (
+  D => COUNTAI(5),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTBI(5));
+\COUNTAI[3]_REG_Z107\: FD1S3DX port map (
+  D => COUNTAI_S(3),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTAI(3));
+\COUNT[4]_REG_Z109\: FD1P3AX port map (
+  D => COUNTBI(4),
+  SP => reset_c_i,
+  CK => clk_c,
+  Q => countt_1(4));
+\COUNT[5]_REG_Z111\: FD1P3AX port map (
+  D => COUNTBI(5),
+  SP => reset_c_i,
+  CK => clk_c,
+  Q => countt_1(5));
+\COUNT[6]_REG_Z113\: FD1P3AX port map (
+  D => COUNTBI(6),
+  SP => reset_c_i,
+  CK => clk_c,
+  Q => countt_1(6));
+\COUNTBI[6]_REG_Z115\: FD1S3DX port map (
+  D => COUNTAI(6),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTBI(6));
+\COUNTBI[7]_REG_Z117\: FD1S3DX port map (
+  D => COUNTAI(7),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTBI(7));
+\COUNTAI[0]_REG_Z119\: FD1S3DX port map (
+  D => COUNTAI_S(0),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTAI(0));
+\COUNTAI[4]_REG_Z121\: FD1S3DX port map (
+  D => COUNTAI_S(4),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTAI(4));
+\COUNTAI[5]_REG_Z123\: FD1S3DX port map (
+  D => COUNTAI_S(5),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTAI(5));
+\COUNTAI[6]_REG_Z125\: FD1S3DX port map (
+  D => COUNTAI_S(6),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTAI(6));
+\COUNT[7]_REG_Z127\: FD1P3AX port map (
+  D => COUNTBI(7),
+  SP => reset_c_i,
+  CK => clk_c,
+  Q => countt_1(7));
+\COUNTAI[7]_REG_Z129\: FD1S3DX port map (
+  D => COUNTAI_S(7),
+  CK => clk_c,
+  CD => reset_c,
+  Q => COUNTAI(7));
+\COUNTAI_S_0[7]\: CCU2B 
+generic map(
+  INIT0 => "0x090a",
+  INIT1 => "0x0a0c",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+A0 => N_1_i_c,
+B0 => COUNTAI(7),
+C0 => GND,
+D0 => VCC,
+A1 => GND,
+B1 => GND,
+C1 => GND,
+D1 => VCC,
+CIN => COUNTAI_CRY(6),
+COUT => COUNTAI_S_0_COUT(7),
+S0 => COUNTAI_S(7),
+S1 => COUNTAI_S_0_S1(7));
+\COUNTAI_CRY_0[5]\: CCU2B 
+generic map(
+  INIT0 => "0x0905",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+A0 => N_1_i_c,
+B0 => COUNTAI(5),
+C0 => GND,
+D0 => VCC,
+A1 => N_1_i_c,
+B1 => COUNTAI(6),
+C1 => GND,
+D1 => VCC,
+CIN => COUNTAI_CRY(4),
+COUT => COUNTAI_CRY(6),
+S0 => COUNTAI_S(5),
+S1 => COUNTAI_S(6));
+\COUNTAI_CRY_0[3]\: CCU2B 
+generic map(
+  INIT0 => "0x0905",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+A0 => N_1_i_c,
+B0 => COUNTAI(3),
+C0 => GND,
+D0 => VCC,
+A1 => N_1_i_c,
+B1 => COUNTAI(4),
+C1 => GND,
+D1 => VCC,
+CIN => COUNTAI_CRY(2),
+COUT => COUNTAI_CRY(4),
+S0 => COUNTAI_S(3),
+S1 => COUNTAI_S(4));
+\COUNTAI_CRY_0[1]\: CCU2B 
+generic map(
+  INIT0 => "0x0905",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+A0 => N_1_i_c,
+B0 => COUNTAI(1),
+C0 => GND,
+D0 => VCC,
+A1 => N_1_i_c,
+B1 => COUNTAI(2),
+C1 => GND,
+D1 => VCC,
+CIN => COUNTAI_CRY(0),
+COUT => COUNTAI_CRY(2),
+S0 => COUNTAI_S(1),
+S1 => COUNTAI_S(2));
+\COUNTAI_CRY_0[0]\: CCU2B 
+generic map(
+  INIT0 => "0x0a0c",
+  INIT1 => "0x0905",
+  INJECT1_0 => "NO",
+  INJECT1_1 => "NO"
+)
+port map (
+A0 => GND,
+B0 => N_1_i_c,
+C0 => GND,
+D0 => VCC,
+A1 => N_1_i_c,
+B1 => COUNTAI(0),
+C1 => GND,
+D1 => VCC,
+CIN => GND,
+COUT => COUNTAI_CRY(0),
+S0 => COUNTAI_CRY_0_S0(0),
+S1 => COUNTAI_S(0));
+NN_1 <= '0';
+NN_2 <= '1';
+end beh;
+
+--
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library synplify;
+use synplify.components.all;
+library ecp2;
+use ecp2.components.all;
+
+entity reveal_coretop is
+port(
+clk :  in std_logic;
+reset_n :  in std_logic;
+trigger_din : in std_logic_vector(1 downto 0);
+trace_din : in std_logic_vector(113 downto 0));
+end reveal_coretop;
+
+architecture beh of reveal_coretop is
+signal JTCK : std_logic_vector(0 to 0);
+signal JRSTN : std_logic_vector(0 to 0);
+signal JCE2 : std_logic_vector(0 to 0);
+signal JTDI : std_logic_vector(0 to 0);
+signal ER2_TDO : std_logic_vector(0 to 0);
+signal JSHIFT : std_logic_vector(0 to 0);
+signal JUPDATE : std_logic_vector(0 to 0);
+signal IP_ENABLE : std_logic_vector(0 to 0);
+signal GND : std_logic ;
+signal VCC : std_logic ;
+signal NN_1 : std_logic ;
+signal NN_2 : std_logic ;
+component jtagconn16
+port(
+  jtck :  out std_logic;
+  jtdi :  out std_logic;
+  jshift :  out std_logic;
+  jupdate :  out std_logic;
+  jrstn :  out std_logic;
+  jce2 :  out std_logic;
+  ip_enable :  out std_logic;
+  er2_tdo :  in std_logic  );
+end component;
+component mixedcounter_mixedcounter_la0
+port(
+  clk :  in std_logic;
+  reset_n :  in std_logic;
+  jtck :  in std_logic;
+  jrstn :  in std_logic;
+  jce2 :  in std_logic;
+  jtdi :  in std_logic;
+  er2_tdo :  out std_logic;
+  jshift :  in std_logic;
+  jupdate :  in std_logic;
+  trigger_din_0 : in std_logic_vector(0 downto 0);
+  trigger_din_1 : in std_logic_vector(0 downto 0);
+  trace_din : in std_logic_vector(113 downto 0);
+  ip_enable :  in std_logic  );
+end component;
+begin
+VCC_0: VHI port map (
+Z => VCC);
+GND_0: VLO port map (
+Z => GND);
+JTAG0: jtagconn16 port map (
+jtck => JTCK(0),
+jtdi => JTDI(0),
+jshift => JSHIFT(0),
+jupdate => JUPDATE(0),
+jrstn => JRSTN(0),
+jce2 => JCE2(0),
+ip_enable => IP_ENABLE(0),
+er2_tdo => ER2_TDO(0));
+CORE0: mixedcounter_mixedcounter_la0 port map (
+clk => clk,
+reset_n => VCC,
+jtck => JTCK(0),
+jrstn => JRSTN(0),
+jce2 => JCE2(0),
+jtdi => JTDI(0),
+er2_tdo => ER2_TDO(0),
+jshift => JSHIFT(0),
+jupdate => JUPDATE(0),
+trigger_din_0(0) => trigger_din(0),
+trigger_din_1(0) => trigger_din(1),
+trace_din(0) => trace_din(0),
+trace_din(1) => trace_din(1),
+trace_din(2) => trace_din(2),
+trace_din(3) => trace_din(3),
+trace_din(4) => trace_din(4),
+trace_din(5) => trace_din(5),
+trace_din(6) => trace_din(6),
+trace_din(7) => trace_din(7),
+trace_din(8) => trace_din(8),
+trace_din(9) => trace_din(9),
+trace_din(10) => trace_din(10),
+trace_din(11) => trace_din(11),
+trace_din(12) => trace_din(12),
+trace_din(13) => trace_din(13),
+trace_din(14) => trace_din(14),
+trace_din(15) => trace_din(15),
+trace_din(16) => trace_din(0),
+trace_din(17) => trace_din(1),
+trace_din(18) => trace_din(2),
+trace_din(19) => trace_din(3),
+trace_din(20) => trace_din(4),
+trace_din(21) => trace_din(5),
+trace_din(22) => trace_din(6),
+trace_din(23) => trace_din(7),
+trace_din(24) => trace_din(8),
+trace_din(25) => trace_din(9),
+trace_din(26) => trace_din(10),
+trace_din(27) => trace_din(11),
+trace_din(28) => trace_din(12),
+trace_din(29) => trace_din(13),
+trace_din(30) => trace_din(14),
+trace_din(31) => trace_din(15),
+trace_din(32) => trace_din(32),
+trace_din(33) => trace_din(33),
+trace_din(34) => trace_din(34),
+trace_din(35) => trace_din(35),
+trace_din(36) => trace_din(36),
+trace_din(37) => trace_din(37),
+trace_din(38) => trace_din(38),
+trace_din(39) => trace_din(39),
+trace_din(40) => trace_din(40),
+trace_din(41) => trace_din(41),
+trace_din(42) => trace_din(42),
+trace_din(43) => trace_din(43),
+trace_din(44) => trace_din(44),
+trace_din(45) => trace_din(45),
+trace_din(46) => trace_din(46),
+trace_din(47) => trace_din(47),
+trace_din(48) => trace_din(48),
+trace_din(49) => trace_din(49),
+trace_din(50) => trace_din(50),
+trace_din(51) => trace_din(51),
+trace_din(52) => trace_din(52),
+trace_din(53) => trace_din(53),
+trace_din(54) => trace_din(54),
+trace_din(55) => trace_din(55),
+trace_din(56) => trace_din(56),
+trace_din(57) => trace_din(57),
+trace_din(58) => trace_din(58),
+trace_din(59) => trace_din(59),
+trace_din(60) => trace_din(60),
+trace_din(61) => trace_din(61),
+trace_din(62) => trace_din(62),
+trace_din(63) => trace_din(63),
+trace_din(64) => trace_din(63),
+trace_din(65) => trace_din(62),
+trace_din(66) => trace_din(61),
+trace_din(67) => trace_din(60),
+trace_din(68) => trace_din(59),
+trace_din(69) => trace_din(58),
+trace_din(70) => trace_din(57),
+trace_din(71) => trace_din(56),
+trace_din(72) => trace_din(55),
+trace_din(73) => trace_din(54),
+trace_din(74) => trace_din(53),
+trace_din(75) => trace_din(52),
+trace_din(76) => trace_din(51),
+trace_din(77) => trace_din(50),
+trace_din(78) => trace_din(49),
+trace_din(79) => trace_din(48),
+trace_din(80) => trace_din(47),
+trace_din(81) => trace_din(46),
+trace_din(82) => trace_din(45),
+trace_din(83) => trace_din(44),
+trace_din(84) => trace_din(43),
+trace_din(85) => trace_din(42),
+trace_din(86) => trace_din(41),
+trace_din(87) => trace_din(40),
+trace_din(88) => trace_din(39),
+trace_din(89) => trace_din(38),
+trace_din(90) => trace_din(37),
+trace_din(91) => trace_din(36),
+trace_din(92) => trace_din(35),
+trace_din(93) => trace_din(34),
+trace_din(94) => trace_din(33),
+trace_din(95) => trace_din(32),
+trace_din(96) => trace_din(96),
+trace_din(97) => trace_din(97),
+trace_din(98) => trace_din(98),
+trace_din(99) => trace_din(99),
+trace_din(100) => trace_din(100),
+trace_din(101) => trace_din(101),
+trace_din(102) => trace_din(102),
+trace_din(103) => trace_din(103),
+trace_din(104) => trace_din(96),
+trace_din(105) => trace_din(97),
+trace_din(106) => trace_din(98),
+trace_din(107) => trace_din(99),
+trace_din(108) => trace_din(100),
+trace_din(109) => trace_din(101),
+trace_din(110) => trace_din(102),
+trace_din(111) => trace_din(103),
+trace_din(112) => trigger_din(0),
+trace_din(113) => trigger_din(1),
+ip_enable => IP_ENABLE(0));
+NN_1 <= '0';
+NN_2 <= '1';
+end beh;
+
+--
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library synplify;
+use synplify.components.all;
+library ecp2;
+use ecp2.components.all;
+
+entity typecount is
+port(
+clk :  in std_logic;
+reset :  in std_logic;
+direction :  in std_logic;
+count : out std_logic_vector(7 downto 0);
+count2 : out std_logic_vector(15 downto 0);
+count3 : out std_logic_vector(31 downto 0));
+end typecount;
+
+architecture beh of typecount is
+signal COUNTT_1 : std_logic_vector(7 downto 0);
+signal COUNT2T_1 : std_logic_vector(15 downto 0);
+signal COUNT_C : std_logic_vector(7 downto 0);
+signal COUNT2_C : std_logic_vector(15 downto 0);
+signal COUNT3_C : std_logic_vector(31 downto 0);
+signal N_1_I_C : std_logic ;
+signal GND : std_logic ;
+signal VCC : std_logic ;
+signal CLK_C : std_logic ;
+signal RESET_C : std_logic ;
+signal RESET_C_I : std_logic ;
+signal NN_1 : std_logic ;
+signal NN_2 : std_logic ;
+component reveal_coretop
+port(
+clk :  in std_logic;
+reset_n :  in std_logic;
+trigger_din : in std_logic_vector(1 downto 0);
+trace_din : in std_logic_vector(113 downto 0)  );
+end component;
+component count8_uniq_0
+port(
+countt_1 : out std_logic_vector(7 downto 0);
+GND :  in std_logic;
+N_1_i_c :  in std_logic;
+reset_c_i :  in std_logic;
+VCC :  in std_logic;
+reset_c :  in std_logic;
+clk_c :  in std_logic  );
+end component;
+component count16_uniq_0
+port(
+count2t_1 : out std_logic_vector(15 downto 0);
+GND :  in std_logic;
+N_1_i_c :  in std_logic;
+reset_c_i :  in std_logic;
+VCC :  in std_logic;
+reset_c :  in std_logic;
+clk_c :  in std_logic  );
+end component;
+begin
+PUR_INST: PUR port map (
+PUR => VCC);
+GSR_INST: GSR port map (
+GSR => VCC);
+VCC_0: VHI port map (
+Z => VCC);
+GND_0: VLO port map (
+Z => GND);
+RESET_PAD_RNI5OA: INV port map (
+A => RESET_C,
+Z => RESET_C_I);
+\COUNT3_PAD[31]\: OB port map (
+I => COUNT3_C(31),
+O => count3(31));
+\COUNT3_PAD[30]\: OB port map (
+I => COUNT3_C(30),
+O => count3(30));
+\COUNT3_PAD[29]\: OB port map (
+I => COUNT3_C(29),
+O => count3(29));
+\COUNT3_PAD[28]\: OB port map (
+I => COUNT3_C(28),
+O => count3(28));
+\COUNT3_PAD[27]\: OB port map (
+I => COUNT3_C(27),
+O => count3(27));
+\COUNT3_PAD[26]\: OB port map (
+I => COUNT3_C(26),
+O => count3(26));
+\COUNT3_PAD[25]\: OB port map (
+I => COUNT3_C(25),
+O => count3(25));
+\COUNT3_PAD[24]\: OB port map (
+I => COUNT3_C(24),
+O => count3(24));
+\COUNT3_PAD[23]\: OB port map (
+I => COUNT3_C(23),
+O => count3(23));
+\COUNT3_PAD[22]\: OB port map (
+I => COUNT3_C(22),
+O => count3(22));
+\COUNT3_PAD[21]\: OB port map (
+I => COUNT3_C(21),
+O => count3(21));
+\COUNT3_PAD[20]\: OB port map (
+I => COUNT3_C(20),
+O => count3(20));
+\COUNT3_PAD[19]\: OB port map (
+I => COUNT3_C(19),
+O => count3(19));
+\COUNT3_PAD[18]\: OB port map (
+I => COUNT3_C(18),
+O => count3(18));
+\COUNT3_PAD[17]\: OB port map (
+I => COUNT3_C(17),
+O => count3(17));
+\COUNT3_PAD[16]\: OB port map (
+I => COUNT3_C(16),
+O => count3(16));
+\COUNT3_PAD[15]\: OB port map (
+I => COUNT3_C(15),
+O => count3(15));
+\COUNT3_PAD[14]\: OB port map (
+I => COUNT3_C(14),
+O => count3(14));
+\COUNT3_PAD[13]\: OB port map (
+I => COUNT3_C(13),
+O => count3(13));
+\COUNT3_PAD[12]\: OB port map (
+I => COUNT3_C(12),
+O => count3(12));
+\COUNT3_PAD[11]\: OB port map (
+I => COUNT3_C(11),
+O => count3(11));
+\COUNT3_PAD[10]\: OB port map (
+I => COUNT3_C(10),
+O => count3(10));
+\COUNT3_PAD[9]\: OB port map (
+I => COUNT3_C(9),
+O => count3(9));
+\COUNT3_PAD[8]\: OB port map (
+I => COUNT3_C(8),
+O => count3(8));
+\COUNT3_PAD[7]\: OB port map (
+I => COUNT3_C(7),
+O => count3(7));
+\COUNT3_PAD[6]\: OB port map (
+I => COUNT3_C(6),
+O => count3(6));
+\COUNT3_PAD[5]\: OB port map (
+I => COUNT3_C(5),
+O => count3(5));
+\COUNT3_PAD[4]\: OB port map (
+I => COUNT3_C(4),
+O => count3(4));
+\COUNT3_PAD[3]\: OB port map (
+I => COUNT3_C(3),
+O => count3(3));
+\COUNT3_PAD[2]\: OB port map (
+I => COUNT3_C(2),
+O => count3(2));
+\COUNT3_PAD[1]\: OB port map (
+I => COUNT3_C(1),
+O => count3(1));
+\COUNT3_PAD[0]\: OB port map (
+I => COUNT3_C(0),
+O => count3(0));
+\COUNT2_PAD[15]\: OB port map (
+I => COUNT2_C(15),
+O => count2(15));
+\COUNT2_PAD[14]\: OB port map (
+I => COUNT2_C(14),
+O => count2(14));
+\COUNT2_PAD[13]\: OB port map (
+I => COUNT2_C(13),
+O => count2(13));
+\COUNT2_PAD[12]\: OB port map (
+I => COUNT2_C(12),
+O => count2(12));
+\COUNT2_PAD[11]\: OB port map (
+I => COUNT2_C(11),
+O => count2(11));
+\COUNT2_PAD[10]\: OB port map (
+I => COUNT2_C(10),
+O => count2(10));
+\COUNT2_PAD[9]\: OB port map (
+I => COUNT2_C(9),
+O => count2(9));
+\COUNT2_PAD[8]\: OB port map (
+I => COUNT2_C(8),
+O => count2(8));
+\COUNT2_PAD[7]\: OB port map (
+I => COUNT2_C(7),
+O => count2(7));
+\COUNT2_PAD[6]\: OB port map (
+I => COUNT2_C(6),
+O => count2(6));
+\COUNT2_PAD[5]\: OB port map (
+I => COUNT2_C(5),
+O => count2(5));
+\COUNT2_PAD[4]\: OB port map (
+I => COUNT2_C(4),
+O => count2(4));
+\COUNT2_PAD[3]\: OB port map (
+I => COUNT2_C(3),
+O => count2(3));
+\COUNT2_PAD[2]\: OB port map (
+I => COUNT2_C(2),
+O => count2(2));
+\COUNT2_PAD[1]\: OB port map (
+I => COUNT2_C(1),
+O => count2(1));
+\COUNT2_PAD[0]\: OB port map (
+I => COUNT2_C(0),
+O => count2(0));
+\COUNT_PAD[7]\: OB port map (
+I => COUNT_C(7),
+O => count(7));
+\COUNT_PAD[6]\: OB port map (
+I => COUNT_C(6),
+O => count(6));
+\COUNT_PAD[5]\: OB port map (
+I => COUNT_C(5),
+O => count(5));
+\COUNT_PAD[4]\: OB port map (
+I => COUNT_C(4),
+O => count(4));
+\COUNT_PAD[3]\: OB port map (
+I => COUNT_C(3),
+O => count(3));
+\COUNT_PAD[2]\: OB port map (
+I => COUNT_C(2),
+O => count(2));
+\COUNT_PAD[1]\: OB port map (
+I => COUNT_C(1),
+O => count(1));
+\COUNT_PAD[0]\: OB port map (
+I => COUNT_C(0),
+O => count(0));
+DIRECTION_PAD: IB port map (
+I => direction,
+O => N_1_I_C);
+RESET_PAD: IB port map (
+I => reset,
+O => RESET_C);
+CLK_PAD: IB port map (
+I => clk,
+O => CLK_C);
+COUNT3_C(31) <= COUNT2_C(15);
+COUNT3_C(30) <= COUNT2_C(14);
+COUNT3_C(29) <= COUNT2_C(13);
+COUNT3_C(28) <= COUNT2_C(12);
+COUNT3_C(27) <= COUNT2_C(11);
+COUNT3_C(26) <= COUNT2_C(10);
+COUNT3_C(25) <= COUNT2_C(9);
+COUNT3_C(24) <= COUNT2_C(8);
+COUNT3_C(23) <= COUNT2_C(7);
+COUNT3_C(22) <= COUNT2_C(6);
+COUNT3_C(21) <= COUNT2_C(5);
+COUNT3_C(20) <= COUNT2_C(4);
+COUNT3_C(19) <= COUNT2_C(3);
+COUNT3_C(18) <= COUNT2_C(2);
+COUNT3_C(17) <= COUNT2_C(1);
+COUNT3_C(16) <= COUNT2_C(0);
+COUNT3_C(15) <= COUNT_C(7);
+COUNT3_C(14) <= COUNT_C(6);
+COUNT3_C(13) <= COUNT_C(5);
+COUNT3_C(12) <= COUNT_C(4);
+COUNT3_C(11) <= COUNT_C(3);
+COUNT3_C(10) <= COUNT_C(2);
+COUNT3_C(9) <= COUNT_C(1);
+COUNT3_C(8) <= COUNT_C(0);
+COUNT3_C(7) <= COUNT_C(7);
+COUNT3_C(6) <= COUNT_C(6);
+COUNT3_C(5) <= COUNT_C(5);
+COUNT3_C(4) <= COUNT_C(4);
+COUNT3_C(3) <= COUNT_C(3);
+COUNT3_C(2) <= COUNT_C(2);
+COUNT3_C(1) <= COUNT_C(1);
+COUNT3_C(0) <= COUNT_C(0);
+COUNT_C(7) <= COUNTT_1(7);
+COUNT_C(6) <= COUNTT_1(6);
+COUNT_C(5) <= COUNTT_1(5);
+COUNT_C(4) <= COUNTT_1(4);
+COUNT_C(3) <= COUNTT_1(3);
+COUNT_C(2) <= COUNTT_1(2);
+COUNT_C(1) <= COUNTT_1(1);
+COUNT_C(0) <= COUNTT_1(0);
+COUNT2_C(15) <= COUNT2T_1(15);
+COUNT2_C(14) <= COUNT2T_1(14);
+COUNT2_C(13) <= COUNT2T_1(13);
+COUNT2_C(12) <= COUNT2T_1(12);
+COUNT2_C(11) <= COUNT2T_1(11);
+COUNT2_C(10) <= COUNT2T_1(10);
+COUNT2_C(9) <= COUNT2T_1(9);
+COUNT2_C(8) <= COUNT2T_1(8);
+COUNT2_C(7) <= COUNT2T_1(7);
+COUNT2_C(6) <= COUNT2T_1(6);
+COUNT2_C(5) <= COUNT2T_1(5);
+COUNT2_C(4) <= COUNT2T_1(4);
+COUNT2_C(3) <= COUNT2T_1(3);
+COUNT2_C(2) <= COUNT2T_1(2);
+COUNT2_C(1) <= COUNT2T_1(1);
+COUNT2_C(0) <= COUNT2T_1(0);
+TYPECOUNT_REVEAL_CORETOP_INSTANCE: reveal_coretop port map (
+clk => CLK_C,
+reset_n => VCC,
+trigger_din(0) => N_1_I_C,
+trigger_din(1) => RESET_C,
+trace_din(0) => COUNT2_C(0),
+trace_din(1) => COUNT2_C(1),
+trace_din(2) => COUNT2_C(2),
+trace_din(3) => COUNT2_C(3),
+trace_din(4) => COUNT2_C(4),
+trace_din(5) => COUNT2_C(5),
+trace_din(6) => COUNT2_C(6),
+trace_din(7) => COUNT2_C(7),
+trace_din(8) => COUNT2_C(8),
+trace_din(9) => COUNT2_C(9),
+trace_din(10) => COUNT2_C(10),
+trace_din(11) => COUNT2_C(11),
+trace_din(12) => COUNT2_C(12),
+trace_din(13) => COUNT2_C(13),
+trace_din(14) => COUNT2_C(14),
+trace_din(15) => COUNT2_C(15),
+trace_din(16) => COUNT2_C(0),
+trace_din(17) => COUNT2_C(1),
+trace_din(18) => COUNT2_C(2),
+trace_din(19) => COUNT2_C(3),
+trace_din(20) => COUNT2_C(4),
+trace_din(21) => COUNT2_C(5),
+trace_din(22) => COUNT2_C(6),
+trace_din(23) => COUNT2_C(7),
+trace_din(24) => COUNT2_C(8),
+trace_din(25) => COUNT2_C(9),
+trace_din(26) => COUNT2_C(10),
+trace_din(27) => COUNT2_C(11),
+trace_din(28) => COUNT2_C(12),
+trace_din(29) => COUNT2_C(13),
+trace_din(30) => COUNT2_C(14),
+trace_din(31) => COUNT2_C(15),
+trace_din(32) => COUNT3_C(0),
+trace_din(33) => COUNT3_C(1),
+trace_din(34) => COUNT3_C(2),
+trace_din(35) => COUNT3_C(3),
+trace_din(36) => COUNT3_C(4),
+trace_din(37) => COUNT3_C(5),
+trace_din(38) => COUNT3_C(6),
+trace_din(39) => COUNT3_C(7),
+trace_din(40) => COUNT3_C(8),
+trace_din(41) => COUNT3_C(9),
+trace_din(42) => COUNT3_C(10),
+trace_din(43) => COUNT3_C(11),
+trace_din(44) => COUNT3_C(12),
+trace_din(45) => COUNT3_C(13),
+trace_din(46) => COUNT3_C(14),
+trace_din(47) => COUNT3_C(15),
+trace_din(48) => COUNT3_C(16),
+trace_din(49) => COUNT3_C(17),
+trace_din(50) => COUNT3_C(18),
+trace_din(51) => COUNT3_C(19),
+trace_din(52) => COUNT3_C(20),
+trace_din(53) => COUNT3_C(21),
+trace_din(54) => COUNT3_C(22),
+trace_din(55) => COUNT3_C(23),
+trace_din(56) => COUNT3_C(24),
+trace_din(57) => COUNT3_C(25),
+trace_din(58) => COUNT3_C(26),
+trace_din(59) => COUNT3_C(27),
+trace_din(60) => COUNT3_C(28),
+trace_din(61) => COUNT3_C(29),
+trace_din(62) => COUNT3_C(30),
+trace_din(63) => COUNT3_C(31),
+trace_din(64) => COUNT3_C(31),
+trace_din(65) => COUNT3_C(30),
+trace_din(66) => COUNT3_C(29),
+trace_din(67) => COUNT3_C(28),
+trace_din(68) => COUNT3_C(27),
+trace_din(69) => COUNT3_C(26),
+trace_din(70) => COUNT3_C(25),
+trace_din(71) => COUNT3_C(24),
+trace_din(72) => COUNT3_C(23),
+trace_din(73) => COUNT3_C(22),
+trace_din(74) => COUNT3_C(21),
+trace_din(75) => COUNT3_C(20),
+trace_din(76) => COUNT3_C(19),
+trace_din(77) => COUNT3_C(18),
+trace_din(78) => COUNT3_C(17),
+trace_din(79) => COUNT3_C(16),
+trace_din(80) => COUNT3_C(15),
+trace_din(81) => COUNT3_C(14),
+trace_din(82) => COUNT3_C(13),
+trace_din(83) => COUNT3_C(12),
+trace_din(84) => COUNT3_C(11),
+trace_din(85) => COUNT3_C(10),
+trace_din(86) => COUNT3_C(9),
+trace_din(87) => COUNT3_C(8),
+trace_din(88) => COUNT3_C(7),
+trace_din(89) => COUNT3_C(6),
+trace_din(90) => COUNT3_C(5),
+trace_din(91) => COUNT3_C(4),
+trace_din(92) => COUNT3_C(3),
+trace_din(93) => COUNT3_C(2),
+trace_din(94) => COUNT3_C(1),
+trace_din(95) => COUNT3_C(0),
+trace_din(96) => COUNT_C(0),
+trace_din(97) => COUNT_C(1),
+trace_din(98) => COUNT_C(2),
+trace_din(99) => COUNT_C(3),
+trace_din(100) => COUNT_C(4),
+trace_din(101) => COUNT_C(5),
+trace_din(102) => COUNT_C(6),
+trace_din(103) => COUNT_C(7),
+trace_din(104) => COUNT_C(0),
+trace_din(105) => COUNT_C(1),
+trace_din(106) => COUNT_C(2),
+trace_din(107) => COUNT_C(3),
+trace_din(108) => COUNT_C(4),
+trace_din(109) => COUNT_C(5),
+trace_din(110) => COUNT_C(6),
+trace_din(111) => COUNT_C(7),
+trace_din(112) => N_1_I_C,
+trace_din(113) => RESET_C);
+COUNTER8: count8_uniq_0 port map (
+countt_1(0) => COUNTT_1(0),
+countt_1(1) => COUNTT_1(1),
+countt_1(2) => COUNTT_1(2),
+countt_1(3) => COUNTT_1(3),
+countt_1(4) => COUNTT_1(4),
+countt_1(5) => COUNTT_1(5),
+countt_1(6) => COUNTT_1(6),
+countt_1(7) => COUNTT_1(7),
+GND => GND,
+N_1_i_c => N_1_I_C,
+reset_c_i => RESET_C_I,
+VCC => VCC,
+reset_c => RESET_C,
+clk_c => CLK_C);
+COUNTER16: count16_uniq_0 port map (
+count2t_1(0) => COUNT2T_1(0),
+count2t_1(1) => COUNT2T_1(1),
+count2t_1(2) => COUNT2T_1(2),
+count2t_1(3) => COUNT2T_1(3),
+count2t_1(4) => COUNT2T_1(4),
+count2t_1(5) => COUNT2T_1(5),
+count2t_1(6) => COUNT2T_1(6),
+count2t_1(7) => COUNT2T_1(7),
+count2t_1(8) => COUNT2T_1(8),
+count2t_1(9) => COUNT2T_1(9),
+count2t_1(10) => COUNT2T_1(10),
+count2t_1(11) => COUNT2T_1(11),
+count2t_1(12) => COUNT2T_1(12),
+count2t_1(13) => COUNT2T_1(13),
+count2t_1(14) => COUNT2T_1(14),
+count2t_1(15) => COUNT2T_1(15),
+GND => GND,
+N_1_i_c => N_1_I_C,
+reset_c_i => RESET_C_I,
+VCC => VCC,
+reset_c => RESET_C,
+clk_c => CLK_C);
+NN_1 <= '0';
+NN_2 <= '1';
+end beh;
+

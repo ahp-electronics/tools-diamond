@@ -1,0 +1,910 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Spinti 07/28/04
+	xpga/sc sub directory
+		.Contains new engineering device database file and all the algorithm files for ECP technology devices.
+	 ispVM_012.xdf  support :
+		. SC family.
+		. SC_ES family.
+	08/03/04 Spinti: Changed the family names to match ispLEVER and Lattice's official family names.
+	08/19/04 Spinti: Changed device names and PON from LFSC25E to LFSC3GA25E per marketings change.
+	09/16/04 Spinti: Added JTAG Burst Program operation.
+					 Removed Erase, Read, and Program DONE operations.
+	09/24/04 Spinti: Changed JTAG Burst Program operation to Fast Program.
+	11/02/04 Nguyen changed the LFSC3GA25E TotalFuses for readback to 7685440 = row * (column + dummy) = (1316 *(5816 + 24))
+										   ColWidth = 5840
+	11/17/04 Nguyen added Status_Control field and "Read Programming Status" operation 
+	11/18/04 Nguyen added "Voltage_Control" field	
+	11/24/04 Nguyen added "Read Programming Status" and "Read DONE Bit" operations
+	12/10/04 Ong   . Commented out Pin List for "LatticeSC-ES" device family.
+	11/24/04 Nguyen changed Family name="LatticeSC-ES-V1" and Device name="LFSC3GA25EV1_ES" for V1
+					added LFSC3GA25E V2 support
+	05/12/05 Nguyen changed the Column width to 64
+	09/02/05 Spinti: Commented out LatticeSC-ES-V1 and LatticeSC-ES families for release.
+	                 Commented out LFSC3GA25E-XXFF672.
+	                 Added <AliasName> and <AliasPON>.
+	                 Commented out Program; Program,Verify; Erase DONE bit; Program DONE bit; SPI Flash Refresh,Erase,Program,Verify;
+	                   SPI Flash Erase,Program,Verify,Refresh; SPI Flash Refresh,Program; and SPI Flash Program,Refresh operations.
+	09/06/05 Spinti: Removed nested comment.
+					 Changed 900 fpBGA PON from "FH" to "F".
+					 Added LatticeSCM family (Commented out for current release).
+	09/06/05 Nguyen: support FPGA Loader.					 
+	02/08/06 Spinti: Correct LFSC3GA25E and LFSCM3GA25E package type.
+					 Added "P1" to the LatticeSCM family PON's.
+	03/16/06 Ong   : Commented out the Verify Only and Verify USERCODE operations for SC/SCM.
+	08/23/06 Nguyen release support for LFSC3GA80E and LFSCM3GA80E devices
+	08/24/06 Ong   : Updated the package and PON names for LFSC3GA80E and LFSCM3GA80E devices.
+			     Changed package type from "1152-ball FFBGA" to "1152-ball FCBGA". 
+ 			     Changed package type from "1704-ball FFPBGA" to "1704-ball FCBGA".  
+			     Changed PON from "FF" to "FC".
+			     Changed Alis PON from "FF" to "FC".
+	08/31/06 Nguyen release support for LFSC3GA15E and LFSCM3GA15E devices		
+	Nguyen 10/19/06 Added Calculate File's size Checksum and Calculate Device's size Checksum SPI Flash operations	     
+	Spinti 11/02/06 Changed operation names to SPI Flash Calculate File Size Checksum and SPI Flash Calculate Device Size Checksum.
+	08/16/07 Nguyen added Parallel Flash mode to SC to support parallel FLASH
+	09/27/07 Nguyen Enabled STAPL support
+	09/27/07 Spinti: Added support for the LFSC3GA40E/LFSCM3GA40E and LFSC3GA115E/LFSCM3GA115E.
+	10/04/07 Spinti: Added P1 to the PON's that were missing it.
+	10/16/07 Spinti: Removed P1 to the LFSNC3GA40E PON's.
+	12/12/07 Nguyen added SPI Flash Read and Save operation
+	12/17/07 Spinti: Added SPI Flash Read and Save operation to the LatticeSC family.
+	01/28/08 Spinti: Added the Refresh for Flash and SPI Flash Erase, Program, Verify, Refresh operations.
+	03/04/08 Nguyen: changed the SPI mode to SPI Background mode.
+	05/09/08 Spinti: Updated the TotalFuses for the entire family.
+	08/11/08 Spinti: Removed the mask file since we do not support verify for the SC family. Moved them to control database.
+	06/04/10 Nguyen: sync up the device with Diamond v1.0 device list
+-->
+
+<ispXDF version="15.1">
+    <Family name="LatticeSC/LatticeSCM">
+    	<Device name="LFSC3GA15E/LFSCM3GA15E">
+            <Comm> JTAG </Comm>
+            <Vendor> LATTICE </Vendor>
+            <CodeName> LFSC3GA15E/LFSCM3GA15E </CodeName>
+            <FullName> LFSC3GA15E/LFSCM3GA15E </FullName>
+            <JtagID>0x0A82C157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFSC3GA15E/LFSCM3GA15E </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+	    <Device name="LFSC3GA25E/LFSCM3GA25E">
+            <Comm> JTAG </Comm>
+            <Vendor> LATTICE </Vendor>
+            <CodeName> LFSC3GA25E/LFSCM3GA25E </CodeName>
+            <FullName> LFSC3GA25E/LFSCM3GA25E </FullName>
+            <JtagID>0x0A812157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFSC3GA25E/LFSCM3GA25E </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+ 	    <Device name="LFSC3GA40E/LFSCM3GA40E">
+            <Comm> JTAG </Comm>
+            <Vendor> LATTICE </Vendor>
+            <CodeName> LFSC3GA40E/LFSCM3GA40E </CodeName>
+            <FullName> LFSC3GA40E/LFSCM3GA40E </FullName>
+            <JtagID>0x0A81A157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFSC3GA40E/LFSCM3GA40E </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+        <Device name="LFSC3GA80E/LFSCM3GA80E">
+            <Comm> JTAG </Comm>
+            <Vendor> LATTICE </Vendor>
+            <CodeName> LFSC3GA80E/LFSCM3GA80E </CodeName>
+            <FullName> LFSC3GA80E/LFSCM3GA80E </FullName>
+            <JtagID>0x0A801157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFSC3GA80E/LFSCM3GA80E </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+ 	    <Device name="LFSC3GA115E/LFSCM3GA115E">
+            <Comm> JTAG </Comm>
+            <Vendor> LATTICE </Vendor>
+            <CodeName> LFSC3GA115E/LFSCM3GA115E </CodeName>
+            <FullName> LFSC3GA115E/LFSCM3GA115E </FullName>
+            <JtagID>0x0A809157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFSC3GA115E/LFSCM3GA115E </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+      	<Operation>
+            &quot;Bypass&quot;
+        </Operation>
+        <Hidden>YES</Hidden>
+    </Family>
+    <Family name="LatticeSC">
+    	<Device name="LFSC3GA15E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFSC3GA15E </CodeName>
+            <FullName> LFSC3GA15E </FullName>
+            <AliasName> LFSCM3GA15E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>SC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_SC.svp"
+                         value="0x01"/>
+            <JtagID>0x0A82C157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <BitstreamColWidth> 4216 </BitstreamColWidth>
+            <ColWidth>   64 </ColWidth>
+            <RowWidth> 1043 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4434152 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>883</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFSC3GA15E </PON>
+                <AliasPON> LFSC3GA15E-ES </AliasPON>
+<!--                <JDFFile> lfsc3ga15e.msk </JDFFile> -->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFSC3GA15E-XXF256 </PON>
+                <AliasPON> LFSC3GA15E-XXF256ES </AliasPON>
+<!--                <JDFFile> lfsc3ga15e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFSC3GA15E-XXF900 </PON>
+                <AliasPON> LFSC3GA15E-XXF900ES </AliasPON>
+<!--                <JDFFile> lfsc3ga15e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;RESETN;RDCFGN;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;117;119;764;114;115;768;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device> 
+		<Device name="LFSC3GA25E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFSC3GA25E </CodeName>
+            <FullName> LFSC3GA25E </FullName>
+            <AliasName> LFSCM3GA25E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>SC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_SC.svp"
+                         value="0x01"/>
+            <JtagID>0x0A812157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <BitstreamColWidth> 5816 </BitstreamColWidth>
+            <ColWidth>   64 </ColWidth>
+            <RowWidth> 1316 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 7700472 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1095</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFSC3GA25E </PON>
+                <AliasPON> LFSC3GA25E-ES </AliasPON>
+<!--                <JDFFile> lfsc3ga25e.msk </JDFFile> -->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 900-ball FPBGA </Type>
+                <PON> LFSC3GA25E-XXF900 </PON>
+                <AliasPON> LFSC3GA25E-XXF900ES </AliasPON>
+<!--                <JDFFile> lfsc3ga25e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Package>
+                <Type> 1020-ball FFBGA </Type>
+                <PON> LFSC3GA25E-XXFF1020 </PON>
+                <AliasPON> LFSC3GA25E-XXFF1020ES </AliasPON>
+<!--                <JDFFile> lfsc3ga25e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;RESETN;RDCFGN;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;103;105;990;100;101;994;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>  
+ 		<Device name="LFSC3GA40E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFSC3GA40E </CodeName>
+            <FullName> LFSC3GA40E </FullName>
+            <AliasName> LFSCM3GA40E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>SC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_SC.svp"
+                         value="0x01"/>
+            <JtagID>0x0A81A157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <BitstreamColWidth> 7100 </BitstreamColWidth>
+            <ColWidth>   64 </ColWidth>
+            <RowWidth> 1652 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 11779832 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1447</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFSC3GA40E </PON>
+                <AliasPON> LFSC3GA40E-ES </AliasPON>
+<!--                <JDFFile> lfsc3ga40e.msk </JDFFile> -->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 1020-ball FFBGA </Type>
+                <PON> LFSC3GA40E-XXFF1020 </PON>
+                <AliasPON> LFSC3GA40EP1-XXFF1020ES </AliasPON>
+<!--                <JDFFile> lfsc3ga40e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Package>
+                <Type> 1152-ball FCBGA </Type>
+                <PON> LFSC3GA40E-XXFC1152 </PON>
+                <AliasPON> LFSC3GA40EP1-XXFC1152ES </AliasPON>
+<!--                <JDFFile> lfsc3ga40e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;RESETN;RDCFGN;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;159;161;1286;156;157;1290;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>    
+        <Device name="LFSC3GA80E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFSC3GA80E </CodeName>
+            <FullName> LFSC3GA80E </FullName>
+            <AliasName> LFSCM3GA80E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>SC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_SC.svp"
+                         value="0x01"/>
+            <JtagID>0x0A801157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <BitstreamColWidth> 10300 </BitstreamColWidth>
+            <ColWidth>   64 </ColWidth>
+            <RowWidth> 2156 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 22273912 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1903</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFSC3GA80E </PON>
+                <AliasPON> LFSC3GA80E-ES </AliasPON>
+<!--                <JDFFile> lfsc3ga80e.msk </JDFFile> -->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 1152-ball FCBGA </Type>
+                <PON> LFSC3GA80E-XXFC1152 </PON>
+                <AliasPON> LFSC3GA80E-XXFC1152ES </AliasPON>
+<!--                <JDFFile> lfsc3ga80e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Package>
+                <Type> 1704-ball FCBGA </Type>
+                <PON> LFSC3GA80E-XXFC1704 </PON>
+                <AliasPON> LFSC3GA80E-XXFC1704ES </AliasPON>
+<!--                <JDFFile> lfsc3ga80e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;RESETN;RDCFGN;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;123;125;1778;120;121;1782;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>  
+		<Device name="LFSC3GA115E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFSC3GA115E </CodeName>
+            <FullName> LFSC3GA115E </FullName>
+            <AliasName> LFSCM3GA115E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>SC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_SC.svp"
+                         value="0x01"/>
+            <JtagID>0x0A809157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <BitstreamColWidth> 11580 </BitstreamColWidth>
+            <ColWidth>   64 </ColWidth>
+            <RowWidth> 2639 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 30638952 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>2367</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFSC3GA115E </PON>
+                <AliasPON> LFSC3GA115E-ES </AliasPON>
+<!--                <JDFFile> lfsc3ga115e.msk </JDFFile> -->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 1152-ball FCBGA </Type>
+                <PON> LFSC3GA115E-XXFC1152 </PON>
+                <AliasPON> LFSC3GA115E-XXFC1152ES </AliasPON>
+<!--                <JDFFile> lfsc3ga1150e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Package>
+                <Type> 1704-ball FCBGA </Type>
+                <PON> LFSC3GA115E-XXFC1704 </PON>
+                <AliasPON> LFSC3GA115E-XXFC1704ES </AliasPON>
+<!--                <JDFFile> lfsc3ga115e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;RESETN;RDCFGN;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;179;181;2186;176;177;2190;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>  
+        <Operation>
+        	&quot;Fast Program&quot;
+<!--		    &quot;Program&quot;-->
+<!--		    &quot;Program,Verify&quot;-->
+<!--        	&quot;Verify Only&quot; -->
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+<!--            &quot;Verify USERCODE&quot; -->
+			&quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+            &quot;Read DONE bit&quot;
+<!--            &quot;Erase DONE bit&quot;-->
+<!--			&quot;Program DONE bit&quot;-->
+            &quot;Bypass&quot;
+			&quot;Refresh from FLASH&quot;
+            &quot;Read Programming Status&quot;      
+            &quot;Serial Program&quot;
+            &quot;Serial Read DONE bit&quot;
+            &quot;SPI Flash Erase,Program,Verify&quot;
+<!--			&quot;SPI Flash Refresh,Erase,Program,Verify&quot;-->
+			&quot;SPI Flash Erase,Program,Verify,Refresh&quot;
+            &quot;SPI Flash Erase,Program&quot;
+<!--			&quot;SPI Flash Refresh,Program&quot;-->
+<!--			&quot;SPI Flash Program,Refresh&quot;-->
+			&quot;SPI Flash Verify Only&quot;
+			&quot;SPI Flash Erase All&quot;
+			&quot;SPI Flash Read and Save&quot;
+			&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+			&quot;SPI Flash Bypass&quot;
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x19</IDInstr>
+        <ISCRelease value="0x01" extension="*.bit;*.rbt"/>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <BitstreamModelTemplate>Slayer Template</BitstreamModelTemplate>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Leave Alone;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;SERIAL;SPI Background;Parallel Flash;</Programming_Mode_Control>
+    </Family>  
+    <Family name="LatticeSCM">
+    	<Device name="LFSCM3GA15EP1">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFSCM3GA15EP1 </CodeName>
+            <FullName> LFSCM3GA15EP1 </FullName>
+            <AliasName> LFSCM3GA15E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>SC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_SC.svp"
+                         value="0x01"/>
+            <JtagID>0x0A82C157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <BitstreamColWidth> 4216 </BitstreamColWidth>
+            <ColWidth>   64 </ColWidth>
+            <RowWidth> 1043 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4434152 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>883</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFSCM3GA15EP1 </PON>
+                <AliasPON> LFSCM3GA15E </AliasPON>
+<!--                <JDFFile> lfsc3ga15e.msk </JDFFile> -->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFSCM3GA15EP1-XXF256 </PON>
+                <AliasPON> LFSCM3GA15E-XXF256 </AliasPON>
+<!--                <JDFFile> lfsc3ga15e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFSCM3GA15EP1-XXF900 </PON>
+                <AliasPON> LFSCM3GA15E-XXF900 </AliasPON>
+<!--                <JDFFile> lfsc3ga15e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;RESETN;RDCFGN;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;117;119;764;114;115;768;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device> 
+		<Device name="LFSCM3GA25EP1">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFSCM3GA25EP1 </CodeName>
+            <FullName> LFSCM3GA25EP1 </FullName>
+            <AliasName> LFSCM3GA25E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>SC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_SC.svp"
+                         value="0x01"/>
+            <JtagID>0x0A812157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <BitstreamColWidth> 5816 </BitstreamColWidth>
+            <ColWidth>   64 </ColWidth>
+            <RowWidth> 1316 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 7700472 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1095</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFSCM3GA25EP1 </PON>
+                <AliasPON> LFSCM3GA25E </AliasPON>
+<!--                <JDFFile> lfsc3ga25e.msk </JDFFile> -->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 900-ball FPBGA </Type>
+                <PON> LFSCM3GA25EP1-XXF900 </PON>
+                <AliasPON> LFSCM3GA25EP1-XXF900ES </AliasPON>
+<!--                <JDFFile> lfscm3ga25e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Package>
+                <Type> 1020-ball FFBGA </Type>
+                <PON> LFSCM3GA25EP1-XXFF1020 </PON>
+                <AliasPON> LFSCM3GA25EP1-XXFF1020ES </AliasPON>
+<!--                <JDFFile> lfscm3ga25e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;RESETN;RDCFGN;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;103;105;990;100;101;994;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>  
+		<Device name="LFSCM3GA40EP1">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFSCM3GA40EP1 </CodeName>
+            <FullName> LFSCM3GA40EP1 </FullName>
+            <AliasName> LFSCM3GA40E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>SC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_SC.svp"
+                         value="0x01"/>
+            <JtagID>0x0A81A157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <BitstreamColWidth> 7100 </BitstreamColWidth>
+            <ColWidth>   64 </ColWidth>
+            <RowWidth> 1652 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 11779832 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1447</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFSCM3GA40EP1 </PON>
+                <AliasPON> LFSCM3GA40E </AliasPON>
+<!--                <JDFFile> lfsc3ga40e.msk </JDFFile> -->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 1020-ball FFBGA </Type>
+                <PON> LFSCM3GA40EP1-XXFF1020 </PON>
+                <AliasPON> LFSCM3GA40EP1-XXFF1020ES </AliasPON>
+<!--                <JDFFile> lfsc3ga40e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Package>
+                <Type> 1152-ball FCBGA </Type>
+                <PON> LFSCM3GA40EP1-XXFC1152 </PON>
+                <AliasPON> LFSCM3GA40EP1-XXFC1152ES </AliasPON>
+<!--                <JDFFile> lfsc3ga40e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;RESETN;RDCFGN;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;159;161;1286;156;157;1290;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>   
+        <Device name="LFSCM3GA80EP1">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFSCM3GA80EP1 </CodeName>
+            <FullName> LFSCM3GA80EP1 </FullName>
+            <AliasName> LFSCM3GA80E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>SC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_SC.svp"
+                         value="0x01"/>
+            <JtagID>0x0A801157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <BitstreamColWidth> 10300 </BitstreamColWidth>
+            <ColWidth>   64 </ColWidth>
+            <RowWidth> 2156 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 22273912 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1903</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFSCM3GA80EP1 </PON>
+                <AliasPON> LFSCM3GA80E </AliasPON>
+<!--                <JDFFile> lfsc3ga80e.msk </JDFFile> -->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 1152-ball FCBGA </Type>
+                <PON> LFSCM3GA80EP1-XXFC1152 </PON>
+                <AliasPON> LFSCM3GA80E-XXFC1152 </AliasPON>
+<!--                <JDFFile> lfsc3ga80e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Package>
+                <Type> 1704-ball FCBGA </Type>
+                <PON> LFSCM3GA80EP1-XXFC1704 </PON>
+                <AliasPON> LFSCM3GA80E-XXFC1704 </AliasPON>
+<!--                <JDFFile> lfsc3ga80e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;RESETN;RDCFGN;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;123;125;1778;120;121;1782;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device> 
+		<Device name="LFSCM3GA115EP1">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFSCM3GA115EP1 </CodeName>
+            <FullName> LFSCM3GA115EP1 </FullName>
+            <AliasName> LFSCM3GA115E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>SC.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_SC.svp"
+                         value="0x01"/>
+            <JtagID>0x0A809157</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <BitstreamColWidth> 11580 </BitstreamColWidth>
+            <ColWidth>   64 </ColWidth>
+            <RowWidth> 2639 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 30638952 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>2367</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFSCM3GA115EP1 </PON>
+                <AliasPON> LFSCM3GA115E </AliasPON>
+<!--                <JDFFile> lfsc3ga115e.msk </JDFFile> -->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 1152-ball FCBGA </Type>
+                <PON> LFSCM3GA115EP1-XXFC1152 </PON>
+                <AliasPON> LFSCM3GA115E-XXFC1152 </AliasPON>
+<!--                <JDFFile> lfsc3ga1150e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Package>
+                <Type> 1704-ball FCBGA </Type>
+                <PON> LFSCM3GA115EP1-XXFC1704 </PON>
+                <AliasPON> LFSCM3GA115E-XXFC1704 </AliasPON>
+<!--                <JDFFile> lfsc3ga115e.msk </JDFFile> -->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Available"/>
+            </Package>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;RESETN;RDCFGN;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;179;181;2186;176;177;2190;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>  
+        <Operation>
+        	&quot;Fast Program&quot;
+  <!--      	&quot;Verify Only&quot; -->
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+  <!--        &quot;Verify USERCODE&quot; -->
+			&quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+            &quot;Read DONE bit&quot;
+            &quot;Bypass&quot;
+			&quot;Refresh from FLASH&quot;
+            &quot;Read Programming Status&quot;      
+            &quot;Serial Program&quot;
+            &quot;Serial Read DONE bit&quot;
+            &quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program,Verify,Refresh&quot;
+            &quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Verify Only&quot;
+			&quot;SPI Flash Erase All&quot;
+			&quot;SPI Flash Read and Save&quot;
+			&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+			&quot;SPI Flash Bypass&quot;
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x19</IDInstr>
+        <ISCRelease value="0x01" extension="*.bit;*.rbt"/>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <BitstreamModelTemplate>Slayer Template</BitstreamModelTemplate>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Leave Alone;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;SERIAL;SPI Background;Parallel Flash;</Programming_Mode_Control>
+    </Family>
+</ispXDF>

@@ -1,0 +1,2688 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        SVF_Plus    SYSTEM    "SVF_Plus.dtd" >
+<!--
+
+    02/19/11 Nguyen: Apps has requested that we change the programming flow for ispVM, 
+    so that the 2 die come out of programming mode at nearly the same time, 
+    by controlling the done bit using the following new programming method. 
+    1 Program POWR1220AT8 die, verify but donot set the done bit.
+    2 Bypass the POWR1220AT8 die and go on to program the XO640 die.
+	3 Verify XO640.
+	4 Go back and program DONE bits for both.
+	
+	
+	
+-->
+<SVF_Plus version="1.0">
+<Header>
+    <Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+    <Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+    <!-- Length fields are in number if bits -->
+    <Instruction_Length  value="INSTRUCTION_REGISTER_LENGTH"/>
+    <Row_Width           value="DEVICE_ROW_WIDTH"/>
+    <Address_Length      value="ADDRESS_REGISTER_LENGTH"/>
+    <Address length="ADDRESS_LENGTH">
+        INI_ADDRESS
+    </Address>
+    <ID_Length           value="DEVICE_ID_LENGTH"/>
+    <Usercode_Length     value="DEVICE_USERCODE_LENGTH"/>
+    <BSCAN_Length value="BSCAN_REGISTER_LENGTH"/> 
+	<Bscan length="BSCAN_LENGTH">
+		BSCAN_DATA
+	</Bscan>
+	<BscanMask length="BSCAN_LENGTH">
+		BSCAN_MASK
+	</BscanMask>
+    <Arch_Length         value="ARCHITECH_LENGTH"/>
+    <Arch_Row            value="ARCHITECH_ROW"/>
+    <PWP    value="PROGRAMING_PULSE_WIDTH"/>
+    <PWV    value="VERIFY_PULSE_WIDTH"/>
+    <PWE    value="ERASE_PULSE_WIDTH"/>
+    <Instruction>
+        EXTEST                = 0x00FF;
+        BSAMPLE               = 0x1CFF;
+        INTEST				  = 0x2CFF;
+        HIGHZ				  = 0x18FF;
+        ADDPLD                = 0x01FF;
+        DATAPLD               = 0x02FF;
+        PROGPLD               = 0x07FF;
+        ERASEPLD	          = 0x03FF;
+        PROGESF               = 0x06FF;
+        READPLD               = 0x0AFF;
+        DISCHARGE             = 0x14FF;
+        PROGRAMEN             = 0x15FF;
+        IDCODE                = 0x16FF;
+        BYPASS                = 0xFFFF;
+        USERCODE			  = 0x17FF;
+        PROG_USERCODE      	  = 0x1AFF;
+        PROG_INCR			  = 0x27FF;
+        VERIFY_INCR			  = 0x2AFF;
+        PROG_SECURITY	      = 0x09FF;
+        PROGRAMDIS            = 0x1EFF;
+        PROGRAM_DONE		  = 0x2FFF;
+        ERASE_DONE			  = 0x24FF;   
+        CFGBE	              = 0x29FF;
+        ADDCFG                = 0x2BFF;
+        DATACFG               = 0x2DFF;
+        PROGCFG               = 0x2EFF;
+        READCFG               = 0x28FF;
+        CLAMP	 			  = 0x20FF;
+		BPRELOAD 			  = 0x1CFF;
+		ISC_ENABLE 			  = 0x15FF;
+		ISC_XPROGRAM_ENABLE   = 0x35FF;
+		ISC_SRAM_ENABLE 	  = 0x55FF;
+		ISC_DISABLE			  = 0x1EFF;
+		ISC_ADDRESS_SHIFT 	  = 0x01FF;
+		ISC_DATA_SHIFT 		  = 0x02FF;
+		ISC_ERASE 			  = 0x03FF;
+		ISC_PROGRAM			  = 0x07FF;
+		ISC_READ			  = 0x0AFF;
+		ISC_PROGRAM_USERCODE  = 0x1AFF;
+		ISC_PROGRAM_PES       = 0x0FFF;
+		ISC_READ_PES          = 0x11FF;
+		ISC_PROGRAM_SECURITY  = 0x09FF;
+		ISC_PROGRAM_DONE 	  = 0x2FFF;
+		ISC_ERASE_DONE		  = 0x24FF;
+		ISC_DISCHARGE		  = 0x14FF;
+		ISC_NOOP			  = 0x30FF;
+		LSCC_PROGRAM_INCR_RTI = 0x67FF;
+		LSCC_READ_INCR_RTI 	  = 0x6AFF;
+		LSCC_TRANSPARENT_ENABLE	= 0x75FF;
+		LSCC_BITSTREAM_BURST  = 0x04FF;
+		LSCC_RESET_ADDRESS	  = 0x21FF;
+		LSCC_REFRESH		  = 0x23FF;
+		READ_STATUS			  = 0xB2FF;
+		CONFIG_SHIFT		  = 0x22FF;
+		READ_CONFIG			  = 0xEAFF;
+		PROGRAM_REFRESH		  = 0x4FFF;
+		PROGRAM_RAM			  = 0x27FF;
+		PRO_INCR_RTI_RAM	  = 0x68FF;	
+        
+    </Instruction>
+</Parameter>
+<Data>
+    <DataField    name="IDTDI">
+        <FieldBlock    row_width="DEVICE_ID_LENGTH">
+            ID_DATA
+        </FieldBlock>
+    </DataField>
+    <DataField    name="Address_CFG">
+        <FieldBlock    row_width="12">
+            0x800,
+            0x400,
+            0x200,
+            0x100,
+            0x080,
+            0x040,
+            0x020,
+            0x010,
+            0x008,
+            0x004,
+            0x002,
+            0x001
+        </FieldBlock>
+    </DataField>
+    <DataField	name="BSCANPROGRAM">
+		<FieldBlock	row_width="BSCAN_REGISTER_LENGTH">
+			MDR_BSCANPROGRAM
+		</FieldBlock>
+	</DataField>
+	<DataField	name="BSCANPROGRAMMASK">
+		<FieldBlock	row_width="BSCAN_REGISTER_LENGTH">
+			MDR_BSCANPROGRAMMASK
+		</FieldBlock>
+	</DataField>
+</Data>
+<Operation_List>
+    "Read and Save JEDEC" = "INIT, 
+    						 READ_ID     ! Check the IDCODE,
+    						 SAVE_ID, 
+    						 ENABLE, 
+    						 SAVE_ARRAY, 
+    						 SAVE_CFG, 
+    						 SAVE_USERCODE, 
+    						 FLASH_READ_ID !Check the Flash ID, 
+							 FLASH_ENABLE, 
+							 FLASH_SAVE_ARRAY, 
+							 FLASH_SAVE_USERCODE, 
+							 DISABLE,    						 
+							 FLASH_DISABLE";
+
+    "Calculate Checksum" = "INIT, 
+    						READ_ID     ! Check the IDCODE,
+     						SAVE_ID, 
+     						ENABLE, 
+     						SAVE_ARRAY, 
+     						SAVE_CFG, 
+     						SAVE_USERCODE, 
+     						FLASH_READ_ID !Check the Flash ID, 
+						 	FLASH_ENABLE, 
+						 	FLASH_SAVE_ARRAY, 
+						 	FLASH_SAVE_USERCODE, 
+						 	DISABLE,     						
+						 	FLASH_DISABLE";
+
+    "Read and Save" = "INIT, 
+    				   READ_ID     ! Check the IDCODE,
+    				   SAVE_ID, 
+    				   ENABLE, 
+    				   SAVE_ARRAY, 
+    				   SAVE_CFG, 
+    				   SAVE_USERCODE, 
+    				   FLASH_READ_ID !Check the Flash ID, 
+					   FLASH_ENABLE, 
+					   FLASH_SAVE_ARRAY, 
+					   FLASH_SAVE_USERCODE, 
+					   DISABLE,    				   
+					   FLASH_DISABLE";
+
+    "Calculate Data CRC" = "INIT, 
+    					    READ_ID     ! Check the IDCODE,
+    						SAVE_ID, 
+    						ENABLE, 
+    						SAVE_ARRAY, 
+    						SAVE_CFG, 
+    						SAVE_USERCODE, 
+    						FLASH_READ_ID !Check the Flash ID, 
+							FLASH_ENABLE, 
+							FLASH_SAVE_ARRAY, 
+							FLASH_SAVE_USERCODE, 
+							DISABLE,    						
+							FLASH_DISABLE";
+
+
+	"Erase,Program,Verify PM Only" = "INIT  ! Initialize,
+				                    READ_ID     ! Check the IDCODE,
+				                    ENABLE      ! Enable the programming mode,
+				                    ERASE       ! Erase the device,
+				                    PROGRAM     ! Program Fuse Map,
+				                    PROGRAM_CFG ! Program CFG,
+				                    PROGRAM_USERCODE  ! Program USERCODE,
+				                    VERIFY      ! Verify Fuse Map,
+				                    VERIFY_CFG  ! Verify CFG,
+				                    VERIFY_USERCODE   ! Verify USERCODE,
+				                    PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+				                    DISABLE     ! Exit the programming mode";
+ 			 		
+    "Erase,Program,Verify,Secure PM Only" = "INIT  ! Initialize,
+						                    READ_ID     ! Check the IDCODE,
+						                    ENABLE      ! Enable the programming mode,
+						                    ERASE       ! Erase the device,
+						                    PROGRAM     ! Program Fuse Map,
+						                    PROGRAM_CFG ! Program CFG,
+						                    PROGRAM_USERCODE  ! Program USERCODE,
+						                    VERIFY      ! Verify Fuse Map,
+						                    VERIFY_CFG  ! Verify CFG,
+						                    VERIFY_USERCODE   ! Verify USERCODE,
+						                    PROGRAM_SECURITY ! Secure device,
+						                    PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+						                    DISABLE     ! Exit the programming mode";
+    "Erase,Program,Verify XO Only" = "INIT  ! Initialize,
+					                    READ_ID     ! Check the IDCODE,
+					                    FLASH_READ_ID !Check the Flash ID,
+					                    FLASH_ENABLE	! Enable the programming mode, 
+										DIRECT_FLASH_ERASE	! Erase the device,
+										CHECK_STATUS ! Read the status bit,
+										FLASH_PROGRAM_STATUS	! Program Fuse Map,
+										FLASH_PROGRAM_USERCODE	! Program USERCODE,
+										CHECK_STATUS ! Read the status bit,
+										FLASH_VERIFY	! Verify Fuse Map, 
+										FLASH_VERIFY_USERCODE		! Verify USERCODE,
+					 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					 			 		CHECK_STATUS ! Read the status bit,
+					 			 		FLASH_DISABLE ! Exit the programming mode,
+					 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+					 			 		
+					 			 		
+    "Erase,Program,Verify,Secure XO Only" = "INIT  ! Initialize,
+						                    READ_ID     ! Check the IDCODE,
+						                    FLASH_READ_ID !Check the Flash ID,
+						                    FLASH_ENABLE	! Enable the programming mode, 
+											DIRECT_FLASH_ERASE	! Erase the device,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_PROGRAM_STATUS	! Program Fuse Map,
+											FLASH_PROGRAM_USERCODE	! Program USERCODE,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_VERIFY	! Verify Fuse Map, 
+											FLASH_VERIFY_USERCODE		! Verify USERCODE,
+											FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+											FLASH_PROGRAM_SECURITY ! Secure device,						 			 		
+						 			 		CHECK_STATUS ! Read the status bit,
+						 			 		FLASH_DISABLE ! Exit the programming mode,
+						 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+            
+            
+    "Erase,Program,Verify" = "INIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,			
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+	"Erase,Program" = "INIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+                    
+    "Erase,Program,Verify,Secure" = "INIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,                     
+                    PROGRAM_SECURITY ! Secure device,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		FLASH_PROGRAM_SECURITY ! Secure device,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+    "Secure Device" = "INIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    PROGRAM_SECURITY ! Secure device,
+                    FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode,
+					FLASH_PROGRAM_SECURITY ! Secure device,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE ! Exit the programming mode";
+
+    "Program Only" = "INIT       ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+    "Verify Only" = "INIT       ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    SAFE_VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+  			  		FLASH_READ_ID !Check the Flash ID,	
+			  		FLASH_ENABLE	! Enable the programming mode, 
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT,			  		
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	
+	"Verify,Secure" = "INIT       ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    SAFE_VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device, 
+  			  		FLASH_READ_ID !Check the Flash ID,
+			  		FLASH_ENABLE	! Enable the programming mode, 
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		FLASH_PROGRAM_SECURITY ! Secure device,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT,			  		
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			  
+    "Verify ID" =  "INIT        ! Initialize,
+                    READ_ID     ! Check the IDCODE";
+                    
+    "Display ID" = "INIT, READ_ID, SAVE_ID";
+
+    "Verify USERCODE" = " INIT ! Initialize, 
+                    READ_ID    ! Check the IDCODE,
+                    VERIFY_USERCODE ! Verify USERCODE";
+                     
+    "Display USERCODE" = "INIT, READ_ID, SAVE_ID, SAVE_USERCODE";
+
+    "Erase Only" = "INIT        ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE     ! Exit the programming mode";
+                    
+    "Bypass" = "INIT  ! Initialize";
+
+    "Re-Initialize" = "INIT     ! Initialize,
+    	            ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE     ! Exit the programming mode";
+                    
+    "Disable Only" = "INIT      ! Initialize,
+                    DISABLE     ! Exit the programming mode";
+	"Erase DONE bit"	=	"INIT 	! Initialize, 
+							 READ_ID     ! Check the IDCODE,
+							 ENABLE      ! Enable the programming mode,
+							 ERASE_DONE_BIT	! Erase the done bit,
+							 FLASH_READ_ID !Check the Flash ID,							
+							 FLASH_ENABLE	! Enable the programming mode, 
+							 FLASH_ERASE_DONE_BIT	! Erase the done bit,
+							 DISABLE     ! Exit the programming mode,							 
+							 FLASH_DISABLE     ! Exit the programming mode"	;
+	"Program DONE bit"	=	"INIT 	! Initialize, 
+	                         READ_ID     ! Check the IDCODE,
+	                         ENABLE      ! Enable the programming mode,
+							 PROGRAM_DONE_BIT	! Program DONE bit,
+							 FLASH_READ_ID !Check the Flash ID,							
+							 FLASH_ENABLE	! Enable the programming mode, 
+							 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							 DISABLE     ! Exit the programming mode,							 
+							 FLASH_DISABLE     ! Exit the programming mode"	;
+	"Read DONE bit"	=	"INIT 	! Initialize, 
+						 READ_ID     ! Check the IDCODE,
+					 	 READ_DONE_BIT	! Read the done bit"	;
+	"Display DONE bit"	=	"INIT 	! Initialize, 
+					 	     READ_ID     ! Check the IDCODE,
+					 	     SAVE_ID,
+					 	     READ_DONE_BIT	! Read the done bit"	;  
+								 						 	                                 
+</Operation_List>
+
+<Operation_List label="SingleSVFOperation">
+    "Read and Save JEDEC" = "SVFINIT  ! Initialize,
+                    READ_ID      ! Check the IDCODE,
+                    ENABLE       ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    FLASH_READ_ID !Check the Flash ID,	 
+					FLASH_ENABLE, 
+					FLASH_SVF_SAVE_ARRAY, 
+					FLASH_SVF_SAVE_USERCODE, 
+					DISABLE      ! Exit the programming mode,                    
+					FLASH_DISABLE";
+
+    "Calculate Checksum" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    FLASH_READ_ID !Check the Flash ID,	 
+					FLASH_ENABLE, 
+					FLASH_SVF_SAVE_ARRAY, 
+					FLASH_SVF_SAVE_USERCODE, 
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE";
+
+    "Read and Save" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    FLASH_READ_ID !Check the Flash ID,	 
+					FLASH_ENABLE, 
+					FLASH_SVF_SAVE_ARRAY, 
+					FLASH_SVF_SAVE_USERCODE, 
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE";
+
+    "Calculate Data CRC" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    FLASH_READ_ID !Check the Flash ID,	 
+					FLASH_ENABLE, 
+					FLASH_SVF_SAVE_ARRAY, 
+					FLASH_SVF_SAVE_USERCODE,
+					DISABLE     ! Exit the programming mode,                     
+					FLASH_DISABLE";
+
+	"Erase,Program,Verify PM Only" = "SVFINIT  ! Initialize,
+				                    READ_ID     ! Check the IDCODE,
+				                    ENABLE      ! Enable the programming mode,
+				                    ERASE       ! Erase the device,
+				                    PROGRAM     ! Program Fuse Map,
+				                    PROGRAM_CFG ! Program CFG,
+				                    PROGRAM_USERCODE  ! Program USERCODE,
+				                    VERIFY      ! Verify Fuse Map,
+				                    VERIFY_CFG  ! Verify CFG,
+				                    VERIFY_USERCODE   ! Verify USERCODE,
+				                    PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+				                    DISABLE     ! Exit the programming mode";
+ 			 		
+    "Erase,Program,Verify,Secure PM Only" = "SVFINIT  ! Initialize,
+						                    READ_ID     ! Check the IDCODE,
+						                    ENABLE      ! Enable the programming mode,
+						                    ERASE       ! Erase the device,
+						                    PROGRAM     ! Program Fuse Map,
+						                    PROGRAM_CFG ! Program CFG,
+						                    PROGRAM_USERCODE  ! Program USERCODE,
+						                    VERIFY      ! Verify Fuse Map,
+						                    VERIFY_CFG  ! Verify CFG,
+						                    VERIFY_USERCODE   ! Verify USERCODE,
+						                    PROGRAM_SECURITY ! Secure device,
+						                    PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+						                    DISABLE     ! Exit the programming mode";
+    "Erase,Program,Verify XO Only" = "SVFINIT  ! Initialize,
+					                    READ_ID     ! Check the IDCODE,
+					                    FLASH_READ_ID !Check the Flash ID,	
+					                    FLASH_ENABLE	! Enable the programming mode, 
+										DIRECT_FLASH_ERASE	! Erase the device,
+										CHECK_STATUS ! Read the status bit,
+										FLASH_PROGRAM_STATUS	! Program Fuse Map,
+										FLASH_PROGRAM_USERCODE	! Program USERCODE,
+										CHECK_STATUS ! Read the status bit,
+										FLASH_VERIFY	! Verify Fuse Map, 
+										FLASH_VERIFY_USERCODE		! Verify USERCODE,
+					 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					 			 		CHECK_STATUS ! Read the status bit,
+					 			 		FLASH_DISABLE ! Exit the programming mode,
+					 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+					 			 		
+					 			 		
+    "Erase,Program,Verify,Secure XO Only" = "SVFINIT  ! Initialize,
+						                    READ_ID     ! Check the IDCODE,
+						                    FLASH_READ_ID !Check the Flash ID,
+						                    FLASH_ENABLE	! Enable the programming mode, 
+											DIRECT_FLASH_ERASE	! Erase the device,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_PROGRAM_STATUS	! Program Fuse Map,
+											FLASH_PROGRAM_USERCODE	! Program USERCODE,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_VERIFY	! Verify Fuse Map, 
+											FLASH_VERIFY_USERCODE		! Verify USERCODE,
+											FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+											FLASH_PROGRAM_SECURITY ! Secure device,						 			 		
+						 			 		CHECK_STATUS ! Read the status bit,
+						 			 		FLASH_DISABLE ! Exit the programming mode,
+						 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+						 			 		
+    "Erase,Program,Verify" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Full Address Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    FLASH_READ_ID !Check the Flash ID,			
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device, 
+					CHECK_STATUS ! Read the status bit,
+ 			 		FLASH_PROGRAM_STATUS	! Program Fuse Map,
+ 			 		FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_VERIFY	! Verify Fuse Map,
+					FLASH_VERIFY_USERCODE	! Verify USERCODE, 
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					CHECK_STATUS ! Read the status bit,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+	"Erase,Program" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device, 
+					CHECK_STATUS ! Read the status bit,
+ 			 		FLASH_PROGRAM_STATUS	! Program Fuse Map,
+ 			 		FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					CHECK_STATUS ! Read the status bit,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+                    
+    "Erase,Program,Verify,Secure" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Full Address Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    PROGRAM_SECURITY ! Secure device,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device, 
+					CHECK_STATUS ! Read the status bit,
+ 			 		FLASH_PROGRAM_STATUS	! Program Fuse Map,
+ 			 		FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_VERIFY	! Verify Fuse Map,
+					FLASH_VERIFY_USERCODE	! Verify USERCODE, 
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		FLASH_PROGRAM_SECURITY ! Secure Flash,
+					CHECK_STATUS ! Read the status bit,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE    ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+    "Secure Device" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    PROGRAM_SECURITY ! Secure device,
+                    FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode,
+					FLASH_PROGRAM_SECURITY ! Secure device,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE ! Exit the programming mode";
+
+    "Program Only" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device, 
+					CHECK_STATUS ! Read the status bit,
+ 			 		FLASH_PROGRAM_STATUS	! Program Fuse Map,
+ 			 		FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					CHECK_STATUS ! Read the status bit,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+    "Verify Only" = "SVFINIT   ! Initialize,
+                    READ_ID    ! Check the IDCODE,
+                    ENABLE     ! Enable the programming mode,
+                    VERIFY     ! Full Address Verify Fuse Map,
+                    SAFE_VERIFY_CFG ! Verify CFG,
+                    VERIFY_USERCODE    ! Verify USERCODE,
+			  		FLASH_READ_ID !Check the Flash ID,
+			  		FLASH_ENABLE	! Enable the programming mode, 
+					FLASH_VERIFY	! Verify Fuse Map,
+					FLASH_VERIFY_USERCODE	! Verify USERCODE, 
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT,			  		
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			  		
+	"Verify,Secure" = "SVFINIT       ! Initialize,
+					READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    SAFE_VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device, 
+  			  		FLASH_READ_ID !Check the Flash ID,
+			  		FLASH_ENABLE	! Enable the programming mode, 
+					FLASH_VERIFY	! Verify Fuse Map,
+					FLASH_VERIFY_USERCODE	! Verify USERCODE, 
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		FLASH_PROGRAM_SECURITY ! Secure Flash,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT,			  		
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			  					  		
+    "Verify ID" =  "INIT       ! Initialize,
+                    READ_ID    ! Check the IDCODE";
+
+    "Display ID" = "SVFINIT     ! Initialize,
+                    SVF_SAVE_ID ! Read the IDCODE";
+
+    "Display USERCODE" = "SVFINIT 	  ! Initialize, 
+                    READ_ID           ! Check the IDCODE",
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+                    
+    "Verify USERCODE" = "SVFINIT      ! Initialize, 
+                    READ_ID           ! Check the IDCODE",
+                    VERIFY_USERCODE   ! Verify USERCODE";
+
+    "Erase Only" = "SVFINIT    ! Initialize,
+                    READ_ID    ! Check the IDCODE,
+                    ENABLE     ! Enable the programming mode,
+                    ERASE      ! Erase the device,
+                    FLASH_READ_ID !Check the Flash ID,
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE    ! Exit the programming mode,                    
+					FLASH_DISABLE     ! Exit the programming mode";
+
+    "Bypass" = "SVFINIT  ! Initialize";
+
+    "Disable Only" = "SVFINIT  ! Initialize,
+                    DISABLE    ! Exit the programming mode";
+
+    "Re-Initialize" = "SVFINIT ! Initialize,
+                    ENABLE     ! Enable the programming mode,
+                    ERASE      ! Erase the device,
+                    DISABLE    ! Exit the programming mode";
+	"Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Read DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"	;
+	"Display DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"	;					 		
+								 											 			 	 			 				 	                            
+</Operation_List>
+<Operation_List label="TurboOperation">
+	"Read and Save JEDEC" = "INIT, 
+    						 SAVE_ARRAY, 
+    						 SAVE_CFG, 
+    						 SAVE_USERCODE, 
+    						 DISABLE,
+    						 FLASH_READ_ID !Check the Flash ID, 
+							 FLASH_ENABLE, 
+							 FLASH_SAVE_ARRAY, 
+							 FLASH_SAVE_USERCODE";
+
+    "Calculate Checksum" = "INIT, 
+    						SAVE_ARRAY, 
+     						SAVE_CFG, 
+     						SAVE_USERCODE, 
+     						DISABLE,
+     						FLASH_READ_ID !Check the Flash ID, 
+						 	FLASH_ENABLE, 
+						 	FLASH_SAVE_ARRAY, 
+						 	FLASH_SAVE_USERCODE";
+
+    "Read and Save" = "INIT, 
+    				   SAVE_ARRAY, 
+    				   SAVE_CFG, 
+    				   SAVE_USERCODE, 
+    				   DISABLE,
+    				   FLASH_READ_ID !Check the Flash ID, 
+					   FLASH_ENABLE, 
+					   FLASH_SAVE_ARRAY, 
+					   FLASH_SAVE_USERCODE";
+
+    "Calculate Data CRC" = "INIT, 
+    					    SAVE_ARRAY, 
+    						SAVE_CFG, 
+    						SAVE_USERCODE, 
+    						DISABLE,
+    						FLASH_READ_ID !Check the Flash ID, 
+							FLASH_ENABLE, 
+							FLASH_SAVE_ARRAY, 
+							FLASH_SAVE_USERCODE";
+
+
+	"Erase,Program,Verify PM Only" = "INIT  ! Initialize,
+				                    ERASE       ! Erase the device,
+				                    PROGRAM     ! Program Fuse Map,
+				                    PROGRAM_CFG ! Program CFG,
+				                    PROGRAM_USERCODE  ! Program USERCODE,
+				                    VERIFY      ! Verify Fuse Map,
+				                    VERIFY_CFG  ! Verify CFG,
+				                    VERIFY_USERCODE   ! Verify USERCODE,
+				                    PROGRAM_DONE_BIT	! Program DONE bit";
+ 			 		
+    "Erase,Program,Verify,Secure PM Only" = "INIT  ! Initialize,
+						                    ERASE       ! Erase the device,
+						                    PROGRAM     ! Program Fuse Map,
+						                    PROGRAM_CFG ! Program CFG,
+						                    PROGRAM_USERCODE  ! Program USERCODE,
+						                    VERIFY      ! Verify Fuse Map,
+						                    VERIFY_CFG  ! Verify CFG,
+						                    VERIFY_USERCODE   ! Verify USERCODE,
+						                    PROGRAM_SECURITY ! Secure device,
+						                    PROGRAM_DONE_BIT	! Program DONE bit";
+    "Erase,Program,Verify XO Only" = "INIT  ! Initialize,
+					                    FLASH_READ_ID !Check the Flash ID,	
+					                    FLASH_ENABLE	! Enable the programming mode, 
+										DIRECT_FLASH_ERASE	! Erase the device,
+										CHECK_STATUS ! Read the status bit,
+										FLASH_PROGRAM_STATUS	! Program Fuse Map,
+										FLASH_PROGRAM_USERCODE	! Program USERCODE,
+										CHECK_STATUS ! Read the status bit,
+										FLASH_VERIFY	! Verify Fuse Map, 
+										FLASH_VERIFY_USERCODE		! Verify USERCODE,
+					 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					 			 		CHECK_STATUS ! Read the status bit,
+					 			 		FLASH_DISABLE ! Exit the programming mode,
+					 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+					 			 		
+					 			 		
+    "Erase,Program,Verify,Secure XO Only" = "INIT  ! Initialize,
+						                    FLASH_READ_ID !Check the Flash ID,	
+						                    FLASH_ENABLE	! Enable the programming mode, 
+											DIRECT_FLASH_ERASE	! Erase the device,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_PROGRAM_STATUS	! Program Fuse Map,
+											FLASH_PROGRAM_USERCODE	! Program USERCODE,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_VERIFY	! Verify Fuse Map, 
+											FLASH_VERIFY_USERCODE		! Verify USERCODE,
+											FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+											FLASH_PROGRAM_SECURITY ! Secure device,						 			 		
+						 			 		CHECK_STATUS ! Read the status bit,
+						 			 		FLASH_DISABLE ! Exit the programming mode,
+						 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+            
+            
+    "Erase,Program,Verify" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,			
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+	"Erase,Program" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,		
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+                    
+    "Erase,Program,Verify,Secure" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,                     
+                    PROGRAM_SECURITY ! Secure device,
+                    FLASH_READ_ID !Check the Flash ID,
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		FLASH_PROGRAM_SECURITY ! Secure device,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+    "Secure Device" = "INIT  ! Initialize,
+                    PROGRAM_SECURITY ! Secure device,
+                    FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode,
+					FLASH_PROGRAM_SECURITY ! Secure device,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE ! Exit the programming mode";
+
+    "Program Only" = "INIT       ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+    "Verify Only" = "INIT       ! Initialize,
+                    VERIFY      ! Verify Fuse Map,
+                    SAFE_VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+  			  		FLASH_READ_ID !Check the Flash ID,
+			  		FLASH_ENABLE	! Enable the programming mode, 
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT,			  		
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	
+	"Verify,Secure" = "INIT       ! Initialize,
+                    VERIFY      ! Verify Fuse Map,
+                    SAFE_VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device, 
+  			  		FLASH_READ_ID !Check the Flash ID,
+			  		FLASH_ENABLE	! Enable the programming mode, 
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		FLASH_PROGRAM_SECURITY ! Secure device,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT,			  		
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			  
+    "Verify ID" =  "INIT        ! Initialize,
+                    READ_ID     ! Check the IDCODE";
+                    
+    "Display ID" = "INIT, READ_ID, SAVE_ID";
+
+    "Verify USERCODE" = " INIT ! Initialize, 
+                    READ_ID    ! Check the IDCODE,
+                    VERIFY_USERCODE ! Verify USERCODE";
+                     
+    "Display USERCODE" = "INIT, READ_ID, SAVE_ID, SAVE_USERCODE";
+
+    "Erase Only" = "INIT        ! Initialize,
+                    ERASE       ! Erase the device,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE     ! Exit the programming mode";
+                    
+    "Bypass" = "INIT  ! Initialize";
+
+    "Re-Initialize" = "INIT     ! Initialize,
+    	            ERASE       ! Erase the device,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE     ! Exit the programming mode";
+                    
+    "Disable Only" = "INIT      ! Initialize,
+                    DISABLE     ! Exit the programming mode";
+	"Erase DONE bit"	=	"INIT 	! Initialize, 
+							 ERASE_DONE_BIT	! Erase the done bit,
+							 DISABLE     ! Exit the programming mode,
+							 FLASH_READ_ID !Check the Flash ID,							
+							 FLASH_ENABLE	! Enable the programming mode, 
+							 FLASH_ERASE_DONE_BIT	! Erase the done bit,
+							 FLASH_DISABLE     ! Exit the programming mode"	;
+	"Program DONE bit"	=	"INIT 	! Initialize, 
+	                         PROGRAM_DONE_BIT	! Program DONE bit,
+							 DISABLE     ! Exit the programming mode,
+							 FLASH_READ_ID !Check the Flash ID,							
+							 FLASH_ENABLE	! Enable the programming mode, 
+							 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							 FLASH_DISABLE     ! Exit the programming mode"	;
+	"Read DONE bit"	=	"INIT 	! Initialize, 
+						 READ_ID     ! Check the IDCODE,
+					 	 READ_DONE_BIT	! Read the done bit"	;
+	"Display DONE bit"	=	"INIT 	! Initialize, 
+					 	     READ_ID     ! Check the IDCODE,
+					 	     SAVE_ID,
+					 	     READ_DONE_BIT	! Read the done bit"	;  
+													 			 								
+</Operation_List>
+<Operation_List label="ChainSVFOperation">
+	"Read and Save JEDEC" = "SVFINIT, 
+    						 SAVE_ARRAY, 
+    						 SAVE_CFG, 
+    						 SAVE_USERCODE, 
+    						 DISABLE,
+    						 FLASH_READ_ID !Check the Flash ID, 
+							 FLASH_ENABLE, 
+							 FLASH_SAVE_ARRAY, 
+							 FLASH_SAVE_USERCODE";
+
+    "Calculate Checksum" = "SVFINIT, 
+    						SAVE_ARRAY, 
+     						SAVE_CFG, 
+     						SAVE_USERCODE, 
+     						DISABLE,
+     						FLASH_READ_ID !Check the Flash ID, 
+						 	FLASH_ENABLE, 
+						 	FLASH_SAVE_ARRAY, 
+						 	FLASH_SAVE_USERCODE";
+
+    "Read and Save" = "SVFINIT, 
+    				   SAVE_ARRAY, 
+    				   SAVE_CFG, 
+    				   SAVE_USERCODE, 
+    				   DISABLE,
+    				   FLASH_READ_ID !Check the Flash ID, 
+					   FLASH_ENABLE, 
+					   FLASH_SAVE_ARRAY, 
+					   FLASH_SAVE_USERCODE";
+
+    "Calculate Data CRC" = "SVFINIT, 
+    					    SAVE_ARRAY, 
+    						SAVE_CFG, 
+    						SAVE_USERCODE, 
+    						DISABLE,
+    						FLASH_READ_ID !Check the Flash ID, 
+							FLASH_ENABLE, 
+							FLASH_SAVE_ARRAY, 
+							FLASH_SAVE_USERCODE";
+
+
+	"Erase,Program,Verify PM Only" = "SVFINIT  ! Initialize,
+				                    ERASE       ! Erase the device,
+				                    PROGRAM     ! Program Fuse Map,
+				                    PROGRAM_CFG ! Program CFG,
+				                    PROGRAM_USERCODE  ! Program USERCODE,
+				                    VERIFY      ! Verify Fuse Map,
+				                    VERIFY_CFG  ! Verify CFG,
+				                    VERIFY_USERCODE   ! Verify USERCODE,
+				                    PROGRAM_DONE_BIT	! Program DONE bit";
+ 			 		
+    "Erase,Program,Verify,Secure PM Only" = "SVFINIT  ! Initialize,
+						                    ERASE       ! Erase the device,
+						                    PROGRAM     ! Program Fuse Map,
+						                    PROGRAM_CFG ! Program CFG,
+						                    PROGRAM_USERCODE  ! Program USERCODE,
+						                    VERIFY      ! Verify Fuse Map,
+						                    VERIFY_CFG  ! Verify CFG,
+						                    VERIFY_USERCODE   ! Verify USERCODE,
+						                    PROGRAM_SECURITY ! Secure device,
+						                    PROGRAM_DONE_BIT	! Program DONE bit";
+    "Erase,Program,Verify XO Only" = "SVFINIT  ! Initialize,
+					                    FLASH_READ_ID !Check the Flash ID,							
+										FLASH_ENABLE	! Enable the programming mode, 
+										DIRECT_FLASH_ERASE	! Erase the device,
+										CHECK_STATUS ! Read the status bit,
+										FLASH_PROGRAM_STATUS	! Program Fuse Map,
+										FLASH_PROGRAM_USERCODE	! Program USERCODE,
+										CHECK_STATUS ! Read the status bit,
+										FLASH_VERIFY	! Verify Fuse Map, 
+										FLASH_VERIFY_USERCODE		! Verify USERCODE,
+					 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					 			 		CHECK_STATUS ! Read the status bit,
+					 			 		FLASH_DISABLE ! Exit the programming mode,
+					 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+					 			 		
+					 			 		
+    "Erase,Program,Verify,Secure XO Only" = "SVFINIT  ! Initialize,
+						                    FLASH_READ_ID !Check the Flash ID,							
+											FLASH_ENABLE	! Enable the programming mode, 
+											DIRECT_FLASH_ERASE	! Erase the device,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_PROGRAM_STATUS	! Program Fuse Map,
+											FLASH_PROGRAM_USERCODE	! Program USERCODE,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_VERIFY	! Verify Fuse Map, 
+											FLASH_VERIFY_USERCODE		! Verify USERCODE,
+											FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+											FLASH_PROGRAM_SECURITY ! Secure device,						 			 		
+						 			 		CHECK_STATUS ! Read the status bit,
+						 			 		FLASH_DISABLE ! Exit the programming mode,
+						 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+            
+            
+    "Erase,Program,Verify" = "SVFINIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+	"Erase,Program" = "SVFINIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+                    
+    "Erase,Program,Verify,Secure" = "SVFINIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,                     
+                    PROGRAM_SECURITY ! Secure device,
+                    FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		FLASH_PROGRAM_SECURITY ! Secure device,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+    "Secure Device" = "SVFINIT  ! Initialize,
+                    PROGRAM_SECURITY ! Secure device,
+                    FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode,
+					FLASH_PROGRAM_SECURITY ! Secure device,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE ! Exit the programming mode";
+
+    "Program Only" = "SVFINIT       ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_STATUS	! Program Fuse Map,
+					FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+    "Verify Only" = "SVFINIT       ! Initialize,
+                    VERIFY      ! Verify Fuse Map,
+                    SAFE_VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+  			  		FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode, 
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT,			  		
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	
+	"Verify,Secure" = "SVFINIT       ! Initialize,
+                    VERIFY      ! Verify Fuse Map,
+                    SAFE_VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device, 
+  			  		FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode, 
+					FLASH_VERIFY	! Verify Fuse Map, 
+					FLASH_VERIFY_USERCODE		! Verify USERCODE,
+ 			 		FLASH_PROGRAM_SECURITY ! Secure device,
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT,			  		
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			  
+    "Verify ID" =  "SVFINIT        ! Initialize,
+                    READ_ID     ! Check the IDCODE";
+                    
+    "Display ID" = "SVFINIT, READ_ID, SAVE_ID";
+
+    "Verify USERCODE" = " SVFINIT ! Initialize, 
+                    READ_ID    ! Check the IDCODE,
+                    VERIFY_USERCODE ! Verify USERCODE";
+                     
+    "Display USERCODE" = "SVFINIT, READ_ID, SAVE_ID, SAVE_USERCODE";
+
+    "Erase Only" = "SVFINIT        ! Initialize,
+                    ERASE       ! Erase the device,
+                    FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE     ! Exit the programming mode,                   
+					FLASH_DISABLE     ! Exit the programming mode";
+                    
+    "Bypass" = "SVFINIT  ! Initialize";
+
+    "Re-Initialize" = "SVFINIT     ! Initialize,
+    	            ERASE       ! Erase the device,
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE     ! Exit the programming mode";
+                    
+    "Disable Only" = "SVFINIT      ! Initialize,
+                    DISABLE     ! Exit the programming mode";
+	"Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							 ERASE_DONE_BIT	! Erase the done bit,
+							 DISABLE     ! Exit the programming mode,
+							 FLASH_READ_ID !Check the Flash ID,							
+							 FLASH_ENABLE	! Enable the programming mode, 
+							 FLASH_ERASE_DONE_BIT	! Erase the done bit,
+							 FLASH_DISABLE     ! Exit the programming mode"	;
+	"Program DONE bit"	=	"SVFINIT 	! Initialize, 
+	                         PROGRAM_DONE_BIT	! Program DONE bit,
+							 DISABLE     ! Exit the programming mode,
+							 FLASH_READ_ID !Check the Flash ID,							
+							 FLASH_ENABLE	! Enable the programming mode, 
+							 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							 FLASH_DISABLE     ! Exit the programming mode"	;
+	"Read DONE bit"	=	"SVFINIT 	! Initialize, 
+						 READ_ID     ! Check the IDCODE,
+					 	 READ_DONE_BIT	! Read the done bit"	;
+	"Display DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	     READ_ID     ! Check the IDCODE,
+					 	     SAVE_ID,
+					 	     READ_DONE_BIT	! Read the done bit"	;  	
+</Operation_List>
+
+<Operation_List label="SingleSVFOperationRevC">
+	"Read and Save JEDEC" = "SVFINIT  ! Initialize,
+                    READ_ID      ! Check the IDCODE,
+                    ENABLE       ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    FLASH_READ_ID !Check the Flash ID,	 
+					FLASH_ENABLE, 
+					FLASH_SVF_SAVE_ARRAY, 
+					FLASH_SVF_SAVE_USERCODE, 
+					DISABLE      ! Exit the programming mode,                    
+					FLASH_DISABLE";
+
+    "Calculate Checksum" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    FLASH_READ_ID !Check the Flash ID,	 
+					FLASH_ENABLE, 
+					FLASH_SVF_SAVE_ARRAY, 
+					FLASH_SVF_SAVE_USERCODE,
+					DISABLE     ! Exit the programming mode,                     
+					FLASH_DISABLE";
+
+    "Read and Save" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    FLASH_READ_ID !Check the Flash ID,	 
+					FLASH_ENABLE, 
+					FLASH_SVF_SAVE_ARRAY, 
+					FLASH_SVF_SAVE_USERCODE, 
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE";
+
+    "Calculate Data CRC" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    FLASH_READ_ID !Check the Flash ID,	 
+					FLASH_ENABLE, 
+					FLASH_SVF_SAVE_ARRAY, 
+					FLASH_SVF_SAVE_USERCODE,
+					DISABLE     ! Exit the programming mode,                     
+					FLASH_DISABLE";
+
+	"Erase,Program,Verify PM Only" = "SVFINIT  ! Initialize,
+				                    READ_ID     ! Check the IDCODE,
+				                    ENABLE      ! Enable the programming mode,
+				                    ERASE       ! Erase the device,
+				                    PROGRAM     ! Program Fuse Map,
+				                    PROGRAM_CFG ! Program CFG,
+				                    PROGRAM_USERCODE  ! Program USERCODE,
+				                    VERIFY      ! Verify Fuse Map,
+				                    VERIFY_CFG  ! Verify CFG,
+				                    VERIFY_USERCODE   ! Verify USERCODE,
+				                    PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+				                    DISABLE     ! Exit the programming mode";
+ 			 		
+    "Erase,Program,Verify,Secure PM Only" = "SVFINIT  ! Initialize,
+						                    READ_ID     ! Check the IDCODE,
+						                    ENABLE      ! Enable the programming mode,
+						                    ERASE       ! Erase the device,
+						                    PROGRAM     ! Program Fuse Map,
+						                    PROGRAM_CFG ! Program CFG,
+						                    PROGRAM_USERCODE  ! Program USERCODE,
+						                    VERIFY      ! Verify Fuse Map,
+						                    VERIFY_CFG  ! Verify CFG,
+						                    VERIFY_USERCODE   ! Verify USERCODE,
+						                    PROGRAM_SECURITY ! Secure device,
+						                    PROGRAM_DONE_BIT	! Program DONE bit,				 			 
+						                    DISABLE     ! Exit the programming mode";
+    "Erase,Program,Verify XO Only" = "SVFINIT  ! Initialize,
+					                    READ_ID     ! Check the IDCODE,
+					                    FLASH_READ_ID !Check the Flash ID,	
+					                    FLASH_ENABLE	! Enable the programming mode, 
+										DIRECT_SVF_FLASH_ERASE	! Erase the device,
+										CHECK_STATUS ! Read the status bit,
+										FLASH_SVF_PROGRAM_STATUS	! Program Fuse Map,
+										FLASH_PROGRAM_USERCODE	! Program USERCODE,
+										CHECK_STATUS ! Read the status bit,
+										FLASH_VERIFY	! Verify Fuse Map, 
+										FLASH_VERIFY_USERCODE		! Verify USERCODE,
+					 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					 			 		CHECK_STATUS ! Read the status bit,
+					 			 		FLASH_DISABLE ! Exit the programming mode,
+					 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+					 			 		
+					 			 		
+    "Erase,Program,Verify,Secure XO Only" = "SVFINIT  ! Initialize,
+						                    READ_ID     ! Check the IDCODE,
+						                    FLASH_READ_ID !Check the Flash ID,	
+						                    FLASH_ENABLE	! Enable the programming mode, 
+											DIRECT_SVF_FLASH_ERASE	! Erase the device,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_SVF_PROGRAM_STATUS	! Program Fuse Map,
+											FLASH_PROGRAM_USERCODE	! Program USERCODE,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_VERIFY	! Verify Fuse Map, 
+											FLASH_VERIFY_USERCODE		! Verify USERCODE,
+											FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+											FLASH_PROGRAM_SECURITY ! Secure device,						 			 		
+						 			 		CHECK_STATUS ! Read the status bit,
+						 			 		FLASH_DISABLE ! Exit the programming mode,
+						 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+						 			 		
+    "Erase,Program,Verify" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Full Address Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    FLASH_READ_ID !Check the Flash ID,			
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+					CHECK_STATUS ! Read the status bit,
+ 			 		FLASH_SVF_PROGRAM_STATUS	! Program Fuse Map,
+ 			 		FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_VERIFY	! Verify Fuse Map,
+					FLASH_VERIFY_USERCODE	! Verify USERCODE, 
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					CHECK_STATUS ! Read the status bit,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+	"Erase,Program" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,		
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+					CHECK_STATUS ! Read the status bit,
+ 			 		FLASH_SVF_PROGRAM_STATUS	! Program Fuse Map,
+ 			 		FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					CHECK_STATUS ! Read the status bit,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+                    
+    "Erase,Program,Verify,Secure" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Full Address Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    PROGRAM_SECURITY ! Secure device,
+                    FLASH_READ_ID !Check the Flash ID,		
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+					CHECK_STATUS ! Read the status bit,
+ 			 		FLASH_SVF_PROGRAM_STATUS	! Program Fuse Map,
+ 			 		FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					CHECK_STATUS ! Read the status bit,
+					FLASH_VERIFY	! Verify Fuse Map,
+					FLASH_VERIFY_USERCODE	! Verify USERCODE, 
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		FLASH_PROGRAM_SECURITY ! Secure Flash,
+					CHECK_STATUS ! Read the status bit,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE    ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+    "Secure Device" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    PROGRAM_SECURITY ! Secure device,
+                    FLASH_READ_ID !Check the Flash ID,							
+					FLASH_ENABLE	! Enable the programming mode,
+					FLASH_PROGRAM_SECURITY ! Secure device,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE ! Exit the programming mode";
+
+    "Program Only" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    FLASH_READ_ID !Check the Flash ID,
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+					CHECK_STATUS ! Read the status bit,
+ 			 		FLASH_SVF_PROGRAM_STATUS	! Program Fuse Map,
+ 			 		FLASH_PROGRAM_USERCODE	! Program USERCODE,
+					FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+					CHECK_STATUS ! Read the status bit,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+                    DISABLE     ! Exit the programming mode,                    
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit";
+
+    "Verify Only" = "SVFINIT   ! Initialize,
+                    READ_ID    ! Check the IDCODE,
+                    ENABLE     ! Enable the programming mode,
+                    VERIFY     ! Full Address Verify Fuse Map,
+                    SAFE_VERIFY_CFG ! Verify CFG,
+                    VERIFY_USERCODE    ! Verify USERCODE,
+			  		FLASH_READ_ID !Check the Flash ID,
+			  		FLASH_ENABLE	! Enable the programming mode, 
+					FLASH_VERIFY	! Verify Fuse Map,
+					FLASH_VERIFY_USERCODE	! Verify USERCODE, 
+ 			 		CHECK_STATUS ! Read the status bit,
+ 			 		DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT,			  		
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			  		
+	"Verify,Secure" = "SVFINIT       ! Initialize,
+					READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    SAFE_VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE,
+                    PROGRAM_SECURITY ! Secure device, 
+  			  		FLASH_READ_ID !Check the Flash ID,	
+			  		FLASH_ENABLE	! Enable the programming mode, 
+					FLASH_VERIFY	! Verify Fuse Map,
+					FLASH_VERIFY_USERCODE	! Verify USERCODE, 
+ 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+ 			 		FLASH_PROGRAM_SECURITY ! Secure Flash,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE ! Exit the programming mode,
+			  		VERIFY_DONE_BIT,			  		
+ 			 		FLASH_DISABLE ! Exit the programming mode,
+ 			 		SRAM_VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			  					  		
+    "Verify ID" =  "INIT       ! Initialize,
+                    READ_ID    ! Check the IDCODE";
+
+    "Display ID" = "SVFINIT     ! Initialize,
+                    SVF_SAVE_ID ! Read the IDCODE";
+
+    "Display USERCODE" = "SVFINIT 	  ! Initialize, 
+                    READ_ID           ! Check the IDCODE",
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+                    
+    "Verify USERCODE" = "SVFINIT      ! Initialize, 
+                    READ_ID           ! Check the IDCODE",
+                    VERIFY_USERCODE   ! Verify USERCODE";
+
+    "Erase Only" = "SVFINIT    ! Initialize,
+                    READ_ID    ! Check the IDCODE,
+                    ENABLE     ! Enable the programming mode,
+                    ERASE      ! Erase the device,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_SVF_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE    ! Exit the programming mode,                    
+					FLASH_DISABLE     ! Exit the programming mode";
+
+    "Bypass" = "SVFINIT  ! Initialize";
+
+    "Disable Only" = "SVFINIT  ! Initialize,
+                    DISABLE    ! Exit the programming mode";
+
+    "Re-Initialize" = "SVFINIT     ! Initialize,
+    	            ERASE       ! Erase the device,
+                    FLASH_READ_ID !Check the Flash ID,	
+                    FLASH_ENABLE	! Enable the programming mode, 
+					DIRECT_FLASH_ERASE	! Erase the device,
+					CHECK_STATUS ! Read the status bit,
+					DISABLE     ! Exit the programming mode,                    
+					FLASH_DISABLE     ! Exit the programming mode";
+	"Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Read DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"	;
+	"Display DONE bit"	=	"SVFINIT 	! Initialize, 
+					 	SVF_SAVE_DONE_BIT	! Read the done bit"	;					 					
+</Operation_List>
+<Script>
+<![CDATA[
+int32	TDRFlag = TDR_LENGTH;
+int32	HDRFlag = HDR_LENGTH;
+int32	HIRFlag = HIR_LENGTH;
+int32	TIRFlag = TIR_LENGTH;
+int32   _Address_length = ADDRESS_LENGTH;
+int32   _Arch_Row = ARCHITECH_ROW;
+int32   _BSCAN_Length = BSCAN_REGISTER_LENGTH;
+function INIT {   
+    HDR HDR_LENGTH TDI(HDR_PATTERN);
+    HIR HIR_LENGTH TDI(HIR_PATTERN);
+    TDR TDR_LENGTH TDI(TDR_PATTERN);
+    TIR TIR_LENGTH TDI(TIR_PATTERN);
+    ENDDR DRPAUSE;
+    ENDIR IRPAUSE;
+    FREQUENCY 700 HZ;
+    STATE IDLE;
+    ID_Length = ID_Length +1;
+    Row_Width = Row_Width +1;
+    _Address_length = _Address_length +1;
+    Usercode_Length = Usercode_Length +1;
+    _Arch_Row = _Arch_Row +1;
+    _BSCAN_Length = _BSCAN_Length +1;
+}
+function SVFINIT {
+    HDR 0;
+    HIR 0;
+    TDR 0;
+    TIR 0;
+    ENDDR DRPAUSE;
+    ENDIR IRPAUSE;
+    FREQUENCY 1E6 HZ;
+    STATE IDLE;
+    ID_Length = ID_Length +1;
+    Row_Width = Row_Width +1;
+    _Address_length = _Address_length +1;
+    Usercode_Length = Usercode_Length +1;
+    _Arch_Row = _Arch_Row +1;
+    _BSCAN_Length = _BSCAN_Length +1;
+}
+function ATDI_INIT {
+    HDR 0;
+    HIR 0;
+    TDR 0;
+    TIR 0;
+    ! Enable the ATDI pin;
+	STATE IRPAUSE;
+	STATE IDLE;
+	STATE IRPAUSE;
+	STATE IDLE;
+	STATE IRPAUSE;
+	STATE IDLE;
+	STATE IRPAUSE;
+	STATE IDLE;
+}
+
+function PRELOAD {
+   datastream BScanTDI[1][_BSCAN_Length];	
+   BScanTDI[1] = ((#0) @ (Bscan[1]));
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(0xFF1C);
+   SDR _BSCAN_Length TDI(BScanTDI[1]);
+}
+
+function INI_PRELOAD {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(0xFF1C);
+   SDR _BSCAN_Length TDI(#1^_BSCAN_Length);
+}
+function SAMPLE {				
+   ! Shift in Sample(0x1C) instruction;
+   SIR Instruction_Length TDI(0xFF1C);
+   STATE DRPAUSE;
+   STATE IDLE;
+}
+function INI_SAMPLE {				
+   ! Shift in Sample(0x1C) instruction;
+   SIR Instruction_Length TDI(0xFF1C);
+   STATE DRPAUSE;
+   STATE IDLE;
+}
+function CAPTURE {	
+	datastream SavedBScanTDO[1][_BSCAN_Length];	
+	file NewFile = "FILE_SAVE";		
+   	! Shift in Sample(0x1C) instruction;
+   	SIR Instruction_Length TDI(0xFF1C);
+   	SDR _BSCAN_Length TDI(#1^_BSCAN_Length)
+   					TDO(SavedBScanTDO[1]);
+   	Bscan[1] = (SavedBScanTDO[1] << 1) >> 1;	
+   	! Shift in Preload(0x1C) instruction;
+   	SIR Instruction_Length TDI(0xFF1C);
+   	SDR _BSCAN_Length TDI(SavedBScanTDO[1]);
+   	// Write To file 
+   	fopen NewFile att "w"
+					 format "SVF_Plus";	
+   	fwrite NewFile (BSCAN_TDO, Bscan);
+   	fclose 	NewFile;
+}
+
+function DYNAMIC {	
+	datastream BScanTDI[1][_BSCAN_Length];
+	datastream BScanmask[1][_BSCAN_Length];
+	BScanTDI[1] = ((#0) @ (Bscan[1]));
+	BScanmask[1] = ((#0) @ (BscanMask[1]));
+   	ENDDR DRPAUSE;
+   	! Shift in Preload(0x1C) instruction;
+   	SIR Instruction_Length TDI(0xFF1C);
+   	SDR _BSCAN_Length 	TDI(BScanTDI[1])
+   					 	DMASK(BScanmask[1]);
+   	STATE IDLE;
+}
+
+function READ_ID {
+	datastream IDFuseMap[1][ID_Length];
+	! Shift in IDCODE(0x16) instruction;
+    SIR Instruction_Length TDI  (IDCODE);
+    IDFuseMap[1] = ( (IDTDI[1]) @ (#0) );
+    SDR_VERIFY ID_Length   TDI  (#1^ID_Length)
+                    	   TDO  (IDFuseMap[1])
+                    	   MASK (#1^ID_Length);
+	STATE IDLE;                           
+}
+function ENABLE {
+    ! Shift in PROGRAM_ENABLE(0x15) instruction;
+    SIR Instruction_Length TDI (PROGRAMEN);
+    STATE IDLE;
+}
+function DISABLE {
+    ! Shift in PROGRAM DISABLE(0x1E) instruction;
+    SIR Instruction_Length TDI (PROGRAMDIS);
+    RUN_TEST TCK 5 DELAY 200;
+    ! Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length TDI (BYPASS);
+    RUN_TEST TCK 5 DELAY PWP;
+}
+function ERASE {
+	! Shift in ERASE_DONE(0x24) instruction;
+    SIR Instruction_Length TDI (ERASE_DONE);
+    RUN_TEST TCK 5 DELAY PWP;
+    
+    ! Shift in ERASE(0x03) instruction;
+    SIR Instruction_Length TDI (ERASEPLD);
+    RUN_TEST TCK 5 DELAY PWE;
+	
+	! Shift in PROGRAM_ENABLE(0x15) instruction;
+    SIR Instruction_Length TDI (PROGRAMEN);
+    STATE IDLE;
+    
+    ! Shift in DISCHARGE(0x14) instruction;
+    SIR Instruction_Length TDI (DISCHARGE);
+    RUN_TEST TCK 5 DELAY PWP;
+}
+function PROGRAM {
+	datastream FuseMapAddr[1][_Address_length];
+	datastream FuseMapData[1][Row_Width];
+	int32	RowCount = 1;
+    Address.row = 1;
+    FuseArray_TDI.row = 1;
+
+    repeat Address_Length {
+    	! Shift in PROGRAM_ENABLE(0x15) instruction;
+	    SIR Instruction_Length TDI (PROGRAMEN);
+	    STATE IDLE;
+        ! Shift in ADDRESS(0x01) instruction;
+        SIR Instruction_Length TDI (ADDPLD);
+        FuseMapAddr[1] = ((Address[1]) @ (#0));
+        SDR _Address_length TDI (FuseMapAddr[1]);
+		STATE IDLE;
+        ! Shift in DATA(0x02) instruction;
+        SIR Instruction_Length TDI (DATAPLD);
+        ! Shift in Data Row = RowCount;
+        FuseMapData[1] = ((FuseArray_TDI[RowCount]) @ (#0));
+        SDR Row_Width TDI (FuseMapData[1]);
+        ! Shift in PROGRAM(0x07) instruction;
+        SIR Instruction_Length TDI (PROGPLD);
+        RUN_TEST TCK 5 DELAY PWP;
+        Address[1] = Address[1] >> 1;
+        RowCount = RowCount + 1 ;
+    } // repeat
+    Address[1] = #1@(#0^(Address_Length-1));
+}
+function PROGRAM_CFG {
+	datastream Address_CFGFuseMap[1][13];
+	datastream DataCFGFuseMap[1][_Arch_Row];
+	datastream DataCFGFuseMap1[1][_Arch_Row];
+    int32 i = 1;
+    int32 j = 1;
+    int32 CFGRow = 0;
+    Address_CFG.row = 1;
+    IF (ArchArray_TDI.row = 1)
+    {
+    	! Shift in PROGRAM_ENABLE(0x15) instruction;
+		SIR Instruction_Length TDI (PROGRAMEN);
+		STATE IDLE;		
+		! Shift in CFGBE(0x29) instruction;
+		SIR Instruction_Length TDI (CFGBE);
+		RUN_TEST TCK 5 DELAY PWE;
+		CFGRow = Arch_Length/Arch_Row;    
+	    repeat CFGRow {
+	    	! Shift in PROGRAM_ENABLE(0x15) instruction;
+			SIR Instruction_Length TDI (PROGRAMEN);
+			STATE IDLE;
+	        ! Shift in CFG ADDRESS(0x2B) instruction;
+	        SIR Instruction_Length TDI (ADDCFG);
+	        Address_CFGFuseMap[1] = ((Address_CFG[i]) @ (#0));
+	        SDR 13 TDI (Address_CFGFuseMap[1]);
+	        i = i + 1;
+	        ! Shift in CFG DATA(0x2D) instruction;
+	        SIR Instruction_Length TDI (DATACFG);
+	        j = (Arch_Row * (13 -i));
+	        DataCFGFuseMap1[1] = ArchArray_TDI[1] << j;
+	        DataCFGFuseMap[1] = ((DataCFGFuseMap1[1] >> 8)) << 1;
+		    SDR _Arch_Row TDI (DataCFGFuseMap[1]);
+	        ! Shift in CFG PROGRAM(0x2E) instruction;
+	        SIR Instruction_Length TDI (PROGCFG);
+	        RUN_TEST TCK 5 DELAY PWP;
+	    } // repeat
+	}
+}
+function PROGRAM_USERCODE {
+	datastream UserCodeFuseMap[1][Usercode_Length];
+    IF (Usercode_TDI.row = 1)
+	{
+		! Shift in USERCODE(0x17) instruction;
+	    SIR Instruction_Length	TDI (USERCODE);
+	    UserCodeFuseMap[1] = ((#1) @ (Usercode_TDI[1]));
+	    UserCodeFuseMap[1] = UserCodeFuseMap[1] << 1;
+	    SDR Usercode_Length	TDI	(UserCodeFuseMap[1]);
+		! Shift in PROGRAM USERCODE(0x1A) instruction;
+	    SIR Instruction_Length	TDI (PROG_USERCODE);
+		RUN_TEST	TCK 	5 DELAY 	PWP;
+	}
+}
+function PROGRAM_SECURITY {
+    ! Shift in PROGRAM SECURITY(0x09) instruction;
+    SIR Instruction_Length TDI (PROG_SECURITY);
+    RUN_TEST TCK 5 DELAY PWP;
+}
+
+function PROGRAM_DONE_BIT {
+	! Shift in PROGRAM DONE(0x2F) instruction;
+    SIR	Instruction_Length 	TDI (PROGRAM_DONE);
+	RUN_TEST	IDLE TCK 5 DELAY 50;
+	! Shift in PROGRAM DISABLE(0x1E) instruction;
+    SIR	Instruction_Length 	TDI (PROGRAMDIS);
+	RUN_TEST	IDLE  TCK 5 DELAY 200;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 10;
+	! Shift in IDCODE(0x16) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (IDCODE)
+									TDO(0x1D00)
+									MASK(0xFF00);	
+}
+function VERIFY_DONE_BIT {	
+	! Shift in IDCODE(0x16) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI(IDCODE)
+								    TDO(0x1D00)
+								    MASK(0xFF00);			   	      	
+}
+function ERASE_DONE_BIT {
+	! Shift in ISC ERASE DONE(0x24) instruction;
+    SIR	Instruction_Length 	TDI (ISC_ERASE_DONE);
+	RUN_TEST	TCK 5 DELAY PWP;
+	STATE IDLE;
+}
+function VERIFY {
+	datastream FuseMapAddr[1][_Address_length];
+	datastream DataFuseArray[1][Row_Width];
+    int32 RowCount = 1;
+    FuseArray_TDI.row = 1;
+    Address.row = 1;
+    
+    repeat Address_Length {
+    	! Shift in PROGRAM_ENABLE(0x15) instruction;
+		SIR Instruction_Length TDI (PROGRAMEN);
+		STATE IDLE;
+	    ! Shift in ADDRESS(0x01) instruction;
+	    SIR Instruction_Length TDI (ADDPLD);
+	    FuseMapAddr[1] = ((Address[1]) @(#0));
+	    SDR _Address_length TDI (FuseMapAddr[1]);
+		STATE IDLE;
+	
+        ! Shift in VERIFY(0x0A) instruction; 
+    	SIR Instruction_Length TDI (READPLD);
+    	RUN_TEST TCK 5 DELAY PWV;
+
+        ! Shift in DATA(0x02) instruction;
+    	SIR Instruction_Length TDI (DATAPLD);
+    	! Shift Out Data Row = RowCount;
+    	DataFuseArray[1] = ((FuseArray_TDI[RowCount]) @(#0));
+    	SDR_VERIFY Row_Width TDI (#1^Row_Width)
+                         	 TDO (DataFuseArray[1]]);
+        RowCount = RowCount+1;
+        Address[1] = Address[1] >> 1;
+        
+    } // repeat
+    Address[1] = #1@(#0^(Address_Length-1));
+}
+function VERIFY_CFG {
+	datastream Address_VCFGFuseMap[1][13];
+	datastream DataVCFGFuseMap1[1][_Arch_Row];
+	datastream DataVCFGFuseMap[1][_Arch_Row];
+	int32 i = 1;
+    int32 j = 1;
+    int32 CFGRow = 0;
+    Address_CFG.row = 1;
+    IF (ArchArray_TDI.row = 1)
+    {
+	    CFGRow = Arch_Length/Arch_Row;    
+	    repeat CFGRow {
+	    	IF (i == 1)
+	    	{
+	    		i = i + 1;
+	        }
+	        ELSEIF (i == 4)
+	    	{
+	    		i = i + 1;
+	        }
+	        ELSE
+	        {
+	        	! Shift in PROGRAM_ENABLE(0x15) instruction;
+				SIR Instruction_Length TDI (PROGRAMEN);
+				STATE IDLE;
+	        	! Shift in CFG ADDRESS(0x2B) instruction;
+	        	SIR Instruction_Length TDI (ADDCFG);
+	        	Address_VCFGFuseMap[1] = ((Address_CFG[i]) @ (#0));
+	        	SDR 13 TDI (Address_VCFGFuseMap[1]);
+	        	i = i + 1;
+	        	! Shift in CFG Read(0x28) instruction;
+	        	SIR Instruction_Length TDI (READCFG);
+	        	RUN_TEST TCK 5 DELAY PWV;
+	        	! Shift in CFG DATA(0x2D) instruction;
+	        	SIR Instruction_Length TDI (DATACFG);		        	
+	        	j = (Arch_Row * (13 -i));
+	        	DataVCFGFuseMap1[1] = ArchArray_TDI[1] << j;
+	        	DataVCFGFuseMap[1] = (DataVCFGFuseMap1[1] >> 8) << 1;
+	        	SDR_VERIFY _Arch_Row TDI (#1^_Arch_Row)
+	                          		 TDO (DataVCFGFuseMap[1]);		
+	        }
+	    } // repeat
+	}
+}
+function SAFE_VERIFY_CFG {
+	datastream Address_VCFGFuseMap[1][13];
+	datastream DataVCFGFuseMap1[1][_Arch_Row];
+	datastream DataVCFGFuseMap[1][_Arch_Row];
+	int32 i = 1;
+    int32 j = 1;
+    int32 CFGRow = 0;
+    Address_CFG.row = 1;
+    IF (ArchArray_TDI.row = 1)
+    {
+	    CFGRow = Arch_Length/Arch_Row;    
+	    repeat CFGRow {
+	        ! Shift in PROGRAM_ENABLE(0x15) instruction;
+			SIR Instruction_Length TDI (PROGRAMEN);
+			STATE IDLE;
+        	! Shift in CFG ADDRESS(0x2B) instruction;
+        	SIR Instruction_Length TDI (ADDCFG);
+        	Address_VCFGFuseMap[1] = ((Address_CFG[i]) @ (#0));
+        	SDR 13 TDI (Address_VCFGFuseMap[1]);
+        	i = i + 1;
+        	! Shift in CFG Read(0x28) instruction;
+        	SIR Instruction_Length TDI (READCFG);
+        	RUN_TEST TCK 5 DELAY PWV;
+        	! Shift in CFG DATA(0x2D) instruction;
+        	SIR Instruction_Length TDI (DATACFG);
+        	j = (Arch_Row * (13 -i));
+        	DataVCFGFuseMap1[1] = ArchArray_TDI[1] << j;
+        	DataVCFGFuseMap[1] = (DataVCFGFuseMap1[1] >> 8) << 1;
+        	SDR_VERIFY _Arch_Row TDI (#1^_Arch_Row)
+                                 TDO (DataVCFGFuseMap[1]);		            		        	
+	    } // repeat
+	}
+}
+function VERIFY_USERCODE {
+	datastream VUserCodeFuseMap[1][Usercode_Length];
+    IF (Usercode_TDI.row = 1)
+	{
+		! Shift in USERCODE(0x17) instruction;
+	    SIR Instruction_Length TDI (USERCODE);
+	    VUserCodeFuseMap[1] = ((#1) @ (Usercode_TDI[1]));
+	    VUserCodeFuseMap[1] = VUserCodeFuseMap[1] << 1;
+		SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+					   				TDO	(VUserCodeFuseMap[1]);
+	}
+}
+function SAVE_ID {
+    datastream SavedID[1][32];
+    datastream IDFuseMap[1][ID_Length];
+    file NewFile = "FILE_SAVE";
+    SIR Instruction_Length TDI (IDCODE);
+    SDR ID_Length TDI (#1^ID_Length)
+                  TDO (IDFuseMap[1]);
+    SavedID[1] = IDFuseMap[1] << 7;
+    // Write To File
+    fopen  NewFile att "w" format "SVF_Plus";
+    fwrite NewFile (ID, SavedID);
+    fclose NewFile;
+}
+function SVF_SAVE_ID {
+	datastream IDFuseMap[1][ID_Length];                	   
+    SIR Instruction_Length TDI (IDCODE);
+    IDFuseMap[1] = ( (IDTDI[1]) @ (#0) );
+    SDR_VERIFY ID_Length TDI  (#1^ID_Length)
+                         TDO  (IDFuseMap[1])
+                         MASK (#0^ID_Length);
+}
+function SAVE_ARRAY {
+    datastream SavedFuseMap[Address_Length][Row_Width];
+    datastream FuseMapAddress[1][_Address_length];
+	datastream DataFuseMap[1][Row_Width];
+    int32 RowCount = 1;
+    
+    file NewFile = "FILE_SAVE";
+    Address.row = 1;
+
+    ! Shift in PROGRAM_ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (PROGRAMEN);
+	STATE IDLE;
+    ! Shift in ADDRESS(0x01) instruction;
+    SIR Instruction_Length TDI (ADDPLD);
+    FuseMapAddress[1] = ((Address[1]) @(#0));
+    SDR _Address_length TDI (FuseMapAddress[1]);
+	STATE IDLE;
+
+    repeat Address_Length-1 {
+        ! Shift in VERIFY(0x0A) instruction; 
+    	SIR Instruction_Length TDI (READPLD);
+    	RUN_TEST TCK 5 DELAY PWV;
+
+        ! Shift in DATA(0x02) instruction;
+    	SIR Instruction_Length TDI (DATAPLD);
+    	SDR Row_Width TDI (#1^Row_Width)
+                      TDO (DataFuseMap[1]);
+        SavedFuseMap[RowCount] = DataFuseMap[1] >> 1;
+        Address[1] = Address[1] >> 1;
+        RowCount = RowCount+1;
+        ! Shift in PROGRAM_ENABLE(0x15) instruction;
+		SIR Instruction_Length TDI (PROGRAMEN);
+		STATE IDLE;
+        ! Shift in ADDRESS(0x01) instruction;
+    	SIR Instruction_Length TDI (ADDPLD);
+    	FuseMapAddress[1] = ((Address[1]) @(#0));
+    	SDR _Address_length TDI (FuseMapAddress[1]);
+		STATE IDLE;
+    } // repeat
+    ! Shift in VERIFY(0x0A) instruction; 
+	SIR Instruction_Length TDI (READPLD);
+	RUN_TEST TCK 5 DELAY PWV;
+
+    ! Shift in DATA(0x02) instruction;
+	SIR Instruction_Length TDI (DATAPLD);
+	SDR Row_Width TDI (#1^Row_Width)
+                  TDO (DataFuseMap[1]);
+    SavedFuseMap[RowCount] = DataFuseMap[1] >> 1;
+    Address[1] = #1@(#0^(Address_Length-1));
+
+    // Write To file
+    fopen NewFile att "wa"
+               format "SVF_Plus";
+    fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+    fclose NewFile;
+}
+function SAVE_CFG {
+	datastream SavedArchFuseMap[1][ARCHITECH_LENGTH];    
+    datastream SavedArch[12][ARCHITECH_ROW];
+    datastream Address_VCFGFuseMap[1][13];
+	datastream DataVCFGFuseMap[1][_Arch_Row];
+    int32 i = 1;
+    int32 j = 1;
+    int32 CFGRow = 0;
+    file NewFile = "FILE_SAVE";
+    Address_CFG.row = 1;
+    IF (Arch_Length != 0)
+    {
+	    CFGRow = Arch_Length/Arch_Row;    
+	    repeat CFGRow {
+	    	! Shift in PROGRAM_ENABLE(0x15) instruction;
+			SIR Instruction_Length TDI (PROGRAMEN);
+			STATE IDLE;
+	        ! Shift in CFG ADDRESS(0x2B) instruction;
+	        SIR Instruction_Length TDI (ADDCFG);
+	        Address_VCFGFuseMap[1] = ((Address_CFG[i]) @ (#0));
+	        SDR 13 TDI (Address_VCFGFuseMap[1]);
+	        i = i + 1;
+	        ! Shift in CFG Read(0x28) instruction;
+	        SIR Instruction_Length TDI (READCFG);
+	        RUN_TEST TCK 5 DELAY PWV;
+	
+	        ! Shift in CFG DATA(0x2D) instruction;
+	        SIR Instruction_Length TDI (DATACFG);
+	        SDR _Arch_Row TDI(#1^_Arch_Row) 
+	        			 TDO(DataVCFGFuseMap[1]);
+	        SavedArch[j] = DataVCFGFuseMap[1] << 7;
+	        j = j + 1;   
+	    } // repeat
+	    IF (CFGRow == 6)
+	    {
+	    	SavedArchFuseMap[1] = (SavedArch[6] @ SavedArch[5]) @ (SavedArch[4] @ SavedArch[3]) @ (SavedArch[2] @ SavedArch[1]);
+	    }
+	    ELSE
+	    {
+	    	SavedArchFuseMap[1] = (SavedArch[12] @ SavedArch[11]) @ (SavedArch[10] @ SavedArch[9]) @ (SavedArch[8] @ SavedArch[7]) @ (SavedArch[6] @ SavedArch[5]) @ (SavedArch[4] @ SavedArch[3]) @ (SavedArch[2] @ SavedArch[1]);
+	    }		
+	    // Write To file 
+	    fopen NewFile att "wa"
+	               format "SVF_Plus";
+	    fwrite NewFile (ArchArray_TDI,SavedArchFuseMap);
+	    fclose NewFile;
+	}
+}
+function SVF_SAVE_ARRAY {
+	datastream FuseMapAddress[1][_Address_length];
+    Address.row = 1;
+
+    ! Shift in PROGRAM_ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (PROGRAMEN);
+	STATE IDLE;
+    ! Shift in ADDRESS(0x01) instruction;
+    SIR Instruction_Length TDI (ADDPLD);
+    FuseMapAddress[1] = ((Address[1]) @(#0));
+    SDR _Address_length TDI (FuseMapAddress[1]);
+	STATE IDLE;
+
+    repeat Address_Length-1 {
+        ! Shift in VERIFY(0x0A) instruction; 
+    	SIR Instruction_Length TDI (READPLD);
+    	RUN_TEST TCK 5 DELAY PWV;
+
+        ! Shift in DATA(0x02) instruction;
+    	SIR Instruction_Length TDI (DATAPLD);
+    	SDR_VERIFY Row_Width TDI (#1^Row_Width)
+                      		 TDO (#1^Row_Width)
+                             MASK(#0^Row_Width);
+        Address[1] = Address[1] >> 1;
+        ! Shift in PROGRAM_ENABLE(0x15) instruction;
+		SIR Instruction_Length TDI (PROGRAMEN);
+		STATE IDLE;
+        ! Shift in ADDRESS(0x01) instruction;
+    	SIR Instruction_Length TDI (ADDPLD);
+    	FuseMapAddress[1] = ((Address[1]) @(#0));
+    	SDR _Address_length TDI (FuseMapAddress[1]);
+		STATE IDLE;
+    } // repeat
+    ! Shift in VERIFY(0x0A) instruction; 
+	SIR Instruction_Length TDI (READPLD);
+	RUN_TEST TCK 5 DELAY PWV;
+
+    ! Shift in DATA(0x02) instruction;
+	SIR Instruction_Length TDI (DATAPLD);
+	SDR_VERIFY Row_Width TDI (#1^Row_Width)
+                         TDO (#1^Row_Width)
+                         MASK(#0^Row_Width);
+    Address[1] = #1@(#0^(Address_Length-1));
+}
+function SVF_SAVE_CFG {
+	datastream Address_VCFGFuseMap[1][13];
+    int32 i = 1;
+    int32 CFGRow = 0;
+    Address_CFG.row = 1;
+    IF (Arch_Length != 0)
+    {
+	    CFGRow = Arch_Length/Arch_Row;    
+	    repeat CFGRow {
+	        ! Shift in PROGRAM_ENABLE(0x15) instruction;
+			SIR Instruction_Length TDI (PROGRAMEN);
+			STATE IDLE;
+	        ! Shift in CFG ADDRESS(0x2B) instruction;
+	        SIR Instruction_Length TDI (ADDCFG);
+	        Address_VCFGFuseMap[1] = ((Address_CFG[i]) @ (#0));
+	        SDR 13 TDI (Address_VCFGFuseMap[1]);
+	        i = i + 1;
+	        ! Shift in CFG Read(0x28) instruction;
+	        SIR Instruction_Length TDI (READCFG);
+	        RUN_TEST TCK 5 DELAY PWV;
+	
+	        ! Shift in CFG DATA(0x2D) instruction;
+	        SIR Instruction_Length TDI (DATACFG);
+	        SDR_VERIFY _Arch_Row TDI(#1^_Arch_Row) 
+	        			 		 TDO(#1^_Arch_Row)
+	        			 		 MASK(#0^_Arch_Row);   
+	    } // repeat
+	}
+}
+function SAVE_USERCODE {
+    datastream SavedUsercode[1][32];
+    datastream UsercodeFusemap[1][Usercode_Length];
+    file NewFile = "FILE_SAVE";
+    ! Shift in USERCODE(0x17) instruction;
+    SIR Instruction_Length	TDI (USERCODE);
+    RUN_TEST TCK 5 DELAY PWV;
+    SDR	Usercode_Length TDI (#1^Usercode_Length)
+           				TDO (UsercodeFusemap[1]);
+    SavedUsercode[1] = (UsercodeFusemap[1]) << 7;
+    // Write To file 
+    fopen NewFile att "wa"
+                  format "SVF_Plus";	
+    fwrite NewFile (Usercode_TDI, SavedUsercode);
+    fclose NewFile;
+}
+function SVF_SAVE_USERCODE {
+    ! Shift in USERCODE(0x17) instruction; 
+    SIR Instruction_Length TDI (USERCODE);
+    SDR_VERIFY Usercode_Length TDI  (#1^Usercode_Length)
+                               TDO  (#1^Usercode_Length)
+                               MASK (#0^Usercode_Length);
+}
+function READ_DONE_BIT {
+	datastream SavedDONE_BIT[1][8];
+	datastream DONE_BITFusemap[1][Instruction_Length];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in IDCODE(0x16) instruction;
+    SIR Instruction_Length	TDI	(IDCODE)
+							TDO (DONE_BITFusemap[1]);
+	SavedDONE_BIT[1] = DONE_BITFusemap[1] >> 8; 
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (DONE_BIT, SavedDONE_BIT);
+	fclose 	NewFile;
+}
+function SVF_SAVE_DONE_BIT {
+	! Shift in IDCODE(0x16) instruction;
+    SIR_VERIFY Instruction_Length	TDI	(IDCODE)
+									TDO (#1^Instruction_Length)
+									MASK(#0^Instruction_Length);
+}
+function FLASH_READ_ID {           	   
+    ! Shift in IDCODE(0x16) instruction;
+    SIR Instruction_Length TDI  (0xFF16);
+    SDR_VERIFY ID_Length   TDI  (#1^ID_Length)
+                           TDO  (#000000001001010000101000001000011)
+                           MASK (#1^ID_Length);
+    STATE IDLE;                           
+}
+function FLASH_ENABLE {
+	! Shift in ISC ENABLE(0x15) instruction;
+    SIR Instruction_Length TDI (0xFF15);
+	RUN_TEST	IDLE	TCK 5 DELAY 1;
+}
+function FLASH_DISABLE {
+    ! Shift in PROGRAM DISABLE(0x1E) instruction;
+    SIR Instruction_Length TDI (0xFF1E);
+    RUN_TEST TCK 5 DELAY 200;
+    ! Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length TDI (0xFFFF);
+    RUN_TEST TCK 5 DELAY 1;
+}
+function FLASH_TRANSPARENT_ENABLE {
+	! Shift in XPROGRAM ENABLE(0x35) instruction;
+    SIR Instruction_Length TDI (0xFF35);
+	RUN_TEST	IDLE	TCK 5 DELAY 1;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (0xFFFF);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+}
+function SRAM_ENABLE {
+	! Shift in ISC SRAM ENABLE(0x55) instruction;
+    SIR Instruction_Length TDI (0xFF55);
+	RUN_TEST	IDLE	TCK 5 DELAY 1;
+}
+function SRAM_TRANSPARENT_READ_ENABLE {
+	! Shift in LSCC_SRAM_TRANSPARENT_ENABLE(0x75) instruction;
+    SIR Instruction_Length TDI (0xFF75);
+	RUN_TEST	IDLE	TCK 5 DELAY 1;
+}
+
+function FLASH_ERASE {	
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (0xFF03);
+	RUN_TEST 	IDLE  TCK 5 DELAY 1;
+	loop 100 {
+		RUN_TEST IDLE  TCK 5 DELAY 100;
+		SDR_VERIFY 1 TDI(#0) TDO(#1);
+	}
+}
+
+function DIRECT_FLASH_ERASE {		
+	! Shift in ISC SRAM ENABLE(0x55) instruction;
+	SIR Instruction_Length TDI (0xFF55);
+	RUN_TEST	IDLE	TCK 5 DELAY 1;
+	
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (0xFF03);
+	RUN_TEST 	TCK 5 DELAY 1;
+	
+	! Shift in ISC ENABLE(0x15) instruction;    
+	SIR Instruction_Length TDI (0xFF15);    
+	RUN_TEST	IDLE	TCK 5 DELAY 1;       
+
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (0xFF03);
+	RUN_TEST 	IDLE  TCK 5 DELAY 1;
+	loop 100 {
+		RUN_TEST IDLE  TCK 5 DELAY 100;
+		SDR_VERIFY 1 TDI(#0) TDO(#1);
+	}
+}
+
+function SVF_FLASH_ERASE {			
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (0xFF03);
+	RUN_TEST 	IDLE  TCK 5 DELAY 10000;
+	SDR_VERIFY 1 TDI(#0) TDO(#1);
+}
+
+function DIRECT_SVF_FLASH_ERASE {	
+	! Shift in ISC SRAM ENABLE(0x55) instruction;
+	SIR Instruction_Length TDI (0xFF55);
+	RUN_TEST	IDLE	TCK 5 DELAY 1;
+	
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (0xFF03);
+	RUN_TEST 	TCK 5 DELAY 1;
+	
+	! Shift in ISC ENABLE(0x15) instruction;    
+	SIR Instruction_Length TDI (0xFF15);    
+	RUN_TEST	IDLE	TCK 5 DELAY 1;        
+	
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (0xFF03);
+	RUN_TEST 	IDLE  TCK 5 DELAY 10000;
+	SDR_VERIFY 1 TDI(#0) TDO(#1);
+}
+
+function CHECK_STATUS {
+	! Shift in READ STATUS(0xB2) instruction;
+	SIR Instruction_Length TDI (0xFFB2);
+	RUN_TEST IDLE TCK 5 DELAY 1; 
+	SDR_VERIFY  1 TDI(#0)
+				  TDO(#0);	
+}
+
+function FLASH_PROGRAM_STATUS {
+	datastream FDataArray[1][237];
+	int32	RowCount = 1;
+	EFuseArray_TDI.row = 1;
+	! Shift in INIT ADDRESS(0x21) instruction;
+	SIR Instruction_Length	TDI (0xFF21);
+	RUN_TEST IDLE TCK 5  DELAY 1;	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (0xFFFF);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	repeat 551 {			
+		! Shift in DATA SHIFT(0x02) instruction;
+		SIR Instruction_Length 	TDI (0xFF02);		
+		! Shift in Row = RowCount;
+		FDataArray[1] = ((#0) @ EFuseArray_TDI[RowCount]);
+		SDR	237	TDI	(FDataArray[1]);			
+		! Shift in LSCC PROGRAM INCR RTI(0x67) instruction;
+		SIR Instruction_Length	TDI (0xFF67);
+		RUN_TEST IDLE TCK 5  DELAY 1;
+		loop 10 {
+			RUN_TEST DRPAUSE DELAY 1;
+			SDR_VERIFY 1 TDI(#0) 
+			             TDO(#1); 
+		}	   
+		RowCount = RowCount +1;
+	} // repeat
+	! Shift in INIT ADDRESS(0x21) instruction;
+	SIR Instruction_Length	TDI (0xFF21);
+	RUN_TEST IDLE TCK 5  DELAY 1;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (0xFFFF);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+}
+function FLASH_SVF_PROGRAM_STATUS {
+	datastream FDataArray[1][237];
+	int32	RowCount = 1;
+	EFuseArray_TDI.row = 1;
+	! Shift in INIT ADDRESS(0x21) instruction;
+	SIR Instruction_Length	TDI (0xFF21);
+	RUN_TEST IDLE TCK 5  DELAY 1;	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (0xFFFF);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	repeat 551 {		
+		! Shift in DATA SHIFT(0x02) instruction;
+		SIR Instruction_Length 	TDI (0xFF02);	
+		! Shift in Row = RowCount;
+		FDataArray[1] = ((#0) @ EFuseArray_TDI[RowCount]);
+		SDR	237	TDI	(FDataArray[1]);	
+		! Shift in LSCC PROGRAM INCR RTI(0x67) instruction;
+    	SIR Instruction_Length	TDI (0xFF67);
+		RUN_TEST IDLE TCK 5  DELAY 10;
+		STATE DRPAUSE;
+		RowCount = RowCount +1;
+	} // repeat
+}
+function FLASH_PROGRAM_USERCODE {
+	datastream FUsercodeFuseMap[1][33];
+	IF (Usercode_TDI.row = 1)
+	{
+	 	! Shift in READ USERCODE(0x17) instruction;
+	    SIR Instruction_Length TDI (0xFF17);
+	    FUsercodeFuseMap[1] = (#0) @ (Usercode_TDI[1]);
+	    SDR Usercode_Length	TDI	( FUsercodeFuseMap[1] );
+		! Shift in ISC PROGRAM USERCODE(0x1A) instruction;
+	    SIR Instruction_Length	TDI (0xFF1A);
+		RUN_TEST	TCK 5   DELAY 	10;
+	}
+}
+function FLASH_PROGRAM_DONE_BIT {
+	! Shift in ISC PROGRAM DONE(0x2F) instruction;
+    SIR	Instruction_Length 	TDI (0xFF2F);
+	RUN_TEST	IDLE TCK 5 DELAY 50;
+	SDR_VERIFY 1 TDI(#0) TDO(#1);
+	! Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (0xFFFF)
+									TDO(0x001D)
+									MASK(0x00FF);
+}
+function FLASH_VERIFY_DONE_BIT {	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (0xFFFF)
+									TDO(0x001D)
+									MASK(0x00FF);		   	      	
+}
+function SRAM_VERIFY_DONE_BIT {	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (0xFFFF)
+									TDO(0x001D)
+									MASK(0x00FF);		   	      	
+}
+function FLASH_ERASE_DONE_BIT {
+	! Shift in ISC ERASE DONE(0x24) instruction;
+    SIR	Instruction_Length 	TDI (0xFF24);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 5 DELAY 50;
+}
+function FLASH_VERIFY {
+	datastream VFDataArray[1][237];
+	int32	RowCount = 1;
+	EFuseArray_TDI.row = 1;
+	! Shift in LSCC RESET ADDRESS(0x21) instruction;
+    SIR Instruction_Length	TDI (0xFF21);
+	RUN_TEST	IDLE TCK 5 DELAY 1;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (0xFFFF);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	! Shift in LSCC READ INCR RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(0xFF6A);
+	repeat 551 {
+		RUN_TEST	IDLE TCK 5 DELAY 1;
+		! Shift Out Data Row = RowCount;
+		VFDataArray[1] = ((EFuseArray_TDI[RowCount]) << 4) >> 4;
+		SDR_VERIFY	237	TDI	(#1^237)
+						TDO	(VFDataArray[1]);
+		RowCount = RowCount +1;
+	}
+}
+function FLASH_VERIFY_USERCODE {
+	datastream FVUsercodeFuseMap[1][33];
+	IF (Usercode_TDI.row = 1)
+	{
+		! Shift in READ USERCODE(0x17) instruction;
+	    SIR Instruction_Length TDI (0xFF17);
+	    RUN_TEST	TCK 5  DELAY 	PWV;
+	    FVUsercodeFuseMap[1] = (#0) @ (Usercode_TDI[1]);
+	    SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+					   				TDO (FVUsercodeFuseMap[1]);
+	}
+}
+
+function FLASH_PROGRAM_SECURITY {
+	! Shift in ISC PROGRAM SECURITY(0x09) instruction;
+    SIR Instruction_Length	TDI	(0xFF09);
+	RUN_TEST	TCK 	5 DELAY 	50;
+	STATE IDLE;
+}
+function FLASH_SAVE_ARRAY {
+	int32	RowCount = 1;
+	datastream FlashSavedFuseMap[551][236];
+	file NewFile = "FILE_SAVE";	  
+	! Shift in LSCC RESET ADDRESS(0x21) instruction;
+    SIR Instruction_Length	TDI (0xFF21);
+	RUN_TEST	IDLE TCK 5 DELAY 1;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (0xFFFF);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	! Shift in LSCC READ INCR RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(0xFF6A);
+	repeat 551 {
+		RUN_TEST	TCK 5 DELAY 1;						
+		! Shift Out Data Row = RowCount;
+	    SDR 236 	TDI (#1^236)
+					TDO (FlashSavedFuseMap);
+		RowCount = RowCount +1;
+	}
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (EFuseArray_TDI, FlashSavedFuseMap);
+	fclose 	NewFile;
+}
+function FLASH_SVF_SAVE_ARRAY {
+	int32	RowCount = 1;
+	Address.row = 1;	
+	! Shift in LSCC RESET ADDRESS(0x21) instruction;
+    SIR Instruction_Length	TDI (0xFF21);
+	RUN_TEST	IDLE TCK 5 DELAY 1;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (0xFFFF);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	! Shift in LSCC READ INCR RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(0xFF6A);
+	repeat 551 {
+		RUN_TEST	TCK 5 DELAY 1;
+		! Shift Out Data Row = RowCount;
+	    SDR_VERIFY	236	TDI	(#1^236)
+						TDO	(#1^236)
+						MASK (#0^236);
+		RowCount = RowCount +1;
+	}
+}
+function FLASH_SVF_CHECKSUM_ARRAY {
+	int32	RowCount = 1;
+	Address.row = 1;	
+	! Shift in LSCC RESET ADDRESS(0x21) instruction;
+    SIR Instruction_Length	TDI (0xFF21);
+	RUN_TEST	IDLE TCK 5 DELAY 1;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (0xFFFF);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	! Shift in LSCC READ INCR RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(0xFF6A);
+	repeat 551 {
+		RUN_TEST	TCK 5 DELAY 1;
+		! Shift Out Data Row = RowCount;
+	    SDR_VERIFY	236	TDI	(#1^236)
+						TDO	(#1^236)
+						CMASK (#0^236);
+		RowCount = RowCount +1;
+	}
+}
+function FLASH_SAVE_USERCODE {
+	datastream FSavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	! Shift in READ USERCODE(0x17) instruction;
+    SIR Instruction_Length	TDI (0xFF17);
+    RUN_TEST	TCK 5 DELAY 1;
+	SDR	Usercode_Length	TDI(#1^Usercode_Length)
+						TDO(FSavedUsercode);
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (EUsercode_TDI, FSavedUsercode);
+	fclose 	NewFile;
+}
+function FLASH_SVF_SAVE_USERCODE {
+	! Shift in READ USERCODE(0x17) instruction;
+    SIR Instruction_Length TDI (0xFF17);
+    RUN_TEST	TCK 5 DELAY 1;
+	SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+								TDO	(#1^Usercode_Length)
+								MASK(#0^Usercode_Length);
+}
+
+function FLASH_SAVE_STATUS {
+	datastream SavedSTATUS[1][32];
+	file NewFile = "FILE_SAVE";
+	! Shift in LSCC READ STATUS(0x53) instruction;
+    SIR Instruction_Length	TDI (0xFF53);
+	SDR	32	TDI(#1^32)
+			TDO(SavedSTATUS);
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (STATUS_BIT, SavedSTATUS);
+	fclose 	NewFile;
+}
+function FLASH_SVF_SAVE_STATUS {
+	! Shift in LSCC READ STATUS(0x53) instruction;
+    SIR Instruction_Length TDI (0xFF53);
+	SDR_VERIFY 	32 TDI (#1^32)
+				   TDO	(#1^32)
+				   MASK(#0^32);
+}
+function FLASH_READ_DONE_BIT {
+	datastream SavedDONE_BIT[1][Instruction_Length];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length	TDI	(0xFFFF)
+							TDO (SavedDONE_BIT);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (DONE_BIT, SavedDONE_BIT);
+	fclose 	NewFile;
+}
+function FLASH_SVF_SAVE_DONE_BIT {
+	! Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY Instruction_Length	TDI	(0xFFFF)
+				TDO (#1^Instruction_Length)
+				MASK(#0^Instruction_Length);
+}
+function REFRESH_FUNCTION {
+	! Shift in LSCC REFRESH(0x23) instruction;
+    SIR Instruction_Length	TDI (0xFF23);
+	RUN_TEST IDLE TCK 5 DELAY 1; 
+
+	! Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length	TDI (0xFFFF);
+	RUN_TEST IDLE TCK 100 DELAY 10;
+}
+
+function UPLOAD_FUNCTION {
+	
+	! Shift in ISC SRAM ENABLE(0x55) instruction;
+    SIR Instruction_Length TDI (0xFF55);
+	RUN_TEST	IDLE	TCK 5 DELAY 1;
+	
+    ! Shift in ISC ERASE(0x03) instruction;
+    SIR Instruction_Length TDI (0xFF03);
+	RUN_TEST 	TCK 5 DELAY 1;
+	
+	
+	! Shift in ISC ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (0xFF15);
+	RUN_TEST	IDLE	TCK 5 DELAY 1;
+
+	! Shift in ISC DISABLE(0x1E) instruction;
+  	SIR	Instruction_Length 	TDI (0xFF1E);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+
+	! Shift in BYPASS(0xFF) instruction;
+  	SIR	Instruction_Length 	TDI (0xFFFF);
+	RUN_TEST	IDLE  TCK 100 DELAY 10;
+}
+function FLASH_SAVE_CONFIG_BIT {	
+	datastream SavedCONFIG_BIT[1][4];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in Read Config(0xEA) instruction;
+	SIR  Instruction_Length  TDI (0xFFEA);
+	RUN_TEST IDLE TCK 5 DELAY 1;
+	SDR  4  TDI (0xFF) 
+			 TDO (SavedCONFIG_BIT) ;	
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, SavedCONFIG_BIT);
+	fclose 	NewFile;
+}
+function FLASH_SVF_SAVE_CONFIG_BIT {	
+	! Shift in Read Config(0xEA) instruction;
+	SIR  Instruction_Length  TDI (0xFFEA);
+	RUN_TEST IDLE TCK 5 DELAY 1;
+	SDR_VERIFY  4  TDI (#1^4) 
+			 		TDO ((#1^4) 
+			 		MASK ((#0^4);
+}
+function FLASH_MDR{
+					        
+	! Shift in ISC SRAM ENABLE(0x55) instruction;
+    SIR Instruction_Length TDI (0xFF55);
+	RUN_TEST	IDLE	TCK 5 DELAY 1;
+	
+   ! Shift in ISC ERASE(0x03) instruction;
+    SIR Instruction_Length TDI (0xFF03);
+	RUN_TEST 	TCK 5 DELAY 1;
+   ! Shift in ISC ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (0xFF15);
+	RUN_TEST	IDLE	TCK 5 DELAY 1;
+
+	! Shift in ISC DISABLE(0x1E) instruction;
+  	SIR	Instruction_Length 	TDI (0xFF1E);
+	RUN_TEST	IDLE  TCK 5 DELAY MDRDelay;
+
+	! Shift in BYPASS(0xFF) instruction;
+  	SIR	Instruction_Length 	TDI (0xFFFF);
+	RUN_TEST	IDLE  TCK 100 DELAY 10;
+}		
+
+]]>
+</Script>
+</SVF_Plus>

@@ -1,0 +1,36 @@
+//
+// mj5gelib.ttl
+//
+// $Header: /home/dmsys/pvcs/RCSMigTest/rcs/mj5g00e/pkg/m5enb/data/RCS/mj5gelib.ttl,v 1.5 2005/05/19 02:38:24 jmchan Exp $
+
+// MojoE uses different names for ebr cells.
+//DP8KB = DP8KA ;
+//PDP8KB = PDP8KA ;
+//SP8KB = SP8KA ;
+
+// Turn off PLLB cells.  Will use PLLC cells defined in nml.
+EHXPLLB = EHXPLLB {
+	RST; CLKI=NOT_USEDI; CLKFB=NOT_USEDFB;
+	DDAMODE; DDAIZR; DDAILAG; DDAIDEL2; DDAIDEL1; DDAIDEL0;
+	CLKOP=NOT_USEDOP; CLKOS=NOT_USEDOS; CLKOK=NOT_USEDOK;
+	LOCK; DDAOZR; DDAOLAG; DDAODEL2; DDAODEL1; DDAODEL0;
+};
+EPLLB = EPLLB {
+	RST; CLKI=NOT_USEDI; CLKFB ;
+	DDAMODE ; DDAIZR; DDAILAG; DDAIDEL2; DDAIDEL1; DDAIDEL0;
+	CLKOP=NOT_USEDOP; CLKOS=NOT_USEDOS; CLKOK=NOT_USEDOK;
+	LOCK; DDAOZR; DDAOLAG; DDAODEL2; DDAODEL1; DDAODEL0;
+};
+
+// Turn off Tristate cells.
+TBUF = TBUF {
+	I; T=NOT_USED; O;
+};
+
+TIBUF = TIBUF {
+	I; T=NOT_USED; O;
+};
+
+OBCO = OBCO {
+	I=NOT_USED; OT; OC;
+};

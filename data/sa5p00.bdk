@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="sa5p00" include="basenewdev,ep5c00" family="ECP5U">
+  <VariableDef name="L2PTXT_NEEDED" value="false" />
+  <VariableDef name="Bitgen_ES_NO" value="-g ES:No"/>
+  <VariableDef name="Bitgen_ES_YES" value="-g ES:Yes"/>  
+  <VariableDef name="Bitgen::ES" value='device.has_es == 1? !Bitgen_ES_YES : !Bitgen_ES_NO'/>  
+  <CommandFileDef id="Bitgen_T2BCmd" name="${report_base}.t2b" clean="TRUE" >
+	<line>#PROP_BIT_RunDRCBitGen</line>
+	<line>#PROP_BIT_CreateBitFile</line>
+	<line>#PROP_BIT_OutFormatBitGen</line>
+	<line>#PROP_BIT_NoHeader</line>
+	<line>#PROP_BIT_ConModBitGen</line>
+	<line>#PROP_BIT_DisRAMResBitGen</line>
+	<line>#PROP_BIT_DisableUESBitgen</line>
+	<line>!Bitgen::ES</line>	
+  </CommandFileDef>
+</BaliFlowDef>

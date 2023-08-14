@@ -1,0 +1,20 @@
+var pairs =
+{
+"bus":{"taps":1,"points":1,"tap":1,"net":1,"adding":1}
+,"signals":{"enter":1}
+,"enter":{"exit":1}
+,"exit":{"bus":1}
+,"points":{"called":1}
+,"called":{"bus":1}
+,"taps":{"bus":1}
+,"tap":{"added":1,"automatically":1}
+,"added":{"existing":1}
+,"existing":{"bus":1}
+,"net":{"wire":1}
+,"wire":{"net":1,"already":1}
+,"already":{"bus":1}
+,"adding":{"tap":1}
+,"automatically":{"promotes":1}
+,"promotes":{"bus":1}
+}
+;Search.control.loadWordPairs(pairs);

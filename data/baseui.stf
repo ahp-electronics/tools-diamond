@@ -1,0 +1,1879 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This file defines all properties of FPGA devices -->
+<!-- Property,ProertyUI,PropertyUISet can be override in leaf node when it has same name -->
+<StrategyConfig parent="basepropset.stf" version="1.0" >
+
+<!-- *************************************************************** -->
+<!-- *****************************  Property Ui *************************** -->
+<!-- *************************************************************** -->
+<!-- property flag : normal,hide,readonly -->
+
+<!-- *************************************************************** -->
+<!-- Synplify Property --> 
+<!-- *************************************************************** -->
+
+<!-- _EdfFrequency=S,INT,Frequency (MHz),200 -->
+<PropertyUI	
+	label="Frequency (MHz)"
+	name="PROPUI_SYN_EdfFrequency"
+	propertyName="PROP_SYN_EdfFrequency"
+	catalog="Timing Options"
+	flag="normal"	
+/>
+
+<!-- _EdfArea=S,BOOL,Area,FALSE -->
+<PropertyUI	
+	label="Area"
+	name="PROPUI_SYN_EdfArea"
+	propertyName="PROP_SYN_EdfArea"
+	catalog="Timing Options"
+/>
+
+<!-- _EdfInConsFile=S,STRLIST,Input SDC Constraint File (.sdc) -->
+<PropertyUI	
+	label="Input SDC Constraint File(.sdc)"
+	name="PROPUI_SYN_EdfInConsFile"
+	propertyName="PROP_SYN_EdfInConsFile"
+	catalog="Input Options"
+/>
+
+<!-- _EdfInPrfWrite=S,BOOL,Output Preference File, FALSE 
+<PropertyUI	
+	label="Output Preference File"
+	name="PROPUI_SYN_EdfInPrfWrite"
+	propertyName="PROP_SYN_EdfInPrfWrite"
+	catalog="Output Options"
+/> -->
+
+<PropertyUI	
+	label="Use LPF Created from SDC in Project"
+	name="PROPUI_SYN_UseLPF"
+	propertyName="PROP_SYN_UseLPF"
+	catalog="Output Options"
+/>
+
+<!-- _EdfSymFSM=S,BOOL,FSM Compiler,TRUE -->
+<PropertyUI	
+	label="FSM Compiler"
+	name="PROPUI_SYN_EdfSymFSM"
+	propertyName="PROP_SYN_EdfSymFSM"
+	catalog="Optimization Options"
+/>
+
+<!--  _EdfInsertIO=S,SLIST,Disable IO Insertion -->
+<PropertyUI	
+	label="Disable IO Insertion"
+	name="PROPUI_SYN_EdfInsertIO"
+	propertyName="PROP_SYN_EdfInsertIO"
+	catalog="Optimization Options"
+/>
+
+<!-- _EdfOutNetForm=S,SLIST,Output Netlist Format, -->
+<PropertyUI	
+	label="Output Netlist Format"
+	name="PROPUI_SYN_EdfOutNetForm"
+	propertyName="PROP_SYN_EdfOutNetForm"
+	catalog="Output Options"
+/>
+
+<!-- _EdfNumCritPath=S,Int,Number of Critical Paths,3 -->
+<PropertyUI	
+	label="Number of Critical Paths"
+	name="PROPUI_SYN_EdfNumCritPath"
+	propertyName="PROP_SYN_EdfNumCritPath"
+	catalog="Timing Analysis Options"
+/>
+
+<!-- _EdfPushTirstates=A,BOOL,Push Tristates,TRUE -->
+<PropertyUI	
+	label="Push Tristates"
+	name="PROPUI_SYN_EdfPushTirstates"
+	propertyName="PROP_SYN_EdfPushTirstates"
+	catalog="Optimization Options"
+/>
+
+<!--  _EdfRunRetiming=A,SLIST,Pipelining and Retiming, -->
+<PropertyUI	
+	label="Pipelining and Retiming"
+	name="PROPUI_SYN_EdfRunRetiming"
+	propertyName="PROP_SYN_EdfRunRetiming"
+	catalog="Optimization Options"
+/>
+
+<!-- _EdfResSharing=A,BOOL,Resource Sharing,TRUE -->
+<PropertyUI	
+	label="Resource Sharing"
+	name="PROPUI_SYN_EdfResSharing"
+	propertyName="PROP_SYN_EdfResSharing"
+	catalog="Optimization Options"
+/>
+
+<!-- _EdfFixGateClocks=A,INTRANGE,Fix Gated Clocks [0-3],3,0,3 
+<PropertyUI	
+	label="Fix Gated Clocks [0-3]"
+	name="PROPUI_SYN_EdfFixGateClocks"
+	propertyName="PROP_SYN_EdfFixGateClocks"
+	catalog="Optimization Options"
+/> -->
+
+<!-- _EdfFixGeneratedClocks=A,INTRANGE,Fix Generated Clocks [0-3],3,0,3 
+<PropertyUI	
+	label="Fix Generated Clocks [0-3]"
+	name="PROPUI_SYN_EdfFixGeneratedClocks"
+	propertyName="PROP_SYN_EdfFixGeneratedClocks"
+	catalog="Optimization Options"
+/> -->
+
+<!-- Clock Conversion  -->
+<PropertyUI	
+	label="Clock Conversion "
+	name="PROPUI_SYN_ClockConversion"
+	propertyName="PROP_SYN_ClockConversion"
+	catalog="Optimization Options"
+/>
+
+<!-- _EdfDefEnumEncode=A,SLIST,Default Enum Encoding, -->
+<PropertyUI	
+	label="Default Enum Encoding"
+	name="PROPUI_SYN_EdfDefEnumEncode"
+	propertyName="PROP_SYN_EdfDefEnumEncode"
+	catalog="Optimization Options"
+/>
+
+<!-- _EdfAllowDUPMod=A,BOOL,Allow Duplicate Modules,FALSE -->
+<PropertyUI	
+	label="Allow Duplicate Modules"
+	name="PROPUI_SYN_EdfAllowDUPMod"
+	propertyName="PROP_SYN_EdfAllowDUPMod"
+	catalog="Optimization Options"
+/>
+
+<!-- _EdfVerilogInput=A,SLIST,Verilog Input, -->
+<PropertyUI	
+	label="Verilog Input"
+	name="PROPUI_SYN_EdfVerilogInput"
+	propertyName="PROP_SYN_EdfVerilogInput"
+	catalog="Verilog Options"
+/>
+
+<!-- _EdfUnconsClk=A,BOOL,Use Clock Period for Unconstrained I/O,TRUE -->
+<PropertyUI	
+	label="Use Clock Period for Unconstrained I/O"
+	name="PROPUI_SYN_EdfUnconsClk"
+	propertyName="PROP_SYN_EdfUnconsClk"
+	catalog="Timing Options"
+/>
+
+<!--	_EdfFanout=A,INT,Fanout Limit,100 -->
+<PropertyUI	
+	label="Fanout Guide"
+	name="PROPUI_SYN_EdfFanout"
+	propertyName="PROP_SYN_EdfFanout"
+	catalog="Optimization Options"
+/>
+
+<!-- _EdfGSR=A,SLIST,Force GSR -->
+<PropertyUI	
+	label="Force GSR"
+	name="PROPUI_SYN_EdfGSR"
+	propertyName="PROP_SYN_EdfGSR"
+	catalog="Optimization Options"
+/>
+
+<!-- _EdfNumStartEnd=A,INT,Number of Start/End Points,0 -->
+<PropertyUI	
+	label="Number of Start/End Points"
+	name="PROPUI_SYN_EdfNumStartEnd"
+	propertyName="PROP_SYN_EdfNumStartEnd"
+	catalog="Timing Analysis Options"
+/>
+
+<!-- _EdfArrangeVHDLFiles=A,BOOL,Arrange VHDL Files,FALSE -->
+<PropertyUI	
+	label="Arrange VHDL Files"
+	name="PROPUI_SYN_EdfArrangeVHDLFiles"
+	propertyName="PROP_SYN_EdfArrangeVHDLFiles"
+	catalog="Optimization Options"
+/>
+
+<!-- Update Compile Point Timing Data-->
+<PropertyUI	
+	label="Update Compile Point Timing Data"
+	name="PROPUI_SYN_UpdateCompilePtTimData"
+	propertyName="PROP_SYN_UpdateCompilePtTimData"
+	catalog="Optimization Options"
+/>
+
+<!-- Resolved Mixed Drivers -->
+<PropertyUI	
+	label="Resolve Mixed Drivers "
+	name="PROPUI_SYN_ResolvedMixedDrivers"
+	propertyName="PROP_SYN_ResolvedMixedDrivers"
+	catalog="Other Options"
+/>
+
+<!-- 6/13/2012 - Edif Array Rename 
+<PropertyUI	
+	label="Edif Array Rename"
+	name="PROPUI_SYN_EdifNames"
+	propertyName="PROP_SYN_EdifNames"
+	catalog="Other Options"
+/> -->
+
+<!-- rerun Synplify 
+<PropertyUI	
+	label="Resynthesize All"
+	name="PROPUI_SYN_RERUN"
+	propertyName="PROP_SYN_RERUN"
+	catalog="Other Options"
+/> -->
+
+<!-- Command line Options -->
+<PropertyUI	
+	label="Command Line Options"
+	name="PROPUI_SYN_CmdLineArgs"
+	propertyName="PROP_SYN_CmdLineArgs"
+	catalog="Other Options"
+/>
+
+<!-- Export Diamond settings to Synplify Pro GUI -->
+<PropertyUI	
+	label="Export Diamond Settings to Synplify Pro GUI"
+	name="PROPUI_SYN_ExportSetting"
+	propertyName="PROP_SYN_ExportSetting"
+	catalog="Other Options"
+/>
+
+<!-- VHDL 2008  -->
+<PropertyUI	
+	label="VHDL 2008"
+	name="PROPUI_SYN_VHDL2008"
+	propertyName="PROP_SYN_VHDL2008"
+	catalog="Other Options"
+/>
+
+<!-- library directories  -->
+<PropertyUI
+	label="Library Directories"
+	name="PROPUI_SYN_LibPath"
+	propertyName="PROP_SYN_LibPath"
+	catalog="Frequent Options"
+/>
+
+<!-- Disable Register Replication during S/R Optimization  -->
+<PropertyUI
+	label="Disable Register Replication during S/R Optimization"
+	name="PROPUI_SYN_DisableRegisterRep"
+	propertyName="PROP_SYN_DisableRegisterRep"
+	catalog="Other Options"
+/>
+
+<!-- *************************************************************** -->
+<!-- Precision Property -->
+<!-- *************************************************************** -->
+
+<!-- _VSynFreq=S,INT,Frequency (MHz),400 -->
+<PropertyUI	
+	label="Frequency (MHz)"
+	name="PROPUI_PRE_VSynFreq"
+	propertyName="PROP_PRE_VSynFreq"
+	catalog="Standard"
+/>
+
+<!-- _VSynComArea=S,BOOL,Area,FALSE -->
+<PropertyUI	
+	label="Area"
+	name="PROPUI_PRE_VSynComArea"
+	propertyName="PROP_PRE_VSynComArea"
+	catalog="Standard"
+/>
+
+<!-- _VSynPrf=S,STRLIST,Input SDC Constraint Filename (.sdc) -->
+<PropertyUI	
+	label="Input SDC Constraint Filename (.sdc)"
+	name="PROPUI_PRE_VSynPrf"
+	propertyName="PROP_PRE_VSynPrf"
+	catalog="Standard"
+/>
+
+<!-- _VSynOutPref=S,SLIST,Output Preference File -->
+<PropertyUI	
+	label="Output Preference File"
+	name="PROPUI_PRE_VSynOutPref"
+	propertyName="PROP_PRE_VSynOutPref"
+	catalog="Standard"
+/>
+
+<!--_VSynFSM=S,SLIST,FSM Encoding -->
+<PropertyUI	
+	label="FSM Encoding"
+	name="PROPUI_PRE_VSynFSM"
+	propertyName="PROP_PRE_VSynFSM"
+	catalog="Standard"
+/>
+
+<!-- _VSynIOPad=S,BOOL,Disable I/O Insertion,FALSE -->
+<PropertyUI	
+	label="Disable I/O Insertion"
+	name="PROPUI_PRE_VSynIOPad"
+	propertyName="PROP_PRE_VSynIOPad"
+	catalog="Standard"
+/>
+
+<!-- _VSynOutNetForm=S,SLIST,Output Netlist Format -->
+<PropertyUI	
+	label="Output Netlist Format"
+	name="PROPUI_PRE_VSynOutNetForm"
+	propertyName="PROP_PRE_VSynOutNetForm"
+	catalog="Standard"
+/>
+
+<!-- _VSynCritcal=S,INT,Number of Critical Paths,3 -->
+<PropertyUI	
+	label="Number of Critical Paths"
+	name="PROPUI_PRE_VSynCritcal"
+	propertyName="PROP_PRE_VSynCritcal"
+	catalog="Standard"
+/>
+
+<!-- _EdfResSharing=A,BOOL,Resource Sharing,TRUE -->
+<PropertyUI	
+	label="Resource Sharing"
+	name="PROPUI_PRE_EdfResSharing"
+	propertyName="PROP_PRE_EdfResSharing"
+	catalog="Advanced"
+/>
+
+<!-- _EdfIgnoreRamRWCol=A,BOOL,Ignore RAM Read/Write Collision,FALSE -->
+<PropertyUI	
+	label="Ignore RAM Read/Write Collision"
+	name="PROPUI_PRE_EdfIgnoreRamRWCol"
+	propertyName="PROP_PRE_EdfIgnoreRamRWCol"
+	catalog="Advanced"
+/>
+
+<!-- _EdfDSPAcrossHie=A,BOOL,Infer DSPs Across Hierarchy,FALSE -->
+<PropertyUI	
+	label="Infer DSPs Across Hierarchy"
+	name="PROPUI_PRE_EdfDSPAcrossHie"
+	propertyName="PROP_PRE_EdfDSPAcrossHie"
+	catalog="Advanced"
+/>
+
+<!-- _EdfUseSafeFSM=A,BOOL,Use Safe FSM,FALSE -->
+<PropertyUI	
+	label="Use Safe FSM"
+	name="PROPUI_PRE_EdfUseSafeFSM"
+	propertyName="PROP_PRE_EdfUseSafeFSM"
+	catalog="Advanced"
+/>
+
+<!-- _EdfReencodeFSM=A,BOOL,Reencode FSM Outputs,TRUE -->
+<PropertyUI	
+	label="Reencode FSM Outputs"
+	name="PROPUI_PRE_EdfReencodeFSM"
+	propertyName="PROP_PRE_EdfReencodeFSM"
+	catalog="Advanced"
+/>
+
+<!-- _EdfAutoResOfRam=A,BOOL,Auto Resource Allocation of RAM,FALSE -->
+<PropertyUI	
+	label="Auto Resource Allocation of RAM"
+	name="PROPUI_PRE_EdfAutoResOfRam"
+	propertyName="PROP_PRE_EdfAutoResOfRam"
+	catalog="Advanced"
+/>
+
+<!-- _EdfFullCase=A,BOOL,Full Case,FALSE -->
+<PropertyUI	
+	label="Full Case"
+	name="PROPUI_PRE_EdfFullCase"
+	propertyName="PROP_PRE_EdfFullCase"
+	catalog="Advanced"
+/>
+
+<!-- _EdfParaCase=A,BOOL,Parallel Case,FALSE -->
+<PropertyUI	
+	label="Parallel Case"
+	name="PROPUI_PRE_EdfParaCase"
+	propertyName="PROP_PRE_EdfParaCase"
+	catalog="Advanced"
+/>
+
+<!-- _EdfArrayBoundsCase=A,BOOL,Array Bounds Case,FALSE -->
+<PropertyUI	
+	label="Array Bounds Case"
+	name="PROPUI_PRE_EdfArrayBoundsCase"
+	propertyName="PROP_PRE_EdfArrayBoundsCase"
+	catalog="Advanced"
+/>
+
+<!-- _EdfVlog2001=A,BOOL,Verilog Standard V2001,TRUE -->
+<PropertyUI	
+	label="Verilog Standard V2001"
+	name="PROPUI_PRE_EdfVlog2001"
+	propertyName="PROP_PRE_EdfVlog2001"
+	catalog="Advanced"
+/>
+
+<!-- _EdfTimingViolation=A,BOOL,Report Timing Violations,FALSE -->
+<PropertyUI	
+	label="Report Timing Violations"
+	name="PROPUI_PRE_EdfTimingViolation"
+	propertyName="PROP_PRE_EdfTimingViolation"
+	catalog="Advanced"
+/>
+
+<!-- _EdfNetFanout=A,BOOL,Show Net Fanout,FALSE -->
+<PropertyUI	
+	label="Show Net Fanout"
+	name="PROPUI_PRE_EdfNetFanout"
+	propertyName="PROP_PRE_EdfNetFanout"
+	catalog="Advanced"
+/>
+
+<!-- _EdfClockDomainCross=A,BOOL,Show Clock Domain Crossing,FALSE -->
+<PropertyUI	
+	label="Show Clock Domain Crossing"
+	name="PROPUI_PRE_EdfClockDomainCross"
+	propertyName="PROP_PRE_EdfClockDomainCross"
+	catalog="Advanced"
+/>
+
+<!-- _EdfMissConstraint=A,BOOL,Report Missing Constraints,FALSE -->
+<PropertyUI	
+	label="Report Missing Constraints"
+	name="PROPUI_PRE_EdfMissConstraint"
+	propertyName="PROP_PRE_EdfMissConstraint"
+	catalog="Advanced"
+/>
+
+<!-- _VSynRetime=A,BOOL,Run Retiming,TRUE -->
+<PropertyUI	
+	label="Run Retiming"
+	name="PROPUI_PRE_VSynRetime"
+	propertyName="PROP_PRE_VSynRetime"
+	catalog="Advanced"
+/>
+
+<!-- _VSyninpd=A,INT,Input Delay (ns),0 -->
+<PropertyUI	
+	label="Input Delay (ns)"
+	name="PROPUI_PRE_VSyninpd"
+	propertyName="PROP_PRE_VSyninpd"
+	catalog="Advanced"
+/>
+
+<!-- _VSynoutd=A,INT,Output Delay (ns),0 -->
+<PropertyUI	
+	label="Output Delay (ns)"
+	name="PROPUI_PRE_VSynoutd"
+	propertyName="PROP_PRE_VSynoutd"
+	catalog="Advanced"
+/>
+
+<!-- _VSynTransform=A,BOOL,Transform Set/Reset on DFFs to Latches,TRUE -->
+<PropertyUI	
+	label="Transform Set/Reset on DFFs to Latches"
+	name="PROPUI_PRE_VSynTransform"
+	propertyName="PROP_PRE_VSynTransform"
+	catalog="Advanced"
+/>
+
+<!-- _VSynRepClkFreq=A,BOOL,Report Clock Frequencies,FALSE -->
+<PropertyUI	
+	label="Report Clock Frequencies"
+	name="PROPUI_PRE_VSynRepClkFreq"
+	propertyName="PROP_PRE_VSynRepClkFreq"
+	catalog="Advanced"
+/>
+
+<!-- _VSynTimSum=A,INT,Number of Timing Summary Paths,10 -->
+<PropertyUI	
+	label="Number of Timing Summary Paths"
+	name="PROPUI_PRE_VSynTimSum"
+	propertyName="PROP_PRE_VSynTimSum"
+	catalog="Advanced"
+/>
+
+<!-- _VSynGatedClk=A,BOOL,Convert Gated Clock,FALSE -->
+<PropertyUI	
+	label="Convert Gated Clock"
+	name="PROPUI_PRE_VSynGatedClk"
+	propertyName="PROP_PRE_VSynGatedClk"
+	catalog="Advanced"
+/>
+
+<!-- _VSynGSR=A,SLIST,Force GSR -->
+<PropertyUI	
+	label="Force GSR"
+	name="PROPUI_PRE_VSynGSR"
+	propertyName="PROP_PRE_VSynGSR"
+	catalog="Advanced"
+/>
+
+<!-- Command line Options -->
+<PropertyUI	
+	label="Command Line Options"
+	name="PROPUI_PRE_CmdLineArgs"
+	propertyName="PROP_PRE_CmdLineArgs"
+	catalog="Advanced"
+/>
+<!-- *************************************************************** -->
+<!-- LST Property -->
+<!-- *************************************************************** -->
+
+<!--  Input SDC Constraint File (.sdc) -->
+<PropertyUI	
+	label="Input SDC Constraint File (.sdc)"
+	name="PROPUI_LST_EdfInConsFile"
+	propertyName="PROP_LST_EdfInConsFile"
+	catalog="Input Options"
+/> 
+
+<!-- Frequency (MHz) -->
+<PropertyUI	
+	label="Target Frequency (MHz)"
+	name="PROPUI_LST_EdfFrequency"
+	propertyName="PROP_LST_EdfFrequency"
+	catalog="Timing Options"
+	condition='PROP_LST_OptimizeGoal!="Area"'
+/>
+
+<!-- Optimization goal-->
+<PropertyUI	
+	label="Optimization Goal"
+	name="PROPUI_LST_OptimizeGoal"
+	propertyName="PROP_LST_OptimizeGoal"
+	catalog="Timing Options"
+/>
+
+<!-- Number of Critical Paths-->
+<PropertyUI	
+	label="Number of Critical Paths"
+	name="PROPUI_LST_NumCriticalPaths"
+	propertyName="PROP_LST_NumCriticalPaths"
+	catalog="Timing Options"
+/>
+
+<!--  Edif Output 
+<PropertyUI	
+	label="Edif Output"
+	name="PROPUI_LST_EdfOutput"
+	propertyName="PROP_LST_EdfOutput"
+	catalog="Output Options"
+/> -->
+
+<!-- Preference Output 
+<PropertyUI	
+	label="Output Preference File"
+	name="PROPUI_LST_PrfOutput"
+	propertyName="PROP_LST_PrfOutput"
+	catalog="Output Options"
+/> -->
+
+<PropertyUI	
+	label="Use LPF Created from SDC in Project"
+	name="PROPUI_LST_UseLPF"
+	propertyName="PROP_LST_UseLPF"
+	catalog="Output Options"
+/>
+
+<!--Log file
+<PropertyUI	
+	label="Log file"
+	name="PROPUI_LST_Logfile"
+	propertyName="PROP_LST_Logfile"
+	catalog="Output Options"
+/> -->
+
+<!--NGD Output
+<PropertyUI	
+	label="NGD Output"
+	name="PROPUI_LST_NGDOutput"
+	propertyName="PROP_LST_NGDOutput"
+	catalog="Output Options"
+/> -->
+
+<!--NGO Output
+<PropertyUI	
+	label="NGO Output"
+	name="PROPUI_LST_NGOOutput"
+	propertyName="PROP_LST_NGOOutput"
+	catalog="Output Options"
+/> -->
+
+<!-- Bram Utilization
+<PropertyUI	
+	label="Bram Utilization"
+	name="PROPUI_LST_BlockRAMUtil"
+	propertyName="PROP_LST_BlockRAMUtil"
+	catalog="Optimization Options"
+/> -->
+
+<!-- EBR Utilization-->
+<PropertyUI	
+	label="EBR Utilization"
+	name="PROPUI_LST_EBRUtil"
+	propertyName="PROP_LST_EBRUtil"
+	catalog="Optimization Options"
+/>
+
+<!-- DSP Utilization-->
+<PropertyUI	
+	label="DSP Utilization"
+	name="PROPUI_LST_DSPUtil"
+	propertyName="PROP_LST_DSPUtil"
+	catalog="Optimization Options"
+/>
+
+<!-- DSP style -->
+<PropertyUI	
+	label="DSP Style"
+	name="PROPUI_LST_DSPStyle"
+	propertyName="PROP_LST_DSPStyle"
+	catalog="Optimization Options"
+/>
+
+<!-- RAM style -->
+<PropertyUI	
+	label="RAM Style"
+	name="PROPUI_LST_RAMStyle"
+	propertyName="PROP_LST_RAMStyle"
+	catalog="Optimization Options"
+/>
+
+<!-- ROM style -->
+<PropertyUI	
+	label="ROM Style"
+	name="PROPUI_LST_ROMStyle"
+	propertyName="PROP_LST_ROMStyle"
+	catalog="Optimization Options"
+/>
+
+<!-- 	DSP usage	
+<PropertyUI	
+	label="DSP Usage"
+	name="PROPUI_LST_DSPUsage"
+	propertyName="PROP_LST_DSPUsage"
+	catalog="Optimization Options"
+/>  -->
+
+<!-- DSP utilization
+<PropertyUI	
+	label="DSP Utilization"
+	name="PROPUI_LST_DSPUtil"
+	propertyName="PROP_LST_DSPUtil"
+	catalog="Optimization Options"
+/>  -->
+
+<!-- Carry chain -->
+<PropertyUI	
+	label="Use Carry Chain"
+	name="PROPUI_LST_CarryChain"
+	propertyName="PROP_LST_CarryChain"
+	catalog="Optimization Options"
+/>
+
+<!-- Carry chain length -->
+<PropertyUI	
+	label="Carry Chain Length"
+	name="PROPUI_LST_CarryChainLength"
+	propertyName="PROP_LST_CarryChainLength"
+	catalog="Optimization Options"
+/>
+
+<!-- Force GSR infer -->
+<PropertyUI	
+	label="Force GSR"
+	name="PROPUI_LST_ForceGSRInfer"
+	propertyName="PROP_LST_ForceGSRInfer"
+	catalog="Optimization Options"
+/>
+
+<!-- Resource sharing -->
+<PropertyUI	
+	label="Resource Sharing"
+	name="PROPUI_LST_ResourceShare"
+	propertyName="PROP_LST_ResourceShare"
+	catalog="Optimization Options"
+/>
+
+<!--Propagate constant -->
+<PropertyUI	
+	label="Propagate Constants"
+	name="PROPUI_LST_PropagatConst"
+	propertyName="PROP_LST_PropagatConst"
+	catalog="Optimization Options"
+/>
+
+<!-- Remove duplicate registers -->
+<PropertyUI	
+	label="Remove Duplicate Registers"
+	name="PROPUI_LST_RemoveDupRegs"
+	propertyName="PROP_LST_RemoveDupRegs"
+	catalog="Optimization Options"
+/>
+
+<!-- 	MUX style	 -->
+<PropertyUI	
+	label="MUX Style"
+	name="PROPUI_LST_MuxStyle"
+	propertyName="PROP_LST_MuxStyle"
+	catalog="Optimization Options"
+/>
+
+<!-- 	Maximal fanout	 -->
+<PropertyUI	
+	label="Max Fanout Limit"
+	name="PROPUI_LST_MaxFanout"
+	propertyName="PROP_LST_MaxFanout"
+	catalog="Optimization Options"
+/>
+
+<!-- FSM encoding style -->
+<PropertyUI	
+	label="FSM Encoding Style"
+	name="PROPUI_LST_FSMEncodeStyle"
+	propertyName="PROP_LST_FSMEncodeStyle"
+	catalog="Optimization Options"
+/>
+
+<!-- I/O Insertion -->
+<PropertyUI	
+	label="Use IO Insertion"
+	name="PROPUI_LST_IOInsertion"
+	propertyName="PROP_LST_IOInsertion"
+	catalog="Optimization Options"
+/>
+
+<!-- Use IO register -->
+<PropertyUI	
+	label="Use IO Registers"
+	name="PROPUI_LST_UseIOReg"
+	propertyName="PROP_LST_UseIOReg"
+	catalog="Optimization Options"
+	condition='PROP_LST_IOInsertion=="True"'
+/>
+
+<!-- IP installation location 
+<PropertyUI	
+	label="IP Installation Location"
+	name="PROPUI_LST_IPInstallLocation"
+	propertyName="PROP_LST_IPInstallLocation"
+	catalog="IP support Options"
+/> -->
+
+<!-- IP core name 
+<PropertyUI	
+	label="IP Core Name"
+	name="PROPUI_LST_IPCoreName"
+	propertyName="PROP_LST_IPCoreName"
+	catalog="IP support Options"
+/> -->
+
+<!-- Encrypted RTL name 
+<PropertyUI	
+	label="Encrypted RTL Name"
+	name="PROPUI_LST_EncryptedRTLName"
+	propertyName="PROP_LST_EncryptedRTLName"
+	catalog="IP support Options"
+/> -->
+
+<!-- Intermediate file dump -->
+<PropertyUI	
+	label="Intermediate File Dump"
+	name="PROPUI_LST_InterFileDump"
+	propertyName="PROP_LST_InterFileDump"
+	catalog="Development Option"
+/>
+
+<!-- _EdfInLibPath=S,STRLIST,Macro Search Path -->
+<PropertyUI	
+	label="Macro Search Path"
+	name="PROPUI_LST_EdfInLibPath"
+	propertyName="PROP_LST_EdfInLibPath"
+	catalog="Translate Option"
+/>
+
+<!--  _EdfInRemLoc=S,SLIST,Remove LOC properties -->
+<PropertyUI	
+	label="Remove LOC Properties"
+	name="PROPUI_LST_EdfInRemLoc"
+	propertyName="PROP_LST_EdfInRemLoc"
+	catalog="Translate Option"
+/>
+
+<!--   Consistent Bus Name Conversion  
+<PropertyUI	
+	label="Consistent Bus Name Conversion"
+	name="PROPUI_LST_EdfInBusNameConv"
+	propertyName="PROP_LST_EdfInBusNameConv"
+	catalog="Translate Option"
+/> -->
+
+<!-- _EdfHardtimer=S,SLIST,Hardware Evaluation -->
+<PropertyUI	
+	label="Hardware Evaluation"
+	name="PROPUI_LST_EdfHardtimer"
+	propertyName="PROP_LST_EdfHardtimer"
+	catalog="Translate Option"
+/>
+
+<!-- _EdfMemPath=S,STRLIST,Memory Initial Value File Search Path -->
+<PropertyUI	
+	label="Memory Initial Value File Search Path"
+	name="PROPUI_LST_EdfMemPath"
+	propertyName="PROP_LST_EdfMemPath"
+	catalog="Translate Option"
+/>
+
+<!-- Resolved Mixed Drivers -->
+<PropertyUI	
+	label="Resolve Mixed Drivers"
+	name="PROPUI_LST_ResolvedMixedDrivers"
+	propertyName="PROP_LST_ResolvedMixedDrivers"
+	catalog="Other Options"
+/>
+
+<!-- 9/27/2013 - VHDL 2008 -->
+<PropertyUI	
+	label="VHDL 2008"
+	name="PROPUI_LST_VHDL2008"
+	propertyName="PROP_LST_VHDL2008"
+	catalog="Other Options"
+/>
+
+<!-- 3/3/2014 - Fix Gated Clocks -->
+<PropertyUI	
+	label="Fix Gated Clocks"
+	name="PROPUI_LST_FIXGATEDCLKS"
+	propertyName="PROP_LST_FIXGATEDCLKS"
+	catalog="Other Options"
+/>
+
+<!-- 7/1/2014 - Loop Limit -->
+<PropertyUI	
+	label="Loop Limit"
+	name="PROPUI_LST_LoopLimit"
+	propertyName="PROP_LST_LoopLimit"
+	catalog="Other Options"
+/>
+
+<!-- 7/10/2014 - Disable Distributed RAM -->
+<PropertyUI	
+	label="Disable Distributed RAM"
+	name="PROPUI_LST_DisableDistRam"
+	propertyName="PROP_LST_DisableDistRam"
+	catalog="Other Options"
+/>
+
+<!-- 2/27/2015 - Allow Duplicate Modules -->
+<PropertyUI	
+	label="Allow Duplicate Modules"
+	name="PROPUI_LST_AllowDUPMod"
+	propertyName="PROP_LST_AllowDUPMod"
+	catalog="Other Options"
+/>
+
+<!-- 3/20/2015 - Decode Unreachable States -->
+<PropertyUI	
+	label="Decode Unreachable States"
+	name="PROPUI_LST_DecodeUnreachableStates"
+	propertyName="PROP_LST_DecodeUnreachableStates"
+	catalog="Other Options"
+/>
+
+<!-- Command line Options -->
+<PropertyUI	
+	label="Command Line Options"
+	name="PROPUI_LST_CmdLineArgs"
+	propertyName="PROP_LST_CmdLineArgs"
+	catalog="Other Options"
+/>
+<!-- *************************************************************** -->
+<!-- Translate Design Property --> 
+<!-- *************************************************************** -->
+
+<!-- _EdfInLibPath=S,STRLIST,Macro Search Path -->
+<PropertyUI	
+	label="Macro Search Path"
+	name="PROPUI_BD_EdfInLibPath"
+	propertyName="PROP_BD_EdfInLibPath"
+	catalog="Standard"
+/>
+
+<!-- Partition Search Path -->
+<PropertyUI	
+	label="Partition Search Path"
+	name="PROPUI_BD_ParSearchPath"
+	propertyName="PROP_BD_ParSearchPath"
+	catalog="Advanced"
+/>
+
+<!--  _EdfInRemLoc=S,SLIST,Remove LOC properties -->
+<PropertyUI	
+	label="Remove LOC Properties"
+	name="PROPUI_BD_EdfInRemLoc"
+	propertyName="PROP_BD_EdfInRemLoc"
+	catalog="Advanced"
+/>
+
+<!--  _EdfInBusNameConv=S,SLIST,Consistent Bus Name Conversion -->
+<PropertyUI	
+	label="Consistent Bus Name Conversion"
+	name="PROPUI_BD_EdfInBusNameConv"
+	propertyName="PROP_BD_EdfInBusNameConv"
+	catalog="Standard"
+/>
+
+<!-- _EdfHardtimer=S,SLIST,Hardware Evaluation -->
+<PropertyUI	
+	label="Hardware Evaluation"
+	name="PROPUI_BD_EdfHardtimer"
+	propertyName="PROP_BD_EdfHardtimer"
+	catalog="Standard"
+/>
+
+<!-- _EdfMemPath=S,STRLIST,Memory Initial Value File Search Path -->
+<PropertyUI	
+	label="Memory Initial Value File Search Path"
+	name="PROPUI_BD_EdfMemPath"
+	propertyName="PROP_BD_EdfMemPath"
+	catalog="Standard"
+/>
+
+<PropertyUI	
+	label="Command Line Options"
+	name="PROPUI_BD_CmdLineArgs"
+	propertyName="PROP_BD_CmdLineArgs"
+	catalog="Standard"
+/>
+
+<!-- *************************************************************** -->
+<!-- Map Design Property --> 
+<!-- *************************************************************** -->
+
+<!--_PackLogMapDes=S,INT,Pack Logic Block Util. [blank or 0 to 100] -->
+<PropertyUI	
+	label="Pack Logic Block Util. [blank or 0 to 100]"
+	name="PROPUI_MAP_PackLogMapDes"
+	propertyName="PROP_MAP_PackLogMapDes"
+	catalog="Standard"
+/>
+
+<!-- _SwlMapDes=S,INTRANGE,Softwire Lookup Util. [0-10],8,0,10 
+<PropertyUI	
+	label="Softwire Lookup Util. [0-10]"
+	name="PROPUI_MAP_SwlMapDes"
+	propertyName="PROP_MAP_SwlMapDes"
+	catalog="Standard"
+/> -->
+
+<!-- _HierMapDes=S,BOOL,Hierarchical Mapping,FALSE
+<PropertyUI	
+	label="Hierarchical Mapping"
+	name="PROPUI_MAP_HierMapDes"
+	propertyName="PROP_MAP_HierMapDes"
+	catalog="Standard"
+/> -->
+
+<!-- _IgnorePreErr=S,BOOL,Ignore Preference Errors,TRUE -->
+<PropertyUI	
+	label="Ignore Preference Errors"
+	name="PROPUI_MAP_IgnorePreErr"
+	propertyName="PROP_MAP_IgnorePreErr"
+	catalog="Standard"
+/>
+
+<!-- _SymCrossRef=S,BOOL,Report Symbol Cross Reference,FALSE -->
+<PropertyUI	
+	label="Report Symbol Cross Reference"
+	name="PROPUI_MAP_SymCrossRef"
+	propertyName="PROP_MAP_SymCrossRef"
+	catalog="Standard"
+/>
+
+<!-- _SigCrossRef=S,BOOL,Report Signal Cross Reference,FALSE -->
+<PropertyUI	
+	label="Report Signal Cross Reference"
+	name="PROPUI_MAP_SigCrossRef"
+	propertyName="PROP_MAP_SigCrossRef"
+	catalog="Standard"
+/>
+
+<!-- _OvermapDevice=A,BOOL,Overmap device if design does not fit,FALSE -->
+<PropertyUI	
+	label="Overmap device if design does not fit"
+	name="PROPUI_MAP_OvermapDevice"
+	propertyName="PROP_MAP_OvermapDevice"
+	catalog="Advanced"
+/>
+
+<!-- _GuideFileMapDes=A,STRLIST,NCD Guide File 
+<PropertyUI	
+	label="NCD Guide File"
+	name="PROPUI_MAP_GuideFileMapDes"
+	propertyName="PROP_MAP_GuideFileMapDes"
+	catalog="Advanced"
+/>
+-->
+<!-- _RegRetiming=A,BOOL,Register Retiming,FALSE -->
+<PropertyUI	
+	label="Register Retiming"
+	name="PROPUI_MAP_RegRetiming"
+	propertyName="PROP_MAP_RegRetiming"
+	catalog="Advanced"
+/>
+
+<!-- _MapBlkModProp=S,DYNLIB,Block Module Properties, blkmod, GetMapProp 
+<PropertyUI	
+	label="Block Module Properties"
+	name="PROPUI_MAP_MapBlkModProp"
+	propertyName="PROP_MAP_MapBlkModProp"
+	catalog="Standard"
+	flag="Hide"
+/>-->
+
+<!-- _TimingDriven=A,BOOL,Timing Driven Mapping,FALSE -->
+<PropertyUI	
+	label="Timing Driven Mapping"
+	name="PROPUI_MAP_TimingDriven"
+	propertyName="PROP_MAP_TimingDriven"
+	catalog="Advanced"
+/>
+
+<!-- _TimingDrivenNodeRep=A,BOOL,Timing Driven Node Replication,FALSE -->
+<PropertyUI	
+	label="Timing Driven Node Replication"
+	name="PROPUI_MAP_TimingDrivenNodeRep"
+	propertyName="PROP_MAP_TimingDrivenNodeRep"
+	catalog="Advanced"
+/>
+
+<!-- _TimingDrivenPack=A,BOOL,Timing Driven Packing,FALSE -->
+<PropertyUI	
+	label="Timing Driven Packing"
+	name="PROPUI_MAP_TimingDrivenPack"
+	propertyName="PROP_MAP_TimingDrivenPack"
+	catalog="Advanced"
+/>
+
+<!-- _MapModArgs=A,STRLIST,Command line Options -->
+<PropertyUI	
+	label="Command Line Options"
+	name="PROPUI_MAP_MapModArgs"
+	propertyName="PROP_MAP_MapModArgs"
+	catalog="Advanced"
+/>
+
+<!-- _MAPIORegister=A,SLIST,IO Registering -->
+<PropertyUI	
+	label="IO Registering"
+	name="PROPUI_MAP_MAPIORegister"
+	propertyName="PROP_MAP_MAPIORegister"
+	catalog="Advanced"
+/>
+
+<!-- _MAPInferGSR=A,BOOL,Infer GSR,TRUE -->
+<PropertyUI	
+	label="Infer GSR"
+	name="PROPUI_MAP_MAPInferGSR"
+	propertyName="PROP_MAP_MAPInferGSR"
+	catalog="Advanced"
+/>
+
+<!-- *************************************************************** -->
+<!-- Place & Route Design Property --> 
+<!-- *************************************************************** -->
+
+<!-- _EffortParDes=S,SLIST,Placement Effort Level [1-5] -->
+<PropertyUI	
+	label="Placement Effort Level [1-5]"
+	name="PROPUI_PAR_EffortParDes"
+	propertyName="PROP_PAR_EffortParDes"
+	catalog="Standard"
+/>
+
+<!-- _RoutePassParDes=S,INTRANGE,Routing Passes [1-1000],6,1,1000 -->
+<PropertyUI	
+	label="Routing Passes [1-1000]"
+	name="PROPUI_PAR_RoutePassParDes"
+	propertyName="PROP_PAR_RoutePassParDes"
+	catalog="Standard"
+/>
+
+<!-- _NewRouteParDes=S,SLIST,Routing method -->
+<PropertyUI	
+	label="Routing method"
+	name="PROPUI_PAR_NewRouteParDes"
+	propertyName="PROP_PAR_NewRouteParDes"
+	catalog="Standard"
+/>
+
+<!-- _RemoveDir=S,BOOL,Remove previous design directory,TRUE -->
+<PropertyUI	
+	label="Remove previous design directory"
+	name="PROPUI_PAR_RemoveDir"
+	propertyName="PROP_PAR_RemoveDir"
+	catalog="Standard"
+/>
+
+<!-- _DisableTDParDes=S,BOOL,Disable Timing Driven,FALSE -->
+<PropertyUI	
+	label="Disable Timing Driven"
+	name="PROPUI_PAR_DisableTDParDes"
+	propertyName="PROP_PAR_DisableTDParDes"
+	catalog="Standard"
+/>
+
+<!-- _CrDlyStFileParDes=S,BOOL,Create Delay Statistic File,FALSE -->
+<PropertyUI	
+	label="Create Delay Statistic File"
+	name="PROPUI_PAR_CrDlyStFileParDes"
+	propertyName="PROP_PAR_CrDlyStFileParDes"
+	catalog="Standard"
+/>
+
+<!-- _PrefErrorOut=S,BOOL,Ignore Preference Errors,TRUE -->
+<PropertyUI	
+	label="Ignore Preference Errors"
+	name="PROPUI_PAR_PrefErrorOut"
+	propertyName="PROP_PAR_PrefErrorOut"
+	catalog="Standard"
+/>
+
+<!-- _RoutingCDP=S,SLIST,Congestion-Driven Placement -->
+<PropertyUI	
+	label="Congestion-Driven Placement"
+	name="PROPUI_PAR_RoutingCDP"
+	propertyName="PROP_PAR_RoutingCDP"
+	catalog="Standard"
+/>
+
+<!-- _RoutingCDR=S,SLIST,Congestion-Driven Routing -->
+<PropertyUI	
+	label="Congestion-Driven Routing"
+	name="PROPUI_PAR_RoutingCDR"
+	propertyName="PROP_PAR_RoutingCDR"
+	catalog="Standard"
+/>
+
+<!-- _PlcIterParDes=A,INTRANGE,Placement Iterations [0-100](0=run until solved),1,0,99 -->
+<PropertyUI	
+	label="Placement Iterations [0-100]"
+	name="PROPUI_PAR_PlcIterParDes"
+	propertyName="PROP_PAR_PlcIterParDes"
+	catalog="Advanced"
+/>
+
+<!-- _PlcStCostTblParDes=A,INTRANGE,Placement Iteration Start Pt,1,1,100 -->
+<PropertyUI	
+	label="Placement Iteration Start Pt"
+	name="PROPUI_PAR_PlcStCostTblParDes"
+	propertyName="PROP_PAR_PlcStCostTblParDes"
+	catalog="Advanced"
+/>
+
+<!-- _SaveBestRsltParDes=A,INTRANGE,Placement Save Best Run [1-100],1,1,100 -->
+<PropertyUI	
+	label="Placement Save Best Run [1-100]"
+	name="PROPUI_PAR_SaveBestRsltParDes"
+	propertyName="PROP_PAR_SaveBestRsltParDes"
+	catalog="Advanced"
+/>
+
+<!-- _RouteResOptParDes=A,INTRANGE,Routing Resource Optimization [0-6],0,0,6 -->
+<PropertyUI	
+	label="Routing Resource Optimization [0-6]"
+	name="PROPUI_PAR_RouteResOptParDes"
+	propertyName="PROP_PAR_RouteResOptParDes"
+	catalog="Advanced"
+/>
+
+<!-- _RouteDlyRedParDes=A,INTRANGE,Routing Delay Reduction Passes [0-100],0,0,100 -->
+<PropertyUI	
+	label="Routing Delay Reduction Passes [0-100]"
+	name="PROPUI_PAR_RouteDlyRedParDes"
+	propertyName="PROP_PAR_RouteDlyRedParDes"
+	catalog="Advanced"
+/>
+
+<!-- _PlcInputLimit=A,SLIST,PLC Input Limit
+<PropertyUI
+	label="PLC Input Limit"
+	name="PROPUI_PAR_PlcInputLimit"
+	propertyName="PROP_PAR_PlcInputLimit"
+	catalog="Advanced"
+/> -->
+
+<!-- _PlcInputNeighborSize=A,SLIST,PLC Input Neighbor Size 
+<PropertyUI
+	label="PLC Input Neighbor Size"
+	name="PROPUI_PAR_PlcInputNeighborSize"
+	propertyName="PROP_PAR_PlcInputNeighborSize"
+	catalog="Advanced"
+/> -->
+
+<!-- _GuideFileParDes=A,STRLIST,Guide Filename 
+<PropertyUI	
+	label="Guide Filename"
+	name="PROPUI_PAR_GuideFileParDes"
+	propertyName="PROP_PAR_GuideFileParDes"
+	catalog="Advanced"
+/> -->
+
+<!-- _RoutingOpt=A,SLIST,Routing Options[0-1] 
+<PropertyUI	
+	label="Routing Options[0-1]"
+	name="PROPUI_PAR_RoutingOpt"
+	propertyName="PROP_PAR_RoutingOpt"
+	catalog="Advanced"
+/>-->
+
+<!-- _ParRunPlaceOnly=A,BOOL,Run Placement Only,FALSE -->
+<PropertyUI	
+	label="Run Placement Only"
+	name="PROPUI_PAR_ParRunPlaceOnly"
+	propertyName="PROP_PAR_ParRunPlaceOnly"
+	catalog="Advanced"
+/>
+
+<!-- _ParMultiNodeList=A,STRLIST,Multi-Tasking Node List -->
+<PropertyUI	
+	label="Multi-Tasking Node List"
+	name="PROPUI_PAR_ParMultiNodeList"
+	propertyName="PROP_PAR_ParMultiNodeList"
+	catalog="Advanced"
+/>
+
+<!-- _ParNCDGuideFile=A,STRLIST,NCD Guide File 
+<PropertyUI	
+	label="NCD Guide File"
+	name="PROPUI_PAR_ParNCDGuideFile"
+	propertyName="PROP_PAR_ParNCDGuideFile"
+	catalog="Advanced"
+/>
+-->
+<!-- _ParMatchFact=A,INT,Guided PAR Matching Factor 
+<PropertyUI	
+	label="Guided PAR Matching Factor"
+	name="PROPUI_PAR_ParMatchFact"
+	propertyName="PROP_PAR_ParMatchFact"
+	catalog="Advanced"
+/>
+-->
+<!-- _ParGuideRepMatch=A,BOOL,Guided PAR Report Matches,FALSE
+<PropertyUI	
+	label="Guided PAR Report Matches"
+	name="PROPUI_PAR_ParGuideRepMatch"
+	propertyName="PROP_PAR_ParGuideRepMatch"
+	catalog="Advanced"
+/>
+ -->
+<!-- _parPathBased=A,SLIST,Path-based Placement -->
+<PropertyUI	
+	label="Path-based Placement"
+	name="PROPUI_PAR_parPathBased"
+	propertyName="PROP_PAR_parPathBased"
+	catalog="Advanced"
+/>
+
+<!-- _parHold=A,SLIST,Auto Hold-Time Correction -->
+<PropertyUI	
+	label="Auto Hold-Time Correction"
+	name="PROPUI_PAR_parHold"
+	propertyName="PROP_PAR_parHold"
+	catalog="Advanced"
+/>
+
+<!-- _PARClockSkew=A,SLIST,Clock Skew Minimization -->
+<PropertyUI	
+	label="Clock Skew Minimization"
+	name="PROPUI_PAR_PARClockSkew"
+	propertyName="PROP_PAR_PARClockSkew"
+	catalog="Advanced"
+/>
+
+<!-- _PARModArgs=A,STRLIST,Command line Options -->
+<PropertyUI	
+	label="Command Line Options"
+	name="PROPUI_PAR_PARModArgs"
+	propertyName="PROP_PAR_PARModArgs"
+	catalog="Advanced"
+/>
+
+<PropertyUI	
+	label="Generate TRACE report for each iteration"
+	name="PROPUI_PAR_RunParWithTrce"
+	propertyName="PROP_PAR_RunParWithTrce"
+	catalog="Advanced"
+/>
+
+<PropertyUI	
+	label="Stop Once Timing is Met"
+	name="PROPUI_PAR_StopZero"
+	propertyName="PROP_PAR_StopZero"
+	catalog="Advanced"
+/>
+
+<PropertyUI	
+	label="Placement Sort Best Run"
+	name="PROPUI_PAR_MultiSeedSortMode"
+	propertyName="PROP_PAR_MultiSeedSortMode"
+	catalog="Advanced"
+/>
+
+<PropertyUI	
+	label="Run-Time Reduction"
+	name="PROPUI_PAR_RunTimeReduction"
+	propertyName="PROP_PAR_RunTimeReduction"
+	catalog="Advanced"
+/>
+
+<!-- *************************************************************** -->
+<!-- IO Timing Property --> 
+<!-- *************************************************************** -->
+<!-- -allSpeed=S,BOOL,All Speed Grade,FALSE -->
+<PropertyUI	
+	label="All Performance Grade"
+	name="PROPUI_IOTIMING_AllSpeed"
+	propertyName="PROP_IOTIMING_AllSpeed"
+	catalog="Standard"
+/>
+
+<!-- *************************************************************** -->
+<!-- Timing Check Property --> 
+<!-- *************************************************************** -->
+<PropertyUI
+	label="Enable Timing Check"
+	name="PROPUI_TMCHK_EnableCheck"
+	propertyName="PROP_TMCHK_EnableCheck"
+	catalog="Frequent Options"
+/>
+
+<!-- *************************************************************** -->
+<!-- Bitgen Property --> 
+<!-- *************************************************************** -->
+<!-- _RunDRCBitGen=S,BOOL,Run DRC,TRUE -->
+<PropertyUI	
+	label="Run DRC"
+	name="PROPUI_BIT_RunDRCBitGen"
+	propertyName="PROP_BIT_RunDRCBitGen"
+	catalog="Standard"
+/>
+
+<!-- _CreateBitFile=S,BOOL,Create bit file,TRUE -->
+<PropertyUI	
+	label="Create bit file"
+	name="PROPUI_BIT_CreateBitFile"
+	propertyName="PROP_BIT_CreateBitFile"
+	catalog="Standard"
+/>
+
+<!-- _MIFFileBitGen=S,STRLIST,MIF Filename -->
+<PropertyUI	
+	label="MIF Filename"
+	name="PROPUI_BIT_MIFFileBitGen"
+	propertyName="PROP_BIT_MIFFileBitGen"
+	catalog="Standard"
+/>
+
+<!-- _OutFormatBitGen=S,SLIST,Output Format -->
+<PropertyUI	
+	label="Output Format"
+	name="PROPUI_BIT_OutFormatBitGen"
+	propertyName="PROP_BIT_OutFormatBitGen"
+	catalog="Standard"
+/>
+
+<!-- _OutFormatPromGen=S,SLIST,Output Format -->
+<PropertyUI	
+	label="PROM Data Output Format"
+	name="PROPUI_BIT_OutFormatPromGen"
+	propertyName="PROP_BIT_OutFormatPromGen"
+	catalog="Standard"
+/>
+
+<!-- _NoHeader=A,BOOL,No Header,FALSE -->
+<PropertyUI	
+	label="No Header"
+	name="PROPUI_BIT_NoHeader"
+	propertyName="PROP_BIT_NoHeader"
+	catalog="Standard"
+/>
+
+<!-- _SearchPthBitGen=S,STRLIST,Search Path -->
+<PropertyUI	
+	label="Search Path"
+	name="PROPUI_BIT_SearchPthBitGen"
+	propertyName="PROP_BIT_SearchPthBitGen"
+	catalog="Standard"
+/>
+
+<!-- _LenBitsBitGen=A,SLIST,LengthBits -->
+<PropertyUI	
+	label="LengthBits"
+	name="PROPUI_BIT_LenBitsBitGen"
+	propertyName="PROP_BIT_LenBitsBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _ConModBitGen=A,SLIST,Config Mode -->
+<PropertyUI	
+	label="Chain Mode"
+	name="PROPUI_BIT_ConModBitGen"
+	propertyName="PROP_BIT_ConModBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _DoneSigBitGen=A,SLIST,Done Signal Active On -->
+<PropertyUI	
+	label="Done Signal Active On"
+	name="PROPUI_BIT_DoneSigBitGen"
+	propertyName="PROP_BIT_DoneSigBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _DonePinBitGen=A,SLIST,Done Pin -->
+<PropertyUI	
+	label="Done Pin"
+	name="PROPUI_BIT_DonePinBitGen"
+	propertyName="PROP_BIT_DonePinBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _ExtClockBitGen=A,BOOL,External Clock,FALSE -->
+<PropertyUI	
+	label="External Clock"
+	name="PROPUI_BIT_ExtClockBitGen"
+	propertyName="PROP_BIT_ExtClockBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _GSRRelOnBitGen=A,SLIST,GSR release on -->
+<PropertyUI	
+	label="GSR release on"
+	name="PROPUI_BIT_GSRRelOnBitGen"
+	propertyName="PROP_BIT_GSRRelOnBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _JTAGEnableBitGen=A,BOOL,JTAG after Configuration,FALSE -->
+<PropertyUI	
+	label="JTAG after Configuration"
+	name="PROPUI_BIT_JTAGEnableBitGen"
+	propertyName="PROP_BIT_JTAGEnableBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _EnIntOscBitGen=A,SLIST,Internal Oscillator Control -->
+<PropertyUI	
+	label="Internal Oscillator Control"
+	name="PROPUI_BIT_EnIntOscBitGen"
+	propertyName="PROP_BIT_EnIntOscBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _IOTriRelBitGen=A,SLIST,I/O Tri-State Rel. On -->
+<PropertyUI	
+	label="I/O Tri-State Rel. On"
+	name="PROPUI_BIT_IOTriRelBitGen"
+	propertyName="PROP_BIT_IOTriRelBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _EnIOBitGen=A,SLIST,Enable I/O in re-configuration -->
+<PropertyUI	
+	label="Enable I/O in re-configuration"
+	name="PROPUI_BIT_EnIOBitGen"
+	propertyName="PROP_BIT_EnIOBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _DisRAMResBitGen=A,BOOL,Reset Config RAM in re-configuration,TRUE -->
+<PropertyUI	
+	label="Reset Config RAM in re-configuration"
+	name="PROPUI_BIT_DisRAMResBitGen"
+	propertyName="PROP_BIT_DisRAMResBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _AllowReadBitGen=A,SLIST,Allow Readback-->
+<PropertyUI	
+	label="Allow Readback"
+	name="PROPUI_BIT_AllowReadBitGen"
+	propertyName="PROP_BIT_AllowReadBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _CapReadBitGen=A,SLIST,Capture Readback -->
+<PropertyUI	
+	label="Capture Readback"
+	name="PROPUI_BIT_CapReadBitGen"
+	propertyName="PROP_BIT_CapReadBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _GSREnableBitGen=A,SLIST,GSR during re-configuration -->
+<PropertyUI	
+	label="GSR during re-configuration"
+	name="PROPUI_BIT_GSREnableBitGen"
+	propertyName="PROP_BIT_GSREnableBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _StartUpClkBitGen=A,SLIST,Startup Clock -->
+<PropertyUI	
+	label="Startup Clock"
+	name="PROPUI_BIT_StartUpClkBitGen"
+	propertyName="PROP_BIT_StartUpClkBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _SynchIOBitGen=A,BOOL,Synch I/O Startup to DoneIn,FALSE -->
+<PropertyUI	
+	label="Synch I/O Startup to DoneIn"
+	name="PROPUI_BIT_SynchIOBitGen"
+	propertyName="PROP_BIT_SynchIOBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _AddressBitGen=A,SLIST,Address -->
+<PropertyUI	
+	label="Address"
+	name="PROPUI_BIT_AddressBitGen"
+	propertyName="PROP_BIT_AddressBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _RemZeroFramesBitGen=A,BOOL,Remove Zero Frames,FALSE -->
+<PropertyUI	
+	label="Remove Zero Frames"
+	name="PROPUI_BIT_RemZeroFramesBitGen"
+	propertyName="PROP_BIT_RemZeroFramesBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _SysConBitGen=A,SLIST,Sysbus Config -->
+<PropertyUI	
+	label="Sysbus Config"
+	name="PROPUI_BIT_SysConBitGen"
+	propertyName="PROP_BIT_SysConBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _SysClockConBitGen=A,SLIST,Sysbus Clock Config -->
+<PropertyUI	
+	label="Sysbus Clock Config"
+	name="PROPUI_BIT_SysClockConBitGen"
+	propertyName="PROP_BIT_SysClockConBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _WaitStTimBitGen=A,INTRANGE,Wait State Timeout [0-15],5,0,15-->
+<PropertyUI	
+	label="Wait State Timeout [0-15]"
+	name="PROPUI_BIT_WaitStTimBitGen"
+	propertyName="PROP_BIT_WaitStTimBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _GranTimBitGen=A,INTRANGE,Grant Timeout [0-15],0,0,15-->
+<PropertyUI	
+	label="Grant Timeout [0-15]"
+	name="PROPUI_BIT_GranTimBitGen"
+	propertyName="PROP_BIT_GranTimBitGen"
+	catalog="Advanced"
+/>
+
+<!-- _ParityCheckBitGen=A,BOOL,Parity Check,TRUE -->
+<PropertyUI	
+	label="Parity Check"
+	name="PROPUI_BIT_ParityCheckBitGen"
+	propertyName="PROP_BIT_ParityCheckBitGen"
+	catalog="Advanced"
+/>
+
+<!-- 3/8/2013 Byte Wide Bit Mirror -->
+<PropertyUI	
+	label="Byte Wide Bit Mirror"
+	name="PROPUI_BIT_ByteWideBitMirror"
+	propertyName="PROP_BIT_ByteWideBitMirror"
+	catalog="Advanced"
+/>
+
+<!-- *************************************************************** -->
+<!-- Generate Timing Simulation File Property --> 
+<!-- *************************************************************** -->
+<!-- _TimSimFormat=S,SLIST,Netlist Format 
+<PropertyUI	
+	label="Netlist Format"
+	name="PROPUI_TIM_TimSimFormat"
+	propertyName="PROP_TIM_TimSimFormat"
+	catalog="Standard"
+/>-->
+
+<!-- _TimSimHierSep=S,STRLIST,Verilog Hierarchy Separator -->
+<PropertyUI	
+	label="Verilog Hierarchy Separator"
+	name="PROPUI_TIM_TimSimHierSep"
+	propertyName="PROP_TIM_TimSimHierSep"
+	catalog="Standard"
+/>
+
+<!-- Only for ecp2/m ecp3, sc/m
+    _WriteVerboseNetlist=A,BOOL,Write Verbose Netlist,FALSE -->
+<PropertyUI	
+	label="Write Verbose Netlist"
+	name="PROPUI_TIM_WriteVerboseNetlist"
+	propertyName="PROP_TIM_WriteVerboseNetlist"
+	catalog="Advanced"
+/>
+
+<!-- _NegStupHldTim=A,BOOL,Negative Setup-Hold Times ,TRUE -->
+<PropertyUI	
+	label="Negative Setup-Hold Times"
+	name="PROPUI_TIM_NegStupHldTim"
+	propertyName="PROP_TIM_NegStupHldTim"
+	catalog="Advanced"
+/>
+
+<!-- _TimSimGenX=A,BOOL,Generate X for Setup/Hold Violation,FALSE -->
+<PropertyUI	
+	label="Generate X for Setup/Hold Violation"
+	name="PROPUI_TIM_TimSimGenX"
+	propertyName="PROP_TIM_TimSimGenX"
+	catalog="Advanced"
+/>
+
+<!-- _TimSimGenPUR=A,BOOL,Generate PUR in the Netlist,TRUE -->
+<PropertyUI	
+	label="Generate PUR in the Netlist"
+	name="PROPUI_TIM_TimSimGenPUR"
+	propertyName="PROP_TIM_TimSimGenPUR"
+	catalog="Advanced"
+/>
+
+<!-- _MinSpeedGrade=A,BOOL,Hold Check Min Speed Grade,FALSE -->
+<PropertyUI	
+	label="Hold Check Min Speed Grade"
+	name="PROPUI_TIM_MinSpeedGrade"
+	propertyName="PROP_TIM_MinSpeedGrade"
+	catalog="Advanced"
+/>
+
+<!-- _TrgtSpeedGrade=A,INT,Retarget Speed Grade -->
+<PropertyUI	
+	label="Retarget Speed Grade"
+	name="PROPUI_TIM_TrgtSpeedGrade"
+	propertyName="PROP_TIM_TrgtSpeedGrade"
+	catalog="Advanced"
+/>
+
+<!-- _ModPreSimDes=A,STRLIST,Multichip Module Prefix -->
+<PropertyUI	
+	label="Multichip Module Prefix"
+	name="PROPUI_TIM_ModPreSimDes"
+	propertyName="PROP_TIM_ModPreSimDes"
+	catalog="Advanced"
+/>
+
+<!-- _MaxDelSimDes=A,INT,Max delay bet. buffers(pS) 
+     cr#49243 - change label -->
+<PropertyUI
+	label="Timing Simulation Max Delay between buffers (ps)"
+	name="PROPUI_TIM_MaxDelSimDes"
+	propertyName="PROP_TIM_MaxDelSimDes"
+	catalog="Advanced"
+/>
+
+<!-- SOF-127090, Transport mode of path delay in VHDL -->
+<PropertyUI
+	label="Transport Mode of Path Delay in VHDL"
+	name="PROPUI_TIM_TransportModeOfPathDelay"
+	propertyName="PROP_TIM_TransportModeOfPathDelay"
+	catalog="Advanced"
+/>
+
+<!-- *************************************************************** -->
+<!-- Trace Option Before Route --> 
+<!-- *************************************************************** -->
+<!-- Route Estimation Algorithm (%),0%,0%, 100% -->
+<PropertyUI	
+	label="Route Estimation Algorithm (%)"
+	name="PROPUI_MAPSTA_RouteEstAlogtithm"
+	propertyName="PROP_MAPSTA_RouteEstAlogtithm"
+	catalog="Standard"
+/>
+
+<PropertyUI	
+	label="Report Style"
+	name="PROPUI_MAPSTA_ReportStyle"
+	propertyName="PROP_MAPSTA_ReportStyle"
+	catalog="Standard"
+/>
+
+<!--  =S,INT,Worst-Case Paths (0-4096),1 -->
+<PropertyUI	
+	label="Worst-Case Paths (0-4096)"
+	name="PROPUI_MAPSTA_WordCasePaths"
+	propertyName="PROP_MAPSTA_WordCasePaths"
+	catalog="Standard"
+/>
+
+<!-- =A,BOOL,Report Asynchronous Timing Loops,FALSE -->
+<PropertyUI	
+	label="Report Asynchronous Timing Loops"
+	name="PROPUI_MAPSTA_RptAsynTimLoop"
+	propertyName="PROP_MAPSTA_RptAsynTimLoop"
+	catalog="Standard"
+/>
+
+<!-- =A,BOOL,Check Unconstrained Connections,FALSE -->
+<PropertyUI	
+	label="Check Unconstrained Connections"
+	name="PROPUI_MAPSTA_CheckUnconstrainedConns"
+	propertyName="PROP_MAPSTA_CheckUnconstrainedConns"
+	catalog="Standard"
+/>
+
+<!-- =A,BOOL,Check Unconstrained Paths,FALSE -->
+<PropertyUI	
+	label="Check Unconstrained Paths"
+	name="PROPUI_MAPSTA_CheckUnconstrainedPaths"
+	propertyName="PROP_MAPSTA_CheckUnconstrainedPaths"
+	catalog="Standard"
+/>
+
+<!-- =A,BOOL,Number of Unconstrained Paths (0 to 4096),0 -->
+<PropertyUI	
+	label="Number of Unconstrained Paths (0 to 4096)"
+	name="PROPUI_MAPSTA_NumUnconstrainedPaths"
+	propertyName="PROP_MAPSTA_NumUnconstrainedPaths"
+	catalog="Standard"
+	condition='PROP_MAPSTA_CheckUnconstrainedPaths=="True"'
+/>
+
+<!-- =A,BOOL,Auto Timing, True -->
+<PropertyUI	
+	label="Auto Timing"
+	name="PROPUI_MAPSTA_AutoTiming"
+	propertyName="PROP_MAPSTA_AutoTiming"
+	catalog="Standard"
+/>
+
+<!-- =A,BOOL,Full Name, False -->
+<PropertyUI	
+	label="Full Name"
+	name="PROPUI_MAPSTA_FullName"
+	propertyName="PROP_MAPSTA_FullName"
+	catalog="Standard"
+/>
+
+<!-- S,SLIST, Analysis Options, -->  
+<PropertyUI	
+	label="Analysis Options"
+	name="PROPUI_MAPSTA_AnalysisOption"
+	propertyName="PROP_MAPSTA_AnalysisOption"
+	catalog="Standard"
+/>
+
+<!-- *************************************************************** -->
+<!-- Trace Option After Route --> 
+<!-- *************************************************************** -->
+<PropertyUI	
+	label="Report Style"
+	name="PROPUI_PARSTA_ReportStyle"
+	propertyName="PROP_PARSTA_ReportStyle"
+	catalog="Standard"
+/>
+
+<PropertyUI	
+	label="Worst-Case Paths (0-4096)"
+	name="PROPUI_PARSTA_WordCasePaths"
+	propertyName="PROP_PARSTA_WordCasePaths"
+	catalog="Standard"
+/>
+
+<PropertyUI	
+	label="Report Asynchronous Timing Loops"
+	name="PROPUI_PARSTA_RptAsynTimLoop"
+	propertyName="PROP_PARSTA_RptAsynTimLoop"
+	catalog="Standard"
+/>
+
+<PropertyUI	
+	label="Check Unconstrained Connections"
+	name="PROPUI_PARSTA_CheckUnconstrainedConns"
+	propertyName="PROP_PARSTA_CheckUnconstrainedConns"
+	catalog="Standard"
+/>
+
+<!-- =A,BOOL,Check Unconstrained Paths,FALSE -->
+<PropertyUI	
+	label="Check Unconstrained Paths"
+	name="PROPUI_PARSTA_CheckUnconstrainedPaths"
+	propertyName="PROP_PARSTA_CheckUnconstrainedPaths"
+	catalog="Standard"
+/>
+
+<!-- =A,INT,Number of Unconstrained Paths (0 to 4096),0 -->
+<PropertyUI	
+	label="Number of Unconstrained Paths (0 to 4096)"
+	name="PROPUI_PARSTA_NumUnconstrainedPaths"
+	propertyName="PROP_PARSTA_NumUnconstrainedPaths"
+	catalog="Standard"
+	condition='PROP_PARSTA_CheckUnconstrainedPaths=="True"'
+/>
+
+<!-- S,SLIST, Analysis Options, -->  
+<PropertyUI	
+	label="Analysis Options"
+	name="PROPUI_PARSTA_AnalysisOption"
+	propertyName="PROP_PARSTA_AnalysisOption"
+	catalog="Standard"
+/>
+
+<!-- S,SLIST, Speed for Setup Analysis,     --> 
+<PropertyUI	
+	label="Speed for Setup Analysis"
+	name="PROPUI_PARSTA_SpeedForSetupAnalysis"
+	propertyName="PROP_PARSTA_SpeedForSetupAnalysis"
+	catalog="Standard"
+/>
+
+<!-- S,SLIST, Speed for Hold Analysis, -->
+<PropertyUI	
+	label="Speed for Hold Analysis"
+	name="PROPUI_PARSTA_SpeedForHoldAnalysis"
+	propertyName="PROP_PARSTA_SpeedForHoldAnalysis"
+	catalog="Standard"
+/>
+
+<PropertyUI	
+	label="Full Name"
+	name="PROPUI_PARSTA_FullName"
+	propertyName="PROP_PARSTA_FullName"
+	catalog="Standard"
+/>
+
+<PropertyUI	
+	label="Auto Timing"
+	name="PROPUI_PARSTA_AutoTiming"
+	propertyName="PROP_PARSTA_AutoTiming"
+	catalog="Standard"
+/>
+
+<!-- *************************************************************** -->
+<!-- Thermal Analysis --> 
+<!-- *************************************************************** -->
+<PropertyUI	
+	label="Default Clock Frequency(MHz)"
+	name="PROPUI_THERMAL_DefaultFreq"
+	propertyName="PROP_THERMAL_DefaultFreq"
+	catalog="Standard"
+/>
+
+</StrategyConfig>

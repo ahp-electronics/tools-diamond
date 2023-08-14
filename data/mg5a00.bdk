@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="mg5a00" include="baseflow">
+  <VariableDef name="Support_SSO" value="true" />
+  <TaskDef id ="Task_Bitgen" title ="Bitgen" lable ="JEDEC File" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_TimingCheck"/>
+	   <Command id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+		 <CommandFile name="${report_base}.t2b" clean="TRUE" >
+		   <line>#PROP_BIT_RunDRCBitGen</line>	
+		   <line>#PROP_BIT_DisRAMResBitGen</line>	
+		   <line>#PROP_BIT_DisableUESBitgen</line>
+		   <line>#PROP_BIT_UFMOrder</line>
+		 </CommandFile>
+		 <cmd_str>bitgen -f "${report_base}.t2b" -w "${report_base}.ncd" -jedec -e -s "${project_dir}/${project.title}.sec" -k "${project_dir}/${project.title}.bek" "${report_base}.prf"</cmd_str>
+		 <scripts>
+		  <![CDATA[
+			proc bitgen {args} {
+				set msg "bitgen $args\n";
+				runtime_log $msg;
+				set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+				runtime_log $msg;
+			}
+		  ]]>
+		 </scripts>
+	   </Command>
+     </Target>
+	 <Report using_def="Report_BitGen"/>
+	 <Report using_def="Report_JDec"/>
+  </TaskDef>
+  <ToolEnvDef name="Download">
+    <Member name="input" value1="$(report_base).jed"/>
+    <Member name="type" value1="jed"/>
+  </ToolEnvDef>
+</BaliFlowDef>

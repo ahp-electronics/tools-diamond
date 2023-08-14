@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        SVF_Plus    SYSTEM    "SVF_Plus.dtd" >
+<!--
+    Nguyen 12/14/05 
+		. Added support for the ispPAC-POWR6AT6		
+-->
+<SVF_Plus version="1.0">
+<Header>
+    <Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+    <Interface protocol="JTAG_1149.1"/>
+    
+</Setup>
+<Parameter>
+    <!-- Length fields are in number if bits -->
+    <Instruction_Length  value="INSTRUCTION_REGISTER_LENGTH"/> 
+    <Row_Width           value="DEVICE_ROW_WIDTH"/> 
+    <Address_Length      value="ADDRESS_REGISTER_LENGTH"/> 
+    <Address length="ADDRESS_LENGTH">
+        INI_ADDRESS            
+    </Address>
+    <ID_Length           value="DEVICE_ID_LENGTH"/>
+    <Usercode_Length     value="DEVICE_USERCODE_LENGTH"/>
+    <Arch_Length         value="ARCHITECH_LENGTH"/>
+    <Arch_Row            value="ARCHITECH_ROW"/>
+    <PWP    value="PROGRAMING_PULSE_WIDTH"/>
+    <PWV    value="VERIFY_PULSE_WIDTH"/>
+    <PWE    value="ERASE_PULSE_WIDTH"/>
+    <Instruction>
+        EXTEST                = 0x00;
+        SAMPLE                = 0x1C;
+        INTEST				  = 0x2C;
+        HIGHZ				  = 0x18;
+        ADDPLD                = 0x01;
+        DATAPLD               = 0x02;
+        PROGPLD               = 0x07;
+        ERASEPLD	          = 0x03;
+        PROGESF               = 0x06;
+        READPLD               = 0x0A;
+        DISCHARGE             = 0x14;
+        PROGRAMEN             = 0x15;
+        IDCODE                = 0x16;
+        BYPASS                = 0xFF;
+        USERCODE			  = 0x17;
+        PROG_USERCODE      	  = 0x1A;
+        PROG_INCR			  = 0x27;
+        VERIFY_INCR			  = 0x2A;
+        PROG_SECURITY	      = 0x09;
+        PROGRAMDIS            = 0x1E;
+        PROGRAM_DONE		  = 0x2F;
+        ERASE_DONE			  = 0x24;   
+        CFGBE	              = 0x29;
+        ADDCFG                = 0x2B;
+        DATACFG               = 0x2D;
+        PROGCFG               = 0x2E;
+        READCFG               = 0x28;
+    </Instruction>
+</Parameter>
+<Data>
+    <DataField    name="IDTDI">
+        <FieldBlock    row_width="DEVICE_ID_LENGTH">
+            ID_DATA
+        </FieldBlock>
+    </DataField>
+    <DataField    name="Address_CFG">
+        <FieldBlock    row_width="12">
+            0x800,
+            0x400,
+            0x200,
+            0x100,
+            0x080,
+            0x040,
+            0x020,
+            0x010,
+            0x008,
+            0x004,
+            0x002,
+            0x001
+        </FieldBlock>
+    </DataField>
+</Data>
+<Operation_List label="TurboOperation0">
+    "Erase,Program,Verify" = " INIT          ! Initialize, 
+                    READ_ID    ! Check the IDCODE, 
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode, 
+                    ERASE      ! Erase the device, 
+                    PROGRAM_CFG  ! Program CFG,
+                    SYNCFUNCTION, 
+                    PROGRAM_USERCODE         ! Program USERCODE,
+                    VERIFY_CFG   ! Verify CFG, 
+                    SYNCFUNCTION, 
+                    VERIFY_USERCODE          ! Verify USERCODE,
+                    SYNCFUNCTION, 
+                    PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,		
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Erase,Program,Verify,Secure" = " INIT   ! Initialize, 
+                    READ_ID    ! Check the IDCODE, 
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode, 
+                    ERASE      ! Erase the device, 
+                    PROGRAM_CFG  ! Program CFG,
+                    SYNCFUNCTION, 
+                    PROGRAM_USERCODE         ! Program USERCODE,
+                    VERIFY_CFG   ! Verify CFG, 
+                    SYNCFUNCTION, 
+                    VERIFY_USERCODE          ! Verify USERCODE,
+                    PROGRAM_SECURITY         ! Secure device,
+                    PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,		
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Program Only" = " INIT    ! Initialize, 
+                    READ_ID    ! Check the IDCODE, 
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode, 
+                    ERASE      ! Erase the device, 
+                    PROGRAM_CFG  ! Program CFG,
+                    SYNCFUNCTION,
+                    PROGRAM_USERCODE         ! Program USERCODE,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,		
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Verify Only" = " INIT     ! Initialize, 
+                    READ_ID    ! Check the IDCODE, 
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION, 
+                    VERIFY_CFG  ! Verify CFG, 
+                    SYNCFUNCTION,
+                    VERIFY_VERIFY_USERCODE  ! Verify USERCODE,
+                    SYNCFUNCTION, 
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Verify ID" = " INIT       ! Initialize, 
+                    READ_ID    ! Check the IDCODE" ; 
+
+    "Verify USERCODE" = "INIT  ! Initialize, 
+                    READ_ID	! Check the IDCODE,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    VERIFY_USERCODE  ! Verify USERCODE" ;
+
+    "Erase Only" = " INIT      ! Initialize, 
+                    READ_ID    ! Check the IDCODE,
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode, 
+                    ERASE      ! Erase the device,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION, 
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Secure Device" = " INIT   ! Initialize, 
+                    READ_ID    ! Check the IDCODE, 
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION, 
+                    PROGRAM_SECURITY ! Secure device,
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Bypass" = " INIT  ! Initialize" ;
+    "Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						ENABLE	! Enable the programming mode" ;
+	"Disable Only" = "	INIT 	! Initialize, 
+						DISABLE ! Exit the programming mode"	;											
+</Operation_List>
+<Operation_List label="TurboOperation1">
+    "Erase,Program,Verify" = " INIT    ! Initialize, 
+                    READ_ID    ! Check the IDCODE, 
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode, 
+                    ERASE      ! Erase the device,
+                    PROGRAM_CFG   ! Program CFG,
+                    SYNCFUNCTION,
+                    VERIFY_CFG   ! Verify CFG, 
+                    SYNCFUNCTION,
+                    PROGRAM_USERCODE          ! Program USERCODE,
+                    VERIFY_USERCODE           ! Verify USERCODE,
+                    SYNCFUNCTION,
+                    PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,		
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Erase,Program,Verify,Secure" = " INIT    ! Initialize, 
+                    READ_ID    ! Check the IDCODE, 
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode, 
+                    ERASE      ! Erase the device, 
+                    PROGRAM_CFG   ! Program CFG,
+                    SYNCFUNCTION,
+                    VERIFY_CFG    ! Verify CFG, 
+                    SYNCFUNCTION,
+                    PROGRAM_USERCODE          ! Program USERCODE,
+                    VERIFY_USERCODE           ! Verify USERCODE,
+                    PROGRAM_SECURITY          ! Secure device,
+                    PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,		
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Program Only" = " INIT    ! Initialize, 
+                    READ_ID    ! Check the IDCODE, 
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode, 
+                    ERASE      ! Erase the device, 
+                    PROGRAM_CFG  ! Program CFG,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    PROGRAM_USERCODE          ! Program USERCODE,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    PROGRAM_DONE_BIT [SEQUENTIAL]	! Program DONE bit,		
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Verify Only" = " INIT     ! Initialize, 
+                    READ_ID    ! Check the IDCODE, 
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode,
+                    SYNCFUNCTION,
+                    VERIFY_CFG    ! Verify CFG, 
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    VERIFY_VERIFY_USERCODE    ! Verify USERCODE,
+                    SYNCFUNCTION,
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Verify ID" = " INIT       ! Initialize, 
+                    READ_ID    ! Check the IDCODE" ; 
+
+    "Verify USERCODE" = "INIT  ! Initialize, 
+                    READ_ID	! Check the IDCODE,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    VERIFY_USERCODE ! Verify USERCODE,	
+                    SYNCFUNCTION, 
+                    DISABLE         ! Exit the programming mode" ;
+
+    "Erase Only" = " INIT      ! Initialize, 
+                    READ_ID    ! Check the IDCODE,
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode, 
+                    ERASE      ! Erase the device,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Secure Device" = " INIT   ! Initialize, 
+                    READ_ID    ! Check the IDCODE, 
+                    SYNCFUNCTION,
+                    ENABLE     ! Enable the programming mode,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    SYNCFUNCTION,
+                    PROGRAM_SECURITY      ! Secure device,
+                    DISABLE    ! Exit the programming mode" ;
+
+    "Bypass" = " INIT          ! Initialize" ;
+    "Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						ENABLE	! Enable the programming mode" ;
+	"Disable Only" = "	INIT 	! Initialize, 
+						DISABLE ! Exit the programming mode"	;					
+</Operation_List>
+
+<Script>
+<![CDATA[
+function INIT {
+    HDR 0;
+    HIR 0;
+    TDR 0;
+    TIR 0;
+    ENDDR DRPAUSE;
+    ENDIR IRPAUSE;
+    FREQUENCY 1E6 HZ;
+    STATE IDLE;
+    SYNC;
+}
+
+function READ_ID {
+    SIR Instruction_Length TDI  (IDCODE);
+    SDR_VERIFY ID_Length   TDI  (#1^ID_Length)
+                           TDO  (IDTDI[1])
+                           MASK (DEVICE_ID_MASK);
+    SYNC;
+}
+function ENABLE {
+    SYNC;
+    // Shift in ERASE_DONE(0x24) instruction
+    SIR Instruction_Length TDI (ERASE_DONE);
+    RUN_TEST TCK 5 DELAY PWP;
+    SYNC;
+    // Shift in program enable instruction
+    SIR Instruction_Length TDI (PROGRAMEN);
+    RUN_TEST TCK 5 DELAY 1;
+    SYNC;
+}
+function DISABLE {
+    // Shift in program disable instruction
+    SIR Instruction_Length TDI (PROGRAMDIS);
+    RUN_TEST TCK 5 DELAY 200;
+    // Shift in BYPASS(0xFF) instruction
+    SIR Instruction_Length TDI (BYPASS);
+    RUN_TEST TCK 5 DELAY PWP;
+    SYNC;
+}
+function ERASE {
+    SYNC;
+    // Shift in CFGBE(0x29) instruction
+	SIR Instruction_Length TDI (CFGBE);
+	RUN_TEST TCK 5 DELAY PWE;
+	// Shift in PROGRAM_ENABLE(0x15) instruction
+    SIR Instruction_Length TDI (PROGRAMEN);
+    STATE IDLE;
+    // Shift in discharge instruction
+    SIR Instruction_Length TDI (DISCHARGE);
+    RUN_TEST TCK 5 DELAY PWP;
+    SYNC;
+}
+function PROGRAM_CFG {	
+    int32 i = 1;
+    FuseArray_TDI.row = 1;
+    Address_CFG.row = 1;
+    SYNC;
+    repeat Address_Length {
+        // Shift in PROGRAM_ENABLE(0x15) instruction
+		SIR Instruction_Length TDI (PROGRAMEN);
+		STATE IDLE;
+        // Shift in CFG ADDRESS(0x2B) instruction
+        SIR Instruction_Length TDI (ADDCFG);
+        SDR 12 TDI (Address_CFG[i]);
+        // Shift in CFG DATA(0x2D) instruction
+        SIR Instruction_Length TDI (DATACFG);
+        SDR Row_Width TDI (FuseArray_TDI);
+        i = i + 1;
+        // Shift in CFG PROGRAM(0x2E) instruction
+        SIR Instruction_Length TDI (PROGCFG);
+        RUN_TEST TCK 5 DELAY PWP;     
+    } // repeat
+    SYNC;
+}
+function PROGRAM_USERCODE {
+    Usercode_TDI.row = 1;
+    // Shift in USERCODE(0x17) instruction
+    SIR Instruction_Length	TDI (USERCODE);
+	SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+	// Shift in PROGRAM USERCODE(0x1A) instruction
+    SIR Instruction_Length	TDI (PROG_USERCODE);
+	RUN_TEST	TCK 	5 DELAY 	PWP;
+    SYNC;
+}
+function PROGRAM_SECURITY {
+    // Shift in PROGRAM SECURITY(0x09) instruction
+    SIR Instruction_Length TDI (PROG_SECURITY);
+    RUN_TEST TCK 5 DELAY PWP;
+    SYNC;
+}
+function PROGRAM_DONE_BIT {
+	// Shift in PROGRAM DONE(0x2F) instruction
+    SIR	Instruction_Length 	TDI (PROGRAM_DONE);
+	RUN_TEST	IDLE TCK 5 DELAY PWP;
+	// Shift in PROGRAM DISABLE(0x1E) instruction
+    SIR	Instruction_Length 	TDI (PROGRAMDIS);
+	RUN_TEST	IDLE  TCK 5 DELAY 200;
+	// Shift in BYPASS(0xFF) instruction
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 10;
+	// Shift in IDCODE(0x16) instruction
+    SIR_VERIFY	Instruction_Length 	TDI (IDCODE)
+						TDO(0xFF)
+			   	      	MASK(0x04);	
+	SYNC;			   	      	
+}
+function VERIFY_CFG {
+    int32 i = 1;
+    FuseArray_TDI.row = 1;
+    Address_CFG.row = 1;
+    repeat Address_Length {
+        // Shift in PROGRAM_ENABLE(0x15) instruction
+		SIR Instruction_Length TDI (PROGRAMEN);
+		STATE IDLE;
+        // Shift in CFG ADDRESS(0x2B) instruction
+        SIR Instruction_Length TDI (ADDCFG);
+        SDR 12 TDI (Address_CFG[i]);
+        i = i + 1;
+        // Shift in CFG Read(0x28) instruction
+        SIR Instruction_Length TDI (READCFG);
+        RUN_TEST TCK 5 DELAY PWV;
+        // Shift in CFG DATA(0x2D) instruction
+        SIR Instruction_Length TDI (DATACFG);
+        SDR_VERIFY Row_Width TDI (#1^Row_Width)
+                            TDO (FuseArray_TDI);
+        SYNC;       
+    } // repeat
+    SYNC;
+}
+function VERIFY_USERCODE {
+    SYNC;
+    Usercode_TDI.row = 1;
+    // Shift in Read Usercode instruction 
+    SIR Instruction_Length TDI (USERCODE);
+    SDR_VERIFY Usercode_Length TDI  (#1^Usercode_Length)
+                               TDO  (Usercode_TDI)
+                               MASK (#1^Usercode_Length);
+    SYNC;
+}
+function SYNCFUNCTION {
+    SYNC;
+}
+]]>
+</Script>
+</SVF_Plus>

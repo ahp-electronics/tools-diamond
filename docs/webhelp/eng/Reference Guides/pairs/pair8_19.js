@@ -1,0 +1,21 @@
+var pairs =
+{
+"oddra":{"primitive":1}
+,"output":{"ddr":1}
+,"architectures":{"supported":1}
+,"inputs":{"clk":1}
+,"clk":{"rst":1}
+,"ddr":{"data":1}
+,"data":{"positive":1,"buffer":1}
+,"positive":{"edge":1}
+,"edge":{"negative":1,"data":1}
+,"negative":{"edge":1}
+,"buffer":{"following":1}
+,"following":{"symbolic":1}
+,"symbolic":{"diagram":1}
+,"diagram":{"shows":1}
+,"shows":{"flip-flop":1}
+,"flip-flop":{"structure":1}
+,"structure":{"primitive":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,21 @@
+var pairs =
+{
+"running":{"power":1}
+,"power":{"calculator":1,"analysis":1}
+,"calculator":{"tcl":1}
+,"tcl":{"console":1,"commands":1,"command":1}
+,"diamond\u2019s":{"tcl":1}
+,"console":{"window":1}
+,"window":{"enables":1}
+,"enables":{"tcl":1}
+,"commands":{"perform":1,"power":1,"tcl":1}
+,"perform":{"power":1}
+,"analysis":{"functions":1}
+,"functions":{"complete":1}
+,"complete":{"list":1}
+,"list":{"descriptions":1}
+,"descriptions":{"power":1}
+,"command":{"reference":1}
+,"reference":{"guide":1}
+}
+;Search.control.loadWordPairs(pairs);

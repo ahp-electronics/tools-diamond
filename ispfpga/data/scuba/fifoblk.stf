@@ -1,0 +1,7 @@
+Clock: CLK * 1 ;
+Reset: => 1; @100 => 0;
+Data: => 0; *(depth + 4)@Clock => COUNT;
+WrEn: => 0; @100; @Reset & E0; * (depth+4) @Clock => 1; => 0;
+RdEn: => 0; @Reset & E0; @WrEn & E1; @ WrEn & E0;
+       *(depth + 2) @Clock => 1; => 0;
+

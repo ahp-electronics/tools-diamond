@@ -1,0 +1,48 @@
+library verilog;
+use verilog.vl_types.all;
+entity pp_tx_top is
+    port(
+        clk             : in     vl_logic;
+        rst_n           : in     vl_logic;
+        txd_i           : in     vl_logic_vector(10 downto 0);
+        txd_o           : out    vl_logic_vector(9 downto 0);
+        ls_sync_status  : in     vl_logic;
+        rudi_invalid    : in     vl_logic;
+        rudi_idle       : in     vl_logic;
+        rudi_config     : in     vl_logic;
+        rx_config_reg   : in     vl_logic_vector(15 downto 0);
+        xmit            : out    vl_logic_vector(1 downto 0);
+        slave           : in     vl_logic;
+        idle_i          : in     vl_logic;
+        a_count_i       : in     vl_logic_vector(4 downto 0);
+        next_ifg_i      : in     vl_logic;
+        code_sel_i      : in     vl_logic;
+        seq_i           : in     vl_logic;
+        idle_o          : out    vl_logic;
+        a_count_o       : out    vl_logic_vector(4 downto 0);
+        next_ifg_o      : out    vl_logic;
+        code_sel_o      : out    vl_logic;
+        seq_o           : out    vl_logic;
+        uc_mode         : in     vl_logic;
+        rio_mode        : in     vl_logic;
+        fc_mode         : in     vl_logic;
+        pcie_mode       : in     vl_logic;
+        xge_mode        : in     vl_logic;
+        restart_an      : in     vl_logic;
+        an_enable       : in     vl_logic;
+        adv_ability     : in     vl_logic_vector(15 downto 0);
+        lp_adv_ability  : out    vl_logic_vector(15 downto 0);
+        np_tx           : in     vl_logic_vector(15 downto 0);
+        lp_np_rx        : out    vl_logic_vector(15 downto 0);
+        set_np_loaded_wstr: in     vl_logic;
+        link_timer_short: in     vl_logic;
+        page_rx         : out    vl_logic;
+        an_complete     : out    vl_logic;
+        np_loaded       : out    vl_logic;
+        resolve_priority: out    vl_logic;
+        pcie_scram_disable: in     vl_logic;
+        pcie_scram_select: in     vl_logic;
+        enc_bypass      : in     vl_logic;
+        scan_mode       : in     vl_logic
+    );
+end pp_tx_top;

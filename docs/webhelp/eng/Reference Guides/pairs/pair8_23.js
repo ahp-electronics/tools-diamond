@@ -1,0 +1,25 @@
+var pairs =
+{
+"generates":{"tristate":1}
+,"tristate":{"control":1,"input":1,"output":1}
+,"control":{"dqs":1}
+,"dqs":{"output":1}
+,"architectures":{"supported":1}
+,"inputs":{"sclk":1}
+,"sclk":{"dqsw":1}
+,"dqsw":{"eclk":1,"includes":1}
+,"eclk":{"rst":1,"input":1}
+,"primitive":{"used":1}
+,"used":{"generate":1}
+,"generate":{"tristate":1}
+,"input":{"speed":1}
+,"speed":{"sclk":1}
+,"includes":{"write":1}
+,"write":{"leveling":1}
+,"leveling":{"phase":1}
+,"phase":{"shift":1}
+,"shift":{"eclk":1}
+,"slck":{"input":1}
+,"reset":{"input":1}
+}
+;Search.control.loadWordPairs(pairs);

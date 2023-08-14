@@ -1,0 +1,26 @@
+var pairs =
+{
+"smi_offset":{"hdl":1,"hexadecimal":1}
+,"hdl":{"attribute":1,"adding":1}
+,"hexadecimal":{"number":1}
+,"system":{"management":1}
+,"management":{"interrupt":1}
+,"interrupt":{"offset":1}
+,"offset":{"attached":1,"start":1}
+,"attached":{"dll":1}
+,"dll":{"element":1}
+,"element":{"attribute":1}
+,"attribute":{"default":1}
+,"default":{"offset":1}
+,"start":{"value":1}
+,"value":{"12h":1}
+,"12h":{"410":1}
+,"device":{"support":1}
+,"latticeecp2":{"latticesc":1}
+,"generic":{"examples":1}
+,"examples":{"fpga":1}
+,"fpga":{"attributes":1}
+,"attributes":{"hdl":1}
+,"adding":{"fpga":1}
+}
+;Search.control.loadWordPairs(pairs);

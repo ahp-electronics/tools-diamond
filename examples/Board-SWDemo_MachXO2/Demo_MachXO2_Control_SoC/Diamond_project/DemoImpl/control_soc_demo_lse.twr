@@ -1,0 +1,377 @@
+--------------------------------------------------------------------------------
+Lattice Synthesis Timing Report, Version  
+Tue Oct 25 13:55:01 2011
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2011 Lattice Semiconductor Corporation,  All rights reserved.
+
+Report Information
+------------------
+Design:     control_soc_demo
+Constraint file:  
+Report level:    verbose report, limited to 3 items per constraint
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+Constraint: create_clock -period 5.000000 -name clk1 [get_nets \TIME_INST/sec_clock]
+            437 items scored, 144 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Error:  The following path violates requirements by 2.240ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1P3DX    CK             \TIME_INST/minutes_755__i2  (from \TIME_INST/sec_clock +)
+   Destination:    FD1P3DX    D              \TIME_INST/hours_756__i7  (to \TIME_INST/sec_clock +)
+
+   Delay:                   7.094ns  (42.6% logic, 57.4% route), 8 logic levels.
+
+ Constraint Details:
+
+      7.094ns data_path \TIME_INST/minutes_755__i2 to \TIME_INST/hours_756__i7 violates
+      5.000ns delay constraint less
+      0.146ns L_S requirement (totaling 4.854ns) by 2.240ns
+
+ Path Details: \TIME_INST/minutes_755__i2 to \TIME_INST/hours_756__i7
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.403             CK to Q              \TIME_INST/minutes_755__i2 (from \TIME_INST/sec_clock)
+Route         3   e 1.099                                  \TIME_INST/minutes[2]
+LUT4        ---     0.448              B to Z              \TIME_INST/i988_3_lut
+Route         1   e 0.788                                  \TIME_INST/n6_adj_0
+LUT4        ---     0.448              A to Z              \TIME_INST/i3_4_lut_adj_0
+Route         9   e 1.315                                  \TIME_INST/n2433
+A1_TO_FCO   ---     0.752           C[2] to COUT           \TIME_INST/hours_756_add_4_1
+Route         1   e 0.020                                  \TIME_INST/n8083
+FCI_TO_FCO  ---     0.143            CIN to COUT           \TIME_INST/hours_756_add_4_3
+Route         1   e 0.020                                  \TIME_INST/n8084
+FCI_TO_FCO  ---     0.143            CIN to COUT           \TIME_INST/hours_756_add_4_5
+Route         1   e 0.020                                  \TIME_INST/n8085
+FCI_TO_FCO  ---     0.143            CIN to COUT           \TIME_INST/hours_756_add_4_7
+Route         1   e 0.020                                  \TIME_INST/n8086
+FCI_TO_F    ---     0.544            CIN to S[2]           \TIME_INST/hours_756_add_4_9
+Route         1   e 0.788                                  \TIME_INST/n31
+                  --------
+                    7.094  (42.6% logic, 57.4% route), 8 logic levels.
+
+
+Error:  The following path violates requirements by 2.240ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1P3DX    CK             \TIME_INST/minutes_755__i1  (from \TIME_INST/sec_clock +)
+   Destination:    FD1P3DX    D              \TIME_INST/hours_756__i7  (to \TIME_INST/sec_clock +)
+
+   Delay:                   7.094ns  (42.6% logic, 57.4% route), 8 logic levels.
+
+ Constraint Details:
+
+      7.094ns data_path \TIME_INST/minutes_755__i1 to \TIME_INST/hours_756__i7 violates
+      5.000ns delay constraint less
+      0.146ns L_S requirement (totaling 4.854ns) by 2.240ns
+
+ Path Details: \TIME_INST/minutes_755__i1 to \TIME_INST/hours_756__i7
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.403             CK to Q              \TIME_INST/minutes_755__i1 (from \TIME_INST/sec_clock)
+Route         3   e 1.099                                  \TIME_INST/minutes[1]
+LUT4        ---     0.448              C to Z              \TIME_INST/i988_3_lut
+Route         1   e 0.788                                  \TIME_INST/n6_adj_0
+LUT4        ---     0.448              A to Z              \TIME_INST/i3_4_lut_adj_0
+Route         9   e 1.315                                  \TIME_INST/n2433
+A1_TO_FCO   ---     0.752           C[2] to COUT           \TIME_INST/hours_756_add_4_1
+Route         1   e 0.020                                  \TIME_INST/n8083
+FCI_TO_FCO  ---     0.143            CIN to COUT           \TIME_INST/hours_756_add_4_3
+Route         1   e 0.020                                  \TIME_INST/n8084
+FCI_TO_FCO  ---     0.143            CIN to COUT           \TIME_INST/hours_756_add_4_5
+Route         1   e 0.020                                  \TIME_INST/n8085
+FCI_TO_FCO  ---     0.143            CIN to COUT           \TIME_INST/hours_756_add_4_7
+Route         1   e 0.020                                  \TIME_INST/n8086
+FCI_TO_F    ---     0.544            CIN to S[2]           \TIME_INST/hours_756_add_4_9
+Route         1   e 0.788                                  \TIME_INST/n31
+                  --------
+                    7.094  (42.6% logic, 57.4% route), 8 logic levels.
+
+
+Error:  The following path violates requirements by 2.240ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1P3DX    CK             \TIME_INST/minutes_755__i0  (from \TIME_INST/sec_clock +)
+   Destination:    FD1P3DX    D              \TIME_INST/hours_756__i7  (to \TIME_INST/sec_clock +)
+
+   Delay:                   7.094ns  (42.6% logic, 57.4% route), 8 logic levels.
+
+ Constraint Details:
+
+      7.094ns data_path \TIME_INST/minutes_755__i0 to \TIME_INST/hours_756__i7 violates
+      5.000ns delay constraint less
+      0.146ns L_S requirement (totaling 4.854ns) by 2.240ns
+
+ Path Details: \TIME_INST/minutes_755__i0 to \TIME_INST/hours_756__i7
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.403             CK to Q              \TIME_INST/minutes_755__i0 (from \TIME_INST/sec_clock)
+Route         3   e 1.099                                  \TIME_INST/minutes[0]
+LUT4        ---     0.448              A to Z              \TIME_INST/i988_3_lut
+Route         1   e 0.788                                  \TIME_INST/n6_adj_0
+LUT4        ---     0.448              A to Z              \TIME_INST/i3_4_lut_adj_0
+Route         9   e 1.315                                  \TIME_INST/n2433
+A1_TO_FCO   ---     0.752           C[2] to COUT           \TIME_INST/hours_756_add_4_1
+Route         1   e 0.020                                  \TIME_INST/n8083
+FCI_TO_FCO  ---     0.143            CIN to COUT           \TIME_INST/hours_756_add_4_3
+Route         1   e 0.020                                  \TIME_INST/n8084
+FCI_TO_FCO  ---     0.143            CIN to COUT           \TIME_INST/hours_756_add_4_5
+Route         1   e 0.020                                  \TIME_INST/n8085
+FCI_TO_FCO  ---     0.143            CIN to COUT           \TIME_INST/hours_756_add_4_7
+Route         1   e 0.020                                  \TIME_INST/n8086
+FCI_TO_F    ---     0.544            CIN to S[2]           \TIME_INST/hours_756_add_4_9
+Route         1   e 0.788                                  \TIME_INST/n31
+                  --------
+                    7.094  (42.6% logic, 57.4% route), 8 logic levels.
+
+Warning: 7.240 ns is the maximum delay for this constraint.
+
+
+
+================================================================================
+Constraint: create_clock -period 5.000000 -name clk0 [get_nets clk_c]
+            4096 items scored, 4093 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Error:  The following path violates requirements by 7.684ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1S3IX    CK             \SPI_INST/clock_cnt_751__i1  (from OSCH_inst +)
+   Destination:    FD1P3AX    D              \SPI_INST/n_status_i0  (to OSCH_inst -)
+
+   Delay:                  10.038ns  (32.9% logic, 67.1% route), 8 logic levels.
+
+ Constraint Details:
+
+     10.038ns data_path \SPI_INST/clock_cnt_751__i1 to \SPI_INST/n_status_i0 violates
+      2.500ns delay constraint less
+      0.146ns L_S requirement (totaling 2.354ns) by 7.684ns
+
+ Path Details: \SPI_INST/clock_cnt_751__i1 to \SPI_INST/n_status_i0
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.403             CK to Q              \SPI_INST/clock_cnt_751__i1 (from OSCH_inst)
+Route         6   e 1.266                                  \SPI_INST/clock_cnt[1]
+LUT4        ---     0.448              A to Z              \SPI_INST/i1_2_lut
+Route         1   e 0.788                                  \SPI_INST/n6
+LUT4        ---     0.448              D to Z              \SPI_INST/i4_4_lut
+Route        14   e 1.509                                  \SPI_INST/n2838
+LUT4        ---     0.448              D to Z              \SPI_INST/i2_3_lut_rep_183_4_lut
+Route         1   e 0.788                                  \SPI_INST/n10234
+LUT4        ---     0.448              A to Z              \SPI_INST/n9384_bdd_3_lut
+Route         1   e 0.020                                  \SPI_INST/n10147
+MUXL5       ---     0.212           BLUT to Z              \SPI_INST/i8794
+Route         1   e 0.788                                  \SPI_INST/n10148
+LUT4        ---     0.448              B to Z              \SPI_INST/mux_130_Mux_0_i3_4_lut
+Route         1   e 0.788                                  \SPI_INST/n3_adj_0
+LUT4        ---     0.448              A to Z              \SPI_INST/mux_130_Mux_0_i7_3_lut
+Route         1   e 0.788                                  \SPI_INST/n405
+                  --------
+                   10.038  (32.9% logic, 67.1% route), 8 logic levels.
+
+
+Error:  The following path violates requirements by 7.586ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1S3IX    CK             \SPI_INST/clock_cnt_751__i4  (from OSCH_inst +)
+   Destination:    FD1P3AX    D              \SPI_INST/n_status_i0  (to OSCH_inst -)
+
+   Delay:                   9.940ns  (33.2% logic, 66.8% route), 8 logic levels.
+
+ Constraint Details:
+
+      9.940ns data_path \SPI_INST/clock_cnt_751__i4 to \SPI_INST/n_status_i0 violates
+      2.500ns delay constraint less
+      0.146ns L_S requirement (totaling 2.354ns) by 7.586ns
+
+ Path Details: \SPI_INST/clock_cnt_751__i4 to \SPI_INST/n_status_i0
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.403             CK to Q              \SPI_INST/clock_cnt_751__i4 (from OSCH_inst)
+Route         4   e 1.168                                  \SPI_INST/clock_cnt[4]
+LUT4        ---     0.448              B to Z              \SPI_INST/i1_2_lut
+Route         1   e 0.788                                  \SPI_INST/n6
+LUT4        ---     0.448              D to Z              \SPI_INST/i4_4_lut
+Route        14   e 1.509                                  \SPI_INST/n2838
+LUT4        ---     0.448              D to Z              \SPI_INST/i2_3_lut_rep_183_4_lut
+Route         1   e 0.788                                  \SPI_INST/n10234
+LUT4        ---     0.448              A to Z              \SPI_INST/n9384_bdd_3_lut
+Route         1   e 0.020                                  \SPI_INST/n10147
+MUXL5       ---     0.212           BLUT to Z              \SPI_INST/i8794
+Route         1   e 0.788                                  \SPI_INST/n10148
+LUT4        ---     0.448              B to Z              \SPI_INST/mux_130_Mux_0_i3_4_lut
+Route         1   e 0.788                                  \SPI_INST/n3_adj_0
+LUT4        ---     0.448              A to Z              \SPI_INST/mux_130_Mux_0_i7_3_lut
+Route         1   e 0.788                                  \SPI_INST/n405
+                  --------
+                    9.940  (33.2% logic, 66.8% route), 8 logic levels.
+
+
+Error:  The following path violates requirements by 6.485ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1S3IX    CK             \SPI_INST/clock_cnt_751__i0  (from OSCH_inst +)
+   Destination:    FD1P3AX    D              \SPI_INST/n_status_i0  (to OSCH_inst -)
+
+   Delay:                   8.839ns  (32.3% logic, 67.7% route), 7 logic levels.
+
+ Constraint Details:
+
+      8.839ns data_path \SPI_INST/clock_cnt_751__i0 to \SPI_INST/n_status_i0 violates
+      2.500ns delay constraint less
+      0.146ns L_S requirement (totaling 2.354ns) by 6.485ns
+
+ Path Details: \SPI_INST/clock_cnt_751__i0 to \SPI_INST/n_status_i0
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.403             CK to Q              \SPI_INST/clock_cnt_751__i0 (from OSCH_inst)
+Route         7   e 1.303                                  \SPI_INST/clock_cnt[0]
+LUT4        ---     0.448              B to Z              \SPI_INST/i4_4_lut
+Route        14   e 1.509                                  \SPI_INST/n2838
+LUT4        ---     0.448              D to Z              \SPI_INST/i2_3_lut_rep_183_4_lut
+Route         1   e 0.788                                  \SPI_INST/n10234
+LUT4        ---     0.448              A to Z              \SPI_INST/n9384_bdd_3_lut
+Route         1   e 0.020                                  \SPI_INST/n10147
+MUXL5       ---     0.212           BLUT to Z              \SPI_INST/i8794
+Route         1   e 0.788                                  \SPI_INST/n10148
+LUT4        ---     0.448              B to Z              \SPI_INST/mux_130_Mux_0_i3_4_lut
+Route         1   e 0.788                                  \SPI_INST/n3_adj_0
+LUT4        ---     0.448              A to Z              \SPI_INST/mux_130_Mux_0_i7_3_lut
+Route         1   e 0.788                                  \SPI_INST/n405
+                  --------
+                    8.839  (32.3% logic, 67.7% route), 7 logic levels.
+
+Warning: 10.184 ns is the maximum delay for this constraint.
+
+
+Timing Report Summary
+--------------
+--------------------------------------------------------------------------------
+Constraint                              |   Constraint|       Actual|Levels
+--------------------------------------------------------------------------------
+                                        |             |             |
+create_clock -period 5.000000 -name     |             |             |
+clk1 [get_nets \TIME_INST/sec_clock]    |     5.000 ns|     7.240 ns|     8 *
+                                        |             |             |
+create_clock -period 5.000000 -name     |             |             |
+clk0 [get_nets clk_c]                   |     5.000 ns|    20.368 ns|     8 *
+                                        |             |             |
+--------------------------------------------------------------------------------
+
+
+2 constraints not met.
+
+--------------------------------------------------------------------------------
+Critical Nets                           |   Loads|  Errors| % of total
+--------------------------------------------------------------------------------
+\UART_INST/u_rxcver/n10235              |      11|    3924|     92.61%
+                                        |        |        |
+\UART_INST/u_rxcver/n8079               |       1|    2940|     69.39%
+                                        |        |        |
+\UART_INST/u_rxcver/n30                 |      22|    2802|     66.13%
+                                        |        |        |
+\UART_INST/u_rxcver/n8078               |       1|    2734|     64.53%
+                                        |        |        |
+\UART_INST/u_rxcver/n8080               |       1|    2244|     52.96%
+                                        |        |        |
+\UART_INST/u_rxcver/n8110               |       1|    2016|     47.58%
+                                        |        |        |
+\UART_INST/u_rxcver/n8111               |       1|    1754|     41.40%
+                                        |        |        |
+\UART_INST/u_rxcver/n14                 |       1|    1680|     39.65%
+                                        |        |        |
+\UART_INST/u_rxcver/n8077               |       1|    1616|     38.14%
+                                        |        |        |
+\UART_INST/u_rxcver/n8081               |       1|    1394|     32.90%
+                                        |        |        |
+\UART_INST/u_rxcver/n1105               |       1|    1072|     25.30%
+                                        |        |        |
+\UART_INST/u_rxcver/n8109               |       1|    1072|     25.30%
+                                        |        |        |
+\UART_INST/u_rxcver/n10                 |       1|     840|     19.83%
+                                        |        |        |
+\UART_INST/u_rxcver/n1103               |       1|     798|     18.83%
+                                        |        |        |
+\UART_INST/u_rxcver/n1104               |       1|     798|     18.83%
+                                        |        |        |
+\UART_INST/u_rxcver/n139                |       1|     718|     16.95%
+                                        |        |        |
+\UART_INST/u_rxcver/n1063               |       1|     718|     16.95%
+                                        |        |        |
+\UART_INST/u_rxcver/n1190               |       1|     718|     16.95%
+                                        |        |        |
+\UART_INST/u_rxcver/n138                |       1|     712|     16.80%
+                                        |        |        |
+\UART_INST/u_rxcver/n1062               |       1|     712|     16.80%
+                                        |        |        |
+\UART_INST/u_rxcver/n1189               |       1|     712|     16.80%
+                                        |        |        |
+\UART_INST/u_rxcver/n137                |       1|     710|     16.76%
+                                        |        |        |
+\UART_INST/u_rxcver/n1061               |       1|     710|     16.76%
+                                        |        |        |
+\UART_INST/u_rxcver/n1188               |       1|     710|     16.76%
+                                        |        |        |
+\UART_INST/u_rxcver/n8112               |       1|     668|     15.77%
+                                        |        |        |
+\UART_INST/u_rxcver/n8076               |       1|     628|     14.82%
+                                        |        |        |
+\UART_INST/u_rxcver/n140                |       1|     566|     13.36%
+                                        |        |        |
+\UART_INST/u_rxcver/n141                |       1|     566|     13.36%
+                                        |        |        |
+\UART_INST/u_rxcver/n1064               |       1|     566|     13.36%
+                                        |        |        |
+\UART_INST/u_rxcver/n1065               |       1|     566|     13.36%
+                                        |        |        |
+\UART_INST/u_rxcver/n1191               |       1|     566|     13.36%
+                                        |        |        |
+\UART_INST/u_rxcver/n1192               |       1|     566|     13.36%
+                                        |        |        |
+\UART_INST/u_rxcver/n26                 |      22|     562|     13.26%
+                                        |        |        |
+\UART_INST/u_rxcver/n25                 |      22|     560|     13.22%
+                                        |        |        |
+\UART_INST/u_rxcver/n449                |       1|     478|     11.28%
+                                        |        |        |
+\UART_INST/u_rxcver/n8082               |       1|     478|     11.28%
+                                        |        |        |
+\UART_INST/u_rxcver/n450                |       1|     458|     10.81%
+                                        |        |        |
+\UART_INST/u_rxcver/n451                |       1|     458|     10.81%
+                                        |        |        |
+\UART_INST/u_rxcver/n452                |       1|     452|     10.67%
+                                        |        |        |
+\UART_INST/u_rxcver/n1101               |       1|     435|     10.27%
+                                        |        |        |
+\UART_INST/u_rxcver/n1102               |       1|     435|     10.27%
+                                        |        |        |
+--------------------------------------------------------------------------------
+
+
+Timing summary:
+---------------
+
+Timing errors: 4237  Score: 38128253
+
+Constraints cover  38862 paths, 1231 nets, and 3239 connections (89.3% coverage)
+
+
+Peak memory: 62996480 bytes, TRCE: 7999488 bytes, DLYMAN: 212992 bytes
+CPU_TIME_REPORT: 0 secs 

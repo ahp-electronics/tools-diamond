@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliMsgFilterDef>
+  <TargetDevice name="fpga">
+    <Engine name="synpwrap" description="Synplify Synthesis Engine">
+      <Rule name="syn-error" example='@E: CG105 :"C:\temp\ddr_ec\ecp_cal_ddr_csm.v":1413:29:1413:28|range on instances are legal in Vlog-2001 mode'/>
+      <Rule name="syn-warning" example='@W: CS141 :"C:\temp\ddr_ec\ddr_sdram_mem_core.v":107:12:107:20|Unrecognized synthesis directive attribute'/>
+      <Rule name="syn-syntax" example="Syntax error: Vlog_std_v2001: true"/>
+      <Rule name="new-message" example="&lt;postMsg" />
+    </Engine>
+    <Engine name="default" description="Default FPGA device engines">
+      <Rule name="msgman-warning" example="WARNING - "/>
+      <Rule name="msgman-error" example="ERROR - "/>
+      <Rule name="new-message" example="&lt;postMsg" />
+    </Engine>
+	<Engine name="hdle" description="HDL Explorer">
+	  <Rule name="hdle-error" example="d:/mytest/bali/schematic/vhdl/case5/eq/eq.vhd(1,1-11,1) ERROR: (VHDL-1261) syntax error near por"/>
+	  <Rule name="hdle-warning" example="d:/mytest/bali/schematic/vhdl/case5/eq/eq.vhd(1,1-11,1) WARNING: (VHDL-1261) ..."/>
+	  <Rule name="hdle-info" example="d:/mytest/bali/schematic/vhdl/case5/eq/eq.vhd(1,1-11,1) INFO: (VHDL-1261) ..."/>
+	</Engine>
+    <Engine name="synthesis" description="Lattice Synthesis Engine">
+      <Rule name="lse-parser-warning" comment="LSE ening warning" example="WARNING - synthesis: e:/projects/bali/cases/ptf445/port_syntax_top.v(10):..."/>
+      <Rule name="lse-parser-error" comment="LSE ening error" example="ERROR - synthesis: e:/projects/bali/cases/ptf445/port_syntax_top.v(10):..."/>
+	  <Rule name="new-message" example="&lt;postMsg" />
+	</Engine>
+	<Engine name="istflow" description="Reveal Inserter">
+	  <Rule name="syn-error" comment="Synplify synthesis error"/>
+	  <Rule name="syn-warning" comment="Synplify synthesis warning"/>
+	  <Rule name="syn-warning" comment="Synplify synthesis warning"/>
+	  <Rule name="hdle-error" comment="Hdl parser error"/>
+	  <Rule name="hdle-warning" comment="Hdl parser warning"/>
+	  <Rule name="hdle-info" comment="Hdl parser info"/>
+	  <Rule name="msgman-warning" comment="FPGA ening warning"/>
+	  <Rule name="msgman-error" comment="FPGA ening error"/>
+	  <Rule name="normal-error" example="ERROR: ....."/>
+	  <Rule name="normal-warning" example="WARNING: ....."/>  
+	  <Rule name="new-message" example="&lt;postMsg" />
+	</Engine>
+  </TargetDevice>
+  <FilterRule name="normal-error" type="Error" reg_patten="^ERROR:">
+    <SubRule name="detailed" type="ERROR" reg_patten='^ERROR:(.*)' fields="description"/>
+  </FilterRule>
+  <FilterRule name="normal-warning" type="Warning" reg_patten="^WARNING:">
+    <SubRule name="detailed" type="WARNING" reg_patten='^WARNING:(.*)' fields="description"/>
+  </FilterRule>
+  <FilterRule name="syn-error" type="Error" reg_patten="^@E\W">
+    <SubRule name="detailed" type="@E" id="2019990" reg_patten='^@E(?:: (\w+) )?:"([^"]+)"(?::(\d+):(\d+):(\d+):(\d+))?\|(.*)$' fields="code,file,line1,col1,line2,col2,description"/>
+    <SubRule name="detailed" type="@E" id="2019992" reg_patten='^@E(?:: (\w+) )?\|(.*)$' fields="code,description"/>
+  </FilterRule>
+  <FilterRule name="syn-warning" type="Warning" reg_patten="^@W\W">
+    <SubRule name="detailed" type="@W" id="2019991" reg_patten='^@W(?:: (\w+) )?:"([^"]+)"(?::(\d+):(\d+):(\d+):(\d+))?\|(.*)$' fields="code,file,line1,col1,line2,col2,description"/>
+    <SubRule name="detailed" type="@W" id="2019993" reg_patten='^@W(?:: (\w+) )?\|(.*)$' fields="code,description"/>
+  </FilterRule>
+  <FilterRule name="syn-syntax" type="Error" reg_patten="^Syntax error:\s">
+	<SubRule name="detailed" type="ERROR" id="2019992" reg_patten='^(.*)$' fields="code,description"/>
+  </FilterRule>
+  <FilterRule name="msgman-warning" type="Warning" reg_patten="^\b(WARNING|Warning)\b\s">
+    	<SubRule name="detailed" type="WARNING" reg_patten="\b(WARNING|Warning)\b - (.*)$" fields ="type, description"/>
+    	<!--SubRule name="detailed" type="WARNING" reg_patten="WARNING - (\w+):\s(.*)$" fields ="engine, description"/-->
+  </FilterRule>
+  <FilterRule name="msgman-error" type="Error" reg_patten="^\b(ERROR|Error)\b\s">
+    	<SubRule name="detailed" type="ERROR" reg_patten="\b(ERROR|Error)\b - (.*)$" fields ="type, description"/>
+    	<!--SubRule name="detailed" type="ERROR" reg_patten="ERROR - (\w+):\s(.*)$" fields ="engine, description"/-->
+  </FilterRule>
+  <FilterRule name="hdle-error" type="Error" reg_patten="\sERROR:">
+	<SubRule name="detailed" type="ERROR" reg_patten="^([^\(]+)?(?:\((\d+),(\d+)(?:-(\d+),(\d+))?\))? ERROR:(?: \(([^\)]+)\))? (.*)" fields="file,line1,col1,line2,col2,code,description"/>
+  </FilterRule>
+  <FilterRule name="hdle-warning" type="Warning" reg_patten="\sWARNING:">
+	<SubRule name="detailed" type="WARNING" reg_patten="^([^\(]+)?(?:\((\d+),(\d+)(?:-(\d+),(\d+))?\))? WARNING:(?: \(([^\)]+)\))? (.*)" fields="file,line1,col1,line2,col2,code,description"/>
+  </FilterRule>
+  <FilterRule name="hdle-info" type="Text" reg_patten="\sINFO:">
+	<SubRule name="detailed" type="INFO" reg_patten="^([^\(]+)?(?:\((\d+),(\d+)(?:-(\d+),(\d+))?\))? INFO:(?: \(([^\)]+)\))? (.*)" fields="file,line1,col1,line2,col2,code,description"/>
+  </FilterRule>
+  <FilterRule name="schTOhdl-error" type="Error" reg_patten="^@E:">
+    <SubRule name="detailed" type="@E" reg_patten="^@E:\s+(.*)" fields="description"/>
+  </FilterRule>
+  <FilterRule name="hdle-find" type="Find Results" reg_patten=":\sFound (Load)|(Driver):">
+	<SubRule name="detailed" type="Found" reg_patten="^([^\(]+)?(?:\((\d+),(\d+)-(\d+),(\d+)\))?: Found ((?:Load)|(?:Driver)): (.*)" fields="file,line1,col1,line2,col2,object,description"/>
+  </FilterRule>
+  <FilterRule name="lse-parser-error" type="Error" reg_patten="^ERROR - synthesis:" >
+    <SubRule name="detailed" type="ERROR" id="2029990" reg_patten="^ERROR - (synthesis): ([^\(]+)\((\d+)\): (.*)$" fields="engine, file, line1, description" />
+    <SubRule name="detailed" type="ERROR" id="2029992" reg_patten="^ERROR - (synthesis): (.*)$" fields="engine, description" />
+  </FilterRule>
+  <FilterRule name="lse-parser-warning" type="Warning" reg_patten="^WARNING - synthesis:" >
+    <SubRule name="detailed" type="WARNING" id="2029991" reg_patten="^WARNING - (synthesis): ([^\(]+)\((\d+)\): (.*)$" fields="engine, file, line1, description" />
+    <SubRule name="detailed" type="WARNING" id="2029993" reg_patten="^WARNING - (synthesis): (.*)$" fields="engine, description" />
+  </FilterRule>
+  <FilterRule name="new-message" type="NewMsg" reg_patten="^\s*&lt;postMsg mid=&quot;(\d+)&quot;">
+	<SubRule name="detailed" type="NewMsg" reg_patten="^\s*&lt;postMsg mid=&quot;(\d+)&quot;\s+type=&quot;([^&quot;]+)&quot;\s+dynamic=&quot;([^&quot;]+)&quot;\s+navigation=&quot;([^&quot;]+)&quot;\s+(.*)/&gt;\s*$" fields="id,type,dynamic,navigation,args"/>
+  </FilterRule>
+</BaliMsgFilterDef>

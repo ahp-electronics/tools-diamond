@@ -1,0 +1,40 @@
+library verilog;
+use verilog.vl_types.all;
+entity e2_cdr is
+    port(
+        ck_core_rx      : in     vl_logic;
+        rx_refck_local  : in     vl_logic;
+        rx_refck_sel    : in     vl_logic_vector(1 downto 0);
+        cold_rst        : in     vl_logic;
+        rrst            : in     vl_logic;
+        rpwdnb          : in     vl_logic;
+        reg_calib_rst   : in     vl_logic;
+        reg_facq_rst    : in     vl_logic;
+        bus8bit_sel     : in     vl_logic;
+        cdr_lol_set     : in     vl_logic_vector(1 downto 0);
+        ck_ref_mode     : in     vl_logic;
+        auto_calib_enb  : in     vl_logic;
+        auto_facq_enb   : in     vl_logic;
+        calib_time_sel  : in     vl_logic_vector(1 downto 0);
+        band_threshold  : in     vl_logic_vector(5 downto 0);
+        dac_bdavoid_enb : in     vl_logic;
+        fc2dco_dloop    : in     vl_logic;
+        reg_band_sel    : in     vl_logic_vector(5 downto 0);
+        reg_band_range  : in     vl_logic_vector(2 downto 0);
+        reg_band_offset : in     vl_logic_vector(3 downto 0);
+        reg_idac_en     : in     vl_logic;
+        reg_idac_sel    : in     vl_logic_vector(9 downto 0);
+        refck25x        : in     vl_logic;
+        refck_mode      : in     vl_logic_vector(1 downto 0);
+        rx_dco_ck_div   : in     vl_logic_vector(2 downto 0);
+        rx_sdata        : in     vl_logic;
+        setdcoidac      : out    vl_logic_vector(9 downto 0);
+        setdcoband      : out    vl_logic_vector(5 downto 0);
+        dco_calib_done  : out    vl_logic;
+        dco_facq_done   : out    vl_logic;
+        dco_calib_err   : out    vl_logic;
+        dco_facq_err    : out    vl_logic;
+        rx_dco_ck       : out    vl_logic;
+        cdr_lol         : out    vl_logic
+    );
+end e2_cdr;

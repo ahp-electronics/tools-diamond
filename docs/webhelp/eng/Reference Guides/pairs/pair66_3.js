@@ -1,0 +1,21 @@
+var pairs =
+{
+"osrx2a":{"primitive":1}
+,"output":{"2-bit":1,"data":1}
+,"2-bit":{"shift":1}
+,"shift":{"register":1}
+,"architectures":{"supported":1}
+,"inputs":{"eclk":1}
+,"eclk":{"sclk":1}
+,"sclk":{"rst":1}
+,"outputs":{"update":1,"data":1}
+,"data":{"shift":1,"following":1}
+,"register":{"output":1}
+,"following":{"symbolic":1}
+,"symbolic":{"diagram":1}
+,"diagram":{"shows":1}
+,"shows":{"flip-flop":1}
+,"flip-flop":{"structure":1}
+,"structure":{"primitive":1}
+}
+;Search.control.loadWordPairs(pairs);

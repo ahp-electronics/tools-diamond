@@ -1,0 +1,82 @@
+[sbp]
+Clarity Designer extended Tcl commands
+For more information on a specific command, type hlp command-name:
+
+  sbp_design     Clarity design commands to manipulate Clarity design
+  sbp_resource   Clarity resource commands to manipulate chip resource
+  sbp_builder    Clarity builder commands to build IP connectivity
+
+[sbp_design]
+sbp_design open - Open an existing Clarity design file\n
+  Usage:
+    sbp_design open -dsgn <Clarity design path>
+
+sbp_design close - Close Clarity design
+  Usage:
+    sbp_design close
+
+sbp_design new - Create a new Clarity design
+  Usage:
+    sbp_design new -dsgn [<new design name>] -path [<new Clarity design path>] -device [<new Clarity device>]
+
+sbp_design save - Save Clarity design
+  Usage:
+    sbp_design save
+
+sbp_design drc - Run Clarity design DRC
+  Usage:
+    sbp_design drc
+
+sbp_design config - Re-configure an existing module
+  Usage:
+    sbp_design config -module <Module name>
+
+[sbp_resource]
+sbp_resource place - Place resource
+  Usage:
+    sbp_resource place -rsc <IP name> -site <siteID>
+
+sbp_resource reset - Reset IP
+  Usage:
+    sbp_resource reset -ip <IP name>
+
+sbp_resource remove - Remove IP
+  Usage:
+    sbp_resource remove -ip <IP name>
+
+[sbp_builder]
+sbp_builder export_add - Export port (or port bus) or all ports of one component
+                         to the design top level port list
+  Usage:
+    sbp_builder export_add -port <portName1> [portName2]...
+    sbp_builder export_add -comp <instName1> [instName2]...
+
+sbp_builder export_rem - Remove exported port (or port bus) or all ports of one
+                         component from the design top level port list
+  Usage:
+    sbp_builder export_rem -port <portName1> [portName2]...
+    sbp_builder export_rem -comp <instName1> [instName2]...
+
+sbp_builder connect_new - Make new connection between ports (or ports bus)
+  Usage:
+    sbp_builder connect_new -port <portName1> <portName2> [portName3]... [-net netName]
+
+sbp_builder connect_add - Connect port (or port bus) to exist net (or net bus)
+  Usage:
+    sbp_builder connect_add -port <portName1> [portName2]... -net <netName>
+
+sbp_builder connect_rem - Remove net (or net bus) or disconnect connected ports from net
+  Usage:
+    sbp_builder connect_rem <-net netName> | <-port portName1 [portName2]...>
+
+sbp_builder connect_rnm - Change net (or net bus) name"
+  Usage:
+    sbp_builder connect_rnm -comp <compName> -org <original netName> -new <new netName>
+
+sbp_builder connect_rstnm - Change net (or net bus) name to default"
+  Usage:
+    sbp_builder connect_rstnm -comp <compName> -net <current netName>
+
+sbp_builder connect_reset - Unexport and disconnect all ports or portbus within specified ip"
+  Usage:
+    sbp_builder connect_reset -ip <ipName>

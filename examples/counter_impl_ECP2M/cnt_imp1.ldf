@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaliProject version="3.2" title="cnt_imp1" device="LFE2M20E-5F256C" default_implementation="cnt_attr">
+    <Options/>
+    <Implementation title="cnt_attr" dir="cnt_attr" description="cnt_attr" synthesis="lse" default_strategy="cnt_attr">
+        <Options def_top="count"/>
+        <Source name="source/count_attr.v" type="Verilog" type_short="Verilog">
+            <Options top_module="count"/>
+        </Source>
+        <Source name="cnt_attr.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Implementation title="cnt_imp1" dir="cnt_imp1" description="cnt_imp1" synthesis="lse" default_strategy="cnt_attr">
+        <Options def_top="count"/>
+        <Source name="source_reveal/count.v" type="Verilog" type_short="Verilog">
+            <Options top_module="count"/>
+        </Source>
+        <Source name="cnt_imp1.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Implementation title="cnt_reveal" dir="cnt_reveal" description="cnt_reveal" synthesis="lse" default_strategy="cnt_attr">
+        <Options def_top="count"/>
+        <Source name="source_reveal/count.v" type="Verilog" type_short="Verilog">
+            <Options top_module="count"/>
+        </Source>
+        <Source name="cnt_rvl.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+        <Source name="reveal_rvl/counta.rvl" type="Reveal" type_short="Reveal">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Strategy name="Strategy1" file="strategy1.sty"/>
+    <Strategy name="cnt_attr" file="cnt_attr.sty"/>
+</BaliProject>

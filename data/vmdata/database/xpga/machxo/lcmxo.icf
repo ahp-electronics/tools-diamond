@@ -1,0 +1,271 @@
+-- ISC flow file for Lattice MachXO family 
+-- Beta Version 1.1
+-- This flow has not been validated on silicon
+-- This version is based off non-looping ISC flow Beta version 1.2
+-- This version is cross-verified with Lattice Non Volatile Flash Prog Spec_R2.1
+-- Note " This file contains additional information that may cause a BSDL "
+-- Note " parser to reject or error if your parser does not contain the "
+-- Note " 1532 library. BSDL files without ISC extensions are available "
+-- Note " on the Lattice website at www.latticesemi.com. "
+-- Note " "
+-- Note " This ISC BSDL file uses a adoptive programming algorithm, "
+-- Note " which optimize programing time by utilizating looping "
+-- Note " defined in IEEE 1532-2002.  Programmer that does not "
+-- Note " support looping may not use this ISC flow. "
+-- Note " "
+-- Family MachXO
+-- Device LCMXO256C LAMXO256C LCMXO256E LAMXO256E LCMXO640C LAMXO640C LCMXO640E LAMXO640E LCMXO1200C LCMXO1200E LAMXO1200E LCMXO2280C LCMXO2280E LAMXO2280E
+-- Attribute INSTRUCTION_OPCODE
+		"   ISC_ADDRESS_SHIFT		(00000001)," &
+		"             XPROGEN		(00110101)," &
+		"              IDCODE		(00010110," &
+		"                    		 00011001," &
+		"                    		 00011101)," &
+		"           PINCR_RTI		(01100111)," &
+		"             PRELOAD		(00011100)," &
+		"          ISC_ENABLE		(00010101)," &
+		"           VINCR_RTI		(01101010)," &
+		"        PROG_REFRESH		(01001111)," &
+		"          SRAMPROGEN		(01010101)," &
+		"            ISC_READ		(00001010)," &
+		"              INTEST		(00101100)," &
+		"    ISC_PROGRAM_DONE		(00101111)," &
+		"         XSRAMREADEN		(01110101)," &
+		"            INITADDR		(00100001)," &
+		"         ISC_DISABLE		(00011110)," &
+		"ISC_PROGRAM_USERCODE		(00011010)," &
+		"          READ_SETUP		(11101010)," &
+		"           ISC_ERASE		(00000011)," &
+		"                 IPB		(00111000)," &
+		"            ISC_NOOP		(00110000)," &
+		"         ISC_PROGRAM		(00000111)," &
+		"ISC_PROGRAM_SECURITY		(00001001)," &
+		"              SAMPLE		(00011100)," &
+		"               HIGHZ		(00011000)," &
+		"              BYPASS		(00000000," &
+		"                    		 11111111)," &
+		"      ISC_DATA_SHIFT		(00000010)," &
+		"                 IPA		(00110010)," &
+		"       ISC_DISCHARGE		(00010100)," &
+		"             REFRESH		(00100011)," &
+		"     LSC_READ_STATUS		(10110010)," &
+		"            USERCODE		(00010111)," &
+		"      ISC_ERASE_DONE		(00100100)," &
+		"               CLAMP		(00100000)," &
+		"              EXTEST		(11010101)," &
+		"           ISC_SETUP		(00100010)," &
+		"PRIVATE	(00010000, 10000000, 00010001, 00001111)";
+-- Attribute End
+-- Attribute REGISTER_ACCESS
+		"ISC_DEFAULT[1]		(ISC_DISCHARGE, " &
+		"			 ISC_ENABLE, " &
+		"			 ISC_DISABLE, " &
+		"			 INITADDR, " &
+		"			 REFRESH, " &
+		"			 ISC_ERASE_DONE, " &
+		"			 ISC_NOOP, " &
+		"			 XPROGEN, " &
+		"			 SRAMPROGEN, " &
+		"			 XSRAMREADEN), " &
+		"ISC_ADDRESS[ADDRESS_REGISTER_LENGTH]		(ISC_ADDRESS_SHIFT), " &
+		"BYPASS		(HIGHZ, " &
+		"			 CLAMP, " &
+		"			 BYPASS), " &
+		"ISC_DATA[DEVICE_ROW_WIDTH]		(ISC_DATA_SHIFT), " &
+		"ISC_ER2[1]		(IPB), " &
+		"STATUS[1]		(ISC_ERASE, " &
+		"			 ISC_PROGRAM, " &			
+		"			 ISC_PROGRAM_SECURITY, " &
+		"			 ISC_PROGRAM_DONE, " &
+		"			 PROG_REFRESH, " &
+		"			 PINCR_RTI, " &
+		"			 LSC_READ_STATUS), " &
+		"ISC_CONFIG[4]		(ISC_SETUP, " &
+		"			 READ_SETUP), " &
+		"ISC_ER1[1]		(IPA), " &
+		"ISC_PDATA[DEVICE_ROW_WIDTH]		(ISC_READ, " &	
+		"			 VINCR_RTI), " &
+		"DEVICE_ID		(IDCODE, " &
+		"			 ISC_PROGRAM_USERCODE, " &
+		"			 USERCODE), " &
+		"BOUNDARY		(SAMPLE, " &
+		"			 PRELOAD, " &
+		"			 INTEST, " &
+		"			 EXTEST) " ;
+-- Attribute End
+-- Variable ID_DATA
+-- Variable BSCAN_REGISTER_LENGTH
+-- Variable BSCAN_REGISTER_VALUE
+-- Variable ADDRESS_REGISTER_LENGTH
+-- Variable DEVICE_ROW_WIDTH
+-- Start
+
+	attribute ISC_Pin_Behavior of DEVICE_NAME : entity is "CLAMP";
+
+	attribute ISC_Status of DEVICE_NAME : entity is "Not Implemented";
+
+	attribute ISC_Blank_Usercode of DEVICE_NAME : entity is
+		"11111111111111111111111111111111";
+
+-----------------------------
+--  ISC_Flow Descriptions    
+-----------------------------
+	attribute ISC_Flow of DEVICE_NAME : entity is
+
+		"flow_verify(idcode) " &
+			"Initialize " &
+			"  (IDCODE wait TCK 1 32:ID_DATA )," &
+
+		"flow_enable " &
+			"Initialize " &
+			"  (ISC_ENABLE  wait TCK 5, 10.0e-3)," &
+
+		"flow_erase " &
+			"Initialize " &
+			"  (SRAMPROGEN wait TCK 5, 1.0e-3) " &
+			"  (ISC_ERASE wait TCK 5, 1.0e-3) " &
+			"  (ISC_ENABLE wait TCK 5, 1.0e-3) " &
+			"  loop max 200( " &
+			"    (ISC_ERASE wait TCK 5, 100.0e-3) " &
+			"  ), " &
+
+		"flow_verify(status) " &
+			"Initialize " &
+			"  (LSC_READ_STATUS  wait TCK 5, 1.0e-3 1:0*1), "&
+			
+		"flow_preload " &
+			"Initialize " &
+			"  (SAMPLE BSCAN_REGISTER_LENGTH:BSCAN_REGISTER_VALUE wait TCK 1 )," &
+
+		"flow_program(array) " &
+			"Initialize " &
+			"  (INITADDR  wait TCK 5, 1.0e-3 )" &
+			"Repeat ADDRESS_REGISTER_LENGTH " &
+			"  (ISC_DATA_SHIFT DEVICE_ROW_WIDTH:? wait TCK 1) " &
+			"  loop max 30( " &
+			"    (PINCR_RTI wait TCK 5, 1.0e-3 1:1)" &
+			"  ), " &
+
+		"flow_verify(array) " &
+			"Initialize " &
+			"  (INITADDR  wait TCK 5, 1.0e-3 )" &
+			"Repeat ADDRESS_REGISTER_LENGTH " &
+			"  (VINCR_RTI wait TCK 5, 1.0e-3 DEVICE_ROW_WIDTH:?:CRC), " &	
+
+		"flow_read(array) " &
+			"Initialize " &
+			"  (INITADDR  wait TCK 5, 1.0e-3 )" &
+			"Repeat ADDRESS_REGISTER_LENGTH " &
+			"  (VINCR_RTI wait TCK 5, 1.0e-3 DEVICE_ROW_WIDTH:!:CRC), " &	
+
+		"flow_program(usercode) " &
+			"Initialize " &
+			"  (USERCODE 32:? wait TCK 1) " &
+			"  (ISC_PROGRAM_USERCODE 32:? wait TCK 5, 1.0e-3)," &
+		
+		"flow_verify(usercode) " &
+			"Initialize " &
+			"  (USERCODE wait TCK 5, 1.0e-3 32:? )," &
+
+		"flow_read(usercode) " &
+			"Initialize " &
+			"  (USERCODE wait TCK 5, 1.0e-3 32:! )," &
+
+		"flow_program_security " &
+			"Initialize " &
+			"  loop max 50( " &
+			"    (ISC_PROGRAM_SECURITY wait TCK 5, 1.0e-3)" &
+			"  ), " &
+			
+		"flow_disable " &
+			"Initialize " &
+			"  (ISC_DISABLE  wait TCK 5, 50.0e-3) "&
+			"  (BYPASS       wait TCK 5, 1.0e-3), "&
+
+-- This is the svp indicates, which has looping
+--		"flow_program_done " &
+--			"Initialize " &
+--			"  loop max 50( " &
+--			"    (ISC_PROGRAM_DONE wait TCK 5, 1.0e-3)" &
+--			"  ) ";
+
+		"flow_program_done " &
+			"Initialize " &
+			"    (ISC_PROGRAM_DONE wait TCK 5, 30.0e-3) ";
+
+
+-----------------------------
+--  ISC_Procdeure Descriptions    
+-----------------------------
+	attribute ISC_Procedure of DEVICE_NAME : entity is
+
+		"proc_verify(idcode)     = (flow_verify(idcode)), " &
+		"proc_verify(status)     = (flow_verify(status)), " &
+		"proc_enable             = (flow_enable), " &
+		"proc_disable            = (flow_disable), " &
+		"proc_program(array)     = (flow_program(array)), " &
+		"proc_verify(array)      = (flow_verify(array)), " &
+		"proc_erase              = (flow_erase), " &
+		"proc_read(array)        = (flow_read(array)), " &
+		"proc_program(usercode)  = (flow_program(usercode)), " &
+		"proc_verify(usercode)   = (flow_verify(usercode)), " &
+		"proc_read(usercode)     = (flow_read(usercode)), " &
+		"proc_program_done       = (flow_program_done), " &
+		"proc_error_exit         = (flow_disable), " &
+		"proc_preload            = (flow_preload), " &
+		"proc_program(security)  = (flow_program_security)";
+
+-----------------------------
+--  ISC_Action Descriptions    
+-----------------------------
+	attribute ISC_Action of DEVICE_NAME : entity is
+
+		"erase          = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_erase, " &
+		"           proc_verify(status), " &
+		"           proc_disable), " &
+		"program        = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_erase, " &
+		"           proc_verify(status), " &
+		"           proc_program(array), " &
+		"           proc_verify(status), " &
+		"           proc_program(usercode), " &
+		"           proc_verify(status), " &
+		"           proc_verify(array), " &
+		"           proc_verify(usercode), " &
+		"           proc_program(security) optional, " &
+		"           proc_verify(status), " &
+		"           proc_program_done, " &
+		"           proc_verify(status), " &
+		"           proc_disable), " &
+		"verify         = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_verify(array), " &
+		"           proc_verify(usercode), " &
+		"           proc_disable), " &
+		"read           = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_read(array) proprietary, " &
+		"           proc_read(usercode), " &
+		"           proc_disable), " &
+		"verify_idcode  = ( proc_verify(idcode)), " &
+		"secure         = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_program(security), " &
+		"           proc_disable) ";
+		
+attribute DESIGN_WARNING of DEVICE_NAME : entity is
+    "This ISC BSDL file uses a looping programming algorithm for optimized " &
+    "programming times.  Do not use this ISC BSDL file if your driver does " &
+    "not support looping." &
+    "This ISC flow is designed to work on JTAG Technology's programmer." &
+    "Please contact Lattice for compatibility before use." &
+    "The SLEEPN pin is used to put the device in Sleep mode." &
+    "It must be High throughout the entire BSCAN testing.";

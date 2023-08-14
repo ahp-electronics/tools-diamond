@@ -1,0 +1,20 @@
+var pairs =
+{
+"working":{"macros":1}
+,"macros":{"design":1,"change":1}
+,"design":{"mode":1,"rule":1}
+,"mode":{"design":1,"epic":1}
+,"epic":{"enables":1}
+,"enables":{"add":1}
+,"add":{"macros":1}
+,"change":{"attributes":1}
+,"attributes":{"clone":1}
+,"clone":{"move":1}
+,"move":{"place":1}
+,"place":{"route":1}
+,"route":{"macro":1}
+,"macro":{"perform":1}
+,"perform":{"design":1}
+,"rule":{"check":1}
+}
+;Search.control.loadWordPairs(pairs);

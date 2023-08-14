@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="baseflowcmd">
+  <CommandDef id="Cmd_HDL_Convert" sctype="CMD_TCL_SCRIPT"  type="CMD_TCL_SCRIPT_SOURCE" iterate="implementation.convert_hdls">
+    <!--cmd_str>tohdl -d %@iterator.type@% -s %@iterator.source_type@% -i %@iterator.source@% -o @iterator@</cmd_str-->
+	<cmd_str>tohdl %@iterator.type@% %@iterator.source_type@% "%@iterator.source@%" "@iterator@" "${project_dir}"</cmd_str>
+	<scripts>tohdl.tcl</scripts>
+	<!--scripts>
+	<[CDATA[
+		proc tohdl {args} {
+			set msg "tohdl $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts!-->
+  </CommandDef>
+  <!--
+  <VariableDef name="EdifIn:RevealCoreGen" value='defined(implementation.Reveal)&amp;&amp;(implementation.Reveal.level=="rtl"||(!defined(implementation.Reveal.level)&amp;&amp;!implementation.is_mix_hdls&amp;&amp;implementation.synthesis_hdls._COUNT&gt;0))?-ip "${InstallPath}/module" -ic reveal -nopropwarn: ' />
+  -->
+  <VariableDef name="NGDBuild:security_keys" iterate="implementation.security_keys" value='-key "%@iterator@%"' />
+  <VariableDef name="EdifIn:RevealCoreGen" value='defined(implementation.Reveal)&amp;&amp;(implementation.synthesis_hdls._COUNT&gt;0)?-ip "${InstallPath}/module" -ic reveal -nopropwarn: ' />
+  <CommandDef id="Cmd_EdifIn" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG" iterate="postsynthesis_edifs">
+    <cmd_str>edif2ngd !EdifIn:RevealCoreGen -l "${device.family}" -d $device.device -path "${impl_dir}" -path "${project_dir}" #PROP_BD_EdfMemPath !NGDBuild:security_keys "@iterator@" "%@iterator.completebasename@%.ngo" #PROP_BD_EdfInBusNameConv #PROP_BD_EdfInRemLoc #PROP_BD_CmdLineArgs</cmd_str>    
+	<scripts>
+	<![CDATA[
+		proc edif2ngd {args} {
+			set msg "edif2ngd $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_MIX_NGO1" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+	<cmd_str>edif2ngd -ip "${InstallPath}/module" -ic reveal -nopropwarn -l "${device.family}" -d $device.device -path "${impl_dir}" -path "${project_dir}" #PROP_BD_EdfMemPath !NGDBuild:security_keys "${report_base}.edi" "${report_base}.ngo" #PROP_BD_EdfInBusNameConv #PROP_BD_EdfInRemLoc  #PROP_BD_CmdLineArgs</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc edif2ngd {args} {
+			set msg "edif2ngd $args\n";
+			runtime_log $msg;
+			set msg "Cmd_RTL_NGO: This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>	
+	</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_MIX_NGO2" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG" iterate="RVP_Reveal">
+	<cmd_str>edif2ngd -l "${device.family}" -d $device.device -path "${impl_dir}" -path "${project_dir}" #PROP_BD_EdfMemPath !NGDBuild:security_keys "@iterator@" "%@iterator.completebasename@%.ngo" #PROP_BD_EdfInBusNameConv #PROP_BD_EdfInRemLoc  #PROP_BD_CmdLineArgs</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc edif2ngd {args} {
+			set msg "edif2ngd $args\n";
+			runtime_log $msg;
+			set msg "Cmd_EDIF_NGO: This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>	
+	</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_EDIF_NGO" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG" iterate="RVP_Reveal">
+	<cmd_str>edif2ngd -l "${device.family}" -d $device.device -path "${impl_dir}" -path "${project_dir}" #PROP_BD_EdfMemPath !NGDBuild:security_keys "@iterator@" "%@iterator.basename@%.ngo" #PROP_BD_EdfInBusNameConv #PROP_BD_EdfInRemLoc  #PROP_BD_CmdLineArgs</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc edif2ngd {args} {
+			set msg "edif2ngd $args\n";
+			runtime_log $msg;
+			set msg "Cmd_RTL_NGO: This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>	
+	</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_EdifSourceIn" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG" iterate="implementation.EDIF">
+    <cmd_str>edif2ngd -l "${device.family}" -d $device.device -path "${impl_dir}" -path "${project_dir}" #PROP_BD_EdfMemPath !NGDBuild:security_keys "@iterator@" "%@iterator.completebasename@%.ngo" #PROP_BD_EdfInBusNameConv #PROP_BD_EdfInRemLoc #PROP_BD_CmdLineArgs</cmd_str>    
+	<scripts>
+	<![CDATA[
+		proc edif2ngd {args} {
+			set msg "edif2ngd $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>  
+  <CommandDef id="Cmd_EdifUpdate" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>edfupdate -t "${report_base}.tcy" -w "${report_base}.ngo" -m "${report_base}.ngo" "${report_base}.ngx"
+	</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc edfupdate {args} {
+			set msg "edfupdate $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <VariableDef name="NGDBuild:device_ngo_path" value='-p "${FOUNDRY}/${device.pm}/data"' />
+  <VariableDef name="NGDBuild:ngo_path" iterate="implementation.ngo_path" value='-p "%@iterator@%"' />
+  <CommandDef id="Cmd_NGDBuild" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <!--cmd_str>ngdbuild  -a "${device.family}" -d $device.device -p "${FOUNDRY}/${device.pm}/data" -p "${impl_dir}" "${report_base}.ngo" "${report_base}.ngd" #PROP_BD_EdfInLibPath
+	</cmd_str-->
+	<cmd_str>ngdbuild  -a "${device.family}" -d $device.device #PROP_BD_EdfHardtimer !NGDBuild:device_ngo_path  !NGDBuild:ngo_path #PROP_BD_EdfInLibPath "${postsynthesis_edifngos._ITERATOR.last.value.completebasename}.ngo" "${report_base}.ngd" 
+	</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ngdbuild {args} {
+			set msg "ngdbuild $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_NGDBuildReveal" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+	<cmd_str>ngdbuild  -a "${device.family}" -d $device.device #PROP_BD_EdfHardtimer !NGDBuild:device_ngo_path  !NGDBuild:ngo_path #PROP_BD_EdfInLibPath "${RVP_Reveal._ITERATOR.last.value.completebasename}.ngo" "${report_base}.ngd" 
+	</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ngdbuild {args} {
+			set msg "ngdbuild $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+ 
+  <VariableDef name="Map_lxt_lpf_name" value='implementation.strategy.PROP_LST_UseLPF == "True"&amp;&amp;(implementation.synthesis == "lse")&amp;&amp;(implementation.synthesisable_srces_count &gt; 0)? -lpf "${result_dir}/${report_base}.lpf" -lpf "${implementation.Logic Preference.absolutefilepath}" : "${implementation.Logic Preference.absolutefilepath}"'/>
+  <VariableDef name="Map_syn_lpf_name" value='implementation.strategy.PROP_SYN_UseLPF == "True"&amp;&amp;(implementation.synthesis == "synplify")&amp;&amp;(implementation.synthesisable_srces_count &gt; 0) ? -lpf "${result_dir}/${report_base}_synplify.lpf" -lpf "${implementation.Logic Preference.absolutefilepath}":!Map_lxt_lpf_name'/>
+  <VariableDef name="Map:PFRPioFile" value=''/>
+  <CommandDef id="Cmd_Map" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>map -a "${device.family}" -p $device.device -t $device.package -s $device.speed -oc $device.operation ${device.MapExtCmd} #PROP_MAP_MAPIORegister "${report_base}.ngd" -o "${report_base}_map.ncd" -pr "${report_base}.prf" -mp "${report_base}.mrp" !Map_syn_lpf_name !Map:PFRPioFile #PROP_MAP_PackLogMapDes #PROP_MAP_IgnorePreErr #PROP_MAP_SymCrossRef #PROP_MAP_SigCrossRef #PROP_MAP_OvermapDevice #PROP_MAP_RegRetiming #PROP_MAP_TimingDriven #PROP_MAP_TimingDrivenNodeRep #PROP_MAP_TimingDrivenPack #PROP_MAP_MapModArgs #PROP_MAP_MAPInferGSR </cmd_str>
+	<scripts>
+	<![CDATA[
+		proc map {args} {
+			set msg "map $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_VDB_CHDIR" type="CMD_TCL_SCRIPT">
+	<cmd_str/>
+	<scripts>
+		<![CDATA[
+			if [catch {
+				if {[file exists .vdbs] == 0} {
+					file mkdir .vdbs
+					set msg "Create .vdbs folder successfully.\n";
+					runtime_log $msg;
+				}
+			} err ] {
+				runtime_log -err $err
+			}
+		]]>
+	</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_NCD_VDB" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>ncd2vdb "${report_base}_map.ncd" ".vdbs/$(report_base)_map.vdb"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc map {args} {
+			set msg "map $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>  
+
+  <CommandDef id="Cmd_MapEqu" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>ncd2eqn "${report_base}_map.ncd"</cmd_str>
+  </CommandDef>
+  <CommandDef id="Cmd_MapTrace" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <CommandFile name="${report_base}.mt" clean="TRUE" >	     
+	    <line>#PROP_MAPSTA_ReportStyle</line>
+	    <line>#PROP_MAPSTA_WordCasePaths</line>
+	    <line>#PROP_MAPSTA_CheckUnconstrainedConns</line>
+	    <line>#PROP_MAPSTA_NumUnconstrainedPaths</line>
+	    <line>#PROP_MAPSTA_AutoTiming</line>
+	    <line>#PROP_MAPSTA_RptAsynTimLoop</line>
+        <line>#PROP_MAPSTA_FullName</line>	     
+	    <line>#PROP_MAPSTA_RouteEstAlogtithm</line>
+	    <line>#PROP_MAPSTA_AnalysisOption</line>
+    </CommandFile>
+    <cmd_str>trce -f "${report_base}.mt" -o "${report_base}.tw1" "${report_base}_map.ncd" "${report_base}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc trce {args} {
+			set msg "trce $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <VariableDef name="PAR:PFRPadFile" value="" />
+  <CommandFileDef id="MPARTRC_P2TCmd" name="${report_base}.p2t" clean="TRUE" >
+    <line>-w</line>
+    <line>#PROP_PAR_PARModArgs</line>
+    <line>#PROP_PAR_EffortParDes</line>
+    <line>#PROP_PAR_RoutePassParDes</line>
+    <line>#PROP_PAR_NewRouteParDes</line>
+    <line>#PROP_PAR_DisableTDParDes</line>
+    <line>#PROP_PAR_CrDlyStFileParDes</line>
+    <line>#PROP_PAR_PrefErrorOut</line>
+    <line>#PROP_PAR_RoutingCDP</line>
+    <line>#PROP_PAR_RoutingCDR</line>
+    <line>#PROP_PAR_PlcIterParDes</line>
+    <line>#PROP_PAR_PlcStCostTblParDes</line>
+    <line>#PROP_PAR_SaveBestRsltParDes</line>
+    <line>#PROP_PAR_RouteResOptParDes</line>
+    <line>#PROP_PAR_RouteDlyRedParDes</line>
+    <line>#PROP_PAR_ParRunPlaceOnly</line>
+    <line>#PROP_PAR_ParMultiNodeList</line>
+<!--<line>#PROP_PAR_ParNCDGuideFile</line>
+    <line>#PROP_PAR_ParMatchFact</line>
+    <line>#PROP_PAR_ParGuideRepMatch</line>-->
+    <line>#PROP_PAR_parPathBased</line>
+    <line>#PROP_PAR_parHold</line>
+    <line>#PROP_PAR_PARClockSkew</line>
+    <line>#PROP_PAR_StopZero</line>
+    <line>#PROP_PAR_MultiSeedSortMode</line>
+    <line>#PROP_PAR_RunTimeReduction</line>
+    <line>!PAR:PFRPadFile</line>
+  </CommandFileDef>
+  <CommandFileDef id="MPARTRC_P3TCmd" name="${report_base}.p3t" clean="TRUE" >
+	<line>#PROP_PAR_RemoveDir</line>
+	<line>#PROP_PAR_RunParWithTrce</line>
+	<line>-log "${report_base}.log"</line>
+	<line>-o "${report_base}.csv"</line>
+	<line>-pr "${report_base}.prf"</line>  
+  </CommandFileDef>
+  <CommandFileDef id="PARTRC_PTCmd" name="${report_base}.pt" clean="TRUE" >
+    <line>#PROP_PARSTA_ReportStyle</line>
+    <line>#PROP_PARSTA_WordCasePaths</line>
+    <line>#PROP_PARSTA_RptAsynTimLoop</line>
+	<line>#PROP_PARSTA_CheckUnconstrainedConns</line>
+	<line>#PROP_PARSTA_NumUnconstrainedPaths</line>	
+    <line>#PROP_PARSTA_FullName</line>
+    <line>#PROP_PARSTA_AutoTiming</line>         
+    <line>#PROP_PARSTA_AnalysisOption</line>
+    <line>#PROP_PARSTA_SpeedForSetupAnalysis</line>
+    <line>#PROP_PARSTA_SpeedForHoldAnalysis</line>
+  </CommandFileDef>
+  <CommandDef id="Cmd_Par" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG" handler="mpartrce">
+    <cmd_str>mpartrce -p "${report_base}.p2t" -f "${report_base}.p3t" -tf "${report_base}.pt" "${report_base}_map.ncd" "${report_base}.ncd"</cmd_str>
+    <CommandFile using_def="MPARTRC_P2TCmd" />
+    <CommandFile using_def="MPARTRC_P3TCmd" />
+    <CommandFile using_def="PARTRC_PTCmd" />
+	<scripts>
+	<![CDATA[
+		proc multipar {args} {
+			set msg "mpartrce $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_PARTrace" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <CommandFile using_def="PARTRC_PTCmd" />
+    <cmd_str>trce -f "${report_base}.pt" -o "${report_base}.twr" "${report_base}.ncd" "${report_base}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc trce {args} {
+			set msg "trce $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_PARPwcTrace" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <CommandFile using_def="PARTRC_PTCmd" />
+    <cmd_str>trce -f "${report_base}.pt" -o "${report_base}_pwc.twr" "${report_base}.ncd" "${report_base}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc trce {args} {
+			set msg "trce $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>  
+  <CommandDef id="Cmd_IOTiming" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>iotiming #PROP_IOTIMING_AllSpeed "${report_base}.ncd" "${report_base}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc iotiming {args} {
+			set msg "iotiming $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_SSO" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>ssoana -d $device.device -p $device.package "${report_base}.ncd" "${implementation.Logic Preference.absolutefilepath}" -o "${report_base}.sso"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ssoana {args} {
+			set msg "ssoana $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <VariableDef name="TimingGen:WriteVerbose" value="#PROP_TIM_WriteVerboseNetlist" />
+  <CommandDef id="Cmd_TimingSimFileVlg" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>ldbanno "${report_base}.ncd" -n Verilog #PROP_TIM_TimSimHierSep -o "${report_base}_vo.vo" #PROP_TIM_TimSimGenX #PROP_TIM_TimSimGenPUR #PROP_TIM_MinSpeedGrade #PROP_TIM_MaxDelSimDes #PROP_TIM_ModPreSimDes #PROP_TIM_TrgtSpeedGrade !TimingGen:WriteVerbose -w #PROP_TIM_NegStupHldTim</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ldbanno {args} {
+			set msg "iotiming $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_TimingSimFileVHD" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>ldbanno "${report_base}.ncd" -n VHDL -o "${report_base}_vho.vho" #PROP_TIM_TimSimGenX #PROP_TIM_TimSimGenPUR #PROP_TIM_MinSpeedGrade #PROP_TIM_MaxDelSimDes #PROP_TIM_ModPreSimDes #PROP_TIM_TrgtSpeedGrade !TimingGen:WriteVerbose -w #PROP_TIM_NegStupHldTim #PROP_TIM_TransportModeOfPathDelay</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ldbanno {args} {
+			set msg "iotiming $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_MapVerilogSimFile" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>ldbanno "${report_base}_map.ncd" -n Verilog -o "${report_base}_mapvo.vo" -w -neg</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ldbanno {args} {
+			set msg "postmap gate-level $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_MapVHDLSimFile" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>ldbanno "${report_base}_map.ncd" -n VHDL -o "${report_base}_mapvho.vho" -w -neg</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ldbanno {args} {
+			set msg "postmap gate-level $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <VariableDef name="IBISGen:ibs_file" value='"${InstallPath}/cae_library/ibis/${device.PrimitiveLib}.ibs"' />
+  <VariableDef name="IBISGen:asc" iterate="project.device.exascs" value='-asc %@iterator._FIRST@% -asc_num %@iterator._SECOND@%' />
+  <VariableDef name="IBISGen:ibs_outfile" value='IBIS/$(report_base).ibs' />
+  <VariableDef name="IBISGen:ibs_ascorder" value='project.device.asc_order != ""? -asc_order "${project.device.asc_order}" : ' />
+  <CommandDef id="Cmd_IBIS" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <!--<cmd_str>ibisgen "${report_base}.pad" !IBISGen:ibs_file !IBISGen:asc</cmd_str>-->
+    <cmd_str>ibisgen "${report_base}.pad" !IBISGen:ibs_file  !IBISGen:ibs_ascorder </cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ibisgen {args} {
+			set msg "ibisgen $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <VariableDef name="Bitgen:security" value='-e -s "${project_dir}/${project.title}.sec" -k "${project_dir}/${project.title}.bek"' />
+  <CommandDef id="Cmd_TimingCheck" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>tmcheck -par "${report_base}.par" #PROP_TMCHK_EnableCheck</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc tmcheck {args} {
+			set msg "tmcheck $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <CommandFile name="${report_base}.t2b" clean="TRUE" >
+	  <line>#PROP_BIT_RunDRCBitGen</line>	
+	</CommandFile>
+    <cmd_str>bitgen -f "${report_base}.t2b" -w "${report_base}.ncd" -jedec !Bitgen:security "${report_base}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc bitgen {args} {
+			set msg "bitgen $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_JEDEC" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <CommandFile using_def="Bitgen_T2BCmd"/>
+    <cmd_str>bitgen -w "${report_base}.ncd" -f "${report_base}.t2b" -jedec !Bitgen:security "${report_base}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc bitgen {args} {
+			set msg "bitgen $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>  
+  
+  <!-- VariableDef name="Bitgen:pcs_path" iterate="implementation.pcs_path" value='-path "%@iterator@%"' / -->
+  <VariableDef name="Bitgen:pcs_path" value='-path "${project_dir}"' />
+  <CommandDef id="Cmd_ltxt2ptxt" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>ltxt2ptxt #PROP_BIT_SearchPthBitGen !Bitgen:pcs_path "${report_base}.ncd"</cmd_str>
+  </CommandDef>
+  
+  <CommandDef id="Cmd_CopyPCS" type="CMD_TCL_SCRIPT" iterate="implementation.bali_package">
+    <cmd_str>copy_pcs %@iterator.file_pcs_text@% </cmd_str>
+	<scripts>
+	<![CDATA[
+		proc copy_pcs {args} {
+			foreach f $args {
+                if { [string equal [file normalize [file dirname $f]] [pwd] ] != 1 } {
+                    file copy -force $f .
+                }
+			}
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  
+  <CommandDef id="Cmd_PROM" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <!--<cmd_str>ispdfw -dev $device.inner_name #PROP_BIT_OutFormatBitGen_REF #PROP_BIT_OutFormatPromGen</cmd_str>-->
+	<cmd_str>ddtcmd -dev $device.device #PROP_BIT_OutFormatBitGen_REF #PROP_BIT_OutFormatPromGen #PROP_BIT_ByteWideBitMirror</cmd_str>
+  </CommandDef>
+  
+  <!-- Incremental flow command lines -->    
+  <CommandDef id ="Cmd_BackUpRef_Ngd" type ="CMD_TCL_SCRIPT" >
+    <cmd_str>backup_ref_files_ngd "${report_base}"</cmd_str>
+    <scripts>
+      <![CDATA[
+        proc backup_ref_files_ngd {name} {          
+          set icf "${name}.icf"		
+          set ngd "${name}.ngd"
+          if {![file exists inc1]} {
+            file mkdir inc1
+          } else {
+            if {![file exists inc2]} {
+              file mkdir inc2
+            }
+            if {[file exists inc1/$icf]} {
+              file copy -force inc1/$icf inc2
+            }			
+            if {[file exists inc1/$ngd]} {
+              file copy -force inc1/$ngd inc2
+            }
+          }
+          if {[file exists $icf]} { 
+            file copy -force $icf inc1
+          }
+          if {[file exists $ngd]} { 
+            file copy -force $ngd inc1
+          }
+        }
+      ]]>
+    </scripts>  
+  </CommandDef>
+  <CommandDef id ="Cmd_CopyRef" type ="CMD_TCL_SCRIPT" >
+    <cmd_str>copy_ref_files "${report_base}"</cmd_str>
+    <scripts>
+      <![CDATA[
+        proc copy_ref_files {name} {
+          set icf "${name}.icf"
+          set ngd "${name}.ngd"
+          set ncd "${name}.ncd"
+          set copied 0
+          if {[file exists "inc1/$icf"] && [file exists "inc1/$ngd"] && [file exists "inc1/$ncd"]} {
+            file copy -force "inc1/$icf" .
+            file copy -force "inc1/$ngd" .
+            file copy -force "inc1/$ncd" .
+            set copied 1
+          }
+          if {$copied == 0} {
+            return -code error "Can't find the reference files inc1/$icf or inc1/$ngd or inc1/$ncd"
+          }
+        }
+      ]]>
+    </scripts>
+  </CommandDef>
+  <CommandDef id ="Cmd_BackUpRef" type ="CMD_TCL_SCRIPT" >
+    <cmd_str>backup_ref_files "${report_base}"</cmd_str>
+    <scripts>
+      <![CDATA[
+        proc backup_ref_files {name} {
+          set icf "${name}.icf"
+          set ngd "${name}.ngd"
+          set ncd "${name}.ncd"
+          if {![file exists inc1]} {
+            file mkdir inc1
+          } else {
+            if {![file exists inc2]} {
+              file mkdir inc2
+            }
+            if {[file exists inc1/$icf]} {
+              file copy -force inc1/$icf inc2
+            }
+            if {[file exists inc1/$ngd]} {
+              file copy -force inc1/$ngd inc2
+            }			
+            if {[file exists inc1/$ncd]} {
+              file copy -force inc1/$ncd inc2
+            }
+          }
+          file copy -force $icf $ngd $ncd inc1
+        }
+      ]]>
+    </scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_InitNgdBuild" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>ngdbuild -inc -icf "${report_base}.icf" -a "${device.family}" -d $device.device #PROP_BD_EdfHardtimer !NGDBuild:device_ngo_path  !NGDBuild:ngo_path #PROP_BD_EdfInLibPath #PROP_BD_ParSearchPath "${postsynthesis_edifngos._ITERATOR.last.value.completebasename}.ngo" "${report_base}.ngd" </cmd_str>   
+  </CommandDef>
+  <CommandDef id="Cmd_IncrNgdBuild" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>ngdbuild -inc -icf "${report_base}.icf" -ref "inc1/${report_base}.ngd" -a "${device.family}" -d $device.device #PROP_BD_EdfHardtimer !NGDBuild:device_ngo_path  !NGDBuild:ngo_path #PROP_BD_EdfInLibPath #PROP_BD_ParSearchPath "${postsynthesis_edifngos._ITERATOR.last.value.completebasename}.ngo" "${report_base}.ngd" </cmd_str>    
+  </CommandDef>   
+  <CommandDef id="Cmd_InitMap" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>map -inc -a "${device.family}" -p $device.device -t $device.package -s $device.speed -oc $device.operation ${device.MapExtCmd} #PROP_MAP_MAPIORegister "${report_base}.ngd" -icf "${report_base}.icf" -o "${report_base}_map.ncd" -pr "${report_base}.prf" -mp "${report_base}.mrp" "${implementation.Logic Preference.absolutefilepath}" #PROP_MAP_PackLogMapDes #PROP_MAP_IgnorePreErr #PROP_MAP_SymCrossRef #PROP_MAP_SigCrossRef #PROP_MAP_OvermapDevice #PROP_MAP_RegRetiming #PROP_MAP_TimingDriven #PROP_MAP_TimingDrivenNodeRep #PROP_MAP_TimingDrivenPack #PROP_MAP_MapModArgs #PROP_MAP_MAPInferGSR </cmd_str>
+  </CommandDef>  
+  <CommandDef id="Cmd_IncrMap" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>map -inc -a "${device.family}" -p $device.device -t $device.package -s $device.speed -oc $device.operation ${device.MapExtCmd} #PROP_MAP_MAPIORegister "${report_base}.ngd" -icf "${report_base}.icf" -ref "inc1/${report_base}.ncd" -o "${report_base}_map.ncd" -pr "${report_base}.prf" -mp "${report_base}.mrp" "${implementation.Logic Preference.absolutefilepath}" #PROP_MAP_PackLogMapDes #PROP_MAP_IgnorePreErr #PROP_MAP_SymCrossRef #PROP_MAP_SigCrossRef #PROP_MAP_OvermapDevice #PROP_MAP_RegRetiming #PROP_MAP_TimingDriven #PROP_MAP_TimingDrivenNodeRep #PROP_MAP_TimingDrivenPack #PROP_MAP_MapModArgs #PROP_MAP_MAPInferGSR </cmd_str>
+  </CommandDef>
+  <CommandDef id="Cmd_InitPAR" type="CMD_EXTERNAL_ENGINE_NEWMSG" handler="mpartrce">
+    <cmd_str>mpartrce -p "${report_base}.p2t" -f "${report_base}.p3t" "${report_base}_map.ncd" "${report_base}.ncd"</cmd_str>
+	<CommandFile using_def="MPARTRC_P2TCmd" />
+	<CommandFile using_def="MPARTRC_P3TCmd" />
+    <CommandFile name="${report_base}.p2t" clean="TRUE" >
+	  <line>-inc -icf "${report_base}_map.icf"</line>
+      <line>-exp parUsePAF_PAR=1</line>   
+    </CommandFile>
+  </CommandDef>
+  <CommandDef id="Cmd_IncrPAR" type="CMD_EXTERNAL_ENGINE_NEWMSG" handler="mpartrce">
+    <cmd_str>mpartrce -p "${report_base}.p2t" -f "${report_base}.p3t" "${report_base}_map.ncd" "${report_base}.ncd"</cmd_str>
+	<CommandFile using_def="MPARTRC_P2TCmd" />
+	<CommandFile using_def="MPARTRC_P3TCmd" />
+    <CommandFile name="${report_base}.p2t" clean="TRUE" >
+	  <line>-inc -icf "${report_base}_map.icf" -ref "inc1/${report_base}.ncd"</line>
+      <line>-exp parUsePAF_PAR=1</line>      
+    </CommandFile>
+  </CommandDef>
+
+  <CommandDef id="Cmd_PowerCal" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>thermalanalysis -ncd "${report_base}.ncd" -twr "${report_base}_pwc.twr" -o "${report_base}.pwrp" #PROP_THERMAL_DefaultFreq </cmd_str>
+    <scripts>
+      <![CDATA[
+        proc pwrcal {name} {
+          runtime_log "Check design '$name' power..."
+          return -code error "Not implemented"
+        }
+      ]]>
+    </scripts>
+  </CommandDef>
+
+  <!-- user defined previous & post script task -->
+  <CommandDef id="Cmd_PreSynScript" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>pnmainc ${implementation.syn_pre_script}</cmd_str>
+  </CommandDef>
+  <CommandDef id="Cmd_PostSynScript" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>pnmainc ${implementation.syn_post_script}</cmd_str>
+  </CommandDef>  
+  <CommandDef id="Cmd_PreMapScript" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>pnmainc ${implementation.map_pre_script}</cmd_str>
+  </CommandDef>
+  <CommandDef id="Cmd_PostMapScript" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>pnmainc ${implementation.map_post_script}</cmd_str>
+  </CommandDef>
+  <CommandDef id="Cmd_PreParScript" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>pnmainc ${implementation.par_pre_script}</cmd_str>
+  </CommandDef>
+  <CommandDef id="Cmd_PostParScript" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>pnmainc ${implementation.par_post_script}</cmd_str>
+  </CommandDef>
+  <CommandDef id="Cmd_PreExportScript" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>pnmainc ${implementation.export_pre_script}</cmd_str>
+  </CommandDef>
+  <CommandDef id="Cmd_PostExportScript" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>pnmainc ${implementation.export_post_script}</cmd_str>
+  </CommandDef>
+  <!-- end of user script tasks -->
+</BaliFlowDef>

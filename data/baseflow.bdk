@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title ="baseflow" include ="basepojo, synthesis, baseflowcmd, basereveal, basereport, basetool">
+  <MileStoneDef id ="synthesis" title ="Synthesis">
+    <if condition="implementation.synthesisable_srces_count &gt; 0">
+	  <if condition='implementation.synthesis == "synplify"' task="Task_Synthesis_Synplify">
+        <elif condition='implementation.synthesis == "precision"' task="Task_Synthesis_Precision">
+          <elif condition='implementation.synthesis == "aldec"' task="Task_Synthesis_Aldec" />
+        </elif>
+        <default definition="Task_Synthesis_Synplify">
+        </default>
+      </if>
+	</if>
+  </MileStoneDef>
+  <MileStoneDef id ="translate" title ="Translate" main_task ="Task_Translate"/>
+  <MileStoneDef id ="map" title ="Map" >
+  <!--MileStoneDef id ="trans_map" title ="Translate_Map" main_task ="Task_Map"-->
+    <if condition='implementation.synthesis == "lse" &amp;&amp; implementation.synthesisable_srces_count &gt; 0' task="Task_LseMap" default ="Task_Map"/>
+	<SubTasks>
+	  <!--Task definition ="Task_Database" /-->
+      <if condition ='&lt;VARIABLE:EQUATION_NEEDED&gt;' task="Task_MapEquation" />
+	  <Task definition ="Task_MapTrace" />
+	  <Task definition ="Task_MapVerilogSimFile" />
+	  <Task definition ="Task_MapVHDLSimFile" />
+	</SubTasks>
+  </MileStoneDef>
+  <!--MileStoneDef id ="hdlsrc" title ="Generate_HDL" main_task ="Task_HDL"/ -->
+  <MileStoneDef id ="hdlgen" title ="Generate_HDL" main_task="Task_HDL_Gen"/>
+  <MileStoneDef id ="hdlsrc" title ="Convert_HDL">
+    <if condition="implementation.convert_srces._COUNT &gt; 0" task="Task_HDL" />
+  </MileStoneDef>
+
+  <VariableDef name="PWR_Check" value='false' />
+
+  <MileStoneDef id ="par" title ="PAR" main_task ="Task_Par">
+    <SubTasks>
+	  <Task definition ="Task_PARTrace" />
+	  <Task definition ="Task_IOTiming" />
+	  <!-- if condition='&lt;VARIABLE:Support_SSO&gt;' task = "Task_SSO" / -->
+      <if condition='&lt;VARIABLE:PWR_Check&gt;' task = "Task_PWRCheck" />
+	</SubTasks>
+  </MileStoneDef>
+  <VariableDef name="Export_IBIS" value="true" />
+  <VariableDef name="Export_JEDEC" value="false" />
+  <VariableDef name="Export_BIT" value="true" />
+  <MileStoneDef id ="export" title ="Export" depend_on_milestones="par">
+    <SubTasks>
+	  <if condition="&lt;VARIABLE:Export_IBIS&gt;" task ="Task_IBIS" />
+	  <if condition='&lt;VARIABLE:Export_IBIS_AMI&gt;' task="Task_IBIS_AMI" />
+	  <Task definition ="Task_TimingSimFileVlg" />
+	  <Task definition ="Task_TimingSimFileVHD" />
+	  <!--Task definition ="Task_Bitgen" /-->
+	  <if condition='device.bit_enable||PNMAIN_ENABLE_BITGEN=="1"&amp;&amp;&lt;VARIABLE:Export_BIT&gt;' task="Task_Bitgen" />
+	  <if condition='device.bit_enable||PNMAIN_ENABLE_BITGEN=="1"&amp;&amp;&lt;VARIABLE:Export_JEDEC&gt;' task="Task_JEDEC" />
+	  <!--if condition='device.bit_enable||PNMAIN_ENABLE_BITGEN=="1"&amp;&amp;&lt;VARIABLE:Export_BitXO2&gt;' task="Task_BitgenXO2" / -->
+	  <if condition='device.bit_enable||PNMAIN_ENABLE_BITGEN=="1"&amp;&amp;&lt;VARIABLE:Export_PROM&gt;' task= "Task_Promgen" />
+	  <!-- if condition="device.has_asc" task ="Task_WrpPojo" / -->
+	  <if condition='device.has_asc&amp;&amp;defined(implementation.PTM)' task ="Task_CopyJed" />
+	  <if condition='device.has_asc&amp;&amp;defined(implementation.PTM)' task ="Task_BitgenPOJOII" />
+	  <if condition='device.has_asc&amp;&amp;implementation.pojo_flow == "EXPORT"' task="Task_BitgenPOJOIIExpt" />
+	  <if condition='project.device.XO3LMigration == "1"' task="Task_Jedecgen4Xo3l"/>
+	  <if condition='project.device.XO3LMigration == "1"' task="Task_Bitgen4Xo3l"/>
+	</SubTasks>
+  </MileStoneDef>
+  
+  <!-- New task type optional means it could be ingonored in depends on while it's not be chaed as the automatically running task-->
+  <TaskDef id = "Task_PWRCheck" title = "PowerCal" type="optional" lable="Thermal Analysis" depend_on_milestones="par">
+    <Target id ="target">
+      <if condition="implementation.bali_package._COUNT &gt; 0" cmd ="Cmd_CopyPCS"/>
+      <Command using_def="Cmd_PARPwcTrace"/>
+      <Command using_def="Cmd_PowerCal"/>
+    </Target>
+    <Report using_def="Report_PowerCal"/>
+  </TaskDef>
+  
+  <TaskDef id = "Task_Translate" title ="Translate" lable="Translate Design"
+           depend_on_milestones="synthesis,reveal_core_gen:reveal_core_gen::synthesis_core" depend_on_properties="implementation.EDIF, implementation.EDIF_Reveal, implementation.PTM">
+    <Target id ="target">
+    	<if condition="postsynthesis_edifs._COUNT &gt; 0">
+			<if condition="defined(implementation.Reveal)&amp;&amp;implementation.EDIF._COUNT &gt; 0 &amp;&amp;synthesis_hdls._COUNT &gt; 0" cmd="Cmd_MIX_NGO1">
+             <elif condition='defined(implementation.Reveal)&amp;&amp;(implementation.synthesisable_srces_count == 0)' cmd="Cmd_EDIF_NGO" />
+			 <default cmd = "Cmd_EdifIn" />
+			</if>
+		</if>
+    	<if condition="postsynthesis_edifs._COUNT &gt; 0">
+			<if condition="defined(implementation.Reveal)&amp;&amp;implementation.EDIF._COUNT &gt; 0 &amp;&amp;synthesis_hdls._COUNT &gt; 0"  cmd="Cmd_MIX_NGO2"/>  
+		</if>		
+	  <if condition="postsynthesis_edifngos._COUNT &gt; 0">
+	    <if condition = 'implementation.run_flow == "INITIAL"' cmd ="Cmd_InitNgdBuild">
+        <elif condition = 'implementation.run_flow == "INCREMENTAL"' cmd ="Cmd_IncrNgdBuild">
+			<elif condition = 'defined(implementation.Reveal)&amp;&amp;(implementation.synthesisable_srces_count == 0)' cmd = "Cmd_NGDBuildReveal"/>
+				<default>
+					<Command using_def="Cmd_NGDBuild"/>
+				</default>
+			</elif>
+        </if>
+	  </if>
+	  <if condition = 'implementation.run_flow == "INITIAL" || implementation.run_flow == "INCREMENTAL"' cmd ="Cmd_BackUpRef_Ngd" />
+    </Target>
+    <Report using_def="Report_NGD"/>
+  </TaskDef>
+  <!--TaskDef id = "Task_Map" title ="Map" lable="Map Design"
+           depend_on_milestones="build_database"-->
+  <TargetDef id = "Map_Target">
+    <!-- if condition = 'implementation.run_flow == "INCREMENTAL"' cmd ="Cmd_CopyRef" /-->
+    <if condition = 'implementation.run_flow == "INITIAL"' cmd ="Cmd_InitMap">
+      <elif condition = 'implementation.run_flow == "INCREMENTAL"' cmd ="Cmd_IncrMap" />
+      <default>
+        <Command using_def="Cmd_Map"/>
+      </default>
+    </if>
+    <if condition='implementation.synthesis == "lse"' cmd="Cmd_VDB_CHDIR"/>
+    <if condition='implementation.synthesis == "lse"' cmd="Cmd_NCD_VDB"/>
+  </TargetDef>
+  <TaskDef id = "Task_Map" title ="Map" lable="Map Design" target="Map_Target"
+           depend_on_milestones="translate" depend_on_properties="implementation.Logic Preference">
+    <Report using_def="Report_MAP_NCD"/>
+	<!--Report using_def="Report_MapVdb"/-->
+  </TaskDef>
+  <TaskDef id ="Task_MapEquation" title ="MapEqu" lable ="Equation Report" depend_on_milestones="map">
+     <Target id ="target">
+	   <Command using_def="Cmd_MapEqu"/>
+     </Target>
+	 <Report using_def ="Report_MapEqu"/>
+  </TaskDef>
+  <TaskDef id ="Task_MapTrace" title ="MapTrace" lable ="Map Trace" depend_on_milestones="map">
+	 <Target id ="target">
+	   <Command using_def="Cmd_MapTrace"/>
+     </Target>
+	 <Report using_def ="Report_MapTrace"/>
+  </TaskDef>
+  <TaskDef id ="Task_MapVHDLSimFile" title ="MapVHDLSimFile" lable ="VHDL Simulation File" depend_on_milestones="map">
+	 <Target id ="target">
+	   <Command using_def="Cmd_MapVHDLSimFile"/>
+     </Target>
+	 <Report using_def ="Report_PostMapSimFileVHD"/>
+  </TaskDef>
+  <TaskDef id ="Task_MapVerilogSimFile" title ="MapVerilogSimFile" lable ="Verilog Simulation File" depend_on_milestones="map">
+	 <Target id ="target">
+	   <Command using_def="Cmd_MapVerilogSimFile"/>
+     </Target>
+	 <Report using_def ="Report_PostMapSimFileVlg"/>
+  </TaskDef>
+  <TaskDef id = "Task_HDL_Gen" title ="HDL_Gen" lable="Generate HDL Source" depend_on_milestones="hdlsrc, cmppojo">
+    <Target id ="target">
+    </Target>
+  </TaskDef>  
+  <TaskDef id = "Task_HDL" title ="HDL_Conv" lable="Convert to HDL Source"
+           depend_on_properties="implementation.convert_srces">
+    <Target id ="target">
+      <Command using_def="Cmd_HDL_Convert"/>
+    </Target>
+    <Report id ="Report_HDL" iterate="implementation.convert_hdls" value ="%@iterator.filename@%"/>
+  </TaskDef>
+  <TaskDef id ="Task_PARTrace" title ="PARTrace" lable ="Place &amp; Route Trace" depend_on_milestones="par">
+	 <Target id ="target">
+	   <if condition="implementation.bali_package._COUNT &gt; 0" cmd ="Cmd_CopyPCS"/>
+	   <Command using_def="Cmd_PARTrace"/>
+     </Target>
+	 <Report using_def ="Report_PARTrace"/>
+  </TaskDef>
+  <TaskDef id ="Task_IOTiming" title ="IOTiming" lable ="I/O Timing Analysis " depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_IOTiming"/>
+     </Target>
+	 <Report using_def ="Report_IOTiming"/>
+  </TaskDef>
+  <TaskDef id ="Task_SSO" title ="SSO" lable ="I/O SSO Analysis" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_SSO"/>
+     </Target>
+	 <Report using_def ="Report_SSO"/>
+  </TaskDef>
+  <TaskDef id ="Task_TimingSimFileVlg" title ="TimingSimFileVlg" lable ="Verilog Simulation File" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_TimingSimFileVlg"/>
+     </Target>
+	 <Report using_def="Report_TimingSimFileVlg"/>
+  </TaskDef> 
+  <TaskDef id ="Task_TimingSimFileVHD" title ="TimingSimFileVHD" lable ="VHDL Simulation File" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_TimingSimFileVHD"/>
+     </Target>
+	 <Report using_def="Report_TimingSimFileVHD"/>
+  </TaskDef>
+  <TaskDef id ="Task_Par" title ="PAR" lable="Place &amp; Route Design" depend_on_milestones="map">
+    <Target id ="target">
+	  <if condition="implementation.bali_package._COUNT &gt; 0" cmd ="Cmd_CopyPCS"/>
+      <if condition ='implementation.run_flow == "INITIAL"' cmd ="Cmd_InitPAR" >
+        <elif condition ='implementation.run_flow == "INCREMENTAL"' cmd ="Cmd_IncrPAR" />
+        <default>
+          <Command using_def="Cmd_Par"/>
+        </default>
+      </if>
+      <if condition = 'implementation.run_flow == "INITIAL" || implementation.run_flow == "INCREMENTAL"' cmd ="Cmd_BackUpRef" />
+	</Target>
+    <Report using_def ="Report_PAR_NCD"/>
+  </TaskDef>
+  <TaskDef id ="Task_IBIS" title ="IBIS" lable ="IBIS Model" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_IBIS"/>
+     </Target>
+   <Report using_def="Report_IBIS_Model"/>	 
+  </TaskDef>
+  <TaskDef id ="Task_IBIS_AMI" title ="IBIS_AMI" lable ="IBIS AMI Model" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_IBIS_AMI"/>
+     </Target>
+	 <Report using_def="Report_IBIS_Model"/>
+  </TaskDef>  
+  <TaskDef id ="Task_Bitgen" title ="Bitgen" lable ="Bitstream File" depend_on_milestones="par">
+	 <Target id ="target">
+	   <if condition="implementation.bali_package._COUNT &gt; 0" cmd ="Cmd_CopyPCS"/>
+	   <if condition='&lt;VARIABLE:L2PTXT_NEEDED&gt;' cmd ="Cmd_ltxt2ptxt"/>
+	   <Command using_def="Cmd_TimingCheck"/>
+	   <Command using_def="Cmd_Bitstream"/>
+     </Target>
+	 <Report using_def="Report_BitGen"/>
+	 <Report using_def="Report_Bitstream"/>
+  </TaskDef>
+  <TaskDef id ="Task_JEDEC" title ="Jedecgen" lable ="JEDEC File" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_TimingCheck"/>
+	   <Command using_def="Cmd_JEDEC"/>
+     </Target>
+	 <Report using_def="Report_BitGen"/>
+	 <Report using_def="Report_JDec"/>
+  </TaskDef>  
+
+  <TaskDef id ="Task_Promgen" title ="Promgen" lable ="PROM File" depend_on_milestones="export:Task_Bitgen">
+	 <Target id ="target">
+	   <Command using_def="Cmd_PROM"/>
+     </Target>
+	 <Report using_def="Report_PromData"/>
+  </TaskDef>
+  <!-- Internal milestone definition -->
+  <MileStoneDef id ="edf_translate" title ="EdfTranslate" main_task ="edf_translate::edifin" />
+  <TaskDef id ="edf_translate::edifin" title ="EdifIn" depend_on_properties="implementation.EDIF">
+    <Target id ="target">
+      <if condition='implementation.synthesis == "lse"' cmd="Cmd_LSEEdifSourceIn" defaultcmd="Cmd_EdifSourceIn" />
+    </Target>
+    <Report id ="Report_EdifSrcIn" iterate="implementation.EDIF" value ="%@iterator.completebasename@%.ngo"/>
+  </TaskDef>  
+  
+  <!-- user defined previous & post script task -->
+  <MileStoneDef id ="run_userscript" title ="run_userscript">
+    <SubTasks>
+      <Task definition ="Task_PreSynthesis" />
+      <Task definition ="Task_PostSynthesis" />
+      <Task definition ="Task_PreMap" />
+      <Task definition ="Task_PostMap" />
+      <Task definition ="Task_PrePar" />
+      <Task definition ="Task_PostPar" />
+      <Task definition ="Task_PreExport" />
+      <Task definition ="Task_PostExport" />  
+    </SubTasks>
+  </MileStoneDef>
+  <TaskDef id = "Task_PreSynthesis" title ="Pre_Synthesis" lable="Previous Synthesis Script">
+     <Target id ="target">
+       <if condition = 'defined(implementation.syn_pre_script)' cmd="Cmd_PreSynScript"/>
+     </Target>
+  </TaskDef>
+
+  <TaskDef id = "Task_PostSynthesis" title ="Post_Synthesis" lable="Post Synthesis Script">
+     <Target id ="target">
+       <if condition = 'defined(implementation.syn_post_script)' cmd = "Cmd_PostSynScript"/>
+     </Target>
+  </TaskDef>
+
+  <TaskDef id = "Task_PreMap" title ="Pre_Map" lable="Previous Map Design">
+     <Target id ="target">
+       <if condition = 'defined(implementation.map_pre_script)' cmd="Cmd_PreMapScript"/>
+     </Target>
+  </TaskDef>
+
+  <TaskDef id = "Task_PostMap" title ="Post_Map" lable="Post Map Design">
+     <Target id ="target">
+       <if condition = 'defined(implementation.map_post_script)' cmd = "Cmd_PostMapScript"/>
+     </Target>
+  </TaskDef>
+
+  <TaskDef id = "Task_PrePar" title ="Pre_Par" lable="Previous Place &amp; Route Design">
+     <Target id ="target">
+       <if condition = 'defined(implementation.par_pre_script)' cmd="Cmd_PreParScript" />
+     </Target>
+  </TaskDef>
+
+  <TaskDef id = "Task_PostPar" title ="Post_Par" lable="Post Place &amp; Route Design">
+     <Target id ="target">
+       <if condition = 'defined(implementation.par_post_script)' cmd = "Cmd_PostParScript"/>
+     </Target>
+  </TaskDef>
+
+  <TaskDef id = "Task_PreExport" title ="Pre_Export" lable="Previous Export">
+     <Target id ="target">
+       <if condition = 'defined(implementation.export_pre_script)' cmd = "Cmd_PreExportScript"/>
+     </Target>
+  </TaskDef>
+
+  <TaskDef id = "Task_PostExport" title ="Post_Export" lable="Post Export">
+     <Target id ="target">
+       <if condition = 'defined(implementation.export_post_script)' cmd = "Cmd_PostExportScript"/>
+     </Target>
+  </TaskDef>  
+  <!-- end of user script tasks -->
+
+  <FlowPointDef id ="FlowDef">
+    <milestone name ="Generate_HDL" def ="hdlgen" type ="internal" visible =".False." enable ="implementation.convert_srces._COUNT &gt; 0||defined(implementation.PTM)"/>
+    <milestone name ="Convert_HDL" def ="hdlsrc" type ="internal" visible =".False." enable ="implementation.convert_srces._COUNT &gt; 0"/>
+    <milestone name ="Compile_Pojo" def ="cmppojo"  type ="internal" visible =".False." enable ="device.has_asc &amp;&amp; defined(implementation.PTM)"/>
+    <milestone name ="TOOL_Report" def ="tool_report" type ="internal"/>
+    <milestone name ="Run_UserScript" def ="run_userscript" type ="internal"/>
+    <milestone name ="Synthesis" def ="synthesis" enable ="implementation.synthesisable_srces_count &gt; 0" >
+      <if condition ='implementation.synthesis == "lse"' def ="lattice_synthesis" />
+    </milestone>
+    <!-- milestone name ="RevealCoreGenerate" def ="reveal_core_gen" type ="collection,internal" enable ='defined(implementation.Reveal)&amp;&amp;(implementation.Reveal.level=="edif" || implementation.synthesisable_srces_count == 0 || (!defined(implementation.Reveal.level)&amp;&amp;implementation.is_mix_hdls))'/ -->
+    <milestone name ="RevealCoreGenerate" def ="reveal_core_gen" type ="collection,internal" enable ='defined(implementation.Reveal)&amp;&amp;(implementation.synthesisable_srces_count == 0)'/>
+	<milestone name ="PojoEncryption" def ="pojo_encryption" type ="collection,internal" enable ='defined(implementation.PTM)'/>	
+    <milestone name ="Translate" def ="translate" enable ='implementation.synthesis != "lse" || implementation.synthesisable_srces_count == 0'/>
+    <milestone name ="EdfTranslate" def ="edf_translate" type ="internal" enable ='implementation.EDIF._COUNT &gt; 0'/>
+    <milestone name ="Map" def ="map" />
+    <milestone name ="PAR" def ="par" />
+    <milestone name ="Export" def ="export" type ="collection"/>
+  </FlowPointDef>
+  
+  <UIFlowDef id ="FlowUIDef">
+    <milestone id ="Compile_Pojo" lable ="Compile POJOII Design"/>
+    <milestone id ="Synthesis" lable ="Synthesize Design"/>
+    <milestone id ="Translate" lable ="Translate Design" />
+    <milestone id ="Map" lable ="Map Design"/>
+    <milestone id ="PAR" lable ="Place &amp; Route Design"/>
+    <milestone id ="Export" lable ="Export Files"/>
+  </UIFlowDef>
+  
+  <!--
+  <UIFlowDef id ="FlowUIDef">
+    <milestone id ="hdlsrc" lable ="Generate HDL" condition =".False."/>
+    <milestone id ="synthesis" lable ="Synthesize Design" condition ="implementation.synthesis_hdls._COUNT &gt; 0"/>
+    <milestone id ="translate" lable ="Translate Design" condition ='project.synthesis == "lattice" &amp;&amp;implementation.synthesis_hdls._COUNT == 0'/>
+    <milestone id ="map" lable ="Map Design"/>
+    <milestone id ="par" lable ="Place &amp; Route Design"/>
+	<milestone id ="export" lable ="Export Files"/>
+  </UIFlowDef>
+ -->
+</BaliFlowDef>

@@ -1,0 +1,933 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<!-- 
+    10/27/03 Nguyen added support of Comment "!"
+    05/25/04 Nguyen added support of Skipping All 1s Row Programming
+    08/09/04 Nguyen took out support of Skipping All 1s Row Programming
+    08/30/04 Spinti: Added DISCHARGE instruction to ERASE function.
+    03/04/05 Spinti: Changed the PROGRAM_DONE_BIT and ERASE_DONE_BIT pulse width to 50.
+    03/07/05 Spinti: Changed the DISABLE delay to 200ms, and DISCHARGE delay to 200ms.
+    06/21/06 Ong   : Added Verify Done Bit to Verify Only operation.
+-->
+<SVF_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+	<!-- Length fields are in number if bits -->
+	<Instruction_Length value="INSTRUCTION_REGISTER_LENGTH"/> 
+	<Row_Width			value="DEVICE_ROW_WIDTH"/> 
+	<Address_Length		value="ADDRESS_REGISTER_LENGTH"/> 
+	<Address length="ADDRESS_LENGTH">
+		INI_ADDRESS			
+	</Address>
+	<ID_Length 			value="DEVICE_ID_LENGTH"/>
+	<Usercode_Length 	value="DEVICE_USERCODE_LENGTH"/>
+	<Arch_Length		value="ARCHITECH_LENGTH"/>
+	<BSCAN_Length value="BSCAN_REGISTER_LENGTH"/> 
+	<Bscan length="BSCAN_LENGTH">
+		BSCAN_DATA
+	</Bscan>
+	<BscanMask length="BSCAN_LENGTH">
+		BSCAN_MASK
+	</BscanMask>
+	<PWP	value="PROGRAMING_PULSE_WIDTH"/>
+	<PWV	value="VERIFY_PULSE_WIDTH"/>
+	<PWE	value="ERASE_PULSE_WIDTH"/>
+	<Instruction>
+		BYPASS				= 0xFF;
+		BPRELOAD 				= 0x1C;
+		IDCODE 				= 0x16;
+		USERCODE 				= 0x17;
+		EXTEST	 			= 0x00;
+		INTEST	 			= 0x2C;
+		HIGH_Z	 			= 0x18;
+		CLAMP	 				= 0x20;
+		ISC_ENABLE 				= 0x15;
+		ISC_DISABLE				= 0x1E;
+		ISC_ADDRESS_SHIFT 		= 0x01;
+		ISC_DATA_SHIFT			= 0x02;
+		ISC_ERASE 				= 0x03;
+		ISC_PROGRAM_INCR 		= 0x27;
+		ISC_READ_INCR	 		= 0x2A;
+		ISC_PROGRAM_SECURITY	= 0x09;
+		ISC_PROGRAM_DONE 		= 0x2F;
+		ISC_ERASE_DONE			= 0x24;
+		ISC_PROGRAM_USERCODE	= 0x1A;
+		ISC_ADDRESS_INIT		= 0x21;
+		ISC_NOOP				= 0x30;
+		ISC_PROGRAM_ASIC		= 0xA6;
+		ISC_READ_ASIC			= 0xAB;
+		ISC_DISCHARGE     		= 0x14;
+	</Instruction>
+</Parameter>
+<Data>
+	<DataField	name="IDTDI">
+		<FieldBlock	row_width="DEVICE_ID_LENGTH">
+			ID_DATA
+		</FieldBlock>
+	</DataField>
+</Data>
+<Operation_List>
+	"Read and Save JEDEC"	=	"INIT, SAVE_ID, IO_STATE, ENABLE, SAVE_ARRAY, SAVE_ARCH, SAVE_USERCODE, DISABLE";
+	"Calculate Checksum"	=	"INIT, SAVE_ID, IO_STATE, ENABLE, SAVE_ARRAY, SAVE_ARCH, SAVE_USERCODE, DISABLE";
+	"Read and Save"	=	"INIT, SAVE_ID, IO_STATE, ENABLE, SAVE_ARRAY, SAVE_ARCH, SAVE_USERCODE, DISABLE";
+	"Calculate Data CRC"	=	"INIT, SAVE_ID, IO_STATE, ENABLE, SAVE_ARRAY, SAVE_ARCH, SAVE_USERCODE, DISABLE";
+	"Capture Only" = "	INIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+
+	
+								 			 	
+	"Erase,Program,Verify" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								ENABLE	! Enable the programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_ARCH ! Program ASIC IO,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+								VERIFY_ARCH ! Verify ASIC, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map, 
+											PROGRAM_ARCH ! Program ASIC IO,
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+											VERIFY_ARCH ! Verify ASIC, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map, 
+							PROGRAM_ARCH ! Program ASIC IO,
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							VERIFY	! Verify Fuse Map, 
+							VERIFY_ARCH ! Verify ASIC,  
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"INIT, READ_ID, SAVE_ID";
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"Display USERCODE"	=	"INIT, READ_ID, SAVE_USERCODE";
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Secure Device"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							PROGRAM_SECURITY ! Secure device,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Bypass"	=	"	INIT 	! Initialize"	;
+	"Re-Initialize" = "	INIT 	! Initialize, 
+						ENABLE	! Enable the programming mode, 
+						ERASE	! Erase the device, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"Read DONE bit" = 	"INIT, READ_ID, READ_DONE_BIT";
+	"Erase DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Program DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Program sysIO"	=	"INIT 	! Initialize, 
+						 READ_ID	! Check the IDCODE,
+						 IO_STATE ! Program Bscan register, 
+						 ENABLE	! Enable the programming mode, 
+						 ERASE	! Erase the device, 
+						 PROGRAM_ARCH ! Program ASIC IO,
+						 VERIFY_ARCH ! Verify ASIC,
+		 			 	 DISABLE ! Exit the programming mode"	;
+	"Verify sysIO"	=	"INIT 	! Initialize, 
+						 READ_ID	! Check the IDCODE,
+						 IO_STATE ! Program Bscan register, 
+						 ENABLE	! Enable the programming mode, 
+						 VERIFY_ARCH ! Verify ASIC, 
+		 			 	 DISABLE ! Exit the programming mode"	;
+	"Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	
+</Operation_List>
+<Operation_List label="SingleSVFOperation">
+	"Read and Save JEDEC"	=	"	SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE, 
+									IO_STATE ! Program Bscan register,
+									ENABLE	! Enable the programming mode, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_ARCH ! Read ASIC IO,
+									SVF_SAVE_USERCODE	! Read USERCODE,  
+				 			 		DISABLE ! Exit the programming mode"	;
+				 			 		
+	"Calculate Checksum"	=	"	SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE, 
+									IO_STATE ! Program Bscan register,
+									ENABLE	! Enable the programming mode, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_ARCH ! Read ASIC IO,
+									SVF_SAVE_USERCODE	! Read USERCODE,  
+				 			 		DISABLE ! Exit the programming mode"	;
+	"Read and Save"	=	"	SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE, 
+									IO_STATE ! Program Bscan register,
+									ENABLE	! Enable the programming mode, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_ARCH ! Read ASIC IO,
+									SVF_SAVE_USERCODE	! Read USERCODE,  
+				 			 		DISABLE ! Exit the programming mode"	;
+				 			 		
+	"Calculate Data CRC"	=	"	SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE, 
+									IO_STATE ! Program Bscan register,
+									ENABLE	! Enable the programming mode, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_ARCH ! Read ASIC IO,
+									SVF_SAVE_USERCODE	! Read USERCODE,  
+				 			 		DISABLE ! Exit the programming mode"	;					 			 		
+	
+	"Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								ENABLE	! Enable the programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Full Address Program Fuse Map,
+								PROGRAM_ARCH ! Program ASIC IO,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Full Address Verify Fuse Map,
+								VERIFY_ARCH ! Verify ASIC,  
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	SVFINIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Full Address Program Fuse Map,
+											PROGRAM_ARCH ! Program ASIC IO,
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Full Address Verify Fuse Map, 
+											VERIFY_ARCH ! Verify ASIC, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Full Address Program Fuse Map,
+							PROGRAM_ARCH ! Program ASIC IO,
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							VERIFY	! Full Address Verify Fuse Map, 
+							VERIFY_ARCH ! Verify ASIC, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 	
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT"	;
+	"Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"SVFINIT	! Initialize,
+					 SVF_SAVE_ID	! Read the IDCODE";
+	"Display USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE",
+								SVF_SAVE_USERCODE		! Read USERCODE"	;
+	"Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE",
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"Erase Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Secure Device"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							PROGRAM_SECURITY ! Secure device,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Bypass"	=	"	SVFINIT 	! Initialize";
+	"Read DONE bit" = 	"SVFINIT, READ_ID, SVF_SAVE_DONE_BIT";
+	"Erase DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Program DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Program sysIO"	=	"SVFINIT 	! Initialize, 
+						 READ_ID	! Check the IDCODE,
+						 IO_STATE ! Program Bscan register, 
+						 ENABLE	! Enable the programming mode, 
+						 ERASE	! Erase the device, 
+						 PROGRAM_ARCH ! Program ASIC IO,
+						 VERIFY_ARCH ! Verify ASIC,
+		 			 	 DISABLE ! Exit the programming mode"	;
+	"Verify sysIO"	=	"SVFINIT 	! Initialize, 
+						 READ_ID	! Check the IDCODE,
+						 IO_STATE ! Program Bscan register, 
+						 ENABLE	! Enable the programming mode, 
+						 VERIFY_ARCH ! Verify ASIC, 
+		 			 	 DISABLE ! Exit the programming mode"	;
+	"Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"Re-Initialize" = "	SVFINIT 	! Initialize, 
+						ENABLE	! Enable the programming mode, 
+						ERASE	! Erase the device, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;	 	
+</Operation_List>
+<Operation_List label="TurboOperation">
+	"Read and Save JEDEC"	=	"INIT, SAVE_ARRAY, SAVE_ARCH, SAVE_USERCODE";
+	"Calculate Checksum"	=	"INIT, SAVE_ARRAY, SAVE_ARCH, SAVE_USERCODE";
+	"Read and Save"	=	"INIT, SAVE_ARRAY, SAVE_ARCH, SAVE_USERCODE";
+	"Calculate Data CRC"	=	"INIT, SAVE_ARRAY, SAVE_ARCH, SAVE_USERCODE";
+	
+								 			 	
+	"Erase,Program,Verify" = "	INIT 	! Initialize, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_ARCH ! Program ASIC IO,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+								VERIFY_ARCH ! Verify ASIC, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map, 
+											PROGRAM_ARCH ! Program ASIC IO,
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+											VERIFY_ARCH ! Verify ASIC, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map, 
+							PROGRAM_ARCH ! Program ASIC IO,
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+							VERIFY_ARCH ! Verify ASIC"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"INIT, READ_ID, SAVE_ID";
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"Display USERCODE"	=	"INIT, SAVE_USERCODE";
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+	"Bypass"	=	"	INIT 	! Initialize"	;
+	"Re-Initialize" = "	INIT 	! Initialize, 
+						ENABLE	! Enable the programming mode, 
+						ERASE	! Erase the device"	;
+	"Read DONE bit" = 	"INIT, READ_DONE_BIT";
+	"Erase DONE bit"	=	"INIT 	! Initialize, 
+							 ERASE_DONE_BIT	! Erase the done bit"	;
+	"Program DONE bit"	=	"INIT 	! Initialize, 
+							 PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Program sysIO"	=	"INIT 	! Initialize, 
+						 ERASE	! Erase the device, 
+						 PROGRAM_ARCH ! Program ASIC IO,
+						 VERIFY_ARCH ! Verify ASIC"	;
+	"Verify sysIO"	=	"INIT 	! Initialize, 
+						 VERIFY_ARCH ! Verify ASIC"	;
+	"Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						ENABLE	! Enable the programming mode"	;
+	"Capture Only" = "	INIT 	! Initialize
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;	 	
+	
+</Operation_List>
+<Operation_List label="ChainSVFOperation">
+	"Read and Save JEDEC"	=	"	SVFINIT 	! Initialize, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_ARCH ! Read ASIC IO,
+									SVF_SAVE_USERCODE	! Read USERCODE"	;
+	"Calculate Checksum"	=	"	SVFINIT 	! Initialize, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_ARCH ! Read ASIC IO,
+									SVF_SAVE_USERCODE	! Read USERCODE"	;
+	"Read and Save"	=	"	SVFINIT 	! Initialize, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_ARCH ! Read ASIC IO,
+									SVF_SAVE_USERCODE	! Read USERCODE"	;
+	"Calculate Data CRC"	=	"	SVFINIT 	! Initialize, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_ARCH ! Read ASIC IO,
+									SVF_SAVE_USERCODE	! Read USERCODE"	;					 			 		
+	
+	"Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Full Address Program Fuse Map,
+								PROGRAM_ARCH ! Program ASIC IO,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Full Address Verify Fuse Map,
+								VERIFY_ARCH ! Verify ASIC,  
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Erase,Program,Verify,Secure"	=	"	SVFINIT 	! Initialize, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Full Address Program Fuse Map,
+											PROGRAM_ARCH ! Program ASIC IO,
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Full Address Verify Fuse Map, 
+											VERIFY_ARCH ! Verify ASIC, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Program Only"	=	"	SVFINIT 	! Initialize, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Full Address Program Fuse Map,
+							PROGRAM_ARCH ! Program ASIC IO,
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	SVFINIT 	! Initialize,
+							VERIFY	! Full Address Verify Fuse Map, 
+							VERIFY_ARCH ! Verify ASIC, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"SVFINIT	! Initialize,
+					 SVF_SAVE_ID	! Read the IDCODE";
+	"Display USERCODE"	=	"	SVFINIT 	! Initialize, 
+								SVF_SAVE_USERCODE		! Read USERCODE"	;
+	"Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"Erase Only"	=	"	SVFINIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+	"Secure Device"	=	"	SVFINIT 	! Initialize, 
+							PROGRAM_SECURITY ! Secure device"	;
+	"Bypass"	=	"	SVFINIT 	! Initialize";
+	"Read DONE bit" = 	"SVFINIT, SVF_SAVE_DONE_BIT";
+	"Erase DONE bit"	=	"INIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"Program DONE bit"	=	"INIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Program sysIO"	=	"SVFINIT 	! Initialize, 
+						 ERASE	! Erase the device, 
+						 PROGRAM_ARCH ! Program ASIC IO,
+						 VERIFY_ARCH ! Verify ASIC"	;
+	"Verify sysIO"	=	"SVFINIT 	! Initialize, 
+						 VERIFY_ARCH ! Verify ASIC"	;
+	"Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"Re-Initialize" = "	SVFINIT 	! Initialize,  
+						ENABLE	! Enable the programming mode, 
+						ERASE	! Erase the device"	;
+	"Enable Only" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						ENABLE	! Enable the programming mode"	;
+	"Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;	 	
+</Operation_List>
+<Script>
+<![CDATA[
+// reviewed: kiu 11/28/2000
+function INIT {
+	! Row_Width	  : DEVICE_ROW_WIDTH; 
+	! Address_Length : ADDRESS_REGISTER_LENGTH;
+	HDR HDR_LENGTH TDI(HDR_PATTERN);
+	HIR HIR_LENGTH TDI(HIR_PATTERN);
+	TDR TDR_LENGTH TDI(TDR_PATTERN);
+	TIR TIR_LENGTH TDI(TIR_PATTERN);
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+}
+
+// reviewed: kiu 11/28/2000
+function SVFINIT {
+	! Row_Width	  : DEVICE_ROW_WIDTH; 
+	! Address_Length : ADDRESS_REGISTER_LENGTH;
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+}
+
+// reviewed: kiu 11/28/2000
+function PRELOAD {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+}
+
+// reviewed: kiu 11/28/2000
+function INI_PRELOAD {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(#0^BSCAN_Length);
+}
+// reviewed: kiu 11/28/2000
+function SAMPLE {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   STATE DRPAUSE;
+   STATE IDLE;
+}
+
+// reviewed: kiu 11/28/2000
+function INI_SAMPLE {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   STATE DRPAUSE;
+   STATE IDLE;
+}
+
+function CAPTURE {	
+	datastream SavedBScanTDO[1][BSCAN_Length];	
+	file NewFile = "FILE_SAVE";		
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1])
+   					TDO(SavedBScanTDO[1]);
+   Bscan[1] = SavedBScanTDO[1];
+   ! Shift in Preload(0x1C) instruction;	
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+   // Write To file 
+   fopen NewFile att "w"
+					 format "SVF_Plus";	
+   fwrite NewFile (BSCAN_TDO, Bscan);
+   fclose 	NewFile;
+}
+
+function DYNAMIC {	
+   ! Shift in Preload(0x1C) instruction;
+   ENDDR DRPAUSE;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1])
+   					DMASK(BscanMask[1]);
+   STATE IDLE;
+}
+
+// reviewed: kiu 11/28/2000
+function ENABLE {
+	! Shift in ISC ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (ISC_ENABLE);
+	RUN_TEST	TCK 3
+				DELAY 20;
+}
+
+// reviewed: kiu 11/28/2000
+function DISABLE {
+	! Shift in ISC DISABLE(0x1E) instruction;
+	SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	TCK 3 DELAY 200;
+}
+
+// reviewed: kiu 11/28/2000
+function READ_ID {
+	! Shift in IDCODE(0x16) instruction;
+	SIR Instruction_Length 	TDI (IDCODE);
+	STATE IDLE;
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+					TDO	(IDTDI[1])
+					MASK (DEVICE_ID_MASK);
+}
+
+function ERASE {
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	TCK 3 DELAY PWE;
+
+	// Spinti 8/30/04 Added discharge
+	! Shift in DISCHARGE(0x14) instruction;
+	SIR Instruction_Length TDI (ISC_DISCHARGE);
+	RUN_TEST 	TCK 3 DELAY 200;
+}
+
+// Program Functions _____________________________________________
+//03/16/01 Nguyen added new function PROGRAM_VERIFY to support concurent
+function	PROGRAM_VERIFY	{
+	int32	Row = 1;
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;
+	
+	! Shift in ISC ADDRESS INIT(0x21) instruction;
+	SIR Instruction_Length	TDI (ISC_ADDRESS_INIT);
+	STATE IDLE;
+	
+	! Shift in ISC PROGRAM INCR(0x27) instruction;
+	SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+	
+	//Increment the address to 1
+	STATE DRPAUSE;
+	
+	! Shift in Data Row = RowCount;
+	SDR	Row_Width	TDI	(FuseArray_TDI[Row]);
+	
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+				
+	! Shift in ISC READ INCR(0x2A) instruction;  
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+				
+	// Program the rest of the device
+	repeat Address_Length - 1	{
+		RowCount = RowCount + 1;
+		! Shift in out Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(FuseArray_TDI[Row+1])
+								TDO (FuseArray_TDI[Row]);
+		Row = Row + 1;
+		! Shift in ISC PROGRAM INCR(0x27) instruction;
+		SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		
+		! Shift in ISC READ INCR(0x2A) instruction; 
+		SIR Instruction_Length	TDI	(ISC_READ_INCR);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+	}			
+	
+	! Shift out Data Row = RowCount; 
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO	(FuseArray_TDI[Row]);
+	Address[1] = #1@(#0^(Address_Length-1));
+}
+// reviewed: kiu 11/28/2000
+function PROGRAM {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+
+	! Shift in ISC ADDRESS INIT(0x21) instruction;
+	SIR Instruction_Length	TDI (ISC_ADDRESS_INIT);
+	STATE IDLE;
+	! Shift in ISC PROGRAM INCR(0x27) instruction;
+	SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+
+	// Program the rest of the device
+	repeat Address_Length {
+		! Shift in Data Row = RowCount; 
+		SDR	Row_Width	TDI	(FuseArray_TDI[RowCount]);
+		RUN_TEST	TCK 	3 DELAY 	PWP;
+		RowCount = RowCount + 1 ;
+	} // repeat
+}
+
+// reviewed: kiu 11/28/2000
+function PROGRAM_ARCH {
+	ArchArray_TDI.row = 1;
+	! Shift in ISC_PROGRAM_ASIC(0xA6) instruction;
+	SIR Instruction_Length TDI(ISC_PROGRAM_ASIC);
+	// Shift in Architech row data
+	SDR	Arch_Length	TDI (ArchArray_TDI);
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+}
+
+// reviewed: kiu 11/28/2000
+function PROGRAM_USERCODE {
+	! Shift in ISC PROGRAM USERCODE(0x1A) instruction; 
+	SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+	SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+}
+// 03/09/01 Nguyen removed the Program DONE bit from DISABLE fuction
+// and make it into seperation function
+function PROGRAM_DONE_BIT {
+	! Shift in ISC PROGRAM DONE(0x2F) instruction; 
+	SIR	Instruction_Length 	TDI (ISC_PROGRAM_DONE);
+	// Goto Run Test Idle 
+	RUN_TEST	IDLE TCK 5 DELAY 50;
+	! Shift in ISC DISABLE(0x1E) instruction;
+    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	IDLE  TCK 5 DELAY 200;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 32 DELAY 10;
+	! Shift in IDCODE(0x16) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (IDCODE)
+						TDO(0xFF)
+			   	      	MASK(0x04);	
+}
+function VERIFY_DONE_BIT {	
+	! Shift in IDCODE(0x16) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (IDCODE)
+						TDO(0xFF)
+			   	      	MASK(0x04);			   	      	
+}
+//03/09/01 Nguyen added new function to support erase DONE bit operation
+function ERASE_DONE_BIT {
+	! Shift in ISC ERASE DONE(0x24) instruction;
+	SIR	Instruction_Length 	TDI (ISC_ERASE_DONE);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 3
+				DELAY 50;
+	STATE IDLE;
+}
+// reviewed: kiu 11/28/2000
+function PROGRAM_SECURITY {
+	! Shift in ISC PROGRAM SECURITY(0x09) instruction; 
+	SIR Instruction_Length	TDI	(ISC_PROGRAM_SECURITY);
+	RUN_TEST	TCK 	3
+				DELAY 	50;
+	STATE IDLE;
+}
+
+// Verify Functions _____________________________________________
+// reviewed: kiu 11/28/2000
+function VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;	
+	! Shift in ISC ADDRESS SHIFT(0x01) instruction; 
+	SIR Instruction_Length	TDI (ISC_ADDRESS_SHIFT);
+	SDR	Address_Length TDI(Address[1]);  
+	! Shift in ISC READ INCR(0x2A) instruction;  
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	
+	repeat Address_Length {
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+		! Shift Out Data Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+								TDO	(FuseArray_TDI);
+		RowCount = RowCount +1;
+	}
+}
+
+// reviewed: kiu 11/28/2000
+function VERIFY_ARCH {
+	ArchArray_TDI.row = 1;
+	! Shift in ISC_READ_ASIC(0xAB) instruction;
+	SIR Instruction_Length TDI(ISC_READ_ASIC);
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	// Shift in Architech row data
+	SDR_VERIFY	Arch_Length	TDI (#1^(Arch_Length))
+						TDO (ArchArray_TDI);
+}
+
+// reviewed: kiu 11/28/2000
+function VERIFY_USERCODE {
+	Usercode_TDI.row = 1;
+	! Shift in READ USERCODE(0x17) instruction;
+	SIR Instruction_Length TDI (USERCODE);
+	SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+								TDO	(Usercode_TDI);
+}
+
+// Read n Save Functions _____________________________________________ 
+// reviewed: kiu 11/28/2000
+function SAVE_ID	{
+	datastream SavedID[1][ID_Length];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in IDCODE(0x16) instruction;
+	SIR Instruction_Length	TDI	(IDCODE);
+	// Shift out ID 
+	SDR	ID_Length	TDI (#1^ID_Length)
+					TDO	(SavedID);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedID);
+	fclose 	NewFile;
+}
+function SVF_SAVE_ID	{
+	! Shift in IDCODE(0x16) instruction;
+	SIR Instruction_Length 	TDI (IDCODE);
+	STATE IDLE;
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+							TDO	(IDTDI[1])
+							MASK (#0^ID_Length);
+}
+// reviewed: kiu 11/28/2000
+function SAVE_ARRAY {
+	int32	RowCount = 1;
+	datastream SavedFuseMap[Address_Length][Row_Width];
+	file NewFile = "FILE_SAVE";
+	Address.row = 1;	
+	
+	! Shift in ISC ADDRESS SHIFT(0x01) instruction;
+	SIR Instruction_Length	TDI (ISC_ADDRESS_SHIFT);
+	SDR	Address_Length TDI(Address[1]);  
+	! Shift in ISC READ INCR(0x2A) instruction; 
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	
+	// Program the rest of the device 
+	repeat Address_Length {
+		// Goto Run Test Idle
+		RUN_TEST	TCK 	3
+						DELAY 	PWV;						
+		! Shift Out Data Row = RowCount;
+		SDR Row_Width 	TDI (#0^Row_Width)
+						TDO (SavedFuseMap);
+		RowCount = RowCount +1;
+	}
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+	fclose 	NewFile;
+}
+function SVF_SAVE_ARRAY {
+	int32	RowCount = 1;
+	Address.row = 1;	
+	! Shift in ISC ADDRESS SHIFT(0x01) instruction;
+	SIR Instruction_Length	TDI (ISC_ADDRESS_SHIFT);
+	SDR	Address_Length TDI(Address[1]);  
+	! Shift in ISC READ INCR(0x2A) instruction;
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	
+	repeat Address_Length {
+	// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+		! Shift Out Data Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+								TDO	(#1^Row_Width)
+								MASK (#0^Row_Width);
+		RowCount = RowCount +1;
+	}
+}
+// reviewed: kiu 11/28/2000
+function SAVE_ARCH {
+	datastream SavedArch[1][Arch_Length];
+	file NewFile = "FILE_SAVE";
+
+	! Shift in ISC_READ_ASIC(0xAB) instruction;
+	SIR Instruction_Length TDI(ISC_READ_ASIC);
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	// Shift in Architech row data
+	SDR	Arch_Length	TDI (#1^(Arch_Length))
+				TDO (SavedArch);
+
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (ArchArray_TDI, SavedArch);
+	fclose 	NewFile;
+}
+function SVF_SAVE_ARCH {
+	! Shift in ISC_READ_ASIC(0xAB) instruction;
+	SIR Instruction_Length TDI(ISC_READ_ASIC);
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	// Shift in Architech row data
+	SDR_VERIFY	Arch_Length	TDI (#1^(Arch_Length))
+						TDO (#1^(Arch_Length))
+						MASK(#0^(Arch_Length));
+}
+// reviewed: kiu 11/28/2000
+function SAVE_USERCODE {
+	datastream SavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	! Shift in READ USERCODE(0x17) instruction;
+	SIR Instruction_Length	TDI (USERCODE);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	// Shift in Data Shift instruction 
+	SDR	Usercode_Length	TDI(#1^Usercode_Length)
+						TDO(SavedUsercode);
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (Usercode_TDI, SavedUsercode);
+	fclose 	NewFile;
+}
+function SVF_SAVE_USERCODE {
+	! Shift in READ USERCODE(0x17) instruction; 
+	SIR Instruction_Length TDI (USERCODE);
+	SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+								TDO	(#1^Usercode_Length)
+								MASK(#0^Usercode_Length);
+}
+//03/09/01 Nguyen added new function Read DONE bit to support Read DONE bit operation
+function READ_DONE_BIT {
+	datastream SavedDONE_BIT[1][Instruction_Length];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in IDCODE(0x16) instruction;
+	SIR Instruction_Length	TDI	(0x16)
+							TDO (SavedDONE_BIT);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (DONE_BIT, SavedDONE_BIT);
+	fclose 	NewFile;
+}
+function SVF_SAVE_DONE_BIT {
+	! Shift in IDCODE(0x16) instruction; 
+	SIR_VERIFY Instruction_Length	TDI	(0x16)
+							TDO (#1^Instruction_Length)
+							MASK(#0^Instruction_Length);
+}
+]]>
+</Script>
+</SVF_Plus>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="synthesis" include ="synplify, lattice, precision">
+  <!-- VariableDef name="Synthesis:REVEAL" value='defined(implementation.Reveal)&amp;&amp;(implementation.Reveal.level=="rtl" || (!defined(implementation.Reveal.level) &amp;&amp; !implementation.is_mix_hdls &amp;&amp; implementation.synthesisable_srces_count &gt; 0))?reveal:no_reveal' / -->
+  <VariableDef name="Synthesis:REVEAL" value='defined(implementation.Reveal)&amp;&amp;(implementation.synthesisable_srces_count &gt; 0)?reveal:no_reveal' />
+  <ReportDef id="Report_Synthesis" value="$(report_base).edi" />
+</BaliFlowDef>

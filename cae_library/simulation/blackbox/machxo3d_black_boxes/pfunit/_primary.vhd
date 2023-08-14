@@ -1,0 +1,40 @@
+library verilog;
+use verilog.vl_types.all;
+entity pfunit is
+    port(
+        clk             : in     vl_logic;
+        rst             : in     vl_logic;
+        ck_en           : in     vl_logic;
+        aptr            : in     vl_logic_vector(8 downto 0);
+        bptr            : in     vl_logic_vector(8 downto 0);
+        cptr            : in     vl_logic_vector(8 downto 0);
+        dptr            : in     vl_logic_vector(8 downto 0);
+        eptr            : in     vl_logic_vector(8 downto 0);
+        eccpptr         : in     vl_logic_vector(8 downto 0);
+        eccuptr         : in     vl_logic_vector(8 downto 0);
+        pfrdc_go        : in     vl_logic;
+        pfrdc_op        : in     vl_logic_vector(1 downto 0);
+        pfasb_go        : in     vl_logic;
+        pfasb_op        : in     vl_logic;
+        pfasb_rdy       : out    vl_logic;
+        pfrdc_rdy       : out    vl_logic;
+        mpimul_go       : out    vl_logic;
+        mpimsk_go       : out    vl_logic;
+        mpisft_go       : out    vl_logic;
+        mpisft_op       : out    vl_logic_vector(3 downto 0);
+        mpisft_ws       : out    vl_logic_vector(2 downto 0);
+        mpiasb_go       : out    vl_logic;
+        mpiasb_op       : out    vl_logic_vector(1 downto 0);
+        mpi_aptr        : out    vl_logic_vector(8 downto 0);
+        mpi_bptr        : out    vl_logic_vector(8 downto 0);
+        mpi_cptr        : out    vl_logic_vector(8 downto 0);
+        mpimul_rdy      : in     vl_logic;
+        mpimsk_rdy      : in     vl_logic;
+        mpisft_rdy      : in     vl_logic;
+        mpiasb_rdy      : in     vl_logic;
+        alu_co          : in     vl_logic;
+        alu_sn          : in     vl_logic;
+        alu_od          : in     vl_logic;
+        alu_eq          : in     vl_logic
+    );
+end pfunit;

@@ -1,0 +1,28 @@
+The following info is for running cmpl_libs.tcl from tclsh only.
+For running cmpl_libs command from Diamond's built-in tcl console, please refer to Diamond help.
+---
+
+**The TCL script requires FOUNDRY variable to be set. If not, please set it to:
+<diamond_path>/ispfpga
+
+**Supported TCL version is 8.5 or higher.
+
+If you don't have TCL installed, or you have an older version, please do the following:
+- add <diamond_path>/tcltk/bin to the front of your PATH, and
+- for Linux users only, add <diamond_path>/tcltk/lib to the front of your LD_LIBRARY_PATH
+
+NOTE: Default version on Linux could be older and may cause the script to fail.
+To check TCL version, type:
+tclsh
+% info tclversion
+% exit
+
+**For script Usage, type:
+tclsh cmpl_libs.tcl [-h|-help|]
+
+NOTE: If Modelsim/Questa is already in your PATH and preceding any Aldec tools, you can use:
+'-sim_path .' for simplification; '.' will be added to the front of your PATH.
+
+**Check log files under <target_path> (defualt = .) for any errors:
+- linux: grep -i error *.log
+- windows: find /i "error" *.log

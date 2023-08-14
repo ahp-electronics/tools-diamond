@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="testreveal">
+  <CommandDef id="Cmd_Reveal_CmdGen" type="CMD_TCL_SCRIPT">
+    <cmd_str/>
+	<scripts>
+	  <![CDATA[
+		set imp_dir "[runtime_property value impl_dir]"
+		set result_dir "[runtime_property value result_dir]"
+		set rep_name "[runtime_property value report_base]"
+		set file_name "${rep_name}.rvp"
+		set prj_name [runtime_property value project.title]
+		if {[catch {set cf [open $file_name w]} err]} {
+		    runtime_log -err "open $file_name is fialed: $err\n"
+		    return -code error
+		}
+		puts $cf "#-- Lattice Semiconductor Corporation Ltd."
+		puts $cf "#-- Bali Reveal project file"
+		puts $cf ""
+		puts $cf "#device options"
+		puts $cf "\[Device\]"
+		puts $cf "part = [runtime_property value device.part]"
+		puts $cf "family = [runtime_property value device.family]"
+		puts $cf "device = [runtime_property value device.device]"
+		puts $cf "speed = [runtime_property value device.speed]"
+		puts $cf "package = [runtime_property value device.package]"
+		puts $cf "operation = [runtime_property value device.operation]"
+		puts $cf ""
+		puts $cf "#design options"
+		puts $cf "\[Design\]"
+		puts $cf "title = $prj_name"
+		puts $cf "path = $result_dir"
+		puts $cf "core_generate = $imp_dir"
+		puts $cf "search_path = [runtime_property value implementation.include\ path]"
+		puts $cf "top = [runtime_property value implementation.top]"
+		#puts $cf "top = TOP_SCHEMATIC"
+		puts $cf ""
+		puts $cf "#HDLs options"
+		puts $cf "\[HDLs\]"
+		foreach src [runtime_property value implementation.synthesis_hdls] {
+		    set type [runtime_property value "implementation.synthesis_hdls.\{${src}\}.type"]
+			set line "$src = $type"
+			if { $type == "VHDL" } {
+			    set work_lib [runtime_property value "implementation.synthesis_hdls.\{${src}\}.lib"]
+				if { [string length $work_lib] == 0 } {
+				     set work_lib work
+				}
+				set line "${line}, $work_lib"
+			}
+			puts $cf $line
+		}
+		close $cf
+      ]]>		
+	</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_Reveal" sc_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>istflow -prj "${implementation.Reveal.absolutefilepath}" -design "${report_base}.rvp" </cmd_str>
+	<scripts>
+	  <![CDATA[
+          proc istflow {args} {
+			set msg "istflow $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+      ]]>		
+	</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_Reveal_Clean" type="CMD_TCL_SCRIPT">
+    <cmd_str/>
+	<scripts>
+	  <![CDATA[
+		  if [ file isdirectory "reveal_workspace/tmpreveal" ] {
+		      file delete -force "reveal_workspace/tmpreveal"
+		  }
+      ]]>		
+	</scripts>
+  </CommandDef>
+</BaliFlowDef>

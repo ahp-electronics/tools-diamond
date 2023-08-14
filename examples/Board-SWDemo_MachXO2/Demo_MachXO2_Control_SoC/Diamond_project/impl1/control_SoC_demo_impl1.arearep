@@ -1,0 +1,364 @@
+----------------------------------------------------------------------
+Report for cell control_soc_demo.
+Register bits:  466 of 5435 (8.574%)
+I/O cells:      24
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                               AND2        10          100.0
+                              CCU2D        87          100.0
+                            FD1P3AX       111          100.0
+                            FD1P3AY         6          100.0
+                            FD1P3DX        52          100.0
+                            FD1P3IX        36          100.0
+                            FD1P3JX        10          100.0
+                            FD1S3AX        99          100.0
+                            FD1S3AY         9          100.0
+                            FD1S3BX         4          100.0
+                            FD1S3DX       100          100.0
+                            FD1S3IX        33          100.0
+                                GSR         1          100.0
+                                 IB         8          100.0
+                           IFS1P3DX         1          100.0
+                              ILVDS         1          100.0
+                                INV        20          100.0
+                            L6MUX21         4          100.0
+                               LUT4       595          100.0
+                              MUX21         4          100.0
+                                 OB        14          100.0
+                                OBZ         2          100.0
+                           OFS1P3DX         4          100.0
+                           OFS1P3JX         1          100.0
+                                OR2         5          100.0
+                               OSCH         1          100.0
+                              PFUMX        44          100.0
+                               XOR2         1          100.0
+                     pmi_addsubXo88         1          100.0
+   pmi_distributed_dpramXbnonen8532         2          100.0
+  pmi_distributed_spramXbnonen12416         1          100.0
+   pmi_distributed_spramXbnonen8532         1          100.0
+            pmi_romXhmenusdn8101024         1          100.0
+      pmi_romXhprom_initadn18101024         1          100.0
+SUB MODULES
+                            ADC_top         1
+                             adc_wb         1
+box_ave(ADC_WIDTH=8,LPF_DEPTH_BITS=3)         1
+intface(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0)         1
+isp8(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16)         1
+        isp8_alu(FAMILY_NAME="XO2")         1
+isp8_core(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16)         1
+isp8_flow_cntl(PGM_STACK_AW=4,PGM_STACK_AD=16,PROM_AW=10,FAMILY_NAME="XO2")         1
+              isp8_idec(PROM_AW=10)         1
+            isp8_io_cntl(PORT_AW=8)         1
+                          led_sw_wb         1
+ lm8_wb(LM8_ADDR_W=24,NUM_DECODE=4)         1
+                 modem(DATAWIDTH=8)         1
+                          reset_gen         1
+         rxcver(DATAWIDTH=8,FIFO=0)         1
+sigmadelta_adc(ADC_WIDTH=8,ACCUM_BITS=10,LPF_DEPTH_BITS=3)         1
+spi(SHIFT_DIRECTION=0,CLOCK_PHASE=0,CLOCK_POLARITY=0,CLOCK_SEL=1,MASTER=1,SLAVE_NUMBER=1,DATA_LENGTH=8,DELAY_TIME=2,CLKCNT_WIDTH=5,INTERVAL_LENGTH=2)         1
+         txmitt(DATAWIDTH=8,FIFO=0)         1
+uart_core(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0)         1
+uptime_wb(CLK_FREQ=24180000,CLK_IN_HZ=25)         1
+                              TOTAL      1290
+----------------------------------------------------------------------
+Report for cell adc_wb.v1
+Instance Path : adc_wb_inst
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              CCU2D        18           20.7
+                            FD1P3AX        30           27.0
+                            FD1S3AX        24           24.2
+                            FD1S3IX         9           27.3
+                                INV         1            5.0
+                               LUT4        13            2.2
+SUB MODULES
+                            ADC_top         1
+box_ave(ADC_WIDTH=8,LPF_DEPTH_BITS=3)         1
+sigmadelta_adc(ADC_WIDTH=8,ACCUM_BITS=10,LPF_DEPTH_BITS=3)         1
+                              TOTAL        98
+----------------------------------------------------------------------
+Report for cell ADC_top.v1
+Instance Path : adc_wb_inst.adc_inst
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              CCU2D        18           20.7
+                            FD1P3AX        30           27.0
+                            FD1S3AX        24           24.2
+                            FD1S3IX         9           27.3
+                                INV         1            5.0
+                               LUT4        13            2.2
+SUB MODULES
+box_ave(ADC_WIDTH=8,LPF_DEPTH_BITS=3)         1
+sigmadelta_adc(ADC_WIDTH=8,ACCUM_BITS=10,LPF_DEPTH_BITS=3)         1
+                              TOTAL        97
+----------------------------------------------------------------------
+Report for cell sigmadelta_adc(ADC_WIDTH=8,ACCUM_BITS=10,LPF_DEPTH_BITS=3).v1
+Instance Path : adc_wb_inst.adc_inst.SSD_ADC
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              CCU2D        18           20.7
+                            FD1P3AX        22           19.8
+                            FD1S3AX        24           24.2
+                            FD1S3IX         9           27.3
+                                INV         1            5.0
+                               LUT4        13            2.2
+SUB MODULES
+box_ave(ADC_WIDTH=8,LPF_DEPTH_BITS=3)         1
+                              TOTAL        88
+----------------------------------------------------------------------
+Report for cell box_ave(ADC_WIDTH=8,LPF_DEPTH_BITS=3).v1
+Instance Path : adc_wb_inst.adc_inst.SSD_ADC.box_ave
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              CCU2D         6            6.9
+                            FD1P3AX        14           12.6
+                            FD1S3AX        10           10.1
+                                INV         1            5.0
+                               LUT4         6            1.0
+                              TOTAL        37
+----------------------------------------------------------------------
+Report for cell uptime_wb(CLK_FREQ=24180000,CLK_IN_HZ=25).v1
+Instance Path : TIME_INST
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              CCU2D        28           32.2
+                            FD1P3DX        16           30.8
+                            FD1S3DX        58           58.0
+                                INV         1            5.0
+                               LUT4        70           11.8
+                              PFUMX         8           18.2
+                              TOTAL       181
+----------------------------------------------------------------------
+Report for cell reset_gen.v1
+Instance Path : reset_gen_inst
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                            FD1P3DX         4            7.7
+                            FD1S3BX         1           25.0
+                                INV         3           15.0
+                               LUT4         4            0.7
+                              TOTAL        12
+----------------------------------------------------------------------
+Report for cell led_sw_wb.v1
+Instance Path : led_sw_inst
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                           OFS1P3DX         4          100.0
+                              TOTAL         4
+----------------------------------------------------------------------
+Report for cell spi(SHIFT_DIRECTION=0,CLOCK_PHASE=0,CLOCK_POLARITY=0,CLOCK_SEL=1,MASTER=1,SLAVE_NUMBER=1,DATA_LENGTH=8,DELAY_TIME=2,CLKCNT_WIDTH=5,INTERVAL_LENGTH=2).v1
+Instance Path : SPI_INST
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              CCU2D         4            4.6
+                            FD1P3AX        34           30.6
+                            FD1P3IX         1            2.8
+                            FD1P3JX         1           10.0
+                            FD1S3AX        31           31.3
+                            FD1S3AY         1           11.1
+                            FD1S3IX        13           39.4
+                                INV         2           10.0
+                               LUT4        93           15.6
+                           OFS1P3JX         1          100.0
+                              PFUMX         6           13.6
+                              TOTAL       187
+----------------------------------------------------------------------
+Report for cell lm8_wb(LM8_ADDR_W=24,NUM_DECODE=4).v1
+Instance Path : lm8_wb_inst
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                            FD1P3AX         8            7.2
+                            FD1P3IX         2            5.6
+                            FD1P3JX         8           80.0
+                            FD1S3DX         8            8.0
+                            FD1S3IX         8           24.2
+                            L6MUX21         4          100.0
+                               LUT4        37            6.2
+                              PFUMX         4            9.1
+            pmi_romXhmenusdn8101024         1          100.0
+                              TOTAL        80
+----------------------------------------------------------------------
+Report for cell uart_core(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0).v1
+Instance Path : UART_INST
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              CCU2D        31           35.6
+                            FD1P3AX        39           35.1
+                            FD1P3AY         6          100.0
+                            FD1P3IX        33           91.7
+                            FD1P3JX         1           10.0
+                            FD1S3AX        44           44.4
+                            FD1S3AY         8           88.9
+                            FD1S3DX         8            8.0
+                            FD1S3IX         2            6.1
+                           IFS1P3DX         1          100.0
+                                INV         2           10.0
+                               LUT4       199           33.4
+                              PFUMX         8           18.2
+SUB MODULES
+intface(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0)         1
+                 modem(DATAWIDTH=8)         1
+         rxcver(DATAWIDTH=8,FIFO=0)         1
+         txmitt(DATAWIDTH=8,FIFO=0)         1
+                              TOTAL       386
+----------------------------------------------------------------------
+Report for cell txmitt(DATAWIDTH=8,FIFO=0).v1
+Instance Path : UART_INST.u_txmitt
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              CCU2D         9           10.3
+                            FD1P3AX        11            9.9
+                            FD1P3AY         2           33.3
+                            FD1P3IX        16           44.4
+                            FD1P3JX         1           10.0
+                            FD1S3AX        13           13.1
+                            FD1S3AY         1           11.1
+                                INV         1            5.0
+                               LUT4        68           11.4
+                              PFUMX         5           11.4
+                              TOTAL       127
+----------------------------------------------------------------------
+Report for cell rxcver(DATAWIDTH=8,FIFO=0).v1
+Instance Path : UART_INST.u_rxcver
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              CCU2D        22           25.3
+                            FD1P3AX        10            9.0
+                            FD1P3AY         1           16.7
+                            FD1P3IX        16           44.4
+                            FD1S3AX        27           27.3
+                            FD1S3AY         4           44.4
+                           IFS1P3DX         1          100.0
+                               LUT4        90           15.1
+                              PFUMX         2            4.5
+                              TOTAL       173
+----------------------------------------------------------------------
+Report for cell modem(DATAWIDTH=8).v1
+Instance Path : UART_INST.u_modem
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                            FD1P3AX         1            0.9
+                            FD1S3AY         1           11.1
+                              TOTAL         2
+----------------------------------------------------------------------
+Report for cell intface(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0).v1
+Instance Path : UART_INST.u_intface
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                            FD1P3AX        17           15.3
+                            FD1P3AY         3           50.0
+                            FD1P3IX         1            2.8
+                            FD1S3AX         4            4.0
+                            FD1S3AY         2           22.2
+                            FD1S3DX         8            8.0
+                            FD1S3IX         2            6.1
+                                INV         1            5.0
+                               LUT4        41            6.9
+                              PFUMX         1            2.3
+                              TOTAL        80
+----------------------------------------------------------------------
+Report for cell isp8(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16).v1
+Instance Path : lm8_inst
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                               AND2        10          100.0
+                              CCU2D         6            6.9
+                            FD1P3DX        32           61.5
+                            FD1S3BX         3           75.0
+                            FD1S3DX        26           26.0
+                            FD1S3IX         1            3.0
+                                INV         8           40.0
+                               LUT4       177           29.7
+                              MUX21         4          100.0
+                                OR2         5          100.0
+                              PFUMX        18           40.9
+                               XOR2         1          100.0
+                     pmi_addsubXo88         1          100.0
+   pmi_distributed_dpramXbnonen8532         2          100.0
+  pmi_distributed_spramXbnonen12416         1          100.0
+   pmi_distributed_spramXbnonen8532         1          100.0
+      pmi_romXhprom_initadn18101024         1          100.0
+SUB MODULES
+        isp8_alu(FAMILY_NAME="XO2")         1
+isp8_core(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16)         1
+isp8_flow_cntl(PGM_STACK_AW=4,PGM_STACK_AD=16,PROM_AW=10,FAMILY_NAME="XO2")         1
+              isp8_idec(PROM_AW=10)         1
+            isp8_io_cntl(PORT_AW=8)         1
+                              TOTAL       302
+----------------------------------------------------------------------
+Report for cell isp8_core(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16).v1
+Instance Path : lm8_inst.u1_isp8
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                               AND2        10          100.0
+                              CCU2D         6            6.9
+                            FD1P3DX        32           61.5
+                            FD1S3BX         3           75.0
+                            FD1S3DX        26           26.0
+                            FD1S3IX         1            3.0
+                                INV         8           40.0
+                               LUT4       177           29.7
+                              MUX21         4          100.0
+                                OR2         5          100.0
+                              PFUMX        18           40.9
+                               XOR2         1          100.0
+                     pmi_addsubXo88         1          100.0
+   pmi_distributed_dpramXbnonen8532         2          100.0
+  pmi_distributed_spramXbnonen12416         1          100.0
+      pmi_romXhprom_initadn18101024         1          100.0
+SUB MODULES
+        isp8_alu(FAMILY_NAME="XO2")         1
+isp8_flow_cntl(PGM_STACK_AW=4,PGM_STACK_AD=16,PROM_AW=10,FAMILY_NAME="XO2")         1
+              isp8_idec(PROM_AW=10)         1
+            isp8_io_cntl(PORT_AW=8)         1
+                              TOTAL       300
+----------------------------------------------------------------------
+Report for cell isp8_io_cntl(PORT_AW=8).v1
+Instance Path : lm8_inst.u1_isp8.u1_isp8_io_cntl
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                               AND2         1           10.0
+                            FD1S3DX        12           12.0
+                                INV         1            5.0
+                               LUT4        29            4.9
+                              TOTAL        43
+----------------------------------------------------------------------
+Report for cell isp8_idec(PROM_AW=10).v1
+Instance Path : lm8_inst.u1_isp8.u1_isp8_idec
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                                INV         1            5.0
+                               LUT4         3            0.5
+                                OR2         1           20.0
+                              PFUMX         1            2.3
+                              TOTAL         6
+----------------------------------------------------------------------
+Report for cell isp8_flow_cntl(PGM_STACK_AW=4,PGM_STACK_AD=16,PROM_AW=10,FAMILY_NAME="XO2").v1
+Instance Path : lm8_inst.u1_isp8.u1_isp8_flow_cntl
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                               AND2         4           40.0
+                              CCU2D         6            6.9
+                            FD1P3DX        26           50.0
+                            FD1S3BX         2           50.0
+                            FD1S3DX        11           11.0
+                            FD1S3IX         1            3.0
+                                INV         2           10.0
+                               LUT4        51            8.6
+                                OR2         3           60.0
+                              PFUMX         1            2.3
+  pmi_distributed_spramXbnonen12416         1          100.0
+      pmi_romXhprom_initadn18101024         1          100.0
+                              TOTAL       109
+----------------------------------------------------------------------
+Report for cell isp8_alu(FAMILY_NAME="XO2").v1
+Instance Path : lm8_inst.u1_isp8.u1_isp8_alu
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                               AND2         4           40.0
+                                INV         2           10.0
+                               LUT4        64           10.8
+                              PFUMX        16           36.4
+                               XOR2         1          100.0
+                     pmi_addsubXo88         1          100.0
+                              TOTAL        88

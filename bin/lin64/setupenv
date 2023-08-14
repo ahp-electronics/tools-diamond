@@ -1,0 +1,55 @@
+#!/bin/csh
+#setup all the environment variable required by Diamond and related executable files
+#version 1.3
+
+set bindir=`pwd`
+
+unset LSC_INI_PATH
+
+#setup LSC_DIAMOND
+setenv LSC_DIAMOND true
+
+#fix RH7 incompatible Qt library issue
+setenv QT_PLUGIN_PATH
+
+#set the output max line width
+setenv NEOCAD_MAXLINEWIDTH 32767
+
+#setup FOUNDRY
+if ($?BALI_USE_FOUNDRY_OUTSIDE && $?FOUNDRY)  then
+	set fpgadir=${FOUNDRY}
+else
+	set fpgadir=`cd "${bindir}/../../ispfpga" ; pwd`
+	setenv FOUNDRY $fpgadir
+endif
+
+echo "FOUNDRY:$FOUNDRY"
+
+#setup TCL_LIBRARY
+setenv TCL_LIBRARY `cd "${bindir}/../../tcltk/lib/tcl8.5"; pwd`
+
+
+#setup path
+set fpgabindir=${fpgadir}/bin/lin
+if ("${bindir}" =~ *lin64) then
+    set fpgabindir=${fpgadir}/bin/lin64
+endif
+set path=(${bindir} ${fpgabindir} ${path})
+echo "path:$path"
+
+#setup library path
+if ( !($?LD_LIBRARY_PATH) ) then
+	setenv LD_LIBRARY_PATH "${bindir}:${fpgabindir}"
+else
+	setenv LD_LIBRARY_PATH "${bindir}:${fpgabindir}:${LD_LIBRARY_PATH}"
+endif
+echo "LD_LIBRARY_PATH:$LD_LIBRARY_PATH"
+
+#setup license
+if ( !($?LM_LICENSE_FILE) ) then
+	setenv LM_LICENSE_FILE "${bindir}/../../license/license.dat"
+else
+	setenv LM_LICENSE_FILE "${bindir}/../../license/license.dat:${LM_LICENSE_FILE}"
+endif
+echo "LM_LICENSE_FILE:$LM_LICENSE_FILE"
+

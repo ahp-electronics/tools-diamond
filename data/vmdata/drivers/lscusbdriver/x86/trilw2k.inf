@@ -1,0 +1,72 @@
+[Version]
+Signature="$CHICAGO$"
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+provider="Lattice"
+LayoutFile=layout.inf
+
+[Manufacturer]
+%Tril%=Tril
+
+[Tril]
+
+;
+; The folowing PIDs are for all of the devices in the EZ-USB family.
+; These are the hardcoded PIDs that will be reported by an EZ-USB
+; device with no external EEPROM. Bound to the general purpose driver.
+;
+
+%USB\VID_1134&PID_8000.DeviceDesc%=EZUSB.Dev, USB\VID_1134&PID_8000
+%USB\VID_1134&PID_8001.DeviceDesc%=EZUSB.Dev, USB\VID_1134&PID_8001
+
+; comment out for vista
+;[PreCopySection]
+;HKR,,NoSetupUI,,1
+
+[DestinationDirs]
+; changed from 10,system32\drivers to 12  for vista 08/20/2008
+EZUSB.Files.Ext = 12
+EZUSB.Files.Inf = 10,INF
+
+[EZUSB.Dev]
+CopyFiles=EZUSB.Files.Ext, EZUSB.Files.Inf
+AddReg=EZUSB.AddReg
+
+[EZUSB.Dev.NT]
+; copyfiles commented out for Win2K to avoid user intervention during install
+; uncomment  for vista 10/11/2007
+CopyFiles=EZUSB.Files.Ext, EZUSB.Files.Inf
+AddReg=EZUSB.AddReg
+
+[EZUSB.Dev.NT.Services]
+Addservice = EZUSB, 0x00000002, EZUSB.AddService
+
+[EZUSB.AddService]
+DisplayName    = %EZUSB.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+; changed from %10%\system32\drivers to %12%\  for vista 03/20/2008
+ServiceBinary  = %12%\ezusb.sys
+LoadOrderGroup = Base
+
+[EZUSB.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ezusb.sys
+
+[EZUSB.Files.Ext]
+; changed from ezusb.sys to ezusb.sys ,,,0x40  for vista 08/20/2008
+ezusb.sys ,,,0x40  ; 0x40 == COPYFLG_OVERWRITE_OLDER_ONLY
+
+[EZUSB.Files.Inf]
+; changed from trilw2k.Inf to trilw2k.Inf ,,,0x40  for vista 08/20/2008
+trilw2k.Inf ,,,0x40  ; 0x40 == COPYFLG_OVERWRITE_OLDER_ONLY
+
+;---------------------------------------------------------------;
+
+[Strings]
+Cypress="Cypress Semiconductor"
+USB\VID_1134&PID_8000.DeviceDesc="Tri-L USB ISP Programmer USBISP"
+USB\VID_1134&PID_8001.DeviceDesc="Lattice USB ISP Programmer"
+
+EZUSB.SvcDesc="Cypress General Purpose USB Driver (ezusb.sys)"

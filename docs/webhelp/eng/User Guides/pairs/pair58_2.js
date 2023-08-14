@@ -1,0 +1,24 @@
+var pairs =
+{
+"generating":{"jedec":1}
+,"build":{"view":1}
+,"view":{"enables":1,"click":1,"current":1}
+,"enables":{"generate":1}
+,"generate":{"merged":1,"jedec":1}
+,"merged":{"jedec":1}
+,"jedec":{"file":1,"fpga":1}
+,"file":{"pin":1}
+,"pin":{"assignment":1}
+,"assignment":{"process":1}
+,"process":{"merges":1,"completed":1}
+,"merges":{"jedec":1}
+,"fpga":{"asc":1}
+,"asc":{"jedecs":1}
+,"click":{"generate":1}
+,"completed":{"summary":1}
+,"summary":{"status":1}
+,"status":{"bottom":1}
+,"bottom":{"build":1}
+,"building":{"design":1}
+}
+;Search.control.loadWordPairs(pairs);

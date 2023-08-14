@@ -1,0 +1,127 @@
+module new sbp v
+load symbol pcs v box pin rx_pcs_rst_c input pin hdinn input pin hdinp input pin hdoutn output pin hdoutp output pin sci_en_dual input pinBus rxdata output [15:0] pinBus sci_addr input [5:0] 
+
+load inst pcs0_inst pcs v -pinBusAttr rxdata @name rxdata[15:0] -pinBusAttr sci_addr @name sci_addr[5:0] 
+load inst pcs1_inst pcs v -pinBusAttr rxdata @name rxdata[15:0] -pinBusAttr sci_addr @name sci_addr[5:0]
+
+load port pcs0_hdinn input
+load port pcs0_hdinp input
+load port pcs0_hdoutn output
+load port pcs0_hdoutp output
+
+load port pcs_rx_pcs_rst_c input
+
+load net pcs0_hdinn -pin pcs0_inst hdinn -port pcs0_hdinn
+load net pcs0_hdinp -pin pcs0_inst hdinp -port pcs0_hdinp
+load net pcs0_hdoutn -pin pcs0_inst hdoutn -port pcs0_hdoutn
+load net pcs0_hdoutp -pin pcs0_inst hdoutp -port pcs0_hdoutp
+
+highlight -color 1 -append -it "pin pcs0_inst hdinn"
+highlight -color 1 -append -it "pin pcs0_inst hdinp"
+highlight -color 1 -append -it "pin pcs0_inst hdoutn"
+highlight -color 1 -append -it "pin pcs0_inst hdoutp"
+
+highlight -color 1 -append -it "port pcs0_hdinn"
+highlight -color 1 -append -it "port pcs0_hdinp"
+highlight -color 1 -append -it "port pcs0_hdoutn"
+highlight -color 1 -append -it "port pcs0_hdoutp"
+
+highlight -color 1 -append -it "net pcs0_hdinn"
+highlight -color 1 -append -it "net pcs0_hdinp"
+highlight -color 1 -append -it "net pcs0_hdoutn"
+highlight -color 1 -append -it "net pcs0_hdoutp"
+
+load net pcs_rx_pcs_rst_c -pin pcs0_inst rx_pcs_rst_c -port pcs_rx_pcs_rst_c
+
+load port pcs1_hdinn input
+load port pcs1_hdinp input
+load port pcs1_hdoutn output
+load port pcs1_hdoutp output
+
+load port pcs1_sci_en_dual input
+
+load net pcs1_hdinn -pin pcs1_inst hdinn -port pcs1_hdinn
+load net pcs1_hdinp -pin pcs1_inst hdinp -port pcs1_hdinp
+load net pcs1_hdoutn -pin pcs1_inst hdoutn -port pcs1_hdoutn
+load net pcs1_hdoutp -pin pcs1_inst hdoutp -port pcs1_hdoutp
+load net pcs_rx_pcs_rst_c -pin pcs1_inst rx_pcs_rst_c -port pcs_rx_pcs_rst_c
+
+highlight -color 0 -append -it "net pcs_rx_pcs_rst_c"
+
+highlight -color 1 -append -it "pin pcs1_inst hdinn"
+highlight -color 1 -append -it "pin pcs1_inst hdinp"
+highlight -color 1 -append -it "pin pcs1_inst hdoutn"
+highlight -color 1 -append -it "pin pcs1_inst hdoutp"
+
+highlight -color 1 -append -it "port pcs1_hdinn"
+highlight -color 1 -append -it "port pcs1_hdinp"
+highlight -color 1 -append -it "port pcs1_hdoutn"
+highlight -color 1 -append -it "port pcs1_hdoutp"
+
+highlight -color 1 -append -it "net pcs1_hdinn"
+highlight -color 1 -append -it "net pcs1_hdinp"
+highlight -color 1 -append -it "net pcs1_hdoutn"
+highlight -color 1 -append -it "net pcs1_hdoutp"
+
+load net pcs1_sci_en_dual -pin pcs1_inst sci_en_dual -pin pcs0_inst sci_en_dual -pin pcs1_inst sci_en_dual -port pcs1_sci_en_dual
+
+highlight -color 2 -append -it "pin pcs1_inst sci_en_dual"
+highlight -color 2 -append -it "port pcs1_sci_en_dual"
+highlight -color 2 -append -it "net pcs1_sci_en_dual"
+
+load net pcs1_pcs0_sci_addr[5] -pin pcs1_inst sci_addr[5] -pin pcs0_inst sci_addr[5]
+load net pcs1_pcs0_sci_addr[4] -pin pcs1_inst sci_addr[4] -pin pcs0_inst sci_addr[4]
+load net pcs1_pcs0_sci_addr[3] -pin pcs1_inst sci_addr[3] -pin pcs0_inst sci_addr[3]
+load net pcs1_pcs0_sci_addr[2] -pin pcs1_inst sci_addr[2] -pin pcs0_inst sci_addr[2]
+load net pcs1_pcs0_sci_addr[1] -pin pcs1_inst sci_addr[1] -pin pcs0_inst sci_addr[1]
+load net pcs1_pcs0_sci_addr[0] -pin pcs1_inst sci_addr[0] -pin pcs0_inst sci_addr[0]
+load netBundle pcs1_pcs0_sci_addr [5:0]
+
+highlight -color 2 -append -it "net pcs1_pcs0_sci_addr[5]"
+highlight -color 2 -append -it "net pcs1_pcs0_sci_addr[4]"
+highlight -color 2 -append -it "net pcs1_pcs0_sci_addr[3]"
+highlight -color 2 -append -it "net pcs1_pcs0_sci_addr[2]"
+highlight -color 2 -append -it "net pcs1_pcs0_sci_addr[1]"
+highlight -color 2 -append -it "net pcs1_pcs0_sci_addr[0]"
+highlight -color 2 -append -it "netBundle pcs1_pcs0_sci_addr"
+
+load portBus pcs0_rxdata[15:0] output g16
+load net pcs0_rxdata[0] -port pcs0_rxdata[0] -pin pcs0_inst rxdata[0]
+load net pcs0_rxdata[1] -port pcs0_rxdata[1] -pin pcs0_inst rxdata[1]
+load net pcs0_rxdata[2] -port pcs0_rxdata[2] -pin pcs0_inst rxdata[2]
+load net pcs0_rxdata[3] -port pcs0_rxdata[3] -pin pcs0_inst rxdata[3]
+load net pcs0_rxdata[4] -port pcs0_rxdata[4] -pin pcs0_inst rxdata[4]
+load net pcs0_rxdata[5] -port pcs0_rxdata[5] -pin pcs0_inst rxdata[5]
+load net pcs0_rxdata[6] -port pcs0_rxdata[6] -pin pcs0_inst rxdata[6]
+load net pcs0_rxdata[7] -port pcs0_rxdata[7] -pin pcs0_inst rxdata[7]
+load net pcs0_rxdata[8] -port pcs0_rxdata[8] -pin pcs0_inst rxdata[8]
+load net pcs0_rxdata[9] -port pcs0_rxdata[9] -pin pcs0_inst rxdata[9]
+load net pcs0_rxdata[10] -port pcs0_rxdata[10] -pin pcs0_inst rxdata[10]
+load net pcs0_rxdata[11] -port pcs0_rxdata[11] -pin pcs0_inst rxdata[11]
+load net pcs0_rxdata[12] -port pcs0_rxdata[12] -pin pcs0_inst rxdata[12]
+load net pcs0_rxdata[13] -port pcs0_rxdata[13] -pin pcs0_inst rxdata[13]
+load net pcs0_rxdata[14] -port pcs0_rxdata[14] -pin pcs0_inst rxdata[14]
+load net pcs0_rxdata[15] -port pcs0_rxdata[15] -pin pcs0_inst rxdata[15]
+load netBundle pcs0_rxdata [15:0]
+
+load portBus pcs1_rxdata[15:0] output g16
+load net pcs1_rxdata[0] -port pcs1_rxdata[0] -pin pcs1_inst rxdata[0]
+load net pcs1_rxdata[1] -port pcs1_rxdata[1] -pin pcs1_inst rxdata[1]
+load net pcs1_rxdata[2] -port pcs1_rxdata[2] -pin pcs1_inst rxdata[2]
+load net pcs1_rxdata[3] -port pcs1_rxdata[3] -pin pcs1_inst rxdata[3]
+load net pcs1_rxdata[4] -port pcs1_rxdata[4] -pin pcs1_inst rxdata[4]
+load net pcs1_rxdata[5] -port pcs1_rxdata[5] -pin pcs1_inst rxdata[5]
+load net pcs1_rxdata[6] -port pcs1_rxdata[6] -pin pcs1_inst rxdata[6]
+load net pcs1_rxdata[7] -port pcs1_rxdata[7] -pin pcs1_inst rxdata[7]
+load net pcs1_rxdata[8] -port pcs1_rxdata[8] -pin pcs1_inst rxdata[8]
+load net pcs1_rxdata[9] -port pcs1_rxdata[9] -pin pcs1_inst rxdata[9]
+load net pcs1_rxdata[10] -port pcs1_rxdata[10] -pin pcs1_inst rxdata[10]
+load net pcs1_rxdata[11] -port pcs1_rxdata[11] -pin pcs1_inst rxdata[11]
+load net pcs1_rxdata[12] -port pcs1_rxdata[12] -pin pcs1_inst rxdata[12]
+load net pcs1_rxdata[13] -port pcs1_rxdata[13] -pin pcs1_inst rxdata[13]
+load net pcs1_rxdata[14] -port pcs1_rxdata[14] -pin pcs1_inst rxdata[14]
+load net pcs1_rxdata[15] -port pcs1_rxdata[15] -pin pcs1_inst rxdata[15]
+load netBundle pcs1_rxdata [15:0]
+
+show
+fullfit

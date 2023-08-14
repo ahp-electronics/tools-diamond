@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="xo2c00" include="mj5g00">
+<VariableDef name="EQUATION_NEEDED" value="false" />
+<VariableDef name="Support_SSO" value="true" />
+<VariableDef name="Export_JEDEC" value="true" />
+<VariableDef name="IBISGen:ibs_outfile" value='device.has_exasc? IBIS/$(report_base)_xo2.ibs : IBIS/$(report_base).ibs' />
+<VariableDef name="Bitgen:security" value="" />
+
+<CommandFileDef id="Bitgen_T2BCmd" name="${report_base}.t2b" clean="TRUE" >
+    <line>#PROP_BIT_RunDRCBitGen</line>
+    <line>#PROP_BIT_DisableUESBitgen</line>
+    <line>#PROP_BIT_DisRAMResBitGen</line>
+    <line>#PROP_BIT_NoHeader</line>
+    <line>-path "${project_dir}" #PROP_BIT_SearchPthBitGen </line>
+    <!-- line>-g ES:Yes</line --> 
+</CommandFileDef>
+  
+<!--TaskDef id ="Task_Bitgen" title ="Jedecgen" lable ="JEDEC File" visible ='!defined(implementation.PTM)&amp;&amp;(implementation.pojo_flow != "EXPORT" || implementation.pojo_flow == "EXPORT"&amp;&amp;!device.has_intasc)' depend_on_milestones="par"-->
+<TaskDef id ="Task_JEDEC" title ="Jedecgen" lable ="JEDEC File" visible ='!defined(implementation.PTM)&amp;&amp;(implementation.pojo_flow != "EXPORT" || implementation.pojo_flow == "EXPORT"&amp;&amp;!device.has_intasc)' depend_on_milestones="par, par:Task_PWRCheck">
+    <Target id ="target">
+        <Command using_def="Cmd_TimingCheck"/>
+        <Command id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+            <CommandFile using_def="Bitgen_T2BCmd"/>
+            <cmd_str>bitgen -f "${report_base}.t2b" -w "${report_base}.ncd" !Bitgen:security -jedec "${report_base}.prf"</cmd_str>
+            <scripts>
+                <![CDATA[
+                proc bitgen {args} {
+                    set msg "bitgen $args\n";
+                    runtime_log $msg;
+                    set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+                    runtime_log $msg;
+                }
+                ]]>
+            </scripts>
+        </Command>
+    </Target>
+    <Report using_def="Report_BitGen"/>
+    <Report using_def="Report_JDec"/>
+</TaskDef>
+
+<!--TaskDef id ="Task_BitgenXO2" title ="Bitgen" lable ="Bitstream File" visible ='!defined(implementation.PTM)&amp;&amp;implementation.pojo_flow != "EXPORT"' depend_on_milestones="par"-->
+<TaskDef id ="Task_Bitgen" title ="Bitgen" lable ="Bitstream File" visible ='!defined(implementation.PTM)&amp;&amp;implementation.pojo_flow != "EXPORT"' depend_on_milestones="par, par:Task_PWRCheck">
+    <Target id ="target">
+        <Command using_def="Cmd_TimingCheck"/>
+        <Command id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+            <CommandFile using_def="Bitgen_T2BCmd"/>
+            <cmd_str>bitgen -f "${report_base}.t2b" -w "${report_base}.ncd" !Bitgen:security "${report_base}.prf"</cmd_str>
+            <scripts>
+                <![CDATA[
+                proc bitgen {args} {
+                    set msg "bitgen $args\n";
+                    runtime_log $msg;
+                    set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+                    runtime_log $msg;
+                }
+                ]]>
+            </scripts>
+       </Command>
+     </Target>
+     <Report using_def="Report_BitGen"/>
+     <Report using_def="Report_Bitstream"/>
+  </TaskDef> 
+</BaliFlowDef>

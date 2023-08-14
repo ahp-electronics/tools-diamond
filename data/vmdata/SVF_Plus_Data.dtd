@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!ELEMENT 	SVF_Plus_Data (	Comment?, DataField+	) >
+<!ATTLIST 	SVF_Plus_Data
+			version		CDATA	#REQUIRED>
+
+<!ELEMENT	Comment	(#PCDATA)*	>
+
+<!ELEMENT	DataField	(FieldBlock+) >
+<!ATTLIST	DataField
+			name		CDATA	#REQUIRED 
+			checksum	CDATA	#IMPLIED	>
+			
+<!ELEMENT	FieldBlock	(#PCDATA)* >
+<!ATTLIST	FieldBlock
+			row_width	CDATA	#REQUIRED >

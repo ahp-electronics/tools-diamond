@@ -1,0 +1,194 @@
+PAR: Place And Route ispLever_v8.1_ALPHA_Build (558).
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2010 Lattice Semiconductor Corporation,  All rights reserved.
+Thu Mar 04 17:56:54 2010
+
+C:/lscc/diamond/1.0/ispfpga\bin\nt\par -f mixedcounter_vhdl.p2t
+mixedcounter_vhdl_map.ncd mixedcounter_vhdl.dir mixedcounter_vhdl.prf
+
+Preference file: mixedcounter_vhdl.prf.
+
+Level/      Number      Timing      Run         NCD
+Cost [ncd]  Unrouted    Score       Time        Status
+----------  --------    --------    -----       ------------
+5_1   *     0           0           48          Complete        
+
+
+* : Design saved.
+
+par done!
+
+Lattice Place and Route Report for Design "mixedcounter_vhdl_map.ncd"
+Thu Mar 04 17:56:54 2010
+
+PAR: Place And Route ispLever_v8.1_ALPHA_Build (558).
+Command line: C:/lscc/diamond/1.0/ispfpga\bin\nt\par -f mixedcounter_vhdl.p2t
+mixedcounter_vhdl_map.ncd mixedcounter_vhdl.dir mixedcounter_vhdl.prf
+Preference file: mixedcounter_vhdl.prf.
+Placement level-cost: 5-1.
+Routing Iterations: 6
+
+Loading design for application par from file mixedcounter_vhdl_map.ncd.
+Design name: typecount
+NCD version: 3.2
+Vendor:      LATTICE
+Device:      LFE2-35E
+Package:     FPBGA672
+Speed:       5
+Loading device for application par from file 'ep5a60x74.nph' in environment
+C:/lscc/diamond/1.0/ispfpga.
+Package Status:               Final          Version 1.20
+Speed Hardware Data Status:   Final          Version 5.7
+License checked out.
+
+
+Ignore Preference Error(s):  True
+Dumping design to file C:/DOCUME~1/bcaslis/LOCALS~1/Temp/neo_3.
+Device utilization summary:
+
+   GSR                1/1           100% used
+   PIO (prelim)      59/500          11% used
+                     59/450          13% bonded
+   SLICE             36/16128        <1% used
+
+
+
+Number of Signals: 112
+Number of Connections: 273
+
+Pin Constraint Summary:
+   0 out of 59 pins locked (0% locked).
+
+The following 1 signal is selected to use the primary clock routing resources:
+    clk_c (driver: clk, clk load #: 36)
+
+No signal is selected as DCS clock.
+
+The following 1 signal is selected to use the secondary clock routing resources:
+    reset_c (driver: reset, clk load #: 0, sr load #: 8, ce load #: 12)
+
+Signal reset_c is selected as Global Set/Reset.
+.
+Starting Placer Phase 0.
+..........
+Finished Placer Phase 0.  REAL time: 13 secs 
+
+CDP(congestion driven placement) auto mode does not turn on CDP.
+	To force CDP on, set -exp parCDP=1
+Starting Placer Phase 1.
+....................
+Placer score = 14148.
+Finished Placer Phase 1.  REAL time: 20 secs 
+
+Starting Placer Phase 2.
+.
+Placer score =  13845
+Finished Placer Phase 2.  REAL time: 20 secs 
+
+
+------------------ Clock Report ------------------
+
+Global Clock Resources:
+  CLK_PIN    : 2 out of 8 (25%)
+  PLL        : 0 out of 2 (0%)
+  DCS        : 0 out of 8 (0%)
+
+Quadrants All (TL, TR, BL, BR) - Global Clocks:
+  PRIMARY "clk_c" from comp "clk" on CLK_PIN site "AD15 (PB40A)", clk load = 36
+  SECONDARY "reset_c" from comp "reset" on CLK_PIN site "M23 (PR25A)", clk load = 0, ce load = 12, sr load = 8
+
+  PRIMARY  : 1 out of 8 (12%)
+     DCS   : 0 out of 2 (0%)
+  SECONDARY: 1 out of 4 (25%)
+
+Edge Clocks:
+  No edge clock selected
+
+--------------- End of Clock Report ---------------
+
+
+I/O Usage Summary (final):
+   59 out of 500 (11.8%) PIO sites used.
+   59 out of 450 (13.1%) bonded PIO sites used.
+   Number of PIO comps: 59; differential: 0
+   Number of Vref pins used: 0
+
+I/O Bank Usage Summary:
+----------+------------------+-------+-----------------
+ I/O Bank | Usage            | Vccio |  Vref1 / Vref2
+----------+------------------+-------+-----------------
+    0     |   0 / 67  (  0%) |    -  |      - / -     
+    1     |   0 / 52  (  0%) |    -  |      - / -     
+    2     |   1 / 48  (  2%) |    -  |      - / -     
+    3     |   0 / 42  (  0%) |    -  |      - / -     
+    4     |  34 / 54  ( 62%) | 2.5V  |      - / -     
+    5     |  24 / 68  ( 35%) | 2.5V  |      - / -     
+    6     |   0 / 58  (  0%) |    -  |      - / -     
+    7     |   0 / 47  (  0%) |    -  |      - / -     
+    8     |   0 / 14  (  0%) |    -  |      - / -     
+----------+------------------+-------+-----------------
+
+
+DSP Utilization Summary:
+-------------------------------------
+DSP Block #:              1 2 3 4 5 6 7 8
+# of MULT36X36B                          
+# of MULT18X18B                          
+# of MULT18X18MACB                       
+# of MULT18X18ADDSUBB                    
+# of MULT18X18ADDSUBSUMB                 
+# of MULT9X9B                            
+# of MULT9X9ADDSUBB                      
+# of MULT9X9ADDSUBSUMB                   
+
+Total placer CPU time: 19 secs 
+
+Dumping design to file mixedcounter_vhdl.dir/5_1.ncd.
+
+0 connections routed; 273 unrouted.
+Starting router resource preassignment
+
+Completed router resource preassignment. Real time: 33 secs 
+
+Congestion Driven Router (CDR) is turned on.
+CDR effort level is set at 0.
+To turn CDR off, please set "-exp parCDR=0" on command line.
+
+Starting iterative routing.
+
+For each routing iteration the number inside the parenthesis is the
+total time (in picoseconds) the design is failing the timing constraints.
+For each routing iteration the router will attempt to reduce this number
+until the number of routing iterations is completed or the value is 0
+meaning the design setup analysis has met timing constraints.
+
+End of iteration 1
+273 successful; 0 unrouted; (0) real time: 33 secs 
+Dumping design to file mixedcounter_vhdl.dir/5_1.ncd.
+Total CPU time 32 secs 
+Total REAL time: 33 secs 
+Completely routed.
+End of route.  273 routed (100.00%); 0 unrouted.
+Checking DRC ... 
+No errors found.
+
+Timing score: 0 
+
+Total REAL time to completion: 48 secs 
+
+Dumping design to file mixedcounter_vhdl.dir/5_1.ncd.
+
+
+All signals are completely routed.
+
+
+par done!
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2010 Lattice Semiconductor Corporation,  All rights reserved.

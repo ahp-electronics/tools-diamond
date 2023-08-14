@@ -1,0 +1,29 @@
+[pgr]
+Programmer extended Tcl commands
+For more information on a specific command, type help command-name:
+pgr_project      Programmer project commands
+pgr_program      Programmer program commands
+[pgr_project]
+pgr_project                             Programmer project commands
+    open <XCF file>                     Opens XCF file
+    save <XCF file>                     Saves current XCF as XCF file
+    close                               Closes current XCF file
+[pgr_program]
+pgr_program                             Programmer program commands
+    set                                 No arguments return the status of the current  settings
+        -cable <lattice|usb|usb2>       Sets the cable for downloading
+        -portaddress <portaddress>      Sets the port address for downloading
+            where port address for cable type can be:
+                lattice                 <0x0378|0x0278|0x03bc|0x0378|0x0278|0x03bc|0x<custom address>>
+                usb                     <Ezusb-0|Ezusb-1|Ezusb-2|...|Ezusb-15>
+                usb2                    <FTUSB-0|FTUSB-1|FTUSB-2|...|FTUSB-15>
+    run                                 Executes the current xcf with the current settings
+[pgr_genfile]
+pgr_genfile                             Programmer generate files command (not supported for customer use)
+    set                                 No arguments return the status of the current  settings
+        -process <file type>            Sets the file type for file generation
+            where file type for process can be:
+                file type               <svf|vme10|vme9|vme8|slim>
+        -slim <file path>               Sets algorithm file for Slim VME file
+        -outfile <file path>            Sets the output file
+    run                                 Generates file based on the current xcf and current settings

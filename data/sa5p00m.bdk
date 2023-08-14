@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="sa5p00m" include="basenewdev,sa5p00" family="ECP5UM">  
+  <VariableDef name="Export_IBIS_AMI" value="false" />
+  <VariableDef name="IBISGen:ibs_ami_file" value='"${InstallPath}/cae_library/ibis_ami/${device.PrimitiveLib}_serdes.ibs"' />
+  <CommandDef id="Cmd_IBIS_AMI" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>ibisgen "${report_base}.ncd" !IBISGen:ibs_ami_file</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ibisgen {args} {
+			set msg "ibisgen $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <TaskDef id ="Task_BitgenPOJOII" title ="BitgenPOJOII" lable="ASC Configuration File" depend_on_milestones="cmppojo,export:Task_JEDEC, export:Task_Bitgen">
+    <Target id ="target">
+      <Command using_def="Cmd_POJOBitGen"/>
+    </Target>
+    <Report using_def="Report_ASC_HEX"/>
+  </TaskDef>  
+</BaliFlowDef>

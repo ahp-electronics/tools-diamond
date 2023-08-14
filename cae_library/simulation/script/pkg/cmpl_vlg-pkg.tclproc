@@ -1,0 +1,337 @@
+# Copyright (c) 2012-2013 by Lattice Semiconductor Corporation
+# %HEADER%
+#
+proc cmpl_vlg {device} {
+
+upvar script_path script_path
+upvar target_path target_path
+#global script_path target_path
+
+switch $device {
+
+ec {
+#
+# Compile the EC/XP libraries
+#
+#exec echo Refreshing the EC/XP black-boxes... >$target_path/ec_vlg.log
+file delete -force $target_path/ec_vlg
+file copy $script_path/../blackbox/jtagb_work $target_path/ec_vlg
+exec vlog -refresh -work $target_path/ec_vlg >>$target_path/ec_vlg.log
+#
+#exec echo Compiling the EC/XP Verilog files... >>$target_path/ec_vlg.log
+set ec_list [open "$target_path/ec_vlg.f" w]
+set ec_files [glob "$script_path/../verilog/ec/*.v"]
+puts $ec_list "$ec_files"
+close $ec_list
+exec vlog -work $target_path/ec_vlg -f $target_path/ec_vlg.f >>$target_path/ec_vlg.log
+#exec vlog -work $target_path/ec_vlg $script_path/../verilog/ec/*.v >>$target_path/ec_vlg.log
+}
+
+ecp {
+#
+# Compile the ECP library
+#
+#exec echo Refreshing the ECP black-boxes... >$target_path/ecp_vlg.log
+file delete -force $target_path/ecp_vlg
+file copy $script_path/../blackbox/jtagb_work $target_path/ecp_vlg
+exec vlog -refresh -work $target_path/ecp_vlg >>$target_path/ecp_vlg.log
+#
+#exec echo Compiling the ECP Verilog files... >>$target_path/ecp_vlg.log
+set ecp_list [open "$target_path/ecp_vlg.f" w]
+set ecp_files [glob "$script_path/../verilog/ecp/*.v"]
+puts $ecp_list "$ecp_files"
+close $ecp_list
+exec vlog -work $target_path/ecp_vlg -f $target_path/ecp_vlg.f >>$target_path/ecp_vlg.log
+#exec vlog -work $target_path/ecp_vlg $script_path/../verilog/ecp/*.v >>$target_path/ecp_vlg.log
+}
+
+ecp2 {
+#
+# Compile the ECP2/M library
+#
+#exec echo Refreshing the ECP2/M black-boxes... >$target_path/ecp2_vlg.log
+file delete -force $target_path/ecp2_vlg
+file copy $script_path/../blackbox/jtagc_work $target_path/ecp2_vlg
+exec vlog -refresh -work $target_path/ecp2_vlg >>$target_path/ecp2_vlg.log
+#
+#exec echo Compiling the ECP2/M Verilog files... >>$target_path/ecp2_vlg.log
+set ecp2_list [open "$target_path/ecp2_vlg.f" w]
+set ecp2_files [glob "$script_path/../verilog/ecp2/*.v"]
+puts $ecp2_list "$ecp2_files"
+close $ecp2_list
+exec vlog -work $target_path/ecp2_vlg -f $target_path/ecp2_vlg.f >>$target_path/ecp2_vlg.log
+#exec vlog -work $target_path/ecp2_vlg $script_path/../verilog/ecp2/*.v >>$target_path/ecp2_vlg.log
+}
+
+ecp3 {
+#
+# Compile the ECP3 library
+#
+#exec echo Refreshing the ECP3 black-boxes... >$target_path/ecp3_vlg.log
+file delete -force $target_path/ecp3_vlg
+file copy $script_path/../blackbox/jtage_work $target_path/ecp3_vlg
+exec vlog -refresh -work $target_path/ecp3_vlg >>$target_path/ecp3_vlg.log
+#
+#exec echo Compiling the ECP3 Verilog files... >>$target_path/ecp3_vlg.log
+set ecp3_list [open "$target_path/ecp3_vlg.f" w]
+set ecp3_files [glob "$script_path/../verilog/ecp3/*.v"]
+puts $ecp3_list "$ecp3_files"
+close $ecp3_list
+exec vlog -work $target_path/ecp3_vlg -f $target_path/ecp3_vlg.f >>$target_path/ecp3_vlg.log
+#exec vlog -work $target_path/ecp3_vlg $script_path/../verilog/ecp3/*.v >>$target_path/ecp3_vlg.log
+}
+
+ecp5u {
+#
+# Compile the ECP5U/M library
+#
+#exec echo Refreshing the ECP5U/M black-boxes... >$target_path/ecp5u_vlg.log
+file delete -force $target_path/ecp5u_vlg
+file copy $script_path/../blackbox/ecp5u_black_boxes $target_path/ecp5u_vlg
+exec vlog -refresh -work $target_path/ecp5u_vlg >>$target_path/ecp5u_vlg.log
+#
+#exec echo Compiling the ECP5U/M Verilog files... >>$target_path/ecp5u_vlg.log
+set ecp5u_list [open "$target_path/ecp5u_vlg.f" w]
+set ecp5u_files [glob "$script_path/../verilog/ecp5u/*.v"]
+puts $ecp5u_list "$ecp5u_files"
+close $ecp5u_list
+exec vlog -work $target_path/ecp5u_vlg -f $target_path/ecp5u_vlg.f >>$target_path/ecp5u_vlg.log
+#exec vlog -work $target_path/ecp5u_vlg $script_path/../verilog/ecp5u/*.v >>$target_path/ecp5u_vlg.log
+}
+
+lptm {
+#
+# Compile the MACHXO/LPTM libraries
+#
+#exec echo Refreshing the MACHXO/LPTM black-boxes... >$target_path/lptm_vlg.log
+file delete -force $target_path/lptm_vlg
+file copy $script_path/../blackbox/jtagd_work $target_path/lptm_vlg
+exec vlog -refresh -work $target_path/lptm_vlg >>$target_path/lptm_vlg.log
+#
+#exec echo Compiling the MACHXO/LPTM Verilog files... >>$target_path/lptm_vlg.log
+set lptm_list [open "$target_path/lptm_vlg.f" w]
+set lptm_files [glob "$script_path/../verilog/lptm/*.v"]
+puts $lptm_list "$lptm_files"
+close $lptm_list
+exec vlog -work $target_path/lptm_vlg -f $target_path/lptm_vlg.f >>$target_path/lptm_vlg.log
+#exec vlog -work $target_path/lptm_vlg $script_path/../verilog/lptm/*.v >>$target_path/lptm_vlg.log
+}
+
+lptm2 {
+#
+# Compile the LPTM2 library
+#
+#exec echo Refreshing the LPTM2 black-boxes... >$target_path/lptm2_vlg.log
+file delete -force $target_path/lptm2_vlg
+file copy $script_path/../blackbox/lptm2_black_boxes $target_path/lptm2_vlg
+exec vlog -refresh -work $target_path/lptm2_vlg >>$target_path/lptm2_vlg.log
+#
+#exec echo Compiling the LPTM2 Verilog files... >>$target_path/lptm2_vlg.log
+set lptm2_list [open "$target_path/lptm2_vlg.f" w]
+set lptm2_files [glob "$script_path/../verilog/lptm2/*.v"]
+puts $lptm2_list "$lptm2_files"
+close $lptm2_list
+exec vlog -work $target_path/lptm2_vlg -f $target_path/lptm2_vlg.f >>$target_path/lptm2_vlg.log
+#exec vlog -work $target_path/lptm2_vlg $script_path/../verilog/lptm2/*.v >>$target_path/lptm2_vlg.log
+}
+
+machxo {
+#
+# Compile the MACHXO/LPTM libraries
+#
+#exec echo Refreshing the MACHXO/LPTM black-boxes... >$target_path/machxo_vlg.log
+file delete -force $target_path/machxo_vlg
+file copy $script_path/../blackbox/jtagd_work $target_path/machxo_vlg
+exec vlog -refresh -work $target_path/machxo_vlg >>$target_path/machxo_vlg.log
+#
+#exec echo Compiling the MACHXO/LPTM Verilog files... >>$target_path/machxo_vlg.log
+set machxo_list [open "$target_path/machxo_vlg.f" w]
+set machxo_files [glob "$script_path/../verilog/machxo/*.v"]
+puts $machxo_list "$machxo_files"
+close $machxo_list
+exec vlog -work $target_path/machxo_vlg -f $target_path/machxo_vlg.f >>$target_path/machxo_vlg.log
+#exec vlog -work $target_path/machxo_vlg $script_path/../verilog/machxo/*.v >>$target_path/machxo_vlg.log
+}
+
+machxo2 {
+#
+# Compile the MACHXO2 library
+#
+#exec echo Refreshing the MACHXO2 black-boxes... >$target_path/machxo2_vlg.log
+file delete -force $target_path/machxo2_vlg
+file copy $script_path/../blackbox/machxo2_black_boxes $target_path/machxo2_vlg
+exec vlog -refresh -work $target_path/machxo2_vlg >>$target_path/machxo2_vlg.log
+#
+#exec echo Compiling the MACHXO2 Verilog files... >>$target_path/machxo2_vlg.log
+set machxo2_list [open "$target_path/machxo2_vlg.f" w]
+set machxo2_files [glob "$script_path/../verilog/machxo2/*.v"]
+puts $machxo2_list "$machxo2_files"
+close $machxo2_list
+exec vlog -work $target_path/machxo2_vlg -f $target_path/machxo2_vlg.f >>$target_path/machxo2_vlg.log
+#exec vlog -work $target_path/machxo2_vlg $script_path/../verilog/machxo2/*.v >>$target_path/machxo2_vlg.log
+}
+
+machxo3l {
+#
+# Compile the MACHXO3L library
+#
+#exec echo Refreshing the MACHXO3L black-boxes... >$target_path/machxo3l_vlg.log
+file delete -force $target_path/machxo3l_vlg
+file copy $script_path/../blackbox/machxo3l_black_boxes $target_path/machxo3l_vlg
+exec vlog -refresh -work $target_path/machxo3l_vlg >>$target_path/machxo3l_vlg.log
+#
+#exec echo Compiling the MACHXO3L Verilog files... >>$target_path/machxo3l_vlg.log
+set machxo3l_list [open "$target_path/machxo3l_vlg.f" w]
+set machxo3l_files [glob "$script_path/../verilog/machxo3l/*.v"]
+puts $machxo3l_list "$machxo3l_files"
+close $machxo3l_list
+exec vlog -work $target_path/machxo3l_vlg -f $target_path/machxo3l_vlg.f >>$target_path/machxo3l_vlg.log
+#exec vlog -work $target_path/machxo3l_vlg $script_path/../verilog/machxo3l/*.v >>$target_path/machxo3l_vlg.log
+}
+
+sc {
+#
+# Compile the SC/M library
+#
+#exec echo Refreshing the SC/M black-boxes... >$target_path/sc_vlg.log
+file delete -force $target_path/sc_vlg
+file copy $script_path/../blackbox/jtaga_work $target_path/sc_vlg
+exec vlog -refresh -work $target_path/sc_vlg >>$target_path/sc_vlg.log
+#
+#exec echo Compiling the SC/M Verilog files... >>$target_path/sc_vlg.log
+set sc_list [open "$target_path/sc_vlg.f" w]
+set sc_files [glob "$script_path/../verilog/sc/*.v"]
+puts $sc_list "$sc_files"
+close $sc_list
+exec vlog -work $target_path/sc_vlg -f $target_path/sc_vlg.f >>$target_path/sc_vlg.log
+#exec vlog -work $target_path/sc_vlg $script_path/../verilog/sc/*.v >>$target_path/sc_vlg.log
+}
+
+scm {
+#
+# Compile the SC/M library
+#
+#exec echo Refreshing the SC/M black-boxes... >$target_path/scm_vlg.log
+file delete -force $target_path/scm_vlg
+file copy $script_path/../blackbox/jtaga_work $target_path/scm_vlg
+exec vlog -refresh -work $target_path/scm_vlg >>$target_path/scm_vlg.log
+#
+#exec echo Compiling the SC/M Verilog files... >>$target_path/scm_vlg.log
+set scm_list [open "$target_path/scm_vlg.f" w]
+set scm_files [glob "$script_path/../verilog/scm/*.v"]
+puts $scm_list "$scm_files"
+close $scm_list
+exec vlog -work $target_path/scm_vlg -f $target_path/scm_vlg.f >>$target_path/scm_vlg.log
+#exec vlog -work $target_path/scm_vlg $script_path/../verilog/scm/*.v >>$target_path/scm_vlg.log
+}
+
+xp {
+#
+# Compile the EC/XP libraries
+#
+#exec echo Refreshing the EC/XP black-boxes... >$target_path/xp_vlg.log
+file delete -force $target_path/xp_vlg
+file copy $script_path/../blackbox/jtagb_work $target_path/xp_vlg
+exec vlog -refresh -work $target_path/xp_vlg >>$target_path/xp_vlg.log
+#
+#exec echo Compiling the EC/XP Verilog files... >>$target_path/xp_vlg.log
+set xp_list [open "$target_path/xp_vlg.f" w]
+set xp_files [glob "$script_path/../verilog/xp/*.v"]
+puts $xp_list "$xp_files"
+close $xp_list
+exec vlog -work $target_path/xp_vlg -f $target_path/xp_vlg.f >>$target_path/xp_vlg.log
+#exec vlog -work $target_path/xp_vlg $script_path/../verilog/xp/*.v >>$target_path/xp_vlg.log
+}
+
+xp2 {
+#
+# Compile the XP2 library
+#
+#exec echo Refreshing the XP2 black-boxes... >$target_path/xp2_vlg.log
+file delete -force $target_path/xp2_vlg
+file copy $script_path/../blackbox/jtage_sspia_work $target_path/xp2_vlg
+exec vlog -refresh -work $target_path/xp2_vlg >>$target_path/xp2_vlg.log
+#
+#exec echo Compiling the XP2 Verilog files... >>$target_path/xp2_vlg.log
+set xp2_list [open "$target_path/xp2_vlg.f" w]
+set xp2_files [glob "$script_path/../verilog/xp2/*.v"]
+puts $xp2_list "$xp2_files"
+close $xp2_list
+exec vlog -work $target_path/xp2_vlg -f $target_path/xp2_vlg.f >>$target_path/xp2_vlg.log
+#exec vlog -work $target_path/xp2_vlg $script_path/../verilog/xp2/*.v >>$target_path/xp2_vlg.log
+}
+
+machxo3d {
+#
+# Compile the MACHXO3D library
+#
+exec echo Refreshing the MACHXO3D black-boxes... >$target_path/machxo3d_vlg.log
+file delete -force $target_path/machxo3d_vlg
+file copy $script_path/../blackbox/machxo3d_black_boxes $target_path/machxo3d_vlg
+exec vlog -refresh -work $target_path/machxo3d_vlg >>$target_path/machxo3d_vlg.log
+#
+exec echo Compiling the MACHXO3D Verilog files... >>$target_path/machxo3d_vlg.log
+set machxo3d_list [open "$target_path/machxo3d_vlg.f" w]
+set machxo3d_files [glob "$script_path/../verilog/machxo3d/*.v"]
+puts $machxo3d_list "$machxo3d_files"
+close $machxo3d_list
+exec vlog -work $target_path/machxo3d_vlg -f $target_path/machxo3d_vlg.f >>$target_path/machxo3d_vlg.log
+#exec vlog -work $target_path/machxo3d_vlg $script_path/../verilog/machxo3d/*.v >>$target_path/machxo3d_vlg.log
+}
+
+lifmd {
+#
+# Compile the LIFMD library
+#
+#exec echo Refreshing the LIFMD black-boxes... >$target_path/lifmd_vlg.log
+file delete -force $target_path/lifmd_vlg
+file copy $script_path/../blackbox/machxo3d_black_boxes $target_path/lifmd_vlg
+exec vlog -refresh -work $target_path/lifmd_vlg >>$target_path/lifmd_vlg.log
+#
+#exec echo Compiling the LIFMD Verilog files... >>$target_path/lifmd_vlg.log
+set lifmd_list [open "$target_path/lifmd_vlg.f" w]
+set lifmd_files [glob "$script_path/../verilog/lifmd/*.v"]
+puts $lifmd_list "$lifmd_files"
+close $lifmd_list
+exec vlog -work $target_path/lifmd_vlg -f $target_path/lifmd_vlg.f >>$target_path/lifmd_vlg.log
+#exec vlog -work $target_path/lifmd_vlg $script_path/../verilog/lifmd/*.v >>$target_path/lifmd_vlg.log
+}
+
+lifmdf {
+#
+# Compile the LIFMDF library
+#
+#exec echo Refreshing the LIFMDF black-boxes... >$target_path/lifmdf_vlg.log
+file delete -force $target_path/lifmdf_vlg
+file copy $script_path/../blackbox/machxo3d_black_boxes $target_path/lifmdf_vlg
+exec vlog -refresh -work $target_path/lifmdf_vlg >>$target_path/lifmdf_vlg.log
+#
+#exec echo Compiling the LIFMDF Verilog files... >>$target_path/lifmdf_vlg.log
+set lifmdf_list [open "$target_path/lifmdf_vlg.f" w]
+set lifmdf_files [glob "$script_path/../verilog/lifmdf/*.v"]
+puts $lifmdf_list "$lifmdf_files"
+close $lifmdf_list
+exec vlog -work $target_path/lifmdf_vlg -f $target_path/lifmdf_vlg.f >>$target_path/lifmdf_vlg.log
+#exec vlog -work $target_path/lifmdf_vlg $script_path/../verilog/lifmdf/*.v >>$target_path/lifmdf_vlg.log
+}
+
+lfmnx {
+#
+# Compile the LFMNX library
+#
+#exec echo Refreshing the LFMNX black-boxes... >$target_path/lfmnx_vlg.log
+file delete -force $target_path/lfmnx_vlg
+file copy $script_path/../blackbox/machxo3d_black_boxes $target_path/lfmnx_vlg
+exec vlog -refresh -work $target_path/lfmnx_vlg >>$target_path/lfmnx_vlg.log
+#
+#exec echo Compiling the LFMNX Verilog files... >>$target_path/lfmnx_vlg.log
+set lfmnx_list [open "$target_path/lfmnx_vlg.f" w]
+set lfmnx_files [glob "$script_path/../verilog/lfmnx/*.v"]
+puts $lfmnx_list "$lfmnx_files"
+close $lfmnx_list
+exec vlog -work $target_path/lfmnx_vlg -f $target_path/lfmnx_vlg.f >>$target_path/lfmnx_vlg.log
+#exec vlog -work $target_path/lfmnx_vlg $script_path/../verilog/lfmnx/*.v >>$target_path/lfmnx_vlg.log
+}
+
+}
+}

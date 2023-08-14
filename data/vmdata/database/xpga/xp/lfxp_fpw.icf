@@ -1,0 +1,230 @@
+-- ISC flow file for Lattice XP family 
+-- This flow does not contain looping
+-- Last Update: 06/25/2008
+-- Beta Version 2.0
+-- Family LatticeXP
+-- Device LFXP3C LFXP3E LFXP6C LFXP6E LFXP10C LFXP10C_ENG LFXP10E LFXP10E_ENG LFXP15C LFXP15E LFXP20C LFXP20E
+-- Attribute INSTRUCTION_OPCODE
+		"   ISC_ADDRESS_SHIFT		(00000001)," &
+		"              IDCODE		(00010110," &
+		"                    		 00011001," &
+		"                    		 00011101)," &
+		"             PRELOAD		(00011100)," &
+		"          ISC_ENABLE		(00010101)," &
+		"            ISC_READ		(01101010)," &
+		"     LSC_READ_STATUS		(10110010)," &
+		"    ISC_PROGRAM_DONE		(00101111)," &
+		"         ISC_DISABLE		(00011110)," &
+		"ISC_PROGRAM_USERCODE		(00011010)," &
+		"           ISC_ERASE		(00000011)," &
+		"   ISC_RESET_ADDRESS		(00100001)," &
+		"            ISC_NOOP		(00110000)," &
+		"         ISC_PROGRAM		(00000111)," &
+		"ISC_PROGRAM_SECURITY		(00001001)," &
+		"              SAMPLE		(00011100)," &
+		"               HIGHZ		(00011000)," &
+		"         LSC_REFRESH		(00100011)," &
+		"              BYPASS		(00011111," &
+		"                    		 00111111," &
+		"                    		 01111111," &
+		"                    		 11111111)," &
+		"      ISC_DATA_SHIFT		(00000010)," &
+		"       ISC_DISCHARGE		(00010100)," &
+		"            USERCODE		(00010111)," &
+		"      ISC_ERASE_DONE		(00100100)," &
+		"              EXTEST		(00000000)," &
+		"               CLAMP		(00100000)," &
+		"RESERVE	(00110011," &  -- IPTESTA
+			"		 00111000," &  -- IPB
+			"		 00110010," &  -- IPA
+			"		 00111001)," & -- IPTESTB
+		"PRIVATE	(00110101, 01010101, 00010001, 00101100, " &
+			"01100111, 00001010, 00001111, 00010000, " &
+			"00000100, 01010010, 01001010, 10000000, " &
+			"01110101, 01000111)";
+-- Attribute End
+-- Attribute REGISTER_ACCESS
+		"ISC_DEFAULT[1]		(ISC_ENABLE, " &
+		"			 ISC_DISABLE, " &
+		"			 ISC_PROGRAM_SECURITY, " &
+		"			 ISC_ERASE, " &
+		"			 ISC_DISCHARGE, " &
+		"			 ISC_ERASE_DONE, " &
+		"			 ISC_PROGRAM_DONE, " &
+		"			 ISC_NOOP, " &
+		"			 ISC_RESET_ADDRESS, " &
+		"			 LSC_READ_STATUS), " &
+		"ISC_ADDRESS[ADDRESS_REGISTER_LENGTH]		(ISC_ADDRESS_SHIFT), " &
+		"BYPASS		(HIGHZ, " &
+		"			 BYPASS, " &
+		"			 CLAMP, " &
+		"			 LSC_REFRESH), " &
+		"ISC_DATA[DEVICE_ROW_WIDTH]		(ISC_DATA_SHIFT), " &
+		"BOUNDARY		(EXTEST, " &
+		"			 SAMPLE, " &
+		"			 PRELOAD), " &
+		"DEVICE_ID		(IDCODE, " &
+		"			 USERCODE, " &
+		"			 ISC_PROGRAM_USERCODE), " &
+		"ISC_PDATA[DEVICE_ROW_WIDTH]		(ISC_PROGRAM, " &
+		"			 ISC_READ)"; 
+-- Attribute End
+-- Variable ID_DATA
+-- Variable BSCAN_REGISTER_LENGTH
+-- Variable ADDRESS_REGISTER_LENGTH
+-- Variable ADDRESS_REGISTER_VALUE
+-- Variable DEVICE_ROW_WIDTH
+-- Variable BSCAN_REGISTER_VALUE
+-- Start
+
+	attribute ISC_Pin_Behavior of DEVICE_NAME : entity is "CLAMP";
+
+	attribute ISC_Status of DEVICE_NAME : entity is "Not Implemented";
+
+	attribute ISC_Blank_Usercode of DEVICE_NAME : entity is
+		"11111111111111111111111111111111";
+
+-----------------------------
+--  ISC_Flow Descriptions    
+-----------------------------
+	attribute ISC_Flow of DEVICE_NAME : entity is
+
+		"flow_verify(idcode) " &
+			"Initialize " &
+			"  (IDCODE wait TCK 1 32:ID_DATA )," &
+
+		"flow_enable " &
+			"Initialize " &
+			"  (ISC_ENABLE  wait TCK 5, 20.0e-3)," &
+
+		"flow_erase " &
+			"Initialize " &
+			"  (ISC_ERASE_DONE  wait TCK 5, 5.0e-0) " &
+			"  (ISC_ERASE       wait TCK 5, 85.0e-0), " &
+
+		"flow_verify(status) " &
+			"Initialize " &
+			"  (LSC_READ_STATUS  wait TCK 5, 1.0e-3 1:0*1), "&
+			
+		"flow_preload " &
+			"Initialize " &
+			"  (SAMPLE BSCAN_REGISTER_LENGTH:BSCAN_REGISTER_VALUE wait TCK 1 )," &
+
+		"flow_program(array) " &
+			"Initialize " &
+		      "(ISC_ADDRESS_SHIFT ADDRESS_REGISTER_LENGTH:$addr= "&
+		      "ADDRESS_REGISTER_VALUE"&
+		      " WAIT TCK 1) "&
+			"Repeat ADDRESS_REGISTER_LENGTH " &
+		      "(ISC_DATA_SHIFT    DEVICE_ROW_WIDTH:?        WAIT TCK 1) "&
+		      "(ISC_PROGRAM                     wait TCK 5, 25.0e-3) "&
+		      "(ISC_ADDRESS_SHIFT ADDRESS_REGISTER_LENGTH:$addr>>1 WAIT TCK 1), "&
+
+		"flow_verify(array) " &
+			"Initialize " &
+			"  (ISC_RESET_ADDRESS  wait TCK 5, 1.0e-3 )" &
+			"Repeat ADDRESS_REGISTER_LENGTH " &
+			"  (ISC_READ wait TCK 5, 1.0e-3 DEVICE_ROW_WIDTH:?:CRC)," &
+
+		"flow_read(array) " &
+			"Initialize " &
+			"  (ISC_RESET_ADDRESS  wait TCK 5, 1.0e-3 )" &
+			"Repeat ADDRESS_REGISTER_LENGTH " &
+			"  (ISC_READ wait TCK 5, 1.0e-3 DEVICE_ROW_WIDTH:!:CRC)," &
+
+		"flow_program(usercode) " &
+			"Initialize " &
+			"  (ISC_PROGRAM_USERCODE 32:? wait TCK 5, 25.0e-3)," &
+			
+		"flow_verify(usercode) " &
+			"Initialize " &
+			"  (USERCODE wait TCK 1 32:? )," &
+
+		"flow_read(usercode) " &
+			"Initialize " &
+			"  (USERCODE wait TCK 1 32:! )," &
+
+		"flow_program_security " &
+			"Initialize " &
+			"  (ISC_PROGRAM_SECURITY wait TCK 5, 50.0e-3)," &
+			
+		"flow_disable " &
+			"Initialize " &
+			"  (ISC_DISABLE  wait TCK 5, 200.0e-3) "&
+			"  (BYPASS       wait TCK 5, 1.0e-3), "&
+
+		"flow_program_done " &
+			"Initialize " &
+			"  (ISC_PROGRAM_DONE wait TCK 5, 200.0e-3)";
+
+-----------------------------
+--  ISC_Procdeure Descriptions    
+-----------------------------
+	attribute ISC_Procedure of DEVICE_NAME : entity is
+
+		"proc_verify(idcode)     = (flow_verify(idcode)), " &
+		"proc_verify(status)     = (flow_verify(status)), " &
+		"proc_enable             = (flow_enable), " &
+		"proc_disable            = (flow_disable), " &
+		"proc_program(array)     = (flow_program(array)), " &
+		"proc_verify(array)      = (flow_verify(array)), " &
+		"proc_erase              = (flow_erase), " &
+		"proc_read(array)        = (flow_read(array)), " &
+		"proc_program(usercode)  = (flow_program(usercode)), " &
+		"proc_verify(usercode)   = (flow_verify(usercode)), " &
+		"proc_read(usercode)     = (flow_read(usercode)), " &
+		"proc_program_done       = (flow_program_done), " &
+		"proc_error_exit         = (flow_disable), " &
+		"proc_preload            = (flow_preload), " &
+		"proc_program(security)  = (flow_program_security)";
+
+-----------------------------
+--  ISC_Action Descriptions    
+-----------------------------
+	attribute ISC_Action of DEVICE_NAME : entity is
+
+		"erase          = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_erase, " &
+		"           proc_verify(status), " &
+		"           proc_disable), " &
+		"program        = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_erase, " &
+		"           proc_verify(status), " &
+		"           proc_program(array), " &
+		"           proc_program(usercode), " &
+		"           proc_verify(status), " &
+		"           proc_verify(array), " &
+		"           proc_verify(usercode), " &
+		"           proc_program(security) optional, " &
+		"           proc_verify(status), " &
+		"           proc_program_done, " &
+		"           proc_disable), " &
+		"verify         = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_verify(array), " &
+		"           proc_verify(usercode), " &
+		"           proc_disable), " &
+		"read           = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_read(array) proprietary, " &
+		"           proc_read(usercode), " &
+		"           proc_disable), " &
+		"verify_idcode  = ( proc_verify(idcode)), " &
+		"secure         = ( proc_verify(idcode) recommended, " &
+		"           proc_preload recommended, " &
+		"           proc_enable, " &
+		"           proc_program(security), " &
+		"           proc_disable) ";
+		
+attribute DESIGN_WARNING of DEVICE_NAME : entity is
+    "This ISC BSDL file uses a fixed pulse width programming algorithm" &
+    "and will result in very long erase and programming times." &
+    " " &
+    "The SLEEPN pin is used to put the device in Sleep mode." &
+    "It must be High throughout the entire BSCAN testing.";		

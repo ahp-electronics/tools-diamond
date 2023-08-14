@@ -1,0 +1,61 @@
+library verilog;
+use verilog.vl_types.all;
+entity ulogic_mr is
+    generic(
+        H_IDLE          : integer := 0;
+        H_HALT          : integer := 3;
+        H_SREQ          : integer := 5;
+        H_SIDL          : integer := 17;
+        H_SNSQ          : integer := 21;
+        H_SSEQ          : integer := 23;
+        H_BRTY          : integer := 9;
+        H_BNBS          : integer := 27;
+        H_BSBS          : integer := 11;
+        H_BREQ          : integer := 13;
+        H_BWRP          : integer := 29;
+        H_BSEQ          : integer := 15;
+        FM_OK           : integer := 1;
+        FM_RT           : integer := 3;
+        FM_ER           : integer := 5;
+        FM_SR           : integer := 0;
+        FM_SW           : integer := 8;
+        FM_BR           : integer := 16;
+        FM_BO           : integer := 17;
+        FM_BW           : integer := 24;
+        FM_FR           : integer := 2;
+        FM_FE           : integer := 4;
+        FM_RE           : integer := 20;
+        FM_WE           : integer := 28
+    );
+    port(
+        HCLK            : in     vl_logic;
+        HRESET_N        : in     vl_logic;
+        HREADY          : in     vl_logic;
+        HRESP           : in     vl_logic_vector(1 downto 0);
+        HGRANT_USR      : in     vl_logic;
+        HADDR_USR       : out    vl_logic_vector(17 downto 0);
+        HTRANS_USR      : out    vl_logic_vector(1 downto 0);
+        HWRITE_USR      : out    vl_logic;
+        HSIZE_USR       : out    vl_logic_vector(1 downto 0);
+        HBURST_USR      : out    vl_logic;
+        HWDATA_USR      : out    vl_logic_vector(35 downto 0);
+        HRDATA          : in     vl_logic_vector(35 downto 0);
+        HBUSREQ_USR     : out    vl_logic;
+        HLOCK_USR       : out    vl_logic;
+        MC1_USR_MR      : in     vl_logic_vector(1 downto 0);
+        MRESET_N        : in     vl_logic;
+        FMCLK           : in     vl_logic;
+        FMADDR          : in     vl_logic_vector(17 downto 0);
+        FMWDATA         : in     vl_logic_vector(35 downto 0);
+        FMWRN           : in     vl_logic;
+        FMBURST         : in     vl_logic;
+        FMSIZE          : in     vl_logic_vector(1 downto 0);
+        FMLOCK          : in     vl_logic;
+        FMRDY           : in     vl_logic;
+        FMRETRY         : out    vl_logic;
+        FMACK           : out    vl_logic;
+        FMRDATA         : out    vl_logic_vector(35 downto 0);
+        FMERR           : out    vl_logic;
+        FMSCAN          : in     vl_logic
+    );
+end ulogic_mr;

@@ -1,0 +1,779 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<SVF_Plus version="1.0">
+<!-- Revision History   -->
+<!-- 04/18/02 Changed Enable from three enable instructions to a single instr. 
+              Changed IDCODE instr. from 0x15 to 0x16.
+     04/23/02 Changed name from LSC_JEVEN.svp tp JEVEN.svp
+     10/27/03 Nguyen added support of Comment "!"
+-->
+
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1">
+	</Interface>
+</Setup>
+<Parameter>
+	<!-- Length fields are in number if bits -->
+	<Instruction_Length value="INSTRUCTION_REGISTER_LENGTH"/> 
+	<Row_Width			value="DEVICE_ROW_WIDTH"/> 
+	<Address_Length		value="ADDRESS_REGISTER_LENGTH"/> 
+	<Address length="ADDRESS_LENGTH">
+		INI_ADDRESS			
+	</Address>
+	<ID_Length 			value="DEVICE_ID_LENGTH"/>
+	<Usercode_Length 	value="DEVICE_USERCODE_LENGTH"/>
+	<PWP	value="PROGRAMING_PULSE_WIDTH"/>
+	<PWV	value="VERIFY_PULSE_WIDTH"/>
+	<PWE	value="ERASE_PULSE_WIDTH"/>
+	<Instruction>
+		ADDSHIFT	= 0x01;
+		DATASHIFT 	= 0x02;
+		UBERASE 	= 0x03;
+		PRGM_HIGH 	= 0x07;
+		PRGM_LOW 	= 0x08;
+		PRGM_SEC 	= 0x09;
+		VER_HIGH 	= 0x0A;
+		VER_LOW 	= 0x0B;
+		PRGM_PES 	= 0x0F;
+		ERASE_ALL 	= 0x10;
+		VER_PES 	= 0x11;
+		VER_HIGH_ERASE	= 0x12;
+		VER_LOW_ERASE 	= 0x13;
+		PRGM_EN 	= 0x15;
+		PRGM_DIS 	= 0x1E;
+		IDCODE 		= 0x16;
+		PRGM_USERCODE = 0x1A;
+		VERIFY_USRECODE = 0x17;
+		BYPASS	 	= 0x1F;
+	</Instruction>
+</Parameter>
+<Data>
+	<DataField	name="IDTDI">
+		<FieldBlock	row_width="DEVICE_ID_LENGTH">
+			ID_DATA
+		</FieldBlock>
+	</DataField>
+</Data>
+<Operation_List>
+	"Read and Save JEDEC"	=	"INIT, SAVE_ID, ENABLE, SAVE_ARRAY, SAVE_USERCODE, DISABLE";
+	"Calculate Checksum"	=	"INIT, SAVE_ID, ENABLE, SAVE_ARRAY, SAVE_USERCODE, DISABLE";
+	
+	"Erase,Program,Verify" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								ENABLE	! Enable the programming mode, 
+								ERASE	! Erase the device, 
+								FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+											PROGRAM_USERCODE	! Program USERCODE,
+											FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+							PROGRAM_USERCODE		! Program USERCODE,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							ENABLE	! Enable the programming mode, 
+							FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"INIT, READ_ID, SAVE_ID";
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								ENABLE	! Enable the programming mode,
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 
+	"Display USERCODE"	=	"INIT, READ_ID, ENABLE, SAVE_USERCODE, DISABLE";
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	
+	"Bypass"	=	"	INIT 	! Initialize"	;
+	"Re-Initialize" = "	INIT 	! Initialize,  
+						ENABLE	! Enable the programming mode, 
+						ERASE	! Erase the device, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"Disable Only" = "	INIT 	! Initialize,  
+ 			 			DISABLE ! Exit the programming mode"	;
+	
+</Operation_List>
+<Operation_List label="SingleSVFOperation">
+	"Read and Save JEDEC"	=	"	SVFINIT 	! Initialize, 
+									READ_ID		! Check the IDCODE, 
+									ENABLE	! Enable the programming mode, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_USERCODE	! Read USERCODE,  
+				 			 		DISABLE ! Exit the programming mode"	;
+	"Calculate Checksum"	=	"	SVFINIT 	! Initialize, 
+									READ_ID		! Check the IDCODE, 
+									ENABLE	! Enable the programming mode, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_USERCODE	! Read USERCODE,  
+				 			 		DISABLE ! Exit the programming mode"	;
+	
+	"Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								ENABLE	! Enable the programming mode, 
+								ERASE	! Erase the device, 
+								FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	SVFINIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+											PROGRAM_USERCODE	! Program USERCODE,
+											FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+							PROGRAM_USERCODE		! Program USERCODE,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							ENABLE	! Enable the programming mode, 
+							FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"SVFINIT	! Initialize,
+					 SVF_SAVE_ID	! Read the IDCODE";
+	"Display USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								ENABLE	! Enable the programming mode,
+								SVF_SAVE_USERCODE		! Read USERCODE,
+								DISABLE ! Exit the programming mode"	;
+	"Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								ENABLE	! Enable the programming mode,
+								VERIFY_USERCODE		! Verify USERCODE, 
+								DISABLE ! Exit the programming mode"	;
+	"Erase Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	
+	"Bypass"	=	"	SVFINIT 	! Initialize"	;
+	"Disable Only" = "	SVFINIT 	! Initialize,  
+ 			 			DISABLE ! Exit the programming mode"	;
+ 	"Re-Initialize" = "	SVFINIT 	! Initialize,  
+						ENABLE	! Enable the programming mode, 
+						ERASE	! Erase the device, 
+	 			 		DISABLE ! Exit the programming mode"	;
+</Operation_List>
+<Operation_List label="TurboOperation">
+	"Read and Save JEDEC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"Calculate Checksum"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	
+	"Erase,Program,Verify" = "	INIT 	! Initialize, 
+								ERASE	! Erase the device, 
+								FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											ERASE	! Erase the device, 
+											FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+											PROGRAM_USERCODE	! Program USERCODE,
+											FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							ERASE	! Erase the device, 
+							FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+							PROGRAM_USERCODE		! Program USERCODE"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"INIT, READ_ID, SAVE_ID";
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								ENABLE	! Enable the programming mode,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"Display USERCODE"	=	"INIT, READ_ID, ENABLE, SAVE_USERCODE";
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+	
+	"Bypass"	=	"	INIT 	! Initialize"	;
+	"Re-Initialize" = "	INIT 	! Initialize,  
+						ENABLE	! Enable the programming mode, 
+						ERASE	! Erase the device"	;
+	"Disable Only" = "	INIT 	! Initialize,  
+ 			 			DISABLE ! Exit the programming mode"	;
+ 	"Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						ENABLE	! Enable the programming mode" ;
+							
+	
+</Operation_List>
+<Operation_List label="ChainSVFOperation">
+	"Read and Save JEDEC"	=	"	SVFINIT 	! Initialize,
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_USERCODE	! Read USERCODE"	;
+	"Calculate Checksum"	=	"	SVFINIT 	! Initialize, 
+									SVF_SAVE_ARRAY ! Read Fuse Map,
+									SVF_SAVE_USERCODE	! Read USERCODE"	;
+	
+	"Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								ERASE	! Erase the device, 
+								FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"Erase,Program,Verify,Secure"	=	"	SVFINIT 	! Initialize,
+											ERASE	! Erase the device, 
+											FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+											PROGRAM_USERCODE	! Program USERCODE,
+											FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device"	;
+	"Program Only"	=	"	SVFINIT 	! Initialize,
+							ERASE	! Erase the device, 
+							FULL_ADDRESS_PROGRAM	! Full Address Program Fuse Map,
+							PROGRAM_USERCODE		! Program USERCODE"	;
+	"Verify Only"	=	"	SVFINIT 	! Initialize, 
+							FULL_ADDRESS_VERIFY	! Full Address Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"SVFINIT	! Initialize,
+					 SVF_SAVE_ID	! Read the IDCODE";
+	"Display USERCODE"	=	"	SVFINIT 	! Initialize,
+								SVF_SAVE_USERCODE		! Read USERCODE"	;
+	"Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"Erase Only"	=	"	SVFINIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+
+	"Bypass"	=	"	SVFINIT 	! Initialize"	;
+	"Disable Only" = "	SVFINIT 	! Initialize,  
+ 			 			DISABLE ! Exit the programming mode"	;
+ 	"Re-Initialize" = "	SVFINIT 	! Initialize,  
+						ENABLE	! Enable the programming mode, 
+						ERASE	! Erase the device"	;
+	"Enable Only" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						ENABLE	! Enable the programming mode" ;
+</Operation_List>
+<Script>
+<![CDATA[
+function INIT {
+	! Row_Width	  : DEVICE_ROW_WIDTH; 
+	! Address_Length : ADDRESS_REGISTER_LENGTH; 
+	HDR HDR_LENGTH TDI(HDR_PATTERN);
+	HIR HIR_LENGTH TDI(HIR_PATTERN);
+	TDR TDR_LENGTH TDI(TDR_PATTERN);
+	TIR TIR_LENGTH TDI(TIR_PATTERN);
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+}
+
+function SVFINIT {
+	! Row_Width	  : DEVICE_ROW_WIDTH; 
+	! Address_Length : ADDRESS_REGISTER_LENGTH; 
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+}
+
+function ENABLE {
+	! Shift in ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (PRGM_EN);
+	RUN_TEST	TCK 3
+			DELAY 20;
+	
+}
+function DISABLE {
+	! Shift in DISABLE(0x1E) instruction;
+	SIR	Instruction_Length 	TDI (PRGM_DIS);
+	RUN_TEST	TCK 3
+			DELAY 1E-1;
+}
+function READ_ID {
+	! Shift in IDCODE(0x16) instruction;
+	SIR Instruction_Length 	TDI (IDCODE);
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+					TDO	(IDTDI[1])
+					MASK (DEVICE_ID_MASK);
+}
+function ERASE {
+	! Shift in ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (UBERASE);
+	RUN_TEST 	TCK 3 DELAY PWE;
+}
+
+// Program Functions _____________________________________________
+function PROGRAM {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+
+	! Shift in ADDRESS SHIFT(0x01) instruction;
+	SIR Instruction_Length	TDI (ADDSHIFT);
+	// Shift in intial address 
+	SDR	Address_Length	TDI (Address);
+	// Program the rest of the device
+	repeat Address_Length -1{
+		! Shift in DATA SHIFT(0x02) instruction;
+		SIR Instruction_Length 	TDI (DATASHIFT);	
+		! Shift in Row = RowCount;
+		SDR	Row_Width	TDI	(FuseArray_TDI);
+		! Shift in PROGRAM(0x07) instruction;
+		SIR Instruction_Length	TDI (PRGM_HIGH);
+		// Goto Run Test Idle
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		! Shift in ADDRESS SHIFT(0x01) instruction; 
+		SIR Instruction_Length	TDI (ADDSHIFT);
+		// Exclusive Shift address by one bit 
+		ESDR	1	TDI (#0);
+		RowCount = RowCount + 1;
+	} // repeat
+	! Shift in DATA SHIFT(0x02) instruction;
+	SIR Instruction_Length 	TDI (DATASHIFT);	
+	! Shift in Row = RowCount;
+	SDR	Row_Width	TDI	(FuseArray_TDI);
+	! Shift in PROGRAM(0x07) instruction;
+	SIR Instruction_Length	TDI (PRGM_HIGH);
+	// Goto Run Test Idle
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+}
+
+function	PROGRAM_VERIFY	{
+	int32	Row = 1;
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;
+	! Shift in ADDRESS SHIFT(0x01) instruction;  
+	SIR Instruction_Length 	TDI	(ADDSHIFT);
+	// Shift in intial address 
+	SDR	Address_Length	TDI (Address);
+	! Shift in DATA SHIFT(0x02) instruction; 
+	SIR Instruction_Length	TDI (DATASHIFT);
+	! Shift in Data Row = RowCount;
+	SDR	Row_Width	TDI	(FuseArray_TDI[Row]);
+	! Shift in PROGRAM(0x07) instruction; 
+	SIR Instruction_Length	TDI	(PRGM_HIGH);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+	! Shift in VERIFY(0x0A) instruction;
+	SIR Instruction_Length	TDI	(VER_HIGH);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	// Program the rest of the device
+	repeat Address_Length - 1	{
+		! Shift in ADDRESS SHIFT(0x01) instruction;  
+		SIR Instruction_Length	TDI	(ADDSHIFT);
+		// Exclusive Shift address by one bit 
+		ESDR	1	TDI (#0);
+		! Shift in DATA SHIFT(0x02) instruction;
+		SIR Instruction_Length	TDI	(DATASHIFT);
+		RowCount = RowCount + 1;
+		! Shift in out Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(FuseArray_TDI[Row+1])
+								TDO (FuseArray_TDI[Row]);
+		Row = Row + 1;
+		! Shift in PROGRAM(0x07) instruction;  
+		SIR Instruction_Length	TDI (PRGM_HIGH);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		! Shift in VERIFY(0x0A) instruction; 
+		SIR Instruction_Length	TDI	(VER_HIGH);
+		// Goto Run Test Idle
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+	}
+}
+
+function PROGRAM_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+		! Shift in READ USERCODE(0x17) instruction; 
+		SIR Instruction_Length	TDI (VERIFY_USRECODE);
+		SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+		! Shift in PROGRAM USERCODE(0x1A) instruction;
+		SIR Instruction_Length	TDI	(PRGM_USERCODE);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+	}
+}
+
+function PROGRAM_SECURITY {
+	! Shift in PROGRAM SECURITY(0x09) instruction;  
+	SIR Instruction_Length	TDI	(PRGM_SEC);
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+	STATE IDLE;
+}
+
+// Verify Functions _____________________________________________
+function VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;	
+	! Shift in ADDRESS SHIFT(0x01) instruction;
+	SIR Instruction_Length TDI (ADDSHIFT);
+	// Shift in intial address 
+	SDR	Address_Length TDI (Address[1]);
+	// Verify the device 
+	repeat Address_Length -1 {
+		! Shift in VERIFY(0x0A) instruction; 
+		SIR Instruction_Length TDI (VER_HIGH);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+
+		! Shift Out Data Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+								TDO	(FuseArray_TDI);
+		! Shift in ADDRESS SHIFT(0x01) instruction; 
+		SIR Instruction_Length TDI (ADDSHIFT);
+		// Exclusive Shift address by one bit 
+		ESDR	1	TDI (#0);
+		RowCount = RowCount +1;
+	}
+	! Shift in VERIFY(0x0A) instruction;
+	SIR Instruction_Length TDI (VER_HIGH);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+
+	! Shift Out Data Row = RowCount;
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO	(FuseArray_TDI);
+}
+
+function VERIFY_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+		! Shift in READ USERCODE(0x17) instruction; 
+		SIR Instruction_Length TDI (VERIFY_USRECODE);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+		! Shift in READ USERCODE(0x17) instruction;
+		SIR Instruction_Length TDI (VERIFY_USRECODE);
+		SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+									TDO	(Usercode_TDI);
+	}
+}
+
+// Read n Save Functions _____________________________________________ 
+function SAVE_ID	{
+	datastream SavedID[1][ID_Length];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in IDCODE(0x16) instruction;
+	SIR Instruction_Length	TDI	(IDCODE);
+	// Shift out ID 
+	SDR	ID_Length	TDI (#1^ID_Length)
+					TDO	(SavedID);
+	// Goto Run Test Idle 
+	STATE IDLE;
+	
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedID);
+	fclose 	NewFile;
+}
+function SVF_SAVE_ID	{
+	! Shift in IDCODE(0x16) instruction;
+	SIR Instruction_Length 	TDI (IDCODE);
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+							TDO	(IDTDI[1])
+							MASK (#0^ID_Length);
+}
+function SAVE_ARRAY {
+	int32	RowCount = 1;
+	datastream SavedFuseMap[Address_Length][Row_Width];
+	file NewFile = "FILE_SAVE";
+
+	! Shift in ADDRESS SHIFT(0x01) instruction;
+	SIR Instruction_Length	TDI (ADDSHIFT);
+	// Shift in intial address 
+	SDR	Address_Length TDI	(Address[1]);
+
+	repeat Address_Length -1{
+		! Shift in VERIFY(0x0A) instruction; 
+		SIR Instruction_Length	TDI	(VER_HIGH);
+		// Goto Run Test Idle
+		RUN_TEST	TCK 	3
+						DELAY 	PWV;
+
+		! Shift Out Data Row = RowCount;
+		SDR Row_Width 	TDI (#1^Row_Width)
+						TDO (SavedFuseMap);
+		! Shift in ADDRESS SHIFT(0x01) instruction;
+		SIR Instruction_Length	TDI	(ADDSHIFT);
+		// Exclusive Shift address by one bit 
+		ESDR	1	TDI (#0);
+		RowCount = RowCount +1;
+	}
+	! Shift in VERIFY(0x0A) instruction; 
+	SIR Instruction_Length	TDI	(VER_HIGH);
+	// Goto Run Test Idle
+	RUN_TEST	TCK 	3
+					DELAY 	PWV;
+
+	! Shift Out Data Row = RowCount;
+	SDR Row_Width 	TDI (#1^Row_Width)
+					TDO (SavedFuseMap);
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+	fclose 	NewFile;
+}
+function SVF_SAVE_ARRAY {
+	int32	RowCount = 1;
+	Address.row = 1;	
+	! Shift in ADDRESS SHIFT(0x01) instruction;
+	SIR Instruction_Length TDI (ADDSHIFT);
+	// Shift in intial address 
+	SDR	Address_Length TDI (Address[1]);
+	// Verify the device 
+	repeat Address_Length -1{
+		! Shift in VERIFY(0x0A) instruction; 
+		SIR Instruction_Length TDI (VER_HIGH);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+
+		! Shift Out Data Row = RowCount;  
+		SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+								TDO	(#1^Row_Width)
+								MASK(#0^Row_Width);
+		! Shift in ADDRESS SHIFT(0x01) instruction;
+		SIR Instruction_Length	TDI	(ADDSHIFT);
+		// Shift Address to the left by 1 bit
+		Address[1] = Address[1] >> 1;
+		// Shift Full address
+		SDR	Address_Length	TDI	(Address[1]);
+		RowCount = RowCount +1;
+	}
+	! Shift in VERIFY(0x0A) instruction; 
+	SIR Instruction_Length TDI (VER_HIGH);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+
+	! Shift Out Data Row = RowCount;  
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO	(#1^Row_Width)
+							MASK(#0^Row_Width);
+	Address[1] = #1@(#0^(Address_Length-1));
+}
+function SAVE_USERCODE {
+	datastream SavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	! Shift in READ USERCODE(0x17) instruction;
+	SIR Instruction_Length	TDI (VERIFY_USRECODE);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	! Shift in READ USERCODE(0x17) instruction; 
+	SIR Instruction_Length	TDI (VERIFY_USRECODE);
+	SDR	Usercode_Length	TDI(#1^Usercode_Length)
+						TDO(SavedUsercode);
+	STATE IDLE;
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (Usercode_TDI, SavedUsercode);
+	fclose 	NewFile;
+}
+function SVF_SAVE_USERCODE {
+	! Shift in READ USERCODE(0x17) instruction; 
+	SIR Instruction_Length TDI (VERIFY_USRECODE);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	! Shift in READ USERCODE(0x17) instruction;
+	SIR Instruction_Length TDI (VERIFY_USRECODE);
+	SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+								TDO	(#1^Usercode_Length)
+								MASK(#0^Usercode_Length);
+	STATE IDLE;
+}
+//////////////////////////////////////////////////////////////////////
+// Full Address Operation
+// Program Functions _____________________________________________
+function FULL_ADDRESS_PROGRAM {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+
+	! Shift in ADDRESS SHIFT(0x01) instruction;
+	SIR Instruction_Length	TDI (ADDSHIFT);
+	// Shift in intial address 
+	SDR	Address_Length	TDI (Address);
+	// Program the rest of the device
+	repeat Address_Length -1{
+		! Shift in DATA SHIFT(0x02) instruction; 
+		SIR Instruction_Length 	TDI (DATASHIFT);	
+		! Shift in Data Row = RowCount;
+		SDR	Row_Width	TDI	(FuseArray_TDI);
+		! Shift in PROGRAM(0x07) instruction;
+		SIR Instruction_Length	TDI (PRGM_HIGH);
+		// Goto Run Test Idle
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		! Shift in ADDRESS SHIFT(0x01) instruction;
+		SIR Instruction_Length	TDI	(ADDSHIFT);
+		// Shift Address to the left by 1 bit
+		Address[1] = Address[1] >> 1;
+		// Shift Full address
+		SDR	Address_Length	TDI	(Address[1]);
+		RowCount = RowCount +1;
+	} // repeat
+	! Shift in DATA SHIFT(0x02) instruction;
+	SIR Instruction_Length 	TDI (DATASHIFT);	
+	! Shift in Data Row = RowCount;
+	SDR	Row_Width	TDI	(FuseArray_TDI);
+	! Shift in PROGRAM(0x07) instruction;
+	SIR Instruction_Length	TDI (PRGM_HIGH);
+	// Goto Run Test Idle
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+	Address[1] = #1@(#0^(Address_Length-1));
+}
+
+// Verify Functions _____________________________________________
+function FULL_ADDRESS_VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;	
+	! Shift in ADDRESS SHIFT(0x01) instruction; 
+	SIR Instruction_Length TDI (ADDSHIFT);
+	// Shift in intial address 
+	SDR	Address_Length TDI (Address[1]);
+	// Verify the device 
+	repeat Address_Length -1{
+		! Shift in VERIFY(0x0A) instruction;
+		SIR Instruction_Length TDI (VER_HIGH);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+
+		! Shift Out Data Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+								TDO	(FuseArray_TDI);
+		! Shift in ADDRESS SHIFT(0x01) instruction;
+		SIR Instruction_Length	TDI	(ADDSHIFT);
+		// Shift Address to the left by 1 bit
+		Address[1] = Address[1] >> 1;
+		// Shift Full address
+		SDR	Address_Length	TDI	(Address[1]);
+		RowCount = RowCount +1;
+	}
+	! Shift in VERIFY(0x0A) instruction; 
+	SIR Instruction_Length TDI (VER_HIGH);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+
+	! Shift Out Data Row = RowCount;
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO	(FuseArray_TDI);
+	Address[1] = #1@(#0^(Address_Length-1));
+}
+
+function	FULL_ADDRESS_PROGRAM_VERIFY	{
+	int32	Row = 1;
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;
+	! Shift in ADDRESS SHIFT(0x01) instruction;
+	SIR Instruction_Length 	TDI	(ADDSHIFT);
+	// Shift in intial address 
+	SDR	Address_Length	TDI (Address);
+	! Shift in DATA SHIFT(0x02) instruction;
+	SIR Instruction_Length	TDI (DATASHIFT);
+	! Shift in Data Row = RowCount;
+	SDR	Row_Width	TDI	(FuseArray_TDI[Row]);
+	! Shift in PROGRAM(0x07) instruction; 
+	SIR Instruction_Length	TDI	(PRGM_HIGH);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+	! Shift in VERIFY(0x0A) instruction; 
+	SIR Instruction_Length	TDI	(VER_HIGH);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	// Program the rest of the device
+	repeat Address_Length - 1	{
+		! Shift in ADDRESS SHIFT(0x01) instruction; 
+		SIR Instruction_Length	TDI	(ADDSHIFT);
+		// Shift Address to the left by 1 bit
+		Address[1] = Address[1] >> 1;
+		// Shift Full address
+		SDR	Address_Length	TDI	(Address[1]);
+
+		! Shift in DATA SHIFT(0x02) instruction;
+		SIR Instruction_Length	TDI	(DATASHIFT);
+		RowCount = RowCount + 1;
+		! Shift in out Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(FuseArray_TDI[Row+1])
+								TDO (FuseArray_TDI[Row]);
+		Row = Row + 1;
+		! Shift in PROGRAM(0x07) instruction;
+		SIR Instruction_Length	TDI (PRGM_HIGH);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		! Shift in VERIFY(0x0A) instruction; 
+		SIR Instruction_Length	TDI	(VER_HIGH);
+		// Goto Run Test Idle
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+	}
+	! Shift in DATA SHIFT(0x02) instruction;
+	SIR Instruction_Length	TDI	(DATASHIFT);
+	! Shift out Data Row = RowCount; 
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO	(FuseArray_TDI[Row]);
+	Address[1] = #1@(#0^(Address_Length-1));
+}
+
+]]>
+</Script>
+</SVF_Plus>

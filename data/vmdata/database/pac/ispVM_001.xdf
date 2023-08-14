@@ -1,0 +1,585 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!--
+	Spinti 05/08/03
+	PAC sub directory
+		.Contains new release device database file and all the algorithm files for ispPAC technology devices.
+	 ispVM_001.xdf  support :
+		. ispPAC Power Manager II family.
+		. ispPAC Power Manager family.
+	Spinti 10/07/03
+		. Removed speed grade from PONs.
+	Spinti 01/08/04
+		. Changed ispPAC10 28-pin Dip PON from ispPAC10 to ispPAC10-XXP.
+		. Changed ispPAC80 16-pin DIP PON from ispPAC80 to ispPAC80-XXP.
+	Spinti 05/19/04
+		. Added ispPAC-POWR1208P1 device (commented out until release).
+	Spinti 11/23/04
+		. Released ispPAC-POWR1208P1 device.
+	Ong	 12/13/04
+		. Added Voltage Control field to ispPAC-POWR Family.
+	Nguyen 11/02/05 
+		. Added support for the ispPAC-POWR1220AT8 
+	Ong	. 11/15/05
+		  Added socket adapter listing for ispPAC-PWR1220AT8 device,
+		  "PA-T100/POWR1220A".
+	Nguyen 08/08/06 
+		. Added support for the ispPAC-POWR1014 and ispPAC-POWR1014A
+		. Added support for the ispPAC-POWR607 	
+	Ong   . 12/4/06
+		. Added socket adapter name for ispPAC-POWR607, PN-N32/POWR607.
+		. Added socket adapter name for ispPAC-POWR1014/A, PN-T48/POWR1014/A.  
+	Spinti. 12/11/06
+		. Uncommented ispPAC-POWR6AT6.
+	Ong   . 12/19/06
+		. Added socket adapter name for ispPAC-POWR6AT6, PN-N32/POWR6AT6.  
+	Spinti. 12/20/06
+		. Masked out revision bits for the ispPAC-POWR6AT6.
+	Spinti. 01/15/07
+		. Corrected the 6AT6 PON.
+	Spinti. 05/24/07
+		. Moved ispPAC 10, 20, 30, 80, and 81 to mature.
+	Ong   . 07/16/07 
+		. Updated the Program Pulse Width for POWR607, POWR1014/A and POWR1220AT8 to 40ms. 
+	Ong   . 07/17/07
+		. Changed the Erase Pulse Width to 200ms to match ispPAC-CLOCK family. 
+	Ong   . Enable the STAPL support for the POWR1220AT8. 
+	Spinti. 10/30/08
+		. Added the "Secure Device" and "ATDI Secure Device" operations for the ispPAC Power Manager II family.
+		. Removed the "Calculate Checksum" and "Read and Save JEDEC" operations for the ispPAC Power Manager II family.
+	11/26/08 Nguyen added the "Erase,Program", "ATDI Erase,Program", "Verify,Secure" and "ATDI Verify,Secure" operations for ispPAC Power Manager II
+	05/11/09 Nguyen added support for ispPAC ProcessorPM family: ispPAC-POWR605 device
+	07/08/09 Nguyen added <Compliant1532>YES</Compliant1532>
+	10/28/09 Nguyen masked out the revision bit of the POWR1014(0x10145043) and POWR1014A(0x00145043)
+	         to support ispPAC-POWR1014-02((0x30145043) and ispPAC-POWR1014A-02(0x20145043) 
+	02/26/2010 Nguyen masked out the first 4 bits of Device ID (revision bits) for POWR 1208-P1 devices per Matt Fisk requested 
+	05/26/2010 Nguyen added the support for ispPAC-POWR1220AT8-02.
+-->
+<ispXDF version="13.1">
+    <Comment>PAC technology Devices List</Comment>
+	<Family name="ispPAC ProcessorPM">
+    	<Device name="ispPAC-POWR605">
+            <Comm> JTAG </Comm>
+			<Access> JTAG </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR605 </CodeName>
+            <FullName> ispPAC-POWR605 </FullName>
+            <AlgoTemplate> LSC_POWERPM.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWERPM.svp"
+                         value="0x03"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x10147043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  8 </IRLength>
+            <ColWidth>81 </ColWidth>
+            <RowWidth> 61 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 32 </jtagUSERCODELogicalBits>
+            <TotalFuses> 4941 </TotalFuses>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 24-pin QFNS </Type>
+                <PON> ispPAC-POWR605-XXSN24 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-N24/POWR605"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Read and Save JEDEC&quot;
+            &quot;Bypass&quot;
+            &quot;Display USERCODE&quot;
+			&quot;Secure Device&quot;
+			&quot;ATDI Erase,Program,Verify&quot;
+            &quot;ATDI Erase,Program,Verify,Secure&quot;
+            &quot;ATDI Verify ID&quot;
+            &quot;ATDI Display ID&quot;
+            &quot;ATDI Verify Only&quot;
+            &quot;ATDI Erase Only&quot;
+            &quot;ATDI Bypass&quot;
+            &quot;ATDI Display USERCODE&quot;
+ 			&quot;ATDI Secure Device&quot;
+       </Operation>
+	  	<STAPLSupport>YES</STAPLSupport>
+	  	<Compliant1532>YES</Compliant1532>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <Programming_Mode_Control>;JTAG;ATDI;</Programming_Mode_Control>
+    </Family>
+    <Family name="ispPAC Power Manager II">
+    	<Device name="ispPAC-POWR607">
+            <Comm> JTAG </Comm>
+		<Access> JTAG </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR607 </CodeName>
+            <FullName> ispPAC-POWR607 </FullName>
+            <AlgoTemplate> LSC_POWERPM.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWERPM.svp"
+                         value="0x03"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x00147043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  8 </IRLength>
+            <ColWidth>81 </ColWidth>
+            <RowWidth> 61 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 32 </jtagUSERCODELogicalBits>
+            <TotalFuses> 4941 </TotalFuses>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 32-pin QFN </Type>
+                <PON> ispPAC-POWR607-XXN32 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-N32/POWR607"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device>
+    	<Device name="ispPAC-POWR6AT6">
+            <Comm> JTAG </Comm>
+            <Access> JTAG</Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR6AT6 </CodeName>
+            <FullName> ispPAC-POWR6AT6 </FullName>
+            <AlgoTemplate> LSC_POWER6AT6.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWER6AT6.svp"
+                         value="0x03"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x00180043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  8 </IRLength>
+            <ColWidth> 56 </ColWidth>
+            <RowWidth> 5 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 32 </jtagUSERCODELogicalBits>
+            <TotalFuses> 280 </TotalFuses>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 32-pin QFN </Type>
+                <PON> ispPAC-POWR6AT6-XXN32 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-N32/POWR6AT6"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device>
+    	<Device name="ispPAC-POWR1014">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/ATDI</Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR1014 </CodeName>
+            <FullName> ispPAC-POWR1014 </FullName>
+            <AlgoTemplate> LSC_POWERV2.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWERV2.svp"
+                         value="0x03"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x10145043</JtagID> 
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  8 </IRLength>
+            <ColWidth> 123 </ColWidth>
+            <RowWidth> 109 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 32 </jtagUSERCODELogicalBits>
+            <TotalFuses> 13743 </TotalFuses>
+            <ArchRow>      56 </ArchRow>
+            <ArchLength>  336 </ArchLength>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> ispPAC-POWR1014-XXT48 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T48/POWR1014/A"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TDISEL</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispPAC-POWR1014A-2">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/ATDI</Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR1014A-2 </CodeName>
+            <FullName> ispPAC-POWR1014A-2 </FullName>
+            <AlgoTemplate> LSC_POWERV2.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWERV2.svp"
+                         value="0x03"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x20145043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  8 </IRLength>
+            <ColWidth> 123 </ColWidth>
+            <RowWidth> 109 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 32 </jtagUSERCODELogicalBits>
+            <TotalFuses> 13743 </TotalFuses>
+            <ArchRow>      56 </ArchRow>
+            <ArchLength>  336 </ArchLength>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> ispPAC-POWR1014A-02T48 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T48/POWR1014/A"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TDISEL</PinList>
+            </Voltage_Control>
+        </Device>
+    	<Device name="ispPAC-POWR1014A">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/ATDI</Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR1014A </CodeName>
+            <FullName> ispPAC-POWR1014A </FullName>
+            <AlgoTemplate> LSC_POWERV2.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWERV2.svp"
+                         value="0x03"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x00145043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  8 </IRLength>
+            <ColWidth> 123 </ColWidth>
+            <RowWidth> 109 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 32 </jtagUSERCODELogicalBits>
+            <TotalFuses> 13743 </TotalFuses>
+            <ArchRow>      56 </ArchRow>
+            <ArchLength>  336 </ArchLength>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> ispPAC-POWR1014A-XXT48 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T48/POWR1014/A"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TDISEL</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispPAC-POWR1220AT8-2">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/ATDI</Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR1220AT8-2 </CodeName>
+            <FullName> ispPAC-POWR1220AT8-2 </FullName>
+            <AliasName> ispPAC-POWR1220AT8 </AliasName>
+            <AlgoTemplate> LSC_POWERV2.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWERV2.svp"
+                         value="0x03"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x20144043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  8 </IRLength>
+            <ColWidth> 243 </ColWidth>
+            <RowWidth> 169 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 32 </jtagUSERCODELogicalBits>
+            <TotalFuses> 41739 </TotalFuses>
+            <ArchRow>      56 </ArchRow>
+            <ArchLength>  672 </ArchLength>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> ispPAC-POWR1220AT8-02T100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor Corp."
+                       adapter_name="PA-T100/POWR1220A"/>
+            </Package>
+            <Package>
+                <Type> 100-pin Lead-Free TQFP </Type>
+                <PON> ispPAC-POWR1220AT8-02TN100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor Corp."
+                       adapter_name="PA-T100/POWR1220A"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TDISEL</PinList>
+            </Voltage_Control>
+        </Device>
+    	<Device name="ispPAC-POWR1220AT8">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/ATDI</Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR1220AT8 </CodeName>
+            <FullName> ispPAC-POWR1220AT8 </FullName>
+            <AlgoTemplate> LSC_POWERV2.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWERV2.svp"
+                         value="0x03"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x00144043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  8 </IRLength>
+            <ColWidth> 243 </ColWidth>
+            <RowWidth> 169 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 32 </jtagUSERCODELogicalBits>
+            <TotalFuses> 41739 </TotalFuses>
+            <ArchRow>      56 </ArchRow>
+            <ArchLength>  672 </ArchLength>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> ispPAC-POWR1220AT8-XXT100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor Corp."
+                       adapter_name="PA-T100/POWR1220A"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TDISEL</PinList>
+            </Voltage_Control>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+<!--            &quot;Erase,Program&quot; -->
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+<!--            &quot;Verify,Secure&quot; -->
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+<!--            &quot;Verify USERCODE&quot;-->
+            &quot;Display USERCODE&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Read and Save JEDEC&quot;
+<!--           &quot;Read DONE bit&quot;-->
+<!--            &quot;Erase DONE bit&quot;-->
+<!--            &quot;Program DONE bit&quot;-->
+			&quot;Secure Device&quot;
+            
+            &quot;ATDI Erase,Program,Verify&quot;
+            &quot;ATDI Erase,Program,Verify,Secure&quot;
+<!--            &quot;ATDI Erase,Program&quot; -->
+            &quot;ATDI Verify ID&quot;
+            &quot;ATDI Display ID&quot;
+            &quot;ATDI Verify Only&quot;
+<!--            &quot;ATDI Verify,Secure&quot; -->
+            &quot;ATDI Erase Only&quot;
+            &quot;ATDI Bypass&quot;
+<!--            &quot;ATDI Verify USERCODE&quot;-->
+            &quot;ATDI Display USERCODE&quot;
+<!--        &quot;ATDI Calculate Checksum&quot; -->
+<!--        &quot;ATDI Read and Save JEDEC&quot; -->
+<!--            &quot;ATDI Read DONE bit&quot;-->
+<!--            &quot;ATDI Erase DONE bit&quot;-->
+<!--            &quot;ATDI Program DONE bit&quot;-->
+ 			&quot;ATDI Secure Device&quot;
+       </Operation>
+	  	<STAPLSupport>YES</STAPLSupport>
+	  	<Compliant1532>YES</Compliant1532>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <Programming_Mode_Control>;JTAG;ATDI;</Programming_Mode_Control>
+    </Family>
+
+    <Family name="ispPAC Power Manager">
+        <Device name="ispPAC-POWR604">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR604 </CodeName>
+            <FullName> ispPAC-POWR604 </FullName>
+            <AlgoTemplate> LSC_POWER.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWER.svp"
+                         value="0x0F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x00141043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  6 </IRLength>
+            <ColWidth> 41 </ColWidth>
+            <RowWidth> 43 </RowWidth>
+            <UESPhysicalBits> 16 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 16 </jtagUSERCODELogicalBits>
+            <TotalFuses> 1831 </TotalFuses>
+            <ArchRow>      17 </ArchRow>
+            <ArchLength>   68 </ArchLength>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> ispPAC-POWR604-XXT44 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor Corp."
+                       adapter_name="PA-T44/POWR1208"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TRST</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispPAC-POWR1208">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR1208 </CodeName>
+            <FullName> ispPAC-POWR1208 </FullName>
+            <AlgoTemplate> LSC_POWER.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWER.svp"
+                         value="0x0F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x00140043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  6 </IRLength>
+            <ColWidth> 81 </ColWidth>
+            <RowWidth> 75 </RowWidth>
+            <UESPhysicalBits> 16 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 16 </jtagUSERCODELogicalBits>
+            <TotalFuses> 6239 </TotalFuses>
+            <ArchRow>      41 </ArchRow>
+            <ArchLength>  164 </ArchLength>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> ispPAC-POWR1208-XXT44 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor Corp."
+                       adapter_name="PA-T44/POWR1208"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TRST</PinList>
+            </Voltage_Control>
+        </Device>
+        <Device name="ispPAC-POWR1208P1">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ispPAC-POWR1208P1 </CodeName>
+            <FullName> ispPAC-POWR1208P1 </FullName>
+            <AlgoTemplate> LSC_POWER.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_POWER.svp"
+                         value="0x0F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x00142043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>   32 </IDSize>
+            <IRLength>  6 </IRLength>
+            <ColWidth> 81 </ColWidth>
+            <RowWidth> 75 </RowWidth>
+            <UESPhysicalBits> 16 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits> 16 </jtagUSERCODELogicalBits>
+            <TotalFuses> 6251 </TotalFuses>
+            <ArchRow>      44 </ArchRow>
+            <ArchLength>  176 </ArchLength>
+            <PWP> 40 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>  1 </PWV>
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> ispPAC-POWR1208P1-XXT44 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor Corp."
+                       adapter_name="PA-T44/POWR1208"/>
+            </Package>
+           <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+            	<PinList>TCK,TMS,TDI,TDO,TRST</PinList>
+            </Voltage_Control>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Read and Save JEDEC&quot;
+        </Operation>
+        <STAPLSupport>YES</STAPLSupport>
+	  	<Compliant1532>YES</Compliant1532>
+        <BypassInst>111111</BypassInst>
+        <IDInstr>0x19</IDInstr>
+        <Programming_Mode_Control>;JTAG</Programming_Mode_Control>
+    </Family>
+</ispXDF>

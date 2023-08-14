@@ -1,0 +1,181 @@
+[eco]
+ECO extended Tcl commands
+
+For more information on a specific command, type the command without any options:
+	eco_design       design command
+	eco_add          add command
+	eco_delete       delete command
+	eco_unbind       unbind macro command
+	eco_clone        clone command
+	eco_swap         swap command
+	eco_rename       rename command
+	eco_place        place command
+	eco_route        route command
+	eco_config       config component sysio PLL or memory command
+
+[eco_design]
+eco_design new  - create an empty design or macro
+  Usage:
+    eco_design new -arch <arch> -device <device> -package <package> -speed <speed> -ncd <ncd file> [-prf <prf file>] [-macro]
+    -arch:          device arch name
+    -device:        device name
+    -package:       device package name
+    -speed:         device speed name
+    -ncd:           ncd file name
+    -prf:           pref file name
+    -macro:         create macro instead of ncd
+
+eco_design open - open a design or macro
+  Usage:
+    eco_design open -ncd <ncd file> [-prf <prf file>] [-macro]
+
+eco_design save - save design or macro to file
+  Usage:
+    eco_design save [-ncd <ncd file> -prf <prf file>] | [-nmc <nmc file>]
+
+eco_design close - close the design
+  Usage:
+    eco_design save [-ncd <ncd file> -prf <prf file>] | [-nmc <nmc file>]
+
+eco_design query - query design object information
+  Usage:
+    eco_design query { -net <net name> } | { -comp <comp name> } | { -pin <pin name> } | { -site <site name> }	
+
+eco_design drc - drc check
+  Usage:
+    eco_design drc { -all | { [-chip] [-net <net name>]... [-netsanity <net name> ]... [-comp <comp name>]... } } { [-err] | {[-unrouted] [-unplaced]} }
+
+[eco_add]
+eco_add comp - add component object
+  Usage:
+    eco_add comp [-name <comp name>] -site <site name>	
+
+eco_add net - add new net objects
+  Usage:
+    eco_add net [-name <net name>] { -netpin <pin name> }...
+
+eco_add netpin - add net pins into existing net
+  Usage:
+    eco_add netpin -net <net name> { -netpin <pin name> }...
+
+eco_add macro - add new macro
+  Usage:
+    eco_add macro -macro <macro name> -nmc <nmc file> [-site <site name>]
+	
+eco_add sigprobe - add signal probe
+  Usage:
+    eco_add sigprobe -site <site name> -net <net name>	
+
+[eco_delete]
+eco_delete comp - delete component objects from design
+  Usage:
+    eco_delete comp <comp name>...
+
+eco_delete net - delete net from design
+  Usage:
+    eco_delete net <net name>...
+
+eco_delete netpin - delete pin from net
+  Usage:
+    eco_delete netpin <pin name>...
+
+eco_delete macro - delete macro from design
+  Usage:
+    eco_delete macro <macro name>...
+	
+eco_delete sigprobe - delete sigprobe from design
+  Usage:
+    eco_delete sigprobe -site <site name> -net <net name> 	
+
+[eco_unbind]
+eco_unbind -  commands to unbind macro
+  Usage:
+    eco_unbind macro <macro name>
+
+[eco_clone]
+eco_clone comp - clone component
+  Usage:
+    eco_clone comp <compname> { -comp compname2 } | { -site <sitename> }...
+
+eco_clone macro - clone macro
+  Usage:
+    eco_clone macro <macroname> { -site <sitename> }...
+
+[eco_swap]
+eco_swap comp - swap components or site
+  Usage:
+    eco_swap comp -comp1 <compname1> { -comp2 <compname2> } | { -site <sitename> }
+
+eco_swap pin - swap component pins
+  Usage:
+    eco_swap pin <pinname1> <pinname2>
+
+eco_swap macro - move macro to empty site
+  Usage:
+    eco_swap macro -macro <macroname> -site <sitename>
+
+[eco_rename]
+eco_rename comp - rename the component
+  Usage:
+    eco_rename comp <old compname> <new compname>
+
+eco_rename net - rename the net
+  Usage:
+    eco_rename net <old netname> <new netname>
+
+[eco_place]
+eco_place auto - auto place all unplaced component or macro objects
+  Usage:
+    eco_place auto [-x] [-l <level:1,5>] [-t <tableentry:1,100>]
+
+eco_place manual - manual place an unplaced component or macro
+  Usage:
+    eco_place manual { -comp <unplaced comp name> } | { -macro <unplaced macro name> } -site <site name>
+
+phv_unplace - unplace placed component or macro objects
+  Usage:
+    eco_place unplace -all | { [-comp <comp name> ]...  [-macro <macro name>]...
+
+[eco_place]
+eco_route auto - auto route all or given object
+  Usage:
+    eco_route auto { -all [-i <iterations:-1,2000>] [-cc <costclean:0,20>] [-dc <delayclean:0,100>] [-ec <delaycleanif:0,100>] [-x] } | { -net <net name> } | { -comp <comp name> } | { -macro <macro name> | { -netpin <pin name> } | { {-netpin <pin name>} | {-wire <wire name>} {-netpin <pin name>} | {-wire <wire name>} }  }
+
+eco_route manual - manual route with order objects
+  Usage:
+    eco_route manual { [-netpin <pin name>] | [-wire <wire name>] }...
+
+eco_route unroute - unroute all or given objects
+  Usage:
+    eco_route unroute -all | { [-comp <comp name>]... [-wire <wire name>]... [-netpin <pin name>]... [-net <net name>]... [-macro <macro name>]... }
+
+[eco_config]
+eco_config comp - set program string of component
+  Usage:
+    eco_config comp -comp <comp name> [<logic string>]
+	
+eco_config prim - set primitive property or programming pin value of component
+  Usage:
+    eco_config prim -comp <comp name> -prim <mode value pair> [-prop <prop value pair>]... [-pin <pin value pair>]... 
+
+eco_config sysio - config sysio
+  Usage:
+    eco_config sysio -comp <comp name> [-bank_vccio <bank_vccio>] [-clamp <clamp>] [-diffcurrent <diffcurrent>] [-diffdrive <diffdrive>] [-diffresistor <diffresistor>] [-drive <drive>] [-eq_cal <eq_cal>] [-hysteresis <hysteresis>] [-impedance <impedance>] [-inf <inf>] [-io_type <io_type>] [-multdrive <multdrive>]  [-opendrain <opendrain>] [-pciclamp <pciclamp>] [-pullmode <pullmode>]  [-pwrsave <pwrsave>]  [-refcircuit <refcircuit>] [-slewrate <slewrate>] [-terminategnd <terminategnd>] [-terminatevccio <terminatevccio>] [-terminatevtt <terminatevtt>] [-termination <termination>] [-vcmt <vcmt>] [-vref <vref>]
+
+eco_config pll - config PLL
+  Usage:
+    eco_config pll -comp <comp name> -type <type> [-phaseadj <phaseadj>] [-delay_val <delay>] [-fdel <fdel>] [-clkos_fdel <clkos_fdel>]	
+
+eco_config memufm  - config UFM memory
+  Usage:
+    eco_config memufm -comp <comp name> -init_all_0 <no|yes> [-format <hex|bin>] [-mem <mem file>]
+
+eco_config memebr  - config EBR memory
+  Usage:
+    eco_config memebr -instance <instance name> [-init_all <0|1|no>] -mem <file name> -format <hex|bin|add> [-init_data <dynamic|static>] -module <module name> -mode <mode value> -depth <depth value> -widtha <widthA value> -widthb <widthB value> [-area <area value>] [-ecc <ecc value>] [-bytesize <bytesize value>]
+
+eco_config memdram  - config dram memory
+  Usage:
+   eco_config memdram -instance <instance name> -mem <file name> -format <hex|bin|add> -module <module name> -depth <depth value> -widtha <widthA value>
+ 
+

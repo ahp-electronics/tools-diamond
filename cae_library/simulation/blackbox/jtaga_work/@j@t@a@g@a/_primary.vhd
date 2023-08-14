@@ -1,0 +1,60 @@
+library verilog;
+use verilog.vl_types.all;
+entity JTAGA is
+    generic(
+        JTAG_FLASH_PRGRM: string  := "ENABLED"
+    );
+    port(
+        TCK             : in     vl_logic;
+        TMS             : in     vl_logic;
+        TDI             : in     vl_logic;
+        PSROUT1         : in     vl_logic;
+        PSROUT2         : in     vl_logic;
+        PSROUT3         : in     vl_logic;
+        JTDO1           : in     vl_logic;
+        JTDO2           : in     vl_logic;
+        JTDO3           : in     vl_logic;
+        JTDO4           : in     vl_logic;
+        JTDO5           : in     vl_logic;
+        JTDO6           : in     vl_logic;
+        JTDO7           : in     vl_logic;
+        JTDO8           : in     vl_logic;
+        TDO             : out    vl_logic;
+        TRESET          : out    vl_logic;
+        PSRSFTN         : out    vl_logic;
+        PSRCAP          : out    vl_logic;
+        PSRENABLE1      : out    vl_logic;
+        PSRENABLE2      : out    vl_logic;
+        PSRENABLE3      : out    vl_logic;
+        SCANENABLE1     : out    vl_logic;
+        SCANENABLE2     : out    vl_logic;
+        SCANENABLE3     : out    vl_logic;
+        SCANENABLE4     : out    vl_logic;
+        SCANENABLE5     : out    vl_logic;
+        SCANENABLE6     : out    vl_logic;
+        SCANENABLE7     : out    vl_logic;
+        SCANENABLE8     : out    vl_logic;
+        SCANI           : out    vl_logic;
+        JTCK            : out    vl_logic;
+        JTDI            : out    vl_logic;
+        JSHIFT          : out    vl_logic;
+        JUPDATE         : out    vl_logic;
+        JRSTN           : out    vl_logic;
+        JCE1            : out    vl_logic;
+        JCE2            : out    vl_logic;
+        JCE3            : out    vl_logic;
+        JCE4            : out    vl_logic;
+        JCE5            : out    vl_logic;
+        JCE6            : out    vl_logic;
+        JCE7            : out    vl_logic;
+        JCE8            : out    vl_logic;
+        JRTI1           : out    vl_logic;
+        JRTI2           : out    vl_logic;
+        JRTI3           : out    vl_logic;
+        JRTI4           : out    vl_logic;
+        JRTI5           : out    vl_logic;
+        JRTI6           : out    vl_logic;
+        JRTI7           : out    vl_logic;
+        JRTI8           : out    vl_logic
+    );
+end JTAGA;

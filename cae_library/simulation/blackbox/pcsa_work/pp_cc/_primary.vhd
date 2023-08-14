@@ -1,0 +1,38 @@
+library verilog;
+use verilog.vl_types.all;
+entity pp_cc is
+    generic(
+        PTR_MSB         : integer := 4
+    );
+    port(
+        BIST            : in     vl_logic;
+        BFC             : in     vl_logic;
+        BC              : out    vl_logic;
+        BF0             : out    vl_logic;
+        rx_clk          : in     vl_logic;
+        rst_rx_clk_n    : in     vl_logic;
+        sys_clk         : in     vl_logic;
+        rst_sys_clk_n   : in     vl_logic;
+        d_in            : in     vl_logic_vector(10 downto 0);
+        rx_even_in      : in     vl_logic;
+        d_out           : out    vl_logic_vector(10 downto 0);
+        rx_even_out     : out    vl_logic;
+        slave           : in     vl_logic;
+        re_out          : out    vl_logic;
+        re_in           : in     vl_logic;
+        we_out          : out    vl_logic;
+        we_in           : in     vl_logic;
+        match1_d        : in     vl_logic_vector(9 downto 0);
+        match2_d        : in     vl_logic_vector(9 downto 0);
+        match3_d        : in     vl_logic_vector(9 downto 0);
+        match4_d        : in     vl_logic_vector(9 downto 0);
+        match2_en       : in     vl_logic;
+        match4_en       : in     vl_logic;
+        min_ipg_cnt     : in     vl_logic_vector(1 downto 0);
+        hwm             : in     vl_logic_vector(3 downto 0);
+        lwm             : in     vl_logic_vector(3 downto 0);
+        overrun         : out    vl_logic;
+        underrun        : out    vl_logic;
+        scan_mode       : in     vl_logic
+    );
+end pp_cc;

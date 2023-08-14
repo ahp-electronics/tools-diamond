@@ -1,0 +1,25 @@
+var pairs =
+{
+"simulation":{"tool":1,"fpga":1,"wizard":1}
+,"tool":{"selecting":1,"project":1}
+,"selecting":{"simulation":1}
+,"diamond":{"supports":1}
+,"supports":{"functional":1}
+,"functional":{"timing":1}
+,"timing":{"simulation":1}
+,"fpga":{"devices":1}
+,"devices":{"using":1}
+,"using":{"modelsim":1}
+,"modelsim":{"active-hdl":1}
+,"active-hdl":{"specify":1,"simulation":1}
+,"specify":{"either":1}
+,"either":{"modelsim":1}
+,"project":{"simulation":1}
+,"wizard":{"tools":1,"main":1,"simulating":1}
+,"tools":{"simulation":1}
+,"main":{"window":1}
+,"window":{"details":1}
+,"details":{"simulation":1}
+,"simulating":{"design":1}
+}
+;Search.control.loadWordPairs(pairs);

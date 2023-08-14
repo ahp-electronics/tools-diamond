@@ -1,0 +1,2735 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!--
+	Spinti 04/30/03
+	EE9/LC4000 sub directory
+		.Contains device database file and all the algorithm files for CPLD ispMACH4000 devices.
+	 ispVM_005e.xdf  support :
+		. ispMACH4000V/B/C/ZC family
+
+	Ong 07/18/03
+		.Added 144TQFP socket adapter listing for LC4128V
+	Spinti 08/21/03
+		.Changed LC4000ZC csBGA PON's from -XXU to -XXM.
+		.Removed LC4032ZC 132 csBGA.
+                .Added support for LC4256ZC 100 TQFP, 176 TQFP, and 132 csBGA devices.
+                .Added support for the LC4256V 100 caBGA device.
+	Ong    10/20/03
+		. Added 56csBAG and 132csBGA Socket Adapter Listing for LC4000ZC family.
+		    . 56csBGA - PA-M56/LC4032ZC (LC4032ZC and LC4064ZC)
+		    . 132csBGA - PA-M132/LC4064ZC (LC4064ZC, LC4128ZC and LC4256ZC)
+	Nguyen 03/18/04
+		. Added FPGALoaderSupport field for ispMACH4000 family
+	Spinti 04/21/04
+		.Added ALL packages to devices missing them.
+	Ong    05/26/04
+		.Added 144TQFP socket adapter listing for LC4245V.
+		   .144TQFP - PA-T144/LC4128V.
+	Ong    07/21/04
+		. Added "Not Applicable" to Model 300 Socket Adapter support of LC4000V(B) 
+              and LC4000C(ZC) "All" selection. 
+	06/27/06 Spinti: Added LA4032V, LA4064V, and LA4128V devices.
+	07/07/06 Nguyen: Added 4032V, 4064V, and 4128V devices.
+	10/17/06 Nguyen Remove FPGA Loader support
+	04/10/07 Nguyen added the FPGA Loader support back
+      09/04/07 Ong   : Commented out the 100 caBGA package selection for LC4256V(B).
+			     Removed the MCtrl setting for the "ALL" selection.
+			     Updated the names to the M56, M132, T100, T128, T144, T176, and F256 SAB's that have been converted to lead-free with PA(N).	
+	09/05/07 Ong   : Added support for LA4032ZC, LA4064ZC, LA4128ZC devices.
+			     Added back the missing LA4128V support.
+	04/14/08 Spinti: Added support for the ispMACH4000ZE family.
+	04/17/08 Ong   : Added 256 ball ftBGA socket listing, PN-FT256/LC4000 for LC4256V/B/C, LC4384V/B/C and LC4512V/B/C.		
+	04/30/08 Spinti: Commented out ucBGA packages.
+	10/29/08 Spinti: Renamed PA-T100/LC4256 and PA-T144/LC4128 socket adapters to PA(N)-T100/LC4256 and PA(N)-T144/LC4128
+	11/26/08 Spinti: Added the PN-M144/LC4000ZE and PN-M64/LC4000ZE socket adapters.
+-->
+<ispXDF version="13.1">
+    <Comment>EE9/LC4000 Devices List</Comment>   
+    <Family name="ispMACH4000ZE">
+		<Device name="LC4032ZE">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4032ZE </CodeName>
+            <FullName> LC4032ZE </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01806043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 172 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17200 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4032ZE </PON>
+                <Adapter vendor="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LC4032ZE-XXTN48 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 64-pin csBGA </Type>
+                <PON> LC4032ZE-XXMN64 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-M64/LC4000ZE"/>
+            </Package>
+        </Device>
+        <Device name="LC4064ZE">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064ZE </CodeName>
+            <FullName> LC4064ZE </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x0180E043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 356 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 35600 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>    
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064ZE </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LC4064ZE-XXTN48 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 64-ball csBGA </Type>
+                <PON> LC4064ZE-XXMN64 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-M64/LC4000ZE"/>
+            </Package>
+            <Package>
+                <Type> 64-ball ucBGA </Type>
+                <PON> LC4064ZE-XXUMN64 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="PN-UM64/LC4000ZE"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4064ZE-XXTN100 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4246"/>
+            </Package>
+            <Package>
+                <Type> 144-ball csBGA </Type>
+                <PON> LC4064ZE-XXMN144 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-M144/LC4000ZE"/>
+            </Package>
+        </Device>
+        <Device name="LC4128ZE">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4128ZE </CodeName>
+            <FullName> LC4128ZE </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01812043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 740 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 74000 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>196</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4128ZE </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4128ZE-XXTN100 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4246"/>
+            </Package>
+            <Package>
+                <Type> 132-ball ucBGA </Type>
+                <PON> LC4128ZE-XXUMN132 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 144-ball csBGA </Type>
+                <PON> LC4128ZE-XXMN144 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-M144/LC4000ZE"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LC4128ZE-XXTN144 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T144/LC4128V"/>
+            </Package>
+        </Device>
+        <Device name="LC4256ZE">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4256ZE </CodeName>
+            <FullName> LC4256ZE </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01816043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1592 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 151240 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>260</BScan_Length>    
+            <Package>
+                <Type> All </Type>
+                <PON> LC4256ZE </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4256ZE-XXTN100 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4246"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LC4256ZE-XXTN144 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T144/LC4128V"/>
+            </Package>
+            <Package>
+                <Type> 144-ball csBGA </Type>
+                <PON> LC4256ZE-XXMN144 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-M144/LC4000ZE"/>
+            </Package>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save JEDEC&quot;
+            &quot;Read DONE bit&quot;
+            &quot;Erase DONE bit&quot;
+            &quot;Program DONE bit&quot;
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed"/>
+	  	<Compliant1532>YES</Compliant1532>
+	  	<DebugMode>YES</DebugMode>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <Programming_Mode_Control>;JTAG;Advanced Flash;</Programming_Mode_Control>
+    </Family>    
+    <Family name="ispMACH4000">
+		<Device name="LC4032V(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4032V(B) </CodeName>
+            <FullName> LC4032V(B) </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01805043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 172 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17200 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4032V/B </PON>
+                <Adapter vendor="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 44-pin TQFP (3.3V) </Type>
+                <PON> LC4032V-XXT44 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+	        <Package>
+                <Type> 44-pin TQFP (2.5V) </Type>
+                <PON> LC4032B-XXT44 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP (3.3V) </Type>
+                <PON> LC4032V-XXT48 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP (2.5V) </Type>
+                <PON> LC4032B-XXT48 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device>
+        <Device name="LC4032V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4032V </CodeName>
+            <FullName> LC4032V </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01805043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 172 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17200 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4032V </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> LC4032V-XXT44 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LC4032V-XXT48 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device>        
+        <Device name="LA4032V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LA4032V </CodeName>
+            <FullName> LA4032V </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01805043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 172 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17200 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LA4032V-XXTN4 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                      adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> LA4032V-XXTN44 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LA4032V-XXTN48 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device>
+        <Device name="LC4032B">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4032B </CodeName>
+            <FullName> LC4032B </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01805043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 172 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17200 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4032B </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> LC4032B-XXT44 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LC4032B-XXT48 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device>
+        <Device name="LC4032C(ZC)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4032C(ZC) </CodeName>
+            <FullName> LC4032C(ZC) </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x11804043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 172 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17200 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All  </Type>
+                <PON> LC4032C/ZC </PON>
+                <Adapter vendor="Not Applicable"/>
+            </Package>    
+        </Device>
+        <Device name="LC4032C">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4032C </CodeName>
+            <FullName> LC4032C </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01804043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 172 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17200 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4032C </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> LC4032C-XXT44 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LC4032C-XXT48 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device>
+        <Device name="LC4032ZC">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4032ZC </CodeName>
+            <FullName> LC4032ZC </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x11804043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 172 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17200 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4032ZC </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                      adapter_name="Not Applicable"/>
+            </Package>               
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LC4032ZC-XXT48 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>           
+            <Package>
+                <Type> 56-ball csBGA </Type>
+                <PON> LC4032ZC-XXM56 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-M56/LC4032ZC"/>
+            </Package>
+        </Device>
+        <Device name="LA4032ZC">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LA4032ZC </CodeName>
+            <FullName> LA4032ZC </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x11804043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 172 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17200 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LA4032ZC-XXTN48 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>           
+        </Device>
+        <Device name="LC4064V(B) (32 I/O)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064V(B)-32IO </CodeName>
+            <FullName> LC4064V(B)-32IO </FullName>
+            <AliasName> LC4064V(B) </AliasName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01809043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 352 </ColWidth>
+            <RowWidth>  95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 33440 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064V/B-XXT4 </PON>
+             <Adapter vendor="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 44-pin TQFP (3.3V) </Type>
+                <PON> LC4064V-XXT44 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 44-pin TQFP (2.5V) </Type>
+                <PON> LC4064B-XXT44 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP (3.3V) </Type>
+                <PON> LC4064V-XXT48 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>            <Package>
+                <Type> 48-pin TQFP (2.5V)  </Type>
+                <PON> LC4064B-XXT48 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device>   
+        <Device name="LC4064V (32 I/O)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064V-32IO </CodeName>
+            <FullName> LC4064V-32IO </FullName>
+            <AliasName> LC4064V </AliasName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01809043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 352 </ColWidth>
+            <RowWidth>  95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 33440 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064V-XXT4 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                      adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> LC4064V-XXT44 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LC4064V-XXT48 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device>
+        <Device name="LA4064V (32 I/O)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LA4064V-32IO </CodeName>
+            <FullName> LA4064V-32IO </FullName>
+            <AliasName> LA4064V </AliasName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01809043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 352 </ColWidth>
+            <RowWidth>  95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 33440 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LA4064V-XXTN4 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> LA4064V-XXTN44 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LA4064V-XXTN48 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device>                        
+        <Device name="LC4064B (32 I/O)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064B-32IO </CodeName>
+            <FullName> LC4064B-32IO </FullName>
+            <AliasName> LC4064B </AliasName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01809043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 352 </ColWidth>
+            <RowWidth>  95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 33440 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064B-XXT4 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> LC4064B-XXT44 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LC4064B-XXT48 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device>
+        <Device name="LC4064C (32 I/O)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064C-32IO </CodeName>
+            <FullName> LC4064C-32IO </FullName>
+            <AliasName> LC4064C </AliasName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01808043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 352 </ColWidth>
+            <RowWidth>  95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 33440 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064C-XXT4 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 44-pin TQFP </Type>
+                <PON> LC4064C-XXT44 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T44/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LC4064C-XXT48 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device> 
+        <Device name="LA4064ZC (32 I/O)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LA4064ZC-32IO </CodeName>
+            <FullName> LA4064ZC-32IO </FullName>
+            <AliasName> LA4064ZC </AliasName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x1180C043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 352 </ColWidth>
+            <RowWidth>  95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 33440 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>68</BScan_Length>    
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LA4064ZC-XXTN48 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+        </Device> 
+		<Device name="LC4064V(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064V(B) </CodeName>
+            <FullName> LC4064V(B) </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x0180D043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 356 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 35600 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064V/B-XXT1 </PON>
+             <Adapter vendor="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP (3.3V) </Type>
+                <PON> LC4064V-XXT100</PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP (2.5V) </Type>
+                <PON> LC4064B-XXT100 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+        </Device>       
+        <Device name="LC4064V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064V  </CodeName>
+            <FullName> LC4064V  </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x0180D043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 356 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 35600 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064V-XXT1 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4064V-XXT100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+        </Device>                            
+        <Device name="LA4064V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LA4064V  </CodeName>
+            <FullName> LA4064V  </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x0180D043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 356 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 35600 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LA4064V-XXTN100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+        </Device>               
+        <Device name="LC4064B">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064B </CodeName>
+            <FullName> LC4064B </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x0180D043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 356 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 35600 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064B-XXT1 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                        adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4064B-XXT100 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+        </Device>
+        <Device name="LC4064C(ZC)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064C(ZC) </CodeName>
+            <FullName> LC4064C(ZC) </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x1180C043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 356 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 35600 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064C/ZC  </PON>
+             <Adapter vendor="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="LC4064C">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064C </CodeName>
+            <FullName> LC4064C </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x0180C043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 356 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 35600 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064C-XXT1 </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP  </Type>
+                <PON> LC4064C-XXT100    </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+        </Device>
+        <Device name="LC4064ZC">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4064ZC </CodeName>
+            <FullName> LC4064ZC </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x1180C043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 356 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 35600 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4064ZC </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 48-pin TQFP </Type>
+                <PON> LC4064ZC-XXT48 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T48/LC4032"/>
+            </Package>
+            <Package>
+                <Type> 56-ball csBGA </Type>
+                <PON> LC4064ZC-XXM56 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-M56/LC4032ZC"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4064ZC-XXT100 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LC4064ZC-XXM132 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-M132/LC4064ZC"/>
+            </Package>
+        </Device>
+        <Device name="LA4064ZC">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LA4064ZC </CodeName>
+            <FullName> LA4064ZC </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x1180C043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 356 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 35600 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LA4064ZC-XXTN100 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+        </Device>
+        <Device name="LC4128V(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4128V(B) </CodeName>
+            <FullName> LC4128V(B) </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01811043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 740 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 74000 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>196</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4128V/B </PON>
+             <Adapter vendor="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP (3.3V) </Type>
+                <PON> LC4128V-XXT100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP (2.5V) </Type>
+                <PON> LC4128B-XXT100 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP (3.3V) </Type>
+                <PON> LC4128V-XXT128 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T128/LC4128"/>
+            </Package>            
+            <Package>
+                <Type> 128-pin TQFP (2.5V) </Type>
+                <PON> LC4128B-XXT128 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T128/LC4128"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP (3.3V) </Type>
+                <PON> LC4128V-XXT144 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T144/LC4128V"/>
+            </Package>
+        </Device>     
+        <Device name="LC4128V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4128V </CodeName>
+            <FullName> LC4128V </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01811043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 740 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 74000 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>196</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4128V </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                        adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4128V-XXT100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP </Type>
+                <PON> LC4128V-XXT128 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T128/LC4128"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LC4128V-XXT144 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T144/LC4128V"/>
+            </Package>
+        </Device> 
+	  <Device name="LA4128V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LA4128V </CodeName>
+            <FullName> LA4128V </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01811043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 740 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 74000 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>196</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LA4128V </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LA4128V-XXTN100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP </Type>
+                <PON> LA4128V-XXTN128 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T128/LC4128"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LA4128V-XXTN144 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T144/LC4128V"/>
+            </Package>
+        </Device>                                                         
+        <Device name="LC4128B">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4128B </CodeName>
+            <FullName> LC4128B </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01811043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 740 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 74000 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>196</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4128B </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4128B-XXT100 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP </Type>
+                <PON> LC4128B-XXT128 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T128/LC4128"/>
+            </Package>
+        </Device>
+        <Device name="LC4128C(ZC)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4128C(ZC) </CodeName>
+            <FullName> LC4128C(ZC) </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x11810043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 740 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 74000 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>196</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4128C/ZC </PON>
+             <Adapter vendor="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="LC4128C">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4128C </CodeName>
+            <FullName> LC4128C </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01810043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 740 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 74000 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>196</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4128C </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4128C-XXT100 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP </Type>
+                <PON> LC4128C-XXT128 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T128/LC4128"/>
+            </Package>
+        </Device>
+        <Device name="LC4128ZC">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4128ZC </CodeName>
+            <FullName> LC4128ZC </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x11810043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 740 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 74000 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>196</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4128ZC </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4128ZC-XXT100 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 128-pin TQFP  </Type>
+                <PON> LC4128ZC-XXT128 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA-T128/LC4128"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LC4128ZC-XXM132 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-M132/LC4064ZC"/>
+            </Package>
+        </Device>
+        <Device name="LA4128ZC">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LA4128ZC </CodeName>
+            <FullName> LA4128ZC </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x11810043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 740 </ColWidth>
+            <RowWidth> 100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 74000 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>196</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LA4128ZC-XXTN100 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+        </Device>
+        <Device name="LC4256V(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4256V(B) </CodeName>
+            <FullName> LC4256V(B) </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x11815043</JtagID> 
+            <IDMask>0x1FFFFFFF</IDMask>
+            <IDScanMask>0x1FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1592 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 151240 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>260</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4256V/B </PON>
+             <Adapter vendor="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP (3.3V) </Type>
+                <PON> LC4256V-XXT100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP (2.5V) </Type>
+                <PON> LC4256B-XXT100 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP (3.3V) </Type>
+                <PON> LC4256V-XXT144 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T144/LC4128V"/>
+            </Package>            
+            <Package>
+                <Type> 176-pin TQFP (3.3V) </Type>
+                <PON> LC4256V-XXT176 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>            
+            <Package>
+                <Type> 176-pin TQFP (2.5V) </Type>
+                <PON> LC4256B-XXT176 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA (3.3V) </Type>
+                <PON> LC4256V-XXF256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA (3.3V) </Type>
+                <PON> LC4256V-XXFT256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA (2.5V) </Type>
+                <PON> LC4256B-XXF256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>  
+            <Package>
+                <Type> 256-ball ftBGA (2.5V) </Type>
+                <PON> LC4256B-XXFT256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>            
+        </Device>
+        <Device name="LC4256V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4256V </CodeName>
+            <FullName> LC4256V </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x11815043</JtagID> 
+            <IDMask>0x1FFFFFFF</IDMask>
+            <IDScanMask>0x1FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1592 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 151240 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>260</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+     	      <Package>
+                <Type> All </Type>
+                <PON> LC4256V </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+   <!--     <Package>
+                <Type> 100-ball caBGA </Type>
+                <PON> LC4256V-XXC100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="Not Available"/>
+            </Package> -->
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4256V-XXT100 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LC4256V-XXT144 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T144/LC4128V"/>
+            </Package>            
+            <Package>
+                <Type> 176-pin TQFP </Type>
+                <PON> LC4256V-XXT176 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LC4256V-XXF256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LC4256V-XXFT256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>        
+        <Device name="LC4256B">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4256B </CodeName>
+            <FullName> LC4256B </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x11815043</JtagID> 
+            <IDMask>0x1FFFFFFF</IDMask>
+            <IDScanMask>0x1FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1592 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 151240 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>260</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4256B </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4256B-XXT100 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 176-pin TQFP </Type>
+                <PON> LC4256B-XXT176 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LC4256B-XXF256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LC4256B-XXFT256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+        <Device name="LC4256C">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4256C </CodeName>
+            <FullName> LC4256C </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x11814043</JtagID> 
+            <IDMask>0x1FFFFFFF</IDMask>
+            <IDScanMask>0x1FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1592 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 151240 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>260</BScan_Length>    
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4256C </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4256C-XXT100 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 176-pin TQFP </Type>
+                <PON> LC4256C-XXT176 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LC4256C-XXF256 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LC4256C-XXFT256 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+        <Device name="LC4256ZC">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4256ZC </CodeName>
+            <FullName> LC4256ZC </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x31814043</JtagID> 
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1592 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 151240 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>260</BScan_Length>    
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4256ZC </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LC4256ZC-XXT100 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T100/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 176-pin TQFP </Type>
+                <PON> LC4256ZC-XXT176 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LC4256ZC-XXM132 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-M132/LC4064ZC"/>
+            </Package>
+        </Device>
+        <Device name="LC4256V(B) (160 IO)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4256V(B)-160IO </CodeName>
+            <FullName> LC4256V(B)-160IO </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01825043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1624 </ColWidth>
+            <RowWidth>  100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 162400 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>324</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4256V/B-XXF256B-160 </PON>
+             <Adapter vendor="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA (3.3V) </Type>
+                <PON> LC4256V-XXF256B-160 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA (3.3V) </Type>
+                <PON> LC4256V-XXFT256B-160 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA (2.5V) </Type>
+                <PON> LC4256B-XXF256B-160 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA (2.5V) </Type>
+                <PON> LC4256B-XXFT256B-160 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+        <Device name="LC4256V (160 IO)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4256V-160IO </CodeName>
+            <FullName> LC4256V-160IO </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01825043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1624 </ColWidth>
+            <RowWidth>  100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 162400 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>324</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC4256V-XXF256B-160 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA  </Type>
+                <PON> LC4256V-XXFT256B-160 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+        <Device name="LC4256B (160 IO)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4256B-160IO </CodeName>
+            <FullName> LC4256B-160IO </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01825043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1624 </ColWidth>
+            <RowWidth>  100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 162400 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>324</BScan_Length>
+            <SysIO>
+                &quot;100&quot;
+            </SysIO>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC4256B-XXF256B-160 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+           <Package>
+                <Type> 256-ball ftBGA  </Type>
+                <PON> LC4256B-XXFT256B-160 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+        <Device name="LC4256C (160 IO)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4256C-160IO </CodeName>
+            <FullName> LC4256C-160IO </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01824043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1624 </ColWidth>
+            <RowWidth>  100 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 162400 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1        </PWV>
+            <BScan_Length>324</BScan_Length>    
+            <SysIO>
+                &quot;100&quot;
+            </SysIO> 
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC4256C-XXF256B-160 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA  </Type>
+                <PON> LC4256C-XXFT256B-160 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+	<Device name="LC4384V(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4384V(B) </CodeName>
+            <FullName> LC4384V(B) </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x0181D043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2616 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 248520 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>388</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4384V/B </PON>
+             <Adapter vendor="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 176-pin TQFP (3.3V) </Type>
+                <PON> LC4384V-XXT176 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 176-pin TQFP (2.5V) </Type>
+                <PON> LC4384B-XXT176 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA (3.3V) </Type>
+                <PON> LC4384V-XXF256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA (3.3V) </Type>
+                <PON> LC4384V-XXFT256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA (2.5V) </Type>
+                <PON> LC4384B-XXF256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+           <Package>
+                <Type> 256-ball ftBGA (2.5V) </Type>
+                <PON> LC4384B-XXFT256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+       <Device name="LC4384V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4384V </CodeName>
+            <FullName> LC4384V </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x0181D043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2616 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 248520 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>388</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4384V </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 176-pin TQFP  </Type>
+                <PON> LC4384V-XXT176 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC4384V-XXF256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA  </Type>
+                <PON> LC4384V-XXFT256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>                
+        <Device name="LC4384B">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4384B </CodeName>
+            <FullName> LC4384B </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x0181D043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2616 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 248520 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>388</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4384B </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 176-pin TQFP  </Type>
+                <PON> LC4384B-XXT176 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC4384B-XXF256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+           <Package>
+                <Type> 256-ball ftBGA  </Type>
+                <PON> LC4384B-XXFT256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+        <Device name="LC4384C">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4384C </CodeName>
+            <FullName> LC4384C </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x0181C043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2616 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 248520 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>388</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4384C </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 176-pin TQFP  </Type>
+                <PON> LC4384C-XXT176 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC4384C-XXF256 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA  </Type>
+                <PON> LC4384C-XXFT256 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+        <Device name="LC4512V(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4512V(B) </CodeName>
+            <FullName> LC4512V(B) </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01821043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 3632 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 345040 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>516</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4512V/B </PON>
+             <Adapter vendor="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 176-pin TQFP (3.3V) </Type>
+                <PON> LC4512V-XXT176 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 176-pin TQFP (2.5V) </Type>
+                <PON> LC4512B-XXT176 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA (3.3V) </Type>
+                <PON> LC4512V-XXF256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>  
+           <Package>
+                <Type> 256-ball ftBGA (3.3V) </Type>
+                <PON> LC4512V-XXFT256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>            
+            <Package>
+                <Type> 256-ball fpBGA (2.5V) </Type>
+                <PON> LC4512B-XXF256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA (2.5V) </Type>
+                <PON> LC4512B-XXFT256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+        <Device name="LC4512V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4512V </CodeName>
+            <FullName> LC4512V </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01821043</JtagID> 
+            <IDMask>0x0FFFFFFF </IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 3632 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 345040 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>516</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4512V </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 176-pin TQFP  </Type>
+                <PON> LC4512V-XXT176 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC4512V-XXF256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA  </Type>
+                <PON> LC4512V-XXFT256 </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>        
+        <Device name="LC4512B">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4512B </CodeName>
+            <FullName> LC4512B </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01821043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 3632 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 345040 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>516</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4512B </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 176-pin TQFP  </Type>
+                <PON> LC4512B-XXT176 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC4512B-XXF256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA  </Type>
+                <PON> LC4512B-XXFT256 </PON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+        <Device name="LC4512C">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LC4512C </CodeName>
+            <FullName> LC4512C </FullName>
+            <AlgoTemplate>LSC_MACH4SXXX.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x01820043</JtagID> 
+            <IDMask>0x0FFFFFFF</IDMask>
+            <IDScanMask>0x0FFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 3632 </ColWidth>
+            <RowWidth>   95 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 345040 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>516</BScan_Length>
+            <SysIO>
+                &quot;95&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LC4512C </PON>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 176-pin TQFP  </Type>
+                <PON> LC4512C-XXT176 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-T176/LC4256"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA  </Type>
+                <PON> LC4512C-XXF256 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PA(N)-F256/LC4512"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA  </Type>
+                <PON> LC4512C-XXFT256 </PON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                       adapter_name="PN-FT256/LC4000"/>
+            </Package>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save JEDEC&quot;
+            &quot;Read DONE bit&quot;
+            &quot;Erase DONE bit&quot;
+            &quot;Program DONE bit&quot;
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed"/>
+	  	<Compliant1532>YES</Compliant1532>
+	  	<DebugMode>YES</DebugMode>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <Programming_Mode_Control>;JTAG;Advanced Flash;</Programming_Mode_Control>
+    </Family>    
+</ispXDF>

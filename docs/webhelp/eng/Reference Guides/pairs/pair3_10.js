@@ -1,0 +1,20 @@
+var pairs =
+{
+"ccu2":{"primitive":1,"instantiated":1}
+,"architectures":{"supported":1}
+,"platform":{"manager":1}
+,"input":{"cin":1}
+,"output":{"cout0":1}
+,"cout0":{"cout1":1}
+,"init0":{"hexadecimal":1}
+,"hexadecimal":{"value":1}
+,"value":{"default":1}
+,"default":{"\u2019h0000":1}
+,"init1":{"hexadecimal":1}
+,"inject1_0":{"default":1}
+,"inject1_1":{"default":1}
+,"attributes":{"need":1}
+,"need":{"defined":1}
+,"defined":{"ccu2":1}
+}
+;Search.control.loadWordPairs(pairs);

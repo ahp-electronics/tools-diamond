@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpIndex version="1.0">
+  <tool name="pn_main_view" href="/index.htm#context/user/Getting_Started">
+    <view name="start_page" href="/index.htm#context/user/Getting_Started" />
+    <view name="pn_error_view" href="/index.htm#context/user/viewing_logs_and_reports" />
+    <view name="pn_file_list_view" href="/index.htm#context/user/managing_project_sources" />
+    <view name="pn_output_view" href="/index.htm#context/user/viewing_logs_and_reports" />
+    <view name="pn_process_view" href="/index.htm#context/user/running_processes" />
+    <view name="pn_warning_view" href="/index.htm#context/user/viewing_logs_and_reports"></view>
+    <view name="pn_find_results_view" href="/index.htm#context/user/finding_results" />
+    <view name="pn_hierarchy_view" href="/index.htm#context/user/hierarchy_view" />
+
+    <dialog name="project_name" href="/index.htm#context/user/creating_a_new_project_using_project_wizard">
+      <whatsthis name="project">Enables you to enter a name and to specify a location for your new project.</whatsthis>
+      <whatsthis name="implementation">Implementations are comprised of source files, synthesis constraints (if the project source is HDL based), constraints for mapping, PAR, timing, placement, and constraints for static timing analysis. This area enables you to enter a name for your implementation. The location of the implementation defaults to the same of the project directory.</whatsthis>
+    </dialog>
+
+    <dialog name="add_source" href="/index.htm#context/user/creating_a_new_project_using_project_wizard">
+      <whatsthis name="source_files">You can choose to add source or remove source by clicking the Add Source button or the Remove source button.&lt;br&gt;
+&lt;b&gt;Add Source&lt;/b&gt; - Enables you to open the Import File dialog and browse to find the desired source to import to your new project.&lt;br&gt;
+&lt;b&gt;Remove Source&lt;/b&gt; - Lets you remove the undesired source.&lt;br&gt;
+&lt;b&gt;Copy source to implementation directory&lt;/b&gt; - If you check this option, the source files you have chosen will be added to the implementation directory. 
+</whatsthis>
+      <whatsthis name="macro_directories">This area is optional when you create a new project. You can choose to specify a directory for the macros of a modular design by using the four buttons: choose or create a directory , remove a directory, move the highlighted directory up or down.</whatsthis>
+    </dialog>
+
+    <dialog name="select_device" href="/index.htm#context/user/creating_a_new_project_using_project_wizard">
+      <!--This appears in the New Project wizard. sel_device appears when you double-click the the target device in File List.-->
+      <!--Both dialog boxes use the following set of whatsthis.-->
+      <whatsthis name="select_device">Specify the device that you plan to use with your design. Start by choosing the family. Other options depend on the family.&lt;br&gt;
+&lt;b&gt;Family&lt;/b&gt; - First, choose the device family.&lt;br&gt;
+&lt;b&gt;Device&lt;/b&gt; - Second, choose the size of the device.&lt;br&gt;
+&lt;b&gt;Performance grade&lt;/b&gt; - Choose the performance grade of the device.&lt;br&gt;
+&lt;b&gt;Package type&lt;/b&gt; - Choose the package type.&lt;br&gt;
+&lt;b&gt;Operating conditions&lt;/b&gt; - Choose the operating conditions.&lt;br&gt;
+&lt;b&gt;Part Names&lt;/b&gt; - Part name of the selected device. Also, a pull-down menu to all devices in the selected family.</whatsthis>
+      <whatsthis name="device_information">Specifications of the selected device are displayed in this area.</whatsthis>
+      <whatsthis name="online_data_sheet">Click to download the data sheet for the selected device.</whatsthis>
+      <whatsthis name="show_obsolete_devices">Check this option. The Device list will also display Lattice obsolete devices.</whatsthis>
+    </dialog>
+
+    <dialog name="sel_device" href="/index.htm#context/user/targeting_a_device">
+      <!--This appears when you double-click the target device in File List. select_device appears in the New Project wizard.-->
+      <!--Both dialog boxes use the above set of whatsthis.-->
+    </dialog>
+
+    <dialog name="project_information" href="/index.htm#context/user/creating_a_new_project_using_project_wizard">
+      <whatsthis name="project_summary">The specification of the new project is displayed in this area, such as project name, project location, implementation name, and the device you have chosen.</whatsthis>
+    </dialog>
+
+    <dialog name="enter_password" href="/index.htm#context/user/setting_security_options"></dialog>
+
+    <dialog name="security_settings" href="/index.htm#context/user/setting_security_options">
+      <whatsthis name="advanced_security_settings">When this option is selected, the advanced settings options in the lower part of this dialog box will be available.</whatsthis>
+      <whatsthis name="advanced_settings_options">&lt;b&gt;Flash Protect&lt;/b&gt; (&lt;i&gt;LatticeXP2 only&lt;/i&gt;) – Allows you to specify the flash protect key. The flash protect key is used to protect the encryption key and the embedded configuration flash from accidental or unauthorized erasure. This feature does not prevent the device from readback. The readback feature is controlled by the CONFIG_SECURE preference, which can be specified in the Design Planner’s SpreadSheet View.&lt;br&gt;
+You can change the flash protect key and its format in the text boxes. The flash protect key is a 64-bit key. Your entries will be left padded with zeros(0) if the text box is not completely filled out. The software will then create a .key file in the project folder to hold the new key. You must keep track of your keys. The flash protect key is needed to reprogram the device.&lt;br&gt;
+You can also revert back to using the default key by clicking &lt;b&gt;Default Key&lt;/b&gt;. The default key is &lt;b&gt;_LATTICE&lt;/b&gt;.&lt;br&gt;
+&lt;b&gt;Encryption/Flash Protect&lt;/b&gt; – Allows you to specify the JEDEC encryption key and the flash protect key (&lt;i&gt;the flash protect key feature is only available for LatticeXP2&lt;/i&gt;). The 128-bit JEDEC encryption key is used to encrypt and decrypt the JEDEC file. Your entries will be left padded with zeros(0) if the text box is not completely filled out. 
+</whatsthis>
+    </dialog>
+
+    <dialog name="options">
+      <whatsthis name="general_auto_gen_hierarchy">If this option is selected, hierarchy of the design will be automatically generated whenever you open a design. Details of the design will be displayed automatically in the Dictionary view, Hierarchy view, Module Library view, as well as the HDL Explorer after you open a design.</whatsthis>
+      <whatsthis name="general_auto_run_bkm">If this option is selected, the Best Known Methods (BKM) analysis is run automatically when you open a design. A series of RTL rule checks are run automatically after you open a design.</whatsthis>
+      <whatsthis name="general_copy_file_to_impl">If this option is selected, when adding exisiting files to the project, these files are copied to the active implementation source directory.</whatsthis>
+      <whatsthis name="general_archive">If this option is selected, all files under the project directory are saved when archiving a project.</whatsthis>
+      <whatsthis name="general_clean_up_output">If this option is selected, the Output, Error, Warning, and Info views are cleared when closing a project.</whatsthis>
+      <whatsthis name="general_clear_output_per_run">If this option is selected, the Output, Error, Warning, and Info views are cleared before running an implementation process.</whatsthis>
+      <whatsthis name="general_max_item_shown">Set the maximum number of items shown in the Recent Files and Recent Projects lists. The value range is 0-20. Default value is 4.</whatsthis>
+      <whatsthis name="general_max_num_imp_proc">Set the maximum number of implementations that can run simultaneously in Run Manager. The value range is 1-32. Default value is 2.</whatsthis>
+      <whatsthis name="general_max_num_mpar_proc">Set the maximum number of place-and-route processes that can run simultaneously in Run Manager. The value range is 1-32. Default value is 2.</whatsthis>
+      <whatsthis name="general_warning_color">Click the color block to change the color used for warnings in the Output and Warning views.</whatsthis>
+      <whatsthis name="general_error_color">Click the color block to change the color used for errors in the Output and Error views.</whatsthis>
+      <whatsthis name="startup_at_mainwin_startup">Choose what you want Diamond to show when it opens and how often Diamond should check for updates.</whatsthis>
+      <whatsthis name="startup_tool_startup_as">For each tool, select the check box if you want the tool to open attached to Diamond's main window. Clear the check box if you want the tool to open in a separate window.</whatsthis>
+      <whatsthis name="directories_synthesis">&lt;b&gt;Synplify Pro&lt;/b&gt;&lt;br&gt;
+Specifies the installation path of Synplify Pro. By default, the text box displays the path of the Lattice OEM Synplify Pro installed with Diamond.&lt;br&gt;
+To use Synplify Pro software that you purchased directly from Synplicity, click the ... button and navigate to its installation directory, or directly type in the path.&lt;br&gt;
+&lt;b&gt;use OEM&lt;/b&gt;&lt;br&gt;Select this option to run Lattice OEM Synplify Pro with the Lattice license. Clear this option if you want to use a license that you got from Synplicity. This option is selected by default.&lt;br&gt;
+&lt;b&gt;Precision&lt;/b&gt;&lt;br&gt;
+Specifies the installation path of Precision RTL Synthesis. Precision RTL Synthesis is not included in Diamond. You must purchase the tool directly from Mentor Graphics.&lt;br&gt;
+Click the ... button and navigate to the Precision installation directory, or directly type in the path. For example:&lt;br&gt;
+C:\Program Files\mentor graphics\precision synthesis 2005c.21\mgc_home\</whatsthis>
+      <whatsthis name="directories_simulation">
+&lt;b&gt;Aldec Simulator&lt;/b&gt;&lt;br&gt;
+Specifies the Active-HDL installation path. By default, this box displays the path of the Lattice OEM Active-HDL installed with Diamond.&lt;br&gt;
+To use Active-HDL software that you purchased directly from Aldec, click the ... button and navigate to its installation directory, or directly type in the path.&lt;br&gt;
+&lt;b&gt;ModelSim/QuestaSim&lt;/b&gt;&lt;br&gt;
+Specifies the ModelSim or Questa installation path. ModelSim and Questa are not included in Diamond. You must purchase the tool directly from Mentor Graphics.&lt;br&gt;
+Click the ... button and navigate to the installation directory, or directly type in the path.
+</whatsthis>
+      <whatsthis name="network_use_proxy_server">
+Select this option if you must go through a proxy server before connecting to the Internet. Ask your system administrator for the proxy information. You may also find the proxy information in the options or preferences of your browser. Check for Advanced or Connections options.
+      </whatsthis>
+    </dialog>
+  </tool>
+</helpIndex>

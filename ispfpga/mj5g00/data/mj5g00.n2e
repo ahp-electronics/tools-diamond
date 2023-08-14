@@ -1,0 +1,109 @@
+   mode LOGIC
+   {
+      include REGMODE MODE K1 K0 REG1 REG0 Q1 Q0 F1 F0 D1 C1 B1 A1 D0 C0 B0 A0 
+         M0 DI1 DI0 GSR M0MUX K0K1MUX CLK CE LSR CLKMUX CEMUX LSRMUX OFX1 FXA 
+         FXB FXMUX M1 SRMODE OFX0 LSRONMUX M1MUX;
+
+      # Doing the connections.
+      connect K1.A to A1.A1;
+      connect K1.B to B1.B1;
+      connect K1.C to C1.C1;
+      connect K1.D to D1.D1;
+      connect K1.H1 to F1.F;
+      connect K1.H1 to K0K1MUX.H1;
+      connect K0.A to A0.A0;
+      connect K0.B to B0.B0;
+      connect K0.C to C0.C0;
+      connect K0.D to D0.D0;
+      connect K0.H0 to F0.F;
+      connect K0.H0 to K0K1MUX.H0;
+      connect REG1.D0 to M1MUX.M1MUX;
+      connect REG1.D1 to DI1.DI1;
+      connect REG1.SD to LSRMUX.LSRMUX;
+      connect REG1.SP to CEMUX.CEMUX;
+      connect REG1.CK to CLKMUX.CLKMUX;
+      connect REG1.LSR to LSRONMUX.LSRONMUX;
+      connect REG1.Q to Q1.Q;
+      connect REG0.D0 to M0MUX.M0MUX;
+      connect REG0.D1 to DI0.DI0;
+      connect REG0.SD to LSRMUX.LSRMUX;
+      connect REG0.SP to CEMUX.CEMUX;
+      connect REG0.CK to CLKMUX.CLKMUX;
+      connect REG0.LSR to LSRONMUX.LSRONMUX;
+      connect REG0.Q to Q0.Q;
+      connect M0.M0 to M0MUX.M0;
+      connect M0MUX.M0MUX to K0K1MUX.M0MUX;
+      connect K0K1MUX.K0K1MUX to OFX0.F;
+      connect CLK.CLK to CLKMUX.CLK;
+      connect CE.CE to CEMUX.CE;
+      connect LSR.LSR to LSRMUX.LSR;
+      connect LSRMUX.LSRMUX to LSRONMUX.LSRMUX;
+      connect OFX1.F to FXMUX.FXMUX;
+      connect FXA.FXA to FXMUX.FXA;
+      connect FXB.FXB to FXMUX.FXB;
+      connect FXMUX.M1MUX to M1MUX.M1MUX;
+      connect M1.M1 to M1MUX.M1;
+
+      # Doing the attachments.
+      attach REGMODE to REG0;
+      attach REGMODE to REG1;
+      attach REG1 to GSR;
+      attach REG1 to SRMODE;
+      attach REG0 to GSR;
+      attach REG0 to SRMODE;
+   } # LOGIC 
+
+   mode RIPPLE
+   {
+      include REGMODE MODE REG1 REG0 Q1 Q0 A1 B1 B0 A0 M0 GSR CLK CE LSR CLKMUX 
+         CEMUX LSRMUX OFX1 SRMODE ALU2_MULT DI0 FCO FCIMUX FCI M0MUX M1MUX 
+         LSRONMUX M1 OFX0 DI1MUX DI1 DI0MUX C1 D1 C0 D0;
+
+      # Doing the connections.
+      connect REG1.D0 to M1MUX.M1MUX;
+      connect REG1.D1 to DI1MUX.DI1MUX;
+      connect REG1.SD to LSRMUX.LSRMUX;
+      connect REG1.SP to CEMUX.CEMUX;
+      connect REG1.CK to CLKMUX.CLKMUX;
+      connect REG1.LSR to LSRONMUX.LSRONMUX;
+      connect REG1.Q to Q1.Q;
+      connect REG0.D0 to M0MUX.M0MUX;
+      connect REG0.D1 to DI0MUX.DI0MUX;
+      connect REG0.SD to LSRMUX.LSRMUX;
+      connect REG0.SP to CEMUX.CEMUX;
+      connect REG0.CK to CLKMUX.CLKMUX;
+      connect REG0.LSR to LSRONMUX.LSRONMUX;
+      connect REG0.Q to Q0.Q;
+      connect A1.A1 to ALU2_MULT.A1;
+      connect B1.B1 to ALU2_MULT.B1;
+      connect B0.B0 to ALU2_MULT.B0;
+      connect A0.A0 to ALU2_MULT.A0;
+      connect M0.M0 to M0MUX.M0;
+      connect CLK.CLK to CLKMUX.CLK;
+      connect CE.CE to CEMUX.CE;
+      connect LSR.LSR to LSRMUX.LSR;
+      connect LSRMUX.LSRMUX to LSRONMUX.LSRMUX;
+      connect OFX1.F to ALU2_MULT.CO1;
+      connect ALU2_MULT.C0 to C0.C0;
+      connect ALU2_MULT.C1 to C1.C1;
+      connect ALU2_MULT.D0 to D0.D0;
+      connect ALU2_MULT.D1 to D1.D1;
+      connect ALU2_MULT.CI to FCIMUX.FCIMUX;
+      connect ALU2_MULT.S0 to DI0MUX.S0;
+      connect ALU2_MULT.S1 to DI1MUX.S1;
+      connect ALU2_MULT.CO0 to OFX0.F;
+      connect ALU2_MULT.CO1 to FCO.CO;
+      connect DI0.DI0 to DI0MUX.DI0;
+      connect FCIMUX.M0MUX to M0MUX.M0MUX;
+      connect FCIMUX.FCI to FCI.FCI;
+      connect M1MUX.M1 to M1.M1;
+      connect DI1MUX.DI1 to DI1.DI1;
+
+      # Doing the attachments.
+      attach REGMODE to REG0;
+      attach REGMODE to REG1;
+      attach REG1 to GSR;
+      attach REG1 to SRMODE;
+      attach REG0 to GSR;
+      attach REG0 to SRMODE;
+   } # RIPPLE 

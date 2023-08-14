@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="basereveal">
+  <!-- Internal milestone definition -->
+  <MileStoneDef id ="reveal_core_gen" title ="RevealCoreGenerate">
+    <SubTasks>
+      <Task definition="reveal_core_gen::synthesis_core" />
+    </SubTasks>
+  </MileStoneDef>
+
+  <TaskDef id="reveal_core_gen::synthesis_core" title="core_synthesis" type="internal" depend_on_properties="implementation.EDIF_Reveal">
+    <Target id ="target">
+      <Command using_def='Cmd_EDIF_Reveal_CmdGen' />
+      <Command using_def='Cmd_Reveal' />
+      <if condition='implementation.synthesis == "lse"' cmd="core_synthesis::Cmd_Cmdgen_Lattice_ngo" defaultcmd="core_synthesis::Cmd_Cmdgen_Synplify" />
+      <if condition='implementation.synthesis == "lse"' cmd="core_synthesis::Cmd_Lattice" defaultcmd="core_synthesis::Cmd_Synplify" />
+      <if condition='implementation.synthesis != "lse"' cmd="core_synthesis::Cmd_Translate"/>
+      <Command using_def ='Cmd_Reveal_Clean'/>
+    </Target>
+    <Report id="coretop" value="reveal_coretop.ngo" />
+  </TaskDef>
+  <CommandDef id="core_synthesis::Cmd_Translate" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+	<cmd_str>edif2ngd -ip "${InstallPath}/module" -ic reveal -nopropwarn -l "${device.family}" -d $device.device -path "${impl_dir}" "reveal_debug_coretop.edi" "reveal_coretop.ngo" </cmd_str>
+  </CommandDef>
+  <CommandDef id="core_synthesis::Cmd_Cmdgen_Lattice_ngo" type="CMD_TCL_SCRIPT_SOURCE">
+    <cmd_str>gen_lattice_prj hdl_ngo gen_core </cmd_str>
+    <scripts>syn_lattice.tcl</scripts>
+  </CommandDef>
+  <CommandDef id="core_synthesis::Cmd_Lattice" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>synthesis -f "reveal_coretop_lattice.synproj"</cmd_str>
+  </CommandDef>
+  <CommandDef id="core_synthesis::Cmd_Cmdgen_Synplify" type="CMD_TCL_SCRIPT_SOURCE">
+    <cmd_str>gen_synplify_tcl gen_core</cmd_str>
+    <scripts>syn_synplify.tcl</scripts>
+  </CommandDef>
+  <CommandDef id="core_synthesis::Cmd_Synplify" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>synpwrap -prj "reveal_coretop_synplify.tcl" -log "reveal_coretop.srf"</cmd_str>
+  </CommandDef>
+  
+  <CommandDef id="Cmd_Reveal_CmdGen" type="CMD_TCL_SCRIPT_SOURCE">
+    <cmd_str>gen_reveal_rvp ${implementation.Reveal.level}</cmd_str>
+    <scripts>reveal_rvp.tcl</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_Rtl_Reveal_CmdGen" type="CMD_TCL_SCRIPT_SOURCE">
+    <cmd_str>gen_reveal_rvp rtl</cmd_str>
+    <scripts>reveal_rvp.tcl</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_EDIF_Reveal_CmdGen" type="CMD_TCL_SCRIPT_SOURCE">
+    <cmd_str>gen_reveal_rvp edif</cmd_str>
+    <scripts>reveal_rvp.tcl</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_Reveal" sc_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>istflow -prj "${implementation.Reveal.absolutefilepath}" -design "${report_base}.rvp" </cmd_str>
+	<scripts>
+	  <![CDATA[
+          proc istflow {args} {
+			set msg "istflow $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+      ]]>		
+	</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_RevealEdif" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>revealedf -t "${implementation.Reveal.completebasename}.rve" -w "${postsynthesis_edifngos._ITERATOR.last.value.completebasename}.ngo" -m "${postsynthesis_edifngos._ITERATOR.last.value.completebasename}.ngo" </cmd_str>
+  </CommandDef>
+  <CommandDef id="Cmd_Reveal_Clean" type="CMD_TCL_SCRIPT">
+    <cmd_str/>
+	<scripts>
+	  <![CDATA[
+	      if [catch {
+			  if {[info exists env(KEEP_REVEAL_TEMP)] == 0} {
+			    if [ file isdirectory "reveal_workspace/tmpreveal" ] {
+			      file delete -force "reveal_workspace/tmpreveal"
+			    }
+              }				
+			} err ] {
+			runtime_log -err $err
+		  }
+      ]]>		
+	</scripts>
+  </CommandDef>
+</BaliFlowDef>

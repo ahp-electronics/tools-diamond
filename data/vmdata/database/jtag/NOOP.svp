@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<SVF_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1">
+	</Interface>
+</Setup>
+<Operation_List>
+	"Bypass"	=	"	INIT 	! Initialize"	;
+</Operation_List>
+<Script>
+<![CDATA[
+function INIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR IDLE;
+	ENDIR IDLE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+	SYNC;
+}
+]]>
+</Script>
+</SVF_Plus>

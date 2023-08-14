@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="precision">
+  <TaskDef id = "Task_Synthesis_Precision" title="Precision_Synthesis" lable="Precision"
+           depend_on_milestones="hdlgen" depend_on_properties="implementation.synthesis_hdls, implementation.RTL_Reveal">
+    <Target id ="target">
+	  <if condition = 'defined(implementation.Reveal)&amp;&amp;(implementation.synthesisable_srces_count &gt; 0)' cmd = "Cmd_Reveal_CmdGen"/>
+	  <if condition = 'defined(implementation.Reveal)&amp;&amp;(implementation.synthesisable_srces_count &gt; 0)' cmd = "Cmd_Reveal"/>
+      <Command using_def="Cmd_Cmdgen_Precision" />
+      <Command using_def="Cmd_Precision" />
+	  <if condition = 'defined(implementation.Reveal)&amp;&amp;(implementation.synthesisable_srces_count &gt; 0)' cmd = "Cmd_Reveal_Clean"/>
+    </Target>
+    <Report using_def="Report_Synthesis" />
+  </TaskDef>
+  <CommandDef id="Cmd_Cmdgen_Precision" type="CMD_TCL_SCRIPT_SOURCE">
+    <cmd_str>gen_precision_tcl !Synthesis:REVEAL</cmd_str>
+    <scripts>syn_precision.tcl</scripts>
+    <!--scripts-->
+      <![CDATA[
+		set imp_dir "[runtime_property value impl_dir]"
+		set rep_name "$imp_dir/[runtime_property value report_base]"
+		set file_name "${rep_name}_precision.tcl"
+		set prj_name [runtime_property value project.title]
+		set prj_dir [runtime_property value project.project_path]
+		if {[catch {set cf [open $file_name w]} err]} {
+			runtime_log -err "open $file_name is fialed: $err\n"
+			return -code error
+		}
+		puts $cf "if \{ \[catch \{"
+        #puts $cf "new_project -name verilog_hierarchical_design -folder \{\"${prj_dir}\"\} -createimpl_name \"${prj_name}_impl\" -force"
+		puts $cf "new_project -name verilog_hierarchical_design -folder \"$prj_dir\" -createimpl_name \"${prj_name}_impl\" -force"
+		set synthesis_srces [runtime_property value implementation.synthesis_hdls]
+		foreach src $synthesis_srces {
+			set type [runtime_property value "implementation.synthesis_hdls.\{${src}\}.type"]
+			if { $type == "Verilog" } {
+				set search_path [runtime_property value "implementation.synthesis_hdls.\{${src}\}.include path"]
+				if { [string length $search_path] == 0 } {
+					set search_path .
+				}
+				puts $cf "add_input_file -format verilog \{$src\} -search_path \{$search_path\}"
+			} elseif { $type == "VHDL" } {
+				set work_lib [runtime_property value "implementation.synthesis_hdls.\{${src}\}.lib"]
+				if { [string length $work_lib] == 0 } {
+					set work_lib work
+				}
+				puts $cf "add_input_file -format vhdl \{$src\} -work \{$work_lib\}"
+			}
+		}
+		puts $cf "setup_design -design=\"[runtime_property value implement.top]\""
+		puts $cf "setup_design -manufacturer Lattice -family \"[runtime_property value device.family]\" -part [runtime_property value device.device] -speed [runtime_property value device.speed] -package [runtime_property value device.package]"
+        puts $cf "setup_design -basename \"[runtime_property value report_base]\""
+		puts $cf "[runtime_strategy cmd_option PROP_PRE_VSynFreq]"
+        puts $cf "setup_design -input_delay=0"
+        puts $cf "setup_design -output_delay=0"
+        puts $cf "setup_design -vendor_constraint_file=false"
+        puts $cf "setup_design -encoding=auto"
+        puts $cf "setup_analysis -critical_paths -num_critical_paths=3"
+        puts $cf "setup_design -retiming"
+        puts $cf "setup_design -gated_clock=0"
+        puts $cf "setup_design -infer_gsr=true"
+        puts $cf "setup_design -resource_sharing"
+        puts $cf "setup_design -reencode_fsm_outputs"
+        puts $cf "setup_design -language_syntax_verilog v2001"
+        puts $cf "compile"
+        puts $cf "synthesize"
+        puts $cf "report_timing -all_clocks"
+        puts $cf "setup_analysis -summary -num_summary_paths=10"
+        puts $cf "save_impl"
+        puts $cf "file copy -force \"./${prj_name}_impl/[runtime_property value report_base].edf\" \"${rep_name}.edi\""
+        puts $cf "close_project"
+        puts $cf "\} result\]\} \{"
+        puts $cf "save_impl"
+        puts $cf "close_project"
+        puts $cf "exit 1\"\}"
+        close $cf
+      ]]>
+    <!--/scripts-->
+  </CommandDef>
+  <CommandDef id="Cmd_Precision" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>${PRECISION_PATH}/bin/precision -shell -file "${report_base}_precision.tcl" -logfile "${report_base}_precision.srp"</cmd_str>
+    <scripts>
+	    <![CDATA[
+		    proc precision {args} {
+			    set msg "precision $args\n";
+			    runtime_log $msg;
+			    set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			    runtime_log $msg;
+			    runtime_log "......\n";
+			    runtime_log "......\n";
+		    }
+	    ]]>
+    </scripts>
+  </CommandDef>
+</BaliFlowDef>

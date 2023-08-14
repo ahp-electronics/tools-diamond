@@ -1,0 +1,25 @@
+var pairs =
+{
+"schematic":{"design":1,"symbols":1}
+,"wiring":{"schematic":1}
+,"wires":{"electrically":1,"add":1,"symbol":1}
+,"electrically":{"connect":1}
+,"connect":{"schematic":1}
+,"symbols":{"symbol":1}
+,"symbol":{"pins":1}
+,"pins":{"connection":1,"however":1}
+,"connection":{"points":1}
+,"points":{"wires":1}
+,"add":{"wire":1,"wires":1,"net":1,"bus":1,"single":1}
+,"wire":{"command":1,"segments":1}
+,"command":{"used":1}
+,"used":{"add":1}
+,"however":{"add":1}
+,"net":{"name":1}
+,"name":{"add":1}
+,"bus":{"tap":1}
+,"tap":{"commands":1}
+,"commands":{"add":1}
+,"single":{"wire":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="xo3c00f" include="xo3c00">
+  <VariableDef name="Bitgen:outfile" value ='strategy.PROP_BIT_OutFormatBitGen=="Bit File (Binary)"||strategy.PROP_BIT_OutFormatBitGen=="Mask and Readback File (Binary)"?$(report_base)_XO3L.bit:$(report_base)_XO3L.rbt' />
+  <TaskDef id ="Task_Jedecgen4Xo3l" title ="Jedec4Xo3l" lable ="JEDEC File(XO3L Migration)" depend_on_milestones="par, par:Task_PWRCheck">
+	 <Target id ="target">
+	   <Command using_def="Cmd_TimingCheck"/>
+	   <Command id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+		 <CommandFile name="${report_base}.t2b" clean="TRUE" >
+		   <line>#PROP_BIT_RunDRCBitGen</line>	
+		   <line>#PROP_BIT_DisableUESBitgen</line>
+          <line>#PROP_BIT_DisRAMResBitGen</line>
+		  <line>#PROP_BIT_NoHeader</line>
+          <line>-path "${project_dir}" #PROP_BIT_SearchPthBitGen </line>
+		  <line>-g MIGRATION:ON</line>
+		 </CommandFile>
+		 <cmd_str>bitgen -f "${report_base}.t2b" -w "${report_base}.ncd" -jedec "${report_base}_XO3L.jed" "${report_base}.prf"</cmd_str>
+		 <scripts>
+		  <![CDATA[
+			proc bitgen {args} {
+				set msg "bitgen $args\n";
+				runtime_log $msg;
+				set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+				runtime_log $msg;
+			}
+		  ]]>
+		 </scripts>
+	   </Command>
+     </Target>
+	 <Report using_def="Report_BitGen_XO3"/>
+	 <Report using_def="Report_JDec_XO3L"/>
+  </TaskDef>
+  <TaskDef id ="Task_Bitgen4Xo3l" title ="Bitgen4Xo3l" lable ="Bitstream File(XO3L Migration)" depend_on_milestones="par, par:Task_PWRCheck">
+	 <Target id ="target">
+	   <Command using_def="Cmd_TimingCheck"/>
+	   <Command id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+		 <CommandFile name="${report_base}.t2b" clean="TRUE" >
+		   <line>#PROP_BIT_RunDRCBitGen</line>	
+		   <line>#PROP_BIT_DisableUESBitgen</line>
+          <line>#PROP_BIT_DisRAMResBitGen</line>
+		  <line>#PROP_BIT_NoHeader</line>
+           <line>-path "${project_dir}" #PROP_BIT_SearchPthBitGen </line>
+		  <line>-g MIGRATION:ON</line>
+		 </CommandFile>
+		 <cmd_str>bitgen -f "${report_base}.t2b" -w "${report_base}.ncd" !Bitgen:outfile "${report_base}.prf"</cmd_str>
+		 <scripts>
+		  <![CDATA[
+			proc bitgen {args} {
+				set msg "bitgen $args\n";
+				runtime_log $msg;
+				set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+				runtime_log $msg;
+			}
+		  ]]>
+		 </scripts>
+	   </Command>
+     </Target>
+	 <Report using_def="Report_BitGen_XO3"/>
+	 <Report using_def="Report_Bitstream_XO3L"/>
+  </TaskDef> 
+</BaliFlowDef>

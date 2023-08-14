@@ -1,0 +1,21 @@
+var pairs =
+{
+"assigning":{"signals":1}
+,"diamond\u2019s":{"spreadsheet":1}
+,"spreadsheet":{"view":1}
+,"view":{"netlist":1,"enable":1,"pin":1,"layout":1}
+,"netlist":{"view":1}
+,"enable":{"assign":1}
+,"assign":{"signals":1}
+,"signals":{"pin":1,"dragging":1,"assigned":1}
+,"pin":{"locations":1}
+,"locations":{"assign":1,"package":1}
+,"dragging":{"netlist":1}
+,"package":{"view":1}
+,"layout":{"signals":1}
+,"assigned":{"reassigned":1}
+,"reassigned":{"stage":1}
+,"stage":{"design":1}
+,"design":{"flow":1}
+}
+;Search.control.loadWordPairs(pairs);

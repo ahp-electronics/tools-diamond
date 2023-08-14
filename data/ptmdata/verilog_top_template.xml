@@ -1,0 +1,5511 @@
+<?xml version="1.0"?>
+<VerilogTopTemplate>
+   <Date>2/23/2012</Date>
+   <Version>1.0</Version>
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>TopDesign</HDLProcessProtoName>
+
+      <HDLStatement>
+         <HDLText>// Target device: %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>DEVICE_NAME</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>// HDL code generated on: %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>FULL_TIME_STAMP</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>// by Lattice Diamond HDL generator: Version %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>HDLGEN_VERSION</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText>// (part of Lattice Diamond Version %s)</HDLText>
+         <HDLArg>
+            <HDLArgVal>DIAMOND_VERSION</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText></HDLText>
+      </HDLStatement>
+
+      <HDLStatement>
+         <HDLText></HDLText>
+      </HDLStatement>
+
+       <HDLStatement>
+         <HDLText>module %s</HDLText>
+         <HDLArg>
+            <HDLArgVal>TOP_HDL_MODULE_NAME</HDLArgVal>
+         </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>(</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t%s input %s</HDLText>
+		 <HDLList>LIST_TOP_IN_LOC</HDLList>
+		 <HDLList>LIST_TOP_IN</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+		 <HDLSepCondition>B_HAS_TOP_OUT</HDLSepCondition>
+		 <HDLSepCondition>B_HAS_TOP_INOUT</HDLSepCondition>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t%s output %s</HDLText>
+		 <HDLList>LIST_TOP_OUT_LOC</HDLList>
+		 <HDLList>LIST_TOP_OUT</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+		 <HDLSepCondition>B_HAS_TOP_INOUT</HDLSepCondition>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t%s inout %s</HDLText>
+		 <HDLList>LIST_TOP_INOUT_LOC</HDLList>
+		 <HDLList>LIST_TOP_INOUT</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>wire %s;</HDLText>
+		 <HDLList>LIST_TOP_NODE</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>wire [%s:%s] %s;</HDLText>
+		 <HDLList>LIST_TOP_ARR_NODE_START</HDLList>
+		 <HDLList>LIST_TOP_ARR_NODE_END</HDLList>
+		 <HDLList>LIST_TOP_ARR_NODE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>wire [69:0] %s;</HDLText>
+		 <HDLList>LIST_ASCRDAT_NODE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>wire [76:0] %s;</HDLText>
+		 <HDLList>LIST_ASCWDAT_NODE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>wire [69:0] %s;</HDLText>
+		 <HDLList>LIST_USPASCO_NODE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>wire [76:0] %s;</HDLText>
+		 <HDLList>LIST_USPASCI_NODE</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>wire [1:0] LOGIC1;</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>wire [1:0] LOGIC0;</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+	     <HDLProcessName>P_INSTANT_CLKRST</HDLProcessName>
+      </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLProcessName>P_INSTANT_ASCVM</HDLProcessName>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLProcessName>P_INSTANT_RDAT</HDLProcessName>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessName>P_INSTANT_WDAT</HDLProcessName>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLProcessAltern>1</HDLProcessAltern>
+         <HDLCondition>B_HAS_LGB_USED</HDLCondition>
+	     <HDLProcessName>P_INSTANT_LGB</HDLProcessName>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_FAN_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_FAN</HDLProcessName>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_HOTSWAP_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_HOTSWAP</HDLProcessName>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_MICOSYS_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_MICOTOP</HDLProcessName>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_EFB_TIMER_CONFIG_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_EFBTCCFG</HDLProcessName>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_USR_HDL_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_USRHDL</HDLProcessName>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+	     <HDLText></HDLText>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessName>P_ASSIGN_SECTION</HDLProcessName>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>endmodule</HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_CLKRST</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>clkrst clkrst_inst(</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.clk_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>USED_GLOBAL_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t.asc%s_rstn_i(%s),</HDLText>
+         <HDLList>LIST_ASC_IDX_FOR_RESET</HDLList>
+		 <HDLList>LIST_ASC_RESET</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t.vm%s_crc_i(%s),</HDLText>
+         <HDLList>LIST_ASC_IDX</HDLList>
+		 <HDLList>LIST_CLKRST_VM_CRC_I_NODE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.ext_rstn_i(%s),</HDLText>
+		 <HDLArg>
+			<HDLArgVal>EXT_RSTN_I_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.db_busy_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>DB_BUSY_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.sys_clk_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>SYS_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_PLL_CLOCK</HDLCondition>
+	     <HDLText>\t.pll_clk_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PLL_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.pld_clk_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>LB_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.lb_clk_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>LGB_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.lb_clk_enable(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>LGB_CLOCK_ENABLE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.rstn_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>SYS_RESET_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_PLL_RESET</HDLCondition>
+	     <HDLText>\t.wb_comp_rstn_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PLL_RESET_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>B_HAS_ECP5_USED</HDLCondition>
+	     <HDLText>\t.pll_hsclk_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_SEFB_DEL_CLK_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t.vm%s_crc_rstn_o(%s),</HDLText>
+         <HDLList>LIST_ASC_IDX</HDLList>
+		 <HDLList>LIST_CLKRST_VM_CRC_RSTN_O_NODE</HDLList>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.lb_rstn_o(%s)</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>LB_RESET_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+   
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_ASCVM</HDLProcessProtoName>
+   	  
+	  <HDLStatement>
+	     <HDLText>ASCVM ascvm_inst(</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.clk_3wi(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>SYS_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.resetn(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>SYS_RESET_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t.rst_usp_asc%s_o(%s),</HDLText>
+         <HDLList>LIST_ASC_IDX</HDLList>
+		 <HDLList>LIST_CLKRST_VM_CRC_RSTN_O_NODE</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.clk_lgbldr(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>LB_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_HAS_MICO_FL</HDLCondition>
+	     <HDLProcessName>P_FL_INSTANT_WRAP</HDLProcessName>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_INSTANT_VM_ASCPORT</HDLProcessName>
+         <HDLArg>
+            <HDLArgVal>INCREASE_ASC_NUM</HDLArgVal>
+         </HDLArg>
+		 <HDLList>LIST_ASC_RDAT_IN</HDLList>
+		 <HDLList>LIST_ASC_WDAT_OUT</HDLList>
+		 <HDLList>LIST_USP_ASC_I_NODE</HDLList>
+		 <HDLList>LIST_USP_ASC_O_NODE</HDLList>
+		 <HDLList>LIST_USP_3WIERRRST</HDLList>
+		 <HDLList>LIST_CLKRST_VM_CRC_I_NODE</HDLList>
+		 <HDLList>LIST_ASC_3WCLK_OUT</HDLList>
+		 <HDLList>LIST_USP_ASC_3WIERRRST</HDLList>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_FL_INSTANT_WRAP</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLProcessName>P_INSTANT_VM_FL_PORT</HDLProcessName>
+		 <HDLArg>
+		   <HDLArgVal>INCREASE_ASC_NUM</HDLArgVal>
+		 </HDLArg>
+		 <HDLList>LIST_FL_ASC_DATA</HDLList>
+		 <HDLList>LIST_FL_ASC_VALID</HDLList>
+	  </HDLStatement>
+   </HDLProcessProto>
+   
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_VM_ASCPORT</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+         <HDLText>\t.rdat_%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	     <HDLArg>
+	        <HDLArgVal>PROCESS_ARG1</HDLArgVal>
+	     </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.wdat_%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	     <HDLArg>
+	        <HDLArgVal>PROCESS_ARG2</HDLArgVal>
+	     </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.wrclk_%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	     <HDLArg>
+	        <HDLArgVal>PROCESS_ARG7</HDLArgVal>
+	     </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.usp_asc%s_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG3</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.usp_asc%s_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG4</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.usp_asc%s_3wierr(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG5</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.usp_asc%s_3wierrrst(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG8</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_LAST_ASC</HDLCondition>
+	     <HDLText>\t.crb_asc%s_crcerr(%s)</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG6</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_NOT_LAST_ASC</HDLCondition>
+	     <HDLText>\t.crb_asc%s_crcerr(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG6</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_VM_FL_PORT</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+         <HDLText>\t.fl_asc%s_data(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	     <HDLArg>
+	        <HDLArgVal>PROCESS_ARG1</HDLArgVal>
+	     </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLText>\t.fl_asc%s_valid(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+	     <HDLArg>
+	        <HDLArgVal>PROCESS_ARG2</HDLArgVal>
+	     </HDLArg>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+   
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_RDAT</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>RDAT RDAT_inst(</HDLText>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_INSTANT_RDAT_ASCPORT</HDLProcessName>
+         <HDLArg>
+            <HDLArgVal>INCREASE_ASC_NUM</HDLArgVal>
+         </HDLArg>
+		 <HDLList>LIST_USP_ASC_O_NODE</HDLList>
+		 <HDLList>LIST_RDAT_BIT_NODE</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.clk_3wi(%s)</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>SYS_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_WDAT</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>WDAT WDAT_inst(</HDLText>
+	  </HDLStatement>
+
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_INSTANT_WDAT_ASCPORT</HDLProcessName>
+         <HDLArg>
+            <HDLArgVal>INCREASE_ASC_NUM</HDLArgVal>
+         </HDLArg>
+		 <HDLList>LIST_USP_ASC_I_NODE</HDLList>
+		 <HDLList>LIST_WDAT_BIT_NODE</HDLList>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.clk_3wi(%s)</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>SYS_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_RDAT_ASCPORT</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.asc%s_RDAT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG2</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.usp_asc%s_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG1</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	</HDLProcessProto>
+
+	
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_WDAT_ASCPORT</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.usp_asc%s_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG1</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.asc%s_WDAT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG0</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG2</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	</HDLProcessProto>
+	
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_LGB</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>%s %s_inst(</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>LGB_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>LGB_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t.%s(%s)</HDLText>
+		 <HDLList>LIST_LGB_INPUT</HDLList>
+		 <HDLList>LIST_LGB_INPUT</HDLList>
+         <HDLSeparater>,</HDLSeparater>
+         <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+         <HDLSepCondition>B_HAS_LGB_OUTPUT</HDLSepCondition>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t.%s(%s)</HDLText>
+		 <HDLList>LIST_LGB_OUTPUT</HDLList>
+		 <HDLList>LIST_LGB_OUTPUT</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_MICOTOP</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>%s %s_inst(</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>MICO_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>MICO_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_VID_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_VIDPORTS</HDLProcessName>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_EFB_I2C1_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_EFB_I2C1PORTS</HDLProcessName>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_EFB_I2C2_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_EFB_I2C2PORTS</HDLProcessName>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_EFB_SPI_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_EFB_SPIPORTS</HDLProcessName>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_EFB_TC_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_EFB_TCPORTS</HDLProcessName>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_EFB_USED_MASTER</HDLCondition>
+         <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFBWB_INT_O_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFBWB_INT_O_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_DB_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_DB_PORTS</HDLProcessName>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_FL_MICO_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_FL_PORTS</HDLProcessName>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>B_HAS_SPI_UFM_USED</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+			<HDLArgVal>EFB_UFM_SN_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_UFM_SN_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>B_HAS_PMBUS_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_PMBUS_PORTS</HDLProcessName>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_ECP5_VID_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_ECP5_VIDPORTS</HDLProcessName>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_ECP5_EFB_I2C1_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_ECP5_EFB_I2C1PORTS</HDLProcessName>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_ECP5_DB_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_ECP5_DB_PORTS</HDLProcessName>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_ECP5_FL_MICO_USED</HDLCondition>
+		 <HDLProcessName>P_INSTANT_ECP5_FL_PORTS</HDLProcessName>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_ECP5_USED</HDLCondition>
+	     <HDLText>\t.sefbsefb_del_clk(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_SEFB_DEL_CLK_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.clk_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>MAIN_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.reset_n(%s)</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>MAIN_RESET_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+      <HDLStatement>
+         <HDLIf>
+            <HDLIfCon>B_HAS_FL_MICO_USED</HDLIfCon>
+            <HDLStatement>
+			   <HDLText>) /*synthesis syn_noprune=1*/;</HDLText>
+            </HDLStatement>
+         </HDLIf>
+         <HDLElse>
+            <HDLStatement>
+               <HDLText>);</HDLText>
+            </HDLStatement>
+         </HDLElse>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+   
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_EFBTCCFG</HDLProcessProtoName>
+
+	  <HDLStatement>
+	     <HDLText>%s %s_inst(</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFBTC_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFBTC_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_EFB_TIMER_USED</HDLCondition>
+	     <HDLText>\t.CLK(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>SYS_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_EFB_TIMER_USED</HDLCondition>
+	     <HDLText>\t.RESET(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>LB_RESET_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.wb_clk_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>USED_GLOBAL_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_EFB_TIMER_USED</HDLCondition>
+	     <HDLText>\t.tc_oc(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_TC_OC_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLText>\t.i2c1_scl(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C1_SCL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+      <HDLStatement>
+	     <HDLText>\t.i2c1_sda(%s)</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C1_SDA_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+   
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_VIDPORTS</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH0</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH0_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH0_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH1</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH1_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH1_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH2</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH2_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH2_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH3</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH3_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH3_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH4</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH4_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH4_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH5</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH5_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH5_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH6</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH6_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH6_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH7</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH7_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH7_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH8</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH8_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH8_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH9</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH9_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH9_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH10</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH10_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH10_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH11</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH11_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH11_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH12</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH12_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH12_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH13</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH13_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH13_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH14</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH14_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH14_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH15</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH15_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH15_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDDB_BUSY_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>DB_BUSY_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH_ENA_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH_ENA_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDSLOW_CLOCK_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>LGB_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDGPIO1_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_GPIO1_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>B_IS_VID_MASTER_WITHOUT_PMBUS</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDVID_IRQ_O_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VIDVID_IRQ_O_SIGNAME</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+   </HDLProcessProto>
+	
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_ECP5_VIDPORTS</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH0</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH0_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH0_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH1</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH1_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH1_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH2</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH2_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH2_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH3</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH3_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH3_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH4</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH4_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH4_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH5</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH5_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH5_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH6</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH6_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH6_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH7</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH7_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH7_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH8</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH8_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH8_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH9</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH9_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH9_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH10</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH10_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH10_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH11</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH11_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH11_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH12</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH12_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH12_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH13</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH13_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH13_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH14</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH14_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH14_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_VIDCH15</HDLCondition>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH15_SEL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH15_SEL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDDB_BUSY_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>DB_BUSY_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDCH_ENA_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_CH_ENA_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDSLOW_CLOCK_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>LGB_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>VIDGPIO1_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>VID_GPIO1_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_EFB_I2C1PORTS</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C1_SCL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C1_SCL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C1_SDA_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C1_SDA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_ECP5_EFB_I2C1PORTS</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5_EFB_I2C1_SCL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C1_SCL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5_EFB_I2C1_SDA_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C1_SDA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_EFB_I2C2PORTS</HDLProcessProtoName>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C2_SCL_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C2_SCL_SIG</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C2_SDA_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_I2C2_SDA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+   </HDLProcessProto>
+
+
+   <HDLProcessProto>   
+      <HDLProcessProtoName>P_INSTANT_EFB_SPIPORTS</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_SPI_CSN_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_SPI_CSN_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_SPI_CLK_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_SPI_CLK_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_SPI_MISO_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_SPI_MISO_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_SPI_MOSI_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_SPI_MOSI_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(1'b1),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_SPI_SCSN_PORTNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+	  
+	  
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_EFB_TCPORTS</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_TC_IC_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_TC_IC_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_TC_OC_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>EFB_TC_OC_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>EFB_TC_RSTN_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>MAIN_RESET_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_DB_PORTS</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s({%s}),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>RESET_LIST_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>RESET_LIST_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>DB_BUSY_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>DB_BUSY_NAME</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>DB_WE_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>DB_WE_SIGNAL</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+   </HDLProcessProto>
+	
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_ECP5_DB_PORTS</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.%s({%s}),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5_RESET_LIST_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>RESET_LIST_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.%s(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5_DB_BUSY_PORTNAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>DB_BUSY_NAME</HDLArgVal>
+		 </HDLArg>
+      </HDLStatement>
+	  
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_PMBUS_PORTS</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.pmbusSMBCLK(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_CLK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.pmbusSMBDAT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_DAT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_PMBUSALERT_USED</HDLCondition>
+	     <HDLText>\t.pmbusSMBALERT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_ALERT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_PAGE_BYTE_0(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_PAGE_BYTE_0_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_PAGE_BYTE_1(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_PAGE_BYTE_1_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_PAGE_BYTE_2(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_PAGE_BYTE_2_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_PAGE_BYTE_3(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_PAGE_BYTE_3_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_PAGE_BYTE_4(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_PAGE_BYTE_4_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_PAGE_BYTE_5(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_PAGE_BYTE_5_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_PAGE_BYTE_6(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_PAGE_BYTE_6_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_PAGE_BYTE_7(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_PAGE_BYTE_7_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_SMBALERT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_SMBALERT_INT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusLGB_3WI_CLK_I(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>SYS_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusLGB_INT_CLK_I(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>LGB_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_BYTE_BUSY(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_BYTE_BUSY_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_BYTE_OFF(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_BYTE_OFF_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_BYTE_VOUT_OV(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_BYTE_VOUT_OV_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_BYTE_IOUT_OC(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_BYTE_IOUT_OC_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_BYTE_VIN_UV(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_BYTE_VIN_UV_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_BYTE_TEMPERATURE(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_BYTE_TEMPERATURE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_BYTE_CML(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_BYTE_CML_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_BYTE_NONE_OF_ABOVE(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_BYTE_NONE_OF_ABOVE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_WORD_VOUT_OV(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_WORD_VOUT_OV_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_WORD_IOUT_POUT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_WORD_IOUT_POUT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_WORD_INPUT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_WORD_INPUT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_WORD_MFR(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_WORD_MFR_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_WORD_POWER_GOOD(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_WORD_POWER_GOOD_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_WORD_FANS(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_WORD_FANS_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_WORD_OTHER(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_WORD_OTHER_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_WORD_UNKNOWN(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_WORD_UNKNOWN_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_VOUT_OV_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_VOUT_OV_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_VOUT_OV_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_VOUT_OV_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_VOUT_UV_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_VOUT_UV_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_VOUT_UV_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_VOUT_UV_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_VOUT_MAX_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_VOUT_MAX_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_VOUT_TON_MAX_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_VOUT_TOFF_MAX_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_VOUT_TOFF_MAX_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_VOUT_TOFF_MAX_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_VOUT_POWER_ON_TRACKING_ERROR(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_VOUT_POWER_ON_TRACKING_ERROR_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_IOUT_OC_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_IOUT_OV_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_IOUT_OC_FAULT_LV_SHUTDOWN(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_IOUT_OV_FAULT_LV_SHUTDOWN_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_IOUT_OC_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_IOUT_OC_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_IOUT_UC_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_IOUT_UC_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_IOUT_CURRENT_SHARE_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_IOUT_CURRENT_SHARE_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_IOUT_IN_POWER_LIMITING_MODE(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_IOUT_IN_POWER_LIMITING_MODE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_IOUT_POUT_OP_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_IOUT_POUT_OP_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_IOUT_POUT_OP_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_IOUT_POUT_OP_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_TEMP_OT_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_TEMP_OT_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_TEMP_OT_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_TEMP_OT_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_TEMP_UT_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_TEMP_UT_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_TEMP_UT_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_TEMP_UT_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_TEMP_RESERVED_3(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_TEMP_RESERVED_3_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_TEMP_RESERVED_2(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_TEMP_RESERVED_2_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_TEMP_RESERVED_1(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_TEMP_RESERVED_1_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_TEMP_RESERVED_0(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_TEMP_RESERVED_0_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_OTHER_RESERVED_7(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_OTHER_RESERVED_7_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_OTHER_RESERVED_6(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_OTHER_RESERVED_6_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_OTHER_INPUT_A_FUSEBREAKER_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_OTHER_INPUT_A_FUSEBREAKER_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_OTHER_INPUT_B_FUSEBREAKER_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_OTHER_INPUT_B_FUSEBREAKER_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_OTHER_INPUT_A_OR_ING_DEVICE_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_OTHER_INPUT_A_OR_ING_DEVICE_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_OTHER_INPUT_B_OR_ING_DEVICE_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_OTHER_INPUT_B_OR_ING_DEVICE_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_OTHER_OUTPUT_OR_ING_DEVICE_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_OTHER_OUTPUT_OR_ING_DEVICE_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_OTHER_RESERVED_0(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_OTHER_RESERVED_0_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_INPUT_VIN_OV_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_INPUT_VIN_OV_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_INPUT_VIN_OV_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_INPUT_VIN_OV_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_INPUT_VIN_UV_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_INPUT_VIN_UV_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_INPUT_VIN_UV_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_INPUT_VIN_UV_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_INPUT_UNIT_OFF_FOR_LOW_INPUT_VOLTAGE(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_INPUT_UNIT_OFF_FOR_LOW_INPUT_VOLTAGE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_INPUT_IN_OC_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_INPUT_IN_OC_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_INPUT_IN_OC_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_INPUT_IN_OC_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_INPUT_PIN_OP_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_INPUT_PIN_OP_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_MFR_SPECIFIC_7(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_MFR_SPECIFIC_7_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_MFR_SPECIFIC_6(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_MFR_SPECIFIC_6_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_MFR_SPECIFIC_5(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_MFR_SPECIFIC_5_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_MFR_SPECIFIC_4(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_MFR_SPECIFIC_4_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_MFR_SPECIFIC_3(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_MFR_SPECIFIC_3_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_MFR_SPECIFIC_2(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_MFR_SPECIFIC_2_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_MFR_SPECIFIC_1(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_MFR_SPECIFIC_1_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_MFR_SPECIFIC_0(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_MFR_SPECIFIC_0_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_1_2_FAN_1_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_1_2_FAN_1_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_1_2_FAN_2_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_1_2_FAN_2_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_1_2_FAN_1_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_1_2_FAN_1_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_1_2_FAN_2_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_1_2_FAN_2_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_1_2_FAN_1_SPEED_OVERRIDE(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_1_2_FAN_1_SPEED_OVERRIDE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_1_2_FAN_2_SPEED_OVERRIDE(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_1_2_FAN_2_SPEED_OVERRIDE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_1_2_AIR_FLOW_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_1_2_AIR_FLOW_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_1_2_AIR_FLOW_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_1_2_AIR_FLOW_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_3_4_FAN_3_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_3_4_FAN_3_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_3_4_FAN_4_FAULT(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_3_4_FAN_4_FAULT_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_3_4_FAN_3_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_3_4_FAN_3_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_3_4_FAN_4_WARNING(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_3_4_FAN_4_WARNING_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_3_4_FAN_3_SPEED_OVERRIDE(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_3_4_FAN_3_SPEED_OVERRIDE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_3_4_FAN_4_SPEED_OVERRIDE(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_3_4_FAN_4_SPEED_OVERRIDE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_3_4_RESERVED_1(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_3_4_RESERVED_1_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_STATUS_FANS_3_4_RESERVED_0(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_STATUS_FANS_3_4_RESERVED_0_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_IMMED_OFF(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_IMMED_OFF_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_SOFT_OFF(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_SOFT_OFF_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_ON_MARGIN_OFF(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_MARGIN_OFF_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_MARGIN_LOW_IF(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_MARGIN_LOW_IF_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_MARGIN_LOW_AF(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_MARGIN_LOW_AF_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_MARGIN_HI_IF(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_MARGIN_HI_IF_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_MARGIN_HI_AF(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_MARGIN_HI_AF_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_CLEAR_FAULTS(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_CLEAR_FAULTS_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.pmbusPMBUS_INTERLEAVE_ON_OFF(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PMBUS_INTERLEAVE_ON_OFF_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+   
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_FL_PORTS</HDLProcessProtoName>
+
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerclk_3wi(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>SYS_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC0</HDLCondition>
+	     <HDLText>\t.faultloggerrdat0_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT0_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC0</HDLCondition>
+	     <HDLText>\t.faultloggerrdat0_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT0_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC1</HDLCondition>
+	     <HDLText>\t.faultloggerrdat1_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT1_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC1</HDLCondition>
+	     <HDLText>\t.faultloggerrdat1_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT1_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC2</HDLCondition>
+	     <HDLText>\t.faultloggerrdat2_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT2_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC2</HDLCondition>
+	     <HDLText>\t.faultloggerrdat2_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT2_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC3</HDLCondition>
+	     <HDLText>\t.faultloggerrdat3_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT3_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC3</HDLCondition>
+	     <HDLText>\t.faultloggerrdat3_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT3_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC4</HDLCondition>
+	     <HDLText>\t.faultloggerrdat4_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT4_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC4</HDLCondition>
+	     <HDLText>\t.faultloggerrdat4_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT4_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC5</HDLCondition>
+	     <HDLText>\t.faultloggerrdat5_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT5_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC5</HDLCondition>
+	     <HDLText>\t.faultloggerrdat5_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT5_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC6</HDLCondition>
+	     <HDLText>\t.faultloggerrdat6_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT6_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC6</HDLCondition>
+	     <HDLText>\t.faultloggerrdat6_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT6_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC7</HDLCondition>
+	     <HDLText>\t.faultloggerrdat7_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT7_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC7</HDLCondition>
+	     <HDLText>\t.faultloggerrdat7_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT7_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerclk_logibuilder(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>LB_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerusp_trigger_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_TRIGGER_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_USRLOG0</HDLCondition>
+	     <HDLText>\t.faultloggerusp_usrlog0_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_USRLOG0_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_USRLOG1</HDLCondition>
+	     <HDLText>\t.faultloggerusp_usrlog1_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_USRLOG1_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_USRLOG2</HDLCondition>
+	     <HDLText>\t.faultloggerusp_usrlog2_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_USRLOG2_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_USRLOG3</HDLCondition>
+	     <HDLText>\t.faultloggerusp_usrlog3_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_USRLOG3_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerusp_busy_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_BUSY_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerusp_db_busy_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>DB_BUSY_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_SPIFL_USED</HDLCondition>
+	     <HDLText>\t.faultloggerusp_memerr_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_FULL_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+   
+
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_ECP5_FL_PORTS</HDLProcessProtoName>
+
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerclk_3wi(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>SYS_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC0</HDLCondition>
+	     <HDLText>\t.faultloggerrdat0_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT0_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC0</HDLCondition>
+	     <HDLText>\t.faultloggerrdat0_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT0_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC1</HDLCondition>
+	     <HDLText>\t.faultloggerrdat1_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT1_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC1</HDLCondition>
+	     <HDLText>\t.faultloggerrdat1_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT1_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC2</HDLCondition>
+	     <HDLText>\t.faultloggerrdat2_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT2_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC2</HDLCondition>
+	     <HDLText>\t.faultloggerrdat2_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT2_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC3</HDLCondition>
+	     <HDLText>\t.faultloggerrdat3_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT3_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC3</HDLCondition>
+	     <HDLText>\t.faultloggerrdat3_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT3_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC4</HDLCondition>
+	     <HDLText>\t.faultloggerrdat4_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT4_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC4</HDLCondition>
+	     <HDLText>\t.faultloggerrdat4_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT4_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC5</HDLCondition>
+	     <HDLText>\t.faultloggerrdat5_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT5_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC5</HDLCondition>
+	     <HDLText>\t.faultloggerrdat5_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT5_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC6</HDLCondition>
+	     <HDLText>\t.faultloggerrdat6_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT6_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC6</HDLCondition>
+	     <HDLText>\t.faultloggerrdat6_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT6_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC7</HDLCondition>
+	     <HDLText>\t.faultloggerrdat7_data_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT7_DATA_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_ASC7</HDLCondition>
+	     <HDLText>\t.faultloggerrdat7_valid_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_RDAT7_VALID_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerclk_logibuilder(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>LB_CLOCK_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerusp_trigger_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_TRIGGER_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_USRLOG0</HDLCondition>
+	     <HDLText>\t.faultloggerusp_usrlog0_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_USRLOG0_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_USRLOG1</HDLCondition>
+	     <HDLText>\t.faultloggerusp_usrlog1_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_USRLOG1_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_USRLOG2</HDLCondition>
+	     <HDLText>\t.faultloggerusp_usrlog2_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_USRLOG2_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_MICO_FL_USRLOG3</HDLCondition>
+	     <HDLText>\t.faultloggerusp_usrlog3_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_USRLOG3_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerusp_busy_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FL_USP_BUSY_SIG</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerusp_db_busy_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>DB_BUSY_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_ECP5_MICO_FL_EXT_TIMESTAMP</HDLCondition>
+	     <HDLText>\t.faultloggerusp_timestamp_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_TIMESTAMP_I_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerflash_miso(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FLASH_MISO_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerextspi_mosi(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_EXT_SPI_MOSI_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerextspi_clk(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_EXT_SPI_CLK_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerextspi_mcsn(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_EXT_SPI_MCSN_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerextspi_req(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_EXT_SPI_REQ_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.sefbsefbspi_scsn(1'b1),</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerusp_recordreg_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_USP_RECORDREG_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerusp_memerr_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_USP_MEMERR_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerflash_mosi(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FLASH_MOSI_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>B_HAS_USERCLOCK_TO_TOP</HDLCondition>
+	     <HDLText>\t.faultloggerflash_clk(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FLASH_CLK_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerflash_mcsn(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FLASH_MCSN_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerextspi_miso(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_EXT_SPI_MISO_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerextspi_grant(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_EXT_SPI_GRANT_SIGNAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_clk_oe(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_CLK_OE</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_clk_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_CLK_O</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_mosi_oe(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MOSI_OE</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_mosi_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MOSI_O</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_miso_oe(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MISO_OE</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_miso_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MISO_O</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_mcsn_oe(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MCSN_OE</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_mcsn_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MCSN_O</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_clk_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_SEFB_SPI_CLK_I</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_mosi_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_SEFB_MOSI_I</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.faultloggerfaultlog_miso_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_SEFB_MISO_I</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.sefbspi_clk_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_SEFB_SPI_CLK_I</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.sefbmosi_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_SEFB_MOSI_I</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.sefbmiso_i(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_SEFB_MISO_I</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.sefbspi_clk_oe(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_CLK_OE</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.sefbspi_clk_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_CLK_O</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.sefbmosi_oe(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MOSI_OE</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.sefbmosi_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MOSI_O</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.sefbmiso_oe(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MISO_OE</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.sefbmiso_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MISO_O</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t.sefbmcsn_oe(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MCSN_OE</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t.sefbmcsn_o(%s),</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ECP5FL_FL_FL_MCSN_O</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_USRHDL</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>%s</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>USRHDL_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLProcessAltern>1</HDLProcessAltern>
+		 <HDLCondition>B_HAS_USR_HDL_PARAM</HDLCondition>
+		 <HDLProcessName>P_INSTANT_USRHDL_PARAM</HDLProcessName>
+	  </HDLStatement>
+
+	  <HDLStatement>
+		 <HDLProcessName>P_INSTANT_USRHDL_PORT</HDLProcessName>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_USRHDL_PARAM</HDLProcessProtoName>
+
+	  <HDLStatement>
+	     <HDLText>#(</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t.%s(%s)</HDLText>
+		 <HDLList>LIST_USRHDL_PARAM</HDLList>
+		 <HDLList>LIST_USRHDL_PARAMVAL</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLText>)</HDLText>
+      </HDLStatement>
+	  
+   </HDLProcessProto>
+   
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_USRHDL_PORT</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>%s</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>USRHDL_INST_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>(</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+		 <HDLText>\t.%s(%s)</HDLText>
+		 <HDLList>LIST_USRHDL_PORTNAME</HDLList>
+		 <HDLList>LIST_USRHDL_SIGNAME</HDLList>
+		 <HDLSeparater>,</HDLSeparater>
+		 <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+   </HDLProcessProto>
+   
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_FAN</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>%s %s_inst(</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>FAN_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>FAN_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t.%s(%s)</HDLText>
+		 <HDLList>LIST_FAN_PORT</HDLList>
+		 <HDLList>LIST_FAN_SIG</HDLList>
+         <HDLSeparater>,</HDLSeparater>
+         <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_INSTANT_HOTSWAP</HDLProcessProtoName>
+	  
+	  <HDLStatement>
+	     <HDLText>%s %s_inst(</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>HOTSWAP_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+		 <HDLArg>
+		    <HDLArgVal>HOTSWAP_MODULE_NAME</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+      <HDLStatement>
+	     <HDLRepeat>1</HDLRepeat>
+	     <HDLText>\t.%s(%s)</HDLText>
+		 <HDLList>LIST_HOTSWAP_PORT</HDLList>
+		 <HDLList>LIST_HOTSWAP_SIG</HDLList>
+         <HDLSeparater>,</HDLSeparater>
+         <HDLSepCondition>B_NOT_LISTEND</HDLSepCondition>
+      </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>);</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+   
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_ASSIGN_SECTION</HDLProcessProtoName>
+
+      <HDLStatement>
+         <HDLRepeat>1</HDLRepeat>
+         <HDLProcessName>P_ASSIGN_SINGLE_SEC</HDLProcessName>
+         <HDLArg>
+            <HDLArgVal>INCREASE_ASC_NUM</HDLArgVal>
+         </HDLArg>
+		 <HDLList>LIST_RDAT_BIT_NODE</HDLList>
+		 <HDLList>LIST_WDAT_BIT_NODE</HDLList>
+	  </HDLStatement>
+   </HDLProcessProto>
+
+   
+   <HDLProcessProto>
+      <HDLProcessProtoName>P_ASSIGN_SINGLE_SEC</HDLProcessProtoName>
+
+	  <HDLStatement>
+	     <HDLText>assign {</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_TMON3_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_TMON3_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_TMON4_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_TMON4_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON11_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON11_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_HVMON_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_HVMON_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_IMON3_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_IMON3_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_HIMON_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_HIMON_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RHVOUT5</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RHVOUT6</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO11</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO12</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO13</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+         <HDLAlternative>1</HDLAlternative>
+         <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO14</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+		 <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_TMON_Int_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_TMON_Int_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_TMON1_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_TMON1_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_TMON2_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_TMON2_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON1_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON1_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON2_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON2_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON3_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON3_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON4_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON4_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON5_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON5_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON6_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON6_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON7_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON7_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON8_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON8_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON9_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON9_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON10_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>ASC_B_IS_RENO</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_HVMON_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_VMON10_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>ASC_B_IS_RENO</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_HVMON_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_IMON1_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_IMON1_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_IMON2_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>ASC_B_IS_RENO</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_HIMON_A</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_IMON2_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLAlternative>1</HDLAlternative>
+		 <HDLCondition>ASC_B_IS_RENO</HDLCondition>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_HIMON_B</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RHVOUT1</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RHVOUT2</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RHVOUT3</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RHVOUT4</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO1</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO2</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO3</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO4</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO5</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO6</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO7</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO8</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO9</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_RGPIO10</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_AGOOD</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\tLOGIC1[1],</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_EEPROM_Done</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\tLOGIC1[0],</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\tLOGIC0[1],</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\tLOGIC0[0],</HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>\t\t%s,</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_Fault_Log_In_Progress</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>\t\t%s</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>ASC_SIG_Fault_Log_Full</HDLArgVal>
+			<HDLArgDepend>0</HDLArgDepend>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>} = %s;</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG1</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText>assign %s = {</HDLText>
+		 <HDLArg>
+		    <HDLArgVal>PROCESS_ARG2</HDLArgVal>
+		 </HDLArg>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HVOUT5_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HVOUT5</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_HVOUT5_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HVOUT6_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HVOUT6</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_HVOUT6_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO11_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO11</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO11_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO12_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO12</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO12_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO13_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO13</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO13_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO14_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO14</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO14_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HYSTENLI2_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HYSTENLI2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CMPSELLI2_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CMPSELLI2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HYSTENLI3_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HYSTENLI3</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CMPSELLI3_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CMPSELLI3</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTE5_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTE_5</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTE6_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTE_6</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTE7_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTE_7</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTE8_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTE_8</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP0_5_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP0_5</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP1_5_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP1_5</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP0_6_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP0_6</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP1_6_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP1_6</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP0_7_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP0_7</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP1_7_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP1_7</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP0_8_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP0_8</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP1_8_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP1_8</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_DACHIZ5_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_DACHIZ5</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_DACHIZ6_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+ 		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_DACHIZ6</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_DACHIZ7_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_DACHIZ7</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_DACHIZ8_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_DACHIZ8</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HVOUT1_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HVOUT1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_VEGAS</HDLCondition>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_HVOUT1_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HVOUT1_USED</HDLIfCon>
+			<HDLStatement>
+               <HDLAlternative>1</HDLAlternative>
+               <HDLCondition>ASC_B_IS_RENO</HDLCondition>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HVOUT1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLAlternative>1</HDLAlternative>
+			   <HDLCondition>ASC_B_IS_RENO</HDLCondition>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_HVOUT1_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HVOUT2_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HVOUT2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_HVOUT2_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HVOUT3_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HVOUT3</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_HVOUT3_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HVOUT4_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HVOUT4</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_HVOUT4_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO1_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO2_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO2_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO3_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO3</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO3_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO4_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO4</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO4_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO5_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO5</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO5_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO6_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO6</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO6_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO7_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO7</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO7_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO8_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO8</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO8_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO9_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO9</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO9_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_GPIO10_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_GPIO10</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b%s,</HDLText>
+			   <HDLArg>
+			      <HDLArgVal>ASC_SIG_GPIO10_RST_VALUE</HDLArgVal>
+				  <HDLArgDepend>0</HDLArgDepend>
+			   </HDLArg>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HYSTENHI_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HYSTENHI</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HYSTENLI1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HYSTENLI1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CMPSELLI1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CMPSELLI1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HYSTENLV1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HYSTENLV1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CMPSELLV1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CMPSELLV1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_HYSTENLV2_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_HYSTENLV2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CMPSELLV2_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CMPSELLV2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_IMON1A_THRESH1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_IMON1A_THRESH1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_IMON1A_THRESH2_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+ 		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_IMON1A_THRESH2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_IMON1A_THRESH3_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+  		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_IMON1A_THRESH3</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_IMON1A_THRESH4_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_IMON1A_THRESH4</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTE1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTE_1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTE2_USED</HDLIfCon>
+		    <HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTE_2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTE3_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTE_3</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTE4_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTE_4</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP0_1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP0_1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP1_1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP1_1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP0_2_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP0_2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP1_2_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+  		          <HDLArgVal>ASC_SIG_CLTP1_2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP0_3_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP0_3</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP1_3_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP1_3</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP0_4_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+   		          <HDLArgVal>ASC_SIG_CLTP0_4</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_CLTP1_4_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_CLTP1_4</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_DACHIZ1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_DACHIZ1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_DACHIZ2_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_DACHIZ2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_DACHIZ3_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_DACHIZ3</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_DACHIZ4_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_DACHIZ4</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_FLID_7_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_FLID_7</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_FLID_6_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_FLID_6</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_FLID_5_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_FLID_5</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_FLID_4_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+   		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_FLID_4</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_FLID_3_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_FLID_3</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_FLID_2_USED</HDLIfCon>
+			<HDLStatement>
+			   <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_FLID_2</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+        	   </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_FLID_1_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_FLID_1</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_FLID_0_USED</HDLIfCon>
+			<HDLStatement>
+	           <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_FLID_0</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLIf>
+		    <HDLIfCon>ASC_B_SIG_FL_SOFT_HARD_B_USED</HDLIfCon>
+			<HDLStatement>
+			   <HDLText>\t\t%s,</HDLText>
+		       <HDLArg>
+		          <HDLArgVal>ASC_SIG_FL_SOFT_HARD_B</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+		       </HDLArg>
+			</HDLStatement>
+		 </HDLIf>
+		 <HDLElse>
+		    <HDLStatement>
+			   <HDLText>\t\t1'b0,</HDLText>
+			</HDLStatement>
+		 </HDLElse>
+	  </HDLStatement>
+
+	  <HDLStatement>
+         <HDLIf>
+            <HDLIfCon>ASC_B_SIG_FL_RECORD_USED</HDLIfCon>
+            <HDLStatement>
+               <HDLText>\t\t%s</HDLText>
+               <HDLArg>
+		          <HDLArgVal>ASC_SIG_FL_RECORD</HDLArgVal>
+			      <HDLArgDepend>0</HDLArgDepend>
+               </HDLArg>
+            </HDLStatement>
+         </HDLIf>
+         <HDLElse>
+            <HDLStatement>
+               <HDLText>\t\t1'b0</HDLText>
+            </HDLStatement>
+         </HDLElse>
+ 	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText>};</HDLText>
+	  </HDLStatement>
+	  
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+
+	  <HDLStatement>
+	     <HDLText></HDLText>
+	  </HDLStatement>
+   </HDLProcessProto>
+   
+</VerilogTopTemplate>

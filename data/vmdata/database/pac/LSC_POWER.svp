@@ -1,0 +1,877 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        SVF_Plus    SYSTEM    "SVF_Plus.dtd" >
+<!--
+    03/04/05 Spinti: Changed the PROGRAM_SECURITY pulse width to 50.
+    03/08/05 Spinti: Changed the DISABLE delay to 200ms.
+-->
+<SVF_Plus version="1.0">
+<Header>
+    <Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+    <Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+    <!-- Length fields are in number if bits -->
+    <Instruction_Length  value="INSTRUCTION_REGISTER_LENGTH"/>
+    <Row_Width           value="DEVICE_ROW_WIDTH"/>
+    <Address_Length      value="ADDRESS_REGISTER_LENGTH"/>
+    <Address length="ADDRESS_LENGTH">
+        INI_ADDRESS
+    </Address>
+    <ID_Length           value="DEVICE_ID_LENGTH"/>
+    <Usercode_Length     value="DEVICE_USERCODE_LENGTH"/>
+    <Arch_Length         value="ARCHITECH_LENGTH"/>
+    <Arch_Row            value="ARCHITECH_ROW"/>
+    <PWP    value="PROGRAMING_PULSE_WIDTH"/>
+    <PWV    value="VERIFY_PULSE_WIDTH"/>
+    <PWE    value="ERASE_PULSE_WIDTH"/>
+    <Instruction>
+        EXTEST                = 0x00;
+        ADDPLD                = 0x01;
+        DATAPLD               = 0x02;
+        ERASEAND              = 0x03;
+        ERASEARCH             = 0x04;
+        PROGPLD               = 0x05;
+        PROGESF               = 0x06;
+        READPLD               = 0x08;
+        DISCHARGE             = 0x09;
+        ADDCFG                = 0x0A;
+        DATACFG               = 0x0B;
+        ERASECFG              = 0x0C;
+        PROGCFG               = 0x0D;
+        READCFG               = 0x0E;
+        CFGBE                 = 0x16;
+        SAFESTATE             = 0x17;
+        PROGRAMEN             = 0x18;
+        IDCODE                = 0x19;
+        PROGRAMDIS            = 0x1A;
+        ADDSTATUS             = 0x1B;
+        SAMPLE                = 0x1C;
+        ERASEUES              = 0x1D;
+        SHIFTUES              = 0x1E;
+        PROGUES               = 0x1F;
+        BYPASS                = 0xFF;
+    </Instruction>
+</Parameter>
+<Data>
+    <DataField    name="IDTDI">
+        <FieldBlock    row_width="DEVICE_ID_LENGTH">
+            ID_DATA
+        </FieldBlock>
+    </DataField>
+    <DataField    name="Address_CFG">
+        <FieldBlock    row_width="4">
+            0x80,
+            0x40,
+            0x20,
+            0x10
+        </FieldBlock>
+    </DataField>
+</Data>
+<Operation_List>
+    "Read and Save JEDEC" = "INIT, SAVE_ID, ENABLE, SAVE_ARRAY, SAVE_CFG, SAVE_USERCODE, DISABLE";
+
+    "Calculate Checksum" = "INIT, SAVE_ID, ENABLE, SAVE_ARRAY, SAVE_CFG, SAVE_USERCODE, DISABLE";
+
+    "Read and Save" = "INIT, SAVE_ID, ENABLE, SAVE_ARRAY, SAVE_CFG, SAVE_USERCODE, DISABLE";
+
+    "Calculate Data CRC" = "INIT, SAVE_ID, ENABLE, SAVE_ARRAY, SAVE_CFG, SAVE_USERCODE, DISABLE";
+
+    "Erase,Program,Verify" = "INIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+                    DISABLE     ! Exit the programming mode";
+
+    "Erase,Program,Verify,Secure" = "INIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+                    PROGRAM_SECURITY ! Secure device,
+                    DISABLE     ! Exit the programming mode";
+
+   "Program Only" = "INIT       ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    DISABLE     ! Exit the programming mode";
+
+    "Verify Only" = "INIT       ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+                    DISABLE     ! Exit the programming mode";
+
+    "Verify ID" =  "INIT        ! Initialize,
+                    READ_ID     ! Check the IDCODE";
+                    
+    "Display ID" = "INIT, READ_ID, SAVE_ID";
+
+    "Verify USERCODE" = " INIT ! Initialize, 
+                    READ_ID    ! Check the IDCODE,
+                    VERIFY_USERCODE ! Verify USERCODE";
+                     
+    "Display USERCODE" = "INIT, READ_ID, SAVE_USERCODE";
+
+    "Erase Only" = "INIT        ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    DISABLE     ! Exit the programming mode";
+                    
+    "Bypass" = "INIT  ! Initialize";
+
+    "Re-Initialize" = "INIT     ! Initialize,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    DISABLE     ! Exit the programming mode";
+                    
+    "Disable Only" = "INIT      ! Initialize,
+                    DISABLE     ! Exit the programming mode";
+                    
+</Operation_List>
+
+<Operation_List label="SingleSVFOperation">
+    "Read and Save JEDEC" = "SVFINIT  ! Initialize,
+                    READ_ID      ! Check the IDCODE,
+                    ENABLE       ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE      ! Exit the programming mode";
+
+    "Calculate Checksum" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE     ! Exit the programming mode";
+
+    "Read and Save" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE     ! Exit the programming mode";
+
+    "Calculate Data CRC" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE,  
+                    DISABLE     ! Exit the programming mode";
+
+    "Erase,Program,Verify" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Full Address Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    DISABLE     ! Exit the programming mode";
+
+    "Erase,Program,Verify,Secure" = "SVFINIT  ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Full Address Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    PROGRAM_SECURITY ! Secure device,
+                    DISABLE    ! Exit the programming mode";
+
+    "Program Only" = "SVFINIT   ! Initialize,
+                    READ_ID     ! Check the IDCODE,
+                    ENABLE      ! Enable the programming mode,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Full Address Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    DISABLE     ! Exit the programming mode";
+
+    "Verify Only" = "SVFINIT   ! Initialize,
+                    READ_ID    ! Check the IDCODE,
+                    ENABLE     ! Enable the programming mode,
+                    VERIFY     ! Full Address Verify Fuse Map,
+                    VERIFY_CFG ! Verify CFG,
+                    VERIFY_USERCODE    ! Verify USERCODE, 
+                    DISABLE    ! Exit the programming mode";
+
+    "Verify ID" =  "INIT       ! Initialize,
+                    READ_ID    ! Check the IDCODE";
+
+    "Display ID" = "SVFINIT     ! Initialize,
+                    SVF_SAVE_ID ! Read the IDCODE";
+
+    "Display USERCODE" = "SVFINIT 	  ! Initialize, 
+                    READ_ID           ! Check the IDCODE",
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+                    
+    "Verify USERCODE" = "SVFINIT      ! Initialize, 
+                    READ_ID           ! Check the IDCODE",
+                    VERIFY_USERCODE   ! Verify USERCODE";
+
+    "Erase Only" = "SVFINIT    ! Initialize,
+                    READ_ID    ! Check the IDCODE,
+                    ENABLE     ! Enable the programming mode,
+                    ERASE      ! Erase the device,
+                    DISABLE    ! Exit the programming mode";
+
+    "Bypass" = "SVFINIT  ! Initialize";
+
+    "Disable Only" = "SVFINIT  ! Initialize,
+                    DISABLE    ! Exit the programming mode";
+
+    "Re-Initialize" = "SVFINIT ! Initialize,
+                    ENABLE     ! Enable the programming mode,
+                    ERASE      ! Erase the device,
+                    DISABLE    ! Exit the programming mode";
+</Operation_List>
+
+<Operation_List label="TurboOperation">
+    "Read and Save JEDEC" = "INIT, SAVE_ARRAY, SAVE_CFG, SAVE_USERCODE";
+
+    "Calculate Checksum" = "INIT, SAVE_ARRAY, SAVE_CFG, SAVE_USERCODE";
+
+    "Read and Save" = "INIT, SAVE_ARRAY, SAVE_CFG, SAVE_USERCODE";
+
+    "Calculate Data CRC" = "INIT, SAVE_ARRAY, SAVE_CFG, SAVE_USERCODE";
+
+    "Erase,Program,Verify" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE    ! Verify USERCODE"; 
+
+    "Erase,Program,Verify,Secure" = "INIT  ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE ! Program USERCODE,
+                    VERIFY      ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG,
+                    VERIFY_USERCODE  ! Verify USERCODE, 
+                    PROGRAM_SECURITY ! Secure device";
+
+    "Program Only" = "INIT      ! Initialize,
+                    ERASE       ! Erase the device,
+                    PROGRAM     ! Program Fuse Map,
+                    PROGRAM_CFG ! Program CFG,
+                    PROGRAM_USERCODE   ! Program USERCODE";
+
+    "Verify Only" = "INIT    ! Initialize,
+                    ENABLE   ! Enable the programming mode,
+                    VERIFY   ! Verify Fuse Map,
+                    VERIFY_CFG  ! Verify CFG";
+
+    "Verify ID" =  "INIT     ! Initialize,
+                    READ_ID  ! Check the IDCODE";
+
+    "Display ID" = "INIT, READ_ID, SAVE_ID";
+
+    "Verify USERCODE" = "INIT ! Initialize, 
+                    VERIFY_USERCODE ! Verify USERCODE"; 
+
+    "Display USERCODE" = "INIT,
+                    SAVE_USERCODE";
+
+    "Erase Only" = "INIT     ! Initialize,
+                    ERASE    ! Erase the device";
+
+    "Bypass" = "INIT  ! Initialize";
+
+    "Re-Initialize" = "INIT  ! Initialize,
+                    ENABLE   ! Enable the programming mode,
+                    ERASE    ! Erase the device";
+
+    "Disable Only" = "INIT   ! Initialize,
+                    DISABLE  ! Exit the programming mode";
+
+    "Enable Only" = "INIT    ! Initialize,
+                    READ_ID  ! Check the IDCODE,
+                    ENABLE   ! Enable the programming mode";
+</Operation_List>
+
+<Operation_List label="ChainSVFOperation">
+    "Read and Save JEDEC" = "SVFINIT  ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "Calculate Checksum" = "SVFINIT   ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "Read and Save" = "SVFINIT        ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "Calculate Data CRC" = "SVFINIT   ! Initialize,
+                    SVF_SAVE_ARRAY    ! Read Fuse Map,
+                    SVF_SAVE_CFG      ! Read CFG,
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+
+    "Simultanous Erase,Program,Verify" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM_VERIFY    ! Program and Verify Fuse Map,
+                    PROGRAM_CFG       ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY_CFG        ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE"; 
+
+    "Simultanous Erase,Program,Verify,Secure" = "SVFINIT  ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM_VERIFY    ! Program and Verify Fuse Map,
+                    PROGRAM_CFG       ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY_CFG        ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+                    PROGRAM_SECURITY  ! Secure device";
+
+    "Erase,Program,Verify" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_CFG       ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_CFG        ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE"; 
+
+    "Erase,Program,Verify,Secure" = "SVFINIT ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_CFG       ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_CFG        ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE, 
+                    PROGRAM_SECURITY  ! Secure device";
+
+    "Program Only" = "SVFINIT         ! Initialize,
+                    ERASE             ! Erase the device,
+                    PROGRAM           ! Full Address Program Fuse Map,
+                    PROGRAM_CFG       ! Program CFG,
+                    PROGRAM_USERCODE  ! Program USERCODE";
+
+    "Verify Only" = "SVFINIT          ! Initialize,
+                    VERIFY            ! Full Address Verify Fuse Map,
+                    VERIFY_CFG        ! Verify CFG,
+                    VERIFY_USERCODE   ! Verify USERCODE"; 
+
+    "Verify ID" =  "SVFINIT      ! Initialize,
+                    READ_ID      ! Check the IDCODE";
+
+    "Display ID" = "SVFINIT      ! Initialize,
+                    SVF_SAVE_ID  ! Read the IDCODE";
+
+    "Display USERCODE" = "SVFINIT     ! Initialize, 
+                    SVF_SAVE_USERCODE ! Read USERCODE";
+								
+    "Verify USERCODE" = "SVFINIT      ! Initialize, 
+                    VERIFY_USERCODE   ! Verify USERCODE";
+
+    "Erase Only" = "SVFINIT      ! Initialize,
+                    ERASE        ! Erase the device";
+
+    "Secure Device" = "SVFINIT   ! Initialize,
+                    PROGRAM_SECURITY ! Secure device";
+
+    "Bypass" = "SVFINIT  ! Initialize";
+
+    "Disable Only" = "SVFINIT    ! Initialize,
+                    DISABLE      ! Exit the programming mode";
+
+    "Re-Initialize" = "SVFINIT   ! Initialize,
+                    ERASE        ! Erase the device";
+
+    "Enable Only" = "SVFINIT     ! Initialize,
+                    READ_ID      ! Check the IDCODE,
+                    ENABLE       ! Enable the programming mode";
+</Operation_List>
+
+<Script>
+<![CDATA[
+// created: spinti 04/01/2003
+function INIT {
+    HDR HDR_LENGTH TDI(HDR_PATTERN);
+    HIR HIR_LENGTH TDI(HIR_PATTERN);
+    TDR TDR_LENGTH TDI(TDR_PATTERN);
+    TIR TIR_LENGTH TDI(TIR_PATTERN);
+    ENDDR DRPAUSE;
+    ENDIR IRPAUSE;
+    FREQUENCY 1E6 HZ;
+    STATE IDLE;
+}
+
+// created: spinti 04/01/2003
+function SVFINIT {
+    HDR 0;
+    HIR 0;
+    TDR 0;
+    TIR 0;
+    ENDDR DRPAUSE;
+    ENDIR IRPAUSE;
+    FREQUENCY 1E6 HZ;
+    STATE IDLE;
+}
+
+// created: spinti 04/01/2003
+function READ_ID {
+    SIR Instruction_Length TDI  (IDCODE);
+    FREQUENCY 100 HZ;
+    SDR_VERIFY ID_Length   TDI  (#1^ID_Length)
+                           TDO  (IDTDI[1])
+                           MASK (DEVICE_ID_MASK);
+    FREQUENCY 1E6 HZ;
+}
+
+// created: spinti 04/01/2003
+function ENABLE {
+    // Shift in program enable instruction
+    SIR Instruction_Length TDI (PROGRAMEN);
+    RUN_TEST TCK 3 DELAY 20;
+}
+
+// created: spinti 04/01/2003
+function DISABLE {
+    // Shift in program disable instruction
+    SIR Instruction_Length TDI (PROGRAMDIS);
+    RUN_TEST TCK 3 DELAY 200;
+}
+
+// created: spinti 04/01/2003
+function ERASE {
+    // Shift in Erase All instruction
+    SIR Instruction_Length TDI (CFGBE);
+    RUN_TEST TCK 3 DELAY PWE;
+
+    // Shift in discharge instruction
+    SIR Instruction_Length TDI (DISCHARGE);
+    RUN_TEST TCK 3 DELAY 10;
+}
+
+// Program Functions _____________________________________________
+// created: spinti 04/01/2003
+function PROGRAM {
+    Address.row = 1;
+    FuseArray_TDI.row = 1;
+
+    repeat Address_Length {
+        // Shift in PLD Address instruction
+        SIR Instruction_Length TDI (ADDPLD);
+        // Shift in address 
+        SDR Address_Length TDI (Address[1]);
+
+        // Shift in PLD Data instruction
+        SIR Instruction_Length TDI (DATAPLD);
+        // Shift in row data
+        SDR Row_Width TDI (FuseArray_TDI);
+
+        // Shift in PLD Program instruction
+        SIR Instruction_Length TDI (PROGPLD);
+        RUN_TEST TCK 3 DELAY PWP;
+
+        Address[1] = Address[1] >> 1;
+        // Shift in address 
+    } // repeat
+
+    Address[1] = #1@(#0^(Address_Length-1));
+}
+
+// created: spinti 04/01/2003
+function PROGRAM_CFG {
+    datastream SavedFuseMap[1][ARCHITECH_LENGTH];
+    int32 i = 1;
+    ArchArray_TDI.row = 1;
+    Address_CFG.row = 1;
+    SavedFuseMap[1] = ArchArray_TDI[1];
+
+    repeat 4 {
+        // Shift in CFG Address instruction
+        SIR Instruction_Length TDI (ADDCFG);
+        // Shift in address 
+        SDR 4 TDI (Address_CFG[i]);
+
+        // Shift in CFG Data instruction
+        SIR Instruction_Length TDI (DATACFG);
+        // Shift in row data
+        SDR Arch_Row TDI (SavedFuseMap[1]);
+
+        i = i + 1;
+         // Shift in CFG Program instruction
+        SIR Instruction_Length TDI (PROGCFG);
+        RUN_TEST TCK 3 DELAY PWP;
+        SavedFuseMap[1] = SavedFuseMap[1] >> Arch_Row;
+    } // repeat
+}
+
+// created: spinti 04/01/2003
+function PROGRAM_VERIFY {
+    int32 Row = 1;
+    FuseArray_TDI.row = 1;
+    Address.row = 1;
+
+    // Shift in PLD Address instruction
+    SIR Instruction_Length TDI (ADDPLD);
+    // Shift in address 
+    SDR Address_Length TDI (Address[1]);
+
+    repeat Address_Length-1 {
+        // Shift in PLD Data instruction
+        SIR Instruction_Length TDI (DATAPLD);
+        // Shift in row data
+        SDR Row_Width TDI (FuseArray_TDI);
+
+        // Shift in PLD Program instruction
+        SIR Instruction_Length TDI (PROGPLD);
+        RUN_TEST TCK 3 DELAY PWP;
+
+        // Shift in PLD Read instruction 
+        SIR Instruction_Length TDI (READPLD);
+        RUN_TEST TCK 3 DELAY PWV;
+
+        // Shift in PLD column data instruction 
+        SIR Instruction_Length TDI (DATAPLD);
+        // Shift in data for next row and verify previous row at the same time
+        SDR_VERIFY Row_Width TDI (FuseArray_TDI[Row+1])
+                             TDO (FuseArray_TDI[Row]);
+
+        Address[1] = Address[1] >> 1;
+        Row = Row + 1;
+
+        // Shift in PLD Address instruction
+        SIR Instruction_Length TDI (ADDPLD);
+        // Shift in address 
+        SDR Address_Length TDI (Address[1]);
+    } // repeat
+
+    // Shift in PLD Data instruction
+    SIR Instruction_Length TDI (DATAPLD);
+    // Shift in row data
+    SDR Row_Width TDI (FuseArray_TDI);
+
+    // Shift in PLD Program instruction
+    SIR Instruction_Length TDI (PROGPLD);
+    RUN_TEST TCK 3 DELAY PWP;
+
+    // Shift in PLD Read instruction 
+    SIR Instruction_Length TDI (READPLD);
+    RUN_TEST TCK 3 DELAY PWV;
+
+    // Shift in PLD column data instruction 
+    SIR Instruction_Length TDI (DATAPLD);
+    // Verify Last Row by shifting in all one's into data register
+    SDR_VERIFY Row_Width TDI (#1^Row_Width)
+                         TDO (FuseArray_TDI[Row]);
+
+    Address[1] = #1@(#0^(Address_Length-1));
+}
+
+// created: spinti 04/28/2003
+function PROGRAM_USERCODE {
+    // Shift in Data Shift instruction 
+    SIR Instruction_Length	TDI (SHIFTUES);
+    SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+    // Goto Run Test Idle 
+    SIR Instruction_Length	TDI (PROGUES);
+    RUN_TEST TCK 3 DELAY PWP;
+}
+
+// created: spinti 04/01/2003
+function PROGRAM_SECURITY {
+    // Shift in Program Security Fuse instruction
+    SIR Instruction_Length TDI (PROGESF);
+    RUN_TEST TCK 3 DELAY 50;
+}
+
+// Verify Functions _____________________________________________
+// created: spinti 04/01/2003
+function VERIFY {
+    int32 Row = 1;
+    FuseArray_TDI.row = 1;
+    Address.row = 1;
+
+    repeat Address_Length {
+    	// Shift in PLD Address instruction
+    	SIR Instruction_Length TDI (ADDPLD);
+    	// Shift in address 
+    	SDR Address_Length TDI (Address[1]);
+        // Shift in PLD Read instruction 
+        SIR Instruction_Length TDI (READPLD);
+        RUN_TEST TCK 3 DELAY PWV;
+        // Shift in PLD column data instruction 
+
+        SIR Instruction_Length TDI (DATAPLD);
+        // Verify Last Row by shifting in all one's into data register
+        SDR_VERIFY Row_Width TDI (#1^Row_Width)
+                             TDO (FuseArray_TDI[Row]);
+
+        Row = Row+1;
+        Address[1] = Address[1] >> 1;
+    } // repeat
+    Address[1] = #1@(#0^(Address_Length-1));
+}
+
+// created: spinti 04/01/2003
+function VERIFY_CFG {
+    datastream SavedFuseMap[1][ARCHITECH_LENGTH];
+    int32 i = 1;
+    ArchArray_TDI.row = 1;
+    Address_CFG.row = 1;
+    SavedFuseMap[1] = ArchArray_TDI[1];
+
+    repeat 4 {
+        // Shift in CFG Address instruction
+        SIR Instruction_Length TDI (ADDCFG);
+        // Shift in address 
+        SDR 4 TDI (Address_CFG[i]);
+        i = i + 1;
+
+        // Shift in CFG Read instruction
+        SIR Instruction_Length TDI (READCFG);
+        RUN_TEST TCK 3 DELAY PWV;
+
+        // Shift in CFG Data instruction
+        SIR Instruction_Length TDI (DATACFG);
+        // Verify Last Row by shifting in all one's into data register
+        SDR_VERIFY Arch_Row TDI (#1^Arch_Row)
+                            TDO (SavedFuseMap[1]);
+        SavedFuseMap[1] = SavedFuseMap[1] >> Arch_Row;
+    } // repeat
+}
+
+// created: spinti 04/28/2003
+function VERIFY_USERCODE {
+    Usercode_TDI.row = 1;
+    // Shift in Read Usercode instruction 
+    SIR Instruction_Length TDI (SHIFTUES);
+    SDR_VERIFY Usercode_Length TDI (#1^Usercode_Length)
+                               TDO (Usercode_TDI);
+}
+
+// Read n Save Functions _____________________________________________
+// created: spinti 04/01/2003
+function SAVE_ID {
+    datastream SavedID[1][ID_Length];
+    file NewFile = "FILE_SAVE";
+
+    // Shift in Address Shift instruction
+    SIR Instruction_Length TDI (IDCODE);
+    // Shift out ID
+    SDR ID_Length TDI (#1^ID_Length)
+                  TDO (SavedID);
+    // Write To File
+    fopen  NewFile att "w" format "SVF_Plus";
+    fwrite NewFile (ID, SavedID);
+    fclose NewFile;
+}
+
+// created: spinti 04/01/2003
+function SVF_SAVE_ID {
+    SIR Instruction_Length TDI (IDCODE);
+    SDR_VERIFY ID_Length TDI  (#1^ID_Length)
+                         TDO  (IDTDI[1])
+                         MASK (#0^ID_Length);
+}
+
+// created: spinti 04/01/2003
+function SAVE_ARRAY {
+    datastream SavedFuseMap[Address_Length][Row_Width];
+    file NewFile = "FILE_SAVE";
+    Address.row = 1;
+
+    // Shift in PLD Address instruction
+    SIR Instruction_Length TDI (ADDPLD);
+    // Shift in address 
+    SDR Address_Length TDI (Address[1]);
+
+    repeat Address_Length-1 {
+        // Shift in PLD Read instruction 
+        SIR Instruction_Length TDI (READPLD);
+        RUN_TEST TCK 3 DELAY PWV;
+
+        // Shift in PLD column data instruction 
+        SIR Instruction_Length TDI (DATAPLD);
+        // Verify Last Row by shifting in all one's into data register
+        SDR Row_Width TDI (#1^Row_Width)
+                      TDO (SavedFuseMap);
+
+        Address[1] = Address[1] >> 1;
+        // Shift in PLD Address instruction
+        SIR Instruction_Length TDI (ADDPLD);
+        // Shift in address 
+        SDR Address_Length TDI (Address[1]);
+    } // repeat
+
+    // Shift in PLD Read instruction 
+    SIR Instruction_Length TDI (READPLD);
+    RUN_TEST TCK 3 DELAY PWV;
+
+    // Shift in PLD Data instruction
+    SIR Instruction_Length TDI (DATAPLD);
+    // Verify Last Row by shifting in all one's into data register
+    SDR Row_Width TDI (#1^Row_Width)
+                  TDO (SavedFuseMap);
+    Address[1] = #1@(#0^(Address_Length-1));
+
+    // Write To file
+    fopen NewFile att "wa"
+               format "SVF_Plus";
+    fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+    fclose NewFile;
+}
+
+// created: spinti 04/01/2003
+function SAVE_CFG {
+    datastream SavedArchFuseMap[1][ARCHITECH_LENGTH];
+    datastream SavedArch[4][ARCHITECH_ROW];
+    int32 i = 1;
+    int32 j = 1;
+    file NewFile = "FILE_SAVE";
+    Address_CFG.row = 1;
+
+    repeat 4 {
+        // Shift in CFG Address instruction
+        SIR Instruction_Length TDI (ADDCFG);
+        // Shift in address 
+        SDR 4 TDI (Address_CFG[i]);
+		i = i + 1;
+		
+        // Shift in CFG Read instruction
+        SIR Instruction_Length TDI (READCFG);
+        RUN_TEST TCK 3 DELAY PWV;
+
+        // Shift in CFG Data instruction
+        SIR Instruction_Length TDI (DATACFG);
+        // Verify Last Row by shifting in all one's into data register
+        SDR Arch_Row TDI(#1^Arch_Row) TDO(SavedArch[j]);
+        j = j + 1;
+        
+    } // repeat
+
+    SavedArchFuseMap[1] = (SavedArch[4] @ SavedArch[3]) @ (SavedArch[2] @ SavedArch[1]);
+	
+    // Write To file 
+    fopen NewFile att "wa"
+               format "SVF_Plus";
+    fwrite NewFile (ArchArray_TDI, SavedArchFuseMap);
+    fclose NewFile;
+}
+
+// created: spinti 04/01/2003
+function SVF_SAVE_ARRAY {
+    Address.row = 1;
+
+    // Shift in PLD Address instruction
+    SIR Instruction_Length TDI (ADDPLD);
+    // Shift in address 
+    SDR Address_Length TDI (Address[1]);
+
+    repeat Address_Length {
+        // Shift in PLD Read instruction 
+        SIR Instruction_Length TDI (READPLD);
+        RUN_TEST TCK 3 DELAY PWV;
+
+        // Shift in PLD column data instruction 
+        SIR Instruction_Length TDI (DATAPLD);
+        // Verify row by shifting in all one's into data register
+        SDR_VERIFY Row_Width TDI  (#0^Row_Width)
+                             TDO  (#1^Row_Width)
+                             MASK (#0^Row_Width);
+
+        Address[1] = Address[1] >> 1;
+        // Shift in PLD Address instruction
+        SIR Instruction_Length TDI (ADDPLD);
+        // Shift in address 
+        SDR Address_Length TDI (Address[1]);
+    }
+}
+
+// created: spinti 04/01/2003
+function SVF_SAVE_CFG {
+    int32 i = 1;
+    Address.row = 1;
+    Address_CFG.row = 1;
+
+    repeat 4 {
+        // Shift in CFG Address instruction
+        SIR Instruction_Length TDI (ADDCFG);
+        // Shift in address 
+        SDR 4 TDI (Address_CFG[i]);
+
+        // Shift in CFG Read instruction
+        SIR Instruction_Length TDI (READCFG);
+        RUN_TEST TCK 3 DELAY PWV;
+
+        // Shift in CFG Data instruction
+        SIR Instruction_Length TDI (DATACFG);
+        // Verify Row by shifting in all one's into data register
+        SDR_VERIFY Arch_Row TDI (#1^Arch_Row)
+                            TDO (#1^(Arch_Row))
+                            MASK(#0^(Arch_Row));
+        i = i + 1;
+    } // repeat
+}
+
+// created: spinti 04/28/2003
+function SAVE_USERCODE {
+    datastream SavedUsercode[1][Usercode_Length];
+    file NewFile = "FILE_SAVE";
+    // Shift in Read Usercode instruction
+    SIR Instruction_Length	TDI (SHIFTUES);
+    // Goto Run Test Idle 
+    RUN_TEST TCK 3 DELAY PWV;
+    // Shift in Data Shift instruction 
+    SDR	Usercode_Length TDI (#1^Usercode_Length)
+                        TDO (SavedUsercode);
+    // Write To file 
+    fopen NewFile att "wa"
+                  format "SVF_Plus";	
+    fwrite NewFile (Usercode_TDI, SavedUsercode);
+    fclose NewFile;
+}
+
+// created: spinti 04/28/2003
+function SVF_SAVE_USERCODE {
+    // Shift in Read Usercode instruction 
+    SIR Instruction_Length TDI (SHIFTUES);
+    SDR_VERIFY Usercode_Length TDI  (#1^Usercode_Length)
+                               TDO  (#1^Usercode_Length)
+                               MASK (#0^Usercode_Length);
+}
+
+]]>
+</Script>
+</SVF_Plus>

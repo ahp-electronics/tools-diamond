@@ -1,0 +1,200 @@
+[rvl]
+Reveal Inserter extended Tcl commands
+For more information on a specific command, type hlp command-name:
+
+  rvl_project   RVL project commands to manipulate reveal insert project
+  rvl_core      RVL core comands to manipulate cores in current project
+  rvl_trace     RVL trace commands to manipulate trace signals and optins
+                for a debug core in current project
+  rvl_tu        RVL trigger unit commands to manipulate trigger units for
+                a debug core in current project
+  rvl_te        RVL trigger expression commands to manipulate trigger
+                expressions for a debug core in current project
+
+[rvl_project]
+rvl_project new - Create a new reveal insert project
+  Usage:
+    rvl_project new [-overwrite] [<new rvl file name>]
+    
+rvl_project open - Open a reveal insert project file\n
+  Usage:
+    rvl_project open <rvl file name>
+    
+rvl_project save - Save the current reveal insert project
+  Usage:
+    rvl_project save [-overwrite] [<new rvl file name>]
+    
+rvl_project close - Close the current reveal insert project
+  Usage:
+    rvl_project close [-force]
+
+rvl_project run - Run inserting debug task or DRC checking on the current
+                  reveal insert project
+  Usage:
+    rvl_project run [-save] [-saveAs <file_name>] [-overwrite] 
+                    [-drc] [-insert_core <core_name>]...
+    -save: Save the project before run command\n"
+    -drc:  Run DRC checking only\n"
+    -insert_core: Specify the core to be inserted\n"
+    All cores will be inserted if none is specified.
+
+[rvl_core]
+rvl_core list - List all cores in current project
+  Usage:
+    rvl_core list
+
+rvl_core add - Add a new core in current project
+  Usage:
+    rvl_core add <core name>
+
+rvl_core delete - Remove an existing core from current project
+  Usage:
+    rvl_core delete <core name>
+
+rvl_core rename - Rename an existing core in current project
+  Usage:
+    rvl_core rename <core name> <new name>
+
+rvl_core select - List the default core or slect a core as the default core in
+                  current project
+  Usage:
+    rvl_core select [core name]
+
+rvl_core add_serdes - Add a serdes debug core into current project
+  Usage:
+    rvl_core add_serdes
+
+rvl_core delete_serdes - Remove the existing serdes debug core out of current project
+  Usage:
+    rvl_core delete_serdes
+
+rvl_serdes set  - Set option for the existing serdes debug core
+  Usage:\n"
+    rvl_serdes set [<clk=clock name> [<rst=reset signal, default value is VLO>]
+
+[rvl_trace]
+rvl_trace add_sig - Add signals in a debug core in current project
+  Usage:
+    rvl_trace add_sig [-core <core name>] [-insert_at <position>] <signals list>
+      You can specify an existing trace signal/bus name or a position number in 
+      a trace bus as the inserting position.
+      For example: "signal1", "Bus1<1>", "Bus1<.end.>"...
+
+rvl_trace list_sig - List all trace signals in a debug core in current project
+  Usage:
+    rvl_trace list_sig [-core <core name>]
+    
+rvl_trace move_sig - Move and rearrange the order of signals in a debug core in 
+                     current project
+  Usage:
+    rvl_trace move_sig [-core <core name>] [-move_to <position>] <signals list>
+      You can specify an existing trace signal/bus name or a postion number in
+      a trace bus as the new position.
+      For example: "signal1", "Bus1<1>", "Bus1<.end.>"...
+
+rvl_trace del_sig - Delete trace signals in a debug core in current project
+  Usage:
+    rvl_trace del_sig [-core <core name>] <signals list>
+
+rvl_trace group - Group specified trace signals in a debug core in current
+                  project into a bus
+  Usage:
+    rvl_trace group [-core <core name>] -bus <bus name> <signals list>
+
+rvl_trace ungroup - Ungroup trace signals in a trace bus in a debug core in current
+                    project
+  Usage:
+    rvl_trace ungroup [-core <core name>] <bus name>
+
+rvl_trace rename_bus - Change the name of a trace bus in a debug core in the
+                       current project
+  Usage:
+    rvl_trace rename_bus [-core <core name>] -bus <bus name> <new bus name>
+
+rvl_trace trc_option - List or set trace options of a debug core in current project
+  Usage:
+    rvl_trace trc_option [-core <core name>] [option=value]
+    You can set the following option:
+        SampleClk = [signal name]
+        SampleEnable = [on|off]
+        SampleEnableSig = [signal name](depend on SampleEnable is on)
+        SampleEnablePri = [Active_Low|Active_High](depend on SampleEnable is on)
+        BufferDepth = [16,32,...,65536]
+        Implementation = [EBR|DRAM]
+        Timestamp = [on|off]
+        TimestampBits = [<BufferDepth bits + 1> - 63]
+                        (depend on Timestamp is on and BufferDepth)
+        CaptureMode = [single|multiple]
+        MinimumSamplesPerTrigger = [8, 16, ...]
+                                   (depend on CaptureMode is multiple and BufferDepth)
+        IncludeTrigger = [on|off]
+
+rvl_trace trig_option - List or set trigger options of a debug core in current project
+  Usage:
+    rvl_trace trig_option [-core <core name>] [option=value]
+    You can set the following option:
+        DefaultRadix = [bin|oct|dec|hex]
+        EventCounter = [on|off]
+        CounterValue = [2,4,8,16,...,65536] (depend on FinalCounter is on)
+        TriggerOut = [on|off]\n 
+        OutNetType = [IO|NET|BOTH] (depend on TriggerOut is on)
+        OutNetName = [net name] (depend on TriggerOut is on)
+        OutNetPri = [Active_Low|Active_High] (depend on TriggerOut is on)
+        OutNetMPW = [pulse number]\n (depend on TriggerOut is on)
+
+[rvl_tu]
+rvl_tu list - List all trigger units in a debug core in current project
+  Usage:
+    rvl_tu list [-core <core name>]
+
+rvl_tu add - Add a new trigger unit to a debug core in current project
+  Usage:
+    rvl_tu add [-core <core name>] [-radix <bin|oct|dec|hex>] [-name <new TU name>]
+               <TU definition>
+      TU definition format: "{signal list} Operator Value"
+      Operator must be "==", "!=", ">", ">=", "<", "<=", ".RE."(rising edge),
+      ".FE."(falling edge) and ".SC."(serial compare).
+      A default trigger unit name will be created if it's omitted in command.
+
+rvl_tu rename - Rename an existing trigger unit in a debug core in current project
+  Usage:
+    rvl_tu rename [-core <core name>] <old name> <new name>
+
+rvl_tu set - Set an existing trigger unit in a debug core in current project
+  Usage:
+    rvl_tu set [-core <core name>] [-radix <bin|oct|dec|hex>] -name <TU name>
+               [-add_sig <signal list>] [-del_sig <signal list>] [-set_sig <signal list>]
+               [-expr <TU definition>] [-op operator] [-val value]
+      TU definition format: "{signal list} Operator Value"
+      Operator must be "==", "!=", ">", ">=", "<", "<=", ".RE."(rising edge), 
+      ".FE."(falling edge) and ".SC."(serial compare).
+
+rvl_tu remove - Delete an existing trigger unit in a debug core in current project
+  Usage:
+    rvl_tu remove [-core <core name>] <TU name>
+
+[rvl_te]
+rvl_te list - List all trigger expressions in a debug core in current project
+  Usage:
+    rvl_te list [-core <core name>]
+
+rvl_te add - Add a new trigger expression to a debug core in current project
+  Usage:
+    rvl_te add [-core <core name>] [-ram <EBR|Slice>] [-name <new TE name>]
+               [-expression <expreesion string>] [-max_seq_depth <max depth>]
+               [-max_event_count <max event count>]
+    A default trigger expression name will be created if it's omitted in command.
+
+rvl_te set - Change an existing trigger expression in a debug core in current project
+  Usage:
+    rvl_te set [-core <core name>] [-ram <EBR|Slice>] [-expression <expreesion string>]
+               [-max_seq_depth <max depth>] [-max_event_count <max event count>] <TE name>
+
+rvl_te rename - Rename an existing trigger expression in a debug core in current project
+  Usage:
+    rvl_te rename [-core <core name>] <old name> <new name>
+
+rvl_te remove - Delete an existing trigger expression in a debug core in current
+                project
+  Usage:
+    rvl_te remove [-core <core name>] [TE name]

@@ -1,0 +1,23 @@
+var pairs =
+{
+"expanding":{"net":1,"schematic":1}
+,"expand":{"net":1}
+,"net":{"show":1,"connected":1,"driving":1}
+,"show":{"connected":1,"just":1}
+,"connected":{"primitives":1,"instances":1}
+,"primitives":{"ports":1}
+,"ports":{"show":1,"expanding":1}
+,"just":{"primitive":1,"driver":1}
+,"primitive":{"port":1}
+,"port":{"driving":1,"expanding":1}
+,"modules":{"net":1}
+,"select":{"net":1}
+,"right-click":{"choose":1}
+,"choose":{"connected":1,"driver":1}
+,"highlights":{"selected":1}
+,"selected":{"net":1}
+,"schematic":{"necessary":1}
+,"driver":{"net":1}
+,"driving":{"primitive":1}
+}
+;Search.control.loadWordPairs(pairs);

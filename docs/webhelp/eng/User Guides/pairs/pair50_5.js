@@ -1,0 +1,24 @@
+var pairs =
+{
+"removing":{"error":1}
+,"error":{"sei":1,"design":1,"want":1,"injection":1,"device":1}
+,"sei":{"editor":1}
+,"remove":{"previously":1,"error":1}
+,"previously":{"inserted":1}
+,"inserted":{"error":1}
+,"design":{"using":1}
+,"using":{"sei":1,"soft":1}
+,"click":{"cell":1,"remove":1}
+,"cell":{"row":1}
+,"row":{"error":1}
+,"want":{"remove":1}
+,"analyzing":{"design":1}
+,"soft":{"error":1}
+,"running":{"sei":1}
+,"adding":{"configuring":1}
+,"configuring":{"new":1}
+,"new":{"error":1}
+,"inserting":{"error":1}
+,"device":{"using":1}
+}
+;Search.control.loadWordPairs(pairs);

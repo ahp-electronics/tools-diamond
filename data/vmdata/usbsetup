@@ -1,0 +1,42 @@
+#! /bin/bash
+path=/etc/hotplug
+/bin/echo "Configuring the Lattice USB2A cable for a hotplug based operating system"
+if [ -e $path/usb.usermap ]; then
+    /bin/echo "#Lattice USB Cable" >> $path/usb.usermap
+    /bin/echo "usbcable 0x0003 0x1134 0x8001 0x0000 0x0000 0x00 0x00 0x00 0x00 0x00 0x00 0x00000000" >> $path/usb.usermap
+else
+
+    /bin/echo "The usb.usermap file cannot be found in $path/, please check your settings"
+    /bin/echo "and try again."
+    exit 1
+fi
+	
+if [ -e $path/usb/usbcam ]; then
+    if [ -e $path/usb/usbcable ]; then
+        /bin/echo "File usbcable already exists, write over file? (y/n)"
+        read ans
+        case "$ans" in
+            y)
+                /bin/cp $path/usb/usbcam $path/usb/usbcable
+                /bin/chmod 755 $path/usb/usbcable
+                ;;
+            n)
+                /bin/echo "Setup unsuccessful"
+                exit 1
+                ;;
+        esac
+    else
+        /bin/cp $path/usb/usbcam $path/usb/usbcable
+        /bin/chmod 755 $path/usb/usbcable
+    fi
+    else
+        /bin/echo "The $path/usb/usbcam file was not found.  Please refer to the Linux"
+        /bin/echo "installation guide for information about how to manually configure"
+        /bin/echo "a hotplug based environment"
+        exit 1
+fi
+
+/bin/echo "Setup successful"
+
+	
+	

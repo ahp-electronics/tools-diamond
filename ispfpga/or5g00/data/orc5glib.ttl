@@ -1,0 +1,99 @@
+// $Header: /home/dmsys/pvcs/RCSMigTest/rcs/or5g00/pkg/o5gnb/data/RCS/orc5glib.ttl,v 1.14 2004/09/27 21:29:12 rag Exp $
+
+IB = IBM;
+IBPU = IBMPU;
+IBPD = IBMPD;
+OBW6 = OBZ( PULLMODE=KEEPER );
+BUF = BUFBA {IN=A; OUT=Z;};
+
+//Translate all drive 6 ouput buffers to OB
+OB6 = OB;
+OBZ6 = OBZ;
+OBZ6PU = OBZPU;
+OBZ6PD = OBZPD;
+BMZ6 = BB;
+BMZ6PU = BBPU;
+BMZ6PD = BBPD;
+
+BMS12 = BMZ12 (DELAYMODE=1);      // CMOS delayed input 12/6ma Output w/tri
+BMS12PU = BMZ12PU (DELAYMODE=1);  // CMOS delayed input 12/6ma Output w/tri & PU
+BMS12PD = BMZ12PD (DELAYMODE=1);  // CMOS delayed input 12/6ma Output w/tri & PD
+BMS12F = BMZ12F (DELAYMODE=1);  // CMOS delayed input 12/6ma fast Output w/tri
+BMS12FPU = BMZ12FPU (DELAYMODE=1); // CMOS Input 12/6ma Fast Output w/tri & PU
+BMS12FPD = BMZ12FPD (DELAYMODE=1); // CMOS Input 12/6ma Fast Output w/tri & PD
+BMS6  = BB (DELAYMODE=1);  // CMOS delayed Input 6/3ma Output w/ tri
+BMS6PU  = BBPU  (DELAYMODE=1);  // CMOS delayed Input 6/3ma Output w/ tri & PU
+BMS6PD  = BBPD  (DELAYMODE=1);// CMOS delayed Input 6/3ma Output w/ tri & PD
+BMW6 = BB (PULLMODE=KEEPER);  // CMOS BI 6/3ma with keeper state
+
+CB4 = INCDEC4;
+CU4 = INC4;
+CD4 = DEC4;
+CB8 = INCDEC8;
+CU8 = INC8;
+CD8 = DEC8;
+
+// Translate INPUT/OUTPUT flops to Generic PIC register with proper props
+// The EXPRESS keyword tells the client that the is to use the ECLK routing.
+IFS1P3BX = FS1P3BX ( DIN ) {
+           D; SP; SCLK=CK; PD; Q;
+};
+OFS1P3BX = FS1P3BX ( DOUT ) {
+           D; SP; SCLK=CK; PD; Q;
+};
+OFE1P3BX = FS1P3BX ( DOUT EXPRESS ) {
+           D; SP; ECLK=CK; PD; Q;
+};
+IFS1P3DX = FS1P3DX ( DIN ) {
+           D; SP; SCLK=CK; CD; Q;
+};
+OFS1P3DX = FS1P3DX ( DOUT ) {
+           D; SP; SCLK=CK; CD; Q;
+};
+OFE1P3DX = FS1P3DX ( DOUT EXPRESS ) {
+           D; SP; ECLK=CK; CD; Q;
+};
+IFS1P3IZ = FS1P3IZ ( DIN ) {
+           D; SP; SCLK=CK; CD; Q;
+};
+OFS1P3IZ = FS1P3IZ ( DOUT ) {
+           D; SP; SCLK=CK; CD; Q;
+};
+OFE1P3IZ = FS1P3IZ ( DOUT EXPRESS ) {
+           D; SP; ECLK=CK; CD; Q;
+};
+IFS1P3JZ = FS1P3JZ ( DIN ) {
+           D; SP; SCLK=CK; PD; Q;
+};
+OFS1P3JZ = FS1P3JZ ( DOUT ) {
+           D; SP; SCLK=CK; PD; Q;
+};
+OFE1P3JZ = FS1P3JZ ( DOUT EXPRESS ) {
+           D; SP; ECLK=CK; PD; Q;
+};
+IFS1P3IX = FS1P3IX ( DIN ) {
+           D; SP; CD; SCLK=CK; Q;
+};
+OFS1P3IX = FS1P3IX ( DOUT ) {
+           D; SP; CD; SCLK=CK; Q;
+};
+OFE1P3IX = FS1P3IX ( DOUT EXPRESS ) {
+           D; SP; CD; ECLK=CK; Q;
+};
+IFS1P3JX = FS1P3JX ( DIN ) {
+           D; SP; PD; SCLK=CK; Q;
+};
+OFS1P3JX = FS1P3JX ( DOUT ) {
+           D; SP; PD; SCLK=CK; Q;
+};
+OFE1P3JX = FS1P3JX ( DOUT EXPRESS ) {
+           D; SP; PD; ECLK=CK; Q;
+};
+
+RDBK = READBK { RDCFGN; RDDATA=PRDDATA; };
+
+// SWL BLOCKS
+SWL4 = ORCALUT4( SWL );
+SWL5 = ORCALUT5( SWL );
+SWLMX = MUX21( SWL );
+SWL6 = ORCALUT6( SWL );

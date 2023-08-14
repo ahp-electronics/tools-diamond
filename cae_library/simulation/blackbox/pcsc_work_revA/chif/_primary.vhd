@@ -1,0 +1,60 @@
+library verilog;
+use verilog.vl_types.all;
+entity chif is
+    generic(
+        CREG            : integer := 13;
+        SREG            : integer := 13;
+        SREG_ST         : integer := 32
+    );
+    port(
+        pcs_addro       : out    vl_logic_vector(5 downto 0);
+        pcs_rdo         : out    vl_logic;
+        pcs_wdatao      : out    vl_logic_vector(7 downto 0);
+        pcs_wstbo       : out    vl_logic;
+        pcs_rdatao      : out    vl_logic_vector(7 downto 0);
+        pcs_into        : out    vl_logic;
+        int_cha_out     : out    vl_logic;
+        ctie_low        : out    vl_logic;
+        pcs_ctl_1_ch_00 : out    vl_logic_vector(7 downto 0);
+        pcs_ctl_2_ch_01 : out    vl_logic_vector(7 downto 0);
+        pcs_ctl_3_ch_02 : out    vl_logic_vector(7 downto 0);
+        pcs_ctl_4_ch_03 : out    vl_logic_vector(7 downto 0);
+        pcs_ctl_6_ch_05 : out    vl_logic_vector(7 downto 0);
+        pcs_ctl_7_ch_06 : out    vl_logic_vector(7 downto 0);
+        ser_ctl_1_ch_07 : out    vl_logic_vector(7 downto 0);
+        ser_ctl_2_ch_08 : out    vl_logic_vector(7 downto 0);
+        ser_ctl_3_ch_09 : out    vl_logic_vector(7 downto 0);
+        ser_ctl_4_ch_0a : out    vl_logic_vector(7 downto 0);
+        ser_ctl_5_ch_0b : out    vl_logic_vector(7 downto 0);
+        ffc_txpwdnb     : in     vl_logic;
+        ffc_rxpwdnb     : in     vl_logic;
+        resetn          : in     vl_logic;
+        ion_delay       : in     vl_logic;
+        pcs_inti        : in     vl_logic;
+        pcs_addri       : in     vl_logic_vector(5 downto 0);
+        pcs_wdatai      : in     vl_logic_vector(7 downto 0);
+        pcs_wstbi       : in     vl_logic;
+        pcs_rdi         : in     vl_logic;
+        sciselch        : in     vl_logic;
+        pcs_rdatai      : in     vl_logic_vector(7 downto 0);
+        sciench         : in     vl_logic;
+        mc1_chif_ctl    : in     vl_logic_vector(103 downto 0);
+        test_clk        : in     vl_logic;
+        char_mode       : in     vl_logic;
+        force_int       : in     vl_logic;
+        prbs_error      : in     vl_logic;
+        pcs_sts_1_ch_20 : in     vl_logic_vector(7 downto 0);
+        pcs_sts_3_ch_22 : in     vl_logic_vector(7 downto 0);
+        pcs_sts_5_ch_24 : in     vl_logic_vector(7 downto 0);
+        pcs_sts_6_ch_25 : in     vl_logic_vector(7 downto 0);
+        pcie_det_done   : in     vl_logic;
+        rlos_lo         : in     vl_logic;
+        rlos_hi         : in     vl_logic;
+        rlol            : in     vl_logic;
+        ser_sts_2_ch_27 : in     vl_logic_vector(7 downto 0);
+        ser_sts_3_ch_28 : in     vl_logic_vector(7 downto 0);
+        ser_sts_4_ch_29 : in     vl_logic_vector(7 downto 0);
+        ser_sts_6_ch_2b : in     vl_logic_vector(7 downto 0);
+        ser_sts_7_ch_2c : in     vl_logic_vector(7 downto 0)
+    );
+end chif;

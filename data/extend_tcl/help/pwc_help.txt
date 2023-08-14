@@ -1,0 +1,1424 @@
+[pwc]
+Power Calculator extended Tcl commands
+
+For more information on a specific command, type help command-name:
+pwc_command        Power Calculator command commands
+pwc_device         Power Calculator device command
+pwc_parameters     Power Calculator parameters command
+pwc_thermal        Power Calculator thermal command
+pwc_settings       Power Calculator settings command
+pwc_supply         Power Calculator supply command
+pwc_logicblocks    Power Calculator logicblocks command
+pwc_clocks         Power Calculator clocks command
+pwc_inout          Power Calculator inout command
+pwc_blockram       Power Calculator blockram command
+pwc_dspblock       Power Calculator dspblock command
+pwc_plldll         Power Calculator plldll command
+pwc_maco           Power Calculator maco command
+pwc_serdes         Power Calculator serdes command
+pwc_mipidphy       Power Calculator mipi dphy command
+pwc_writereport    Power Calculator writereport command
+pwc_efb            Power Calculator efb command
+pwc_misc           Power Calculator misc command
+pwc_power          Power Calculator power control command
+pwc_esb            Power Calculator esb control command
+
+
+
+[pwc_command]
+pwc_command        Power Calculator command command
+
+pwc_command open -project <project file>
+	Open project file.
+
+	Input: String
+		project file - project file name.
+
+	Output: String
+		project file name.
+
+pwc_command save -project <project file>
+	Save project file.
+
+	Input: String
+		project file - project file name.
+
+	Output: String
+		project file name.
+
+pwc_command new  -project <project file> [-ncd <ncd file>]
+	Create new project.
+
+	Input: String
+		project file - project file name.
+		ncd file - NCD file name. Only support in standalone mode.
+
+	Output: String
+		project file name.
+
+pwc_command open  -vcd <vcd file> [-module <module name> [casesensitive|caseinsensitive]]
+	Open vcd file.
+
+	Input: String
+		vcd file - vcd file name.
+		module name - vcd file module name.
+		casesensitive option: casesensitive or caseinsensitive. casesensitive is default.
+
+	Output: String
+		module name.
+
+pwc_command open  -lpf <lpf file>
+	Import lpf file to get bank vccio.
+
+	Input: String
+		lpf file - lpf file name.
+
+	Output: String
+		lpf file name.
+
+pwc_command exit
+	Exit program.
+
+
+[pwc_device]
+pwc_device      Power Calculator device command
+
+pwc_device list
+	List all device info.
+
+	Output: List
+		list value of family, device, package, performance, operation, and partname.
+
+pwc_device list -family
+	List current device family.
+
+	Output: String
+		current selected family value.
+
+pwc_device list -device
+	List current device.
+
+	Output: String
+		current selected device value.
+
+pwc_device list -packagetype
+	List current package.
+
+	Output: String
+		current selected package value.
+
+pwc_device list -performance
+	List current performance grade.
+
+	Output: String
+		current selected performance value.
+
+pwc_device list -operatingconditions
+	List current operating condition.
+
+	Output: String
+		current selected operating condition value.
+
+pwc_device list -partnames
+	List current part name.
+
+	Output: String
+		current selected partname value.
+
+pwc_device set  -family [<value>]
+	Set device family.
+
+	Input: String
+		value - family.
+
+	Output: String
+		family.
+
+pwc_device set  -device [<value>]
+	Set device.
+
+	Input: String
+		value - device.
+
+	Output: String
+		device.
+
+pwc_device set  -packagetype [<value>]
+	Set package.
+
+	Input: String
+		value - package.
+
+	Output: String
+		package.
+
+pwc_device set  -performance [<value>]
+	Set performance grade.
+
+	Input: String
+		value - performance.
+
+	Output: String
+		performance.
+
+pwc_device set  -operatingconditions [<value>]
+	Set operating condition.
+
+	Input: String
+		value - operating condition.
+
+	Output: String
+		operating condition.
+
+pwc_device set  -partnames [<value>]
+	Set part name.
+
+	Input: String
+		value - part name.
+
+	Output: String
+		part name.
+
+[pwc_parameters]
+pwc_parameters      Power Calculator parameters command
+
+pwc_parameters set    -process [<value>]
+	Set device power process type.
+
+	Input: String
+		value - process type.
+
+	Output: String
+		process type.
+
+pwc_parameters set    -powermode [<value>]
+	Set device power mode.
+
+	Input: String
+		value - power mode.
+
+	Output: String
+		power mode.
+
+[pwc_thermal]
+pwc_thermal      Power Calculator thermal command
+
+pwc_thermal list
+	List all thermal settings.
+
+	Output: List
+		Value list of Ambient Temperature, Effective Theta-JA, Junction Temperature and Maximun Safe Ambient.
+
+pwc_thermal set  -userdefined [<theta-ja value>]
+	Set user defined theta JA.
+
+	Input: String
+		theta-ja value - user defined theta-ja value.
+
+	Output: String
+		user defined theta-ja value.
+
+pwc_thermal set  -board [<board type>]
+	Set board type.
+
+	Input: String
+		board type - board type value.
+
+	Output: String
+		board type value.
+
+pwc_thermal set  -heatsink [<heatsink type>]
+	Set heatsink type.
+
+	Input: String
+		heatsink type - heatsink type value.
+
+	Output: String
+		heatsink type value.
+
+pwc_thermal set  -airflow [<value>]
+	Set airflow value.
+
+	Input: String
+		value - airflow value.
+
+	Output: String
+		airflow value.
+
+pwc_thermal set  -ambient [<value>]
+	Set Ambient Temperature value.
+
+	Input: String
+		value - ambient value.
+
+	Output: String
+		ambient value.
+
+pwc_thermal set  -board <board type> -heatsink <heatsink type> -airflow <airflow value>
+	Set thermal settings.
+
+	Input: String
+		board type - board type value.
+		heatsink type - heatsink type value.
+		airflow value - airflow value.
+
+	Output: List
+		Value list of board type, heatsink type and airflow value.
+
+pwc_thermal set  -board <board type> -heatsink <custom heatsink value>
+	Set thermal settings with custom heatsink value.
+
+	Input: String
+		board type - board type value.
+		heatsink type - custom heatsink value.
+
+	Output: List
+		Value list of board type, custom heatsink value.
+
+
+[pwc_settings]
+pwc_settings      Power Calculator settings command
+
+pwc_settings list
+	List all settings.
+
+	Output: List
+		Value list of default frequency, default AF, twr option and estimated routing option.
+
+pwc_settings set  -af [<value>]
+	Set default activity factor.
+
+	Input: String
+		value - default AF value.
+
+	Output: String
+		default AF value.
+
+pwc_settings set  -freq [<value>]
+	Set default frequency.
+
+	Input: String
+		value - default frequency value.
+
+	Output: String
+		default frequency value.
+
+pwc_settings set  -freqtwr <file>
+	Set twr file for frequency.
+
+	Input: String
+		file - twr file name.
+
+	Output: String
+		twr file name.
+
+pwc_settings set  -freq <value> -freqtwr <file>
+	Set default frequency and twr file for frequency.
+
+	Input: String
+		value - default frequency value.
+		file - twr file name.
+
+	Output: String
+		default frequency value and twr file name.
+
+
+pwc_settings set  -freqtwropt [min|pref|trace]
+	Set twr file options.
+
+	Input: String
+		twr frequency option.
+
+	Output: String
+		twr frequency option.
+
+
+pwc_settings set  -estrouting [low|medium|high]
+	Set estimated routing option.
+
+	Input: String
+		estimated routing option.
+
+	Output: String
+		estimated routing option.
+
+
+[pwc_supply]
+pwc_supply        Power Calculator supply command
+
+pwc_supply list
+	List all power supplies.
+
+	Output: List
+		A list of supported supply type, voltage value and multiplication factor.
+
+pwc_supply set  -type <supply value> -mult <multiplication> -voltage <voltage value>
+	Set multiplication factor and voltage of named power supply.
+
+	Input: String
+		supply value - supply type value.
+		multiplication - multiplication value.
+		voltage value - voltage value.
+	Output: List
+		A value list of supply, voltage and multiplication value.
+		
+pwc_supply set  -type <supply value> -mult [<multiplication>]
+	Set multiplication factor of named power supply.
+
+	Input: String
+		supply value - supply type value.
+		multiplication - multiplication value.
+	Output: List
+		A value list of supply and multiplication value.
+
+pwc_supply set  -type <supply value> -voltage [<voltage value>]
+	Set voltage of named power supply.
+
+	Input: String
+		supply value - supply type value.
+		voltage value - voltage value.
+	Output: List
+		A value list of supply and voltage value.
+
+[pwc_logicblocks]
+pwc_logicblocks       Power Calculator logicblocks command
+
+pwc_logicblocks list
+	List all logic blocks.
+
+	Output: List
+		A list of the rows in logic block table.
+
+pwc_logicblocks add     [-clockname <value>] [-freq <value>] [-af <value>]
+                        [-logicluts <value>] [-distram <value>] [-rippleslices <value>]
+                        [-registers <value>]
+	Add logic block row.
+
+	Input: String
+		value - the value of each key in logic table.
+
+	Output: List
+		A value list of added row.
+
+pwc_logicblocks remove  [-clockname <value>] [-freq <value>] [-af <value>]
+                        [-logicluts <value>] [-distram <value>] [-rippleslices <value>]
+                        [-registers <value>]
+	Remove logic block row.
+
+	Input: String
+		value - the value of each key in logic table.
+
+	Output: String
+		The number of rows removed.
+
+	
+
+[pwc_clocks]
+pwc_clocks       Power Calculator clocks command
+
+pwc_clocks list
+	List all clocks.
+
+	Output: List
+		A list of the rows in clock table.
+
+pwc_clocks add       [-clockname <value>] [-freq <value>]
+	Add clock.
+
+	Input: String
+		value - the value of each key in clock table.
+
+	Output: List
+		A value list of added row.
+
+pwc_clocks remove    [-clockname <value>] [-freq <value>]
+	Remove clock.
+
+	Input: String
+		value - the value of each key in clock table.
+
+	Output: String
+		The number of rows removed.
+
+[pwc_inout]
+pwc_inout       Power Calculator inout command
+
+pwc_inout list
+	List all the rows in inputs/outputs table, bidi table, bank voltage table and termination table.
+
+	Output: List
+		List of all the rows in inputs/outputs table, bidi table, bank voltage table and termination table.
+
+pwc_inout list     -io
+	List all the rows in inputs/outputs table.
+
+	Output: List
+		A list of all the rows in inputs/outputs table.
+
+pwc_inout add      -io [-clockname <value>] [-type <value>] [-ioregistermode <value>]
+                       [-freq <value>] [-af <value>] [-ip <value>]
+                       [-op <value>] [-cload <value>] [-bank <value>] [-pg <value>]
+	Add I/O.
+
+	Input: String
+		value - the value of each key in inputs/outputs table.
+		-pg is for specfic device family only.
+
+	Output: List
+		A value list of added row.
+
+pwc_inout remove   -io [-clockname <value>] [-type <value>] [-ioregistermode <value>]
+                       [-freq <value>] [-af <value>] [-ip <value>]
+                       [-op <value>] [-cload <value>] [-bank <value>] [-pg <value>]
+	Remove I/O.
+
+	Input: String
+		value - the value of each key in inputs/outputs table.
+		-pg is for specfic device family only.
+
+	Output: String
+		The number of rows removed.
+
+pwc_inout list     -bidir
+	List all bi-directional I/Os.
+
+	Output: List
+		A list of all the rows in bi-directional I/Os table.
+
+pwc_inout add      -bidir [-clockinputname <value>] [-type <value>]
+                          [-ioregistermode <value>] [-inputfreq <value>]
+                          [-inputaf <value>] [-bidi <value>] [-clockoutputname <value>]
+                          [-outputfreq <value>] [-outputaf <value>] [-dutycycle <value>] 
+                          [-cload <value>] [-bank <value>] [-pg <value>]
+	Add bi-directional I/O.
+
+	Input: String
+		value - the value of each key in bi-directional I/Os table.
+		-pg is for specfic device family only.
+
+	Output: List
+		A value list of added row.
+
+pwc_inout remove   -bidir [-clockinputname <value>] [-type <value>]
+                          [-ioregistermode <value>] [-inputfreq <value>]
+                          [-inputaf <value>] [-bidi <value>] [-clockoutputname <value>]
+                          [-outputfreq <value>] [-outputaf <value>] [-dutycycle <value>] 
+                          [-cload <value>] [-bank <value>] [-pg <value>]
+	Remove bi-directional I/O.
+
+	Input: String
+		value - the value of each key in bi-directional I/Os table.
+		-pg is for specfic device family only.
+
+	Output: String
+		The number of rows removed.
+
+pwc_inout list     -bank
+	List all bank voltages.
+
+	Output: List
+		A list of all the rows in bank voltage table.
+
+pwc_inout set  -bank <bank id> -inrdshutoff|-lvdsoshutoff|-slewrate [<value>]
+	Set InRD Shut-off, LVDSO Shut-off or Slewrate for bank. InRD, LVDSO and Slewrate are for specific device family only.
+
+	Input: String
+		bank id - bank No.
+		value - The value set for Allow InRD Shut-off, Allow LVDSO Shut-off or Slewrate, No or Yes.
+
+	Output: String
+		The value set.
+
+pwc_inout list     -term
+	List all termination resistances and voltages.
+
+	Output: List
+		A list of all the rows in termination table.
+
+[pwc_blockram]
+pwc_blockram       Power Calculator blockram command
+
+pwc_blockram list
+	List all block ram tables.
+
+	Output: List
+		A list of all the rows in single port ram table, dual port ram table, dual port true table and fifodc table.
+		
+pwc_blockram list    -spram
+	List all single port rams.
+
+	Output: List
+		List of all the rows in single port ram table.
+
+pwc_blockram add     -spram [-clockname <value>] [-ebrblocks <value>] [-freq <value>] [-af <value>]
+	Add single port ram.
+
+	Input: String
+		value - the value of each key in single port ram table.
+
+	Output: List
+		A value list of added row.
+
+pwc_blockram remove  -spram [-clockname <value>] [-ebrblocks <value>] [-freq <value>] [-af <value>]
+	Remove single port ram.
+
+	Input: String
+		value - the value of each key in single port ram table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_blockram list    -dpram
+	List all dual port rams.
+
+	Output: List
+		List of all the rows in dual port ram table.
+
+pwc_blockram add     -dpram [-rdclockname <value>] [-rdclkfreq <value>] [-rdaf <value>]
+                            [-ebrblocks <value>] [-wrclockname <value>] [-wrclkfreq <value>]
+                            [-wraf <value>]
+	Add dual port ram.
+
+	Input: String
+		value - the value of each key in dual port ram table.
+
+	Output: List
+		A value list of added row.
+
+pwc_blockram remove  -dpram [-rdclockname <value>] [-rdclkfreq <value>] [-rdaf <value>]
+                            [-ebrblocks <value>] [-wrclockname <value>] [-wrclkfreq <value>]
+                            [-wraf <value>]
+	Remove all dual port ram.
+
+	Input: String
+		value - the value of each key in dual port ram table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_blockram list    -dpramtrue
+	List all dual port true rams.
+
+	Output: List
+		List of all the rows in dual port true ram table.
+
+pwc_blockram add     -dpramtrue [-clockaname <value>] [-clkafreq <value>] [-clkaaf <value>]
+                                [-ebrblocks <value>] [-clockbname <value>] [-clkbfreq <value>]
+                                [-clkbaf <value>]
+	Add dual port true ram.
+
+	Input: String
+		value - the value of each key in dual port true ram table.
+
+	Output: List
+		A value list of added row.
+
+pwc_blockram remove  -dpramtrue [-clockaname <value>] [-clkafreq <value>] [-clkaaf <value>]
+                                [-ebrblocks <value>] [-clockbname <value>] [-clkbfreq <value>]
+                                [-clkbaf <value>]
+	Remove dual port true ram.
+
+	Input: String
+		value - the value of each key in dual port true ram table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_blockram list    -fifodc
+	List all fifodc.
+
+	Output: List
+		List of all the rows in fifodc table.
+
+pwc_blockram add     -fifodc [-rdclockname <value>] [-outputregistersrd <value>]
+                             [-rdclkfreq <value>] [-rdaf <value>]
+                             [-ebrblocks <value>] [-wrclockname <value>]
+                             [-outputregisterswr <value>] [-wrclkfreq <value> [-wraf <value>]
+	Add FIFO DC.
+
+	Input: String
+		value - the value of each key in fifidc table.
+
+	Output: List
+		A value list of added row.
+
+pwc_blockram remove  -fifodc [-rdclockname <value>] [-outputregistersrd <value>]
+                             [-rdclkfreq <value>] [-rdaf <value>]
+                             [-ebrblocks <value>] [-wrclockname <value>]
+                             [-outputregisterswr <value>] [-wrclkfreq <value> [-wraf <value>]
+	Remove FIFO DC.
+
+	Input: String
+		value - the value of each key in fifodc table.
+
+	Output: String
+		The number of rows removed.
+
+
+[pwc_dspblock]
+pwc_dspblock      Power Calculator dspblock command
+
+pwc_dspblock list
+	List all DSP blocks.
+
+	Output: List
+		List of all the rows in dsp table(s).
+
+pwc_dspblock add     [-clockname <name>] [-freq <value>] [-af <value>] [-type <value>] [-dsp <vaue>]
+	Add DSP block.
+
+	Input: String
+		name - clock name.
+		value - the value of each key in dsp table.
+
+	Output: List
+		A value list of added row.
+
+pwc_dspblock remove  [-clockname <name>] [-freq <value>] [-af <value>] [-type <value>] [-dsp <vaue>]
+	Remove DSP block.
+
+	Input: String
+		name - clock name.
+		value - the value of each key in dsp table.
+
+	Output: String
+		The number of rows removed.
+
+
+[pwc_plldll]
+pwc_plldll        Power Calculator plldll command
+
+pwc_plldll list
+	List all PLL, DLL, DQSDLL, DQS, DLLDEL, DDRDLL tables.
+
+	Output: List
+		List of all the rows in PLL, DLL, DQSDLL, DQS, DDRDLL and DLLDEL table.
+
+pwc_plldll list   -pll
+	List all PLLs.
+
+	Output: List
+		List of all the rows in PLL table.
+
+pwc_plldll add    -pll [-outputclockname <value>] [-inputfreq <value>]
+                       [-n <value>] [-v <value>] [-m <value>] [-pll <value>] [-pllid <value>]
+	Add PLL.
+
+	Input: String
+		value - the value of each key in PLL table. -pllid is for specific device family only.
+
+	Output: List
+		A value list of added row.
+
+pwc_plldll remove -pll [-outputclockname <value>] [-inputfreq <value>]
+                       [-n <value>] [-v <value>] [-m <value>] [-pll <value>] [-pllid <value>]
+	Remove PLL.
+
+	Input: String
+		value - the value of each key in PLL table. -pllid is for specific device family only.
+
+	Output: String
+		The number of rows removed.
+
+pwc_plldll list   -dll
+	List all DLLs.
+
+	Output: List
+		List of all the rows in DLL table.
+
+pwc_plldll add    -dll [-clockname <value>] [-freq <value>] [-dll <value>]
+	Add DLL.
+
+	Input: String
+		value - the value of each key in DLL table.
+
+	Output: List
+		A value list of added row.
+
+pwc_plldll remove -dll [-clockname <value>] [-freq <value>] [-dll <value>]
+	Remove DLL.
+
+	Input: String
+		value - the value of each key in DLL table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_plldll list   -dqsdll
+	List all DQSDLLs.
+
+	Output: List
+		List of all the rows in DQSDLL table.
+
+pwc_plldll add    -dqsdll [-clockname <value>] [-freq <value>] [-dqsdll <value>]
+	Add DQSDLL.
+
+	Input: String
+		value - the value of each key in DQSDLL table.
+
+	Output: List
+		A value list of added row.
+
+pwc_plldll remove -dqsdll [-clockname <value>] [-freq <value>] [-dqsdll <value>]
+	Remove DQSDLL.
+
+	Input: String
+		value - the value of each key in DQSDLL table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_plldll list   -ddrdll
+	List all DDRDLLs. For specific device family only.
+
+	Output: List
+		List of all the rows in DDRDLL table.
+
+pwc_plldll add    -ddrdll [-clockname <value>] [-freq <value>] [-ddrdllid] [-allowstandby <value>]
+	Add DDRDLL. For specific device family only.
+
+	Input: String
+		value - the value of each key in DDRDLL table.
+
+	Output: List
+		A value list of added row.
+
+pwc_plldll remove -ddrdll [-clockname <value>] [-freq <value>] [-ddrdllid] [-allowstandby <value>]
+	Remove DDRDLL. For specific device family only.
+
+	Input: String
+		value - the value of each key in DDRDLL table.
+
+	Output: String
+		The number of rows removed.
+		
+pwc_plldll list   -dqs
+	List all DQS. For specific device family only.
+
+	Output: List
+		List of all the rows in DQS table.
+
+pwc_plldll add    -dqs [-clockname <value>] [-freq <value>] [-dqs <value>]
+	Add DQS. For specific device family only.
+
+	Input: String
+		value - the value of each key in DQS table.
+
+	Output: List
+		A value list of added row.
+
+pwc_plldll remove -dqs [-clockname <value>] [-freq <value>] [-dqs <value>]
+	Remove DQS. For specific device family only.
+
+	Input: String
+		value - the value of each key in DQS table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_plldll list   -dlldel
+	List all DLLDEL. For specific device family only.
+
+	Output: List
+		List of all the rows in DLLDEL table.
+
+pwc_plldll add    -dlldel [-clockname <value>] [-freq <value>] [-dlldel <value>]
+	Add DLLDEL. For specific device family only.
+
+	Input: String
+		value - the value of each key in DLLDEL table.
+
+	Output: List
+		A value list of added row.
+
+pwc_plldll remove -dlldel [-clockname <value>] [-freq <value>] [-dlldel <value>]
+	Remove DLLDEL. For specific device family only.
+
+	Input: String
+		value - the value of each key in DLLDEL table.
+
+	Output: String
+		The number of rows removed.
+
+
+[pwc_maco]
+pwc_maco        Power Calculator maco command for SCM device
+
+pwc_maco list
+	List all MACO.
+
+	Output: List
+		List of all the rows in maco table.
+
+pwc_maco add    [-clockname <name>] [-freq <value>] [-af <value>]
+                [-type <value>] [-maco <value>]
+	Add MACO for SCM device.
+
+	Input: String
+		name - clock name.
+		value - the value of each key in maco table.
+
+	Output: List
+		A value list of added row.
+
+
+pwc_maco remove [-clockname <name>] [-freq <value>] [-af <value>]
+                [-type <value>] [-maco <value>]
+	Remove MACO for SCM device.
+
+	Input: String
+		name - clock name.
+		value - the value of each key in maco table.
+
+	Output: String
+		The number of rows removed.
+
+
+[pwc_serdes]
+pwc_serdes        Power Calculator serdes command
+
+pwc_serdes list
+	List all serdes.
+	Output: List
+		List of all the rows in serdes table.
+
+pwc_serdes add -pcs [-clockname <name>] [-freq <value>] [-channels <value>]
+                  [-gearingratio <value>] [-txpreemphasis <value>]
+	Add SERDES for SC/SCM device.
+
+	Input: String
+		name - clock name.
+		value - the value of each key in serdes table.
+
+	Output: List
+		A value list of added row.
+
+pwc_serdes add -pcs [-clockname <name>] [-freq <value>] [-channels <value>]
+                  [-mode <value>]
+	Add SERDES for ECP3/ECP2M/ECP2MS device.
+
+	Input: String
+		name - clock name.
+		value - the value of each key in serdes table.
+
+	Output: List
+		A value list of added row.
+
+pwc_serdes add -pcs [-dualchannel <value>] [-mode <value>] [-receivemaxdatarate <value>] [-rxrate <value>]
+                    [-txmaxdatarate <value>] [-txrate <value>] [-differentialamplitude <value>]
+                    [-outputtermination <value>] [-deemphasisprecursorselect <value>] [-deemphasispostcursorselect <value>]
+                    [-receivelossofsignalport <value>]
+	Add SERDES for ECP5UM device.
+
+	Input: String
+		value - the value of each key in serdes table.
+
+	Output: List
+		A value list of added row.
+
+pwc_serdes add -aux [-dual <value>] [-txpll <value>] 
+	Add SERDES AUX for ECP5UM device.
+
+	Input: String
+		value - the value of each key in serdes aux table.
+
+	Output: List
+		A value list of added row.
+		
+pwc_serdes remove [-clockname <name>] [-freq <value>] [-channels <value>]
+                  [-gearingratio <value>] [-txpreemphasis <value>]
+	Remove SERDES for SC/SCM device.
+
+	Input: String
+		name - clock name.
+		value - the value of each key in serdes table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_serdes remove [-clockname <name>] [-freq <value>] [-channels <value>]
+                  [-mode <value>]
+	Remove SERDES for ECP3/ECP2M/ECP2MS device.
+
+	Input: String
+		name - clock name.
+		value - the value of each key in serdes table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_serdes remove -pcs [-dualchannel <value>] [-mode <value>] [-receivemaxdatarate <value>] [-rxrate <value>]
+                    [-txmaxdatarate <value>] [-txrate <value>] [-differentialamplitude <value>]
+                    [-outputtermination <value>] [-deemphasisprecursorselect <value>] [-deemphasispostcursorselect <value>]
+                    [-receivelossofsignalport <value>]
+	Remove SERDES for ECP5UM device.
+
+	Input: String
+		value - the value of each key in serdes table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_serdes remove -aux [-dual <value>] [-txpll <value>] 
+	Remove SERDES AUX for ECP5UM device.
+
+	Input: String
+		value - the value of each key in serdes aux table.
+
+	Output: List
+		The number of rows removed.
+
+[pwc_writereport]
+pwc_writereport     Power Calculator writereport command
+
+pwc_writereport txt  -file <file name>
+	Generate text report to file.
+
+	Input: String
+		file name - text report file name.
+
+	Output: String
+		text report file name.
+
+pwc_writereport html -file <file name>
+	Generate HTML report to file.
+
+	Input: String
+		file name - html report file name.
+
+	Output: String
+		html report file name.
+
+[pwc_efb]
+pwc_efb        Power Calculator efb command. For specfic device family only.
+
+pwc_efb list
+	List I2C1, I2C2, SPI, TC, UFM, CFG and WISHBONE in EFB. 
+
+	Output: List
+		List of all the rows in I2C1, I2C2, SPI, TC, UFM, CFG and WISHBONE table.
+
+pwc_efb list -i2c1
+	List I2C1. For specfic device family only.
+
+	Output: List
+		List of all the rows in I2C1 table.
+
+pwc_efb add  -i2c1
+	Add I2C1. For specfic device family only.
+
+	Input: String
+		value - the value of each key in I2C1 table.
+
+	Output: List
+		A value list of added row.
+
+pwc_efb remove -i2c1
+	Remove I2C1. For specfic device family only.
+
+	Input: String
+		value - the value of each key in I2C1 table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_efb list -i2c2
+	List I2C2. For specfic device family only.
+
+	Output: List
+		List of all the rows in I2C2 table.
+
+pwc_efb add  -i2c2
+	Add I2C2. For specfic device family only.
+
+	Input: String
+		value - the value of each key in I2C2 table.
+
+	Output: List
+		A value list of added row.
+
+pwc_efb remove -i2c2
+	Remove I2C2. For specfic device family only.
+
+	Input: String
+		value - the value of each key in I2C2 table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_efb list -spi
+	List SPI. For specfic device family only.
+
+	Output: List
+		List of all the rows in SPI table.
+
+pwc_efb add  -spi
+	Add SPI. For specfic device family only.
+
+	Input: String
+		value - the value of each key in SPI table.
+
+	Output: List
+		A value list of added row.
+
+pwc_efb remove -spi
+	Remove SPI. For specfic device family only.
+
+	Input: String
+		value - the value of each key in SPI table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_efb list -tc
+	List TC. For specfic device family only.
+
+	Output: List
+		List of all the rows in TC table.
+
+pwc_efb add  -tc
+	Add TC. For specfic device family only.
+
+	Input: String
+		value - the value of each key in TC table.
+
+	Output: List
+		A value list of added row.
+
+pwc_efb remove -tc
+	Remove TC. For specfic device family only.
+
+	Input: String
+		value - the value of each key in TC table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_efb list -ufm
+	List UFM. For specfic device family only.
+
+	Output: List
+		List of all the rows in UFM table.
+
+pwc_efb add  -ufm
+	Add UFM. For specfic device family only.
+
+	Input: String
+		value - the value of each key in UFM table.
+
+	Output: List
+		A value list of added row.
+
+pwc_efb remove -ufm
+	Remove UFM. For specfic device family only.
+
+	Input: String
+		value - the value of each key in UFM table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_efb list -cfg
+	List CFG. For specfic device family only.
+
+	Output: List
+		List of all the rows in CFG table.
+
+pwc_efb add  -cfg
+	Add CFG. For specfic device family only.
+
+	Input: String
+		value - the value of each key in CFG table.
+
+	Output: List
+		A value list of added row.
+
+pwc_efb remove -cfg
+	Remove CFG. For specfic device family only.
+
+	Input: String
+		value - the value of each key in CFG table.
+
+	Output: String
+		The number of rows removed.
+
+pwc_efb list -wishbone
+	List WISHBONE. For specfic device family only.
+
+	Output: List
+		List of all the rows in WISHBONE table.
+
+pwc_efb add  -wishbone
+	Add WISHBONE. For specfic device family only.
+
+	Input: String
+		value - the value of each key in WISHBONE table.
+
+	Output: List
+		A value list of added row.
+
+pwc_efb remove -wishbone
+	Remove WISHBONE. For specfic device family only.
+
+	Input: String
+		value - the value of each key in I2C1 table.
+
+	Output: String
+		The number of rows removed.
+
+
+[pwc_misc]
+pwc_misc        Power Calculator misc command. Available for specific family.
+
+pwc_misc list
+	List MCLK, POR, BANDGAP, SED, I2C and UFM table. Available for specific family.
+
+	Output: List
+		List of all the rows in MCLK, POR, BANDGAP, SED, DTR and I2C table.
+
+pwc_misc list   -mclk
+	List all MCLK. For specific device family only.
+
+	Output: List
+		List of all the rows in MCLK table.
+
+pwc_misc set   -mclk [-allowstandby <value>] [-mclkfreq <mclk freq>] [-sedfreq <sedfreq>]
+	Set standby, mclk frequency and sed frequency of MCLK. For specific device family only.
+
+	Input: String
+		value - allow standby, No or Yes.
+		mclk freq - mclk frequency.
+		sedfreq - sed frequency.
+
+	Output: list
+		List of values in MCLK table.
+
+pwc_misc list   -por
+	List all POR. For specific device family only.
+
+	Output: List
+		List of all the rows in POR table.
+
+pwc_misc set   -por -allowstandby [<value>]
+	Set standby of POR. For specific device family only.
+
+	Input: String
+		value - allow standby, No or Yes.
+
+	Output: String
+		Standby value.
+
+pwc_misc list   -bandgap
+	List all BANDGAP. For specific device family only.
+
+	Output: List
+		List of all the rows in BANDGAP table.
+
+pwc_misc set   -bandgap -allowstandby [<value>]
+	Set standby of BANDGAP. For specific device family only.
+
+	Input: String
+		value - allow standby, No or Yes.
+
+	Output: String
+		Standby value.
+
+pwc_misc list   -sed
+	List all SED. For specific device family only.
+
+	Output: List
+		List of all the rows in SED table.
+
+pwc_misc list   -i2c
+	List all I2C. For specific device family only.
+
+	Output: List
+		List of all the rows in I2C table.
+
+pwc_misc list   -ufm
+	List all UFM. For specific device family only.
+
+	Output: List
+		List of all the rows in UFM table.
+
+pwc_misc add   -sed [-mode <mode value>] [-status <status value>]
+	Add SED. For specific device family only.
+
+	Input: String
+		mode value - SED mode, SEDFA, SEDFB or SEDFC.
+		status value - SED enable, Enabled or Disabled.
+
+	Output: List
+		A value list of added row.
+
+pwc_misc remove -sed [-mode <mode value>] [-status <status value>]
+	Remove SED. For specific device family only.
+
+	Input: String
+		mode value - SED mode, SEDFA, SEDFB or SEDFC.
+		status value - SED enable, Enabled or Disabled.
+
+	Output: String
+		The number of rows removed.
+
+pwc_misc add   -dtr [-clockname <value>] [-freq <value>] [-af <value>]
+                    [-dtr <value>]
+	Add DTR. For specific device family only.
+
+	Input: String
+		value - the value of each key in dtr table.
+
+	Output: List
+		A value list of added row.
+
+pwc_misc remove -dtr [-clockname <value>] [-freq <value>] [-af <value>]
+                     [-dtr <value>]
+	Remove DTR. For specific device family only.
+
+	Input: String
+		value - the value of each key in dtr table.
+
+	Output: List
+		A value list of added row.
+
+pwc_misc add   -i2c [-clockname <value>] [-freq <value>] [-af <value>]
+                    [-i2c <value>]
+	Add I2C. For specific device family only.
+
+	Input: String
+		value - the value of each key in i2c table.
+
+	Output: List
+		A value list of added row.
+
+pwc_misc remove -i2c [-clockname <value>] [-freq <value>] [-af <value>]
+                     [-i2c <value>]
+	Remove I2C. For specific device family only.
+
+	Input: String
+		value - the value of each key in i2c table.
+
+	Output: List
+		A value list of added row.
+
+pwc_misc add   -ufm [-clockname <value>] [-freq <value>] [-af <value>]
+                    [-ufm <value>]
+	Add UFM. For specific device family only.
+
+	Input: String
+		value - the value of each key in ufm table.
+
+	Output: List
+		A value list of added row.
+
+pwc_misc remove -ufm [-clockname <value>] [-freq <value>] [-af <value>]
+                     [-ufm <value>]
+	Remove UFM. For specific device family only.
+
+	Input: String
+		value - the value of each key in ufm table.
+
+	Output: List
+		A value list of added row.
+
+
+pwc_misc add   -mclk [-allowstandby <value>] [-mclkfreq <value>] [-sedfreq <value>]
+	Add MCLK. For specific device family only.
+
+	Input: String
+		value - the value of each key in misc table.
+
+	Output: List
+		A value list of added row.
+
+pwc_misc remove -mclk [-allowstandby <value>] [-mclkfreq <value>] [-sedfreq <value>]
+	Remove MCLK. For specific device family only.
+
+	Input: String
+		value - the value of each key in misc table.
+
+	Output: List
+		A value list of added row.
+		
+
+[pwc_power]
+pwc_power        Power Calculator power control command. For specific device family only.
+
+pwc_power set  -standby [<-bandgap | -por | -osc | -pll <pll id> | -mipidphy <mipidphy id> > <Disable|Enable>]
+		-dynamic [-bank <bank id> [<-inrd|-lvdso|-pg|-slewrate>  <Disable|Enable>]]
+
+	Set standby and/or bank dynamic option.
+
+	Input: string
+		pll id - PLL id. Optional. XO2, XO3 and Platform Manager 2: 0 or 1.
+		mipidphy id - MIPIDPHY id. For specific device family only.
+		bank id - Bank id.
+
+	Output: List
+		A value list of standby option and/or dynamic bank option.
+		The standby option value, Disable or Enable.
+
+
+[pwc_mipidphy]
+pwc_mipidphy       Power Calculator mipidphy command
+
+pwc_mipidphy list
+	List all mipidphy blocks.
+
+	Output: List
+		A list of the rows in mipidphy table.
+
+pwc_mipidphy add     [-mipidphyid <value>] [-allowstandby <value>] [-mode <value>]
+                        [-datarate <value>] [-af <value>]
+	Add mipidphy row.
+
+	Input: String
+		value - the value of each key in mipidphy table.
+
+	Output: List
+		A value list of added row.
+
+pwc_mipidphy remove  [-mipidphyid <value>] [-allowstandby <value>] [-mode <value>]
+                        [-datarate <value>] [-af <value>]
+	Remove mipidphy row.
+
+	Input: String
+		value - the value of each key in mipidphy table.
+
+	Output: String
+		The number of rows removed.
+
+
+[pwc_esb]
+pwc_esb        Power Calculator esb command
+
+pwc_esb list
+	List ESB tables.
+
+	Output: List
+		List of all the rows in ESB table.
+
+pwc_esb list   -esb
+	List all ESB. For specific device family only.
+
+	Output: List
+		List of all the rows in ESB table.
+
+pwc_esb add    -esb [-clockname <value>] [-freq <value>] [-esb <value>]
+	Add ESB. For specific device family only.
+
+	Input: String
+		value - the value of each key in ESB table.
+
+	Output: List
+		A value list of added row.
+
+pwc_esb remove -esb [-clockname <value>] [-freq <value>] [-esb <value>]
+	Remove ESB. For specific device family only.
+
+	Input: String
+		value - the value of each key in ESB table.
+
+	Output: String
+		The number of rows removed.
+

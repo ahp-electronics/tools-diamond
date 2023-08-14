@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		FPGA_Plus	SYSTEM	"FPGA_Plus.dtd" >
+<FPGA_Plus version="1.0">
+
+<!-- Operations                                 -->
+<Operation name="Write_Configuration_Embedded_Bitstream">
+	call write_configuration_embedded_bitstream;
+</Operation>
+<!-- Parameters                                 -->
+<Parameter>
+	DATASTREAM MAGIC_NUMBER = hFF;
+	DATASTREAM CONFIG_COMMENT_TERM = hFF;
+	DATASTREAM RBK_COMMENT_TERM = hFE;
+	DATASTREAM MSK_COMMENT_TERM = hFD;
+
+	DATASTREAM ALL_1_DELAY_FRAME = hFFFFFFFFFFFFFFFFFFFF;
+	DATASTREAM ALL_1_COMMAND_INFO = hFFFFFF;
+	DATASTREAM HEADER_DUMMY = hFFFF;
+	DATASTREAM PREAMBLE = hBDB3;
+	DATASTREAM ENCRYPTION_PREAMBLE = hFFFFBAB3;
+	DATASTREAM COMMAND_INFO_CRC_OFF = h000000;
+	DATASTREAM COMMAND_INFO_CRC_ON = h800000;
+	DATASTREAM STOPBYTES = hFFFFFFFF;
+	DATASTREAM TERMINATOR = hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;
+	DATASTREAM ALL_1_IDCODE_FRAME = hFFFFFFFFFFFFFF;
+	DATASTREAM ALL_1_PROGRAM_SECURITY_FRAME = hFFFFFFFF;
+	
+	DATASTREAM MSK_IDCODE = hFFFFFFF0;
+	DATASTREAM MSK_CTL_REGISTER = hFFFFFFFF;
+	DATASTREAM MSK_STOPBYTES = h00000000;
+	DATASTREAM MSK_USERCODE = hFFFFFFFF;			             
+	DATASTREAM MSK_TERMINATOR = h0000000000000000000000000000000000000000;
+
+	DATASTREAM VERIFYID = hC7;
+	DATASTREAM CONTROLREG0 = hC4;
+	DATASTREAM RESETADDR = hE2;
+	DATASTREAM WRITEINC = hC1;
+	DATASTREAM USERCODE = hC3;
+	DATASTREAM PROGRAMSECURE = hF3;
+	DATASTREAM PROGRAMDONE = h7A;
+	DATASTREAM CLEARALL = hF0;
+	DATASTREAM SRAMPROGRAMDONE = hFA;
+
+	DATASTREAM READ_PROGRAM_SECURE = hFF;
+	DATASTREAM READ_VERIFY_ID = hFF;
+	DATASTREAM END_FRAME = hFFFFFFFF;
+	
+	INT32 iCompress = 0;
+</Parameter>
+
+<Script>
+<![CDATA[
+function write_configuration_embedded_bitstream
+{
+	if ( __SERIAL__ )
+	{
+		//
+		// Drive all pins high
+		//
+		cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+		cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+		cpu_send_register();
+		
+		//
+		// Drive PROG pin low
+		//
+		cpu_set_pin( CPU_PROG_PIN, CPU_LOW );
+		cpu_send_register();
+		
+		//
+		// Check INIT pin low
+		//
+		cpu_check_pin( CPU_INIT_PIN, CPU_LOW, 5000, 100 );
+		
+		//
+		// Check DONE pin low
+		//
+		cpu_check_pin( CPU_DONE_PIN, CPU_LOW, 5000, 100 );
+		
+		//
+		// Drive PROG pin high
+		//
+		cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+		cpu_send_register();
+		
+		//
+		// Check INIT pin high
+		//
+		cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 5000, 100 );
+		
+		
+		//
+		// Drive CCLK pin low
+		//
+		cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+		cpu_send_register();
+		
+		add_serial_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+		if ( __ENCRYPT__ )
+		{
+			add_serial_bitstream_frame( ENCRYPTION_PREAMBLE,HEADER_DUMMY, Encryption_Preamble );
+			cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 2000, 100 );
+		}
+		cpu_serial_bitstream_data();
+		add_serial_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+		add_serial_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+		//
+		// Check INIT pin high
+		//
+		cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 500 );
+		
+		//
+		// Check DONE pin high
+		//
+		cpu_check_pin( CPU_DONE_PIN, CPU_HIGH, 1000, 500 );
+			
+	}
+	else
+	{
+		//
+		// Drive all pins high
+		//
+		cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+		cpu_set_pin( CPU_CS_PIN, CPU_HIGH );
+		cpu_set_pin( CPU_CS1_PIN, CPU_HIGH );
+		cpu_set_pin( CPU_WRITE_EN_PIN, CPU_HIGH );
+		cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+		cpu_send_register();
+		
+		//
+		// Drive PROG pin low
+		//
+		cpu_set_pin( CPU_PROG_PIN, CPU_LOW );
+		cpu_send_register();
+		
+		//
+		// Check INIT pin low
+		//
+		cpu_check_pin( CPU_INIT_PIN, CPU_LOW, 5000, 100 );
+		
+		//
+		// Check DONE pin low
+		//
+		cpu_check_pin( CPU_DONE_PIN, CPU_LOW, 5000, 100 );
+		
+		//
+		// Drive PROG pin high
+		//
+		cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+		cpu_send_register();
+		
+		//
+		// Check INIT pin high
+		//
+		//cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 5000, 100 );
+		
+		//
+		// Drive WRITE_EN pin low
+		//
+		cpu_set_pin( CPU_WRITE_EN_PIN, CPU_LOW );
+		cpu_send_register();
+		
+		//
+		// Drive CCLK pin low
+		//
+		cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+		cpu_send_register();
+		
+		//
+		// Drive CS pin low
+		//
+		cpu_set_pin( CPU_CS_PIN, CPU_LOW );
+		cpu_send_register();
+		
+		//
+		// Drive CS1 pin low
+		//
+		cpu_set_pin( CPU_CS1_PIN, CPU_LOW );
+		cpu_send_register();
+		
+		if ( __PROGRAM__ )
+		{
+			///////////////////////////////////////////////////////////////
+			//
+			// Process encryption preamble frame if the encrypt flag was set.
+			// to stop the clock
+			// Check for INIT pin to be high.
+			//
+			//////////////////////////////////////////////////////////////
+			if ( __ENCRYPT__ )
+			{
+				add_embedded_bitstream_frame( ENCRYPTION_PREAMBLE,HEADER_DUMMY, Encryption_Preamble );
+				cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 2000, 100 );
+			}
+			
+			cpu_bitstream_data();
+			
+			///////////////////////////////////////////////////////////////
+			//
+			// Process Program Security frame if the Secure flag was set.
+			// Check for BUSY pin to be low.
+			// Check for INIT pin to be high.
+			//
+			//////////////////////////////////////////////////////////////
+			if ( __SECURE__ )
+			{
+				add_embedded_bitstream_frame( PROGRAMSECURE, COMMAND_INFO_CRC_OFF, Secure );
+				cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 5000, 1000 );
+				cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 500 );
+			}
+			
+			//////////////////////////////////////////////////////////////
+			//
+			// Process Program Done frame.
+			//
+			//////////////////////////////////////////////////////////////
+			
+			add_embedded_bitstream_frame( SRAMPROGRAMDONE, COMMAND_INFO_CRC_OFF, SramProgramDone );
+			add_embedded_bitstream_frame( ALL_1_DELAY_FRAME, ALL_1_DELAY_FRAME, Dummy );
+			add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+			//
+			// Check INIT pin high
+			//
+			cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 5000, 500 );
+			
+			//
+			// Check DONE pin high
+			//
+			cpu_check_pin( CPU_DONE_PIN, CPU_HIGH, 5000, 500 );
+		}
+		else
+		{
+			///////////////////////////////////////////////////////////////
+			//
+			// Process Header frame.
+			//
+			//////////////////////////////////////////////////////////////
+			
+			embedded_bitstream_frame();
+		
+			///////////////////////////////////////////////////////////////
+			//
+			// Process Verify ID frame.
+			//
+			//////////////////////////////////////////////////////////////
+				
+			embedded_bitstream_frame();
+			
+			
+			///////////////////////////////////////////////////////////////
+			//
+			// Process Control Register 0 frame.
+			//
+			//////////////////////////////////////////////////////////////
+			
+			embedded_bitstream_frame();
+			
+			
+		
+			///////////////////////////////////////////////////////////////
+			//
+			// Add Clear All Frame.
+			// Check for BUSY pin to be low.
+			// Check for INIT pin to be high.
+			//
+			//////////////////////////////////////////////////////////////
+			
+			add_embedded_bitstream_frame( CLEARALL, COMMAND_INFO_CRC_OFF, ClearAll );
+			add_embedded_bitstream_frame( MAGIC_NUMBER, MAGIC_NUMBER, Dummy );
+			cpu_check_pin( CPU_BUSY_PIN, CPU_LOW, 50000, 500 );
+			cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 1000, 500 );
+			//
+			// Check DONE pin low
+			//
+			cpu_check_pin( CPU_DONE_PIN, CPU_LOW, 5000, 500 );
+		}
+		//
+		// Drive all pins high
+		//
+		cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+		cpu_set_pin( CPU_CS_PIN, CPU_HIGH );
+		cpu_set_pin( CPU_CS1_PIN, CPU_HIGH );
+		cpu_set_pin( CPU_WRITE_EN_PIN, CPU_HIGH );
+		cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+		cpu_send_register();
+	}
+}
+
+]]>
+</Script>
+</FPGA_Plus>

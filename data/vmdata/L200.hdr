@@ -1,0 +1,17 @@
+!Sample Header File For Teradyne Modle L200/300 Tester
+!The Recommended AC Timing:
+set tset 2 clock = 1000 ns
+        phase 1 assert = 20 ns return 975 ns
+        window 1 open = 935 ns close = 970 ns
+        phase 2 assert = 200 ns return 700 ns
+        window 2 open = 635 ns close 675 ns
+        phase 3 assert = 20 ns return = 975 ns
+        window 3 open = 850 ns close = 890 ns;
+set digital (SCLK) format = $Rzero phase = 2 window = 2;
+set digital (SDO) phase = 3 window = 3;
+
+!The first FTEST in the first module shall be modified
+!From:
+!IOX SDO MH MODE ML ISPEN SDI SCLK FTEST;
+!to:
+!IOX SDO MH MODE ML ISPEN SDI SCLK use tset 2 FTEST;

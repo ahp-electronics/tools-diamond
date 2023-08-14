@@ -1,0 +1,19 @@
+var pairs =
+{
+"unique_id_binary":{"preference":1}
+,"specifies":{"code":1}
+,"code":{"storing":1}
+,"storing":{"device":1}
+,"device":{"data":1,"support":1}
+,"data":{"usercode":1}
+,"usercode":{"binary":1}
+,"binary":{"format":1,"value":1}
+,"machxo2":{"machxo3d":1}
+,"machxo3d":{"machxo3l":1,"platform":1}
+,"machxo3l":{"machxo3d":1}
+,"platform":{"manager":1}
+,"traceid":{"binary_string":1,"00001111":1}
+,"binary_string":{"binary":1}
+,"value":{"bits":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="se5r00" include="se5c00">
+
+<VariableDef name="PAR:PFRPadFile" value="-exp parPfrPadFile=../${project.title}/${project.title}_PFR/${project.title}_PFR.pad" />
+<VariableDef name="Map:PFRPioFile" value='-pfr "${project_dir}/${project.title}/${project.title}_PFR/${project.title}_PFR.pio"'/>
+<CommandFileDef id="Bitgen_T2BCmd" name="${report_base}.t2b" clean="TRUE" >
+    <line>#PROP_BIT_RunDRCBitGen</line>
+    <line>#PROP_BIT_DisableUESBitgen</line>
+    <line>#PROP_BIT_DisRAMResBitGen</line>
+    <line>#PROP_BIT_NoHeader</line>
+    <line>-path "${project_dir}" #PROP_BIT_SearchPthBitGen </line>
+    <!-- line>-g ES:Yes</line -->
+    <line>-icc "${project_dir}/${project.title}/${project.title}_PFR"</line>
+    <!--<line>#PROP_BIT_ICCPioPath</line>-->
+</CommandFileDef>
+
+</BaliFlowDef>

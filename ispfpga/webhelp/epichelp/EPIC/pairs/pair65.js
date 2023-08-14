@@ -1,0 +1,22 @@
+var pairs =
+{
+"saving":{"macro":1}
+,"macro":{"library":1,"mode":1,"file":1}
+,"library":{"file":1}
+,"file":{"design":1,"macro":1,"using":1,"saved":1}
+,"design":{"file":1}
+,"mode":{"tcl":1}
+,"tcl":{"command":1}
+,"command":{"prompt":1}
+,"prompt":{"save":1}
+,"save":{"macro":1,"-ncd":1}
+,"using":{"following":1}
+,"following":{"syntax":1}
+,"syntax":{"eco_design":1}
+,"eco_design":{"save":1}
+,"-ncd":{"<file_name>":1}
+,"<file_name>":{".ncd":1}
+,".ncd":{"macro":1}
+,"saved":{"design":1}
+}
+;Search.control.loadWordPairs(pairs);

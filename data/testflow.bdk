@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title ="testflow" include ="synthesis, testflowcmd, testreveal, testreport">
+  <MileStoneDef id ="synthesis" title ="Synthesis">
+    <if condition="implementation.synthesis_hdls._COUNT &gt; 0">
+	  <if condition='project.synthesis == "synplify"' task="Task_Synthesis_Synplify">
+        <elif condition='project.synthesis == "precision"' task="Task_Synthesis_Precision">
+          <elif condition='project.synthesis == "aldec"' task="Task_Synthesis_Aldec"/>
+        </elif>
+        <default definition="Task_Synthesis_Synplify">
+        </default>
+      </if>
+	</if>
+  </MileStoneDef>
+  <!--MileStoneDef id ="build_database" title ="Database" main_task ="Task_Database"/-->
+  <!--MileStoneDef id ="map" title ="Map" main_task ="Task_Map"-->
+  <MileStoneDef id ="trans_map" title ="Translate_Map" main_task ="Task_TransMap">
+	<SubTasks>
+	  <Task definition ="Task_MapTrace" />
+	</SubTasks>
+  </MileStoneDef>
+  <MileStoneDef id ="hdlsrc" title ="Generate_HDL" main_task ="Task_HDL"/>
+  <MileStoneDef id ="par" title ="PAR" main_task ="Task_Par">
+    <SubTasks>
+	  <Task definition ="Task_PARTrace" />
+	  <Task definition ="Task_IOTiming" />
+	</SubTasks>
+  </MileStoneDef>
+  <MileStoneDef id ="export" title ="Export" >
+    <SubTasks>
+	  <Task definition ="Task_IBIS" />
+	  <Task definition ="Task_TimingSimFileVlg" />
+	  <Task definition ="Task_TimingSimFileVHD" />
+	  <Task definition ="Task_Bitgen" />
+	</SubTasks>
+  </MileStoneDef>
+  <TaskDef id = "Task_Database" title ="Database" lable="Build Design Database"
+           depend_on_milestones="synthesis">
+    <Target id ="target">
+	  <Command using_def="Cmd_EdifIn"/>
+	  <!--Command using_def="Cmd_EdifUpdate"/-->
+      <Command using_def="Cmd_NGDBuild"/>
+    </Target>
+    <Report id ="Report_NGO" value ="$(report_base).ngo"/>
+  </TaskDef>
+  <!--TaskDef id = "Task_Map" title ="Map" lable="Map Design"
+           depend_on_milestones="build_database"-->
+  <TaskDef id = "Task_TransMap" title ="Translate_Map" lable="Translate/Map Design"
+           depend_on_milestones="synthesis">
+    <Target id ="target">
+	  <if condition="postsynthesis_edifs._COUNT &gt; 0">
+		<Command using_def="Cmd_EdifIn"/>
+	  </if>
+	  <if condition="postsynthesis_edifs._COUNT &gt; 0">
+	    <Command using_def="Cmd_NGDBuild"/>
+	  </if>
+      <Command using_def="Cmd_Map"/>
+    </Target>
+    <Report id ="Report_MAP" value ="$(report_base)_map.ncd"/>
+  </TaskDef>
+  <TaskDef id ="Task_MapTrace" title ="MapTrace" lable ="Map TRACE Report" depend_on_milestones="trans_map">
+	 <Target id ="target">
+	   <Command using_def="Cmd_MapTrace"/>
+     </Target>
+	 <Report using_def ="Report_MapTrace"/>
+  </TaskDef>
+  <TaskDef id = "Task_HDL" title ="HDL_Gen" lable="Generate HDL Source"
+           depend_on_properties="implementation.convertable_srces">
+    <Target id ="target">
+      <Command using_def="Cmd_HDL_Convert"/>
+    </Target>
+    <Report id ="Report_HDL" iterate="implementation.convert_srces" value ="%@iterator@%"/>
+  </TaskDef>
+  <TaskDef id ="Task_PARTrace" title ="PARTrace" lable ="Place &amp; Route TRACE Report" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_PARTrace"/>
+     </Target>
+	 <Report using_def ="Report_PARTrace"/>
+  </TaskDef>
+  <TaskDef id ="Task_IOTiming" title ="IOTiming" lable ="I/O Timing Report" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_IOTiming"/>
+     </Target>
+	 <Report id ="Report_IOTiming" value ="$(report_base).ior"/>
+  </TaskDef>
+  <TaskDef id ="Task_TimingSimFileVlg" title ="TimingSimFileVlg" lable ="Generate Verilog Timing Simulation File" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_TimingSimFileVlg"/>
+     </Target>
+	 <Report id ="Report_TimingSimFileVlg" value ="$(report_base).vo"/>
+  </TaskDef> 
+  <TaskDef id ="Task_TimingSimFileVHD" title ="TimingSimFileVHD" lable ="Generate VHDL Timing Simulation File" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_TimingSimFileVHD"/>
+     </Target>
+	 <Report id ="Report_TimingSimFileVHD" value ="$(report_base).vho"/>
+  </TaskDef>
+  <TaskDef id ="Task_Par" title ="PAR" lable="Place &amp; Route Design" depend_on_milestones="trans_map">
+    <Target id ="target">
+	  <!--Command using_def="Cmd_Par_CmdFileGen"/-->
+      <Command using_def="Cmd_Par"/>
+	  <!--Command using_def="Cmd_Par_CmdFileClean"/-->
+    </Target>
+    <Report id ="Report_PAR" value ="$(report_base).ncd"/>
+  </TaskDef>
+  <TaskDef id ="Task_IBIS" title ="IBIS" lable ="IBIS Model" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_IBIS"/>
+     </Target>
+	 <Report id ="Report_IBIS_Model" value ="$(report_base).ibs"/>
+  </TaskDef>
+  <TaskDef id ="Task_Bitgen" title ="Bitgen" lable ="Generate Bitstream" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_Bitstream"/>
+     </Target>
+	 <Report id ="Report_Bitstream" value ="$(report_base).jed"/>
+  </TaskDef>
+  <UIFlowDef id ="FlowUIDef">
+    <milestone id ="hdlsrc" lable ="Generate HDL" condition =".False."/>
+    <milestone id ="synthesis" lable ="Synthesis Design" condition ="implementation.synthesis_hdls._COUNT &gt; 0"/>
+    <!--milestone id ="build_database" lable ="Build Design Database"/-->
+    <milestone id ="trans_map" lable ="Translate/Map Design"/>
+    <milestone id ="par" lable ="Place &amp; Route Design"/>
+	<milestone id ="export" lable ="Export Files"/>
+  </UIFlowDef>
+ 
+</BaliFlowDef>

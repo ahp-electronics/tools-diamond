@@ -1,0 +1,331 @@
+#log _circuit_name.txt
+
+#define -r SLASH2 //
+#define -r STARTCOM /*
+#define -r ENDCOM */
+#ifndef _device_name
+#define _device_name "LFE2M35E"
+#endif
+#ifndef _ch0_pll_rxsrc
+#define _ch0_pll_rxsrc "REFCLK"
+#endif
+#ifndef _ch1_pll_rxsrc
+#define _ch1_pll_rxsrc "REFCLK"
+#endif
+#ifndef _ch2_pll_rxsrc
+#define _ch2_pll_rxsrc "REFCLK"
+#endif
+#ifndef _ch3_pll_rxsrc
+#define _ch3_pll_rxsrc "REFCLK"
+#endif
+# This file is used by the simulation model as well as the ispLEVER bitstream
+# generation process to automatically initialize the PCSC quad to the mode
+# selected in the IPexpress. This file is expected to be modified by the
+# end user to adjust the PCSC quad to the final design requirements.
+
+DEVICE_NAME _device_name
+PROTOCOL    _protocol
+CH0_MODE    _ch0_mode
+CH1_MODE    _ch1_mode
+CH2_MODE    _ch2_mode
+CH3_MODE    _ch3_mode
+PLL_SRC     _pll_txsrc
+DATARANGE     _datarange
+#if _protocol_mode == "Quad Based Protocol Mode"
+#if _ch0_mode != "DISABLE"
+CH0_CDR_SRC     _pll_rxsrc
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_CDR_SRC     _pll_rxsrc
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_CDR_SRC     _pll_rxsrc
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_CDR_SRC     _pll_rxsrc
+#endif
+#elif _protocol_mode == "Channel Based Protocol Mode"
+#if _ch0_mode != "DISABLE"
+CH0_CDR_SRC     _ch0_pll_rxsrc
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_CDR_SRC     _ch1_pll_rxsrc
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_CDR_SRC     _ch2_pll_rxsrc
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_CDR_SRC     _ch3_pll_rxsrc
+#endif
+#endif
+#if _protocol_mode == "Quad Based Protocol Mode"
+#if _ch0_mode != "DISABLE"
+CH0_DATA_WIDTH     _data_width
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_DATA_WIDTH     _data_width
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_DATA_WIDTH     _data_width
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_DATA_WIDTH     _data_width
+#endif
+#elif _protocol_mode == "Channel Based Protocol Mode"
+#if _ch0_mode != "DISABLE"
+#if _ch0_rate == "Full Rate"
+CH0_DATA_WIDTH     _data_width
+#elif _ch0_rate == "Half Rate"
+CH0_DATA_WIDTH     _data_width_half
+#endif
+#endif
+#if _ch1_mode != "DISABLE"
+#if _ch1_rate == "Full Rate"
+CH1_DATA_WIDTH     _data_width
+#elif _ch1_rate == "Half Rate"
+CH1_DATA_WIDTH     _data_width_half
+#endif
+#endif
+#if _ch2_mode != "DISABLE"
+#if _ch2_rate == "Full Rate"
+CH2_DATA_WIDTH     _data_width
+#elif _ch2_rate == "Half Rate"
+CH2_DATA_WIDTH     _data_width_half
+#endif
+#endif
+#if _ch3_mode != "DISABLE"
+#if _ch3_rate == "Full Rate"
+CH3_DATA_WIDTH     _data_width
+#elif _ch3_rate == "Half Rate"
+CH3_DATA_WIDTH     _data_width_half
+#endif
+#endif
+#endif
+#if _protocol_mode == "Quad Based Protocol Mode"
+#if _ch0_mode != "DISABLE"
+CH0_REFCK_MULT     _refclk_mult
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_REFCK_MULT     _refclk_mult
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_REFCK_MULT     _refclk_mult
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_REFCK_MULT     _refclk_mult
+#endif
+#elif _protocol_mode == "Channel Based Protocol Mode"
+#if _ch0_mode != "DISABLE"
+#if _ch0_rate == "Full Rate" || _ch0_rate == "None"
+CH0_REFCK_MULT     _refclk_mult
+#elif _ch0_rate == "Half Rate"
+CH0_REFCK_MULT     _refclk_mult_half
+#endif
+#endif
+#if _ch1_mode != "DISABLE"
+#if _ch1_rate == "Full Rate" || _ch1_rate == "None"
+CH1_REFCK_MULT     _refclk_mult
+#elif _ch1_rate == "Half Rate"
+CH1_REFCK_MULT     _refclk_mult_half
+#endif
+#endif
+#if _ch2_mode != "DISABLE"
+#if _ch2_rate == "Full Rate" || _ch2_rate == "None"
+CH2_REFCK_MULT     _refclk_mult
+#elif _ch2_rate == "Half Rate"
+CH2_REFCK_MULT     _refclk_mult_half
+#endif
+#endif
+#if _ch3_mode != "DISABLE"
+#if _ch3_rate == "Full Rate" || _ch3_rate == "None"
+CH3_REFCK_MULT     _refclk_mult
+#elif _ch3_rate == "Half Rate"
+CH3_REFCK_MULT     _refclk_mult_half
+#endif
+#endif
+#endif
+#REFCLK_RATE     _refclk_rate
+#FPGAINTCLK_RATE     _fpgaintclk_rate
+#if _protocol_mode == "Channel Based Protocol Mode"
+#FPGAINTCLK_RATE_HALF     _fpgaintclk_rate_half
+#endif
+#if _ch0_mode != "DISABLE"
+CH0_TDRV_AMP     _ch0_tdrv_amp
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_TDRV_AMP     _ch1_tdrv_amp
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_TDRV_AMP     _ch2_tdrv_amp
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_TDRV_AMP     _ch3_tdrv_amp
+#endif
+#if _ch0_mode != "DISABLE"
+CH0_TX_PRE     _ch0_tx_pre
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_TX_PRE     _ch1_tx_pre
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_TX_PRE     _ch2_tx_pre
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_TX_PRE     _ch3_tx_pre
+#endif
+#if _ch0_mode != "DISABLE"
+CH0_RTERM_TX     _ch0_rterm_tx
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_RTERM_TX     _ch1_rterm_tx
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_RTERM_TX     _ch2_rterm_tx
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_RTERM_TX     _ch3_rterm_tx
+#endif
+#if _ch0_mode != "DISABLE"
+CH0_RX_EQ     _ch0_rx_eq
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_RX_EQ     _ch1_rx_eq
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_RX_EQ     _ch2_rx_eq
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_RX_EQ     _ch3_rx_eq
+#endif
+#if _ch0_mode != "DISABLE"
+CH0_RTERM_RX     _ch0_rterm_rx
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_RTERM_RX     _ch1_rterm_rx
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_RTERM_RX     _ch2_rterm_rx
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_RTERM_RX     _ch3_rterm_rx
+#endif
+#if _ch0_mode != "DISABLE"
+CH0_RX_DCC     _ch0_rx_dcc
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_RX_DCC     _ch1_rx_dcc
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_RX_DCC     _ch2_rx_dcc
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_RX_DCC     _ch3_rx_dcc
+#endif
+LOS_THRESHOLD     _los_threshold
+PLL_TERM     _pll_term
+PLL_DCC     _pll_dcc
+PLL_LOL_SET     _pll_lol_set
+#if _ch0_mode != "DISABLE"
+CH0_TX_SB     _ch0_tx_sb
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_TX_SB     _ch1_tx_sb
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_TX_SB     _ch2_tx_sb
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_TX_SB     _ch3_tx_sb
+#endif
+#if _ch0_mode != "DISABLE"
+CH0_RX_SB     _ch0_rx_sb
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_RX_SB     _ch1_rx_sb
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_RX_SB     _ch2_rx_sb
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_RX_SB     _ch3_rx_sb
+#endif
+#if _ch0_mode != "DISABLE"
+CH0_8B10B     _ch0_8b10b
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_8B10B     _ch1_8b10b
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_8B10B     _ch2_8b10b
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_8B10B     _ch3_8b10b
+#endif
+COMMA_A     _comma_a
+COMMA_B     _comma_b
+COMMA_M     _comma_m
+#if _ch0_mode != "DISABLE"
+CH0_COMMA_ALIGN     _comma_align
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_COMMA_ALIGN     _comma_align
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_COMMA_ALIGN     _comma_align
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_COMMA_ALIGN     _comma_align
+#endif
+#if _ch0_mode != "DISABLE"
+CH0_CTC_BYP     _ch0_ctc_byp
+#endif
+#if _ch1_mode != "DISABLE"
+CH1_CTC_BYP     _ch1_ctc_byp
+#endif
+#if _ch2_mode != "DISABLE"
+CH2_CTC_BYP     _ch2_ctc_byp
+#endif
+#if _ch3_mode != "DISABLE"
+CH3_CTC_BYP     _ch3_ctc_byp
+#endif
+CC_MATCH1     _cc_match1
+CC_MATCH2     _cc_match2
+CC_MATCH3     _cc_match3
+CC_MATCH4     _cc_match4
+CC_MATCH_MODE     _cc_match_mode
+CC_MIN_IPG     _cc_min_ipg
+CCHMARK     _cchmark
+CCLMARK     _cclmark
+#if _loopback == "TRUE"
+#if _lbtype == "Serial Loopback"
+OS_SSLB     "1"
+#else
+OS_SSLB     "0"
+#endif
+#if _lbtype == "SerDes Parallel Loopback"
+OS_SPLBPORTS     "1"
+#else
+OS_SPLBPORTS     "0"
+#endif
+#if _lbtype == "PCS Parallel Loopback"
+OS_PCSLBPORTS     "1"
+#else
+OS_PCSLBPORTS     "0"
+#endif
+#endif
+#if _refck2core == "TRUE"
+OS_REFCK2CORE     "1"
+#else
+OS_REFCK2CORE     "0"
+#endif
+#if _pllqclkports == "TRUE"
+OS_PLLQCLKPORTS     "1"
+#else
+OS_PLLQCLKPORTS     "0"
+#endif
+#if _sci_int_port == "TRUE"
+OS_INT_ALL     "1"
+#else
+OS_INT_ALL     "0"
+#endif
+

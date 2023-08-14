@@ -1,0 +1,1113 @@
+
+Loading design for application trce from file reveal_xo_impl1.ncd.
+Design name: counter_top
+NCD version: 3.3
+Vendor:      LATTICE
+Device:      LAMXO2280E
+Package:     TQFP100
+Performance: 3
+Loading device for application trce from file 'mj5g21x17.nph' in environment: C:/lscc/diamond/3.8_x64/ispfpga.
+Package Status:                     Final          Version 1.26.
+Performance Hardware Data Status: Version 1.94.
+Setup and Hold Report
+
+--------------------------------------------------------------------------------
+Lattice TRACE Report - Setup, Version Diamond (64-bit) 3.8.0.115.3
+Fri Apr 28 11:14:20 2017
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2016 Lattice Semiconductor Corporation,  All rights reserved.
+
+Report Information
+------------------
+Command line:    trce -v 10 -gt -sethld -sp 3 -sphld m -o Reveal_xo_impl1.twr -gui Reveal_xo_impl1.ncd Reveal_xo_impl1.prf 
+Design file:     reveal_xo_impl1.ncd
+Preference file: reveal_xo_impl1.prf
+Device,speed:    LAMXO2280E,3
+Report level:    verbose report, limited to 10 items per preference
+--------------------------------------------------------------------------------
+
+BLOCK ASYNCPATHS
+BLOCK RESETPATHS
+BLOCK JTAG PATHS
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+Preference: FREQUENCY NET "clk1" 20.000000 MHz ;
+            1385 items scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed: The following path meets requirements by 39.219ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[3]  (to clk1 +)
+                   FF                        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[2]
+
+   Delay:              10.528ns  (20.1% logic, 79.9% route), 5 logic levels.
+
+ Constraint Details:
+
+     10.528ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_208 meets
+     50.000ns delay constraint less
+      0.000ns skew and
+      0.253ns CE_SET requirement (totaling 49.747ns) by 39.219ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_208:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.581     R15C6B.CLK to      R15C6B.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         5     1.172      R15C6B.Q0 to      R15C7B.B0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]
+CTOF_DEL    ---     0.385      R15C7B.B0 to      R15C7B.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/SLICE_276
+ROUTE         8     1.440      R15C7B.F0 to      R12C7D.C0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/wen
+CTOF_DEL    ---     0.385      R12C7D.C0 to      R12C7D.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/SLICE_289
+ROUTE         2     1.011      R12C7D.F0 to      R12C7A.A1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/wen_te[0]
+CTOF_DEL    ---     0.385      R12C7A.A1 to      R12C7A.F1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_303
+ROUTE         3     2.678      R12C7A.F1 to     R16C11C.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_73
+CTOF_DEL    ---     0.385     R16C11C.A0 to     R16C11C.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_449
+ROUTE         8     2.106     R16C11C.F0 to     R15C12D.CE counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val_0_sqmuxa (to clk1)
+                  --------
+                   10.528   (20.1% logic, 79.9% route), 5 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_208:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to    R15C12D.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 39.219ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[7]  (to clk1 +)
+                   FF                        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[6]
+
+   Delay:              10.528ns  (20.1% logic, 79.9% route), 5 logic levels.
+
+ Constraint Details:
+
+     10.528ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_210 meets
+     50.000ns delay constraint less
+      0.000ns skew and
+      0.253ns CE_SET requirement (totaling 49.747ns) by 39.219ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_210:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.581     R15C6B.CLK to      R15C6B.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         5     1.172      R15C6B.Q0 to      R15C7B.B0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]
+CTOF_DEL    ---     0.385      R15C7B.B0 to      R15C7B.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/SLICE_276
+ROUTE         8     1.440      R15C7B.F0 to      R12C7D.C0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/wen
+CTOF_DEL    ---     0.385      R12C7D.C0 to      R12C7D.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/SLICE_289
+ROUTE         2     1.011      R12C7D.F0 to      R12C7A.A1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/wen_te[0]
+CTOF_DEL    ---     0.385      R12C7A.A1 to      R12C7A.F1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_303
+ROUTE         3     2.678      R12C7A.F1 to     R16C11C.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_73
+CTOF_DEL    ---     0.385     R16C11C.A0 to     R16C11C.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_449
+ROUTE         8     2.106     R16C11C.F0 to     R15C12B.CE counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val_0_sqmuxa (to clk1)
+                  --------
+                   10.528   (20.1% logic, 79.9% route), 5 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_210:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to    R15C12B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 39.286ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[3]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[3]  (to clk1 +)
+                   FF                        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[2]
+
+   Delay:              10.461ns  (20.3% logic, 79.7% route), 5 logic levels.
+
+ Constraint Details:
+
+     10.461ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_208 meets
+     50.000ns delay constraint less
+      0.000ns skew and
+      0.253ns CE_SET requirement (totaling 49.747ns) by 39.286ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_208:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.581     R15C6B.CLK to      R15C6B.Q1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         4     1.105      R15C6B.Q1 to      R15C7B.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[3]
+CTOF_DEL    ---     0.385      R15C7B.A0 to      R15C7B.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/SLICE_276
+ROUTE         8     1.440      R15C7B.F0 to      R12C7D.C0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/wen
+CTOF_DEL    ---     0.385      R12C7D.C0 to      R12C7D.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/SLICE_289
+ROUTE         2     1.011      R12C7D.F0 to      R12C7A.A1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/wen_te[0]
+CTOF_DEL    ---     0.385      R12C7A.A1 to      R12C7A.F1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_303
+ROUTE         3     2.678      R12C7A.F1 to     R16C11C.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_73
+CTOF_DEL    ---     0.385     R16C11C.A0 to     R16C11C.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_449
+ROUTE         8     2.106     R16C11C.F0 to     R15C12D.CE counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val_0_sqmuxa (to clk1)
+                  --------
+                   10.461   (20.3% logic, 79.7% route), 5 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_208:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to    R15C12D.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 39.286ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[3]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[7]  (to clk1 +)
+                   FF                        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[6]
+
+   Delay:              10.461ns  (20.3% logic, 79.7% route), 5 logic levels.
+
+ Constraint Details:
+
+     10.461ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_210 meets
+     50.000ns delay constraint less
+      0.000ns skew and
+      0.253ns CE_SET requirement (totaling 49.747ns) by 39.286ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_210:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.581     R15C6B.CLK to      R15C6B.Q1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         4     1.105      R15C6B.Q1 to      R15C7B.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[3]
+CTOF_DEL    ---     0.385      R15C7B.A0 to      R15C7B.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/SLICE_276
+ROUTE         8     1.440      R15C7B.F0 to      R12C7D.C0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/wen
+CTOF_DEL    ---     0.385      R12C7D.C0 to      R12C7D.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/SLICE_289
+ROUTE         2     1.011      R12C7D.F0 to      R12C7A.A1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/wen_te[0]
+CTOF_DEL    ---     0.385      R12C7A.A1 to      R12C7A.F1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_303
+ROUTE         3     2.678      R12C7A.F1 to     R16C11C.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_73
+CTOF_DEL    ---     0.385     R16C11C.A0 to     R16C11C.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_449
+ROUTE         8     2.106     R16C11C.F0 to     R15C12B.CE counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val_0_sqmuxa (to clk1)
+                  --------
+                   10.461   (20.3% logic, 79.7% route), 5 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_210:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to    R15C12B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 39.689ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[9]  (to clk1 +)
+                   FF                        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[8]
+
+   Delay:              10.058ns  (21.1% logic, 78.9% route), 5 logic levels.
+
+ Constraint Details:
+
+     10.058ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_211 meets
+     50.000ns delay constraint less
+      0.000ns skew and
+      0.253ns CE_SET requirement (totaling 49.747ns) by 39.689ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_211:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.581     R15C6B.CLK to      R15C6B.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         5     1.172      R15C6B.Q0 to      R15C7B.B0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]
+CTOF_DEL    ---     0.385      R15C7B.B0 to      R15C7B.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/SLICE_276
+ROUTE         8     1.440      R15C7B.F0 to      R12C7D.C0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/wen
+CTOF_DEL    ---     0.385      R12C7D.C0 to      R12C7D.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/SLICE_289
+ROUTE         2     1.011      R12C7D.F0 to      R12C7A.A1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/wen_te[0]
+CTOF_DEL    ---     0.385      R12C7A.A1 to      R12C7A.F1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_303
+ROUTE         3     2.678      R12C7A.F1 to     R16C11C.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_73
+CTOF_DEL    ---     0.385     R16C11C.A0 to     R16C11C.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_449
+ROUTE         8     1.636     R16C11C.F0 to     R15C13C.CE counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val_0_sqmuxa (to clk1)
+                  --------
+                   10.058   (21.1% logic, 78.9% route), 5 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_211:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to    R15C13C.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 39.689ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[13]  (to clk1 +)
+                   FF                        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[12]
+
+   Delay:              10.058ns  (21.1% logic, 78.9% route), 5 logic levels.
+
+ Constraint Details:
+
+     10.058ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_213 meets
+     50.000ns delay constraint less
+      0.000ns skew and
+      0.253ns CE_SET requirement (totaling 49.747ns) by 39.689ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_213:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.581     R15C6B.CLK to      R15C6B.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         5     1.172      R15C6B.Q0 to      R15C7B.B0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]
+CTOF_DEL    ---     0.385      R15C7B.B0 to      R15C7B.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/SLICE_276
+ROUTE         8     1.440      R15C7B.F0 to      R12C7D.C0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/wen
+CTOF_DEL    ---     0.385      R12C7D.C0 to      R12C7D.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/SLICE_289
+ROUTE         2     1.011      R12C7D.F0 to      R12C7A.A1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/wen_te[0]
+CTOF_DEL    ---     0.385      R12C7A.A1 to      R12C7A.F1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_303
+ROUTE         3     2.678      R12C7A.F1 to     R16C11C.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_73
+CTOF_DEL    ---     0.385     R16C11C.A0 to     R16C11C.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_449
+ROUTE         8     1.636     R16C11C.F0 to     R15C13A.CE counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val_0_sqmuxa (to clk1)
+                  --------
+                   10.058   (21.1% logic, 78.9% route), 5 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_213:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to    R15C13A.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 39.689ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[11]  (to clk1 +)
+                   FF                        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[10]
+
+   Delay:              10.058ns  (21.1% logic, 78.9% route), 5 logic levels.
+
+ Constraint Details:
+
+     10.058ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_212 meets
+     50.000ns delay constraint less
+      0.000ns skew and
+      0.253ns CE_SET requirement (totaling 49.747ns) by 39.689ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_212:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.581     R15C6B.CLK to      R15C6B.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         5     1.172      R15C6B.Q0 to      R15C7B.B0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]
+CTOF_DEL    ---     0.385      R15C7B.B0 to      R15C7B.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/SLICE_276
+ROUTE         8     1.440      R15C7B.F0 to      R12C7D.C0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/wen
+CTOF_DEL    ---     0.385      R12C7D.C0 to      R12C7D.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/SLICE_289
+ROUTE         2     1.011      R12C7D.F0 to      R12C7A.A1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/wen_te[0]
+CTOF_DEL    ---     0.385      R12C7A.A1 to      R12C7A.F1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_303
+ROUTE         3     2.678      R12C7A.F1 to     R16C11C.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_73
+CTOF_DEL    ---     0.385     R16C11C.A0 to     R16C11C.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_449
+ROUTE         8     1.636     R16C11C.F0 to     R15C13D.CE counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val_0_sqmuxa (to clk1)
+                  --------
+                   10.058   (21.1% logic, 78.9% route), 5 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_212:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to    R15C13D.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 39.689ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[5]  (to clk1 +)
+                   FF                        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[4]
+
+   Delay:              10.058ns  (21.1% logic, 78.9% route), 5 logic levels.
+
+ Constraint Details:
+
+     10.058ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_209 meets
+     50.000ns delay constraint less
+      0.000ns skew and
+      0.253ns CE_SET requirement (totaling 49.747ns) by 39.689ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_209:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.581     R15C6B.CLK to      R15C6B.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         5     1.172      R15C6B.Q0 to      R15C7B.B0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]
+CTOF_DEL    ---     0.385      R15C7B.B0 to      R15C7B.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/SLICE_276
+ROUTE         8     1.440      R15C7B.F0 to      R12C7D.C0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/wen
+CTOF_DEL    ---     0.385      R12C7D.C0 to      R12C7D.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/SLICE_289
+ROUTE         2     1.011      R12C7D.F0 to      R12C7A.A1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/wen_te[0]
+CTOF_DEL    ---     0.385      R12C7A.A1 to      R12C7A.F1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_303
+ROUTE         3     2.678      R12C7A.F1 to     R16C11C.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_73
+CTOF_DEL    ---     0.385     R16C11C.A0 to     R16C11C.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_449
+ROUTE         8     1.636     R16C11C.F0 to     R15C13B.CE counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val_0_sqmuxa (to clk1)
+                  --------
+                   10.058   (21.1% logic, 78.9% route), 5 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_209:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to    R15C13B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 39.756ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[3]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[5]  (to clk1 +)
+                   FF                        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[4]
+
+   Delay:               9.991ns  (21.2% logic, 78.8% route), 5 logic levels.
+
+ Constraint Details:
+
+      9.991ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_209 meets
+     50.000ns delay constraint less
+      0.000ns skew and
+      0.253ns CE_SET requirement (totaling 49.747ns) by 39.756ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_209:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.581     R15C6B.CLK to      R15C6B.Q1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         4     1.105      R15C6B.Q1 to      R15C7B.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[3]
+CTOF_DEL    ---     0.385      R15C7B.A0 to      R15C7B.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/SLICE_276
+ROUTE         8     1.440      R15C7B.F0 to      R12C7D.C0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/wen
+CTOF_DEL    ---     0.385      R12C7D.C0 to      R12C7D.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/SLICE_289
+ROUTE         2     1.011      R12C7D.F0 to      R12C7A.A1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/wen_te[0]
+CTOF_DEL    ---     0.385      R12C7A.A1 to      R12C7A.F1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_303
+ROUTE         3     2.678      R12C7A.F1 to     R16C11C.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_73
+CTOF_DEL    ---     0.385     R16C11C.A0 to     R16C11C.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_449
+ROUTE         8     1.636     R16C11C.F0 to     R15C13B.CE counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val_0_sqmuxa (to clk1)
+                  --------
+                    9.991   (21.2% logic, 78.8% route), 5 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_209:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to    R15C13B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 39.756ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[3]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[11]  (to clk1 +)
+                   FF                        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val[10]
+
+   Delay:               9.991ns  (21.2% logic, 78.8% route), 5 logic levels.
+
+ Constraint Details:
+
+      9.991ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_212 meets
+     50.000ns delay constraint less
+      0.000ns skew and
+      0.253ns CE_SET requirement (totaling 49.747ns) by 39.756ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_212:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.581     R15C6B.CLK to      R15C6B.Q1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         4     1.105      R15C6B.Q1 to      R15C7B.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[3]
+CTOF_DEL    ---     0.385      R15C7B.A0 to      R15C7B.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/SLICE_276
+ROUTE         8     1.440      R15C7B.F0 to      R12C7D.C0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/wen
+CTOF_DEL    ---     0.385      R12C7D.C0 to      R12C7D.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/SLICE_289
+ROUTE         2     1.011      R12C7D.F0 to      R12C7A.A1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/wen_te[0]
+CTOF_DEL    ---     0.385      R12C7A.A1 to      R12C7A.F1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_303
+ROUTE         3     2.678      R12C7A.F1 to     R16C11C.A0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/N_73
+CTOF_DEL    ---     0.385     R16C11C.A0 to     R16C11C.F0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_449
+ROUTE         8     1.636     R16C11C.F0 to     R15C13D.CE counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/te_precnt_val_0_sqmuxa (to clk1)
+                  --------
+                    9.991   (21.2% logic, 78.8% route), 5 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/trig_u/te_0/SLICE_212:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     3.123        OSC.OSC to    R15C13D.CLK clk1
+                  --------
+                    3.123   (0.0% logic, 100.0% route), 0 logic levels.
+
+Report:   92.756MHz is the maximum frequency for this preference.
+
+Report Summary
+--------------
+----------------------------------------------------------------------------
+Preference                              |   Constraint|       Actual|Levels
+----------------------------------------------------------------------------
+                                        |             |             |
+FREQUENCY NET "clk1" 20.000000 MHz ;    |   20.000 MHz|   92.756 MHz|   5  
+                                        |             |             |
+----------------------------------------------------------------------------
+
+
+All preferences were met.
+
+
+Clock Domains Analysis
+------------------------
+
+Found 2 clocks:
+
+Clock Domain: jtaghub16_jtck   Source: mj5ghub/genblk0_genblk4_jtagd_u.JTCK   Loads: 132
+   No transfer within this clock domain is found
+
+Clock Domain: clk1   Source: OSCinst0.CFGCLK   Loads: 120
+   Covered under: FREQUENCY NET "clk1" 20.000000 MHz ;
+
+   Data transfers from:
+   Clock Domain: jtaghub16_jtck   Source: mj5ghub/genblk0_genblk4_jtagd_u.JTCK
+
+
+Timing summary (Setup):
+---------------
+
+Timing errors: 0  Score: 0
+Cumulative negative slack: 0
+
+Constraints cover 1385 paths, 1 nets, and 3042 connections (100.00% coverage)
+
+--------------------------------------------------------------------------------
+Lattice TRACE Report - Hold, Version Diamond (64-bit) 3.8.0.115.3
+Fri Apr 28 11:14:20 2017
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2016 Lattice Semiconductor Corporation,  All rights reserved.
+
+Report Information
+------------------
+Command line:    trce -v 10 -gt -sethld -sp 3 -sphld m -o Reveal_xo_impl1.twr -gui Reveal_xo_impl1.ncd Reveal_xo_impl1.prf 
+Design file:     reveal_xo_impl1.ncd
+Preference file: reveal_xo_impl1.prf
+Device,speed:    LAMXO2280E,m
+Report level:    verbose report, limited to 10 items per preference
+--------------------------------------------------------------------------------
+
+BLOCK ASYNCPATHS
+BLOCK RESETPATHS
+BLOCK JTAG PATHS
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+Preference: FREQUENCY NET "clk1" 20.000000 MHz ;
+            1385 items scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed: The following path meets requirements by 0.183ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_din_d[3]  (from clk1 +)
+   Destination:    PDP8KB     Port           counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0(ASIC)  (to clk1 +)
+
+   Delay:               0.397ns  (31.7% logic, 68.3% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.397ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_173 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0 meets
+      0.139ns DATA_HLD and
+      0.000ns delay constraint less
+     -0.075ns skew requirement (totaling 0.214ns) by 0.183ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_173 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.126     R14C3A.CLK to      R14C3A.Q1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_173 (from clk1)
+ROUTE         1     0.271      R14C3A.Q1 to  EBR_R13C1.DI3 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_din_d[3] (to clk1)
+                  --------
+                    0.397   (31.7% logic, 68.3% route), 1 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_173:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R14C3A.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.816        OSC.OSC to EBR_R13C1.CLKW clk1
+                  --------
+                    0.816   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 0.206ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_din_d[0]  (from clk1 +)
+   Destination:    PDP8KB     Port           counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0(ASIC)  (to clk1 +)
+
+   Delay:               0.420ns  (30.0% logic, 70.0% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.420ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_172 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0 meets
+      0.139ns DATA_HLD and
+      0.000ns delay constraint less
+     -0.075ns skew requirement (totaling 0.214ns) by 0.206ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_172 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.126     R15C4A.CLK to      R15C4A.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_172 (from clk1)
+ROUTE         1     0.294      R15C4A.Q0 to  EBR_R13C1.DI0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_din_d[0] (to clk1)
+                  --------
+                    0.420   (30.0% logic, 70.0% route), 1 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_172:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R15C4A.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.816        OSC.OSC to EBR_R13C1.CLKW clk1
+                  --------
+                    0.816   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 0.254ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_din_d[2]  (from clk1 +)
+   Destination:    PDP8KB     Port           counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0(ASIC)  (to clk1 +)
+
+   Delay:               0.468ns  (26.9% logic, 73.1% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.468ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_173 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0 meets
+      0.139ns DATA_HLD and
+      0.000ns delay constraint less
+     -0.075ns skew requirement (totaling 0.214ns) by 0.254ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_173 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.126     R14C3A.CLK to      R14C3A.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_173 (from clk1)
+ROUTE         1     0.342      R14C3A.Q0 to  EBR_R13C1.DI2 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_din_d[2] (to clk1)
+                  --------
+                    0.468   (26.9% logic, 73.1% route), 1 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_173:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R14C3A.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.816        OSC.OSC to EBR_R13C1.CLKW clk1
+                  --------
+                    0.816   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 0.272ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_din_d[5]  (from clk1 +)
+   Destination:    PDP8KB     Port           counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0(ASIC)  (to clk1 +)
+
+   Delay:               0.486ns  (25.9% logic, 74.1% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.486ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_174 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0 meets
+      0.139ns DATA_HLD and
+      0.000ns delay constraint less
+     -0.075ns skew requirement (totaling 0.214ns) by 0.272ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_174 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.126     R14C5C.CLK to      R14C5C.Q1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_174 (from clk1)
+ROUTE         1     0.360      R14C5C.Q1 to  EBR_R13C1.DI5 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_din_d[5] (to clk1)
+                  --------
+                    0.486   (25.9% logic, 74.1% route), 1 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_174:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R14C5C.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.816        OSC.OSC to EBR_R13C1.CLKW clk1
+                  --------
+                    0.816   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 0.273ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[0]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[1]  (to clk1 +)
+
+   Delay:               0.256ns  (49.2% logic, 50.8% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.256ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_79 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_79 meets
+     -0.017ns M_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling -0.017ns) by 0.273ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_79 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_79:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.126     R19C7A.CLK to      R19C7A.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_79 (from clk1)
+ROUTE         1     0.130      R19C7A.Q0 to      R19C7A.M1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[0] (to clk1)
+                  --------
+                    0.256   (49.2% logic, 50.8% route), 1 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_79:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R19C7A.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_79:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R19C7A.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 0.273ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/capture_reclk[0]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/capture_reclk[1]  (to clk1 +)
+
+   Delay:               0.256ns  (49.2% logic, 50.8% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.256ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_68 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_68 meets
+     -0.017ns M_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling -0.017ns) by 0.273ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_68 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_68:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.126     R12C9D.CLK to      R12C9D.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_68 (from clk1)
+ROUTE         1     0.130      R12C9D.Q0 to      R12C9D.M1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/capture_reclk[0] (to clk1)
+                  --------
+                    0.256   (49.2% logic, 50.8% route), 1 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_68:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R12C9D.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_68:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R12C9D.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 0.275ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/capture_reclk[2]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/capture_reclk[3]  (to clk1 +)
+
+   Delay:               0.258ns  (48.8% logic, 51.2% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.258ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_69 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_69 meets
+     -0.017ns M_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling -0.017ns) by 0.275ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_69 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_69:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.126    R14C11C.CLK to     R14C11C.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_69 (from clk1)
+ROUTE         2     0.132     R14C11C.Q0 to     R14C11C.M1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/capture_reclk[2] (to clk1)
+                  --------
+                    0.258   (48.8% logic, 51.2% route), 1 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_69:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to    R14C11C.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_69:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to    R14C11C.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 0.281ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              cnt[0]  (from clk1 +)
+   Destination:    FF         Data in        cnt[0]  (to clk1 +)
+
+   Delay:               0.264ns  (47.7% logic, 52.3% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.264ns physical path delay SLICE_50 to SLICE_50 meets
+     -0.017ns M_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling -0.017ns) by 0.281ns
+
+ Physical Path Details:
+
+      Data path SLICE_50 to SLICE_50:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.126     R18C4D.CLK to      R18C4D.Q0 SLICE_50 (from clk1)
+ROUTE         4     0.138      R18C4D.Q0 to      R18C4D.M0 cnt_4[0] (to clk1)
+                  --------
+                    0.264   (47.7% logic, 52.3% route), 1 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to SLICE_50:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R18C4D.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to SLICE_50:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R18C4D.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 0.281ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2]  (from clk1 +)
+   Destination:    FF         Data in        counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[3]  (to clk1 +)
+
+   Delay:               0.264ns  (47.7% logic, 52.3% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.264ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 meets
+     -0.017ns M_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling -0.017ns) by 0.281ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.126     R15C6B.CLK to      R15C6B.Q0 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80 (from clk1)
+ROUTE         5     0.138      R15C6B.Q0 to      R15C6B.M1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jupdate_reclk[2] (to clk1)
+                  --------
+                    0.264   (47.7% logic, 52.3% route), 1 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/SLICE_80:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R15C6B.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+Passed: The following path meets requirements by 0.284ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_din_d[1]  (from clk1 +)
+   Destination:    PDP8KB     Port           counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0(ASIC)  (to clk1 +)
+
+   Delay:               0.498ns  (25.3% logic, 74.7% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.498ns physical path delay counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_172 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0 meets
+      0.139ns DATA_HLD and
+      0.000ns delay constraint less
+     -0.075ns skew requirement (totaling 0.214ns) by 0.284ns
+
+ Physical Path Details:
+
+      Data path counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_172 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.126     R15C4A.CLK to      R15C4A.Q1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_172 (from clk1)
+ROUTE         1     0.372      R15C4A.Q1 to  EBR_R13C1.DI1 counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/trace_din_d[1] (to clk1)
+                  --------
+                    0.498   (25.3% logic, 74.7% route), 1 logic levels.
+
+ Clock Skew Details: 
+
+      Source Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/SLICE_172:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.741        OSC.OSC to     R15C4A.CLK clk1
+                  --------
+                    0.741   (0.0% logic, 100.0% route), 0 logic levels.
+
+      Destination Clock Path OSCinst0 to counter_top_reveal_coretop_instance/counter_top_la0_inst_0/tm_u/genblk4.tr_mem/pmi_ram_dpXbnonesadr6825668256p13183b91_0_0_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       120     0.816        OSC.OSC to EBR_R13C1.CLKW clk1
+                  --------
+                    0.816   (0.0% logic, 100.0% route), 0 logic levels.
+
+Report Summary
+--------------
+----------------------------------------------------------------------------
+Preference(MIN Delays)                  |   Constraint|       Actual|Levels
+----------------------------------------------------------------------------
+                                        |             |             |
+FREQUENCY NET "clk1" 20.000000 MHz ;    |     0.000 ns|     0.183 ns|   1  
+                                        |             |             |
+----------------------------------------------------------------------------
+
+
+All preferences were met.
+
+
+Clock Domains Analysis
+------------------------
+
+Found 2 clocks:
+
+Clock Domain: jtaghub16_jtck   Source: mj5ghub/genblk0_genblk4_jtagd_u.JTCK   Loads: 132
+   No transfer within this clock domain is found
+
+Clock Domain: clk1   Source: OSCinst0.CFGCLK   Loads: 120
+   Covered under: FREQUENCY NET "clk1" 20.000000 MHz ;
+
+   Data transfers from:
+   Clock Domain: jtaghub16_jtck   Source: mj5ghub/genblk0_genblk4_jtagd_u.JTCK
+
+
+Timing summary (Hold):
+---------------
+
+Timing errors: 0  Score: 0
+Cumulative negative slack: 0
+
+Constraints cover 1385 paths, 1 nets, and 3042 connections (100.00% coverage)
+
+
+
+Timing summary (Setup and Hold):
+---------------
+
+Timing errors: 0 (setup), 0 (hold)
+Score: 0 (setup), 0 (hold)
+Cumulative negative slack: 0 (0+0)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+

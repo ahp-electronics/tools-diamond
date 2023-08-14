@@ -1,0 +1,1388 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!--
+	Spinti 04/30/03
+	EE9/GDX2 sub directory
+		.Contains device database file and all the algorithm files for Digital Interconnect ispGDX2 devices.
+	 ispVM_005a.xdf  support :
+		. ispGDX2 family
+	Ong 07/02/03
+	Updated Socket Adapter Listing:
+		. LX64V/B/C - From PA-F100/LX064 to PA-F100/LX64.
+		. LX128V/B/C - From PA-B208/LX128 to PA-F208/LX128.
+
+	Ong 07/03/03
+	Updated package type for LX64V(B) and LX128V(B):
+		. LX64V(B) - From PA-F100/LX64 to All.
+		. LX128V(B) - From PA-F208/LX128 to All.
+
+	Spinti 09/29/03
+		. Changed LX64V/B/C  ID to rev. 0002 and IDMask from 0xFFFFFFFF to 0xDFFFFFFF.
+		. Changed LX128V/B/C ID to rev. 0002 and IDMask from 0xFFFFFFFF to 0xDFFFFFFF.
+		. Changed LX256V/B/C ID to rev. 0002 and IDMask from 0xFFFFFFFF to 0xDFFFFFFF.
+	Nguyen 09/30/03
+		.Add <AliasPON> field
+		.Add <CDRFixed> field
+	Spinti 05/17/04
+		.Added LX64EV, LX64EB, LX64EC, LX128EV, LX128EB, LX128EC, LX256EV, LX256EB, and LX256EC.
+	Spinti 06/17/04
+		.Commented out the LX64EV, LX64EB, LX64EC, LX128EV, LX128EB, LX128EC, LX256EV, LX256EB, and LX256EC from the V14.1.1 release.
+	Spinti 07/14/04
+		.Created the ispGDX2-E family.
+	Ong    07/21/04
+		. Added "Not Applicable" to Model 300 Socket Adapter support of ispGDX2V(B) and ispGDX2EV(B) "All" selection. 
+	Spinti 07/23/04
+		.Changed AliasPON's.
+	Nguyen 11/18/04 Added the "Voltage_Control" field
+      Ong	 12/09/04
+		. Updated VCC supply listing for ispGDX2V(B)from "3.3V" to "3.3V(2.5V).
+		. Updated VCC supply listing for ispGDX2EV(B) from "3.3V" to "3.3V(2.5V)".
+	      . Changed Additional Program Pins from "TCK, TMS, TDI and TDO" to "None".
+	Ong	 12/10/04
+		. Commented out Pin List.
+    Spinti: 02/09/05
+        . Removed <AliasPON> from ispGDX2-E family.
+    07/19/05 Nguyen combined ispGDX2 and ispGDX2-E devices family
+-->
+<ispXDF version="13.1">
+    <Comment>EE9/GDX2 Devices List</Comment>
+    <Family name="ispGDX2">
+    	<FamilyAliasName>ispGDX2-E</FamilyAliasName>
+        <Device name="LX64V(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX64V(B) </CodeName>
+            <FullName> LX64V(B) </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21835043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 128 </ColWidth>
+            <RowWidth> 138 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17664 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;133&quot;
+                &quot;134&quot;
+                &quot;135&quot;
+                &quot;136&quot;
+                &quot;137&quot;
+                &quot;138&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LX64V/B </PON>
+                <AliasPON> LX64EV/B </AliasPON>
+               <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V(2.5V)</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+        <Device name="LX64EV(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX64EV(B) </CodeName>
+            <FullName> LX64EV(B) </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21835043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 128 </ColWidth>
+            <RowWidth> 138 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17664 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;133&quot;
+                &quot;134&quot;
+                &quot;135&quot;
+                &quot;136&quot;
+                &quot;137&quot;
+                &quot;138&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LX64EV/B </PON>
+<!--                <AliasPON> LX64V/B </AliasPON>-->
+               <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V(2.5V)</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LX64V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX64V </CodeName>
+            <FullName> LX64V </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21835043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 128 </ColWidth>
+            <RowWidth> 138 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17664 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;133&quot;
+                &quot;134&quot;
+                &quot;135&quot;
+                &quot;136&quot;
+                &quot;137&quot;
+                &quot;138&quot;
+            </SysIO>
+            <Package>
+                <Type> 100-ball fpBGA </Type>
+                <PON> LX64V-XXF100	</PON>
+                <AliasPON> LX64EV-XXF100 </AliasPON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F100/LX64"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+        <Device name="LX64EV">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX64EV </CodeName>
+            <FullName> LX64EV </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21835043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 128 </ColWidth>
+            <RowWidth> 138 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17664 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;133&quot;
+                &quot;134&quot;
+                &quot;135&quot;
+                &quot;136&quot;
+                &quot;137&quot;
+                &quot;138&quot;
+            </SysIO>
+            <Package>
+                <Type> 100-ball fpBGA </Type>
+                <PON> LX64EV-XXF100	</PON>
+<!--                <AliasPON> LX64V-XXF100 </AliasPON>-->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F100/LX64"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+             </Voltage_Control>
+        </Device>
+        <Device name="LX64B">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX64B </CodeName>
+            <FullName> LX64B </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21835043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 128 </ColWidth>
+            <RowWidth> 138 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17664 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;133&quot;
+                &quot;134&quot;
+                &quot;135&quot;
+                &quot;136&quot;
+                &quot;137&quot;
+                &quot;138&quot;
+            </SysIO>
+            <Package>
+                <Type> 100-ball fpBGA </Type>
+                <PON> LX64B-XXF100 </PON>
+                <AliasPON> LX64EB-XXF100 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F100/LX64"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+        <Device name="LX64EB">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX64EB </CodeName>
+            <FullName> LX64EB </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21835043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 128 </ColWidth>
+            <RowWidth> 138 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17664 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;133&quot;
+                &quot;134&quot;
+                &quot;135&quot;
+                &quot;136&quot;
+                &quot;137&quot;
+                &quot;138&quot;
+            </SysIO>
+            <Package>
+                <Type> 100-ball fpBGA </Type>
+                <PON> LX64EB-XXF100 </PON>
+<!--                <AliasPON> LX64B-XXF100 </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F100/LX64"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LX64C">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX64C </CodeName>
+            <FullName> LX64C </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21834043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 128 </ColWidth>
+            <RowWidth> 138 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17664 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;133&quot;
+                &quot;134&quot;
+                &quot;135&quot;
+                &quot;136&quot;
+                &quot;137&quot;
+                &quot;138&quot;
+            </SysIO>
+            <Package>
+                <Type> 100-ball fpBGA </Type>
+                <PON> LX64C-XXF100	</PON>
+                <AliasPON> LX64EC-XXF100	</AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F100/LX64"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device> 
+        <Device name="LX64EC">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX64EC </CodeName>
+            <FullName> LX64EC </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21834043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 128 </ColWidth>
+            <RowWidth> 138 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 17664 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>138</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;133&quot;
+                &quot;134&quot;
+                &quot;135&quot;
+                &quot;136&quot;
+                &quot;137&quot;
+                &quot;138&quot;
+            </SysIO>
+            <Package>
+                <Type> 100-ball fpBGA </Type>
+                <PON> LX64EC-XXF100	</PON>
+<!--                <AliasPON> LX64C-XXF100	</AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F100/LX64"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+            </Voltage_Control>
+        </Device> 
+        <Device name="LX128V(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX128V(B) </CodeName>
+            <FullName> LX128V(B) </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21839043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 256 </ColWidth>
+            <RowWidth> 152 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 38912 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>270</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;147&quot;
+                &quot;148&quot;
+                &quot;149&quot;
+                &quot;150&quot;
+                &quot;151&quot;
+                &quot;152&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LX128V/B	</PON>
+                <AliasPON> LX128EV/B	</AliasPON>
+               <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V(2.5V)</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+       <!--     	<PinList>TCK,TMS,TDI,TDO</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LX128EV(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX128EV(B) </CodeName>
+            <FullName> LX128EV(B) </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21839043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 256 </ColWidth>
+            <RowWidth> 152 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 38912 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>270</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;147&quot;
+                &quot;148&quot;
+                &quot;149&quot;
+                &quot;150&quot;
+                &quot;151&quot;
+                &quot;152&quot;
+            </SysIO>
+            <Package>
+                <Type> All </Type>
+                <PON> LX128EV/B	</PON>
+<!--                <AliasPON> LX128V/B	</AliasPON>-->
+               <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V(2.5V)</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LX128V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX128V </CodeName>
+            <FullName> LX128V </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21839043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 256 </ColWidth>
+            <RowWidth> 152 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 38912 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>270</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;147&quot;
+                &quot;148&quot;
+                &quot;149&quot;
+                &quot;150&quot;
+                &quot;151&quot;
+                &quot;152&quot;
+            </SysIO>
+            <Package>
+                <Type> 208-ball fpBGA </Type>
+                <PON> LX128V-XXF208	</PON>
+                <AliasPON> LX128EV-XXF208	</AliasPON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F208/LX128"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+        <Device name="LX128EV">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX128EV </CodeName>
+            <FullName> LX128EV </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21839043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 256 </ColWidth>
+            <RowWidth> 152 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 38912 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>270</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;147&quot;
+                &quot;148&quot;
+                &quot;149&quot;
+                &quot;150&quot;
+                &quot;151&quot;
+                &quot;152&quot;
+            </SysIO>
+            <Package>
+                <Type> 208-ball fpBGA </Type>
+                <PON> LX128EV-XXF208	</PON>
+<!--                <AliasPON> LX128V-XXF208	</AliasPON>-->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F208/LX128"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+            </Voltage_Control>
+        </Device>
+        
+        <Device name="LX128B">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX128B </CodeName>
+            <FullName> LX128B </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21839043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 256 </ColWidth>
+            <RowWidth> 152 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 38912 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>270</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;147&quot;
+                &quot;148&quot;
+                &quot;149&quot;
+                &quot;150&quot;
+                &quot;151&quot;
+                &quot;152&quot;
+            </SysIO>
+            <Package>
+                <Type> 208-ball fpBGA </Type>
+                <PON> LX128B-XXF208	</PON>
+                <AliasPON> LX128EB-XXF208	</AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F208/LX128"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+        <Device name="LX128EB">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX128EB </CodeName>
+            <FullName> LX128EB </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21839043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 256 </ColWidth>
+            <RowWidth> 152 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 38912 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>270</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;147&quot;
+                &quot;148&quot;
+                &quot;149&quot;
+                &quot;150&quot;
+                &quot;151&quot;
+                &quot;152&quot;
+            </SysIO>
+            <Package>
+                <Type> 208-ball fpBGA </Type>
+                <PON> LX128EB-XXF208	</PON>
+<!--                <AliasPON> LX128B-XXF208	</AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F208/LX128"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+               </Voltage_Control>
+        </Device>
+        <Device name="LX128C">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX128C </CodeName>
+            <FullName> LX128C </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21838043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 256 </ColWidth>
+            <RowWidth> 152 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 38912 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>270</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;147&quot;
+                &quot;148&quot;
+                &quot;149&quot;
+                &quot;150&quot;
+                &quot;151&quot;
+                &quot;152&quot;
+            </SysIO>
+            <Package>
+                <Type> 208-ball fpBGA </Type>
+                <PON> LX128C-XXF208	</PON>
+                <AliasPON> LX128EC-XXF208	</AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F208/LX128"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device> 
+        <Device name="LX128EC">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX128EC </CodeName>
+            <FullName> LX128EC </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21838043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 256 </ColWidth>
+            <RowWidth> 152 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 38912 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>270</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;147&quot;
+                &quot;148&quot;
+                &quot;149&quot;
+                &quot;150&quot;
+                &quot;151&quot;
+                &quot;152&quot;
+            </SysIO>
+            <Package>
+                <Type> 208-ball fpBGA </Type>
+                <PON> LX128EC-XXF208	</PON>
+<!--                <AliasPON> LX128C-XXF208	</AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F208/LX128"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+            </Voltage_Control>
+        </Device> 
+        <Device name="LX256V(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX256V(B) </CodeName>
+            <FullName> LX256V(B) </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21841043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 512 </ColWidth>
+            <RowWidth> 184 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 94208 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>526</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;179&quot;
+                &quot;180&quot;
+                &quot;181&quot;
+                &quot;182&quot;
+                &quot;183&quot;
+                &quot;184&quot;
+            </SysIO>
+            <Package>
+                <Type> All</Type>
+                <PON> LX256V/B	</PON>
+                <AliasPON> LX256EV/B	</AliasPON>
+               <Adapter vendor="Not Applicable"/>
+            </Package>
+<!--
+            <Package>
+                <Type> 388-ball PBGA (3.3V) </Type>
+                <PON> LX256V-XXP388	</PON>
+                <AliasPON> LX256EV-XXP388	</AliasPON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-B388/LX256"/>
+            </Package>
+            <Package>
+                <Type> 388-ball PBGA (2.5V) </Type>
+                <PON> LX256B-XXP388	</PON>
+                <AliasPON> LX256EB-XXP388	</AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-B388/LX256"/>
+            </Package>
+-->            
+            <Package>
+                <Type> 484-ball FPBGA (3.3V) </Type>
+                <PON> LX256V-XXF484 </PON>
+                <AliasPON> LX256EV-XXF484 </AliasPON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LX256"/>
+            </Package>            <Package>
+                <Type> 484-ball FPBGA (2.5V) </Type>
+                <PON> LX256B-XXF484 </PON>
+                <AliasPON> LX256EB-XXF484 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LX256"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V(2.5V)</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+        <Device name="LX256EV(B)">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX256EV(B) </CodeName>
+            <FullName> LX256EV(B) </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21841043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 512 </ColWidth>
+            <RowWidth> 184 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 94208 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>526</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;179&quot;
+                &quot;180&quot;
+                &quot;181&quot;
+                &quot;182&quot;
+                &quot;183&quot;
+                &quot;184&quot;
+            </SysIO>
+            <Package>
+                <Type> All</Type>
+                <PON> LX256EV/B	</PON>
+<!--                <AliasPON> LX256V/B </AliasPON>-->
+               <Adapter vendor="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V(2.5V)</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LX256V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX256V</CodeName>
+            <FullName> LX256V </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21841043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 512 </ColWidth>
+            <RowWidth> 184 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 94208 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>526</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;179&quot;
+                &quot;180&quot;
+                &quot;181&quot;
+                &quot;182&quot;
+                &quot;183&quot;
+                &quot;184&quot;
+            </SysIO>
+<!--
+            <Package>
+                <Type> All </Type>
+                <PON> LX256V </PON>
+                <AliasPON> LX256EV </AliasPON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 388-ball PBGA </Type>
+                <PON> LX256V-XXP388 </PON>
+                <AliasPON> LX256EV-XXP388 </AliasPON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-B388/LX256"/>
+            </Package>
+-->
+            <Package>
+                <Type> 484-ball FPBGA </Type>
+                <PON> LX256V-XXF484 </PON>
+                <AliasPON> LX256EV-XXF484 </AliasPON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LX256"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             </Voltage_Control>
+        </Device>        
+        <Device name="LX256EV">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX256EV</CodeName>
+            <FullName> LX256EV </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21841043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 512 </ColWidth>
+            <RowWidth> 184 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 94208 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>526</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;179&quot;
+                &quot;180&quot;
+                &quot;181&quot;
+                &quot;182&quot;
+                &quot;183&quot;
+                &quot;184&quot;
+            </SysIO>
+            <Package>
+                <Type> 484-ball FPBGA </Type>
+                <PON> LX256EV-XXF484 </PON>
+<!--                <AliasPON> LX256V-XXF484 </AliasPON>-->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LX256"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Device name="LX256B">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX256B </CodeName>
+            <FullName> LX256B </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21841043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 512 </ColWidth>
+            <RowWidth> 184 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 94208 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>526</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;179&quot;
+                &quot;180&quot;
+                &quot;181&quot;
+                &quot;182&quot;
+                &quot;183&quot;
+                &quot;184&quot;
+            </SysIO>
+<!--
+            <Package>
+                <Type> All </Type>
+                <PON> LX256B </PON>
+                <AliasPON> LX256EB </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 388-ball PBGA </Type>
+                <PON> LX256B-XXP388 </PON>
+                <AliasPON> LX256EB-XXP388 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-B388/LX256"/>
+            </Package>
+-->            
+            <Package>
+                <Type> 484-ball FPBGA </Type>
+                <PON> LX256B-XXF484 </PON>
+                <AliasPON> LX256EB-XXF484 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LX256"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>
+        <Device name="LX256EB">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX256EB </CodeName>
+            <FullName> LX256EB </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21841043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 512 </ColWidth>
+            <RowWidth> 184 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 94208 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>526</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;179&quot;
+                &quot;180&quot;
+                &quot;181&quot;
+                &quot;182&quot;
+                &quot;183&quot;
+                &quot;184&quot;
+            </SysIO>
+            <Package>
+                <Type> 484-ball FPBGA </Type>
+                <PON> LX256EB-XXF484 </PON>
+<!--                <AliasPON> LX256B-XXF484 </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LX256"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+             </Voltage_Control>
+        </Device>
+        <Device name="LX256C">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX256C </CodeName>
+            <FullName> LX256C </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21840043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 512 </ColWidth>
+            <RowWidth> 184 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 94208 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>526</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;179&quot;
+                &quot;180&quot;
+                &quot;181&quot;
+                &quot;182&quot;
+                &quot;183&quot;
+                &quot;184&quot;
+            </SysIO>
+<!--
+            <Package>
+                <Type> All </Type>
+                <PON> LX256C </PON>
+                <AliasPON> LX256EC </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 388-ball PBGA </Type>
+                <PON> LX256C-XXP388 </PON>
+                <AliasPON> LX256EC-XXP388 </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-B388/LX256"/>
+            </Package>
+-->
+            <Package>
+                <Type> 484-ball FPBGA </Type>
+                <PON> LX256C-XXF484 </PON>
+                <AliasPON> LX256EC-XXF484 </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LX256"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ> 
+            </Voltage_Control>
+        </Device>
+        <Device name="LX256EC">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LX256EC </CodeName>
+            <FullName> LX256EC </FullName>
+            <AlgoTemplate>LSC_GDX2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_EE9.svp"
+                         value="0x1F"/>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <JtagID>0x21840043</JtagID>
+            <IDMask>0xDFFFFFFF</IDMask>
+            <IDScanMask>0xDFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 512 </ColWidth>
+            <RowWidth> 184 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 94208 </TotalFuses>
+            <PWP>  13 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>526</BScan_Length>
+            <SysIO>
+                &quot;1&quot;
+                &quot;2&quot;
+                &quot;3&quot;
+                &quot;4&quot;
+                &quot;5&quot;
+                &quot;6&quot;
+                &quot;179&quot;
+                &quot;180&quot;
+                &quot;181&quot;
+                &quot;182&quot;
+                &quot;183&quot;
+                &quot;184&quot;
+            </SysIO>
+            <Package>
+                <Type> 484-ball FPBGA </Type>
+                <PON> LX256EC-XXF484 </PON>
+<!--                <AliasPON> LX256C-XXF484 </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F484/LX256"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+          <!--    <PinList>TCK,TMS,TDI,TDO</PinList> -->
+            </Voltage_Control>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save JEDEC&quot;
+            &quot;Read DONE bit&quot;
+            &quot;Erase DONE bit&quot;
+            &quot;Program DONE bit&quot;
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>   
+        <ISCRelease value="0x01" extension="*.jed"/>
+	  	<Compliant1532>YES</Compliant1532>
+	  	<CDRFixed>YES</CDRFixed>
+	  	<DebugMode>YES</DebugMode>
+	  	<LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+</ispXDF>

@@ -1,0 +1,19 @@
+var pairs =
+{
+"viewing":{"interface":1}
+,"interface":{"placement":1,"placed":1}
+,"once":{"interface":1}
+,"placed":{"view":1,"pin":1}
+,"view":{"placement":1,"location":1,"highlight":1}
+,"clicking":{"port":1,"placed":1}
+,"port":{"left":1,"highlighted":1}
+,"left":{"pane":1}
+,"pane":{"locate":1}
+,"locate":{"chip":1}
+,"chip":{"view":1}
+,"location":{"port":1}
+,"highlighted":{"chip":1}
+,"pin":{"chip":1}
+,"highlight":{"port":1}
+}
+;Search.control.loadWordPairs(pairs);

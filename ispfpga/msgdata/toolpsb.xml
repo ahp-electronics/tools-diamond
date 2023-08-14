@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>							
+<messageFile name="toolpsb" fid="208" alias="psb" vendor="Lattice Semiconductor Corporation" stamp="Date and Time">							
+	<description text="this message file contains message for platform designer"/>						
+	<owner text="ice,derek" /> <!-- owner of this message file -->						
+	<messages>						
+		<!-- define error message -->					
+						<!-- Logbuilder DRC -->	
+		<msg uid="1000"  type="Error"  text="State machine $$s, step $$s: the instruction is not supported." />
+		<msg uid="1001"  type="Error"  text="State machine $$s, step $$s: the instruction $$s cannot be at step zero." />
+		<msg uid="1002"  type="Error"  text="State machine $$s, step $$s: the instruction $$s needs an output list." />
+		<msg uid="1003"  type="Error"  text="State machine $$s, step $$s: the instruction $$s needs a timer." />
+		<msg uid="1004"  type="Error"  text="State machine $$s, step $$s: the timer used in the instruction $$s has no corresponding gate signal." />
+		<msg uid="1005"  type="Error"  text="State machine $$s, step $$s: it is illegal that the timer $$s is used in both start/stop timer instructions and supervisory equations." />
+		<msg uid="1006"  type="Error"  text="State machine $$s, step $$s: the instruction $$s branches to a step $$s that does not exist." />
+		<msg uid="1007"  type="Error"  text="State machine $$s, step $$s: an instruction cannot branch to WaitFor_Timer, WaitFor_Bool_WithTimer and StartTimer." />
+		<msg uid="1008"  type="Error"  text="State machine $$s, step $$s: the instruction $$s needs boolean expression." />
+		<msg uid="1009"  type="Error"  text="State machine $$s, step $$s: the instruction $$s is incorrect in the output setting." />
+		<msg uid="1010"  type="Error"  text="State machine $$s, step $$s: &quot;output&quot; instruction only supports &quot;++&quot;, &quot;--&quot;, &quot;assign '0'/'1'&quot;." />
+		<msg uid="1011"  type="Error"  text="State machine $$s, step $$s: signal $$s cannot be used as sequence output." />
+		<msg uid="1012"  type="Error"  text="State machine $$s, step $$s: the signal $$s used in the instruction $$s is not a group." />
+		<msg uid="1013"  type="Error"  text="State machine $$s, step $$s: the instruction $$s has inconsistent width between signal and value." />
+		<msg uid="1014"  type="Error"  text="State machine $$s, step $$s: final state machine step invalid, choose HALT, GOTO, IF-THEN-ELSE, or IF-THEN-ELSE-WithTimer." />
+		<msg uid="1015"  type="Error"  text="State machine $$s, step $$s: INC/DEC/INCS/DECS can only apply to outputs/nodes." />
+		<msg uid="1016"  type="Error"  text="State machine $$s, step $$s: a signal used in the Sequence must be a register."  />
+		<msg uid="1017"  type="Error"  text="State machine $$s, step $$s: $$s is a timer TC/Gate signal, cannot be used as instruction output." />
+		<msg uid="1018"  type="Error"  text="State machine $$s, step $$s: the signal $$s used in the instruction $$s has already been assigned in state machines or supervisory." />
+		<msg uid="1019"  type="Error"  text="State machine $$s, step $$s: the instruction has an incorrect boolean expression." />
+		<msg uid="1020"  type="Error"  text="State machine $$s, step $$s: the instruction has an incorrect boolean expression. The signal $$s is INCed/DECed multiple times." />
+		<msg uid="1021"  type="Error"  text="State machine $$s, step $$s: the instruction $$s has an incorrect literal value." />
+		<msg uid="1022"  type="Error"  text="State machine $$s, step $$s: the instruction is incorrect." />
+		<msg uid="1023"  type="Error"  text="State machine $$s, step $$s: the exception is incorrect." />
+		<msg uid="1024"  type="Error"  text="State machine $$s, except $$s: the exception branches to a step $$s that does not exist." />
+		<msg uid="1025"  type="Error"  text="State machine $$s, except $$s: the exception needs boolean expression." />
+		<msg uid="1026"  type="Error"  text="State machine $$s, except $$s: an exception cannot branch to WaitFor_Timer, WaitFor_Bool_WithTimer and StartTimer." />
+		<msg uid="1027"  type="Error"  text="State machine $$s, except $$s: the end-of-exception statement cannot be in the middle of exception table." />
+		<msg uid="1028"  type="Error"  text="State machine $$s, except $$s: the exception is incorrect in output setting." />
+		<msg uid="1029"  type="Error"  text="State machine $$s, except $$s: signal $$s cannot be used as exception output." />
+		<msg uid="1030"  type="Error"  text="State machine $$s, except $$s: the exception does not support operators like INC, DEC, ...." />
+		<msg uid="1031"  type="Error"  text="State machine $$s, except $$s: a signal used in the Sequence must be a register."  />
+		<msg uid="1032"  type="Error"  text="State machine $$s, except $$s: the exception has inconsistent width between signal and value." />
+		<msg uid="1033"  type="Error"  text="State machine $$s, except $$s: the signal $$s used in the exception has already been assigned in state machines or supervisory." />
+		<msg uid="1034"  type="Error"  text="State machine $$s, except $$s: the exception has an incorrect boolean expression." />
+		<msg uid="1035"  type="Error"  text="State machine $$s, except $$s: the exception has an incorrect literal value." />
+		<msg uid="1036"  type="Error"  text="State machine $$s, except $$s: INC/DEC/INCS/DECS are not supported in the exception table." />
+		<msg uid="1037"  type="Error"  text="State machine $$s, except $$s: $$s is a timer TC signal, cannot be used as exception output." />
+		<msg uid="1038"  type="Error"  text="Supervisory equation $$s: the equation is incorrect." />
+		<msg uid="1039"  type="Error"  text="Supervisory equation $$s: signal $$s cannot be used as output of supervisory equation." />
+		<msg uid="1040"  type="Error"  text="Supervisory equation $$s: $$s is a timer TC signal, cannot be used as output." />
+		<msg uid="1041"  type="Error"  text="Supervisory equation $$s: the equation needs output." />
+		<msg uid="1042"  type="Error"  text="Supervisory equation $$s: the output signal of the equation is removed. Specify a new output signal." />
+		<msg uid="1043"  type="Error"  text="Supervisory equation $$s: the signal $$s used in the equation has already been assigned in state machines or supervisory." />
+		<msg uid="1044"  type="Error"  text="Supervisory equation $$s: the signal $$s in the equation is assigned to an incorrect type." />
+		<msg uid="1045"  type="Error"  text="Supervisory equation $$s: AR/AP signal cannot be a group signal." />
+		<msg uid="1046"  type="Error"  text="Supervisory equation $$s: Output Signal Group and Expression Group have different widths." />
+		<msg uid="1047"  type="Error"  text="Supervisory equation $$s: the equation needs boolean expression." />
+		<msg uid="1048"  type="Error"  text="Supervisory $$s: the equation has an incorrect boolean expression." />
+		<msg uid="1049"  type="Error"  text="Supervisory $$s: INC/DEC/INCS/DECS are not supported in the supervisory."  />
+		<msg uid="1050"  type="Error"  text="Supervisory $$s: the end-of-supervisory statement cannot be in the middle of supervisory logic table." />
+		<msg uid="1051"  type="Error"  text="Design needs at least one output." />
+		<msg uid="1052"  type="Error"  text="Logic Timer $$s: the timer is not defined." />
+		<msg uid="1053"  type="Error"  text="Logic Timer $$s: the timer has no name specified." />
+		<msg uid="1054"  type="Error"  text="Logic Timer $$s: the value of the clock source is invalid." />
+		<msg uid="1055"  type="Error"  text="Logic Timer $$s: Valid Timer Delay Settings should be longer than 160us." />
+		<msg uid="1056"  type="Error"  text="Logic Timer $$s: the unit of the period is invalid." />
+		<msg uid="1057"  type="Error"  text="State machine $$s, step $$s: IfThenElse with Timeout used without Start Timer instruction." />
+		<msg uid="1058"  type="Error"  text="The timer $$s is used in multiple state machines." />
+						<!-- // LOGIBUILDER operation error -->	
+		<msg uid="1200"  type="Error"  text="Unknown error occurred." />
+		<msg uid="1201"  type="Error"  text="Failed to read the file $$s." />
+		<msg uid="1202"  type="Error"  text="There is an error when allocating memory for &quot;$$s&quot;." />
+		<msg uid="1203"  type="Error"  text="$$s." />
+		<msg uid="1204"  type="Error"  text="The timer index, $$s, is out of range." />
+		<msg uid="1205"  type="Error"  text="The timer index, $$s, is out of range." />
+		<msg uid="1206"  type="Error"  text="Try to insert an empty state machine." />
+		<msg uid="1207"  type="Error"  text="Failed to insert state machine. \nState machine number cannot exceed $$s." />
+		<msg uid="1208"  type="Error"  text="The state machine index, $$s, is out of range." />
+		<msg uid="1209"  type="Error"  text="There is already a state machine named $$s in the design." />
+		<msg uid="1210"  type="Error"  text="The state machine index, $$s, is out of range." />
+		<msg uid="1211"  type="Error"  text="The state machine index, $$s, is out of range." />
+		<msg uid="1212"  type="Error"  text="The instruction index, $$s, is out of range." />
+		<msg uid="1213"  type="Error"  text="The instruction index, $$s, is out of range." />
+		<msg uid="1214"  type="Error"  text="The exception index, $$s, is out of range." />
+		<msg uid="1215"  type="Error"  text="The exception index, $$s, is out of range." />
+		<msg uid="1216"  type="Error"  text="The supervisory equation index, $$s, is out of range." />
+		<msg uid="1217"  type="Error"  text="The supervisory equation index, $$s, is out of range." />
+		<msg uid="1218"  type="Error"  text="Failed to open the file $$s." />
+		<msg uid="1219"  type="Error"  text="The command $$s needs parameters." />
+		<msg uid="1220"  type="Error"  text="The command $$s is not supported." />
+		<msg uid="1221"  type="Error"  text="Try inserting an empty instruction." />
+		<msg uid="1222"  type="Error"  text="Try inserting an empty exception." />
+		<msg uid="1223"  type="Error"  text="Failed to insert then exception.\n In a state machine, exception number cannot exceed $$s." />
+		<msg uid="1224"  type="Error"  text="Try inserting and empty random." />
+		<msg uid="1225"  type="Error"  text="Failed to insert the supervisory equation.\n Equation number cannot exceed $$s." />
+		<msg uid="1226"  type="Error"  text="The state machine $$s does not exist." />
+		<msg uid="1227"  type="Error"  text="Failed to insert the instruction.\nInstruction number cannot exceed $$s." />
+		<msg uid="1228"  type="Error"  text="The state machine index, $$s, is out of range." />
+		<msg uid="1229"  type="Error"  text="The file $$s is not supported as a logiBuilder source file." />
+		<msg uid="1230"  type="Error"  text="Failed to write the file $$s." />
+		<msg uid="1231"  type="Error"  text="The file $$s is corrupted." />
+		<msg uid="1232"  type="Error"  text="The signal $$s cannot be used in boolean expression." />
+		<msg uid="1233"  type="Error"  text="The imported design uses more ASC signals than the target device can accept.\nThe following signals are ignored:\n$$s." />
+		<msg uid="1234"  type="Error"  text="The imported pac file $$s is incorrect. Some IOs have no data sheet names." />
+		<msg uid="1235"  type="Error"  text="The imported pac file $$s is incorrect, near the definition of IO $$s." />
+		<msg uid="1237"  type="Error"  text="Miss value of &lt;ReserveTimerName&gt; for $$s." />
+		<msg uid="1238"  type="Error"  text="Failed to open file $$s." />
+		<msg uid="1239"  type="Error"  text="The timer $$s is not defined." />
+		<msg uid="1240"  type="Error"  text="The supervisory equation index, $$s, is out of range." />
+		<msg uid="1241"  type="Error"  text="Failed to remove the nodes for timer $$s." />
+		<msg uid="1242"  type="Error"  text="Failed to remove timer $$s." />
+		<msg uid="1243"  type="Error"  text="Failed to map $$s signal." />
+		<msg uid="1244"  type="Error"  text="The pin mapping table is corrupted." />
+		<msg uid="1245"  type="Error"  text="The following instructions cannot be repeated in the same state machine: \nBegin Start-up Sequence, Begin Shut-down Sequence, Halt (end-of-program)." />
+		<msg uid="1246"  type="Error"  text="The import from $$s to $$s is not supported." />
+						<!-- LOGIBUILDER hdlgen error -->	
+		<msg uid="1400"  type="Error"  text="The HDL file name is not specified." />
+		<msg uid="1401"  type="Error"  text="Failed to open the file $$s." />
+		<msg uid="1402"  type="Error"  text="Failed to read the file $$s." />
+		<msg uid="1403"  type="Error"  text="No HDL template file is specified." />
+		<msg uid="1404"  type="Error"  text="Failed to create timer gate for timer $$s." />
+		<msg uid="1405"  type="Error"  text="Failed to create timer TC for timer $$s." />
+		<msg uid="1406"  type="Error"  text="The timer index, $$s, is out of range." />
+		<msg uid="1407"  type="Error"  text="Error occurred when import signal $$s." />
+		<msg uid="1408"  type="Error"  text="The signal $$s in the boolean expression is not defined." />
+		<msg uid="1409"  type="Error"  text="Failed to initialize the output $$s." />
+						<!-- rtl gen error -->	
+		<msg uid="1500"  type="Error"  text="Incorrect command for PSBRTLWRAP." />
+		<msg uid="1501"  type="Error"  text="Failed to open file $$s." />
+		<msg uid="1502"  type="Error"  text="The PTM file may be out of date. Save the PTM file before running the compile flow." />
+		<msg uid="1503"  type="Error"  text="Failed to create PSB engine." />
+		<msg uid="1506"  type="Error"  text="The file $$s does not exist." />
+		<msg uid="1509"  type="Error"  text="USP could not be found." />
+		<msg uid="1510"  type="Error"  text="Error occurs when process psb data." />
+		<msg uid="1513"  type="Error"  text="Failed to write design port file." />
+		<msg uid="1514"  type="Error"  text="Run compile before generating simulation file." />
+		<msg uid="1515"  type="Error"  text="Failed to open file $$s." />
+		<msg uid="1516"  type="Error"  text="Failed to generate $$s.v file." />
+		<msg uid="1517"  type="Error"  text="Internal error: failed to find list $$s." />
+		<msg uid="1518"  type="Error"  text="Internal error: list $$s is incorrect." />
+		<msg uid="1519"  type="Error"  text="Internal error: template file is incorrect around '$$s'." />
+		<msg uid="1520"  type="Error"  text="Internal error: some lists have different length." />
+		<msg uid="1521"  type="Error"  text="Failed to create the HDL-Parser." />
+		<msg uid="1522"  type="Error"  text="Failed to start the HDL-Parser." />
+		<msg uid="1523"  type="Error"  text="HDL-Parser could not be found." />
+		<msg uid="1524"  type="Error"  text="HDL-Parser is closed unexpectedly." />
+		<msg uid="1525"  type="Error"  text="Please select 'Module Name' before getting parameter list." />
+		<msg uid="1526"  type="Error"  text="Please select 'Module Name' before getting port list." />
+		<msg uid="1527"  type="Error"  text="Failed to access input files. LDF file may be corrupted." />
+		<msg uid="1528"  type="Error"  text="Failed to access module list." />
+		<msg uid="1529"  type="Error"  text="Failed to access file name." />
+		<msg uid="1530"  type="Error"  text="Failed to access parameter list." />
+		<msg uid="1531"  type="Error"  text="No port could be found." />
+		<msg uid="1532"  type="Error"  text="Failed to access port list." />
+		<msg uid="1533"  type="Error"  text="'Module Name', 'Instance Name' must be filled, otherwise no user HDL files will be imported into the project, or uncheck enable button ." />
+		<msg uid="1534"  type="Error"  text="User HDL Import: The file $$s is not in the Input file list." />
+		<msg uid="1535"  type="Error"  text="User HDL Import: The module $$s is not in the file $$s." />
+		<msg uid="1536"  type="Error"  text="User HDL Import: The port list of module $$s is updated. Update the Imported HDL tab accordingly." />
+		<msg uid="1537"  type="Error"  text="User HDL Import: The attributes of port $$s is updated. Update the Import HDL tab accordingly." />
+		<msg uid="1538"  type="Error"  text="User HDL Import: The signals for port $$s cannot be constant." />
+		<msg uid="1539"  type="Error"  text="User HDL Import: The port $$s does not exist. Update the Import HDL tab accordingly." />
+		<msg uid="1540"  type="Error"  text="User HDL Import: $$s has no corresponding signal." />
+		<msg uid="1541"  type="Error"  text="User HDL Import: The port $$s has no correct mapping signal." />
+		<msg uid="1542"  type="Error"  text="User HDL Import: The width does not match for the port $$s and $$s." />
+		<msg uid="1543"  type="Error"  text="User HDL Import: The width does not match for the port $$s and its connected signals." />
+		<msg uid="1544"  type="Error"  text="User HDL Import: The direction does not match for the signal $$s and the port $$s." />
+		<msg uid="1545"  type="Error"  text="LDF file is corrupted." />
+		<msg uid="1546"  type="Error"  text="The parameter $$s is multiple specified." />
+		<msg uid="1547"  type="Error"  text="Parameter '-in' needs to be specified." />
+		<msg uid="1548"  type="Error"  text="The PTM file name needs to be specified." />
+		<msg uid="1549"  type="Error"  text="Parameter '-lpf' needs to be specified." />
+		<msg uid="1550"  type="Error"  text="Parameter '-lan' has only 2 valid options: 'Verilog' or 'VHDL'." />
+		<msg uid="1551"  type="Error"  text="The command line of psbrtlwrap is incorrect." />
+		<msg uid="1552"  type="Error"  text="Failed to access USP." />
+		<msg uid="1553"  type="Error"  text="Failed to find ASC0 CLOCK signal" />
+		<msg uid="1554"  type="Error"  text="Failed to load LPF file." />
+		<msg uid="1555"  type="Error"  text="Failed to create path for HDL generation." />
+		<msg uid="1556"  type="Error"  text="Catching exception $$s." />
+		<msg uid="1557"  type="Error"  text="Not enough pins for the imported HDL." />
+		<msg uid="1558"  type="Error"  text="User HDL Import: There are no enough pins for port mapping." />
+		<msg uid="1559"  type="Error"  text="User HDL Import: Failed to create signal/group for port $$s." />
+		<msg uid="1560"  type="Error"  text="Failed to find WDAT signal" />
+		<msg uid="1561"  type="Error"  text="Failed to find WRCLK signal" />
+		
+						<!-- boolean expression parser error -->	
+		<msg uid="1600"  type="Error"  text="($$s) unexpected token: $$s." />
+		<msg uid="1601"  type="Error"  text="($$s) expect operand." />
+		<msg uid="1602"  type="Error"  text="($$s) expect right parenthesis." />
+		<msg uid="1603"  type="Error"  text="($$s) expect 'THEN' token." />
+		<msg uid="1604"  type="Error"  text="($$s) expect 'ELSE' token." />
+		<msg uid="1605"  type="Error"  text="($$s) invalid signal name: $$s." />
+		<msg uid="1606"  type="Error"  text="($$s) the BITEXTEND operator is only valid when applied to single-bit signals." />
+		<msg uid="1607"  type="Error"  text="($$s) INC, DEC, INCS, DECS operators only may be applied to vector signals." />
+		<msg uid="1608"  type="Error"  text="Signal $$s is not a valid vector." />
+		<msg uid="1609"  type="Error"  text="The left and right bits of operator $$s are inconsistent." />
+		<msg uid="1610"  type="Error"  text="Invalid boolean expression." />
+		<msg uid="1611"  type="Error"  text="The left and right operand of operator $$s are inconsistent." />
+						<!-- psb engine error -->	
+		<msg uid="2000"  type="Error"  text="The project [$$s] exists.\nFirst, please close the project.." />
+		<msg uid="2001"  type="Error"  text="The project does not exist." />
+		<msg uid="2002"  type="Error"  text="The file [$$s] does not exist." />
+		<msg uid="2003"  type="Error"  text="Failed to read file: $$s." />
+		<msg uid="2004"  type="Error"  text="Failed to write file: $$s." />
+		<msg uid="2005"  type="Error"  text="Failed to find signal: $$s." />
+		<msg uid="2006"  type="Error"  text="Platform Designer requires LatticeMico System. Install LatticeMico System before creating Platform Manager II project." />
+		<msg uid="2007"  type="Error"  text="Failed to create CPsbLgbHDLGen object." />
+		<msg uid="2008"  type="Error"  text="The mapping file for legacy design import does not exist." />
+		<msg uid="2009"  type="Error"  text="Failed to open the mapping file for legacy design import." />
+		<msg uid="2010"  type="Error"  text="Failed to read the mapping file for legacy design import." />
+		<msg uid="2011"  type="Error"  text="There is not enough pins left to support this action. First, clear some pins." />
+		<msg uid="2012"  type="Error"  text="Failed to copy file [$$s] from [$$s] to [$$s]" />
+		<msg uid="2013"  type="Error"  text="Signal for $$s is not defined." />
+		<msg uid="2014"  type="Error"  text="Failed to access data from FAN $$s." />
+		<msg uid="2015"  type="Error"  text="Fan tab: The signal $$s used as Alarm Out of fan $$s is already used as output of others." />
+		<msg uid="2016"  type="Error"  text="Fan tab: The signal $$s used as PWM Out of fan $$s is already used as output of others." />
+		<msg uid="2017"  type="Error"  text="Fault Log: The $$s signal is not specified." />
+		<msg uid="2018"  type="Error"  text="Fault Log: The model field is not filled." />
+		<msg uid="2019"  type="Error"  text="The PLL_Clk is not defined." />
+		<msg uid="2020"  type="Error"  text="The $$s signal is not defined." />
+		<msg uid="2021"  type="Error"  text="Port signal for I2C Write Feature cannot be IN." />
+		<msg uid="2022"  type="Error"  text="VID implementation requires that ASC I2C Write feature is Enabled or Controlled by GPIO1. Change ASC I2C Write Feature in Global View or disable VID in Voltage view." />
+		<msg uid="2023"  type="Error"  text="Dual-boot and Full featured Fault Log cannot be enabled at the same time for this device." />
+		<msg uid="2024"  type="Error"  text="Failed to access PSB database." />
+		<msg uid="2025"  type="Error"  text="The component combinations supported are:\n1. Dual-Boot;\n2. VID with channels less than 8 for LPTM20 and LPTM21;\n3. SPI Fault Log;\n4. UFM Fault Log;\n5. VID with more than 8 channels for LPTM24 and LPTM27;\n6. Dual-Boot and VID for LPTM24 and LPTM27;." />
+		<msg uid="2026"  type="Error"  text="TMON signal $$s is used in (Logic/Fan/FaultLog) but disabled in Temperature tab. Enable it to use in (Logic/Fan/FaultLog)." />
+		<msg uid="2027"  type="Error"  text="Signal $$s cannot be used for both ASC write protect and VID select signal." />
+		<msg uid="2028"  type="Error"  text="Failed to allocate memory for HDL generator." />
+		<msg uid="2029"  type="Error"  text="Failed to create path for $$s." />
+		<msg uid="2030"  type="Error"  text="Failed to access file $$s." />
+		<msg uid="2031"  type="Error"  text="Failed to create Folders for Mico." />
+		<msg uid="2032"  type="Error"  text="Failed to allocate memory for top level HDL generator." />
+		<msg uid="2033"  type="Error"  text="Failed to allocate memory for test top level HDL generator." />
+		<msg uid="2034"  type="Error"  text="Failed to allocate memory for post test top level HDL generator." />
+		<msg uid="2035"  type="Error"  text="Project/implementation is not found." />
+		<msg uid="2036"  type="Error"  text="$$s section of the PTM file is corrupted." />
+		<msg uid="2037"  type="Error"  text="Failed to initialize the PSB engine for legacy design import." />
+		<msg uid="2038"  type="Error"  text="Parameters error." />
+		<msg uid="2039"  type="Error"  text="Invalid parameter value." />
+		<msg uid="2040"  type="Error"  text="The pmc, asc or jed file is empty." />
+		<msg uid="2041"  type="Error"  text="Failed to initialize database." />
+		<msg uid="2042"  type="Error"  text="Failed to load psb database." />
+		<msg uid="2043"  type="Error"  text="Failed to load asc database." />
+		<msg uid="2044"  type="Error"  text="Failed to generate asc jed file." />
+		<msg uid="2045"  type="Error"  text="Failed to generate asc hex file." />
+		<msg uid="2046"  type="Error"  text="Failed to generate the asc configuration hex file." />
+		<msg uid="2047"  type="Error"  text="Failed to generate trim hex file." />
+		<msg uid="2048"  type="Error"  text="Failed to generate fault logger hex file." />
+		<msg uid="2049"  type="Error"  text="Failed to generate i2c address hex file." />
+		<msg uid="2050"  type="Error"  text="Fault Logger Tab: $$s, the busy signal of Full Featured Fault Log must be connected to outside." />
+		<msg uid="2051"  type="Error"  text="The voltage increase of $$s is too small and the Phase 1 would have to be repeated more than 8 times." />
+		<msg uid="2052"  type="Error"  text="The value of $$s must be larger than $$s." />
+		<msg uid="2053"  type="Error"  text="The value of $$s must be less than $$s." />
+		<msg uid="2054"  type="Error"  text="The values of trip point are unavailable. Re-edit the Rs or Gain value." />
+		<msg uid="2055"  type="Error"  text="The SPI Flash used for Fault Log must be the same as Dual-Boot SPI Flash." />
+		<msg uid="2056"  type="Error"  text="The $$s is used in two Hot Swaps ($$s and $$s), it should have the same level voltage." />
+		<msg uid="2057"  type="Error"  text="The current trip point ($$s) of hot swap calculation is bigger than Imax ($$s)." />
+		<msg uid="2058"  type="Error"  text="$$s option '$$s' is invalid." />
+		<msg uid="2059"  type="Error"  text="$$s option '$$s' is out of range { $$s }." />
+		<msg uid="2060"  type="Error"  text="The $$s cannot be empty." />
+		<msg uid="2061"  type="Error"  text="$$s value '$$s' is invalid." />
+		<msg uid="2062"  type="Error"  text="$$s value '$$s' is out of range ($$s ~ $$s)." />
+		<msg uid="2063"  type="Error"  text="$$s is multi-driven by hotswap." />
+		<msg uid="2064"  type="Error"  text="$$s cannot be used in hotswap $$s and $$s at the same time." />
+		<msg uid="2065"  type="Error"  text="$$s has already been used in the same hotswap $$s." />
+		<msg uid="2066"  type="Error"  text="The sense resistor value for $$s cannot exceed 1000 million." />
+		<msg uid="2067"  type="Error"  text="The available current monitor trip points are too high to maintain the SOA during hot swap. Increase the Rs or Gain (External Current Sense Amp only)." />
+		<msg uid="2068"  type="Error"  text="The available current monitor trip points are too low to maintain the SOA during hot swap. Decrease the Rs or Gain (External Current Sense Amp only)." />
+		<msg uid="2069"  type="Error"  text="The current sense selection can only select 'IMON (Internal)', because the vin value has exceeded 12V." />
+		<msg uid="2070"  type="Error"  text="The number of phases cannot exceed $$s." />
+		<msg uid="2071"  type="Error"  text="The monitor type of '$$s' must be '$$s' while monitor is used by PMBus monitor mapping." />
+		<msg uid="2072"  type="Error"  text="JTAG port has been selected for Background Programming, thus configuration Quad SPI is not available for Fault Logger IP.  Please choose 'Log to Alternate SPI Memory' or got to Global view to select SPI for Background Programming." />
+		<msg uid="2073"  type="Error"  text="The component combination '$$s' is not supported for the selected device." />
+						<!-- tcl parser error -->	
+		<msg uid="2100"  type="Error"  text="Failed to find the parameter: $$s." />
+		<msg uid="2101"  type="Error"  text="Invalid parameter: $$s." />
+		<msg uid="2102"  type="Error"  text="Invalid parameter value: $$s." />
+		<msg uid="2103"  type="Error"  text="The value of parameter [$$s] is empty." />
+		<msg uid="2104"  type="Error"  text="$$s." />
+		<msg uid="2105"  type="Error"  text="$$s." />
+		<msg uid="2106"  type="Error"  text="Invalid command: $$s." />
+						<!-- psb database error -->	
+		<msg uid="2200"  type="Error"  text="Failed to find super symbol '$$s'." />
+		<msg uid="2201"  type="Error"  text="$$s tab: failed to find pin $$s, $$s" />
+		<msg uid="2202"  type="Error"  text="$$s tab: failed to find symbol '$$s'." />
+		<msg uid="2203"  type="Error"  text="Failed to find e2cell in ASC $$s: $$s." />
+		<msg uid="2204"  type="Error"  text="$$s tab: failed to find signal: $$s." />
+		<msg uid="2205"  type="Error"  text="Failed to find ASC: $$s." />
+		<msg uid="2206"  type="Error"  text="$$s tab: failed to rename signal from $$s to $$s." />
+		<msg uid="2207"  type="Error"  text="Failed to rename ASC from $$s to $$s." />
+		<msg uid="2208"  type="Error"  text="Null pointer." />
+		<msg uid="2209"  type="Error"  text="The value [$$s] is out of range" />
+		<msg uid="2210"  type="Error"  text="There is already a fan control named $$s in the design." />
+		<msg uid="2211"  type="Error"  text="Failed to add fan control '$$s'." />
+		<msg uid="2212"  type="Error"  text="Failed to add the fan.\nFan number cannot exceed $$s." />
+		<msg uid="2213"  type="Error"  text="Not possible to enable VID while Dual Boot is active." />
+		<msg uid="2214"  type="Error"  text="The dual boot cannot be enabled while VID is in use." />
+		<msg uid="2215"  type="Error"  text="The Full Featured Fault Log is enabled.\n First, disable this." />
+		<msg uid="2216"  type="Error"  text="The count of VID channels already exceeds the maximum number." />
+		<msg uid="2217"  type="Error"  text="The i2c address '$$s' is invalid." />
+		<msg uid="2218"  type="Error"  text="$$s tab: the '$$s' cannot be empty." />
+		<msg uid="2219"  type="Error"  text="$$s tab: signal '$$s' does not exist or cannot be used as '$$s'." />
+		<msg uid="2220"  type="Error"  text="There is already a hotswap named $$s in the design." />
+		<msg uid="2221"  type="Error"  text="Failed to add hotswap '$$s'." />
+		<msg uid="2222"  type="Error"  text="Failed to add the hotswap.\nThe hotswap number cannot exceed $$s." />
+						<!-- usp drc check message -->	
+		<msg uid="2500"  type="Error"  text="Unknown error occurs in USP." />
+		<msg uid="2501"  type="Error"  text="'$$s' not defined." />
+		<msg uid="2502"  type="Error"  text="AR/AP port of signal '$$s' is assigned, while its D port is not used in the design." />
+		<msg uid="2503"  type="Error"  text="Signal '$$s' is defined as NODE, while there is no driver for it." />
+		<msg uid="2504"  type="Error"  text="There is an empty member in the group '$$s'." />
+		<msg uid="2505"  type="Error"  text="Internal error:  member '$$s' attributes conflict with its group '$$s'." />
+		<msg uid="2506"  type="Error"  text="Signal '$$s' cannot be grouped because it is already in another group '$$s'." />
+		<msg uid="2507"  type="Error"  text="The signal '$$s' is defined as '$$s', which conflict with its usage." />
+		<msg uid="2508"  type="Error"  text="Error occurs when changing device because PIO reach minimum." />
+		<msg uid="2509"  type="Error"  text="File name cannot be empty." />
+		<msg uid="2510"  type="Error"  text="Parameter invalid: file '$$s' is not an valid file." />
+		<msg uid="2511"  type="Error"  text="Failed to read file '$$s': '$$s'." />
+		<msg uid="2512"  type="Error"  text="Failed to write file '$$s': '$$s'." />
+		<msg uid="2513"  type="Error"  text="'$$s' cannot be processed." />
+		<msg uid="2514"  type="Error"  text="$$s attributes '$$s' cannot be changed because the signal has a special use." />
+		<msg uid="2515"  type="Error"  text="Signal '$$s' is not HVOUT." />
+		<msg uid="2516"  type="Error"  text="Signal '$$s' does not have reset level because it is combination signal." />
+		<msg uid="2517"  type="Error"  text="Timer source must be '62.5KHz' or 'EFB Prescaler'." />
+		<msg uid="2518"  type="Error"  text="Output signal $$s has no driver." />
+		<msg uid="2519"  type="Error"  text="$$s is used as input for I2C Write Feature." />
+		<msg uid="2520"  type="Error"  text="The signal $$s cannot be used as the $$s of the block $$s." />
+		<msg uid="2521"  type="Error"  text="$$s: Signal $$s is $$s, cannot be connected to $$s" />
+		<msg uid="2522"  type="Error"  text="Signal '$$s' is multi-driven by the blocks $$s" />
+		<msg uid="2523"  type="Error"  text="Device Info must have _TBLSECT format" />
+		<msg uid="2524"  type="Error"  text="Signal $$s used in $$s has no driver." />
+		<msg uid="2525"  type="Error"  text="Signals in group $$s have different register type." />
+		<msg uid="2526"  type="Error"  text="Signals in group $$s have different direction or usage." />
+		<msg uid="2527"  type="Error"  text="FaultLog busy signal $$s should be out or inout." />
+						<!-- fan error message added by Wei You 2012-02-29 -->	
+		<msg uid="3000"  type="Error"  text="The fan named '$$s' does not exist." />
+		<msg uid="3001"  type="Error"  text="Only signal from FGPA is acceptable." />
+		<msg uid="3002"  type="Error"  text="Signal '$$s' is already occupied by '$$s'." />
+		<msg uid="3003"  type="Error"  text="Pwm frequency '$$s' is out of range, the available range is { $$s }." />
+		<msg uid="3004"  type="Error"  text="Pwm polarity '$$s' is out of range, the available range is { $$s }." />
+		<msg uid="3005"  type="Error"  text="Alarm filter '$$s' is out of range, the available range is { $$s }." />
+		<msg uid="3006"  type="Error"  text="Startup status '$$s' is out of range, the available range is { $$s}." />
+		<msg uid="3007"  type="Error"  text="Startup period '$$s' is out of range, the available range is { $$s }." />
+		<msg uid="3008"  type="Error"  text="Startup speed '$$s' is out of range, the available range is { $$s }." />
+		<msg uid="3009"  type="Error"  text="Type of signal from ASC is incorrect." />
+						<!-- port drc check message  added by Wei You 2012-03-05 -->	
+		<msg uid="3100"  type="Error"  text="The required parameter '$$s' is missing." />
+		<msg uid="3101"  type="Error"  text="The name parameter's value '$$s' is illegal." />
+		<msg uid="3102"  type="Error"  text="There is a port already named '$$s' in the design."  />
+		<msg uid="3103"  type="Error"  text="The type option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3104"  type="Error"  text="The regtype option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3105"  type="Error"  text="The tim_rsv option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3106"  type="Error"  text="The group name '$$s' is illegal." />
+		<msg uid="3107"  type="Error"  text="The gpio type option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3108"  type="Error"  text="The gpio rst_lvl option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3109"  type="Error"  text="The gpio pull option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3110"  type="Error"  text="The I2C write protect is controlled by ASC$$s_GPIO1, so the type option cannot be changed." />
+		<msg uid="3111"  type="Error"  text="The hvout oset option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3112"  type="Error"  text="The hvout rol option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3113"  type="Error"  text="The hvout srrc option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3114"  type="Error"  text="The hvout sinkc option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3115"  type="Error"  text="The hvout freq option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3116"  type="Error"  text="The hvout pwm option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3117"  type="Error"  text="The hvout pulse option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3118"  type="Error"  text="The output source option you given '$$s' is out range, the correct range is { $$s }." />
+		<msg uid="3119"  type="Error"  text="The output polarity option you given '$$s' is out range, the correct range is { $$s }." />
+						<!-- importHDL drc check message -->	
+		<msg uid="3200"  type="Error"  text="The module '$$s' does not exist." />
+		<msg uid="3201"  type="Error"  text="The signal '$$s' does not exist." />
+		<msg uid="3202"  type="Error"  text="The instance name '$$s' cannot be assigned when module is empty." />
+		<msg uid="3203"  type="Error"  text="The signal '$$s' cannot be used in Import HDL." />
+		<msg uid="3204"  type="Error"  text="The port '$$s' does not exist." />
+		<msg uid="3205"  type="Error"  text="The size of '$$s' and '$$s' does not match." />
+		<msg uid="3206"  type="Error"  text="The direction of '$$s' and '$$s' does not match." />
+		<msg uid="3207"  type="Error"  text="Enable the import HDL first." />
+		<msg uid="3208"  type="Error"  text="No error in import HDL" />
+						<!-- PSBGUI DRC error message -->	
+		<msg uid="3300"  type="Error"  text="Unknown error type for PSB control view." />
+		<msg uid="3301"  type="Error"  text="$$s cannot be empty." />
+		<msg uid="3302"  type="Error"  text="$$s '$$s' already exists." />
+		<msg uid="3303"  type="Error"  text="$$s '$$s' does not exist." />
+		<msg uid="3304"  type="Error"  text="$$s '$$s' is invalid." />
+		<msg uid="3305"  type="Error"  text="$$s '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3306"  type="Error"  text="$$s '$$s' should not be identical with $$s." />
+		<msg uid="3307"  type="Error"  text="$$s schematic net name cannot be empty." />
+		<msg uid="3308"  type="Error"  text="$$s schematic net name '$$s' already exists." />
+		<msg uid="3309"  type="Error"  text="$$s schematic net name '$$s' is invalid." />
+		<msg uid="3310"  type="Error"  text="$$s logical name cannot be empty." />
+		<msg uid="3311"  type="Error"  text="$$s logical name '$$s' already exists." />
+		<msg uid="3312"  type="Error"  text="$$s logical name '$$s' is invalid." />
+		<msg uid="3313"  type="Error"  text="Vmon vnominal profile 0 '$$s' is invalid." />
+		<msg uid="3314"  type="Error"  text="Vmon vnominal profile 0 '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3315"  type="Error"  text="Vmon monitoring type cannot be empty." />
+		<msg uid="3316"  type="Error"  text="Vmon monitoring type '$$s' is invalid." />
+		<msg uid="3317"  type="Error"  text="$$s trip point selection cannot be empty." />
+		<msg uid="3318"  type="Error"  text="$$s trip point selection '$$s' is invalid." />
+		<msg uid="3319"  type="Error"  text="$$s trip point '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3320"  type="Error"  text="Vmon glitch filter cannot be empty." />
+		<msg uid="3321"  type="Error"  text="Vmon glitch filter '$$s' is invalid." />
+		<msg uid="3322"  type="Error"  text="Vmon window mode cannot be empty." />
+		<msg uid="3323"  type="Error"  text="Vmon window mode '$$s' is invalid." />
+		<msg uid="3324"  type="Error"  text="Trim target profile '$$s' is invalid." />
+		<msg uid="3325"  type="Error"  text="Trim target profile '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3326"  type="Error"  text="Target profile '$$s' for all trims is out of range($$s ~ $$s)." />
+		<msg uid="3327"  type="Error"  text="Trim DC-DC converter cannot be empty." />
+		<msg uid="3328"  type="Error"  text="Trim DC-DC converter '$$s' does not exist." />
+		<msg uid="3329"  type="Error"  text="Trim CLT polarity cannot be empty." />
+		<msg uid="3330"  type="Error"  text="Trim CLT polarity '$$s' is invalid." />
+		<msg uid="3331"  type="Error"  text="Trim V-BPZ selection cannot be empty." />
+		<msg uid="3332"  type="Error"  text="Trim V-BPZ selection '$$s' is invalid." />
+		<msg uid="3333"  type="Error"  text="Trim max supply adjustment range cannot be empty." />
+		<msg uid="3334"  type="Error"  text="Trim max supply adjustment range '$$s' is invalid." />
+		<msg uid="3335"  type="Error"  text="Trim max supply adjustment range '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3336"  type="Error"  text="Trim maximum DAC code range cannot be empty." />
+		<msg uid="3337"  type="Error"  text="Trim maximum DAC code range '$$s' is invalid." />
+		<msg uid="3338"  type="Error"  text="Trim maximum DAC code range '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3339"  type="Error"  text="Trim attenuation crossover voltage cannot be empty." />
+		<msg uid="3340"  type="Error"  text="Trim attenuation crossover voltage '$$s' is invalid." />
+		<msg uid="3341"  type="Error"  text="Trim attenuation crossover voltage '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3342"  type="Error"  text="Trim/Margin configuration mode cannot be empty." />
+		<msg uid="3343"  type="Error"  text="Trim/Margin configuration mode '$$s' is invalid." />
+		<msg uid="3344"  type="Error"  text="Trim BPZ voltage cannot be empty." />
+		<msg uid="3345"  type="Error"  text="Trim BPZ voltage '$$s' is invalid." />
+		<msg uid="3346"  type="Error"  text="Trim DAC code profile '$$s' is invalid." />
+		<msg uid="3347"  type="Error"  text="Trim DAC code profile '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3348"  type="Error"  text="Trim realized voltage profile '$$s' is invalid." />
+		<msg uid="3349"  type="Error"  text="Trim DAC current profile '$$s' is invalid." />
+		<msg uid="3350"  type="Error"  text="Vmon divider reference '$$s' is invalid." />
+		<msg uid="3351"  type="Error"  text="Vmon divider reference '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3352"  type="Error"  text="VID table name cannot be empty." />
+		<msg uid="3353"  type="Error"  text="VID table '$$s' does not exist." />
+		<msg uid="3354"  type="Error"  text="Failed to read VID table file '$$s'." />
+		<msg uid="3355"  type="Error"  text="VID table '$$s' includes target voltages outside of TRIM calculator range.\nSome VID table targets may not be possible to reach." />
+		<msg uid="3356"  type="Error"  text="VID select bus port/node cannot be empty." />
+		<msg uid="3357"  type="Error"  text="VID select bus port/node '$$s' is invalid." />
+		<msg uid="3358"  type="Error"  text="VID strobe port/node cannot be empty." />
+		<msg uid="3359"  type="Error"  text="VID strobe port/node '$$s' is invalid." />
+		<msg uid="3360"  type="Error"  text="VID select bus '$$s' cannot include strobe port/node '$$s'." />
+		<msg uid="3361"  type="Error"  text="VID strobe edge cannot be empty." />
+		<msg uid="3362"  type="Error"  text="VID strobe edge '$$s' is invalid." />
+		<msg uid="3363"  type="Error"  text="DC-DC enable port cannot be empty." />
+		<msg uid="3364"  type="Error"  text="DC-DC enable port '$$s' is invalid." />
+		<msg uid="3365"  type="Error"  text="DC-DC enable logic cannot be empty." />
+		<msg uid="3366"  type="Error"  text="DC-DC enable logic '$$s' is invalid." />
+		<msg uid="3367"  type="Error"  text="Imon trip point selection cannot be empty." />
+		<msg uid="3368"  type="Error"  text="Imon trip point selection '$$s' is invalid." />
+		<msg uid="3369"  type="Error"  text="Imon sense resistor cannot be empty." />
+		<msg uid="3370"  type="Error"  text="Imon sense resistor '$$s' is invalid." />
+		<msg uid="3371"  type="Error"  text="Imon sense resistor '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3372"  type="Error"  text="Imon hysteresis cannot be empty." />
+		<msg uid="3373"  type="Error"  text="Imon hysteresis '$$s' is invalid." />
+		<msg uid="3374"  type="Error"  text="Imon glitch filter cannot be empty." />
+		<msg uid="3375"  type="Error"  text="Imon glitch filter '$$s' is invalid." />
+		<msg uid="3376"  type="Error"  text="Imon window mode cannot be empty." />
+		<msg uid="3377"  type="Error"  text="Imon window mode '$$s' is invalid." />
+		<msg uid="3378"  type="Error"  text="Imon low side sense cannot be empty." />
+		<msg uid="3379"  type="Error"  text="Imon low side sense '$$s' is invalid." />
+		<msg uid="3380"  type="Error"  text="Tmon monitoring type cannot be empty." />
+		<msg uid="3381"  type="Error"  text="Tmon monitoring type '$$s' is invalid." />
+		<msg uid="3382"  type="Error"  text="Tmon trip point selection cannot be empty." />
+		<msg uid="3383"  type="Error"  text="Tmon trip point selection '$$s' is invalid." />
+		<msg uid="3384"  type="Error"  text="Tmon trip point selection '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3385"  type="Error"  text="Tmon hysteresis cannot be empty." />
+		<msg uid="3386"  type="Error"  text="Tmon hysteresis '$$s' is invalid." />
+		<msg uid="3387"  type="Error"  text="Tmon hysteresis '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3388"  type="Error"  text="Tmon monitor alarm filter cannot be empty." />
+		<msg uid="3389"  type="Error"  text="Tmon monitor alarm filter '$$s' is invalid." />
+		<msg uid="3390"  type="Error"  text="Tmon measurement averaging cannot be empty." />
+		<msg uid="3391"  type="Error"  text="Tmon measurement averaging '$$s' is invalid." />
+		<msg uid="3392"  type="Error"  text="Tmon offset cannot be empty." />
+		<msg uid="3393"  type="Error"  text="Tmon offset '$$s' is invalid." />
+		<msg uid="3394"  type="Error"  text="Tmon offset '$$s' is invalid.\n Valid entries are multiples of $$s between $$s and $$s." />
+		<msg uid="3395"  type="Error"  text="Tmon short fault measurement reading cannot be empty." />
+		<msg uid="3396"  type="Error"  text="Tmon short fault measurement reading '$$s' is invalid." />
+		<msg uid="3397"  type="Error"  text="Tmon ideality factor cannot be empty." />
+		<msg uid="3398"  type="Error"  text="Tmon ideality factor '$$s' is invalid." />
+		<msg uid="3399"  type="Error"  text="Tmon ideality factor '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3400"  type="Error"  text="Tmon sensor configuration cannot be empty." />
+		<msg uid="3401"  type="Error"  text="Tmon sensor configuration '$$s' is invalid." />
+		<msg uid="3402"  type="Error"  text="Fault logging trigger signal cannot be same with fault logging 'busy' signal. Select another" />
+		<msg uid="3403"  type="Error"  text="Fault logging 'busy' signal cannot be same with fault logging trigger signal. Select another" />
+		<msg uid="3404"  type="Error"  text="The signal '$$s' does not exist." />
+		<msg uid="3405"  type="Error"  text="The signal '$$s' is invalid." />
+		<msg uid="3406"  type="Error"  text="For Window Mode operation to work properly, the trip point voltage selection for $$s must be higher than that of $$s." />
+		<msg uid="3407"  type="Error"  text="The hotswap name cannot be empty." />
+		<msg uid="3408"  type="Error"  text="The hotswap name '$$s' already exists." />
+		<msg uid="3409"  type="Error"  text="The hotswap name '$$s' is invalid." />
+		<msg uid="3410"  type="Error"  text="The hotswap MOSFET name cannot be empty." />
+		<msg uid="3411"  type="Error"  text="The hotswap MOSFET name '$$s' is invalid." />
+		<msg uid="3412"  type="Error"  text="The hotswap type selection cannot be empty." />
+		<msg uid="3413"  type="Error"  text="The hotswap type selection '$$s' is invalid." />
+		<msg uid="3414"  type="Error"  text="The hotswap voltage '$$s' is invalid." />
+		<msg uid="3415"  type="Error"  text="The hotswap voltage '$$s' is out of range($$s ~ $$s Volts)." />
+		<msg uid="3416"  type="Error"  text="The hotswap current '$$s' is invalid." />
+		<msg uid="3417"  type="Error"  text="The hotswap current '$$s' is out of range($$s ~ $$s Amps)." />
+		<msg uid="3418"  type="Error"  text="The hotswap resistor '$$s' is invalid." />
+		<msg uid="3419"  type="Error"  text="The hotswap resistor '$$s' is out of range($$s ~ $$s Ohm)." />
+		<msg uid="3420"  type="Error"  text="The hotswap gain '$$s' is invalid." />
+		<msg uid="3421"  type="Error"  text="The hotswap gain '$$s' is out of range($$s ~ $$s)." />
+		<msg uid="3422"  type="Error"  text="The hotswap cload '$$s' is invalid." />
+		<msg uid="3423"  type="Error"  text="The hotswap cload '$$s' is out of range($$s ~ $$s uF)." />
+		<msg uid="3424"  type="Error"  text="The hotswap current sense selection cannot be empty." />
+		<msg uid="3425"  type="Error"  text="The hotswap current sense selection '$$s' is invalid." />
+		<msg uid="3426"  type="Error"  text="The hotswap low side selection cannot be empty." />
+		<msg uid="3427"  type="Error"  text="The hotswap low side selection '$$s' is invalid." />
+		<msg uid="3428"  type="Error"  text="The hotswap cooldown period '$$s' is invalid." />
+		<msg uid="3429"  type="Error"  text="The hotswap cooldown period '$$s' is out of range($$s ~ $$s ms)." />
+		<msg uid="3430"  type="Error"  text="The hotswap fast shutdown sensor cannot be empty." />
+		<msg uid="3431"  type="Error"  text="The hotswap fast shutdown sensor '$$s' is invalid." />
+		<msg uid="3432"  type="Error"  text="The hotswap current (ASC) feedback cannot be empty." />
+		<msg uid="3433"  type="Error"  text="The hotswap current (ASC) feedback '$$s' is invalid." />
+		<msg uid="3434"  type="Error"  text="The hotswap current sensor cannot be empty." />
+		<msg uid="3435"  type="Error"  text="The hotswap current sensor '$$s' is invalid." />
+		<msg uid="3436"  type="Error"  text="The hotswap fast shutdown ASC output cannot be empty." />
+		<msg uid="3437"  type="Error"  text="The hotswap fast shutdown ASC output '$$s' is invalid." />
+		<msg uid="3438"  type="Error"  text="The hotswap fast shutdown PIO input cannot be empty." />
+		<msg uid="3439"  type="Error"  text="The hotswap fast shutdown PIO input '$$s' is invalid." />
+		<msg uid="3440"  type="Error"  text="The hotswap fast shutdown PIO control cannot be empty." />
+		<msg uid="3441"  type="Error"  text="The hotswap fast shutdown PIO control '$$s' is invalid." />
+		<msg uid="3442"  type="Error"  text="The hotswap internal connection signal '$$s' cannot be empty." />
+		<msg uid="3443"  type="Error"  text="The hotswap internal connection signal $$s '$$s' is invalid." />
+		<msg uid="3444"  type="Error"  text="The hotswap low side selection can be set only when the current sense selection is 'IMON (Internal)'." />
+		<msg uid="3445"  type="Error"  text="The pmbus monitor mapping '$$s' for page no. '$$s' is invalid." />
+							
+		<!-- define warning message -->					
+						<!-- LogiBuilder warning message -->	
+		<msg uid="4200"  type="Warning"  text="$$s has no corresponding signal in the target device. It will be ignored." />
+		<msg uid="4201"  type="Warning"  text="The signal $$s is not defined. It will be ignored." />
+		<msg uid="4202"  type="Warning"  text="The signal $$s is not defined." />
+		<msg uid="4203"  type="Warning"  text="The signal $$s used in the supervisory is not defined." />
+		<msg uid="4204"  type="Warning"  text="State machine $$s, step $$s: the signal $$s used in the instruction $$s is not initialized." />
+		<msg uid="4205"  type="Warning"  text="The signal $$s is changed to INPUT. So it is removed from the OUTPUT instruction. It will be shown again if it is direction is changed back to OUTPUT/INOUT/NODE" />
+		<msg uid="4206"  type="Warning"  text="State machine $$s: program may not terminate (last instruction is not a goto/halt)." />
+		<msg uid="4207"  type="Warning"  text="State machine $$s, step $$s: INC/DEC operation will occur continuously during Wait for Timer/Boolean." />
+						<!-- PSB engine warning message -->	
+		<msg uid="5000"  type="Warning"  text="The signal $$s is set as global clock, and it is driven by $$s at the same time. This may cause problems." />
+		<msg uid="5001"  type="Warning"  text="The design is empty." />
+		<msg uid="5002"  type="Warning"  text="Unable to open the map file for writing." />
+		<msg uid="5003"  type="Warning"  text="Unable to open new file for QF field reading." />
+		<msg uid="5004"  type="Warning"  text="Unable to open new file for QF field writing." />
+		<msg uid="5005"  type="Warning"  text="Unable to open new file for writing." />
+		<msg uid="5006"  type="Warning"  text="Parameters error." />
+		<msg uid="5007"  type="Warning"  text="File $$s not existed." />
+		<msg uid="5008"  type="Warning"  text="Failed to read file $$s." />
+		<msg uid="5009"  type="Warning"  text="Failed to read and write file $$s." />
+		<msg uid="5010"  type="Warning"  text="Some signals in the removed ASC(s) might be in use and compilation might fail." />
+		<msg uid="5011"  type="Warning"  text="ASC$$s_VMON$$s has VID enabled, but signal $$s is not driven by logic. Enable the signal to make the VID work." />
+		<msg uid="5012"  type="Warning"  text="ASC$$s_VMON$$s has VID enabled. To make the VID work, make sure signal $$s is set." />
+		<msg uid="5013"  type="Warning"  text="$$s tab: The value of $$s has been overwritten by the Hot Swap component." />
+		<msg uid="5014"  type="Warning"  text="The resulting time is longer than 500ms. Use a smaller load capacitor or larger MOSFET." />
+		<msg uid="5015"  type="Warning"  text="HVOUT Voltage may exceed MOSFET $$s V-gs limit. Check MOSFET data sheet and adjust HVOUT settings as needed." />
+		<msg uid="5016"  type="Warning"  text="Platform Designer could not find the DC-DC converter(s) used by this project in '$$s'; Platform Designer has found the converter(s) in '$$s' and will change the DC-DC Converters Directory to the new location." />
+		<msg uid="5017"  type="Warning"  text="Platform Designer could not find the VID table(s) used by this project in '$$s'; Platform Designer has found the table(s) in '$$s' and will change the VID Tables Directory to the new location." />
+		<msg uid="5018"  type="Warning"  text="Platform Designer could not find the SPI model(s) used by this project in '$$s'; Platform Designer has found the model(s) in '$$s' and will change the SPI Models Directory to the new location." />
+		<msg uid="5019"  type="Warning"  text="Any HDL files outside of the project tree cannot be archived. Please import these HDL files again after opening the archived project." />
+		<msg uid="5020"  type="Warning"  text="The $$s setting cannot be changed." />
+						<!-- usp warning message -->	
+		<msg uid="5500"  type="Warning"  text="Signal name '$$s' has already been assigned." />
+		<msg uid="5501"  type="Warning"  text="Global clock have been defined multiple times." />
+		<msg uid="5502"  type="Warning"  text="Global clock not defined." />
+		<msg uid="5503"  type="Warning"  text="Global reset have been defined multiple times." />
+		<msg uid="5504"  type="Warning"  text="Global reset not defined." />
+		<msg uid="5505"  type="Warning"  text="name '$$s' not found when doing delete." />
+		<msg uid="5506"  type="Warning"  text="Signal '$$s' cannot be deleted because they have special usage." />
+		<msg uid="5507"  type="Warning"  text="Signal '$$s' cannot be deleted because only user defined node can be deleted." />
+		<msg uid="5508"  type="Warning"  text="Parameter invalid: port or reserved signals cannot be deleted." />
+		<msg uid="5509"  type="Warning"  text="Un-group signal '$$s' before deleting it." />
+		<msg uid="5510"  type="Warning"  text="Signal '$$s' not found when clearing its value." />
+		<msg uid="5511"  type="Warning"  text="Parameter invalid: reserved signals cannot be cleared." />
+		<msg uid="5512"  type="Warning"  text="Signal name '$$s' has already been assigned when adding it." />
+		<msg uid="5513"  type="Warning"  text=" '$$s' is a reserved word, which cannot be used as a signal name." />
+		<msg uid="5514"  type="Warning"  text="Parameter invalid: Add signal '$$s' error: port cannot be added except when initializing." />
+		<msg uid="5515"  type="Warning"  text="Signal '$$s' could not be found when updating it." />
+		<msg uid="5516"  type="Warning"  text="Signal name '$$s' conflicts with an key word when renaming it. Please change this." />
+		<msg uid="5517"  type="Warning"  text="Parameter invalid: Signal name '$$s' not found when renaming it." />
+		<msg uid="5518"  type="Warning"  text="Signal name '$$s' has already been assigned when renaming it." />
+		<msg uid="5519"  type="Warning"  text="Signal '$$s' cannot be renamed because it has a special use." />
+		<msg uid="5520"  type="Warning"  text="member '$$s' not found when grouping it." />
+		<msg uid="5521"  type="Warning"  text="Signal '$$s' cannot be grouped because it has a special use." />
+		<msg uid="5522"  type="Warning"  text="Signal name '$$s' has already been assigned when recovering it." />
+		<msg uid="5523"  type="Warning"  text="Signal name '$$s' has already been assigned when re-adding it." />
+		<msg uid="5524"  type="Warning"  text="Signal name '$$s' not found in record when re-adding it." />
+		<msg uid="5525"  type="Warning"  text="The following ports have to be deleted when changing device because of quantity limitation: $$s." />
+		<msg uid="5526"  type="Warning"  text="There is not enough pins left to support '$$s'. First, clear some pins." />
+							
+		<!-- define information message -->					
+						<!-- LogiBuilder information message -->	
+		<msg uid="7000"  type="Info"  text="Global clock have been defined multiple times." />
+		<msg uid="7001"  type="Info"  text="$$s generated successfully." />
+						<!-- rtl gen information message -->	
+		<msg uid="7500"  type="Info"  text="Starting HDL Generator ..." />
+		<msg uid="7501"  type="Info"  text="Starting DRC..." />
+		<msg uid="7502"  type="Info"  text="DRC done successfully." />
+						<!-- PSB engine information message -->	
+		<msg uid="8000"  type="Info"  text="Usage: \n    mergejedec \n        -type &lt;pojo or pojo2 &gt;\n       -obj &lt;object file name&gt;\n      -xo2 &lt;xo or xo2 file name&gt; \n    -asc &lt;asc file name(only effective in pojo2 type)&gt; \n \n options: -gui \n -help" />
+		<msg uid="8001"  type="Info"  text="Usage: \n    psbascwrap \n        -pmc &lt;pmc file name&gt; \n        -asc &lt;asc file name&gt; \n        -jed &lt;jedec file name&gt; \n        -simpath &lt;simulation file path(optional)&gt; " />
+		<msg uid="8002"  type="Info"  text="Usage: psbrtlwrap -in &lt;PTM file name&gt;\n                  -devFamily &lt;device family&gt;\n                  -devName &lt;device name&gt;\n                  -pkgName &lt;package name&gt;\n                  -ascDevType1 &lt;number of ascDevType1 chip&gt;\n                  -ascDevType2 &lt;number of ascDevType2 chip&gt;\n                  -ldffile &lt;ldf file name&gt;\n                  -lpf &lt;lpf file name&gt;\n\n    options:      -lan &lt;Verilog|VHDL&gt;\n                  -help" />
+							
+		<!-- messages defined to handle ut_** -->					
+		<msg uid="9990" type="Error" text="$$s." />					
+		<msg uid="9991" type="Warning" level="2" text="$$s." />					
+		<msg uid="9992" type="Info" text="$$s." />					
+		<msg uid="9993" type="Status" text="$$s." />					
+	</messages>						
+</messageFile>							

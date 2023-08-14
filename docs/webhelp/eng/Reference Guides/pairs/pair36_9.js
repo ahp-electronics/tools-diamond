@@ -1,0 +1,24 @@
+var pairs =
+{
+"ofd1s3ax":{"primitive":1}
+,"positive":{"edge":1}
+,"edge":{"triggered":1}
+,"triggered":{"flip-flop":1}
+,"flip-flop":{"gsr":1}
+,"gsr":{"used":1,"disabled":1}
+,"used":{"clear":1,"tri-state":1,"implement":1}
+,"clear":{"used":1}
+,"tri-state":{"ddr":1,"primitive":1}
+,"ddr":{"ddr2":1}
+,"architectures":{"supported":1}
+,"inputs":{"sclk":1}
+,"disabled":{"default":1}
+,"default":{"enabled":1}
+,"primitive":{"used":1,"functionally":1}
+,"implement":{"ddr":1}
+,"ddr2":{"tri-state":1}
+,"functionally":{"equivalent":1}
+,"equivalent":{"fd1s3ax":1}
+,"fd1s3ax":{"primitive":1}
+}
+;Search.control.loadWordPairs(pairs);

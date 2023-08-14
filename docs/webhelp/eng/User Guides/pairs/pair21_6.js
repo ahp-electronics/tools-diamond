@@ -1,0 +1,23 @@
+var pairs =
+{
+"converting":{"schematic":1}
+,"schematic":{"design":1,"symbols":1}
+,"design":{"device":1,"new":1}
+,"first":{"target":1}
+,"target":{"design":1}
+,"new":{"device":1,"symbols":1}
+,"device":{"symbols":1,"replace":1,"according":1}
+,"symbols":{"valid":1,"cannot":1,"new":1,"support":1,"list":1}
+,"valid":{"specific":1}
+,"specific":{"devices":1}
+,"devices":{"may":1}
+,"may":{"find":1}
+,"find":{"symbols":1}
+,"cannot":{"used":1}
+,"used":{"new":1}
+,"replace":{"symbols":1}
+,"support":{"new":1}
+,"according":{"list":1}
+,"list":{"schematic":1}
+}
+;Search.control.loadWordPairs(pairs);

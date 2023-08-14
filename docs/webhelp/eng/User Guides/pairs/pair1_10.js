@@ -1,0 +1,27 @@
+var pairs =
+{
+"simulating":{"design":1}
+,"topic":{"explains":1}
+,"explains":{"perform":1}
+,"perform":{"functional":1}
+,"functional":{"timing":1,"simulation":1}
+,"timing":{"simulation":1}
+,"simulation":{"using":1,"environment":1,"project":1,"files":1,"fpga":1}
+,"using":{"diamond":1}
+,"diamond":{"tools":1}
+,"tools":{"third-party":1}
+,"third-party":{"simulators":1}
+,"design":{"source":1}
+,"source":{"files":1}
+,"creating":{"new":1}
+,"new":{"simulation":1}
+,"project":{"diamond":1}
+,"exporting":{"vhdl":1}
+,"vhdl":{"verilog":1}
+,"verilog":{"simulation":1}
+,"verifying":{"designs":1}
+,"designs":{"timing":1}
+,"fpga":{"process":1}
+,"process":{"flow":1}
+}
+;Search.control.loadWordPairs(pairs);

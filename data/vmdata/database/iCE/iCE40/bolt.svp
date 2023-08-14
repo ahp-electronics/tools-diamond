@@ -1,0 +1,2364 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<!-- 
+	07/31/12 Nguyen Created
+	08/11/14 Nguyen changed trim code from:  82 00 00 20 00 25 F2 F0 a3 00 00 00  to 82 00 00 20 00 15 F2 F0 a2 00 00 00
+	05/11/18 Nguyen 
+		. Added trim code for Read Back in verify functions:  82 00 00 20 00 00 00 00 C4 00 00 00
+		. Changed trim code for setup Program:  82 00 00 20 00 15 F2 F0 C2 00 00 00
+		. Changed trim code for OTP Program:  82 00 00 20 00 15 F2 F1 C4 00 00 00
+-->
+<SVF_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+	<!-- Length fields are in number if bits -->
+	<Instruction_Length value="INSTRUCTION_REGISTER_LENGTH"/> 
+	<Real_Row_Width     value="DEVICE_REAL_ROW_WIDTH"/> 
+	<Row_Width			value="DEVICE_ROW_WIDTH"/> 
+	<Address_Length		value="ADDRESS_REGISTER_LENGTH"/> 
+	<Address length="ADDRESS_LENGTH">
+		INI_ADDRESS			
+	</Address>
+	<ID_Length 			value="DEVICE_ID_LENGTH"/>
+	<Usercode_Length 	value="DEVICE_USERCODE_LENGTH"/>
+	<Arch_Length         value="ARCHITECH_LENGTH"/>
+    <Arch_Row            value="ARCHITECH_ROW"/>
+	<TotalFuse value="TOTAL_FUSE_MAP"/>
+	<PWP	value="PROGRAMING_PULSE_WIDTH"/>
+	<PWV	value="VERIFY_PULSE_WIDTH"/>
+	<PWE	value="ERASE_PULSE_WIDTH"/>
+</Parameter>
+<Data>
+	<DataField	name="IDTDI">
+		<FieldBlock	row_width="DEVICE_ID_LENGTH">
+			ID_DATA
+		</FieldBlock>
+	</DataField>
+	<DataField	name="ISPID">
+		<FieldBlock	row_width="8">
+			ISP_ID
+		</FieldBlock>
+	</DataField>
+</Data>
+<Operation_List>	
+	"Fast Program,Read and Save without DONE bit" = "INIT 	! Initialize,   
+													ENABLE   ! Enable Programming mode,
+													BURST_PROGRAM_NO_STARTUP	! Program Fuse Map,
+													SAVE_CRAM_ARRAY, 
+													SAVE_BRAM_ARRAY"	;
+										   
+    "CRAM Read and Save" =	"RSINIT 	! Initialize, 
+    						 SAVE_CRAM_ARRAY, 
+							 SAVE_BRAM_ARRAY";  
+							 
+	"Fast Program" = "  INIT 	! Initialize,   
+						CHECK_DEVICE	! Check the device,	
+						ENABLE   ! Enable Programming mode,
+						BURST_PROGRAM	! Program Fuses Map,
+						STARTUP ! Exit the programming mode"	;
+								
+	"Verify ID" = "INIT 	! Initialize, 
+				   READ_ID	! Check the IDCODE";
+	
+	"Fast Program,Read and Save"	=	"INIT 	! Initialize,   
+										 CHECK_DEVICE	! Check the device,	
+										 ENABLE   ! Enable Programming mode,
+										 BURST_PROGRAM_NO_STARTUP	! Program Fuse Map,
+										 SAVE_CRAM_ARRAY, 
+										 SAVE_BRAM_ARRAY, 
+										 STARTUP ! Exit the programming mode";
+	
+	"Program,Verify" = "INIT 	! Initialize,   
+						 ENABLE   ! Enable Programming mode,
+						 PROGRAM_CRAM_ARRAY	! Program CRAM Fuse Map,
+						 PROGRAM_BRAM_ARRAY	! Program BRAM Fuse Map,
+						 VERIFY_CRAM_ARRAY  ! Verify CRAM Fuse Map, 
+						 VERIFY_BRAM_ARRAY  ! Verify BRAM Fuse Map, 
+						 STARTUP ! Exit the programming mode"	;
+						
+	"NVCM Read Trim Registers" = "  INIT 	! Initialize,   
+									NVCM_READ_TRIM	! Read Trim,
+									NVCM_DISABLE ! Exit NVCM programming mode"	;
+									
+	"NVCM Read DONE bit" = "INIT 	! Initialize, 
+							NVCM_ENABLE   ! Enable NVCM Programming mode,
+					        NVCM_DISABLE ! Exit NVCM programming mode";
+					        					 				
+	"NVCM Program,Verify" = "INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,																		
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check,  
+						NVCM_PROGRAM	! Program Fuse Map,
+						NVCM_VERIFY	! Verify Fuse Map,
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_SIGNATURE_PROGRAM ! Program NVCM Signature,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+	
+	"NVCM Program,Verify,Secure" = "INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,																		
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check,  
+						NVCM_PROGRAM	! Program Fuse Map,
+						NVCM_VERIFY	! Verify Fuse Map,
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_SECURE	! Secure device,
+						NVCM_SIGNATURE_PROGRAM ! Program NVCM Signature,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+											
+     "NVCM Program" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,	
+						NVCMCHECK_STATUS ! Check Status,						
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check, 
+						NVCM_PROGRAM	! Program Fuse Map,
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_SIGNATURE_PROGRAM ! Program NVCM Signature,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+    "NVCM Verify Only" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,	  
+						NVCMCHECK_STATUS ! Check Status, 
+						NVCM_VERIFY	! Verify Fuse Map,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+     "NVCM Blank Check" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,	  
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check, 
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+	"NVCM Secure" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,	  						
+						NVCM_SECURE	! Secure device,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+	"NVCM Program Trim Registers" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,	  						
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+	
+	"NVCM Program Signature" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,	  						
+						NVCM_SIGNATURE_PROGRAM ! Program Signature Block,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+	
+	"NVCM Read Device Properties" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCM_SIGNATURE_READ ! Read Signature Block,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+																						   
+    "NVCM Verify ID" = " INIT 	! Initialize,   
+    					NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;     
+																					  																
+</Operation_List>
+<Operation_List label="SingleSVFOperation">	
+	"Fast Program,Read and Save without DONE bit" = "INIT 	! Initialize,   
+													ENABLE   ! Enable Programming mode,
+													BURST_PROGRAM_NO_STARTUP	! Program Fuse Map,
+													SAVE_CRAM_ARRAY, 
+													SAVE_BRAM_ARRAY"	;
+										   
+    "CRAM Read and Save" =	"RSINIT 	! Initialize, 
+    						 SAVE_CRAM_ARRAY, 
+							 SAVE_BRAM_ARRAY";  
+							 	 			 		
+	"Fast Program" = "  INIT 	! Initialize,   
+						ENABLE   ! Enable Programming mode,
+						BURST_PROGRAM	! Program Fuses Map,
+						STARTUP ! Exit the programming mode"	;
+								
+	"Verify ID" = "INIT 	! Initialize, 
+				   READ_ID	! Check the IDCODE";
+	
+	"Fast Program,Read and Save"	=	"INIT 	! Initialize,   
+										 ENABLE   ! Enable Programming mode,
+										 BURST_PROGRAM_NO_STARTUP	! Program Fuse Map,
+										 SAVE_CRAM_ARRAY, 
+										 SAVE_BRAM_ARRAY, 
+										 STARTUP ! Exit the programming mode";
+	
+	"Program,Verify" = "INIT 	! Initialize,   
+						 ENABLE   ! Enable Programming mode,
+						 PROGRAM_CRAM_ARRAY	! Program CRAM Fuse Map,
+						 PROGRAM_BRAM_ARRAY	! Program BRAM Fuse Map,
+						 VERIFY_CRAM_ARRAY  ! Verify CRAM Fuse Map, 
+						 VERIFY_BRAM_ARRAY  ! Verify BRAM Fuse Map, 
+						 STARTUP ! Exit the programming mode"	;
+							 
+	"NVCM Read Trim Registers" = "  INIT 	! Initialize,   
+									NVCM_READ_TRIM	! Read Trim,
+									NVCM_DISABLE ! Exit NVCM programming mode"	;
+									
+	"NVCM Read DONE bit" = "INIT 	! Initialize, 
+							NVCM_ENABLE   ! Enable NVCM Programming mode,
+					        NVCM_DISABLE ! Exit NVCM programming mode";
+					        					 				
+	"NVCM Program,Verify" = "INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,																		
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check,  
+						NVCM_PROGRAM	! Program Fuse Map,
+						NVCM_VERIFY	! Verify Fuse Map,
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_SIGNATURE_PROGRAM ! Program NVCM Signature,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+	
+	"NVCM Program,Verify,Secure" = "INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,																		
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check,  
+						NVCM_PROGRAM	! Program Fuse Map,
+						NVCM_VERIFY	! Verify Fuse Map,
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_SECURE	! Secure device,
+						NVCM_SIGNATURE_PROGRAM ! Program NVCM Signature,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+											
+     "NVCM Program" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,	
+						NVCMCHECK_STATUS ! Check Status,						
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check, 
+						NVCM_PROGRAM	! Program Fuse Map,
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_SIGNATURE_PROGRAM ! Program NVCM Signature,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+    "NVCM Verify Only" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,	   
+						NVCM_VERIFY	! Verify Fuse Map,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+     "NVCM Blank Check" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,	  
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check, 
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+	"NVCM Secure" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,	  						
+						NVCM_SECURE	! Secure device,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+	"NVCM Program Trim Registers" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,	  						
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+	
+	"NVCM Program Signature" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,	  						
+						NVCM_SIGNATURE_PROGRAM ! Program Signature Block,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+	
+	"NVCM Read Device Properties" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCM_SIGNATURE_READ ! Read Signature Block,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+																						   
+    "NVCM Verify ID" = " INIT 	! Initialize,   
+    					NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;          
+																																 			 							
+</Operation_List>
+<Operation_List label="SingleSVFOperationRevC">	
+	"Fast Program,Read and Save without DONE bit" = "INIT 	! Initialize,   
+													ENABLE   ! Enable Programming mode,
+													BURST_PROGRAM_NO_STARTUP	! Program Fuse Map,
+													SAVE_CRAM_ARRAY, 
+													SAVE_BRAM_ARRAY"	;
+										   
+    "CRAM Read and Save" =	"RSINIT 	! Initialize, 
+    						 SAVE_CRAM_ARRAY, 
+							 SAVE_BRAM_ARRAY";  
+							 			 
+	"Fast Program" = "  INIT 	! Initialize,   
+						ENABLE   ! Enable Programming mode,
+						BURST_PROGRAM	! Program Fuses Map,
+						STARTUP ! Exit the programming mode"	;
+								
+	"Verify ID" = "INIT 	! Initialize, 
+				   READ_ID	! Check the IDCODE";
+	
+	"Fast Program,Read and Save"	=	"INIT 	! Initialize,   
+										 ENABLE   ! Enable Programming mode,
+										 BURST_PROGRAM_NO_STARTUP	! Program Fuse Map,
+										 SAVE_CRAM_ARRAY, 
+										 SAVE_BRAM_ARRAY, 
+										 STARTUP ! Exit the programming mode";
+	
+	"Program,Verify" = "INIT 	! Initialize,   
+						 ENABLE   ! Enable Programming mode,
+						 PROGRAM_CRAM_ARRAY	! Program CRAM Fuse Map,
+						 PROGRAM_BRAM_ARRAY	! Program BRAM Fuse Map,
+						 VERIFY_CRAM_ARRAY  ! Verify CRAM Fuse Map, 
+						 VERIFY_BRAM_ARRAY  ! Verify BRAM Fuse Map, 
+						 STARTUP ! Exit the programming mode"	;
+							 
+	"NVCM Read Trim Registers" = "  INIT 	! Initialize,   
+									NVCM_READ_TRIM	! Read Trim,
+									NVCM_DISABLE ! Exit NVCM programming mode"	;
+									
+	"NVCM Read DONE bit" = "INIT 	! Initialize, 
+							NVCM_ENABLE   ! Enable NVCM Programming mode,
+					        NVCM_DISABLE ! Exit NVCM programming mode";
+					        					 				
+	"NVCM Program,Verify" = "INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,																		
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check,  
+						NVCM_PROGRAM	! Program Fuse Map,
+						NVCM_VERIFY	! Verify Fuse Map,
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_SIGNATURE_PROGRAM ! Program NVCM Signature,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+	
+	"NVCM Program,Verify,Secure" = "INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,																		
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check,  
+						NVCM_PROGRAM	! Program Fuse Map,
+						NVCM_VERIFY	! Verify Fuse Map,
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_SECURE	! Secure device,
+						NVCM_SIGNATURE_PROGRAM ! Program NVCM Signature,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+											
+     "NVCM Program" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,	
+						NVCMCHECK_STATUS ! Check Status,						
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check, 
+						NVCM_PROGRAM	! Program Fuse Map,
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_SIGNATURE_PROGRAM ! Program NVCM Signature,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+    "NVCM Verify Only" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,	 
+						NVCMCHECK_STATUS ! Check Status,  
+						NVCM_VERIFY	! Verify Fuse Map,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+     "NVCM Blank Check" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,	  
+						NVCMTRIM_BLANKCHECK ! NVCM Trim_Parameter_OTP Blank Check, 
+						NVCM_BLANKCHECK	! Main Memory Blank Check, 
+						NVCM_DISABLE ! Exit NVCM programming mode"	;
+	"NVCM Secure" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,	  						
+						NVCM_SECURE	! Secure device,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+	"NVCM Program Trim Registers" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,	  						
+						NVCM_TRIM_PROGRAM ! Program NVCM Trim_Parameter_OTP,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+	
+	"NVCM Program Signature" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCMCHECK_STATUS ! Check Status,	  						
+						NVCM_SIGNATURE_PROGRAM ! Program Signature Block,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+	
+	"NVCM Read Device Properties" = "  INIT 	! Initialize,   
+						NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCM_SIGNATURE_READ ! Read Signature Block,
+						NVCM_DISABLE ! Exit NVCM programming mode"	; 
+																						   
+    "NVCM Verify ID" = " INIT 	! Initialize,   
+    					NVCM_ENABLE   ! Enable NVCM Programming mode,
+						NVCMREAD_ID	! Check the IDCODE,
+						NVCM_DISABLE ! Exit NVCM programming mode"	;       
+																								
+</Operation_List>
+<Script>
+<![CDATA[
+int32   BRAM_Row_Width = 0;
+int32   Temp_Row_Width = 0;
+int32   Read_Row_Width = 0;
+int32   BRAM_Read_Row_Width = 0;
+function INIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	FREQUENCY 1E6 HZ;
+	setpin ISPEN LOW;
+	setpin TRST LOW;
+	setpin TRST HIGH;
+	RUN_TEST DELAY 2;
+	setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	setpin TRST HIGH;
+	setpin TRST LOW;
+	RUN_TEST DELAY 2;
+	IF (Real_Row_Width == 41232)
+    {
+    	BRAM_Row_Width = 6144;	
+    	Temp_Row_Width = Real_Row_Width -16;  
+    	Read_Row_Width = 52992;
+    	BRAM_Read_Row_Width = 8192;
+    }
+    ELSEIF (Real_Row_Width == 232528)
+    {
+    	BRAM_Row_Width = 20480;
+    	Temp_Row_Width = Real_Row_Width -16;  
+    	Read_Row_Width =  121792;
+    	BRAM_Read_Row_Width = 10240;
+    }	
+}
+function RSINIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	FREQUENCY 1E6 HZ;
+	setpin ISPEN LOW;
+	RUN_TEST DELAY 2;
+	setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	RUN_TEST DELAY 2;
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 664 DELAY PWP;
+	IF (Real_Row_Width == 41232)
+    {
+    	BRAM_Row_Width = 6144;	
+    	Temp_Row_Width = Real_Row_Width -16;  
+    	Read_Row_Width = 52992;
+    	BRAM_Read_Row_Width = 8192;
+    }
+    ELSEIF (Real_Row_Width == 232528)
+    {
+    	BRAM_Row_Width = 20480;
+    	Temp_Row_Width = Real_Row_Width -16;  
+    	Read_Row_Width =  121792;
+    	BRAM_Read_Row_Width = 10240;
+    }	
+}
+function CHECK_DEVICE	
+{
+	datastream StatusArray[1][32];
+	datastream StatusInstruction[1][48];
+	StatusInstruction[1] = 0x90807E99557E;
+    RUN_TEST TCK 16000 DELAY PWP;
+    setpin ISPEN LOW;
+	! Shift in STATUS_RD instruction;
+	SDR 48 TDI(StatusInstruction[1]);
+	SDR 2 TDI(0x00);
+	SDR 32 TDI(0x00000000)
+		   TDO(StatusArray[1]);				  
+	setpin ISPEN HIGH;	
+	IF (StatusArray[1] == 0x00000000)
+	{
+		print (1,"Device detection failed. Cannot continue.");
+	}
+	ELSEIF (StatusArray[1] == 0xFFFFFFFF)
+    {
+    	print (1,"Device detection failed. Cannot continue.");
+    }
+    ELSEIF (StatusArray[1] == 0xFFFFFFC0)
+    {
+    	print (1,"Device detection failed. Cannot continue.");
+    }
+}
+function READ_ID {
+	datastream StatusInstruction[1][48];
+	datastream IDInstruction[1][40];
+    StatusInstruction[1] = 0x90807E99557E;
+    IDInstruction[1] = 0x2C7E99557E;
+    IDTDI[1] = $IDTDI[1];
+    RUN_TEST TCK 16000 DELAY PWP;
+    setpin ISPEN LOW;
+    ! Shift in IDCHECK instruction;
+	SDR 40 TDI(IDInstruction[1]);
+	SDR 32 TDI(IDTDI[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 2 DELAY PWP;
+	
+	setpin ISPEN LOW;
+	! Shift in STATUS_RD instruction;
+	SDR 48 TDI(StatusInstruction[1]);
+	SDR 2 TDI(0x00);
+	SDR_VERIFY 32 TDI(0x00000000)
+				  TDO(0xFFFFFFFF);				  
+	setpin ISPEN HIGH;					        
+}
+function ENABLE {
+	setpin ISPEN LOW;
+	setpin TRST LOW;
+	setpin TRST HIGH;
+	RUN_TEST DELAY 2;
+	setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	setpin TRST HIGH;
+	setpin TRST LOW;
+	RUN_TEST DELAY 2;
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 664 DELAY PWP;
+}
+function BURST_PROGRAM {
+	FuseArray_TDI.row = 1;
+	setpin ISPEN LOW;
+	! Shift in TOTAL_FUSE_MAP bits;
+    SDR	TotalFuse TDI	(FuseArray_TDI);   
+    setpin ISPEN HIGH; 
+}
+function BURST_PROGRAM_NO_STARTUP {
+	FuseArray_TDI.row = 1;
+	CFGArray_TDI.row = 1;
+	TotalFuse = TotalFuse - 48;
+	setpin ISPEN LOW;
+	! Shift in TOTAL_FUSE_MAP bits;
+    SDR	TotalFuse TDI	(FuseArray_TDI);    
+    SDR 	24	TDI	(CFGArray_TDI[1]);	
+    setpin ISPEN HIGH;		
+}
+function STARTUP {
+	setpin ISPEN LOW;
+	SDR 	16	TDI	(0x6080);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 DELAY 200;		
+}
+function PROGRAM_CRAM_ARRAY {
+	datastream ArrayPreamble[1][32];
+	datastream ArrayHeader[1][128];
+	FuseArray_TDI.row = 1;
+	EFuseArray_TDI.row = 1;
+	ArrayPreamble[1] = 0x7E99557E;
+	IF (Real_Row_Width == 41232)
+    {
+    	ArrayHeader[1] = 0x0E004E000041F68046040049A080008A;  
+    }
+	ELSEIF (Real_Row_Width == 232528)
+    {
+    	ArrayHeader[1] = 0x0A804E000041CD4046040049A080008A; 
+    }
+    setpin ISPEN LOW;				    						   						    
+	! Shift in Preamble instruction;
+	SDR 	32 TDI(ArrayPreamble[1]);
+	SDR 	128	TDI	(ArrayHeader[1]);		
+	SDR 	32	TDI	(0x80800088);
+	SDR 	Real_Row_Width	TDI	(FuseArray_TDI[1]);    						    
+	IF (Real_Row_Width == 41232)
+    {
+    	SDR 	56	TDI	(0x8080808809004E);
+		SDR 	53008	TDI	(EFuseArray_TDI[1]); 
+		
+		SDR 	56	TDI	(0x808040880E004E);
+		SDR 	Real_Row_Width	TDI	(FuseArray_TDI[2]);
+		
+		SDR 	56	TDI	(0x8080C08809004E);
+		SDR 	53008	TDI	(EFuseArray_TDI[2]);
+    }
+	ELSEIF (Real_Row_Width == 232528)
+    {
+    	SDR 	56	TDI	(0x808080880D004E);
+		SDR 	121808	TDI	(EFuseArray_TDI[1]); 
+		
+		SDR 	56	TDI	(0x808040880A804E);
+		SDR 	Real_Row_Width	TDI	(FuseArray_TDI[2]);
+		
+		SDR 	56	TDI	(0x8080C0880D004E);
+		SDR 	121808	TDI	(EFuseArray_TDI[2]);
+    }					    
+}
+function VERIFY_CRAM_ARRAY {
+	int32	ClockCount = 21;
+	datastream ArrayPreamble[1][32];
+	datastream ReadBackArrayHeader[1][96];
+	FuseArray_TDI.row = 1;
+	EFuseArray_TDI.row = 1;
+	ArrayPreamble[1] = 0x7E99557E;
+	IF (Real_Row_Width == 41232)
+    {
+    	ReadBackArrayHeader[1] = 0x0E004E000041F68046040049; 
+    	ClockCount = 20;  
+    }
+    ELSEIF (Real_Row_Width == 232528)
+    {
+    	ReadBackArrayHeader[1] = 0x0A804E000041CD4046040049; 
+    	ClockCount = 20;  
+    }	
+    RUN_TEST TCK 1000 DELAY PWP;
+    SDR 	16	TDI	(0x0088);
+    RUN_TEST TCK 1000 DELAY 1;
+    SDR 	16	TDI	(0x4080);
+	RUN_TEST TCK 21 DELAY 1;
+	SDR 	Temp_Row_Width	TDI	(#0^Temp_Row_Width);	  					    						   						    
+	! Shift in Preamble instruction;
+	SDR 	32 TDI(ArrayPreamble[1]);
+	SDR 	96	TDI	(ReadBackArrayHeader[1]);		
+	SDR 	32	TDI	(0x40800088);
+	RUN_TEST TCK 21 DELAY 1;
+    SDR_VERIFY 	Temp_Row_Width	TDI	(#0^Temp_Row_Width)
+						    	TDO	(FuseArray_TDI[1]);		
+	IF (Real_Row_Width == 41232)
+    {				    
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x4080808809004E);
+		RUN_TEST TCK 21 DELAY 1;
+		SDR_VERIFY 	Read_Row_Width	TDI	(#0^Read_Row_Width)
+							TDO	(EFuseArray_TDI[1]);	
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x408040880E004E);
+		RUN_TEST TCK 21 DELAY 1;
+		SDR_VERIFY 	Temp_Row_Width	TDI	(#0^Temp_Row_Width)
+							    	TDO	(FuseArray_TDI[2]);		
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x4080C08809004E);
+		RUN_TEST TCK ClockCount DELAY 1;
+		SDR_VERIFY 	Read_Row_Width	TDI	(#0^Read_Row_Width)
+							TDO	(EFuseArray_TDI[2]);	
+	}
+	ELSEIF (Real_Row_Width == 232528)
+    {
+    	! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x408080880D004E);
+		RUN_TEST TCK 21 DELAY 1;
+		SDR_VERIFY 	Read_Row_Width	TDI	(#0^Read_Row_Width)
+							TDO	(EFuseArray_TDI[1]);	
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x408040880A804E);
+		RUN_TEST TCK 21 DELAY 1;
+		SDR_VERIFY 	Temp_Row_Width	TDI	(#0^Temp_Row_Width)
+							    	TDO	(FuseArray_TDI[2]);		
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x4080C0880D004E);
+		RUN_TEST TCK ClockCount DELAY 1;
+		SDR_VERIFY 	Read_Row_Width	TDI	(#0^Read_Row_Width)
+							TDO	(EFuseArray_TDI[2]);
+    	
+    }
+		
+}
+function PROGRAM_BRAM_ARRAY {
+	int32	RowCount = 1;
+	datastream BRAMArrayHeader[1][48];
+	datastream BRAMArrayAddress[1][40];
+	IF (Real_Row_Width == 41232)
+    {
+    	BRAMArrayHeader[1] = 0x01004EF40046; 
+    	BRAMArrayAddress[1] = 0xC080010041;       	
+    }
+    ELSEIF (Real_Row_Width == 232528)
+    {
+    	BRAMArrayHeader[1] = 0x01004EF90046; 
+    	BRAMArrayAddress[1] = 0xC080010041;  
+    }
+    IF (ArchArray_TDI.row = 1)
+    {
+    	SDR 	48	TDI	(BRAMArrayHeader[1]);		
+		SDR 	56	TDI	(0xC0800000410088);
+		SDR 	Arch_Length	TDI	(ArchArray_TDI[1]);    						    
+		
+	    SDR 	40	 TDI	(BRAMArrayAddress[1]);
+		SDR 	Arch_Length TDI(ArchArray_TDI[2]);    						    
+		
+		IF (Real_Row_Width == 41232)
+    	{
+			SDR 	80	TDI	(0xC080000041FC00468088);
+			SDR 	8208	TDI	(SysIOArray_TDI[1]);
+			
+			SDR 	40	TDI	(BRAMArrayAddress[1]);
+			SDR 	8208	TDI	(SysIOArray_TDI[2]);  
+			
+			SDR 	80	TDI	(0xC080000041F400464088);
+			SDR 	Arch_Length	TDI	(ArchArray_TDI[3]);    						    
+			
+			SDR 	40	TDI	(BRAMArrayAddress[1]);
+			SDR 	Arch_Length	TDI	(ArchArray_TDI[4]);    						    
+			
+			SDR 	80	TDI	(0xC080000041FC0046C088);
+			SDR 	8208	TDI	(SysIOArray_TDI[3]);    						    
+		
+			SDR 	40	TDI	(BRAMArrayAddress[1]);
+			SDR 	8208	TDI	(SysIOArray_TDI[4]);  
+		}
+		ELSEIF (Real_Row_Width == 232528)
+    	{
+    		SDR 	80	TDI	(0xC080000041F200468088);
+			SDR 	10256	TDI	(SysIOArray_TDI[1]);
+			
+			SDR 	40	TDI	(BRAMArrayAddress[1]);
+			SDR 	10256	TDI	(SysIOArray_TDI[2]); 
+			
+			SDR 	80	TDI	(0xC080000041F900464088);
+			SDR 	Arch_Length	TDI	(ArchArray_TDI[3]);    						    
+			
+			SDR 	40	TDI	(BRAMArrayAddress[1]);
+			SDR 	Arch_Length	TDI	(ArchArray_TDI[4]);   
+			
+			SDR 	80	TDI	(0xC080000041F20046C088);
+			SDR 	10256	TDI	(SysIOArray_TDI[3]);    						    
+		
+			SDR 	40	TDI	(BRAMArrayAddress[1]);
+			SDR 	10256	TDI	(SysIOArray_TDI[4]);  	  
+    	}  						    	  						    		    
+	}
+	IF (CFGArray_TDI.row = 1)
+	{
+		SDR 	24	TDI	(CFGArray_TDI[1]);				
+	}
+}
+function VERIFY_BRAM_ARRAY {
+	datastream ArrayPreamble[1][32];
+	datastream ReadBackBRAMArrayHeader[1][48];
+	datastream ReadBackBRAMArrayAddress[1][40];
+	ArrayPreamble[1] = 0x7E99557E;
+	IF (Real_Row_Width == 41232)
+    {
+		ReadBackBRAMArrayHeader[1] = 0x01004EF40046; 
+	    ReadBackBRAMArrayAddress[1] = 0x2080010041; 
+	}
+	ELSEIF (Real_Row_Width == 232528)
+    {
+    	ReadBackBRAMArrayHeader[1] = 0x01004EF90046; 
+	    ReadBackBRAMArrayAddress[1] = 0x2080010041; 
+    }      		
+    IF (ArchArray_TDI.row = 1)
+    {
+    	! Shift in Preamble instruction;
+		SDR 	32  TDI(ArrayPreamble[1]);
+		SDR 	48	TDI	(ReadBackBRAMArrayHeader[1]);		
+		SDR 	56	TDI	(0x20800000410088);
+		RUN_TEST TCK 21 DELAY 1;
+	    SDR_VERIFY 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+									TDO	(ArchArray_TDI[1]);						    
+		
+		! Shift in Preamble instruction;
+		SDR 	32  TDI(ArrayPreamble[1]);
+		SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+		RUN_TEST TCK 21 DELAY 1;
+		SDR_VERIFY 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+									TDO	(ArchArray_TDI[2]);								    
+		
+		IF (Real_Row_Width == 41232)
+    	{
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	80	TDI(0x2080000041FC00468088);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+											TDO	(SysIOArray_TDI[1]);			
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+											TDO	(SysIOArray_TDI[2]);								    		
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	104	TDI(0x20800000414088F4004681004E);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+										TDO	(ArchArray_TDI[3]);			
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	64	TDI(0x208001004101004E);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+										TDO	(ArchArray_TDI[4]);					
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	80	TDI(0x2080000041FC0046C088);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+											TDO	(SysIOArray_TDI[3]);		
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+											TDO	(SysIOArray_TDI[4]);
+		}
+		ELSEIF (Real_Row_Width == 232528)
+    	{
+    		! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	80	TDI(0x2080000041F200468088);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	10240	TDI	(#0^10240)
+								TDO	(SysIOArray_TDI[1]);			
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	10240	TDI	(#0^10240)
+								TDO	(SysIOArray_TDI[2]);
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	80	TDI(0x20800000414088F90046);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+										TDO	(ArchArray_TDI[3]);			
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+										TDO	(ArchArray_TDI[4]);	
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	80	TDI(0x2080000041F20046C088);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	10240	TDI	(#0^10240)
+								TDO	(SysIOArray_TDI[3]);		
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR_VERIFY 	10240	TDI	(#0^10240)
+								TDO	(SysIOArray_TDI[4]);															
+									
+    	}			
+	}
+	! Shift in Preamble instruction;
+	SDR 	32 TDI(ArrayPreamble[1]);
+	SDR 	16	TDI	(0xD080);	
+	
+}
+function NVCM_READ_TRIM {
+	datastream TRIMArray[1][64];
+	datastream SMCInstruction[1][48];
+    SMCInstruction[1] = 0x70807E99557E;
+	
+	setpin ISPEN LOW;
+	! Shift in Access-NVCM instruction;
+	SDR 48 TDI(SMCInstruction[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+				
+	setpin ISPEN LOW;
+	! Shift in READ_RF(0x84) instruction;
+	SDR 104 TDI(0x00000000000000000004000021);
+	SDR  64 	TDI(#0^64)
+			  	TDO(TRIMArray[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	TRIMArray[1] =  $TRIMArray[1];
+	print (0,"FSM Trim register:");
+	print (0,TRIMArray);
+	
+	setpin ISPEN LOW;
+	! Shift in Restore Access-NVCM instruction;
+	SDR 40 TDI(0x00A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;	
+}
+function NVCMCHECK_STATUS {
+	setpin ISPEN LOW;
+	! Shift in Trim setup-NVCM instruction;
+	SDR 40 TDI(0x08A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in READ(0x03) instruction;
+		SDR 104 TDI(0x000000000000000000040000C0);
+		SDR_VERIFY  64 	TDI(0x0000000000000000)
+				  		TDO(0x0000000000000000)
+				  		MASK(0x000000000000000C);				  				
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+	}
+	ELSE
+	{	
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in PGM_DISABLE(0x04) instruction;
+		SDR 8 TDI (0x20);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 1000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		setpin ISPEN LOW;
+		! Shift in Restore Access-NVCM instruction;
+		SDR 40 TDI(0x00A40000C1);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 1000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		print (1, "Device NVCM is already secured. Cannot continue.");
+	}	
+	
+}
+function NVCM_ENABLE {
+	datastream SMCInstruction[1][48];
+	datastream TRIMInstruction[1][96];
+	
+    SMCInstruction[1] = 0x70807E99557E;
+    TRIMInstruction[1] = 0x000000230000000004000041;
+	
+	setpin ISPEN LOW;
+	! Shift in Access-NVCM instruction;
+	SDR 48 TDI(SMCInstruction[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Setup Reading Parameter in Trim Registers;
+	setpin ISPEN LOW;
+	! Shift in Trim setup-NVCM instruction;
+	SDR 96 TDI(TRIMInstruction[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+}
+function NVCMREAD_ID {
+	datastream IDInstruction[1][40];
+	IDInstruction[1] = 0x04A40000C1;
+	setpin ISPEN LOW;
+	! Shift in Access Silicon Signature instruction;
+	SDR 40 TDI(IDInstruction[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	setpin ISPEN LOW;
+	! Shift in Read Silicon Signature instruction;
+	SDR 104 TDI(0x000000000000000000000000C0);
+	TRY 1{
+		SDR_VERIFY 8 TDI(0x00)
+					 TDO(ISPID)
+					 MASK(0xFF);
+		setpin ISPEN HIGH;	
+	}
+	ELSE
+	{	
+		SDR 104 TDI(0x000000000000000000000000C0);
+		SDR_VERIFY 8 TDI(0x00)
+					 TDO(0x00)
+					 MASK(0xFF);
+		print (0,"Warning: Device's ID had not been programmed.");
+		setpin ISPEN HIGH;
+	}
+	setpin ISPEN LOW;
+	! Shift in Restore Access-NVCM instruction;
+	SDR 40 TDI(0x00A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;		        
+}
+
+function NVCM_DISABLE {
+	setpin ISPEN LOW;
+	! Shift in Restore Access-NVCM instruction;
+	SDR 40 TDI(0x00A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 DELAY 1;	
+	setpin TRST HIGH;
+	RUN_TEST TCK 8 DELAY 1;
+	setpin TRST LOW;
+	RUN_TEST TCK 8 DELAY 2000;
+}
+function NVCMTRIM_BLANKCHECK {
+	print (0,"NVCM Trim_Parameter_OTP blank check");
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in Access NVCM Trim_Parameter_OTP instruction;
+		SDR 40 TDI(0x08A40000C1);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 5000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		setpin ISPEN LOW;
+		! Shift in READ(0x03) instruction;
+		SDR 104 TDI(0x000000000000000000040000C0);
+		SDR_VERIFY  64 	TDI(#0^64)
+				  		TDO(#0^64);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		setpin ISPEN LOW;
+		! Shift in Restore Access-NVCM instruction;
+		SDR 40 TDI(0x00A40000C1);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 1000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+	}
+	ELSE
+	{	
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in Restore Access-NVCM instruction;
+		SDR 40 TDI(0x00A40000C1);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 1000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		print (1, "NVCM Trim_Parameter_OTP Block is not blank.");
+	}
+	setpin ISPEN HIGH;	
+}
+function NVCM_BLANKCHECK {
+	print (0,"NVCM main memory blank check");
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in READ(0x03) instruction;
+		SDR 104 TDI(0x000000000000000000000000C0);
+		SDR_VERIFY  TotalFuse 	TDI(#0^TotalFuse)
+				  				TDO(#0^TotalFuse);				  				
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+	}
+	ELSE
+	{	
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in Restore Access-NVCM instruction;
+		SDR 40 TDI(0x00A40000C1);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 1000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		print (1, "NVCM Main Memory Block is not blank.");
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;	
+}
+function NVCM_PROGRAM {
+	datastream TRIMInstruction[1][96];
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	TRIMInstruction[1] = 0x000000430F4FA80004000041;
+	
+	! Setup Programming Parameter in Trim Registers;
+	setpin ISPEN LOW;
+	! Shift in Trim setup-NVCM instruction;
+	SDR 96 TDI(TRIMInstruction[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	print (0,"NVCM Program main memory");
+	! Shift in PGM_ENABLE (0x06) instruction;
+	setpin ISPEN LOW;
+	SDR 8 TDI (0x60);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	repeat Address_Length{
+		setpin ISPEN LOW;
+		! Shift in PGMPAGE(0x02) instruction;
+		! Shift in Address;
+		! Shift in Data Row = RowCount;
+		SDR	Row_Width	TDI	(FuseArray_TDI[RowCount]);
+		setpin ISPEN HIGH;	
+		RUN_TEST TCK 10000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 5000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		RowCount = RowCount + 1;
+	}
+	setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	! Shift in PGM_DISABLE(0x04) instruction;
+	SDR 8 TDI (0x20);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+}
+function NVCM_VERIFY {
+	datastream TRIMInstruction[1][96];
+	int32	RowCount = 1;
+	ArchArray_TDI.row = 1;
+	FuseArray_TDO.row = 1;
+	FuseArray_MASK.row = 1;
+	print (0,"NVCM Verify main memory.");
+	
+	setpin ISPEN LOW;
+	! Shift in Restore Access-NVCM instruction;
+	SDR 40 TDI(0x00A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	TRIMInstruction[1] = 0x000000230000000004000041;		
+	! Setup Reading Parameter in Trim Registers;
+	setpin ISPEN LOW;
+	! Shift in Trim setup-NVCM instruction;
+	SDR 96 TDI(TRIMInstruction[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+		
+	TRY 1{
+		repeat Address_Length{
+			RUN_TEST TCK 8 ;
+			setpin ISPEN LOW;
+			! Shift out Data Row = RowCount;
+			SDR_VERIFY	168	TDI	(ArchArray_TDI[RowCount])
+							TDO (FuseArray_TDO[RowCount])
+							MASK(FuseArray_MASK[RowCount]);									
+			setpin ISPEN HIGH;	
+			RowCount = RowCount + 1;
+		}
+	}
+	ELSE
+	{	
+		setpin ISPEN LOW;
+		! Shift in Restore Access-NVCM instruction;
+		SDR 40 TDI(0x00A40000C1);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 1000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		print (1, "Failed in Function Verify /see log file for more details/ ");
+	}
+}
+function NVCM_TRIM_PROGRAM {
+	datastream TRIMInstruction[1][96];
+	TRIMInstruction[1] = 0x000000430F4FA80004000041;
+	print (0,"NVCM Program Trim_Parameter_OTP");
+	
+	setpin ISPEN LOW;
+	! Shift in Restore Access-NVCM instruction;
+	SDR 40 TDI(0x00A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Setup Programming Parameter in Trim Registers;
+	setpin ISPEN LOW;
+	! Shift in Trim setup-NVCM instruction;
+	SDR 96 TDI(TRIMInstruction[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	setpin ISPEN LOW;
+	! Shift in Trim setup-NVCM instruction;
+	SDR 40 TDI(0x08A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	! Shift in PGM_ENABLE (0x06) instruction;
+	setpin ISPEN LOW;
+	SDR 8 TDI (0x60);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	! Program Trim Row 1;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(0x000000238F4FA80004000040);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program Trim Row 2;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(0x000000238F4FA80006000040);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program Trim Row 3;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(0x000000238F4FA80005000040);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;		
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program Trim Row 4;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(0x000000238F4FA80007000040);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	setpin ISPEN LOW;
+	! Shift in PGM_DISABLE(0x04) instruction;
+	SDR 8 TDI (0x20);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in READ(0x03) instruction;
+		SDR 104 TDI(0x000000000000000000040000C0);
+		SDR_VERIFY  64 	TDI(#0^64)
+				  		TDO(0x000000238F4FA800);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+	}
+	ELSE
+	{	
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in Restore Access-NVCM instruction;
+		SDR 40 TDI(0x00A40000C1);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 1000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		print (1, "Failed to program NVCM Trim_Parameter_OTP Block.");
+	}
+	setpin ISPEN LOW;
+	! Shift in Restore Access-NVCM instruction;
+	SDR 40 TDI(0x00A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;			
+}
+function NVCM_SECURE {
+	datastream TRIMInstruction[1][96];
+	TRIMInstruction[1] = 0x000000430F4FA80004000041;
+	print (0,"NVCM Secure.");
+	setpin ISPEN LOW;
+	! Shift in Trim setup-NVCM instruction;
+	SDR 40 TDI(0x08A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Setup Programming Parameter in Trim Registers;
+	setpin ISPEN LOW;
+	! Shift in Trim setup-NVCM instruction;
+	SDR 96 TDI(TRIMInstruction[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Shift in PGM_ENABLE (0x06) instruction;
+	setpin ISPEN LOW;
+	SDR 8 TDI (0x60);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program Security Bit row 1;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(0x000000008000000C04000040);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program Security Bit row 2;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(0x000000008000000C06000040);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program Security Bit row 3;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(0x000000008000000C05000040);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program Security Bit row 4;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(0x00000000800000C07000040);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in READ(0x03) instruction;
+		SDR 104 TDI(0x000000000000000000040000C0);
+		SDR_VERIFY  64 	TDI(0x0000000000000000)
+				  		TDO(0x000000008000000C)
+				  		MASK(0x000000008000000C);				  				
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+	}
+	ELSE
+	{	
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in PGM_DISABLE(0x04) instruction;
+		SDR 8 TDI (0x20);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 1000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		setpin ISPEN LOW;
+		! Shift in Restore Access-NVCM instruction;
+		SDR 40 TDI(0x00A40000C1);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+		loop 1000 {
+			! Shift in Read Status Register(0x05) instruction;
+			setpin ISPEN LOW;
+			SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+			setpin ISPEN HIGH;
+			RUN_TEST TCK 1000 ;
+		}
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		print (1, "Failed to Secure the Device.");
+	}
+	setpin ISPEN HIGH;	
+	setpin ISPEN LOW;
+	! Shift in PGM_DISABLE(0x04) instruction;
+	SDR 8 TDI (0x20);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+}
+function NVCM_SIGNATURE_READ {
+	datastream SavedSTATUS[1][128];
+	file NewFile = "FILE_SAVE";
+	datastream SigArray1[1][64];
+	datastream SigArray2[1][64];
+	print (0,"NVCM Read Signature Block");
+	
+	
+	setpin ISPEN LOW;
+	! Shift in Trim setup-NVCM instruction;
+	SDR 40 TDI(0x08A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in READ(0x03) instruction;
+		SDR 104 TDI(0x000000000000000000040000C0);
+		SDR_VERIFY  64 	TDI(0x0000000000000000)
+				  		TDO(0x0000000000000000)
+				  		MASK(0x000000000000000C);				  				
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 8 ;
+		print (0, "Device Secured: OFF.");
+	}
+	ELSE
+	{	
+		print (0, "Device Secured: ON.");
+	}	
+	
+	
+	! Shift in Restore Access-NVCM instruction;
+	SDR 40 TDI(0x00A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	
+	setpin ISPEN LOW;
+	! Shift in Silicon Signature access instruction;
+	SDR 40 TDI(0x04A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Read first 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in Read Silicon Signature instruction;
+	SDR 104 TDI(0x000000000000000000000000C0);
+	SDR 64 TDI(#0^64)
+		   TDO(SigArray1[1]);
+	setpin ISPEN HIGH;	
+	//print (0,"First 8 bytes:");
+	//print (0,SigArray1);
+
+	setpin ISPEN LOW;
+	! Shift in Silicon Signature access instruction;
+	SDR 40 TDI(0x04A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Read second 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in Read Silicon Signature instruction;
+	SDR 104 TDI(0x000000000000000000100000C0);
+	SDR 64 TDI(#0^64)
+		   TDO(SigArray2[1]);
+	setpin ISPEN HIGH;	
+	//print (0,"Second 8 bytes:");
+	//print (0,SigArray2);
+	
+	setpin ISPEN LOW;
+	! Shift in Restore Access-NVCM instruction;
+	SDR 40 TDI(0x00A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	SigArray1[1] = $SigArray1[1];
+	SigArray2[1] = $SigArray2[1];
+	SavedSTATUS[1] = (SigArray1[1] @ SigArray2[1]);
+	// Write To file 
+	fopen NewFile att "w"
+					 format "SVF_Plus";	
+	fwrite NewFile (STATUS_BIT, SavedSTATUS);
+	fclose 	NewFile;
+	
+}
+function NVCM_SIGNATURE_PROGRAM
+{
+	datastream ArrayCRC16[1][16];
+	datastream ArrayDesignCRC[1][16];
+	datastream Arrayversion[1][16];
+	datastream Arraybuild[1][8];
+	datastream ArrayDate[1][16];
+	
+	datastream SigArray[1][96];
+	datastream SigArray2[1][96];
+	datastream SigArray3[1][96];
+	datastream SigArray4[1][96];
+	
+	datastream SigArray5[1][96];
+	datastream SigArray6[1][96];
+	datastream SigArray7[1][96];
+	datastream SigArray8[1][96];
+	datastream TRIMInstruction[1][96];
+	TRIMInstruction[1] = 0x000000430F4FA80004000041;
+	
+	print (0,"NVCM Program Signature Block");
+	IF (Usercode_TDI.row = 1)
+	{
+		ArrayCRC16[1] = Usercode_TDI[1];
+		ArrayCRC16[1] = $ArrayCRC16[1];
+		ArrayDesignCRC[1] = Usercode_TDI[1] << 16;
+		ArrayDesignCRC[1] = $ArrayDesignCRC[1];
+	}
+	ELSE
+	{
+		ArrayCRC16[1] = 0x0000;
+		ArrayDesignCRC[1] = 0x0000;
+	}
+	IF (PROGRAMMER_REVISION.row = 1)
+	{
+		Arrayversion[1] = PROGRAMMER_REVISION[1];
+		Arrayversion[1] = $Arrayversion[1];
+	}
+	ELSE
+	{
+		Arrayversion[1] = 0x0000;
+	}
+	IF (PROGRAMMER_BUILD.row = 1)
+	{
+		Arraybuild[1] = PROGRAMMER_BUILD[1];
+		Arraybuild[1] = $Arraybuild[1];
+	}
+	ELSE
+	{
+		Arraybuild[1] = 0x00;
+	}
+	
+	IF (PROGRAMMER_DATE.row = 1)
+	{
+		ArrayDate[1] = PROGRAMMER_DATE[1];
+		ArrayDate[1] = $ArrayDate[1];
+	}
+	ELSE
+	{
+		ArrayDate[1] = 0x0000;
+	}
+	
+	SigArray[1]  = (ArrayCRC16[1] @ 0x0000) @ (Arrayversion[1] @ 0x060000000040);
+	SigArray2[1] = (ArrayCRC16[1] @ 0x0000) @ (Arrayversion[1] @ 0x060002000040);
+	SigArray3[1] = (ArrayCRC16[1] @ 0x0000) @ (Arrayversion[1] @ 0x060001000040);
+	SigArray4[1] = (ArrayCRC16[1] @ 0x0000) @ (Arrayversion[1] @ 0x060003000040);
+	
+	SigArray5[1] = Arraybuild[1] @ ((0x000080 @ ArrayDate[1]) @ (ArrayDesignCRC[1] @ 0x10000040));
+	SigArray6[1] = Arraybuild[1] @ ((0x000080 @ ArrayDate[1]) @ (ArrayDesignCRC[1] @ 0x12000040));
+	SigArray7[1] = Arraybuild[1] @ ((0x000080 @ ArrayDate[1]) @ (ArrayDesignCRC[1] @ 0x11000040));
+	SigArray8[1] = Arraybuild[1] @ ((0x000080 @ ArrayDate[1]) @ (ArrayDesignCRC[1] @ 0x13000040));
+	
+	
+	setpin ISPEN LOW;
+	! Shift in Restore Access-NVCM instruction;
+	SDR 40 TDI(0x00A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Setup Programming Parameter in Trim Registers;
+	setpin ISPEN LOW;
+	! Shift in Trim setup-NVCM instruction;
+	SDR 96 TDI(TRIMInstruction[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	setpin ISPEN LOW;
+	! Shift in Silicon Signature access instruction;
+	SDR 40 TDI(0x04A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Shift in PGM_ENABLE (0x06) instruction;
+	setpin ISPEN LOW;
+	SDR 8 TDI (0x60);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program first 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(SigArray[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program second 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(SigArray5[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program first 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(SigArray2[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program second 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(SigArray6[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program first 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(SigArray3[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program second 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(SigArray7[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program first 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(SigArray4[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Program second 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in PAGEPGM instruction;
+	SDR 96 TDI(SigArray8[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 5000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 5000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Verify first 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in Read Silicon Signature instruction;
+	SDR 104 TDI(0x000000000000000000000000C0);
+	SDR_VERIFY 64 TDI(#0^64)
+		          TDO((ArrayCRC16[1] @ 0x0000) @ (Arrayversion[1] @ 0x0600))
+		          MASK(0xFFFFFFFFFFFFFF00);
+	setpin ISPEN HIGH;	
+	
+	setpin ISPEN LOW;
+	! Shift in Silicon Signature access instruction;
+	SDR 40 TDI(0x04A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	! Veirfy second 8 bytes;
+	setpin ISPEN LOW;
+	! Shift in Read Silicon Signature instruction;
+	SDR 104 TDI(0x000000000000000000100000C0);
+	SDR_VERIFY 64 TDI(#0^64)
+		          TDO((Arraybuild[1] @ ((0x000080 @ ArrayDate[1]) @ ArrayDesignCRC[1])));
+	setpin ISPEN HIGH;	
+	
+	setpin ISPEN LOW;
+	! Shift in PGM_DISABLE(0x04) instruction;
+	SDR 8 TDI (0x20);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+	
+	setpin ISPEN LOW;
+	! Shift in Restore Access-NVCM instruction;
+	SDR 40 TDI(0x00A40000C1);
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 1000 ;
+	loop 1000 {
+		! Shift in Read Status Register(0x05) instruction;
+		setpin ISPEN LOW;
+		SDR_VERIFY 16 TDI(0x00A0) TDO(0x0000) MASK(0x8300);
+		setpin ISPEN HIGH;
+		RUN_TEST TCK 1000 ;
+	}
+	setpin ISPEN HIGH;
+	RUN_TEST TCK 8 ;
+}
+
+function SAVE_CRAM_ARRAY {
+	int32	ClockCount = 21;
+	datastream ArrayPreamble[1][32];
+	datastream ReadBackArrayHeader[1][96];
+	datastream SavedFuseMap[2][Temp_Row_Width];
+	datastream SavedFuseMap1[2][Read_Row_Width];
+	file NewFile = "FILE_SAVE";
+	ArrayPreamble[1] = 0x7E99557E;
+	IF (Real_Row_Width == 41232)
+    {
+    	ReadBackArrayHeader[1] = 0x0000410E004EF68046040049; 
+    	ClockCount = 20;  
+    }
+    ELSEIF (Real_Row_Width == 232528)
+    {
+    	ReadBackArrayHeader[1] = 0x0A804E000041CD4046040049; 
+    	ClockCount = 20;  
+    }	
+    RUN_TEST TCK 1000 DELAY PWP;
+    SDR 	16	TDI	(0x0088);
+    RUN_TEST TCK 1000 DELAY 1;
+    SDR 	16	TDI	(0x4080);
+	RUN_TEST TCK 21 DELAY 1;
+	SDR 	Temp_Row_Width	TDI	(#0^Temp_Row_Width);
+						    						   						    
+	! Shift in Preamble instruction;
+	SDR 	32 TDI(ArrayPreamble[1]);
+	SDR 	96	TDI	(ReadBackArrayHeader[1]);		
+	SDR 	32	TDI	(0x40800088);
+	RUN_TEST TCK 21 DELAY 1;
+    SDR 	Temp_Row_Width	TDI	(#0^Temp_Row_Width)
+						    TDO	(SavedFuseMap[1]);	
+	
+	IF (Real_Row_Width == 41232)
+    {					    					    
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x4080808809004E);
+		RUN_TEST TCK 21 DELAY 1;
+		SDR 	Read_Row_Width	TDI	(#0^Read_Row_Width)
+								TDO	(SavedFuseMap1[1]);
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x408040880E004E);
+		RUN_TEST TCK 21 DELAY 1;
+		SDR 	Temp_Row_Width	TDI	(#0^Temp_Row_Width)
+							    TDO	(SavedFuseMap[2]);
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x4080C08809004E);
+		RUN_TEST TCK ClockCount DELAY 1;
+		SDR 	Read_Row_Width	TDI	(#0^Read_Row_Width)
+								TDO	(SavedFuseMap1[2]);
+	}
+	ELSEIF (Real_Row_Width == 232528)
+    {	
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x408080880D004E);
+		RUN_TEST TCK 21 DELAY 1;
+		SDR 	Read_Row_Width	TDI	(#0^Read_Row_Width)
+								TDO	(SavedFuseMap1[1]);
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x408040880A804E);
+		RUN_TEST TCK 21 DELAY 1;
+		SDR 	Temp_Row_Width	TDI	(#0^Temp_Row_Width)
+							    TDO	(SavedFuseMap[2]);
+		! Shift in Preamble instruction;
+		SDR 	32 TDI(ArrayPreamble[1]);
+		SDR 	56	TDI	(0x4080C0880D004E);
+		RUN_TEST TCK ClockCount DELAY 1;
+		SDR 	Read_Row_Width	TDI	(#0^Read_Row_Width)
+								TDO	(SavedFuseMap1[2]);
+	}
+	// Write To file 
+	fopen NewFile att "w"
+					 format "SVF_Plus";	
+	fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+	fclose 	NewFile;
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (FuseArray_TDO, SavedFuseMap1);
+	fclose 	NewFile;
+}
+function SAVE_BRAM_ARRAY {
+	datastream ArrayPreamble[1][32];
+	datastream ReadBackBRAMArrayHeader[1][48];
+	datastream SavedBRAMFuseMap[4][BRAM_Row_Width];
+	datastream SavedBRAMFuseMap1[4][BRAM_Read_Row_Width];
+	datastream ReadBackBRAMArrayAddress[1][40];
+	file NewFile = "FILE_SAVE";
+	ArrayPreamble[1] = 0x7E99557E;
+	IF (Real_Row_Width == 41232)
+    {
+    	ReadBackBRAMArrayHeader[1] = 0x01004EF40046; 
+    	ReadBackBRAMArrayAddress[1] =  0x2080010041; 	
+    }
+    ELSEIF (Real_Row_Width == 232528)
+    {
+    	ReadBackBRAMArrayHeader[1] = 0x01004EF90046; 
+    	ReadBackBRAMArrayAddress[1] =  0x2080010041;  
+    }	
+    IF (BRAM_Row_Width == 0)
+    {
+    }
+    ELSE
+    {
+	    ! Shift in Preamble instruction;
+		SDR 	32  TDI(ArrayPreamble[1]);
+		SDR 	48	TDI	(ReadBackBRAMArrayHeader[1]);		
+		SDR 	56	TDI	(0x20800000410088);
+		RUN_TEST TCK 21 DELAY 1;
+	    SDR 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+								TDO	(SavedBRAMFuseMap[1]);						    
+		
+		! Shift in Preamble instruction;
+		SDR 	32  TDI(ArrayPreamble[1]);
+		SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+		RUN_TEST TCK 21 DELAY 1;
+		SDR 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+								TDO	(SavedBRAMFuseMap[2]);
+		
+		IF (Real_Row_Width == 41232)
+    	{
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	80	TDI(0x2080000041FC00468088);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+							TDO	(SavedBRAMFuseMap1[1]);
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+										TDO	(SavedBRAMFuseMap1[2]);
+								    
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	104	TDI(0x20800000414088F4004681004E);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+									TDO	(SavedBRAMFuseMap[3]);
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	64	TDI(0x208001004101004E);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+									TDO	(SavedBRAMFuseMap[4]);
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	80	TDI(0x2080000041C088FC0046);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+										TDO	(SavedBRAMFuseMap1[3]);
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+										TDO	(SavedBRAMFuseMap1[4]);	
+		}	
+		ELSEIF (Real_Row_Width == 232528)
+    	{
+    		! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	80	TDI(0x2080000041F200468088);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+										TDO	(SavedBRAMFuseMap1[1]);
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+										TDO	(SavedBRAMFuseMap1[2]);
+										
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	80	TDI(0x20800000414088F90046);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+									TDO	(SavedBRAMFuseMap[3]);
+			
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Row_Width	TDI	(#0^BRAM_Row_Width)
+									TDO	(SavedBRAMFuseMap[4]);										
+    		
+    		! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	80	TDI(0x2080000041C088F20046);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+										TDO	(SavedBRAMFuseMap1[3]);
+			! Shift in Preamble instruction;
+			SDR 	32 TDI(ArrayPreamble[1]);
+			SDR 	40	TDI(ReadBackBRAMArrayAddress[1]);
+			RUN_TEST TCK 21 DELAY 1;
+			SDR 	BRAM_Read_Row_Width	TDI	(#0^BRAM_Read_Row_Width)
+										TDO	(SavedBRAMFuseMap1[4]);	
+										
+    	}
+		// Write To file 
+		fopen NewFile att "wa"
+						 format "SVF_Plus";	
+		fwrite NewFile (CFGArray_TDO, SavedBRAMFuseMap);
+		fclose 	NewFile;
+		// Write To file 
+		fopen NewFile att "wa"
+						 format "SVF_Plus";	
+		fwrite NewFile (SysIOArray_TDI, SavedBRAMFuseMap1);
+		fclose 	NewFile;
+	}
+	! Shift in Preamble instruction;
+	SDR 	32 TDI(ArrayPreamble[1]);
+	SDR 	16	TDI	(0xD080);
+	
+}
+]]>
+</Script>
+</SVF_Plus>

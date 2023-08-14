@@ -1,0 +1,936 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       scintilla - Scintilla text widget
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>package</B> <B>require</B> <B>scintillatk</B> ?<B>0.25</B>?
+
+       <B>scintilla</B> <I>pathName</I> ?<I>options</I>?
+
+
+</PRE>
+<H2>STANDARD OPTIONS</H2><PRE>
+       <B>-autoseparators</B>       <B>-highlight</B>           <B>-moveupdatecommand</B>
+       <B>-background</B>           <B>-highlightthickness</B>  <B>-relief</B>
+       <B>-blink</B>                <B>-highlightbackground</B> <B>-showws</B>
+       <B>-borderwidth</B>          <B>-language</B>            <B>-state</B>
+       <B>-busycursor</B>           <B>-linesaddedcommand</B>   <B>-tabwidth</B>
+       <B>-cursor</B>               <B>-marginbackground</B>    <B>-takefocus</B>
+       <B>-foldstyle</B>            <B>-marginbg</B>            <B>-xscrollcommand</B>
+       <B>-font</B>                 <B>-marginforeground</B>    <B>-yscrollcommand</B>
+       <B>-foreground</B>           <B>-marginfg</B>            <B>-undo</B>
+       <B>-height</B>               <B>-marginwidthcommand</B>  <B>-width</B>
+
+       See the <B>options</B> manual entry for details on the standard options.
+
+
+</PRE>
+<H2>WIDGET-SPECIFIC OPTIONS</H2><PRE>
+       Command-Line Name:<B>-autoseparators</B>
+       Database Name:  <B>autoSeparators</B>
+       Database Class: <B>AutoSeparators</B>
+
+              Specifies  a  boolean that says whether separators are automati-
+              cally inserted in the undo stack. Only meaningful when the <B>-undo</B>
+              option is true.
+
+       Command-Line Name:<B>-height</B>
+       Database Name:  <B>height</B>
+       Database Class: <B>Height</B>
+
+              Specifies the desired height for the window, in units of charac-
+              ters in the font given by the <B>-font</B> option.  Must  be  at  least
+              one.
+
+       Command-Line Name:<B>-state</B>
+       Database Name:  <B>state</B>
+       Database Class: <B>State</B>
+
+              Specifies  one  of two states for the text:  <B>normal</B> or <B>disabled</B>.
+              If the text is disabled then characters may not be  inserted  or
+              deleted  and  no insertion cursor will be displayed, even if the
+              input focus is in the widget.
+
+       Command-Line Name:<B>-width</B>
+       Database Name:  <B>width</B>
+       Database Class: <B>Width</B>
+
+              Specifies the desired width for the window in units  of  charac-
+              See Scintilla documentation for style values.
+
+       Command-Line Name:<B>-language</B>
+       Database Name:  <B>language</B>
+       Database Class: <B>Language</B>
+
+              Specifies  which  programming  language  lexer to use for syntax
+              highlighting.
+
+       Command-Line Name:<B>-linesaddedcommand</B>
+       Database Name:  <B>lindesAddedCommand</B>
+       Database Class: <B>LinesAddedCommand</B>
+
+              Callback command when new lines are inserted  in  the  document.
+              This  function can be used to update margin indicators if neces-
+              sary.
+
+       Command-Line Name:<B>-marginbackground</B>
+       Database Name:  <B>marginBackground</B>
+       Database Class: <B>MarginBackground</B>
+
+              The backgound color of the margin columns.
+
+       Command-Line Name:<B>-marginforeground</B>
+       Database Name:  <B>marginForeground</B>
+       Database Class: <B>MarginForeground</B>
+
+              The foregound (font) color of the margin columns.
+
+       Command-Line Name:<B>-marginwidthcommand</B>
+       Database Name:
+       Database Class:
+
+              Callback command used when margin width changes.
+
+       Command-Line Name:<B>-moveupdatecommand</B>
+       Database Name:  <B>moveUpdateCommand</B>
+       Database Class: <B>MoveUpdateCommand</B>
+
+              Callback command when margin changes.
+
+       Command-Line Name:<B>-showws</B>
+       Database Name:  <B>showws</B>
+       Database Class: <B>ShowWs</B>
+
+              Show the ws???
+
+_________________________________________________________________
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The <B>scintilla</B> command creates a new window (given by the <I>pathName</I>  arg)
+       and  makes  it  into  a  Scintilla  text  widget.  Additional  options,
+              <B>clearall</B>
+                     removes annotation strings for all lines
+
+              <B>get</B> <I>line</I>
+                     Returns the annotation text for the specified line.
+
+              <B>set</B> <I>line</I> <I>text</I> <I>?tagName</I> <I>text</I> <I>tagName</I> <I>...?</I>
+                     Assigns  the specified text string to the specified line.
+                     If no tagName option is specified,  the  annotation  text
+                     will  use  the  default text styling. If a single tagName
+                     option is used it will control the appearance for all  of
+                     the  annotation  text. By using multiple text and tagName
+                     options it's possible to have different  appearances  for
+                     different subranges of the text.
+
+              <B>show</B> <I>0|1|2</I>
+                     Used to control the display of annotations where 0 - hid-
+                     ing, 1 - showing or 2 -  showing  with  a  bounding  box.
+                     Note, this affects all lines with annotations.
+
+       <I>pathName</I> <B>bbox</B> <I>index</I>
+              Returns  a  list  of four elements describing the screen area of
+              the character given by index. The first two elements of the list
+              give  the  x  and  y coordinates of the upper-left corner of the
+              area occupied by the character, and the last two  elements  give
+              the  width and height of the area. If the character is not visi-
+              ble on the screen then the return value is an empty list.
+
+       <I>pathName</I> <B>cget</B> <I>option</I>
+              Returns the current value of the configuration option  given  by
+              option.  Option may have any of the values accepted by the scin-
+              tilla command.
+
+       <I>pathName</I> <B>compare</B> <I>index1</I> <I>op</I> <I>index2</I>
+              Compares the indices given by index1 and index2 according to the
+              relational  operator given by op, and returns 1 if the relation-
+              ship is satisfied and 0 if it is not. Op  must  be  one  of  the
+              operators  &lt;,  &lt;=, =, &gt;, &gt;, or !. If op is == then 1 is returned
+              if the two indices refer to the same character, if op is &lt;  then
+              1  is  returned  if index1 refers to an earlier character in the
+              text than index2, and so on.
+
+       <I>pathName</I> <B>configure</B> <I>?option?</I> <I>?value</I> <I>option</I> <I>value</I> <I>...?</I>
+              Query or modify the configuration options of the widget.  If  no
+              option is specified, returns a list describing all of the avail-
+              able options for pathName. If option is specified with no value,
+              then  the command returns a list describing the one named option
+              (this list will be identical to the corresponding sublist of the
+              value  returned  if  no  option  is  specified).  If one or more
+              option-value pairs are specified, then the command modifies  the
+              given  widget option(s) to have the given value(s); in this case
+              the command returns an empty string. Option may have any of  the
+
+              <B>-displaylines</B>
+                     count  all  display  lines  (i.e.  ignore lines which are
+                     folded) from the line of the first index up to,  but  not
+                     including the display line of the second index. Therefore
+                     if they are both on the same display line, zero  will  be
+                     returned.  By  definition  displaylines  are  visible and
+                     therefore this only counts  portions  of  actual  visible
+                     lines.
+
+              <B>-lines</B> count  all  lines (irrespective of folding) from the line
+                     of the first index up to, but not including the  line  of
+                     the  second index. Therefore if they are both on the same
+                     line, zero will be returned. Lines  are  counted  whether
+                     they are currently visible (non-folded) or not.
+
+       <I>pathName</I> <B>delete</B> <I>index1</I> <I>?index2?</I>
+              Delete  a  range of characters from the text. If both index1 and
+              index2 are specified, then delete all  the  characters  starting
+              with  the  one  given  by index1 and stopping just before index2
+              (i.e. the character at index2 is not deleted). If index2 doesn't
+              specify a position later in the text than index1 then no charac-
+              ters are deleted. If index2  isn't  specified  then  the  single
+              character  at  index1  is deleted. It is not allowable to delete
+              characters in a way that would leave the text without a  newline
+              as the last character. The command returns an empty string.
+
+       <I>pathName</I> <B>dump</B> <I>?switches?</I> <I>index1</I> <I>?index2?</I><B>_</B>
+              Return  the  contents  of the text widget from index1 up to, but
+              not including index2, including the text and  information  about
+              marks,  tags,  and embedded windows. If index2 is not specified,
+              then it defaults to one character past index1.  The  information
+              is  returned  in  the following format:: key1 value1 index1 key2
+              value2 index2 ...  The  possible  key  values  are  indicatoron,
+              indicatoroff,  text,  mark,  styleon,  styleoff,  tagon, tagoff,
+              image, and window. The  corresponding  value  is  the  indicator
+              type,  text,  mark  name, style number, tag name, image name, or
+              window name. The index information is the index of the start  of
+              the  indicator  transition,  style  transition,  text, mark, tag
+              transition, image or window. The image and  window  options  are
+              not  supported  and will return nothing. One or more of the fol-
+              lowing switches (or abbreviations thereof) may be  specified  to
+              control the dump:
+
+              <B>-all</B>   Return  information about all elements: indicator, style,
+                     text, marks,  tags,  images  and  windows.  This  is  the
+                     default.
+
+              <B>-command</B> <I>command</I>
+                     Instead of returning the information as the result of the
+                     dump operation, invoke the command on each element of the
+                     text widget within the range. The command has three argu-
+
+              <B>-style</B> Include  information  about style transitions in the dump
+                     results. Style information is  returned  as  styleon  and
+                     styleoff elements that indicate the begin and end of each
+                     range of each style, respectively.
+
+              <B>-tag</B>   Include information about tag  transitions  in  the  dump
+                     results.  Tag information is returned as tagon and tagoff
+                     elements that indicate the begin and end of each range of
+                     each tag, respectively.
+
+              <B>-text</B>  Include  information  about text in the dump results. The
+                     value is the text up to the next element or  the  end  of
+                     range  indicated  by index2. A text element does not span
+                     newlines. A multi-line block of  text  that  contains  no
+                     marks or tag transitions will still be dumped as a set of
+                     text segments that each end with a newline.  The  newline
+                     is part of the value.
+
+              <B>-window</B>
+                     Include  information  about  embedded windows in the dump
+                     results. This option is unsupported in Scintilla.
+
+       <I>pathName</I> <B>edit</B> <I>option</I> <I>?arg</I> <I>arg</I> <I>...?</I>
+              This command controls the undo mechanism and the modified  flag.
+              The exact behavior of the command depends on the option argument
+              that follows the edit argument. The following forms of the  com-
+              mand are currently supported:
+
+              <I>pathName</I> <B>edit</B> <B>canredo</B>
+                     Returns true if the redo stack is not empty.
+
+              <I>pathName</I> <B>edit</B> <B>canundo</B>
+                     Returns true if the undo stack is not empty.
+
+              <I>pathName</I> <B>edit</B> <B>Imodified</B> <I>?boolean?</I>
+                     If boolean is not specified, returns the modified flag of
+                     the widget. The insert, delete, edit undo and  edit  redo
+                     commands  or the user can set or clear the modified flag.
+                     If boolean is specified, sets the modified  flag  of  the
+                     widget to boolean.
+
+              <I>pathName</I> <B>edit</B> <B>redo</B>
+                     When  the -undo option is true, reapplies the last undone
+                     edits provided no other edits were done since then.  Gen-
+                     erates  an error when the redo stack is empty. Does noth-
+                     ing when the -undo option is false.
+
+              <I>pathName</I> <B>edit</B> <B>reset</B>
+                     Clears the undo and redo stacks.
+
+              <I>pathName</I> <B>edit</B> <B>separator</B>
+                     Inserts a separator (boundary) on the  undo  stack.  Does
+
+              document. The following commands are supported:
+
+              <B>foldall</B>
+                     folds all lines within the document
+
+              <B>foldbelow</B> <I>line</I>
+                     folds all lines which are after(below) line number line
+
+              <B>foldparent</B> <I>line</I>
+                     returns  the line containing the immediate fold parent of
+                     line
+
+              <B>foldroot</B> <I>line</I>
+                     returns the line containing topmost fold  parent  of  the
+                     specified line . This is at the top of the fold hierarchy
+                     containing line .
+
+              <B>isfolded</B> <I>line</I>
+                     return 1 if line contained in a folded parent, and  0  if
+                     it isn't
+
+              <B>show</B> <I>line</I>
+                     fully expand the containing fold hierarchy such that line
+                     is visible
+
+              <B>toggle</B> <I>line</I>
+                     toggle the fold state of line (ie  if  collapsed,  expand
+                     it; if expanded, collapse it)
+
+              <B>topunfolded</B> <I>line</I>
+                     return the line of the highest fold parent for line which
+                     is currently expanded
+
+              <B>unfoldall</B>
+                     unfold all lines
+
+              <B>unfoldbelow</B> <I>line</I>
+                     unfold all lines which are after(below) line number line
+
+       <I>pathName</I> <B>index</B> <I>index</I> <I>?-textonly?</I>
+              Returns  the  position  corresponding  to  index  in  the   form
+              line.char  where line is the line number and char is the charac-
+              ter number. See the documentation for the Tk Text widget  for  a
+              description of the formats used to specify indices. NOTE: Speci-
+              fying an X/Y location that corresponds to a line  of  annotation
+              text  will  return  the index for the end of the line associated
+              with the annotation. If the -textonly option is  used,  then  an
+              empty  string is returned if the X/Y location is over an annota-
+              tion.
+
+       <I>pathName</I> <B>insert</B> <I>index</I> <I>chars</I>
+              Inserts all of the chars argument just before the  character  at
+              alias name defined for the margin. The following  forms  of  the
+              command are currently supported:
+
+              <I>pathName</I> <B>margin</B> <B>bbox</B> <I>marginID</I> <I>line</I>
+                     Returns  a  list  of  four elements describing the screen
+                     area of the margin identified by marginID,  at  the  line
+                     specified  by  line.  The  first two elements of the list
+                     give the x and y coordinates of the upper-left corner  of
+                     the area occupied by the character, and the last two ele-
+                     ments give the width and height of the area. If the char-
+                     acter  is not visible on the screen then the return value
+                     is an empty list.
+
+              <I>pathName</I> <B>margin</B> <B>cget</B> <I>marginID</I> <I>option</I>
+                     This command returns the  current  value  of  the  option
+                     named   option   associated  with  the  margin  given  by
+                     marginID. Option may have any of the values  accepted  by
+                     the pathName margin configure widget command.
+
+              <I>pathName</I>  <B>margin</B>  <B>configure</B>  <I>marginID</I>  <I>?option?</I>  <I>?value?</I> <I>?option</I>
+              <I>value</I> <I>...?</I>
+                     This  command is similar to the pathName configure widget
+                     command except that it modifies options  associated  with
+                     the margin given by marginID instead of modifying options
+                     for the overall text widget. If no option  is  specified,
+                     the  command  returns a list describing all of the avail-
+                     able options for marginID. If option is specified with no
+                     value, then the command returns a list describing the one
+                     named option (this list will be identical to  the  corre-
+                     sponding  sublist  of  the value returned if no option is
+                     specified). If one or more option-value pairs are  speci-
+                     fied,  then  the  command modifies the given option(s) to
+                     have the given value(s) in marginID;  in  this  case  the
+                     command returns an empty string.
+
+              <I>pathName</I> <B>margin</B> <B>count</B>
+                     Returns the number of margins
+
+              <I>pathName</I> <B>margin</B> <B>dump</B> <I>marginID</I> <I>?option?</I> <I>Index1</I> <I>?Index2?</I>
+                     Return the contents of the text widget from index1 up to,
+                     but not including index2, including the text and informa-
+                     tion  about  marks, tags, and embedded windows. If index2
+                     is not specified, then it defaults to one character  past
+                     index1. The information is returned in the following for-
+                     mat:: key1 value1 index1 key2 value2 index2 ...  The pos-
+                     sible  key  values  are  indicatoron, indicatoroff, text,
+                     mark, styleon, styleoff, tagon, and  tagoff.  The  corre-
+                     sponding  value  is  the indicator type, text, mark name,
+                     style number, or tag name. The index information  is  the
+                     index  within  the  margin  of the start of the indicator
+                     transition, style transition, text, mark, tag transition,
+                     image  or  window.  One or more of the following switches
+                     Include information about indicator  transitions  in  the
+                     dump  results. Indicator information is returned as indi-
+                     catoron and indicatoroff elements that indicate the begin
+                     and end of each range of each indicator, respectively.
+
+              <B>-mark</B>  Include information about marks in the dump results.
+
+              <B>-style</B> Include  information  about style transitions in the dump
+                     results. Style information is  returned  as  styleon  and
+                     styleoff elements that indicate the begin and end of each
+                     range of each style, respectively.
+
+              <B>-tag</B>   Include information about tag  transitions  in  the  dump
+                     results.  Tag information is returned as tagon and tagoff
+                     elements that indicate the begin and end of each range of
+                     each tag, respectively.
+
+              <B>-text</B>  Include  information  about text in the dump results. The
+                     value is the text up to the next element or  the  end  of
+                     range  indicated  by index2. A text element does not span
+                     newlines. A multi-line block of  text  that  contains  no
+                     marks or tag transitions will still be dumped as a set of
+                     text segments that each end with a newline.  The  newline
+                     is part of the value.
+
+              <I>pathName</I>  <B>margin</B> <B>fillnumbers</B> <I>marginID</I> <I>start</I> <I>count</I> <I>?tagName</I> <I>{line</I>
+              <I>...}?</I>
+                     This  would be used to manually managing filling a margin
+                     with line numbers. This is really  only  used  for  cases
+                     when  control  over the appearance of the line numbers is
+                     needed. The fillnumbers command would  be  called  within
+                     the  -linesaddedcommand  callback  function  in  a margin
+                     whose type was set to  "lnums_alt".  Setting  the  margin
+                     type  to  "lnums" would result in the Scintilla core code
+                     handling filling of the line numbers.  The  start  option
+                     identifies  where  the  line  numbering should begin. The
+                     count option controls how many lines will be  numbers.  A
+                     value  of &lt;= 0 will number all lines from start until the
+                     end of the document. To apply custom styling  to  one  or
+                     more  line  numbers,  first configure a tag named tagName
+                     and then identify the list of line numbers as  the  argu-
+                     ment  following  tagName.  For  example, to fill the line
+                     numbers from 1 to 10  where  only  the  odd  numbers  are
+                     styled  in  red,  first create a tag (ex: $sci tag config
+                     red -margin -fg red) and then execute $sci  margin  fill-
+                     numbers 1 10 red {1 3 5 7 9}.
+
+              <I>pathName</I> <B>margin</B> <B>hide</B> <I>marginID</I>
+                     Hides the margin specified by marginID. The margin's con-
+                     figuration information is maintained while hidden.
+
+              <I>pathName</I> <B>margin</B> <B>index</B> <I>@X,Y</I>
+                     identifies  which  lines to add or remove the marker for.
+                     When removing, if the lines list is empty, then the spec-
+                     ified  marker would be removed from all lines. Also, when
+                     removing, if the markerName is set to "*", then all mark-
+                     ers present for the specified lines would be removed.
+
+              <I>pathName</I> <B>margin</B> <B>marker</B> <I>marginID</I> <I>list</I> <I>markerName</I> <I>?line?</I>
+                     This  command  returns a list of the lines containing the
+                     specified marker. If markerName is specified as  "*"  the
+                     line  argument is required. When this done, the all mark-
+                     ers present on the specified line will be returned.
+
+              <I>pathName</I> <B>margin</B> <B>names</B>
+                     Returns information about each of the margins. Each  mar-
+                     gin  is identified by a three element list containing the
+                     following: 1) the ID value of the margin  (where  "0"  is
+                     the  leftmost  margin), 2) the type of the margin, and 3)
+                     the alias name, or an empty string  if  one  hasn't  been
+                     defined.
+
+              <I>pathName</I> <B>margin</B> <B>show</B> <I>marginID</I>
+                     Shows  the margin specified by marginID. For margins that
+                     have not yet had a width set (ie their  width  is  zero),
+                     the  show  operation will report an error unless the mar-
+                     gin's type is set for linenumbers  or  the  special  fold
+                     margin.  For those margins, the widget will automatically
+                     determine the appropriate width to use in order to  allow
+                     the margin to be made visible.
+
+              <I>pathName</I> <B>margin</B> <B>tag</B> <I>{line</I> <I>...}</I> <I>?tagName</I> <I>-clear?</I>
+                     This  command  will  either  add or remove a tag that was
+                     previously configured for use in  the  margin  area  (see
+                     here  for  more details). The margin tag will affect only
+                     text-based margins (ie not those  holding  symbols).  The
+                     tag  named  tagName  will  be  added to the list of lines
+                     unless the -clear option is specified, in which case  the
+                     tag  will  be  removed.  When  removing  a tag, it can be
+                     removed from all lines by specifying an  empty  list  for
+                     the  lines. To remove all margin tags from all lines, the
+                     tagName option should not be specified  (ie  $sci  margin
+                     tag {} -clear).
+
+              <I>pathName</I> <B>margin</B> <B>text</B> <I>marginID</I> <I>command</I> <I>arglist</I>
+                     This command is used to manipulate the margin text within
+                     the margin specified by marginID. The margin specified by
+                     marginID  must  be  of  type text or rtext. The operation
+                     performed is controlled by the  command  argument,  which
+                     would  either be one of "clear", "get", or "set". If com-
+                     mand is "clear", and there is no arglist, then the margin
+                     text for all lines in the document is removed. If arglist
+                     is provided, it is a list of one or more lines to  clear.
+                     If  the command argument is "get", the arglist must spec-
+
+       <I>pathName</I> <B>mark</B> <I>option</I> <I>?arg</I> <I>arg</I> <I>...?</I>
+              This  command is used to manipulate marks. The exact behavior of
+              the command depends on the option argument that follows the mark
+              argument.  The following forms of the command are currently sup-
+              ported:
+
+              <I>pathName</I> <B>mark</B> <B>exists</B> <I>markName</I>
+                     If markName exists, the command will return 1;  otherwise
+                     0 is returned.
+
+              <I>pathName</I> <B>mark</B> <B>gravity</B> <I>markName</I> <I>?direction?</I>
+                     If  direction  is not specified, returns left or right to
+                     indicate which of its  adjacent  characters  markName  is
+                     attached  to.  If direction is specified, it must be left
+                     or right; the gravity of markName is  set  to  the  given
+                     value.
+
+              <I>pathName</I> <B>mark</B> <B>names</B>
+                     Returns  a  list  whose elements are the names of all the
+                     marks that are currently set.
+
+              <I>pathName</I> <B>mark</B> <B>next</B> <I>index</I>
+                     Returns the name of the next mark at or after  index.  If
+                     index is specified in numerical form, then the search for
+                     the next mark begins at that index. If index is the  name
+                     of a mark, then the search for the next mark begins imme-
+                     diately after that mark. This can still return a mark  at
+                     the same position if there are multiple marks at the same
+                     index. These semantics mean that the mark next  operation
+                     can  be used to step through all the marks in a text wid-
+                     get. An empty string is returned if there  are  no  marks
+                     after index.
+
+              <I>pathName</I> <B>mark</B> <B>previous</B> <I>index</I>
+                     Returns the name of the mark at or before index. If index
+                     is specified in numerical form, then the search  for  the
+                     previous  mark begins with the character just before that
+                     index. If index is the name of a mark,  then  the  search
+                     for  the  next  mark begins immediately before that mark.
+                     This can still return a mark  at  the  same  position  if
+                     there  are multiple marks at the same index. These seman-
+                     tics mean that the mark previous operation can be used to
+                     step  through  all  the  marks in a text widget. An empty
+                     string is returned if there are no marks before index.
+
+              <I>pathName</I> <B>mark</B> <B>set</B> <I>markName</I> <I>index</I>
+                     Sets the mark named markName to a  position  just  before
+                     the character at index. If markName already exists, it is
+                     moved from its old position; if it does not exist, a  new
+                     mark is created. This command returns an empty string.
+
+              <I>pathName</I>  <B>marker</B>  <B>configure</B>  <I>markerName</I>  <I>?option?</I>  <I>?value</I> <I>option</I>
+              <I>value</I> <I>...?</I>
+                     This  command is similar to the pathName configure widget
+                     command except that it modifies options  associated  with
+                     the marker given by markName instead of modifying options
+                     for the overall widget. If no option  is  specified,  the
+                     command  returns  a  list describing all of the available
+                     options for markerName. If option is  specified  with  no
+                     value, then the command returns a list describing the one
+                     named option (this list will be identical to  the  corre-
+                     sponding  sublist  of  the value returned if no option is
+                     specified). If one or more option-value pairs are  speci-
+                     fied,  then  the  command modifies the given option(s) to
+                     have the given value(s) in markerName; in this  case  the
+                     command returns an empty string.
+
+              <I>pathName</I> <B>marker</B> <B>delete</B> <I>markerName</I> <I>?markerName</I> <I>...?</I>
+                     Deletes the named markers
+
+              <I>pathName</I> <B>marker</B> <B>exists</B> <I>markerName</I> <I>line</I>
+                     Checks  if  the marker specified by markerName exists for
+                     line. Returns 1 if it does, 0 otherwise.
+
+              <I>pathName</I> <B>marker</B> <B>names</B>
+                     Returns a sorted list of all  currently  defined  markers
+                     (created by using the marker configure command).
+
+              <I>pathName</I> <B>marker</B> <B>types</B>
+                     Returns the list of type names which can be used with the
+                     -type option to the configure command.
+
+       <I>pathName</I> <B>search</B> <I>?switches?</I> <I>pattern</I> <I>index</I> <I>?stopIndex?</I>
+              Searches the text in pathName starting at index for a  range  of
+              characters  that matches pattern. If a match is found, the index
+              of the first character in the match is returned as result;  oth-
+              erwise an empty string is returned. One or more of the following
+              switches (or abbreviations thereof) may be specified to  control
+              the search:
+
+              <B>-forwards</B>
+                     The search will proceed forward through the text, finding
+                     the first matching range starting at or after  the  posi-
+                     tion given by index. This is the default.
+
+              <B>-backwards</B>
+                     The  search will proceed backward through the text, find-
+                     ing the matching range closest to index whose first char-
+                     acter is before index (it is not allowed to be at index).
+                     Note that, for a variety of reasons,  backwards  searches
+                     can  be substantially slower than forwards searches (par-
+                     ticularly when using -regexp), so it is recommended  that
+                     performance-critical code use forward searches.
+
+              <B>-nolinestop</B>
+                     This allows . and [^ sequences to match the newline char-
+                     acter  0 which they will otherwise not do (see the regexp
+                     command for details). This option is only  meaningful  if
+                     -regexp is also given, and an error will be thrown other-
+                     wise. For example, to match the entire text, use pathName
+                     search -nolinestop -regexp ".*" 1.0.
+
+              <B>-nocase</B>
+                     Ignore case differences between the pattern and the text.
+
+              <B>-count</B> <I>varName</I>
+                     The argument following -count gives the name of  a  vari-
+                     able;  if a match is found, the number of index positions
+                     between beginning and end of the matching range  will  be
+                     stored  in  the variable. If there are no embedded images
+                     or windows in the matching range (and there are no elided
+                     characters if -elide is not given), this is equivalent to
+                     the number of characters matched.  In  either  case,  the
+                     range matchIdx to matchIdx + $count chars will return the
+                     entire matched text.
+
+              <B>-all</B>   Find all matches in the given range and return a list  of
+                     the  indices  of  the first character of each match. If a
+                     -count varName switch is given, then varName is also  set
+                     to  a  list  containing  one  element for each successful
+                     match. Note that, even for exact searches,  the  elements
+                     of  this  list  may  be  different, if there are embedded
+                     images, windows or hidden text. Searches with -all behave
+                     very  similarly  to  the Tcl command regexp -all, in that
+                     overlapping matches are not normally returned. For  exam-
+                     ple, applying an -all search of the pattern 1992Z against
+                     ZooZooZoo will just match once.
+
+              <B>-overlap</B>
+                     When performing -all searches, the  normal  behaviour  is
+                     that  matches  which  overlap an already-found match will
+                     not be returned. This switch changes  that  behaviour  so
+                     that  all  matches  which are not totally enclosed within
+                     another match are  returned.  For  example,  applying  an
+                     -overlap  search  of  the pattern 2304Z against ZooZooZoo
+                     will now match twice. An error will  be  thrown  if  this
+                     switch is used without -all.
+
+              <B>-strictlimits</B>
+                     When  performing any search, the normal behaviour is that
+                     the start and stop limits are checked with respect to the
+                     start  of the matching text. With the -strictlimits flag,
+                     the entire matching range must lie inside the  start  and
+                     stop limits specified for the match to be valid.
+
+       searches, no match at or after stopIndex will be considered; for  back-
+       ward searches, no match earlier in the text than stopIndex will be con-
+       sidered. If stopIndex is omitted, the entire  text  will  be  searched:
+       when  the beginning or end of the text is reached, the search continues
+       at the other end until the  starting  location  is  reached  again;  if
+       stopIndex is specified, no wrap-around will occur. This means that, for
+       example, if the search is -forwards but stopIndex  is  earlier  in  the
+       text  than startIndex, nothing will ever be found. See the Tk Text wid-
+       get man page for more information.
+
+       <I>pathName</I> <B>scisearch</B> <I>?switches?</I> <I>pattern</I> <I>index</I> <I>?stopIndex?</I>
+              Scintilla Search searches the text in pathName starting at index
+              for  a  range  of characters that matches pattern. If a match is
+              found, the index of the first character in the match is returned
+              as result; otherwise an empty string is returned. One or more of
+              the following switches (or abbreviations thereof) may be  speci-
+              fied to control the search:
+
+              <B>-forwards</B>
+                     The search will proceed forward through the text, finding
+                     the first matching range starting at or after  the  posi-
+                     tion given by index. This is the default.
+
+              <B>-backwards</B>
+                     The  search will proceed backward through the text, find-
+                     ing the matching range closest to index whose first char-
+                     acter is before index (it is not allowed to be at index).
+
+              <B>-count</B> <I>varName</I>
+                     The argument following -count gives the name of  a  vari-
+                     able;  if a match is found, the number of index positions
+                     between beginning and end of the matching range  will  be
+                     stored in the variable.
+
+              <B>-exact</B> Use  exact matching: the characters in the matching range
+                     must be identical  to  those  in  pattern.  This  is  the
+                     default.
+
+              <B>-nocase</B>
+                     Ignore case differences between the pattern and the text.
+
+              <B>-regexp</B>
+                     Treat pattern as  a  regular  expression.  In  a  regular
+                     expression, special characters interpreted are:
+
+                     Matches any character.
+
+                      <B>\(</B>     This  marks  the  start of a region for tagging a
+                             match.
+
+                      <B>\)</B>     This marks the end of a tagged region.
+
+                      <B>\x</B>     This allows you to use a character x  that  would
+                             otherwise have a special meaning. For example, \[
+                             would be interpreted as [ and not as the start of
+                             a character set.
+
+                      <B>[...]</B>  This  indicates a set of characters, for example,
+                             [abc] means any of the characters a, b or c.  You
+                             can  also  use  ranges, for example [a-z] for any
+                             lower case character.
+
+                      <B>[^...]</B> The complement of the characters in the set.  For
+                             example,  [^A-Za-z] means any character except an
+                             alphabetic character.
+
+                      <B>^</B>      This matches the start of  a  line  (unless  used
+                             inside a set, see above).
+
+                      <B>$</B>      This matches the end of a line.
+
+                      <B>*</B>      This  matches  0 or more times. For example, Sa*m
+                             matches Sm, Sam, Saam, Saaam and so on.
+
+                      <B>+</B>      This matches 1 or more times. For  example,  Sa+m
+                             matches Sam, Saam, Saaam and so on.
+              Regular expressions will only match ranges within a single line,
+              never matching over multiple lines.
+
+              <B>-word</B>  A match only occurs if the characters  before  and  after
+                     are not word characters.
+
+              <B>--</B>     This switch has no effect except to terminate the list of
+                     switches: the next argument will be  treated  as  pattern
+                     even if it starts with -.
+       The  matching  range  must be within a single line of text. For regular
+       expression matching one can use the various  newline-matching  features
+       such  as  $  to  match the end of a line, ^ to match the beginning of a
+       line. If stopIndex is specified, the search stops at  that  index:  for
+       forward  searches,  no  match at or after stopIndex will be considered;
+       for backward searches, no match earlier in the text than stopIndex will
+       be  considered.  If  stopIndex  is  omitted,  the  entire  text will be
+       searched.
+
+       <I>pathName</I> <B>see</B> <I>index</I> <I>?-center?</I>
+              Adjusts the view in the window so that the  character  given  by
+              index  is  completely  visible. If index is already visible then
+              the command does nothing. If index is a short  distance  out  of
+              view,  the  command  adjusts  the view just enough to make index
+              visible at the edge of the window. If index is far out of  view,
+              then the command centers index in the window. The -center option
+              can be used to force index to be centered in the window.
+
+       <I>pathName</I> <B>tag</B> <I>?option?</I> <I>?arg</I> <I>arg</I> <I>...?</I>
+
+              <I>pathName</I> <B>tag</B> <B>add</B> <I>tagName</I> <I>index1</I> <I>?index2?</I>
+                     Associate  the  tag  tagName  (one  will be created if it
+                     doesn't already exist) with all of the characters  start-
+                     ing  with index1 and ending just before index2 (the char-
+                     acter at index2 is not tagged). If index2 is omitted then
+                     the single character at index1 is tagged. If there are no
+                     characters in the specified range (e.g.  index1  is  past
+                     the  end  of  the file or index2 is less than or equal to
+                     index1) then the command has  no  effect.  EXCEPTION:  If
+                     tagName  is  the  predefined  selection tag (i.e. "sel"),
+                     then specifying index2 to be less than index1  will  have
+                     the  effect  of  positioning  the  insertion point at the
+                     start of the selection.
+
+              <I>pathName</I> <B>tag</B> <B>bind</B> <I>tagName</I> <I>?sequence?</I> <I>?script?</I>
+                     This command associates script with the tag given by tag-
+                     Name.  Whenever  the  event  sequence  given  by sequence
+                     occurs for a character that has been tagged with tagName,
+                     the  script will be invoked. This widget command is simi-
+                     lar to the bind command except that it operates on  char-
+                     acters in a text rather than entire widgets. See the bind
+                     manual entry  for  complete  details  on  the  syntax  of
+                     sequence and the substitutions performed on script before
+                     invoking it. If all arguments are specified  then  a  new
+                     binding  is  created,  replacing any existing binding for
+                     the same sequence and tagName (if the first character  of
+                     script  is  +  then  script  augments an existing binding
+                     rather than replacing it). In this case the return  value
+                     is an empty string. If script is omitted then the command
+                     returns the script associated with tagName  and  sequence
+                     (an  error  occurs  if there is no such binding). If both
+                     script and sequence are omitted then the command  returns
+                     a  list of all the sequences for which bindings have been
+                     defined for tagName. The only events for  which  bindings
+                     may  be specified are those related to the mouse and key-
+                     board (such as Enter,  Leave,  ButtonPress,  Motion,  and
+                     KeyPress)  or  virtual  events. Event bindings for a text
+                     widget use the current mark. An Enter event triggers  for
+                     a  tag  when the tag first becomes present on the current
+                     character, and a Leave event triggers for a tag  when  it
+                     ceases  to be present on the current character. Enter and
+                     Leave events can happen either because the  current  mark
+                     moved  or because the character at that position changed.
+                     Note that these events are different than Enter and Leave
+                     events   for  windows.  Mouse  and  keyboard  events  are
+                     directed to the current character. If a virtual event  is
+                     used  in  a binding, that binding can trigger only if the
+                     virtual event is defined by an  underlying  mouse-related
+                     or keyboard-related event.
+
+              <I>pathName</I> <B>tag</B> <B>cget</B> <I>tagName</I> <I>option</I>
+                     named  option  (this list will be identical to the corre-
+                     sponding sublist of the value returned if  no  option  is
+                     specified).  If one or more option-value pairs are speci-
+                     fied, then the command modifies the  given  option(s)  to
+                     have the given value(s) in tagName; in this case the com-
+                     mand returns an empty string. Note, the  special  -margin
+                     option,  if  used, must immediately follow tagName. It is
+                     used to create and configure tags used within the  margin
+                     area. See "configure options" for more details
+
+              <I>pathName</I> <B>tag</B> <B>delete</B> <I>tagName</I> <I>?tagName</I> <I>...?</I>
+                     Deletes all tag information for each of the tagName argu-
+                     ments. The command removes the tags from  all  characters
+                     in  the file and also deletes any other information asso-
+                     ciated with the tags, such as bindings and display infor-
+                     mation. The command returns an empty string.
+
+              <I>pathName</I> <B>tag</B> <B>lower</B> <I>tagName</I>
+                     This  has  NOT  BEEN  IMPLEMENTED  because Scintilla core
+                     functionality regarding "markers" (which is how the Scin-
+                     tillaTk  tag functionality has been implemented) does not
+                     support drawing priority for markers that overlap.
+
+              <I>pathName</I> <B>tag</B> <B>names</B> <I>?index?</I>
+                     Returns a list whose elements are the names  of  all  the
+                     tags  that  are active at the character position given by
+                     index. If index is omitted, then the  return  value  will
+                     describe all of the tags that exist for the widget.
+
+              <I>pathName</I> <B>tag</B> <B>nextrange</B> <I>tagName</I> <I>index1</I> <I>?index2?</I>
+                     This  command searches the text for a range of characters
+                     tagged with tagName where  the  first  character  of  the
+                     range  is  no earlier than the character at index1 and no
+                     later than the character  just  before  index2  (a  range
+                     starting at index2 will not be considered). The command's
+                     return value is a list containing two elements, which are
+                     the  index  of  the  first character of the range and the
+                     index of the character just after the  last  one  in  the
+                     range.  If  no  matching  range  is found then the return
+                     value is an empty string. If index2 is not given then  it
+                     defaults to the end of the text.
+
+              <I>pathName</I> <B>tag</B> <B>prevrange</B> <I>tagName</I> <I>index1</I> <I>?index2?</I>
+                     This  command searches the text for a range of characters
+                     tagged with tagName where  the  first  character  of  the
+                     range  is  before  the character at index1 and no earlier
+                     than the character at index2 (a range starting at  index2
+                     will be considered). The command's return value is a list
+                     containing two elements, which are the index of the first
+                     character  of  the  range  and the index of the character
+                     just after the last one in  the  range.  If  no  matching
+                     range  is found then the return value is an empty string.
+                     The first element of each pair contains the index of  the
+                     first  character  of the range, and the second element of
+                     the pair contains the index of the character  just  after
+                     the  last  one  in  the range. If there are no characters
+                     tagged with tag then an empty string is returned.
+
+              <I>pathName</I> <B>tag</B> <B>remove</B> <I>tagName</I> <I>index1</I> <I>?index2</I> <I>index1</I> <I>index2</I> <I>...?</I>
+                     Remove the tag tagName from all of the characters  start-
+                     ing  at index1 and ending just before index2 (the charac-
+                     ter at index2 is not affected). A single command may con-
+                     tain  any  number  of  index1-index2  pairs.  If the last
+                     index2 is omitted then the tag is removed from the single
+                     character  at  index1.  If there are no characters in the
+                     specified range (e.g. index1 is past the end of the  file
+                     or  index2 is less than or equal to index1) then the com-
+                     mand has no effect. This command returns an empty string.
+       <B>Tag</B> <B>Types</B>
+
+       +----------------------------------------------------------------------------------+
+       |<B>Type</B>          <B>ID</B>   <B>Description</B>                                                    |
+       |plain          0    Underlined with a single, straight line.                      |
+       |squiggle       1    A squiggly underline, 3 pixels in height                      |
+       |tt             2    A line of small "T" shapes                                    |
+       |diagonal       3    Diagonal hatching                                             |
+       |strike         4    A solid "strike through" line draw at the vertical mid-point  |
+       |hidden         5    No visual effect                                              |
+       |box            6    A rectangular box around the text                             |
+       |roundbox       7    A  rectangle  with  rounded  corners  around the text, using  |
+       |                    translucent drawing for the interior (NOT SUPPORTED YET)      |
+       |squarebox      8    A rectangle around the text, using translucent  drawing  for  |
+       |                    the interior (NOT SUPPORTED YET)                              |
+       |dash           9    A dashed underline                                            |
+       |dots          10    A dotted underline                                            |
+       |squigglelow   11    Similar to squiggle but only 2 pixels in height               |
+       |dotbox        12    A  dotted rectangle around the text, using translucent draw-  |
+       |                    ing for the interior (NOT SUPPORTED YET)                      |
+       +----------------------------------------------------------------------------------+
+
+       For the above types, use the -foreground configuration option  for  the
+       tag to control the color. For types that use a filled interior, use the
+       -background option to set the interior color. The following  lists  the
+       supported  configuration options, though not all are supported for each
+       type of tag (exceptions are noted):
+
+       <B>-background|-bg</B> <I>color</I>
+              Color specifies the color used for tags that have a filled inte-
+              rior.
+
+       <B>-bold</B> <I>boolean</I> (ONLY FOR MARGIN TAGS)
+              Specifies if margins showing text will use a bold font
+
+       <B>-foreground|-fg</B> <I>color</I>
+              current version of the widget. The fields of the list are:  ver-
+              sion  :  identifies  the Tcl package version date : the date the
+              package was created core_rls: this identifies the release of the
+              Scintilla core widget
+
+
+
+</PRE>
+<H2>KNOWN BUGS</H2><PRE>
+       Patterns including newline (0 may not work correctly in all cases. This
+       limitation is due to how Scintilla stores document  text;  the  end  of
+       line  characters are stripped from the document making the search chal-
+       lenging.
+
+       The pathName search -regexp sub-command attempts to  perform  sophisti-
+       cated  regexp  matching  across multiple lines in an efficient fashion.
+       Under certain conditions the  search  result  might  differ  from  that
+       obtained by applying the same regexp to the entire text from the widget
+       in one go.
+
+       Whenever one possible match is fully enclosed in  another,  the  search
+       command  will attempt to ensure only the larger match is returned. When
+       performing backwards regexp searches it is possible that Tcl  will  not
+       always achieve this.
+
+
+
+
+
+Tk                                   0.25                         scintilla(n)
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

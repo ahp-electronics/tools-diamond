@@ -1,0 +1,256 @@
+#log _circuit_name.txt
+
+# This file is used by the simulation model as well as the ispLEVER bitstream
+# generation process to automatically initialize the SYSBUS alignment registers
+# selected in the IPexpress. This file is expected to be modified by the
+# end user to adjust the SYSBUS alignment registers to the final design requirements.
+
+#if _enable_multi_align == 1
+#if _local_device == "master"
+iir 0a 02
+#else
+iir 0a 01
+#endif
+#elif _enable_multi_align == 0
+iir 0a 00
+#endif
+#if #_pcs_360 == "group_0"
+iir 00 10
+#elif #_pcs_360 == "group_1"
+iir 00 11 
+#elif #_pcs_360 == "group_2"
+iir 00 12  
+#elif #_pcs_360 == "group_3"
+iir 00 13  
+#else
+iir 00 00
+#endif
+#if #_pcs_361 == "group_0"
+iir 01 10 
+#elif #_pcs_361 == "group_1"
+iir 01 11  
+#elif #_pcs_361 == "group_2" 
+iir 01 12   
+#elif #_pcs_361 == "group_3" 
+iir 01 13   
+#else
+iir 01 00
+#endif
+#if #_pcs_362 == "group_0"
+iir 02 10 
+#elif #_pcs_362 == "group_1"
+iir 02 11  
+#elif #_pcs_362 == "group_2" 
+iir 02 12   
+#elif #_pcs_362 == "group_3" 
+iir 02 13   
+#else
+iir 02 00
+#endif
+#if #_pcs_363 == "group_0"
+iir 03 10 
+#elif #_pcs_363 == "group_1"
+iir 03 11  
+#elif #_pcs_363 == "group_2" 
+iir 03 12   
+#elif #_pcs_363 == "group_3" 
+iir 03 13   
+#else
+iir 03 00
+#endif
+#if #_pcs_3e0 == "group_0"
+iir 04 10 
+#elif #_pcs_3e0 == "group_1"
+iir 04 11  
+#elif #_pcs_3e0 == "group_2" 
+iir 04 12   
+#elif #_pcs_3e0 == "group_3" 
+iir 04 13   
+#else
+iir 04 00
+#endif
+#if #_pcs_3e1 == "group_0"
+iir 05 10 
+#elif #_pcs_3e1 == "group_1"
+iir 05 11  
+#elif #_pcs_3e1 == "group_2" 
+iir 05 12   
+#elif #_pcs_3e1 == "group_3" 
+iir 05 13   
+#else
+iir 05 00
+#endif
+#if #_pcs_3e2 == "group_0"
+iir 06 10 
+#elif #_pcs_3e2 == "group_1"
+iir 06 11  
+#elif #_pcs_3e2 == "group_2" 
+iir 06 12   
+#elif #_pcs_3e2 == "group_3" 
+iir 06 13   
+#else
+iir 06 00
+#endif
+#if #_pcs_3e3 == "group_0"
+iir 07 10 
+#elif #_pcs_3e3 == "group_1"
+iir 07 11  
+#elif #_pcs_3e3 == "group_2" 
+iir 07 12   
+#elif #_pcs_3e3 == "group_3" 
+iir 07 13   
+#else
+iir 07 00
+#endif
+#macro converter11(arg1,arg2,arg3)
+#if #arg1 == "none" || #arg1 == "pcs_360"
+#if #arg2 == "none" || #arg2 == "pcs_360"
+#define arg3 00
+#elif #arg2 == "pcs_361"
+#define arg3 08
+#elif #arg2 == "pcs_362"
+#define arg3 10
+#elif #arg2 == "pcs_363"
+#define arg3 18
+#elif #arg2 == "pcs_3E0"
+#define arg3 20
+#elif #arg2 == "pcs_3E1"
+#define arg3 28
+#elif #arg2 == "pcs_3E2"
+#define arg3 30
+#elif #arg2 == "pcs_3E3"
+#define arg3 38
+#endif
+#elif #arg1 == "pcs_361"
+#if #arg2 == "none" || #arg2 == "pcs_360"
+#define arg3 01
+#elif #arg2 == "pcs_361"
+#define arg3 09
+#elif #arg2 == "pcs_362"
+#define arg3 11
+#elif #arg2 == "pcs_363"
+#define arg3 19
+#elif #arg2 == "pcs_3E0"
+#define arg3 21
+#elif #arg2 == "pcs_3E1"
+#define arg3 29
+#elif #arg2 == "pcs_3E2"
+#define arg3 31
+#elif #arg2 == "pcs_3E3"
+#define arg3 39
+#endif
+#elif #arg1 == "pcs_362"
+#if #arg2 == "none" || #arg2 == "pcs_360"
+#define arg3 02
+#elif #arg2 == "pcs_361"
+#define arg3 0a
+#elif #arg2 == "pcs_362"
+#define arg3 12
+#elif #arg2 == "pcs_363"
+#define arg3 1a
+#elif #arg2 == "pcs_3E0"
+#define arg3 22
+#elif #arg2 == "pcs_3E1"
+#define arg3 2a
+#elif #arg2 == "pcs_3E2"
+#define arg3 32
+#elif #arg2 == "pcs_3E3"
+#define arg3 3a
+#endif
+#elif #arg1 == "pcs_363"
+#if #arg2 == "none" || #arg2 == "pcs_360"
+#define arg3 03
+#elif #arg2 == "pcs_361"
+#define arg3 0b
+#elif #arg2 == "pcs_362"
+#define arg3 13
+#elif #arg2 == "pcs_363"
+#define arg3 1b
+#elif #arg2 == "pcs_3E0"
+#define arg3 23
+#elif #arg2 == "pcs_3E1"
+#define arg3 2b
+#elif #arg2 == "pcs_3E2"
+#define arg3 33
+#elif #arg2 == "pcs_3E3"
+#define arg3 3b
+#endif
+#elif #arg1 == "pcs_3E0"
+#if #arg2 == "none" || #arg2 == "pcs_360"
+#define arg3 04
+#elif #arg2 == "pcs_361"
+#define arg3 0c
+#elif #arg2 == "pcs_362"
+#define arg3 14
+#elif #arg2 == "pcs_363"
+#define arg3 1c
+#elif #arg2 == "pcs_3E0"
+#define arg3 24
+#elif #arg2 == "pcs_3E1"
+#define arg3 2c
+#elif #arg2 == "pcs_3E2"
+#define arg3 34
+#elif #arg2 == "pcs_3E3"
+#define arg3 3c
+#endif
+#elif #arg1 == "pcs_3E1"
+#if #arg2 == "none" || #arg2 == "pcs_360"
+#define arg3 05
+#elif #arg2 == "pcs_361"
+#define arg3 0d
+#elif #arg2 == "pcs_362"
+#define arg3 15
+#elif #arg2 == "pcs_363"
+#define arg3 1d
+#elif #arg2 == "pcs_3E0"
+#define arg3 25
+#elif #arg2 == "pcs_3E1"
+#define arg3 2d
+#elif #arg2 == "pcs_3E2"
+#define arg3 35
+#elif #arg2 == "pcs_3E3"
+#define arg3 3d
+#endif
+#elif #arg1 == "pcs_3E2"
+#if #arg2 == "none" || #arg2 == "pcs_360"
+#define arg3 06
+#elif #arg2 == "pcs_361"
+#define arg3 0e
+#elif #arg2 == "pcs_362"
+#define arg3 16
+#elif #arg2 == "pcs_363"
+#define arg3 1e
+#elif #arg2 == "pcs_3E0"
+#define arg3 26
+#elif #arg2 == "pcs_3E1"
+#define arg3 2e
+#elif #arg2 == "pcs_3E2"
+#define arg3 36
+#elif #arg2 == "pcs_3E3"
+#define arg3 3e
+#endif
+#elif #arg1 == "pcs_3E3"
+#if #arg2 == "none" || #arg2 == "pcs_360"
+#define arg3 07
+#elif #arg2 == "pcs_361"
+#define arg3 0f
+#elif #arg2 == "pcs_362"
+#define arg3 17
+#elif #arg2 == "pcs_363"
+#define arg3 1f
+#elif #arg2 == "pcs_3E0"
+#define arg3 27
+#elif #arg2 == "pcs_3E1"
+#define arg3 2f
+#elif #arg2 == "pcs_3E2"
+#define arg3 37
+#elif #arg2 == "pcs_3E3"
+#define arg3 3f
+#endif
+#endif
+#endmacro
+#converter11(_driver_group0, _driver_group1, _reg08)
+#converter11(_driver_group2, _driver_group3, _reg09)
+iir 08 _reg08
+iir 09 _reg09
+

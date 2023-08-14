@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ldcconfig>
+	<attribute name="syn_hier" object="module" type="string" value="hard">Control hierarchy flattening</attribute>
+	<attribute name="syn_keep" object="net" type="boolean" value="1;0">Preserve net from being optmized away</attribute>
+	<attribute name="syn_maxfan" object="port;net;register" type="integer">Set fanout limit for an individual input port, net, or register output</attribute>
+	<attribute name="syn_noprune" object="instance" type="boolean" value="1;0">Do not remove instance with undriven outputs</attribute>
+	<attribute name="syn_preserve" object="register;module" type="boolean" value="1;0">Preserve register logic or optimize as needed</attribute>
+	<attribute name="syn_ramstyle" object="register;module;RAMInstance" type="string" value="registers;distributed;block_ram;no_rw_check">Implementation for inferred RAM</attribute>
+	<attribute name="syn_romstyle" object="register;module;ROMInstance" type="string" value="auto;EBR;logic">Implementation for inferred ROM</attribute>
+	<attribute name="syn_useioff" object="port;register" type="boolean" value="1;0">Enable packing of register into I/O pad cell</attribute>
+	<attribute name="GSR" object="module;instance" type="string" value="ENABLED;DISABLED;FORCEENABLE;IPENABLE">Specify use of global/set reset routing resources</attribute>
+	<attribute name="syn_use_carry_chain" object="module;instance" type="boolean" value="1;0">Enable/disable carry chain implementation for counters, adders</attribute>
+	<attribute name="loc" object="port;instance;register" type="string">Pin location</attribute>
+	<attribute name="syn_encoding" object="register" type="string" value="sequential;safe,sequential;onehot;safe,onehot;gray">Encoding style for state machine (sequential, onehot)</attribute>
+	<attribute name="syn_pipeline" object="register" type="boolean" value="1;0">Allow register to be moved if it improves performance</attribute>
+	<attribute name="syn_replicate" object="register" type="boolean" value="1;0">Allow duplication of register to improve timing</attribute>
+	<attribute name="syn_force_pads" object="port" type="boolean" value="1;0">Enable/disable I/O insertion on an unused port</attribute>
+	<attribute name="syn_insert_pad" object="port;net" type="boolean" value="1;0">Insert/remove I/O buffer on/from port or net, when auto I/O buffer insertion is disabled/enabled</attribute>
+	<attribute name="syn_srlstyle" object="register" type="string" value="registers;distributed;block_ram">Implementation of sequential shift components</attribute>
+	<attribute name="syn_state_machine" object="register" type="boolean" value="1;0">Control inferencing of state machines</attribute>
+	<attribute name="syn_useenables" object="register" type="boolean" value="1;0">Infer register with clock-enable pin</attribute>
+	<attribute name="syn_multstyle" object="module;MultiplierInstance" type="string" value="block_mult;logic">Implementation of multiplier</attribute>
+    <attribute name="syn_sharing" object="module" type="boolean" value="1;0">Enables or disables the sharing of operator resources during the compilation stage of synthesis.</attribute>
+</ldcconfig>

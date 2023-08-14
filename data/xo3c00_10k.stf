@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file defines properties of machxo3 devices -->
+<StrategyConfig parent="xo3c00.stf" version="1.0">
+
+<!-- *************************************************************** -->
+<!-- *****************************  PropertySet *************************** -->
+<!-- *************************************************************** -->
+
+<!-- *************************************************************** -->
+<!-- *****************************  Strategy Ui *************************** -->
+<!-- *************************************************************** -->
+<!-- "parent" value must be defined before use it -->
+<StrategyUI name="STYUI_Normal">
+    <Group name="GROUP_Synthesis" parent="root" label="Synthesize Design" type="0" data="" />
+        <Group name="GROUP_Synplify" parent="GROUP_Synthesis" label="Synplify Pro" type="1" data="PROPSET_Synplify" />
+        <!--<Group name="GROUP_Precision" parent="GROUP_Synthesis" label="Precision" type="1" data="PROPSET_Precision" />-->
+        <Group name="GROUP_LST" parent="GROUP_Synthesis" label="LSE" type="1" data="PROPSET_LST" />
+    <Group name="GROUP_BuildDatabase" parent="root" label="Translate Design" type="1" data="PROPSET_Edif" />
+    <Group name="GROUP_MapDesign" parent="root" label="Map Design" type="1" data="PROPSET_Map" />
+        <Group name="GROUP_MapSTA" parent="GROUP_MapDesign" label="Map Trace" type="1" data="PROPSET_MAPTRACE" />
+    <Group name="GROUP_PLACE" parent="root" label="Place &amp; Route Design" type="1" data="PROPSET_PlaceRoute" />
+       <Group name="GROUP_PARSTA" parent="GROUP_PLACE" label="Place &amp; Route Trace" type="1" data="PROPSET_PARTRACE" />
+       <Group name="GROUP_IOTIMING" parent="GROUP_PLACE" label="IO Timing Analysis" type="1" data="PROPSET_IOTIMING" />
+       <Group name="GROUP_ThermalAnalysis" parent="GROUP_PLACE" label="Thermal Analysis" type="1" data="PROPSET_THERMAL" />
+    <Group name="GROUP_TIMSIM" parent="root" label="Timing Simulation" type="1" data="PROPSET_TIMSIMFILE" />
+    <Group name="GROUP_BITGEN" parent="root" label="Bitstream" type="1" data="PROPSET_BITGEN" />
+</StrategyUI>
+
+</StrategyConfig>

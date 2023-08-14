@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messageFile name="m5gncdesign" fid="6703" alias="m5gncdesign" vendor="Lattice Semiconductor Corporation" stamp="Date and Time">
+  <description text="this message file contains message for [name] package"/>
+  <!-- owner of this message file -->
+  <owner text="owner" />
+  <messages>
+
+	<msg uid="1001" type="Error" text="Cannot open the PCLK id assignment file &quot;$$s&quot;."/>
+	<msg uid="1002" type="Error" text="DCC comp &quot;$$s&quot; was placed on an illegal DCC site &quot;$$s&quot;."/>
+	<msg uid="1003" type="Error" text="Quadrant $$s: signal $$s is a feedback path CLKOP=&gt;CLKFB of PLL $$s with FB_MODE=CLOCKTREE, therefore it must use a primary/pure spine.  However, currently $$d out of $$d clocks are using primary/pure clock spines, there is no space left for this PLL feedback path signal."/>
+	<msg uid="1004" type="Error" text="PLL CLKOP outputs have no direct connections to DCS, therefore they are not allowed to drive DCS -- Quadrant $$s, # of CLKOP: $$d, current # of primary/PURE: $$d, maximum # of primary/PURE clocks available: $$d."/>
+	<msg uid="1005" type="Status" text="// [PREASSIGN: 1] PCLK driver &quot;$$s&quot; =&gt; clock &quot;$$s&quot;, driver comp &quot;$$s&quot;."/>
+	<msg uid="1006" type="Status" text="// [PREASSIGN: 2] PCLK driver &quot;$$s&quot; =&gt; clock &quot;$$s&quot;, driver comp &quot;$$s&quot;."/>
+	<msg uid="1007" type="Status" text="// [PREASSIGN: 3] PCLK driver &quot;$$s&quot; =&gt; &quot;$$s&quot;."/>
+	<msg uid="1008" type="Status" text="// [PREASSIGN: 4] PCLK driver &quot;$$s&quot; =&gt; clock &quot;$$s&quot;."/>
+	<msg uid="1009" type="Status" text="// [1] PCLK driver &quot;$$s&quot; =&gt; clock &quot;$$s&quot;, driver comp &quot;$$s&quot;."/>
+	<msg uid="1010" type="Error" text="All clock drivers are used up -- clock signal &quot;$$s\"/>
+	<msg uid="1011" type="Status" text="** Unable to assign a clock driver for signal &quot;$$s&quot;, driver comp &quot;$$s&quot;."/>
+	<msg uid="1012" type="Status" text="// [2] PCLK driver &quot;$$s&quot; =&gt; clock &quot;$$s&quot;, driver comp &quot;$$s&quot;."/>
+	<msg uid="1013" type="Error" text="PCLK assignment error."/>
+	<msg uid="1014" type="Warning" level="2" text="Primary clocks specified in preference are only partially assigned, therefore some primary clocks may have to use general routing, and will incur longer delay or larger clock skew."/>
+	<msg uid="1015" type="Error" text="The primary clock assignment finished unsuccessfully."/>
+	<msg uid="1016" type="Warning" level="2" text="(user pref. $$s clock) Signal &quot;$$s&quot; is not selected as a $$s clock since it has already been assigned as a primary clock."/>
+	<msg uid="1017" type="Warning" level="2" text="(user pref. $$s clock can't be honored) Signal &quot;$$s&quot; is not selected as a $$s clock."/>
+	<msg uid="1018" type="Warning" level="2" text="(user pref. $$s clock can't be honored) Signal &quot;$$s&quot; is driven by a DCS instance &quot;$$s&quot;, therefore it cannot be selected as a $$s/PURE clock.  The preference will be ignored."/>
+	<msg uid="1019" type="Warning" level="2" text="(user pref. $$s clock can't be honored) Signal &quot;$$s&quot; driving DCS select input is not selected as a $$s clock."/>
+	<msg uid="1020" type="Warning" level="2" text="(user pref. $$s clock) Signal &quot;$$s&quot; is selected as a $$s clock; however, it does not drive any $$s input."/>
+	<msg uid="1021" type="Warning" level="2" text="(user pref. $$s clock) Signal &quot;$$s&quot; is not selected as a $$s clock because it does not drive any $$s input."/>
+	<msg uid="1022" type="Warning" level="2" text="(user pref. $$s clock) PLL internal feedback signal &quot;$$s&quot; is not selected to use the $$s clock resources because it is driven by the CLKINTFB output of PLL comp &quot;$$s&quot;."/>
+	<msg uid="1023" type="Warning" level="2" text="(user pref. $$s clock) PLL feedback signal &quot;$$s&quot; is not selected to use the $$s clock resources because it only drives the FBK input of PLL comp &quot;$$s&quot;, and FB_MODE of this PLL is INTERNAL."/>
+	<msg uid="1024" type="Warning" level="2" text="(user pref. $$s clock) PLL $$s=&gt;CLKFB feedback signal &quot;$$s&quot; is assigned to use secondary clock resources in the preference; however, this signal has to use primary clock tree.  The preference will be ignored."/>
+	<msg uid="1025" type="Warning" level="2" text="(user pref. $$s clock) PLL CLKOP=&gt;CLKFB feedback signal &quot;$$s&quot; is assigned to use secondary clock resources in the preference; however, because this PLL $$s has a property FB_MODE=CLOCKTREE or EXTERNAL, this signal has to use primary/pure clock tree.  The preference will be ignored."/>
+	<msg uid="1026" type="Warning" level="2" text="The signal &quot;$$s&quot; (driven by PIO comp &quot;$$s&quot;) is required to use a clock tree by the user preference.  However the only load of this signal is the CLKI input of a PLL comp &quot;$$s&quot;.  It is highly recommended that you don't assign this signal to any primary and/or secondary clock, so that the software can automatically choose a direct path for the PLL CLKI input."/>
+	<msg uid="1027" type="Warning" level="2" text="(user pref. $$s clock) Signal &quot;$$s&quot; will be routed through the $$s clock network, however according to the architecture the driver of this clock cannot drive the $$s clock spine directly. General routing must be used to route this clock to the $$s clock tree and this clock will have variable injection delay."/>
+	<msg uid="1028" type="Error" text="The CLKFB input of PLL comp &quot;$$s&quot; is driven by its $$s output, which requires the PLL feedback signal &quot;$$s&quot; to be selected as a primary clock; however it has already been selected to use the secondary clock resources."/>
+	<msg uid="1029" type="Error" text="PLL $$s has the property FB_MODE=CLOCKTREE, which requires its feedback signal &quot;$$s&quot; to be selected as a primary clock; however it has already been selected to use the secondary clock resources."/>
+	<msg uid="1030" type="Warning" level="2" text="Signal &quot;$$s&quot; has been prohibited from being choosen as a primary clock; however, PLL $$s has a CLKOP==&gt;CLKFB feedback path, which requires this signal &quot;$$s&quot; to be selected as a primary clock.  The prohibit preference for this signal will be ignored."/>
+	<msg uid="1031" type="Error" text="PLL $$s has a CLKOP==&gt;CLKFB feedback path, which requires this signal &quot;$$s&quot; to be selected as a primary clock; however there's no space for primary clocks."/>
+	<msg uid="1032" type="Warning" level="2" text="the number of signals using clock tree exceeds device limitation. Please check your design or PAR might fail to route.\n"/>
+	<msg uid="1033" type="Warning" level="2" text="Boundary CIB @ ($$d, $$d) is not on the device boundary."/>
+	<msg uid="1034" type="Warning" level="2" text="CIB ($$d, $$d) is not located at boundary."/>
+	<msg uid="1035" type="Error" text="too many DCS in the design!"/>
+	<msg uid="1036" type="Error" text="$$d out of $$d PLL CLKFB inputs are driven by CLKOP outputs with PLL property FB_MODE=CLOCKTREE or EXTERNAL. Only $$d CLKOP=&gt;CLKFB feedback paths through clock tree are allowed."/>
+	<msg uid="1037" type="Error" text="$$d out of $$d primary clocks are driven by PLL CLKOP outputs. Only $$d are allowed."/>
+	<msg uid="1038" type="Warning" level="2" text="&gt;&gt; allow PLL CLKOP to be DCS due to overconstraint !"/>
+	<msg uid="1039" type="Warning" level="2" text="selected DCS clocks may experience routing difficulty.\n"/>
+	<msg uid="1040" type="Error" text="DCS clock selection failed"/>
+	<msg uid="1041" type="Error" text="Unable to assign DCS clock '$$s' to primary clock due to excessive number of clock signals in netlist.Please check the following usage (Note: Maximum of 8 Primary Clocks Allowed).\n\n"/>
+	<msg uid="1042" type="Error" text="Unable to assign DCS clock '$$s' due to excessive number of DCS signals in netlist.\nPlease check the following usage. (Note: Maximum of 2 DCS per Quadrant Allowed, use &quot;quadrant clock preference&quot; may help increase the number of usable DCSs)\n\n"/>
+	<msg uid="1043" type="Error" text="Too many DCC clocks required ("/>
+	<msg uid="1044" type="Warning" level="2" text="(User pref. primary clock) Signal &quot;$$s&quot; specified as quadrant clocks does not drive any CLK inputs.\n"/>
+	<msg uid="1045" type="Warning" level="2" text="(User pref or system clock) Signal &quot;$$s&quot; is not selected as a quadrant clock in quadrant $$s; maximum of $$d signals are already selected.\n"/>
+	<msg uid="1046" type="Error" text="All Hspines have same Y location, impossible!"/>
+	<msg uid="1047" type="Error" text="All Hspines have same X location, impossible!"/>
+	<msg uid="1048" type="Error" text="Number of topright hspines is not correct!"/>
+	<msg uid="1049" type="Error" text="Number of topleft hspines is not correct!"/>
+	<msg uid="1050" type="Error" text="Number of bottomright hspines is not correct!"/>
+	<msg uid="1051" type="Error" text="Number of bottomleft hspines is not correct!"/>
+	<msg uid="1052" type="Status" text="\t\t--&gt; connects site $$s."/>
+	<msg uid="1053" type="Error" text="Incorrect number of DQSDLL sites found."/>
+	<msg uid="1054" type="Error" text="No DQS strobe / DQ data pads associated with this DQSBUF site &quot;$$s&quot;."/>
+	<msg uid="1055" type="Warning" level="2" text="PIO site &quot;$$s / $$s&quot; has index &quot;$$d&quot; in the DDR bus.  Please check M5G_PIO_INFO::init_continous_pios()."/>
+	<msg uid="1056" type="Warning" level="2" text="DQSBUF site &quot;$$s&quot; does not connect to any DQS strobe I/O."/>
+	<msg uid="1057" type="Error" text="Could not find the DQS strobe I/O for DQSBUF site &quot;$$s&quot;."/>
+	<msg uid="1058" type="Error" text="No $$s bus signal connects to $$s comp &quot;$$s&quot;."/>
+	<msg uid="1059" type="Error" text="No DDR bus signal connects to DQSBUF comp &quot;$$s&quot;."/>
+	<msg uid="1060" type="Error" text="There is no DQS driven by DQSBUF comp &quot;$$s&quot;."/>
+	<msg uid="1061" type="Error" text="There is no $$s driven by $$s comp &quot;$$s&quot;.  Please correct your design."/>
+	<msg uid="1062" type="Warning" level="2" text="There is no $$s driven by $$s comp &quot;$$s&quot;."/>
+	<msg uid="1063" type="Warning" level="2" text="$$s comp &quot;$$s&quot; is dangling, it doesn't drive any $$s."/>
+	<msg uid="1064" type="Error" text="The width of DQ data bus (its strobe: $$s) is $$d, which exceeds the limit of $$d.  Please check your design carefully."/>
+	<msg uid="1065" type="Warning" level="2" text="Bad call to Get_sigpin_id(), comp=$$s pin$$d\n"/>
+	<msg uid="1066" type="Error" text="M5G_NC_INFO::getmaxplcrow expects an even number of CIB rows"/>
+	<msg uid="1067" type="Error" text="M5G_NC_INFO::getmaxplccol expects an even number of CIB cols"/>
+	<msg uid="1068" type="Status" text="   $$s (prelim)$$8ld/$$-10ld  $$s"/>
+	<msg uid="1069" type="Status" text="   $$-10s$$10ld/$$-10ld  $$s"/>
+	<msg uid="1070" type="Warning" level="2" text="This device has not a pininfo table!"/>
+	<msg uid="1071" type="Warning" level="2" text="No TYPE column in the pininfo table!"/>
+	<msg uid="1072" type="Warning" level="2" text="No FNC column in the pininfo table!"/>
+	<msg uid="1073" type="Status" text="Device utilization summary:"/>
+	<msg uid="1074" type="Error" text="There are $$d instantiated DCS comps in this design; however, the current device only has $$d DCS sites available.  Please check your design carefully."/>
+	<msg uid="1075" type="Status" text="             $$10ld/$$-10ld  $$3d% bonded"/>
+	<msg uid="1076" type="Error" text="Error in retrieving pointer to the pin info table while printing out pad file."/>
+	<msg uid="1077" type="Error" text="No package column found in NP_PININFO_TABLE."/>
+	<msg uid="1078" type="Error" text="Error in writing out pad file."/>
+	<msg uid="1079" type="Error" text="No type column found in NP_PININFO_TABLE."/>
+	<msg uid="1080" type="Error" text="No CFG column found in NP_PININFO_TABLE."/>
+	<msg uid="1081" type="Warning" level="2" text="Couldn't find site &quot;$$s/$$s&quot; in the PKG file.\n"/>
+	<msg uid="1082" type="Warning" level="2" text="Coudn't find site &quot;$$s/$$s&quot; in the PKG file.\n"/>
+	<msg uid="1083" type="Warning" level="2" text="Comp &quot;$$s&quot; - property &quot;$$s&quot; of &quot;$$s&quot; has an unknown type."/>
+	<msg uid="1084" type="Error" text="Site $$s has bad bank id $$d\n"/>
+	<msg uid="1085" type="Error" text="\nNC component with primitive $$s cannot be found in the updated list\n"/>
+	<msg uid="1086" type="Error" text="Error found in PIO comp &quot;$$s&quot; configuration: Couldn't find a match in the LCT."/>
+	<msg uid="1087" type="Error" text="Error found in PIO comp &quot;$$s&quot; configuration: multiple combinations matched in the LCT."/>
+	<msg uid="1088" type="Warning" level="2" text="PIO comp &quot;$$s&quot;: IO_TYPE &quot;$$s&quot; could not be recognized and it will be treated as &quot;$$s&quot;."/>
+	<msg uid="1089" type="Warning" level="2" text="Cannot open the Vccio assignment file &quot;$$s&quot; for bidi PIO comps with OPENDRAIN=ON."/>
+	<msg uid="1090" type="Warning" level="2" text="Invalid PIO comp name &quot;$$s&quot; ignored."/>
+	<msg uid="1091" type="Warning" level="2" text="PIO comp &quot;$$s&quot; is not a bidi with OPENDRAIN=ON.  User Vccio setting ignored."/>
+	<msg uid="1092" type="Warning" level="2" text="The IO_TYPE of PIO comp &quot;$$s&quot; is &quot;$$s&quot;, which has no choice of Vccio setting.  User Vccio setting ignored."/>
+	<msg uid="1093" type="Warning" level="2" text="Invalid Vccio &quot;$$s&quot; specified for bidi PIO comp &quot;$$s&quot; with OPENDRAIN=ON.  User Vccio setting ignored."/>
+	<msg uid="1094" type="Warning" level="2" text="Bidi PIO comp &quot;$$s&quot; with OPENDRAIN=ON has an invalid DRIVE setting &quot;$$s&quot;."/>
+	<msg uid="1095" type="Error" text="Bidirectional PIO comp &quot;$$s&quot; (OPENDRAIN=ON, DRIVE=$$s) was incorrectly placed on I/O bank &quot;$$d&quot; with Vccio=$$s."/>
+	<msg uid="1096" type="Warning" level="2" text="PIO comp &quot;$$s&quot; has an invalid user Vccio setting &quot;$$s&quot;.  Will be ignored."/>
+	<msg uid="1097" type="Error" text="Capture problem: PIO &quot;$$s / $$s&quot; is not on the device boundary."/>
+	<msg uid="1098" type="Error" text="&quot;$$s&quot; LOCATE preference has VDD conflict.\n"/>
+	<msg uid="1099" type="Error" text="Possible capture problem: the device &quot;$$s&quot;, package &quot;$$s&quot; does not have a correct PKT file."/>
+	<msg uid="1100" type="Error" text="The PKT file of device &quot;$$s&quot;, package &quot;$$s&quot; does not have a column &quot;$$s&quot;."/>
+	<msg uid="1101" type="Warning" level="2" text="Possible capture problem: the PKT file of device &quot;$$s&quot;, package &quot;$$s&quot; does not have a PIO site &quot;$$s/$$s&quot;."/>
+	<msg uid="1102" type="Warning" level="2" text="M5G_PIO_INFO::get_pin_cfg(): This device has not a pininfo table!"/>
+	<msg uid="1103" type="Warning" level="2" text="M5G_PIO_INFO::get_pin_cfg(): No CFG column in the pininfo table!"/>
+	<msg uid="1104" type="Warning" level="2" text="M5G_PIO_INFO::get_pin_cfg(): No pad name (FNC) column in the pininfo table!"/>
+	<msg uid="1105" type="Warning" level="2" text="M5G_PIO_INFO::get_pin_cfg(): Pad name entry is not a string."/>
+	<msg uid="1106" type="Warning" level="2" text="M5G_PIO_INFO::get_pin_cfg(): CFG entry is not a string."/>
+	<msg uid="1107" type="Warning" level="2" text="Cannot find a CFG string for PIO site &quot;$$s / $$s&quot;."/>
+	<msg uid="1108" type="Error" text="Error in finding PIO comp for comp &quot;$$s&quot;!"/>
+	<msg uid="1109" type="Error" text="The associated comp &quot;$$s&quot; for IOLOGIC comp &quot;$$s&quot; is not a PIO."/>
+	<msg uid="1110" type="Error" text="Error in finding IOL comp for comp &quot;$$s&quot;!"/>
+	<msg uid="1111" type="Error" text="The associated comp for PIO &quot;$$s&quot; is &quot;$$s&quot;, which is not an IOLOGIC."/>
+	<msg uid="1112" type="Error" text="PIO num != IOLOGIC num"/>
+	<msg uid="1113" type="Warning" level="2" text="M5GPL_ANAL::getPioByCfgName(): This device has not a pininfo table!"/>
+	<msg uid="1114" type="Warning" level="2" text="M5GPL_ANAL::getPioByCfgName(): No CFG column in the pininfo table!"/>
+	<msg uid="1115" type="Warning" level="2" text="M5GPL_ANAL::getPioByCfgName(): CFG entry is not a string."/>
+	<msg uid="1116" type="Warning" level="2" text="M5GPL_ANAL::getPioByCfgName(): pad name entry is not a string."/>
+	<msg uid="1117" type="Warning" level="2" text="Comp &quot;$$s&quot;, idx=$$d; size of pio_comp_flags=$$d."/>
+	<msg uid="1118" type="Warning" level="2" text="Device has not a pininfo table."/>
+	<msg uid="1119" type="Warning" level="2" text="No &quot;HIGHSPEED&quot; column in the pininfo table."/>
+	<msg uid="1120" type="Warning" level="2" text="No pad name (FNC) column in the pininfo table."/>
+	<msg uid="1121" type="Warning" level="2" text="HIGHSPEED entry is not a string."/>
+	<msg uid="1122" type="Warning" level="2" text="Pad name entry is not a string."/>
+	<msg uid="1123" type="Error" text="HW data file (.pkg) contains a PIO site &quot;$$s / $$s&quot; with LVDS output buffer in non-LVDS I/O bank &quot;$$d&quot;."/>
+	<msg uid="1124" type="Status" text="&gt;&gt;&gt; CFG &quot;$$s&quot; ==&gt; PIO site &quot;$$s/$$s\"/>
+	<msg uid="1125" type="Error" text="Column &quot;$$s&quot; doesn't exist in the PKG file."/>
+	<msg uid="1126" type="Warning" level="2" text="PIO comp &quot;$$s&quot; has unknown direction.  Will assume to be INPUT by default."/>
+	<msg uid="1127" type="Warning" level="2" text="Vref$$d is unavailable for I/O bank $$d.\n"/>
+	<msg uid="1128" type="Warning" level="2" text="Vref1 for bank $$d is not bonded out!\n"/>
+	<msg uid="1129" type="Warning" level="2" text="Vref2 for bank $$d is not bonded out!\n"/>
+	<msg uid="1130" type="Error" text="&gt;&gt; [2] M5G_PIO_BANK::update_vref() -- Bank $$d: Vref1/2=($$s, $$s) vs. the Vref to be set=$$s; the availability of Vref sites: ($$s, $$s)."/>
+	<msg uid="1131" type="Error" text="Internal generated Vref is not supported for this device."/>
+	<msg uid="1132" type="Error" text="I/O bank &quot;$$d&quot; has a preference &quot;BANK $$d VCCIO $$s&quot;, therefore its Vccio cannot be changed to &quot;$$s&quot;."/>
+	<msg uid="1133" type="Warning" level="2" text="The Vccio of I/O bank &quot;$$d&quot; will not be changed due to Vccio incompatibility."/>
+	<msg uid="1134" type="Error" text="Bank $$d, check_place() returns false!\n"/>
+	<msg uid="1135" type="Error" text="This bank $$d has a DQS bus (with strobe $$s) placed, but VREF1 was used for other purpose."/>
+	<msg uid="1136" type="Error" text="This bank $$d has a DQS bus (with strobe $$s) placed, but VREF1 input reference pad $$s was used for other purpose."/>
+	<msg uid="1137" type="Error" text="This bank $$d has a DQS bus (with strobe $$s) placed, but VREF1 input reference pad $$s was occupied by a differential I/O pair $$s."/>
+	<msg uid="1138" type="Error" text="Bank $$d has both VREF1 and VREF2 assigned, but the VREF1 input pin is unavailable for this bank."/>
+	<msg uid="1139" type="Error" text="Bank $$d has both VREF1 and VREF2 assigned, but the VREF input pin &quot;$$s/$$s&quot;  has been used for other purpose."/>
+	<msg uid="1140" type="Error" text="Bank $$d has both VREF1 and VREF2 assigned, but the VREF2 input pin is unavailable for this bank."/>
+	<msg uid="1141" type="Error" text="Bank $$d has both VREF1 and VREF2 assigned, but the VREF input pin &quot;$$s/$$s&quot; has been used for other purpose."/>
+	<msg uid="1142" type="Error" text="Bank $$d has both VREF1 and VREF2 assigned, but the VREF input pin &quot;$$s/$$s&quot; was occupied by a differential PIO comp &quot;$$s&quot;."/>
+	<msg uid="1143" type="Error" text="Bank $$d has both VREF1 and VREF2 assigned, but the VREF input pin &quot;$$s/$$s&quot; was occupied by a differential PIO comp &quot;$$s&quot;."/>
+	<msg uid="1144" type="Error" text="Bank $$d has VREF$$d assigned, but both VREF input pins &quot;$$s/$$s&quot; and &quot;$$s/$$s&quot; have been used for other purpose."/>
+	<msg uid="1145" type="Error" text="Bank $$d has VREF$$d assigned, but VREF1 input pin is unavailable, and VREF2 input pin &quot;$$s/$$s&quot; has been used for other purpose."/>
+	<msg uid="1146" type="Error" text="Bank $$d has VREF$$d assigned, but VREF2 input pin is unavailable, and VREF1 input pin &quot;$$s/$$s&quot; has been used for other purpose."/>
+	<msg uid="1147" type="Error" text="Bank $$d has VREF$$d assigned, but both VREF1/2 input pins are unavailable."/>
+	<msg uid="1148" type="Error" text="Bank $$d has VREF2 assigned, but VREF2 input pin &quot;$$s/$$s&quot; was occupied by a differential PIO comp &quot;$$s&quot;."/>
+	<msg uid="1149" type="Error" text="Bank $$d has VREF1 assigned, but VREF1 input pin &quot;$$s/$$s&quot; was occupied by a differential PIO comp &quot;$$s&quot;."/>
+	<msg uid="1150" type="Error" text="Differential PIO comp &quot;$$s&quot; was placed on site &quot;$$s/$$s&quot;, which is not the TRUE side of a PIO pair.\n"/>
+	<msg uid="1151" type="Error" text="Differential PIO comp &quot;$$s&quot; was placed on site &quot;$$s/$$s&quot;, which has no a PIO pair.\n"/>
+	<msg uid="1152" type="Error" text="PIO site &quot;$$s/$$s&quot; (pin &quot;$$s&quot;) is not bonded out.  PIO comp &quot;$$s&quot;, in differential mode, requires placement in a PIO with its site pair also bonded out.\n"/>
+	<msg uid="1153" type="Error" text="PIO site &quot;$$s/$$s&quot; (pin &quot;$$s&quot;) has a comp placed in it.  PIO comp &quot;$$s&quot;, in differential mode, requires placement in a PIO where its site pair has no comp placed in it.\n"/>
+	<msg uid="1154" type="Error" text="PIO site &quot;$$s/$$s&quot; doesn't have an IOL site pair.\n"/>
+	<msg uid="1155" type="Error" text="IOL site &quot;$$s&quot; has an IOLOGIC comp &quot;$$s&quot; placed in it.  PIO comp &quot;$$s&quot;, placed at PIO &quot;$$s/$$s&quot;, is a differential I/O which does not allow other comps to be placed in its paired PIO's IOLOGIC.\n"/>
+	<msg uid="1156" type="Warning" level="2" text="PIO comp &quot;$$s&quot; has been assigned to PIO site &quot;$$s/$$s&quot;; however this site should be reserved for sysCONFIG purpose only (PERSISTENT=$$s)."/>
+	<msg uid="1157" type="Warning" level="2" text="Differential PIO comp &quot;$$s&quot; has been assigned to differential PIO pair &quot;$$s/$$s&quot; and &quot;$$s/$$s&quot;; however the later PIO site should be reserved for sysCONFIG purpose only (PERSISTENT=$$s)."/>
+	<msg uid="1158" type="Error" text="The IO_TYPE of PIO comp &quot;$$s&quot; placed on sysCONFIG pin &quot;$$s/$$s&quot; is &quot;$$s&quot; instead of LVCMOSxx or LVTTL, which is illegal."/>
+	<msg uid="1159" type="Error" text="Differential PIO comp &quot;$$s&quot; is not allowed to be placed on sysCONFIG pin &quot;$$s/$$s&quot; (which is part of a differential pair with &quot;$$s/$$s&quot;)."/>
+	<msg uid="1160" type="Error" text="PERSISTENT is set to &quot;$$s&quot; for this design, therefore the dual-function sysCONFIG pins shall be reserved for sysCONFIG only; however, sysCONFIG pin &quot;$$s/$$s&quot; has been occupied by PIO comp &quot;$$s&quot;, which is not allowed.\n"/>
+	<msg uid="1161" type="Error" text="Found inconsistent I/O bank Vccio: bank $$d has Vccio=&quot;$$s&quot;, however PIO comp &quot;$$s&quot; has different Vccio requirements: "/>
+	<msg uid="1162" type="Error" text="PIO $$s requires Vccio=$$s, but bank $$d has Vccio=$$s.\n"/>
+	<msg uid="1163" type="Error" text="I/O bank $$d does not support Vref input."/>
+	<msg uid="1164" type="Error" text="PIO $$s requires Vref=$$s, but bank $$d has Vref1=$$s, Vref2=$$s.\n"/>
+	<msg uid="1165" type="Error" text="PIO $$s is an LVDS output but was placed in bank $$d which doesn't have true LVDS output buffers.\n"/>
+	<msg uid="1166" type="Error" text="PIO $$s is an LVDS output but was placed on site $$s which doesn't have a true LVDS output buffer.\n"/>
+	<msg uid="1167" type="Error" text="PIO $$s is a PCI which requires PCI clamp, but bank $$d doesn't have PCI clamp diodes.\n"/>
+	<msg uid="1168" type="Error" text="PIO $$s is placed but its site pointer is null.\n"/>
+	<msg uid="1169" type="Error" text="External PIO $$s is placed on an unbonded site $$s."/>
+	<msg uid="1170" type="Error" text="The proposed Vref input pin for I/O bank $$d is &quot;$$s / $$s&quot;; however this pin is in a different I/O bank $$d.  It will not be used as a Vref pin."/>
+	<msg uid="1171" type="Warning" level="2" text="Vref &quot;$$s&quot; is not used in this design.  It will be ignored."/>
+	<msg uid="1172" type="Error" text="I/O Bank $$d doesn't have any Vref input pin, therefore it doesn't support Vref."/>
+	<msg uid="1173" type="Warning" level="2" text="PIO site &quot;$$s / $$s&quot; will not be used as a Vref pin."/>
+	<msg uid="1174" type="Error" text="PIO &quot;$$s / $$s&quot; is neither the VREF1 input pin nor the VREF2 input pin of I/O bank $$d.  It will not be used as a Vref pin."/>
+	<msg uid="1175" type="Error" text="PIO &quot;$$s / $$s&quot; is to be used as a Vref input pin, in the meanwhile it is prohibited from being used.  It will not be used as a Vref pin."/>
+	<msg uid="1176" type="Error" text="PIO &quot;$$s / $$s&quot; is to be used as a Vref input pin, in the meanwhile it is locked for another PIO comp.  It will not be used as a Vref pin."/>
+	<msg uid="1177" type="Error" text="PIO site &quot;$$s / $$s&quot; is not bonded out, it cannot be used as a Vref input pin."/>
+	<msg uid="1178" type="Error" text="Cannot have more than two Vrefs in one I/O bank -- I/O bank $$d, Vref1 &quot;$$s&quot;, Vref2 &quot;$$s&quot;."/>
+	<msg uid="1179" type="Warning" level="2" text="Multiple drivers for same Vref in I/O bank $$d."/>
+	<msg uid="1180" type="Error" text="The Vref1 of I/O bank $$d has already set to &quot;$$s&quot;, it cannot be changed to &quot;$$s&quot;."/>
+	<msg uid="1181" type="Error" text="The Vref2 of I/O bank $$d has already set to &quot;$$s&quot;, it cannot be changed to &quot;$$s&quot;."/>
+	<msg uid="1182" type="Warning" level="2" text="In M5G_PIO_BANK::prohibit_site(), site &quot;$$s / $$s&quot; is already prohibited."/>
+	<msg uid="1183" type="Error" text="Site &quot;$$s&quot; is not available in locate_update!"/>
+	<msg uid="1184" type="Error" text="Can not place comp &quot;$$s&quot; on site &quot;$$s&quot; in locate_update!"/>
+	<msg uid="1185" type="Warning" level="2" text="The placement of PIO comp &quot;$$s&quot; (Vccio=$$s, Vref=$$s) violates I/O banking rules (bank &quot;$$d&quot;, Vccio=$$s, Vref=$$s / $$s)."/>
+	<msg uid="1186" type="Error" text="M5G_PIO_BANK::unplace_update_vccio(): found inconsistent internal states of Vccio."/>
+	<msg uid="1187" type="Status" text="&gt;&gt;&gt; PIO comp &quot;$$s&quot;:"/>
+	<msg uid="1188" type="Status" text="    - Vccio=$$s"/>
+	<msg uid="1189" type="Status" text="&gt;&gt;&gt; I/O bank $$d: $$s"/>
+	<msg uid="1190" type="Error" text="M5G_PIO_BANK::unplace_update_vccio(): Inconsistent internal Vccio state found -- PIO comp &quot;$$s&quot;: Vccio=$$s, bank $$d: Vccio=$$s"/>
+	<msg uid="1191" type="Error" text="M5G_PIO_BANK::unplace_update_vref(): Inconsistent internal Vref state found -- PIO comp &quot;$$s&quot;: Vref=$$s, bank $$d: Vref1/2=($$s, $$s)"/>
+	<msg uid="1192" type="Error" text="=== Un-place PIO comp &quot;$$s&quot; from PIO site &quot;$$s / $$s&quot;, bank &quot;$$d\"/>
+	<msg uid="1193" type="Error" text="*** PIO comp $$s: Vccio=$$s, Vref=$$s"/>
+	<msg uid="1194" type="Error" text="Conflict in setting Vccio for I/O bank $$d: both $$s and $$s are needed.\n"/>
+	<msg uid="1195" type="Error" text="Please check preference file for any conflicts in required Vccio from LOCATE, PGROUP, and/or BANK preferences.\n"/>
+	<msg uid="1196" type="Error" text="M5G_PIO_BANK::post_pref_process(): Error in counting bound_sitenum_avail_min!"/>
+	<msg uid="1197" type="Error" text="I/O bank $$d (Vccio=&quot;$$s&quot;): cannot change its Vccio to &quot;$$s&quot;.  Please make sure that the Vccio requirements of locked PIO comps to the same I/O bank are compatible with each other."/>
+	<msg uid="1198" type="Error" text="I/O bank $$d (Vref=&quot;$$s/$$s&quot;): Vref &quot;$$s&quot; cannot be assigned to the same I/O bank.  Please make sure that the Vref requirements of locked PIO comps to the same I/O bank are compatible.  Each I/O bank can support up to 2 different Vref inputs."/>
+	<msg uid="1199" type="Error" text="The Vref input pins in I/O bank $$d are unavailable (probably due to PROHIBIT statements or pin locking in the preference), while some PIO comps to be placed in this I/O bank require Vref=&quot;$$s&quot;.  Please make sure that the Vref input pins in this I/O bank are available."/>
+	<msg uid="1200" type="Error" text="M5G_IO_BANKING_GROUP::update_vccio(): Invalid Vccio given -- I/O banking group Vccio &quot;$$s&quot; vs I/O group Vccio &quot;$$s&quot;."/>
+	<msg uid="1201" type="Error" text="M5G_IO_BANKING_GROUP::update_vref(): Invalid Vref given -- I/O banking group Vref &quot;$$s/$$s&quot; vs I/O group Vref &quot;$$s&quot;."/>
+	<msg uid="1202" type="Error" text="Pre-assigned bank is incompatible with the I/O banking group: bank &quot;$$d&quot; (Vccio, Vref1/2)=($$s, $$s/$$s), while I/O banking group &quot;0x$$0x&quot; (Vccio, Vref1/2)=($$s, $$s/$$s)."/>
+	<msg uid="1203" type="Status" text="// M5G_PIO_INFO::assign_iobg_banks() started"/>
+	<msg uid="1204" type="Warning" level="2" text="I/O bank assignment finished unsuccessfully."/>
+	<msg uid="1205" type="Status" text="// M5G_PIO_INFO::assign_iobg_banks() done"/>
+	<msg uid="1206" type="Status" text="// M5G_PIO_INFO::assign_iog_banks() started"/>
+	<msg uid="1207" type="Warning" level="2" text="Bank assignment finished unsuccessfully."/>
+	<msg uid="1208" type="Status" text="// M5G_PIO_INFO::assign_iog_banks() done"/>
+	<msg uid="1209" type="Warning" level="2" text="PLL_IN input pad $$s for PLL site $$s is not bonded out, or is not the TRUE side of this PIO pair.\n"/>
+	<msg uid="1210" type="Warning" level="2" text="PLL_FB input pad $$s for PLL site $$s is not bonded out, or is not the TRUE side of this PIO pair.\n"/>
+	<msg uid="1211" type="Warning" level="2" text="Unable to find the dedicated PIOs for PLL site $$s.\n"/>
+	<msg uid="1212" type="Warning" level="2" text="Signal &quot;$$s&quot; cannot be added as a primary clock of quadrant $$s because the number of primary clocks per quadrant is limited to $$d -- request ignored."/>
+	<msg uid="1213" type="Warning" level="2" text="Signal &quot;$$s&quot; cannot be added as a secondary clock of quadrant $$s because the number of secondary clocks per quadrant is limited to $$d -- request ignored."/>
+	<msg uid="1214" type="Warning" level="2" text="Dedicated PIO &quot;$$s / $$s&quot; cannot drive $$s inputs using the secondary clock spines; therefore, generic routing resources will be used for clock signal &quot;$$s&quot;."/>
+	<msg uid="1215" type="Warning" level="2" text="PLL output signal &quot;$$s&quot; is selected to use secondary clock routing resources, but there's no direct connection from PLL outputs to secondary clock spines, therefore a larger skew or delay may be introduced for this clock signal."/>
+	<msg uid="1216" type="Warning" level="2" text="(User pref. $$s clock) Signal &quot;$$s&quot; is not selected as a $$s clock since it has been assigned as a $$s clock already"/>
+	<msg uid="1217" type="Warning" level="2" text="(User pref. $$s clock) Signal &quot;$$s&quot; is selected to use the $$s clock resources per user preference; however, it doesn't drive any $$s inputs."/>
+	<msg uid="1218" type="Warning" level="2" text="(User pref. $$s clock) Signal &quot;$$s&quot; drives $$s input but it doesn't drive any other $$s inputs, therefore it will not be selected to use the $$s clock resources.  However, par will try to use a direct connection for this signal from its driver &quot;$$s&quot; to the $$s input."/>
+	<msg uid="1219" type="Warning" level="2" text="(User pref. $$s clock) Signal &quot;$$s&quot; is not selected to use the $$s clock resources because it doesn't drive any $$s inputs."/>
+	<msg uid="1220" type="Warning" level="2" text="(user pref. $$s clock) PLL internal feedback signal &quot;$$s&quot; is not selected to use the $$s clock resources because it is driven by the CLKINTFB output of PLL $$s."/>
+	<msg uid="1221" type="Warning" level="2" text="(user pref. $$s clock) PLL feedback signal &quot;$$s&quot; is not selected to use the $$s clock resources because it only drives the FBK input of PLL $$s, and FB_MODE of this PLL is INTERNAL."/>
+	<msg uid="1222" type="Warning" level="2" text="(User pref. $$s clock) Signal &quot;$$s&quot; is not selected as a $$s clock in quadrant $$s; maximum of $$d signals are already selected."/>
+	<msg uid="1223" type="Error" text="(User pref. $$s clock) The number of $$s clocks defined is more than available $$d in quadrant $$s!"/>
+	<msg uid="1224" type="Warning" level="2" text="(User pref. $$s clock) Signal &quot;$$s&quot; is not selected as a $$s clock due to the limitation of $$s clock spine."/>
+	<msg uid="1225" type="Warning" level="2" text="(User pref. $$s clock) Signal &quot;$$s&quot; is not selected to use $$s clock resources due to the limited availability of clock driver and/or clock spine resources."/>
+	<msg uid="1226" type="Error" text="The CLKFB input of PLL $$s is driven by its $$s output, which requires the PLL feedback signal &quot;$$s&quot; to be selected as a primary clock; however it has already been selected to use the secondary clock resources."/>
+	<msg uid="1227" type="Error" text="Too many DCS in the quadrant $$s in this design."/>
+	<msg uid="1228" type="Error" text="DCS &quot;$$d&quot; in quadrant $$s has been occupied by signal &quot;$$s\"/>
+	<msg uid="1229" type="Warning" level="2" text="Signal &quot;$$s&quot; may be a good candidate as a clock.  Currently it cannot be selected automatically by par as a primary clock due to resources and/or connectivity limitation."/>
+	<msg uid="1230" type="Error" text="It is impossible to find a primary clock assignment in quadrant $$s."/>
+	<msg uid="1231" type="Warning" level="2" text="Signal &quot;$$s&quot; is a PLL CLKOP output and is selected to use a DCS clock spine.  However, there's no direct connection between PLL CLKOP and DCS inputs, therefore this clock signal may suffer from excessive delay or skew."/>
+	<msg uid="1232" type="Error" text="Signal &quot;$$s&quot; is a PLL CLKOP output and is selected to use a DCS clock spine, which is not allowed because there's no direct connection between PLL CLKOP and DCS inputs."/>
+	<msg uid="1233" type="Error" text="Quadrant $$s: signal &quot;$$s&quot; cannot be assigned to DCS."/>
+	<msg uid="1234" type="Error" text="SCLK signal &quot;$$s&quot;, sclk idx=$$d"/>
+	<msg uid="1235" type="Warning" level="2" text="Signal &quot;$$s&quot; is selected to use secondary clock resources, and its driver was placed on a dedicated PIO &quot;$$s / $$s&quot;; however, the corresponding SCLK[$$s] was occupied by some other signals; therefore, signal &quot;$$s&quot; has to use a CIB and another spine, and it may suffer from excessive delay or skew."/>
+	<msg uid="1236" type="Status" text="&gt;&gt;&gt; Primary clock &quot;$$s&quot; ==&gt; driver: &quot;$$s&quot;"/>
+	<msg uid="1237" type="Error" text="Failed to assign primary clock &quot;$$s&quot;: this clock is driven by &quot;$$cPIO&quot;, therefore it can only reach PCLK$$d; however this spine has been used already."/>
+	<msg uid="1238" type="Status" text="&gt;&gt;&gt; Primary clock &quot;$$s&quot; is closer to CIB LL, but only PCLK$$d is available."/>
+	<msg uid="1239" type="Status" text="&gt;&gt;&gt; Primary clock &quot;$$s&quot; is closer to CIB UR, but only PCLK$$d is available."/>
+	<msg uid="1240" type="Status" text="&gt;&gt;&gt; Primary clock &quot;$$s&quot; ==&gt; driver: &quot;$$s&quot;, PCLK$$d\n"/>
+	<msg uid="1241" type="Status" text="&gt;&gt;&gt; Primay clock &quot;$$s&quot; ==&gt; driver: &quot;$$s&quot;, PCLK$$d"/>
+	<msg uid="1242" type="Error" text="All primary clock spines have been used, so there's no room left for signal &quot;$$s&quot;."/>
+	<msg uid="1243" type="Warning" level="2" text="(User pref. secondary clock) Signal &quot;$$s&quot; is not selected to use secondary clock resources because it has already been assigned as a $$s clock."/>
+	<msg uid="1244" type="Warning" level="2" text="User pref. secondary clock) Signal &quot;$$s&quot; is selected to use secondary clock resources per user preference; however, it doesn't drive any CLK/CE/LSR inputs."/>
+	<msg uid="1245" type="Warning" level="2" text="User pref. secondary clock) Signal &quot;$$s&quot; is not selected to use secondary clock resources becaue it doesn't drive any CLK/CE/LSR inputs."/>
+	<msg uid="1246" type="Warning" level="2" text="(User pref. secondary clock) PLL CLKOP=&gt;CLKFB feedback signal &quot;$$s&quot; is assigned to use secondary clock resources;  however, this signal has to use a primary clock tree.  The preference will be ignored."/>
+	<msg uid="1247" type="Warning" level="2" text="(User pref. secondary clock) Signal &quot;$$s&quot; is not selected to use secondary clock resources in quadrant $$s; maximum of $$s signals are already selected."/>
+	<msg uid="1248" type="Error" text="(User pref. secondary clock) The number of secondary clocks defined is more than available $$d in quadrant $$s."/>
+	<msg uid="1249" type="Warning" level="2" text="(User pref. secondary clock) Signal &quot;$$s&quot; is not selected to use secondary clock resources due to the limitation of secondary clock spines."/>
+	<msg uid="1250" type="Warning" level="2" text="Dedicated PIO &quot;$$s / $$s&quot; cannot directly drive $$s inputs through any secondary clock spine; therefore, generic routing resources will be used as part of the routing of clock signal &quot;$$s&quot;."/>
+	<msg uid="1251" type="Error" text="Unable to assign sclk $$s to any sclk spine."/>
+	<msg uid="1252" type="Error" text="Secondary clock signal &quot;$$s&quot; doesn't have a spine assigned."/>
+	<msg uid="1253" type="Error" text="spine_index[j]=$$d, spine_idx=$$d"/>
+	<msg uid="1254" type="Warning" level="2" text="There're $$d secondary clocks to be assigned,but only $$d secondary clock drivers available."/>
+	<msg uid="1255" type="Warning" level="2" text="Unable to assign signal &quot;$$s&quot; as a secondary clock because of sclk driver/spine resource limitation."/>
+	<msg uid="1256" type="Warning" level="2" text="Not all &quot;secondary clock&quot; signals listed in the preferences can be assigned to use secondary clock resources."/>
+	<msg uid="1257" type="Warning" level="2" text="Signal &quot;$$s&quot; is not selected as a secondary clock due to resources limitation."/>
+	<msg uid="1258" type="Error" text="A CLK input of DCS &quot;$$s&quot; is driven by the CLKOP output of PLL &quot;$$s&quot;, which is not allowed."/>
+	<msg uid="1259" type="Warning" level="2" text="A CLK input of DCS &quot;$$s&quot; is driven by the CLKOP output of PLL &quot;$$s&quot;;  however, there's no direct connection between PLL CLKOP and DCS inputs, therefore the signal &quot;$$s&quot; may suffer from excessive delay or skew."/>
+	<msg uid="1260" type="Error" text="Failed to assign clock signal &quot;$$s&quot; (which is driven by DCS &quot;$$s&quot;) as a DCS source (internal error?)"/>
+	<msg uid="1261" type="Error" text="Failed to add clock signal &quot;$$s&quot; (which is driven by DCS &quot;$$s&quot;)  as a primary/DCS clock because too many DCS clocks found."/>
+	<msg uid="1262" type="Error" text="There's no enough resources for placing DCS &quot;$$s&quot;."/>
+	<msg uid="1263" type="Warning" level="2" text="The $$s input of DCS comp &quot;$$s&quot; is driven by PCLK input pin &quot;$$s / $$s&quot;; however, there is no direct connection between according to the connectivity, therefore general routing may have to be used."/>
+	<msg uid="1264" type="Error" text="There're $$d DCS input signals to be assigned, but only $$d DCS input drivers are available.  Please check your design / preferences carefully."/>
+	<msg uid="1265" type="Warning" level="2" text="Signal &quot;$$s&quot; drives DCS.CLK$$d and DCS.CLK$$d inputs at the same time."/>
+	<msg uid="1266" type="Error" text="DCS assignment failed.  Please check your design / preferences carefully."/>
+    <msg uid="1267" type="Error" text="*** Bank $$d: Vccio=$$s, # of comps of Vccio=$$d; Vref=($$s, $$s), # of comps of Vrefs=($$d, $$d)"/>
+	<msg uid="1268" type="Warning" level="2" text="(User pref. secondary clock) PLL CLKOP=&gt;CLKFB feedback signal &quot;$$s&quot; is assigned to use secondary clock resources;  however, because this PLL &quot;$$s&quot; has a property FB_MODE=CLOCKTREE or EXTERNAL, this signal has to use primary/pure clock tree.  The preference will be ignored."/>
+	<msg uid="1269" type="Warning" level="2" text="(user pref. $$s clock) PLL $$s=&gt;CLKFB feedback signal &quot;$$s&quot; is assigned to use secondary clock resources in the preference; however, this signal has to use a primary clock tree.  The preference will be ignored."/>
+	<msg uid="1270" type="Warning" level="2" text="(user pref. $$s clock) PLL CLKOP=&gt;CLKFB feedback signal &quot;$$s&quot; is assigned to use secondary clock resources in the preference; however, because this PLL comp &quot;$$s&quot; has a property FB_MODE=CLOCKTREE or EXTERNAL, this signal has to use a primary/PURE clock tree.  The preference will be ignored."/>
+	<msg uid="1271" type="Error" text="PLL $$s has the property FB_MODE=CLOCKTREE, which requires its feedback signal &quot;$$s&quot; to be selected as a primary clock; however there's no space for primary clocks."/>
+	<msg uid="1272" type="Warning" level="2" text="Signal &quot;$$s&quot; has been prohibited from being choosen as a primary clock; however, PLL $$s has property FB_MODE=CLOCKTREE, which requires its feedback signal &quot;$$s&quot; to be selected as a primary clock.  The prohibit preference for this signal will be ignored."/>
+	<msg uid="1273" type="Error" text="PERSISTENT is set to &quot;$$s&quot; for this design, therefore the dual-function sysCONFIG pins shall be reserved for sysCONFIG only; however, sysCONFIG pin &quot;$$s/$$s&quot; has been occupied by a differential PIO comp &quot;$$s&quot;, which is not allowed.\n"/>
+	<msg uid="1274" type="Warning" level="2" text="(user pref. $$s clock) Signal &quot;$$s&quot; is not selected as a $$s clock; maximum of $$d signals have already been selected."/>
+	<msg uid="1275" type="Warning" level="2" text="(user pref. $$s clock) Signal &quot;$$s&quot; is not selected as a primary/DCS clock; maximum $$d signals have already been selected."/>
+	<msg uid="1276" type="Warning" level="2" text="(user pref. $$s clock) Signal &quot;$$s&quot; is not selected as a primary/PURE clock; maximum $$d signals have already been selected."/>
+	<msg uid="1277" type="Status" text=""/>
+	<msg uid="1278" type="Warning" level="2" text="(user pref. $$s clock) Signal &quot;$$s&quot; is not selected as a $$s clock because signal &quot;$$s&quot; is a global reset."/>
+	<msg uid="1279" type="Error" text="$$d PIOs ($$s...etc) with IO_TYPE_DIR=$$s and PLLMODE=$$s can only be placed in BANK $$d, but only $$d out of $$d PIO sites are available. Please check the I/O placement constraints / system configuration / legal combination table."/>
+	
+	</messages>
+</messageFile>

@@ -1,0 +1,26 @@
+#-- Synplicity, Inc.
+#-- Synplify version 3.0
+#-- Project file V:\rel\latest\examples\verilog\lucent\prep2_2.prj
+#-- Written on Tue Jul 15 18:48:46 1997
+
+#device options
+set_option -technology orca2c
+set_option -part 2C04A
+set_option -speed_grade -4
+
+#add_file options
+add_file -verilog "../common_rtl/prep/prep2_2.v"
+add_file -constraint "prep2_2.sdc"
+
+#compilation/mapping options
+set_option -default_enum_encoding onehot
+set_option -symbolic_fsm_compiler true
+
+#map options
+set_option -frequency 20.000
+set_option -fanout_limit 20
+set_option -force_gsr true
+set_option -disable_io_insertion false
+
+#set result format/file last
+project -result_file "prep2_2.edn"

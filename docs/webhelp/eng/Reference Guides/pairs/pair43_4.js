@@ -1,0 +1,25 @@
+var pairs =
+{
+"digital":{"temperature":1}
+,"temperature":{"readout":1,"sensing":1,"die":1}
+,"architectures":{"supported":1}
+,"inputs":{"start_pulse":1}
+,"outputs":{"dtr_out":1}
+,"readout":{"dtr":1}
+,"dtr":{"board":1,"start":1,"output":1}
+,"board":{"temperature":1}
+,"sensing":{"circuit":1}
+,"circuit":{"provides":1}
+,"provides":{"junction":1}
+,"junction":{"temperature":1}
+,"die":{"running":1}
+,"table":{"below":1}
+,"below":{"port":1}
+,"port":{"descriptions":1}
+,"pulse":{"instruct":1}
+,"instruct":{"dtr":1}
+,"start":{"capturing":1}
+,"capturing":{"temperature":1}
+,"8-bit":{"dtr":1}
+}
+;Search.control.loadWordPairs(pairs);

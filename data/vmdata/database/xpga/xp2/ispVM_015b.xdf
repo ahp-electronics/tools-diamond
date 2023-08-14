@@ -1,0 +1,1073 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Spinti 07/07/06
+	xpga/xp2 sub directory
+		.Contains device database file and all the algorithm files for LatticeXP2 technology devices.
+	 ispVM_015.xdf  support :
+		. LatticeXP2 family.
+		
+	Spinti: 05/07/07 Created LFXP2-17E_ES database.
+	Ong   : Commented out the following operations:
+			FLASH Program USERCODE, FLASH TAG Operations, FLASH Read Status Register, FLASH Display EBR ,		
+			FLASH Display SED_CRC, FLASH Program DONE bit, XFLASH Calculate Checksum, XFLASH TAG Operations,
+			XFLASH Read Status Register, XFLASH Display EBR, XFLASH Display SED_CRC, SRAM Verify Only
+			SRAM Display SED_CRC, SRAM Read Status Register.
+	Ong	: Added XFLASH Display USERCODE, and XSRAM Display USERCODE operations.
+	Spinti: 06/01/07 Corrected Programming_Mode_Control.
+	Ong   : 06/22/07  Corrected the Socket Adpater names for LFXP2-17E.
+	        	Renamed PA-T100/LFXP3C to PN-Q208/LFXP2
+			Renamed PA-T144/LFXP3C to PN-FT256/LFXP2
+			Renamed PA-Q208/LFXP3C to PN-F484/LFXP2
+	Spinti: 07/03/07 Added LFXP2-5E, LFXP2-8E, LFXP2-30E, and LFXP2-40E.
+	07/03/07 Nguyen modified to support rev B silicon
+	07/20/07 Nguyen modified to support "SRAM Program,Verify" Operation
+	Spinti: 09/05/07 Removed the .xfp tag since the XP2 does not have a sysCONFIG port.
+	Spinti: 09/28/07 Changed all 5, 8, 30, and 40 to call the XP2.SVP and TURBO_XP2.svp instead of the _ENG.svp's.
+	Spinti: 10/02/07 Removed the 5, 8, and 30 support. Added Status_Control tag to the XP2-40.
+	Spinti: 10/22/07 Added the LFXP2-5 Beta support.
+	Spinti: 11/09/07 Enabled the SECURITY Programming_Mode_Control.
+	Ong   : 11/27/07 Added socket adapter listing for LFXP2-5E and LFXP2-40E.
+			     LFXP2-5E: PN-FT256/LFXP2, LFXP2-40E: PN-F672/LFXP2
+	Spinti: 12/14/07 Added LFXP2-8E and LFXP2-30E.
+	Ong   : 01/08/08 Added addition socket adapter listing for LFXP2-5E.
+				PN-M132/LFXP2 and PN-T144/LFXP2 
+	Nguyen: 01/18/08 changed the maximum PWE for the 17K to 240 seconds based on Howard request. 
+	Liu	: 01/23/08 Add Slave SPI Erase,Program,Verify,Refresh.
+	Nguyen: 02/25/08 Added The "XFLASH Erase,Program,Secure" operation
+	Ong	: 02/29/08 Added socket adapter listing for LFXP2-8E and LFXP2-30E.
+			     LFXP2-8E: PN-FT256/LFXP2, LFXP2-30E: PN-F484/LFXP2
+	Ong   : 03/05/08 Added socket adapter listing for LFXP2-8E, PN-M132/LFXP2. 
+	Nguyen: 02/25/08 added XFLASH Erase,Program,Verify,Refresh operation
+	Nguyen: 03/11/08 changed the maximum PWE based on the table from Shawn Murray
+	Device		"Erase Time Worst Case, 125C (seconds)"
+	XQ-5K	Tag			2
+			Main Array	120
+	XQ-8K 	Tag			2
+			Main Array	180
+	XQ-17K	Tag			2
+			Main Array	240
+	XQ-30K 	Tag			4
+			Main Array	280
+	XQ-40K	Tag			4
+			Main Array	300
+	Ong	: 03/10/08 Added addition socket adapter listing for LatticeXP2.
+				LFXP2-5E: PN-Q208/LFXP2
+				LFXP2-8E: PN-T144/LFXP2 and PN-Q208/LFXP2
+				LFXP2-30E: PN-FT256/LFXP2
+	Ong	: 03/28/08 Added remaining socket listing for LatticeXP2.
+				LFXP2-30E: PN-F672/LFXP2
+				LFXP2-40E: PN-F484/LFXP2
+	Spinti: 04/14/08 Moved all "ES" to Alias.
+	Nguyen: 05/16/08 Added "XSRAM Read Status Register" and "XSRAM Verify Only"
+					 Added "Security Read Protect Fuses" and "Security Program Protect Fuses"
+	Nguyen: 06/23/08 Added The persitent fuses location for 5K, 8K, 30K and 40K 
+	Nguyen: 06/23/08 Added "Slave SPI Background Erase,Program" and "Slave SPI Background Erase,Program,Secure" operations
+	Nguyen: 06/23/08 Update the persisten fuses table
+	Nguyen: 06/23/08 Added Security Program Option 1-13 operations
+	Nguyen: 06/17/08 Added "Scan SPI Flash Device" and "SPI Flash Program" operations
+	Nguyen: 08/26/08 Added "FLASH Verify DONE Bit" and "XFLASH Verify DONE Bit" operations					 
+	Nguyen: 08/26/08 Added "FLASH Verify DONE Bit" and "XFLASH Verify DONE Bit" operations	
+	Spinti: 09/03/08 Added the Persistent_fuse information for the LFXP2-5E, LFXP2-8E, LFXP2-30E, and LFXP2-40E.
+	Nguyen 09/10/08 Added "Security Program with Flash Protect Only", "Security Background Program with Flash Protect Only" and "Slave SPI Program with Flash Protect Only"
+	09/17/08 Spinti: Changed "Security Program Protect Key", "Security Read Protect Fuses", "Security Erase,Program,Verify", "Security Program with Flash Protect Only", "Security Background Erase,Program,Verify", and "Security Background Program with Flash Protect Only" operations to
+	         "Security Program Flash Protect Key", "Security Read Flash Protect Key", "Security Erase,Program,Verify with Encryption", "Security Erase,Program,Verify with Flash Protect", "Security Background Program with Encryption", and "Security Background Program with Flash Protect", respectively.
+	11/13/08 Nguyen added "Security Program Flash Protect Key with Feature Lock" operation
+	11/18/08 Nguyen added the SECKEYS and SECPRODUCT Mode
+	11/18/08 Nguyen changed the Security operations: 
+	I. "Advanced Security Encryption File Programming" contains all the operations relate to the jedec file (the key word will be Security):
+ 
+     1. Security Flash Erase with Flash Protect        
+     2. Security Flash Erase Only 
+     3. Security EPV with Encryption  
+     4. Security EPVS with Encryption 
+     5. Security EPV with Encryption and Flash Protect
+     6. Security EPVS with Encryption and Flash Protect   
+     7. Security EPV with Flash Protect
+     8. Security EPVS with Flash Protect 
+     9. Security Verify Only 
+    10. Security Read and Save 
+    11. Security Background EPV with Encryption
+    12. Security Background EPVS with Encryption
+    13. Security Background EPV with Encryption and Flash Protect 
+    14. Security Background EPVS with Encryption and Flash Protect 
+    15. Security Background EPV with Flash Protect
+    16. Security Background EPVS with Flash Protect 
+    17.  Security Background Erase with Flash Protect 
+    18.  Security Background Erase Only 
+    19. Security Read Status Register  
+    
+	II. "Advanced Security Keys Programming" contains all the operations relate to the key and feature row (the key words will be Key, Feature, Manufacturing):
+    
+    1. Security Program Encryption Key and Flash Protect
+    2. Security Program Encryption Key and Flash Protect with Lock
+    3. Security Program Encryption Key Only
+    4. Security Program Encryption Key Only with Lock 
+    5. Security Program Flash Protect Key Only
+    6. Security Program Flash Protect Key with Lock
+    7. Security Erase Feature Row
+    8. Security Read Feature Row
+    9. Security Read Status Register  
+        
+	III. "Advanced Security Production Programming" contains all the operations to perform the 1 shot programming the key and jedec file (the key word will be Option):
+ 
+     1. Security Program Option 1: Security EPVS with full feature Option 
+     2. Security Program Option 2: Security EPV with Encrypt Only Option
+     3. Security Program Option 3: Security EPVS with Encrypt Only Option
+     4. Security Program Option 4: Security EPV with Encrypt and Lock Option
+     5. Security Program Option 5: Security EPVS with Encrypt and Lock Option
+     6. Security Program Option 6: Security EPV with Protect Only Option
+     7. Security Program Option 7: Security EPVS with Protect Only Option
+     8. Security Program Option 8: Security EPV with Protect and Lock Option
+     9. Security Program Option 9: Security EPVS with Protect and Lock Option
+    10. Security Program Option 10 - Security EPV with OTP Option
+    11. Security Program Option 11 - Security EPVS with OTP Option 
+    12. Security Program Option 12: Security EPV with my_ASSP Option
+    13. Security Program Option 13: Security EPVS with my_ASSP Option 
+    14. Security Program Option 14: Security EPV with OTP and my_ASSP Option 
+    15. Security Program Option 15: Security EPVS with OTP and my_ASSP Option 
+    
+    01/08/09 Nguyen Added "FLASH Refresh" and "XFLASH Refresh" operations
+    04/21/09 Spinti Added "Security EPV with OTP Option" and "Security EPVS with OTP Option" operations.
+    04/22/09 Spinti Moved the Security Read Status Register to the top of the operation list.
+    10/22/09 Nguyen added 
+    Slave SPI EPVS with Encryption	
+    Slave SPI EPVS with Encryption,Refresh	
+	Slave SPI EPV with Flash Protect
+	Slave SPI EP with Flash Protect
+	Slave SPI EPV with Flash Protect,Refresh
+	Slave SPI EP with Flash Protect,Refresh
+	Slave SPI EPVS with Flash Protect
+	Slave SPI EPS with Flash Protect
+	Slave SPI EPVS with Flash Protect,Refresh
+	Slave SPI EPS with Flash Protect,Refresh		
+	Slave SPI EPVS with Encryption and Flash Protect
+	Slave SPI EPVS with Encryption and Flash Protect,Refresh												 
+	Slave SPI Erase with Flash Protect
+	Slave SPI Refresh
+	12/05/09 Nguyen Added "FLASH Program,Verify,skip Erase" and "XFLASH Program,Verify,skip Erase" operations
+	12/15/09 Nguyen added "Security Verify Encryption Key" operation
+	06/04/2010 Nguyen: sync up the devices with Diamond 1.0 device list
+-->
+<ispXDF version="16.1">
+    <Family name="LatticeXP2">
+       <FamilyAliasName>LatticeXP2_ENG</FamilyAliasName>
+       <Device name="LFXP2-5E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP2-5E </CodeName>
+            <FullName> LFXP2-5E </FullName>
+            <AliasName> LFXP2-5E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XP2.svp"
+                         value="0x07"/>
+            <JtagID>0x01299043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth>  638 </ColWidth>
+            <RowWidth> 1938 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <ArchLength> 632 </ArchLength>
+            <SEDLength>  32 </SEDLength>
+            <TotalFuses> 1236476 </TotalFuses> 
+            <PWP>   10 </PWP>
+            <PWE>   1200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>394</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP2-5E </PON>
+                <AliasPON> LFXP2-5E_ES </AliasPON>
+                <JDFFile> lfxp2-5.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LFXP2-5E-XXM132 </PON>
+                <AliasPON> LFXP2-5E-XXM132ES </AliasPON>
+                <JDFFile> lfxp2-5.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LFXP2-5E-XXT144 </PON>
+                <AliasPON> LFXP2-5E-XXT144ES </AliasPON>
+                <JDFFile> lfxp2-5.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LFXP2-5E-XXQ208 </PON>
+                <AliasPON> LFXP2-5E-XXQ208ES </AliasPON>
+                <JDFFile> lfxp2-5.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-Q208/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LFXP2-5E-XXFT256 </PON>
+                <AliasPON> LFXP2-5E-XXFT256ES </AliasPON>
+                <JDFFile> lfxp2-5.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256/LFXP2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;011110;
+            							011110;010001;000001;011110;001001;010001;000001;
+            							010001;001011;000001;111001;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;111111;
+            				   111010;111011;110100;110111;110111;110000;110000;
+            				   110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBRFile> lfxp2-5_ebr_only.bit </EBRFile>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;1933;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;396;</Persistent_fuse_Column>
+            </Persistent_fuse>
+			<Status_Control>
+            	<StatusBitName>;PASS/FAIL;DONE;PROTECT;FEATURE;OTP;KEYLOCK;ENCRYPT;SECURITY;</StatusBitName>
+            	<StatusControl>;in;in;in;in;in;in;in;in;</StatusControl>
+            	<StatusIndex>;0;1;2;3;4;5;6;7;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LAXP2-5E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAXP2-5E </CodeName>
+            <FullName> LAXP2-5E </FullName>
+            <AliasName> LFXP2-5E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XP2.svp"
+                         value="0x07"/>
+            <JtagID>0x01299043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth>  638 </ColWidth>
+            <RowWidth> 1938 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <ArchLength> 632 </ArchLength>
+            <SEDLength>  32 </SEDLength>
+            <TotalFuses> 1236476 </TotalFuses> 
+            <PWP>   10 </PWP>
+            <PWE>   1200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>394</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LAXP2-5E </PON>
+                <AliasPON> LFXP2-5E </AliasPON>
+                <JDFFile> lfxp2-5.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LAXP2-5E-XXM132 </PON>
+                <AliasPON> LFXP2-5E-XXM132 </AliasPON>
+                <JDFFile> lfxp2-5.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LAXP2-5E-XXT144 </PON>
+                <AliasPON> LFXP2-5E-XXT144 </AliasPON>
+                <JDFFile> lfxp2-5.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LAXP2-5E-XXQ208 </PON>
+                <AliasPON> LFXP2-5E-XXQ208 </AliasPON>
+                <JDFFile> lfxp2-5.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-Q208/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LAXP2-5E-XXFT256 </PON>
+                <AliasPON> LFXP2-5E-XXFT256 </AliasPON>
+                <JDFFile> lfxp2-5.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256/LFXP2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;011110;
+            							011110;010001;000001;011110;001001;010001;000001;
+            							010001;001011;000001;111001;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;111111;
+            				   111010;111011;110100;110111;110111;110000;110000;
+            				   110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBRFile> lfxp2-5_ebr_only.bit </EBRFile>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;1933;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;396;</Persistent_fuse_Column>
+            </Persistent_fuse>
+			<Status_Control>
+            	<StatusBitName>;PASS/FAIL;DONE;PROTECT;FEATURE;OTP;KEYLOCK;ENCRYPT;SECURITY;</StatusBitName>
+            	<StatusControl>;in;in;in;in;in;in;in;in;</StatusControl>
+            	<StatusIndex>;0;1;2;3;4;5;6;7;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LFXP2-8E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP2-8E </CodeName>
+            <FullName> LFXP2-8E </FullName>
+            <AliasName> LFXP2-8E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XP2.svp"
+                         value="0x07"/>
+            <JtagID>0x0129A043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth>  772 </ColWidth>
+            <RowWidth> 2532 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <ArchLength> 768 </ArchLength>
+            <SEDLength>  32 </SEDLength>
+            <TotalFuses> 1954736 </TotalFuses> 
+            <PWP>   10 </PWP>
+            <PWE>   1800 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>522</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP2-8E </PON>
+                <AliasPON> LFXP2-8E-ES </AliasPON>
+                <JDFFile> lfxp2-8.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LFXP2-8E-XXM132 </PON>
+                <AliasPON> LFXP2-8E-XXM132ES </AliasPON>
+                <JDFFile> lfxp2-8.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LFXP2-8E-XXT144 </PON>
+                <AliasPON> LFXP2-8E-XXT144ES </AliasPON>
+                <JDFFile> lfxp2-8.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LFXP2-8E-XXQ208 </PON>
+                <AliasPON> LFXP2-8E-XXQ208ES </AliasPON>
+                <JDFFile> lfxp2-8.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-Q208/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LFXP2-8E-XXFT256 </PON>
+                <AliasPON> LFXP2-8E-XXFT256ES </AliasPON>
+                <JDFFile> lfxp2-8.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256/LFXP2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;011110;
+            							011110;010001;000001;011110;001001;010001;000001;
+            							010001;001011;000001;111001;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;111111;
+            				   111010;111011;110100;110111;110111;110000;110000;
+            				   110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBRFile> lfxp2-8_ebr_only.bit </EBRFile>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;2527;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;453;</Persistent_fuse_Column>
+            </Persistent_fuse>
+			<Status_Control>
+            	<StatusBitName>;PASS/FAIL;DONE;PROTECT;FEATURE;OTP;KEYLOCK;ENCRYPT;SECURITY;</StatusBitName>
+            	<StatusControl>;in;in;in;in;in;in;in;in;</StatusControl>
+            	<StatusIndex>;0;1;2;3;4;5;6;7;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LAXP2-8E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAXP2-8E </CodeName>
+            <FullName> LAXP2-8E </FullName>
+            <AliasName> LFXP2-8E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XP2.svp"
+                         value="0x07"/>
+            <JtagID>0x0129A043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth>  772 </ColWidth>
+            <RowWidth> 2532 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <ArchLength> 768 </ArchLength>
+            <SEDLength>  32 </SEDLength>
+            <TotalFuses> 1954736 </TotalFuses> 
+            <PWP>   10 </PWP>
+            <PWE>   1800 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>522</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LAXP2-8E </PON>
+                <AliasPON> LFXP2-8E </AliasPON>
+                <JDFFile> lfxp2-8.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LAXP2-8E-XXM132 </PON>
+                <AliasPON> LFXP2-8E-XXM132 </AliasPON>
+                <JDFFile> lfxp2-8.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LAXP2-8E-XXT144 </PON>
+                <AliasPON> LFXP2-8E-XXT144 </AliasPON>
+                <JDFFile> lfxp2-8.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LAXP2-8E-XXQ208 </PON>
+                <AliasPON> LFXP2-8E-XXQ208 </AliasPON>
+                <JDFFile> lfxp2-8.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-Q208/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LAXP2-8E-XXFT256 </PON>
+                <AliasPON> LFXP2-8E-XXFT256 </AliasPON>
+                <JDFFile> lfxp2-8.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256/LFXP2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;011110;
+            							011110;010001;000001;011110;001001;010001;000001;
+            							010001;001011;000001;111001;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;111111;
+            				   111010;111011;110100;110111;110111;110000;110000;
+            				   110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBRFile> lfxp2-8_ebr_only.bit </EBRFile>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;2527;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;453;</Persistent_fuse_Column>
+            </Persistent_fuse>
+			<Status_Control>
+            	<StatusBitName>;PASS/FAIL;DONE;PROTECT;FEATURE;OTP;KEYLOCK;ENCRYPT;SECURITY;</StatusBitName>
+            	<StatusControl>;in;in;in;in;in;in;in;in;</StatusControl>
+            	<StatusIndex>;0;1;2;3;4;5;6;7;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LFXP2-17E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP2-17E </CodeName>
+            <FullName> LFXP2-17E </FullName>
+            <AliasName> LFXP2-17E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XP2.svp"
+                         value="0x07"/>
+            <JtagID>0x0129B043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2188 </ColWidth>
+            <RowWidth> 1658 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <ArchLength>  2184 </ArchLength>
+            <SEDLength>  32 </SEDLength>
+            <TotalFuses> 3627736 </TotalFuses> 
+            <PWP>   10 </PWP>
+            <PWE>   2400 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>730</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP2-17E </PON>
+                <AliasPON> LFXP2-17E-ES </AliasPON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LFXP2-17E-XXQ208 </PON>
+                <AliasPON> LFXP2-17E-XXQ208ES </AliasPON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-Q208/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LFXP2-17E-XXFT256 </PON>
+                <AliasPON> LFXP2-17E-XXFT256ES </AliasPON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256/LFXP2"/>
+            </Package>
+           	<Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFXP2-17E-XXF484 </PON>
+                <AliasPON> LFXP2-17E-XXF484ES </AliasPON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484/LFXP2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;011110;
+            							011110;010001;000001;011110;001001;010001;000001;
+            							010001;001011;000001;111001;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;111111;
+            				   111010;111011;110100;110111;110111;110000;110000;
+            				   110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBRFile> lfxp2-17_ebr_only.bit </EBRFile>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;1463;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;1718;</Persistent_fuse_Column>
+            </Persistent_fuse>
+<!--
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1678</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>188</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+-->
+			<Status_Control>
+            	<StatusBitName>;PASS/FAIL;DONE;PROTECT;FEATURE;OTP;KEYLOCK;ENCRYPT;SECURITY;</StatusBitName>
+            	<StatusControl>;in;in;in;in;in;in;in;in;</StatusControl>
+            	<StatusIndex>;0;1;2;3;4;5;6;7;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LAXP2-17E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAXP2-17E </CodeName>
+            <FullName> LAXP2-17E </FullName>
+            <AliasName> LFXP2-17E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XP2.svp"
+                         value="0x07"/>
+            <JtagID>0x0129B043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2188 </ColWidth>
+            <RowWidth> 1658 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <ArchLength>  2184 </ArchLength>
+            <SEDLength>  32 </SEDLength>
+            <TotalFuses> 3627736 </TotalFuses> 
+            <PWP>   10 </PWP>
+            <PWE>   2400 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>730</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LAXP2-17E </PON>
+                <AliasPON> LFXP2-17E </AliasPON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LAXP2-17E-XXQ208 </PON>
+                <AliasPON> LFXP2-17E-XXQ208 </AliasPON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-Q208/LFXP2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LAXP2-17E-XXFT256 </PON>
+                <AliasPON> LFXP2-17E-XXFT256 </AliasPON>
+                <JDFFile> lfxp2-17.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256/LFXP2"/>
+            </Package>           	
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;011110;
+            							011110;010001;000001;011110;001001;010001;000001;
+            							010001;001011;000001;111001;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;111111;
+            				   111010;111011;110100;110111;110111;110000;110000;
+            				   110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBRFile> lfxp2-17_ebr_only.bit </EBRFile>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;1463;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;1718;</Persistent_fuse_Column>
+            </Persistent_fuse>
+<!--
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1678</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>188</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+-->
+			<Status_Control>
+            	<StatusBitName>;PASS/FAIL;DONE;PROTECT;FEATURE;OTP;KEYLOCK;ENCRYPT;SECURITY;</StatusBitName>
+            	<StatusControl>;in;in;in;in;in;in;in;in;</StatusControl>
+            	<StatusIndex>;0;1;2;3;4;5;6;7;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LFXP2-30E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP2-30E </CodeName>
+            <FullName> LFXP2-30E </FullName>
+            <AliasName> LFXP2-30E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XP2.svp"
+                         value="0x07"/>
+            <JtagID>0x0129D043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2644 </ColWidth>
+            <RowWidth> 2252 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <ArchLength> 2640 </ArchLength>
+            <SEDLength>  32 </SEDLength>
+            <TotalFuses> 5954320 </TotalFuses> 
+            <PWP>   10 </PWP>
+            <PWE>   2800 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>970</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP2-30E </PON>
+                <AliasPON> LFXP2-30E-ES </AliasPON>
+                <JDFFile> lfxp2-30.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LFXP2-30E-XXFT256 </PON>
+                <AliasPON> LFXP2-30E-XXFT256ES </AliasPON>
+                <JDFFile> lfxp2-30.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256/LFXP2"/>
+            </Package>
+           	<Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFXP2-30E-XXF484 </PON>
+                <AliasPON> LFXP2-30E-XXF484ES </AliasPON>
+                <JDFFile> lfxp2-30.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484/LFXP2"/>
+            </Package>
+           	<Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFXP2-30E-XXF672 </PON>
+                <AliasPON> LFXP2-30E-XXF672ES </AliasPON>
+                <JDFFile> lfxp2-30.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672/LFXP2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;011110;
+            							011110;010001;000001;011110;001001;010001;000001;
+            							010001;001011;000001;111001;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;111111;
+            				   111010;111011;110100;110111;110111;110000;110000;
+            				   110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBRFile> lfxp2-30_ebr_only.bit </EBRFile>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;2057;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2060;</Persistent_fuse_Column>
+            </Persistent_fuse>
+			<Status_Control>
+            	<StatusBitName>;PASS/FAIL;DONE;PROTECT;FEATURE;OTP;KEYLOCK;ENCRYPT;SECURITY;</StatusBitName>
+            	<StatusControl>;in;in;in;in;in;in;in;in;</StatusControl>
+            	<StatusIndex>;0;1;2;3;4;5;6;7;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LFXP2-40E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP2-40E </CodeName>
+            <FullName> LFXP2-40E </FullName>
+            <AliasName> LFXP2-40E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XP2.svp"
+                         value="0x07"/>
+            <JtagID>0x0129E043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 3384 </ColWidth>
+            <RowWidth> 2454 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <ArchLength> 3384 </ArchLength>
+            <SEDLength>  32 </SEDLength>
+            <TotalFuses> 8304368 </TotalFuses> 
+            <PWP>   10 </PWP>
+            <PWE>   3000 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1130</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP2-40E </PON>
+                <AliasPON> LFXP2-40E-ES </AliasPON>
+                <JDFFile> lfxp2-40.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+           	<Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFXP2-40E-XXF484 </PON>
+                <AliasPON> LFXP2-40E-XXF484ES </AliasPON>
+                <JDFFile> lfxp2-40.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484/LFXP2"/>
+            </Package>
+           	<Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFXP2-40E-XXF672 </PON>
+                <AliasPON> LFXP2-40E-XXF672ES </AliasPON>
+                <JDFFile> lfxp2-40.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F672/LFXP2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;011110;
+            							011110;010001;000001;011110;001001;010001;000001;
+            							010001;001011;000001;111001;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;111111;
+            				   111010;111011;110100;110111;110111;110000;110000;
+            				   110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBRFile> lfxp2-40_ebr_only.bit </EBRFile>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;2449;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2544;</Persistent_fuse_Column>
+            </Persistent_fuse>
+			<Status_Control>
+            	<StatusBitName>;PASS/FAIL;DONE;PROTECT;FEATURE;OTP;KEYLOCK;ENCRYPT;SECURITY;</StatusBitName>
+            	<StatusControl>;in;in;in;in;in;in;in;in;</StatusControl>
+            	<StatusIndex>;0;1;2;3;4;5;6;7;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Operation>
+        	&quot;FLASH Erase,Program,Verify&quot;
+        	&quot;FLASH Erase,Program,Verify,Secure&quot;
+        	&quot;FLASH Erase,Program,Verify,Refresh&quot;
+        	&quot;FLASH Program,Verify,skip Erase&quot;  
+        	&quot;FLASH Program&quot;       	
+        	&quot;FLASH Verify Only&quot;
+			&quot;FLASH Erase Only&quot;
+			&quot;FLASH Verify ID&quot;
+			&quot;FLASH Display ID&quot;
+			&quot;FLASH Display USERCODE&quot;
+		<!--	&quot;FLASH Program USERCODE&quot; -->
+			&quot;FLASH Read and Save&quot;
+			&quot;FLASH Calculate Checksum&quot;
+			&quot;FLASH TAG Program,Verify&quot;
+			&quot;FLASH TAG Erase&quot;
+		<!--	&quot;FLASH TAG Read and Program&quot;-->
+			&quot;FLASH Save JEDEC with TAG&quot;
+			&quot;FLASH Read Status Register&quot;
+		<!--	&quot;FLASH Display EBR&quot; -->
+			&quot;FLASH Verify DONE bit&quot;			
+			&quot;FLASH Read DONE bit&quot;
+		<!--	&quot;FLASH Program DONE bit&quot; -->
+		<!--	&quot;FLASH Display SED_CRC&quot; -->
+			&quot;FLASH Refresh&quot;
+			&quot;FLASH Bypass&quot;
+			
+			&quot;XFLASH Erase,Program,Verify&quot;
+			&quot;XFLASH Erase,Program,Verify,Secure&quot;
+			&quot;XFLASH Erase,Program,Secure&quot;
+			&quot;XFLASH Program,Verify,skip Erase&quot;
+			&quot;XFLASH Program&quot;
+			&quot;XFLASH Program and TransFR&quot;
+			&quot;XFLASH TransFR&quot;		
+			&quot;XFLASH Verify Only&quot;
+			&quot;XFLASH Erase Only&quot;
+			&quot;XFLASH Display USERCODE&quot;
+			&quot;XFLASH Read and Save&quot;
+			&quot;XFLASH Calculate Checksum&quot;
+			&quot;XFLASH Upload to Static RAM&quot;			
+		    &quot;XFLASH TAG Program,Verify&quot;
+		    &quot;XFLASH TAG Erase&quot;
+		<!--    &quot;XFLASH TAG Read and Program&quot;--> 
+			&quot;XFLASH Save JEDEC with TAG&quot; 		
+			&quot;XFLASH Read Status Register&quot;
+		<!--	&quot;XFLASH Display EBR&quot; -->
+		<!--	&quot;XFLASH Display SED_CRC&quot; -->
+			&quot;XFLASH Verify DONE bit&quot;	
+			&quot;XFLASH Read DONE bit&quot;		
+			&quot;XFLASH Refresh&quot;
+			&quot;XFLASH Bypass&quot;
+			
+			&quot;SRAM Program,Verify&quot;
+<!--			&quot;SRAM Program Only&quot;-->
+            &quot;SRAM Verify ID&quot;
+            &quot;SRAM Display ID&quot;
+            <!--	&quot;SRAM Verify Only&quot; -->
+            &quot;SRAM Erase Only&quot;
+            &quot;SRAM Display USERCODE&quot;
+            <!--	&quot;SRAM Display SED_CRC&quot; -->
+            &quot;SRAM Read and Save&quot;
+            &quot;SRAM Read Status Register&quot; 
+            &quot;SRAM Read DONE bit&quot;            
+            &quot;SRAM Refresh&quot;
+            &quot;SRAM Bypass&quot;
+
+            	&quot;XSRAM Verify ID&quot;
+            	&quot;XSRAM Display ID&quot;
+            	&quot;XSRAM Verify Only&quot;
+            	&quot;XSRAM Read Status Register&quot; 
+		<!-- &quot;XSRAM Display USERCODE&quot; -->
+            	&quot;XSRAM Read and Save&quot;
+            	&quot;XSRAM Bypass&quot;
+            		
+            	&quot;Security Program Encryption Key Only&quot;
+            	&quot;Security Program Encryption Key with Lock&quot;
+	            &quot;Security Program Flash Protect Key Only&quot;
+	        	&quot;Security Program Flash Protect Key with Lock&quot;
+	        	&quot;Security Program Encryption Key and Flash Protect&quot;
+            	&quot;Security Program Encryption Key and Flash Protect with Lock&quot;    
+<!--            	&quot;Security Verify Encryption Key&quot; -->        	        	
+	        	&quot;Security Read Feature Row&quot;
+		 		
+		 		
+
+	        	<!--&quot;Security EPV with Encryption&quot;-->
+	        	&quot;Security EPVS with Encryption&quot;
+	        	&quot;Security EPV with Flash Protect&quot;
+				&quot;Security EPVS with Flash Protect&quot;
+				<!--&quot;Security EPV with Encryption and Flash Protect&quot;-->
+	        	&quot;Security EPVS with Encryption and Flash Protect&quot;	        	
+				&quot;Security Flash Erase with Flash Protect&quot;
+		        &quot;Security Flash Erase Only&quot;			
+				&quot;Security Verify Only&quot;
+				&quot;Security Read and Save&quot;
+				<!--&quot;Security Background EPV with Encryption&quot;-->	
+				&quot;Security Background EPVS with Encryption&quot;	
+				&quot;Security Background EPV with Flash Protect&quot;
+				&quot;Security Background EPVS with Flash Protect&quot;	
+				<!--&quot;Security Background EPV with Encryption and Flash Protect&quot;-->
+				&quot;Security Background EPVS with Encryption and Flash Protect&quot;												 
+				&quot;Security Background Erase with Flash Protect&quot;
+				&quot;Security Background Erase Only&quot;
+				
+				&quot;Security Read Status Register&quot;
+				<!--&quot;Security EPV with Encrypt Only Option&quot;-->
+				&quot;Security EPVS with Encrypt Only Option&quot;
+				<!--&quot;Security EPV with Encrypt and Lock Option&quot;-->
+				&quot;Security EPVS with Encrypt and Lock Option&quot;
+				&quot;Security EPV with Protect Only Option&quot;
+				&quot;Security EPV with Protect and Lock Option&quot;				
+				&quot;Security EPVS with Protect Only Option&quot;
+				&quot;Security EPVS with Protect and Lock Option&quot;
+				&quot;Security EPVS with full feature Option&quot;
+				&quot;Security EPVS with full feature and Lock Option&quot;
+				&quot;Security EPV with OTP Option&quot;
+				&quot;Security EPVS with OTP Option&quot;
+				&quot;Security EPV with my_ASSP Option&quot;
+				&quot;Security EPVS with my_ASSP Option&quot;
+				&quot;Security EPV with OTP and my_ASSP Option&quot;
+				&quot;Security EPVS with OTP and my_ASSP Option&quot;
+				&quot;Security Erase Feature Row&quot;		 		
+				
+				
+				&quot;SPI Flash Erase,Program,Verify&quot;
+				&quot;SPI Flash Background Erase,Program,Verify&quot;
+				&quot;SPI Flash Erase,Program,Verify,Refresh&quot;
+				&quot;SPI Flash Erase,Program&quot;
+				&quot;SPI Flash Background Erase,Program&quot;
+		    	&quot;SPI Flash Verify Only&quot;
+		    	&quot;SPI Flash Background Verify Only&quot;
+		    	&quot;SPI Flash Erase All&quot;
+		    	&quot;SPI Flash Read and Save&quot;
+		    	&quot;SPI Flash Calculate File Size Checksum&quot;
+            	&quot;SPI Flash Calculate Device Size Checksum&quot;
+		    	&quot;SPI Flash Bypass&quot;
+		    	&quot;Scan SPI Flash Device&quot;
+		    	
+		    	&quot;Slave SPI Erase,Program,Verify&quot;
+		    	&quot;Slave SPI Erase,Program,Verify,Secure&quot;
+		    	&quot;Slave SPI Erase,Program,Verify,Secure,Refresh&quot;
+		    	&quot;Slave SPI Erase,Program,Verify,Refresh&quot;
+		    	&quot;Slave SPI Background Erase,Program&quot;
+		    	&quot;Slave SPI Background Erase,Program,Secure&quot;
+		    	&quot;Slave SPI Background Erase,Program,Secure,Refresh&quot;
+		    	&quot;Slave SPI Verify Only&quot;
+				&quot;Slave SPI Erase Only&quot;
+				&quot;Slave SPI Background Erase Only&quot;		    	
+				&quot;Slave SPI Verify ID&quot;
+				&quot;Slave SPI Display ID&quot;
+				&quot;Slave SPI Display USERCODE&quot;
+				&quot;Slave SPI Read and Save&quot;
+				&quot;Slave SPI Read Status Register&quot;
+				&quot;Slave SPI RAM Verify Only&quot;
+				&quot;Slave SPI RAM Read and Save&quot;
+				&quot;Slave SPI TAG Program,Verify&quot;
+				&quot;Slave SPI TAG Verify&quot;
+				&quot;Slave SPI TAG Erase&quot;
+				&quot;Slave SPI TAG Read and Program&quot;
+				&quot;Slave SPI Save JEDEC with TAG&quot;
+				&quot;Slave SPI Upload to Static RAM&quot;
+				&quot;Slave SPI EPVS with Encryption&quot;	
+				&quot;Slave SPI EPVS with Encryption,Refresh&quot;
+				&quot;Slave SPI EPV with Flash Protect&quot;
+				&quot;Slave SPI EPV with Flash Protect,Refresh&quot;
+				&quot;Slave SPI EPVS with Flash Protect&quot;
+				&quot;Slave SPI EPS with Flash Protect&quot;	
+				&quot;Slave SPI EPVS with Flash Protect,Refresh&quot;
+				&quot;Slave SPI EPS with Flash Protect,Refresh&quot;
+				&quot;Slave SPI EPVS with Encryption and Flash Protect&quot;
+				&quot;Slave SPI EPVS with Encryption and Flash Protect,Refresh&quot;												 
+				&quot;Slave SPI Erase with Flash Protect&quot;
+				&quot;Slave SPI Refresh&quot;
+       </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed;*.isc"/>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="TRUE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>2</CFGPinCount>
+     	<BitstreamModelTemplate>Magma Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;Leave Alone;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;FLASH;XFLASH;SRAM;XSRAM;SECKEYS;SECURITY;SECPRODUCT;SLAVESPI;SPI;Parallel Flash;</Programming_Mode_Control>
+     	<ICFFile>\xpga\xp2\lfxp2.icf</ICFFile>
+    </Family>   
+</ispXDF>

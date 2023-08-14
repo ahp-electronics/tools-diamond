@@ -1,0 +1,5628 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<!--   comments
+	egz, 03/30/2015, created.
+-->
+<SVF_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+	<Instruction_Length value="INSTRUCTION_REGISTER_LENGTH"/> 
+	<Row_Width			value="DEVICE_ROW_WIDTH"/> 
+	<Address_Length		value="ADDRESS_REGISTER_LENGTH"/> 
+	<Address length="ADDRESS_LENGTH">
+		INI_ADDRESS			
+	</Address>
+	<ID_Length 			value="DEVICE_ID_LENGTH"/>
+	<Usercode_Length 	value="DEVICE_USERCODE_LENGTH"/>
+	<BSCAN_Length value="BSCAN_REGISTER_LENGTH"/> 
+	<Bscan length="BSCAN_LENGTH">
+		BSCAN_DATA
+	</Bscan>
+	<BscanMask length="BSCAN_LENGTH">
+		BSCAN_MASK
+	</BscanMask>
+	<TotalFuse value="TOTAL_FUSE_MAP"/>
+	<PWP	value="PROGRAMING_PULSE_WIDTH"/>
+	<PWV	value="VERIFY_PULSE_WIDTH"/>
+	<PWE	value="ERASE_PULSE_WIDTH"/>
+	<SkipRow value="1"/>
+	<MDRDelay value="MDR_DELAY"/>
+	<Instruction>
+		EXTEST	 			= 0x15;
+		EXTEST_PULSE        = 0x2D;
+		EXTEST_TRAIN        = 0x2E;
+		INTEST              = 0x2C;
+		CLAMP               = 0x78;
+		HIGHZ               = 0x18;
+		LSC_PRELOAD         = 0x1C;
+		LSC_SAMPLE          = 0x1C;
+		BYPASS              = 0xFF;
+		VERIFY_ID			= 0xE2;
+		IDCODE_PUB          = 0xE0;
+		LSC_UIDCODE_PUB     = 0x19;
+		USERCODE            = 0xC0;
+		LSC_READ_TEMP       = 0xE8;
+		LSC_DEVICE_CTRL     = 0x7D;
+		LSC_READ_STATUS     = 0x3C;
+		LSC_CHECK_BUSY      = 0xF0;
+		LSC_REFRESH         = 0x79;
+		LSC_I2CI_CRBR_WT    = 0x9C;
+		LSC_I2CI_TXDR_WT    = 0x9D;
+		LSC_I2CI_RXDR_RD    = 0x9E;
+		LSC_I2CI_SR_RD      = 0x9F;
+		LSC_IP_A            = 0x32;
+		LSC_IP_B            = 0x38;
+		LSC_IPTEST_A        = 0x33;
+		LSC_IPTEST_B        = 0x39;
+		LSC_PROG_SPI        = 0x3A;
+		LSC_PROG_SPI1       = 0x3E;
+		LSC_IDCODE_PRV      = 0x16;
+		LSC_READ_PES        = 0x11;
+		LSC_MANUFACTURE_SHIFT = 0x90;
+		ISC_ENABLE          = 0xC6;
+		LSC_ENABLE_X        = 0x74;
+		ISC_DISABLE         = 0x26;
+		ISC_PROGRAM         = 0x67;
+		ISC_NOOP            = 0x30;
+		ISC_PROGRAM_USERCODE = 0xC2;
+		ISC_READ            = 0x80;
+		ISC_ERASE           = 0x0E;
+		ISC_DISCHARGE       = 0x14;
+		ISC_PROGRAM_DONE    = 0x5E;
+		ISC_ERASE_DONE      = 0x24;
+		ISC_PROGRAM_SECURITY = 0xCE;
+		LSC_PROGRAM_SECPLUS = 0xCF;
+		ISC_DATA_SHIFT      = 0x05;
+		ISC_ADDRESS_SHIFT   = 0x42;
+		LSC_INIT_ADDRESS    = 0x46;
+		LSC_WRITE_ADDRESS   = 0xB4;
+		LSC_PROG_INCR_RTI   = 0x82;
+		LSC_PROG_INCR_ENC   = 0xB6;
+		LSC_PROG_INCR_CMP   = 0xB8;
+		LSC_PROG_INCR_CNE   = 0xBA;
+		LSC_READ_INCR 	    = 0x6A;
+		LSC_PROG_CTRL0      = 0x22;
+		LSC_READ_CTRL0      = 0x20;
+		LSC_RESET_CRC       = 0x3B;
+		LSC_READ_CRC        = 0x60;
+		LSC_PROG_SED_CRC    = 0xA2;
+		LSC_READ_SED_CRC    = 0xA4;
+		LSC_SHIFT_PASSWORD  = 0xBC;
+		LSC_PROG_PASSWORD   = 0xF1;
+		LSC_READ_PASSWORD   = 0xF2;
+		LSC_PROG_CIPHER_KEY = 0xF3;
+		LSC_READ_CIPHER_KEY = 0xF4;
+		LSC_PROG_FEATURE    = 0xE4;          
+		LSC_READ_FEATURE    = 0xE7;      
+		LSC_PROG_FEABITS    = 0xF8;
+		LSC_READ_FEABITS    = 0xFB;
+		LSC_PROG_OTP        = 0xF9;
+		LSC_READ_OTP        = 0xFA;
+		LSC_WRITE_COMP_DIC  = 0x02;
+		LSC_WRITE_BUS_ADDR  = 0xF6;
+		LSC_PCS_WRITE       = 0x72;
+		LSC_PCS_READ        = 0xF7;
+		LSC_EBR_WRITE       = 0xB2;
+		LSC_EBR_READ        = 0xB0;
+		LSC_PROG_INCR_NV    = 0x70;
+		LSC_READ_INCR_NV    = 0x73;
+		LSC_INIT_ADDR_UFM   = 0x47;
+		LSC_READ_TAG        = 0xCA;
+		LSC_ERASE_UFM       = 0xCB;
+		LSC_PROG_UFM        = 0xC9;
+		LSC_READ_UFM        = 0xCA;
+		LSC_STORE           = 0xD0;
+		LSC_BITSTREAM_BURST = 0x7A;
+		LSC_PROG_PES        = 0xD0;
+		LSC_PROG_MES        = 0xD1;
+		LSC_PROG_MAIN_RED   = 0xD3;
+		LSC_PROG_MAIN_RCR   = 0xD4;
+		LSC_PROG_MAIN_RMR   = 0xD5;
+		LSC_PROG_NV_RED     = 0xD6;
+		LSC_PROG_NV_RMR     = 0xD7;
+		LSC_READ_MES        = 0xD8; 
+		LSC_READ_TRIM       = 0xD1;
+		LSC_PROG_TRIM       = 0xD1;
+		LSC_READ_MAIN_RED   = 0xDA;
+		LSC_READ_MAIN_RCR   = 0xDC;
+		LSC_READ_MAIN_RMR   = 0xDC;
+		LSC_READ_NV_RED     = 0xDD;
+		LSC_READ_NV_RMR     = 0xDE;
+		LSC_MFG_MTEST       = 0x96;
+		LSC_MFG_MTRIM       = 0x69;
+		LSC_MFG_MDATA       = 0x8F;
+		LSC_ISCAN           = 0xDF;			
+	</Instruction>
+</Parameter>
+<Data>
+	<DataField	name="IDTDI">
+		<FieldBlock	row_width="DEVICE_ID_LENGTH">
+			ID_DATA
+		</FieldBlock>
+	</DataField>	
+</Data>
+<Operation_List>
+	
+	"Bypass" = "INIT 	! Initialize"	;
+	
+	"Manufacturing Read PES Fuses" = "SPI_DTR_INIT 	! Initialize, 
+									  SPI_READ_ID, 
+							          SPI_SAVE_ID,
+							          SPI_EFUSE_ENABLE	! Enable programming mode, 
+									  SPI_READ_PES_REGISTER ! Read the Manufacturing Register,
+									  SPI_DISABLE ! Exit the programming mode" ;
+	
+	
+	"Manufacturing Read MES Fuses" = "SPI_DTR_INIT 	! Initialize, 
+									  SPI_READ_ID, 
+							          SPI_SAVE_ID,
+							          SPI_EFUSE_ENABLE	! Enable programming mode, 
+									  SPI_READ_MES_REGISTER ! Read the Manufacturing Register,
+									  SPI_DISABLE ! Exit the programming mode" ;
+	
+	"Manufacturing Read DTR Fuses" = "SPI_DTR_INIT, 
+							 		  SPI_READ_ID, 
+							          SPI_SAVE_ID,
+							          SPI_EFUSE_ENABLE	! Enable programming mode, 
+									  SPI_READ_DTR_REGISTER ! Read the Manufacturing Register,
+									  SPI_DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses Only" = " SPI_DTR_INIT, 
+							 		  		SPI_READ_ID, 
+							          		SPI_SAVE_ID, 
+										    SPI_READ_DTR_REGISTER_ONLY ! Read the Manufacturing Register" ;
+			
+	
+	"Read Manufacturing Register" = " SPI_INIT, 
+							 		  SPI_READ_ID, 
+							          SPI_SAVE_ID, 
+									  SPI_EFUSE_ENABLE	! Enable the programming mode,
+									  SPI_READ_MANUFACTURING_REGISTER ! Read the Manufacturing Register,
+									  SPI_DISABLE ! Exit the programming mode" ;
+						
+	"Program Manufacturing Register" = "SPI_INIT, 
+							 		    SPI_READ_ID, 
+									    SPI_PSUEDO_SRAM_ENABLE	! Enable the programming mode,
+									    SPI_PROGRAM_MANUFACTURING_REGISTER ! Program the Manufacturing Register,
+									    SPI_DISABLE ! Exit the programming mode" ;
+									  						
+	"Slave SPI Disable Only" = "SPI_INIT 	! Initialize, 
+	 			 				SPI_DISABLE ! Exit the programming mode"	;
+	"Slave SPI Enable Only" = "SPI_INIT 	! Initialize, 
+						   	   SPI_READ_ID	! Check the IDCODE,
+						  	   SPI_ENABLE	! Enable XPROGRAM mode"	;
+						   
+	"Slave SPI Re-Initialize" = "SPI_INIT 	! Initialize,  
+							 SPI_READ_ID	! Check the IDCODE,
+						  	 SPI_ENABLE	! Enable programming mode, 
+							 SPI_ERASE	! Erase the device, 
+							 SPI_DISABLE ! Exit the programming mode"	;								
+											 		  	 								
+	"Fast Program" = 			"SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,								 
+								SPI_ENABLE	! Enable programming mode,
+								SPI_ERASE	! Erase the device, 
+								SPI_PROGRAM	! Program Fuse Map,
+								SPI_VERIFY_STATUS ! Read the status bit,
+								SPI_DISABLE ! Exit the programming mode"	;			
+				 			 														
+	"Erase Only"	=			"SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,
+								SPI_ENABLE	! Enable programming mode,
+								SPI_ERASE	! Erase the device, 
+								SPI_DISABLE ! Exit the programming mode"	;	
+								
+	
+	"Erase,Program,Verify" =   		"SPI_INIT 	! Initialize, 
+									SPI_READ_ID	! Check the IDCODE, 
+									SPI_ENABLE	! Enable the SRAM,
+									SPI_ERASE	! Erase the device,
+									SPI_PROGRAM_CONTROL0	! Program Control Register,
+				 			 		SPI_PROGRAM_STATUS	! Program SRAM,
+									SPI_VERIFY	! Verify CFG,									
+									SPI_PROGRAM_USERCODE	! Program USERCODE,
+									SPI_VERIFY_USERCODE		! Verify USERCODE,																		
+									SPI_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		SPI_DISABLE ! Exit the programming mode"	;		 			 		
+	
+	"Program" =   				"SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE, 
+								SPI_ENABLE	! Enable the SRAM,
+								SPI_ERASE	! Erase the device,
+								SPI_PROGRAM_CONTROL0	! Program Control Register,
+			 			 		SPI_PROGRAM_STATUS	! Program SRAM,
+								SPI_PROGRAM_USERCODE	! Program USERCODE,
+								SPI_PROGRAM_DONE_BIT	! Program DONE bit,	
+			 			 		SPI_DISABLE ! Exit the programming mode"	;
+				 			 					 			 		
+	"Verify Only" = 		"SPI_INIT 	! Initialize, 
+							SPI_READ_ID	! Check the IDCODE, 
+							SPI_ENABLE	! Enable the SRAM,
+							SPI_VERIFY_CONTROL ! Verify Control Register,
+							SPI_VERIFY_USERCODE	! Verify USERCODE, 
+							SPI_VERIFY_DONE_BIT ! Verify Done Bit,
+							SPI_VERIFY	! Verify the SRAM, 
+							SPI_DISABLE ! Exit the programming mode";
+	
+	"Verify USERCODE" =     "SPI_INIT, 
+							 SPI_READ_ID, 
+							 SPI_VERIFY_USERCODE	! Verify USERCODE";
+	
+	"Display USERCODE" =	"SPI_INIT, 
+							 SPI_READ_ID, 
+							 SPI_SAVE_ID, 
+							 SPI_SAVE_USERCODE";
+							 
+							 													
+	"Read and Save"	=	"SPI_INIT, 
+						 SPI_READ_ID, 
+						 SPI_SAVE_ID, 
+						 SPI_ENABLE	! Enable the SRAM, 
+						 SPI_SAVE_CONTROL, 
+						 SPI_SAVE_USERCODE,
+						 SPI_SAVE_ARRAY, 
+						 SPI_DISABLE ! Exit the programming mode";												 
+	
+	"Display Control Register0" = "SPI_INIT ! Initialize,
+							     SPI_READ_ID	! Check the IDCODE,
+							     SPI_SAVE_ID,
+							     SPI_ENABLE	! Enable the SRAM,
+					 		     SPI_SAVE_CONTROL,
+								 SPI_DISABLE ! Exit the programming mode";		
+	
+	"Program Control Register0" 		= "SPI_INIT ! Initialize,
+							     		   SPI_READ_ID	! Check the IDCODE,
+										   SPI_ENABLE	! Enable the SRAM,
+										   SPI_PROGRAM_CONTROL0	! Program Control Register,
+										   SPI_DISABLE ! Exit the programming mode";	
+																	 								 																															
+	"Verify ID" = "SPI_INIT 	! Initialize, 
+				   SPI_READ_ID	! Check the IDCODE";
+				   
+	"Display ID" = "SPI_INIT 	! Initialize, 
+					SPI_READ_ID	! Check the IDCODE,
+					SPI_SAVE_ID";								
+					 			 									
+	"Read Status Register" = "SPI_INIT ! Initialize,
+							 SPI_READ_ID, 
+							 SPI_SAVE_ID, 
+				             SPI_SAVE_STATUS !Read Status Register";		 
+	
+	"Refresh" = " 	SPI_INIT ! Initialize,
+					SPI_READ_ID,
+					SPI_REFRESH ! Refresh";
+	
+	"XSRAM Verify ID" = "SPI_INIT 	! Initialize, 
+				   		 SPI_READ_ID	! Check the IDCODE";
+	
+	"XSRAM Display ID" = "SPI_INIT 	! Initialize, 
+					SPI_READ_ID	! Check the IDCODE,
+					SPI_SAVE_ID";
+								   									
+	"XSRAM Verify Only" = 		"SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE, 
+								SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM,
+								SPI_VERIFY_CONTROL ! Verify Control Register,
+								SPI_VERIFY_USERCODE	! Verify USERCODE, 
+								SPI_VERIFY_DONE_BIT ! Verify Done Bit,
+								SPI_VERIFY	! Verify the SRAM, 
+								SPI_DISABLE ! Exit the programming mode";
+																	
+	"XSRAM Verify USERCODE" =     "SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+								 SPI_VERIFY_USERCODE	! Verify USERCODE,
+								 SPI_DISABLE ! Exit the programming mode";
+														
+	"XSRAM Read and Save"	=	"SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SAVE_ID, 
+								 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+								 SPI_SAVE_CONTROL, 
+								 SPI_SAVE_USERCODE,
+								 SPI_SAVE_ARRAY, 
+								 SPI_DISABLE ! Exit the programming mode";		
+	
+	"XSRAM Refresh" =      "SPI_INIT ! Initialize,
+							SPI_READ_ID,
+							SPI_REFRESH ! Refresh";
+					
+	"XSRAM Display USERCODE" =	"SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SAVE_ID, 
+								 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+								 SPI_SAVE_USERCODE,
+								 SPI_DISABLE ! Exit the programming mode";
+	
+	"XSRAM Read Status Register" =  "SPI_INIT ! Initialize,
+									 SPI_READ_ID, 
+									 SPI_SAVE_ID, 
+									 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+						             SPI_SAVE_STATUS !Read Status Register,
+						             SPI_DISABLE ! Exit the programming mode";	
+	
+				             						 					 
+	"I2C Verify ID" = "	I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE";
+	
+	"I2C Read Status Register" = "I2CINIT 	! Initialize, 
+								  I2CREAD_ID	! Check the IDCODE, 
+							      I2C_SAVE_STATUS  ! Read status register";	
+							      
+	"I2C Erase,Program,Verify" =   "I2CINIT 	! Initialize, 
+									I2CREAD_ID	! Check the IDCODE, 
+									I2C_ENABLE	! Enable the SRAM,
+									I2C_ERASE	! Erase the SRAM,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2C_PROGRAM_CONTROL0	! Program Control Register,
+				 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+									I2CPROGRAM_USERCODE	! Program USERCODE,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2CVERIFY_USERCODE		! Verify USERCODE,
+									I2C_VERIFY	! Verify the SRAM, 									
+									I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		I2CCHECK_STATUS ! Read the status bit,		 		
+									I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C Program" =   "I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+						I2C_PROGRAM_CONTROL0	! Program Control Register,
+	 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+						I2CPROGRAM_USERCODE	! Program USERCODE,
+						I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+	 			 		I2CCHECK_STATUS ! Read the status bit,		 		
+						I2CDISABLE ! Exit the programming mode"	;
+									
+	"I2C Fast Program" =   "I2CINIT 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+	 			 		I2CBURST_PROGRAM	! Program SRAM,
+	 			 		I2CVERIFY_USERCODE	! Verify USERCODE,
+	 			 		I2CVERIFY_DONE_BIT ! Verify Done Bit,
+						I2CDISABLE ! Exit the programming mode"	;			 			 		
+				 			 		
+	"I2C Verify Only" = "	I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE, 
+							I2C_ENABLE	! Enable the SRAM,
+							I2C_VERIFY	! Verify the SRAM, 
+							I2CVERIFY_USERCODE	! Verify USERCODE, 
+							I2CVERIFY_DONE_BIT ! Verify Done Bit,
+							I2CCHECK_STATUS ! Read the status bit, 
+							I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C Erase Only"	=	"I2CINIT 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE,
+							I2C_ENABLE	! Enable the SRAM, 
+							I2C_ERASE	! Erase the SRAM,
+							I2CCHECK_STATUS ! Read the status bit,
+		 			 		I2CDISABLE ! Exit the programming mode"	;
+			 			 						 			 								
+	
+	"I2C Refresh"	=	"I2CINIT 	! Initialize, 
+						 I2CREAD_ID	! Check the IDCODE,	
+						 I2CREFRESH ! Refresh";	
+						 
+	"SSPI NVCM Program,Verify" = "SPI_INIT ! Initialize,
+	                          SPI_READ_ID	! Check the IDCODE,
+	                          SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                          SPI_ENABLE_NVCM	! Enable the NVCM,
+	                          SPI_SECURITY_CHECK_NVCM ! Device security check,
+	                          SPI_PROGRAM_NVCM ! Program NVCM,
+                              SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+                              SPI_VERIFY_NVCM ! Verify NVCM,
+                              SPI_VERIFY_USERCODE	! Verify USERCODE,
+	                          SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                          SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,
+	                          SPI_PROGRAM_VERIFY_DONE_BIT ! Program and verify DONE bit,
+	                          SPI_DISABLE ! Exit the programming mode"	;                                                                        
+	
+	"SSPI NVCM Program,Verify,Feature" = "SPI_INIT ! Initialize,
+	                          SPI_READ_ID	! Check the IDCODE,
+	                          SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                          SPI_ENABLE_NVCM	! Enable the NVCM,
+	                          SPI_SECURITY_CHECK_NVCM ! Device security check,	                          
+	                          SPI_PROGRAM_NVCM ! Program NVCM,
+                              SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+                              SPI_VERIFY_NVCM ! Verify NVCM,
+                              SPI_VERIFY_USERCODE	! Verify USERCODE,
+	                          SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                          SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,
+	                          SPI_PROGRAM_VERIFY_DONE_BIT ! Program and verify DONE bit,
+	                          SPI_DISABLE ! Exit the programming mode"	; 
+	                          
+	"SSPI NVCM Program,Verify,Secure" =  " SPI_INIT ! Initialize,	
+	                                  SPI_READ_ID	! Check the IDCODE, 
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_SECURITY_CHECK_NVCM ! Device security check,
+	                                  SPI_PROGRAM_NVCM ! Program NVCM,
+	                                  SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+	                                  SPI_VERIFY_NVCM ! Verify NVCM,
+	                                  SPI_VERIFY_USERCODE	! Verify USERCODE,
+	                                  SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                                  SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,
+	                                  SPI_PROGRAM_VERIFY_DONE_BIT ! Program and verify DONE bit,
+	                                  SPI_PROGRAM_SECURITY_BIT ! Secure Device,
+	                                  SPI_DISABLE ! Exit the programming mode"	;
+	
+	"SSPI NVCM Blank Check" = " SPI_INIT ! Initialize,
+	                           SPI_READ_ID	! Check the IDCODE, 
+	                           SPI_READ_LTRIM_NVCM ! Write read trim values,
+	                           SPI_ENABLE_NVCM	! Enable the NVCM,
+	                           SPI_BLANK_CHECK_NVCM ! Checks if device is blank,
+	                           SPI_DISABLE ! Exit the programming mode";
+	                           
+	"SSPI NVCM Program" =        " SPI_INIT ! Initialize,
+	                              SPI_READ_ID	! Check the IDCODE, 
+	                              SPI_PROGRAM_LTRIM_NVCM ! Write programming trim values, 
+	                              SPI_ENABLE_NVCM	! Enable the NVCM,
+	                              SPI_SECURITY_CHECK_NVCM ! Device security check,
+	                              SPI_PROGRAM_NVCM ! Program NVCM,
+	                              SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+	                              SPI_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                              SPI_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+	                              SPI_PROGRAM_DONE_BIT ! Program DONE bit,
+	                              SPI_DISABLE ! Exit the programming mode"	;
+	
+	"SSPI NVCM Verify Only" =    " 	SPI_INIT 	! Initialize, 
+			      				  	SPI_READ_ID	! Check the IDCODE, 
+			      				  	SPI_READ_LTRIM_NVCM ! Write read trim values,
+			      					SPI_ENABLE_NVCM	! Enable the NVCM,
+				      				SPI_VERIFY_NVCM	! Verify the NVCM, 
+			      	      			SPI_VERIFY_USERCODE	! Verify USERCODE, 
+				      				SPI_VERIFY_STATUS ! Read the status bit,
+				      				SPI_VERIFY_FEATURE_BIT ! Verify Feature bits,
+				      				SPI_VERIFY_FEATURE_ROW_NVCM ! Verify Feature row,
+				      				SPI_VERIFY_DONE_BIT ! Verify DONE bit,
+				      				SPI_DISABLE ! Exit the programming mode"	;
+	
+	"SSPI NVCM Verify ID" = " SPI_INIT ! Initialize,
+	                  		SPI_READ_ID ! Verify ID" ;
+	                   
+	"SSPI NVCM Display ID" = " SPI_INIT ! Initialize,
+	                         SPI_SAVE_ID" ;
+	
+	"SSPI NVCM Display USERCODE" = " SPI_INIT ! Initialize,
+	                               SPI_READ_ID ! Verify ID,
+	                               SPI_SAVE_ID,
+	                               SPI_READ_LTRIM_NVCM ! Write read trim values,
+	                          	   SPI_ENABLE_NVCM	! Enable the NVCM,
+	                               SPI_SAVE_USERCODE_NVCM ! Save USERCODE,
+	                               SPI_DISABLE ! Exit the programming mode";
+	                                            
+	"SSPI NVCM Read and Save" = " SPI_INIT ! Initialize,
+	                          SPI_READ_ID ! Verify ID,
+	                          SPI_SAVE_ID,
+	                          SPI_READ_LTRIM_NVCM ! Write read trim values,
+	                          SPI_ENABLE_NVCM	! Enable the NVCM,
+	                          SPI_SAVE_USERCODE_NVCM ! Save USERCODE,
+	                          SPI_SAVE_NVCM ! Save NVCM array,
+	                          SPI_SAVE_FEATURE ! Save Feature row,
+	                          SPI_DISABLE ! Exit the programming mode"	;
+	                              
+	
+	"SSPI NVCM Read Status Register" =  " SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_SAVE_ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write read trim values,
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_READ_STATUS ! Read status register,
+	                                  SPI_DISABLE ! Exit the programming mode"	;			
+	
+	"SSPI NVCM Secure Device" = " SPI_INIT ! Initialize,	
+	                              SPI_READ_ID	! Check the IDCODE, 
+	                              SPI_PROGRAM_LTRIM_NVCM ! Write programming trim values, 
+	                              SPI_ENABLE_NVCM	! Enable the NVCM,
+	                              SPI_PROGRAM_SECURITY_BIT ! Secure Device,
+	                              SPI_DISABLE ! Exit the programming mode"	;
+	
+	"SSPI NVCM Program Feature Rows" = " SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_CHECK_FEATURE ! Check feature row,
+	                                  SPI_CHECK_STATUS ! Check if device is ready,
+	                                  SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                                  SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,
+	                                  SPI_CHECK_STATUS ! Check if device is ready,
+	                                  SPI_DISABLE ! Exit the programming mode"	;
+	
+	
+	"SSPI NVCM Program USERCODE" = " SPI_INIT ! Initialize,	
+	                              SPI_READ_ID	! Check the IDCODE, 
+	                              SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                              SPI_ENABLE_NVCM	! Enable the NVCM,
+	                              SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+	                              SPI_VERIFY_USERCODE	! Verify USERCODE, 
+	                              SPI_DISABLE ! Exit the programming mode"	;
+	                              
+	                              
+	"SSPI NVCM Refresh" = " SPI_INIT ! Initialize,
+	                    SPI_READ_ID ! Verify ID,
+	                    SPI_REFRESH ! Refresh";	
+	                    
+	"I2C NVCM Program,Verify" = " I2CINIT ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_SECURITY_CHECK_NVCM ! Device security check,
+	                       I2C_PROGRAM_NVCM ! Program NVCM,
+	                       I2CPROGRAM_USERCODE_NVCM ! Program USERCODE,
+	                       I2C_VERIFY_NVCM   ! Verify NVCM,
+	                       I2CVERIFY_USERCODE_NVCM 	! Verify USERCODE,
+	                       I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       I2C_PROGRAM_DONE_BIT ! Program DONE bit,
+					       I2C_VERIFY_DONE_BIT_NVCM ! Verify DONE bit,
+	                       I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+	                       I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+	                       I2CDISABLE_NEW_ADDR ! Exit the programming mode"	;  	                  
+				                  
+	"I2C NVCM Program,Verify,Secure" = " I2CINIT ! Initialize,
+					                       I2CREAD_ID ! Verify_ID,
+					                       I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+					                       I2C_ENABLE_NVCM ! Enable NVCM,
+					                       I2C_SECURITY_CHECK_NVCM ! Device security check,
+					                       I2C_PROGRAM_NVCM ! Program NVCM,
+					                       I2CPROGRAM_USERCODE_NVCM ! Program USERCODE,
+					                       I2C_VERIFY_NVCM   ! Verify NVCM,
+					                       I2CVERIFY_USERCODE_NVCM 	! Verify USERCODE,
+					                       I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+					                       I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+				                           I2C_PROGRAM_DONE_BIT ! Program DONE bit,
+					                       I2C_VERIFY_DONE_BIT_NVCM ! Verify DONE bit,
+					                       I2C_PROGRAM_SECURITY_BIT ! Secure Device,  
+				                           I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+					                       I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+					                       I2CDISABLE_NEW_ADDR ! Exit the programming mode"	;          
+                               	
+	"I2C NVCM Program" = " I2CINIT ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_SECURITY_CHECK_NVCM ! Device security check,
+	                       I2C_PROGRAM_NVCM ! Program NVCM,
+	                       I2CPROGRAM_USERCODE_NVCM ! Program USERCODE,                      
+	                       I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       I2C_PROGRAM_DONE_BIT ! Program DONE bit,
+	                       I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+	                       I2CDISABLE_NEW_ADDR ! Exit the programming mode"	;                     
+                     
+	"I2C NVCM Blank Check" = " I2CINIT ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write read trim values,
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_BLANK_CHECK_NVCM ! Check if device is blank,
+	                       I2CDISABLE ! Exit the programming mode"	; 
+
+	"I2C NVCM Verify Only" = " I2CINIT ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write read trim values,
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2CVERIFY_USERCODE_NVCM 	! Verify USERCODE,
+	                       I2C_VERIFY_NVCM   ! Verify NVCM,
+	                       I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       I2C_VERIFY_FEATURE_ROW_NVCM ! Verify Feature row,
+	                       I2C_VERIFY_DONE_BIT_NVCM ! Verify DONE bit,
+	                       I2CDISABLE ! Exit the programming mode"	; 
+	
+	"I2C NVCM Verify ID" = "I2CINIT !Initialize,
+	                        I2CREAD_ID ! Verify ID";
+	                        
+	"I2C NVCM Display ID" = " I2CINIT ! Initialize,
+	                          I2CSAVE_ID";
+
+	"I2C NVCM Display USERCODE" = " I2CINIT ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID, 
+	                          		I2C_READ_LTRIM_NVCM ! Write read trim values,
+	                       			I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2CSAVE_USERCODE ! Save USERCODE,
+	                          		I2CDISABLE ! Exit the programming mode";
+	
+	"I2C NVCM Program USERCODE" = "I2CINIT ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2C_READ_LTRIM_NVCM ! Write read trim values,
+	                       			I2C_ENABLE_NVCM ! Enable NVCM,
+	                              	I2CPROGRAM_USERCODE_NVCM ! Program USERCODE,
+	                              	I2CVERIFY_USERCODE_NVCM	! Verify USERCODE, 
+	                              	I2CDISABLE ! Exit the programming mode"	;
+	                              
+	"I2C NVCM Read and Save" = " I2CINIT ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID, 
+	                          		I2C_READ_LTRIM_NVCM ! Write read trim values,
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2CSAVE_USERCODE ! Save USERCODE,
+	                          		I2CSAVE_NVCM ! Save NVCM array,
+	                          		I2CSAVE_FEATURE  ! Save Feature row,
+	                          		I2CDISABLE ! Exit the programming mode"	;
+	                          		
+	                              
+	"I2C NVCM Read Status Register"	 = " I2CINIT ! Initialize,
+									I2CREAD_ID ! Verify_ID,	
+									I2CSAVE_ID, 
+									I2C_READ_LTRIM_NVCM ! Write read trim values,
+									I2C_ENABLE_NVCM ! Enable NVCM,
+									I2C_SAVE_STATUS  ! Read status register,
+									I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C NVCM Secure Device" = " I2CINIT ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_PROGRAM_LTRIM_NVCM ! Write programming trim values,
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_PROGRAM_SECURITY_BIT ! Secure Device,
+	                       I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C NVCM Program Feature Rows" = " I2CINIT ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2C_CHECK_FEATURE_ROW ! Check feature row,
+	                          		I2CCHECK_STATUS ! Check if device ready,
+	                          		I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       			I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       			I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+					                I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+					                I2CCHECK_STATUS ! Check if device ready,
+					                I2CDISABLE_NEW_ADDR ! Exit the programming mode";
+	
+	"I2C NVCM Refresh" = " I2CINIT ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2CREFRESH ! Refresh";	
+	                       
+	"Security Read Feature Rows" = " SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_SAVE_ID ! Displays ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write read trim values,
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_CHECK_FEATURE ! Check if feature row empty,
+	                                  SPI_FEATURE_ROW_READ ! Read the Feature Row,
+	                                  SPI_DISABLE ! Exit the programming mode"	;
+	
+	"Security Program Feature Rows" = " SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_SAVE_ID ! Displays ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values,
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_CHECK_FEATURE ! Check if feature row empty,
+	                                  SPI_CHECK_STATUS ! Check if device ready,
+	                                  SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                                  SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,
+	                                  SPI_CHECK_STATUS ! Check if device ready,
+	                                  SPI_DISABLE ! Exit the programming mode"	;
+	       
+	"Security Display TraceID" = " SPI_INIT ! Initialize,
+								   SPI_SAVE_TRACEID ! Display TraceID";
+                      		
+	
+	"Security I2C Read Feature Rows" = " I2CINIT ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID,
+	                          		I2C_READ_LTRIM_NVCM ! Write read trim values,
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2C_CHECK_FEATURE_ROW ! Check for OTP,
+	                          		I2C_FEATURE_ROW_READ ! Read the Feature Row,
+	                          		I2CDISABLE ! Exit the programming mode"	;
+	                          		
+	"Security I2C Program Feature Rows" = " I2CINIT ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2C_CHECK_FEATURE_ROW ! Check feature row,
+	                          		I2CCHECK_STATUS ! Check if device ready,
+	                          		I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       			I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       			I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+					                I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+					                I2CDISABLE_NEW_ADDR ! Exit the programming mode";
+					                
+	"Security I2C Display TraceID" = " I2CINIT ! Initialize,
+								   I2C_SAVE_TRACEID ! Display TraceID";
+	
+	
+	"JTAGI2C Verify ID" = "JTAGI2CINIT 	! Initialize, 
+						   JTAGI2CREAD_ID	! Check the IDCODE";
+		
+	"JTAGI2C Read Status Register" = "JTAGI2CINIT 	! Initialize, 
+									 JTAGI2CREAD_ID	! Check the IDCODE, 
+									 JTAGI2CSAVE_ID,
+									 JTAGI2CSRAM_ENABLE	! Enable SRAM programming mode, 
+					 			 	 JTAGI2C_SAVE_STATUS,
+					 			 	 JTAGI2CDISABLE ! Exit the programming mode";
+	
+	"JTAGI2C Fast Program" = "JTAGI2CINIT 	! Initialize,   
+							  JTAGI2CREAD_ID	! Check the IDCODE,
+							  JTAGI2CSRAM_ENABLE	! Enable SRAM programming mode, 
+							  JTAGI2CSRAM_ERASE	! Erase the SRAM, 
+							  JTAGI2CBURST_PROGRAM	! Program Fuse Map,
+							  JTAGI2CVERIFY_USERCODE		! Verify USERCODE,
+							  JTAGI2CVERIFY_STATUS ! Read the status bit,
+							  JTAGI2CDISABLE ! Exit the programming mode"	;
+	
+	"JTAGI2C Erase Only"	=	"JTAGI2CINIT 	! Initialize, 
+								JTAGI2CREAD_ID	! Check the IDCODE,
+								JTAGI2CSRAM_ENABLE	! Enable SRAM programming mode, 
+							  	JTAGI2CSRAM_ERASE	! Erase the SRAM, 
+								JTAGI2CCHECK_STATUS ! Read the status bit,
+			 			 		JTAGI2CDISABLE ! Exit the programming mode"	;
+						  				 			 	 					 
+</Operation_List>
+<Operation_List label="SingleSVFOperation">
+	
+	"Bypass" = "INIT 	! Initialize"	;
+	
+	"Manufacturing Read MES Fuses" = "SPI_DTR_INIT 	! Initialize, 
+									  SPI_READ_ID, 
+							          SPI_SAVE_ID,
+							          SPI_EFUSE_ENABLE,
+									  SPI_READ_MES_REGISTER ! Read the Manufacturing Register,
+									  SPI_DISABLE ! Exit the programming mode" ;
+									  
+	"Manufacturing Read DTR Fuses" = "SVF_SPI_INIT, 
+							 		  SPI_READ_ID, 
+							          SPI_SAVE_ID, 
+									  SPI_EFUSE_ENABLE	! Enable the programming mode,
+									  SPI_READ_DTR_REGISTER ! Read the Manufacturing Register,
+									  SPI_DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses Only" = " SVF_SPI_INIT, 
+							 		  		SPI_READ_ID, 
+							          		SPI_SAVE_ID, 
+										    SPI_READ_DTR_REGISTER_ONLY ! Read the Manufacturing Register" ;
+			
+	
+	"Read Manufacturing Register" = " SVF_SPI_INIT, 
+							 		  SPI_READ_ID, 
+							          SPI_SAVE_ID, 
+									  SPI_EFUSE_ENABLE	! Enable the programming mode,
+									  SPI_READ_MANUFACTURING_REGISTER ! Read the Manufacturing Register,
+									  SPI_DISABLE ! Exit the programming mode" ;
+						
+	"Program Manufacturing Register" = "SVF_SPI_INIT, 
+							 		    SPI_READ_ID, 
+									    SPI_PSUEDO_SRAM_ENABLE	! Enable the programming mode,
+									    SPI_PROGRAM_MANUFACTURING_REGISTER ! Program the Manufacturing Register,
+									    SPI_DISABLE ! Exit the programming mode" ;
+									  						
+	"Slave SPI Disable Only" = "SVF_SPI_INIT 	! Initialize, 
+	 			 				SPI_DISABLE ! Exit the programming mode"	;
+	"Slave SPI Enable Only" = "SVF_SPI_INIT 	! Initialize, 
+						   	   SPI_READ_ID	! Check the IDCODE,
+						  	   SPI_ENABLE	! Enable XPROGRAM mode"	;
+						   
+	"Slave SPI Re-Initialize" = "SVF_SPI_INIT 	! Initialize,  
+							 SPI_READ_ID	! Check the IDCODE,
+						  	 SPI_ENABLE	! Enable programming mode, 
+							 SPI_ERASE	! Erase the device, 
+							 SPI_DISABLE ! Exit the programming mode"	;								
+											 		  	 								
+	"Fast Program" = 			"SVF_SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,								 
+								SPI_ENABLE	! Enable programming mode,
+								SPI_ERASE	! Erase the device, 
+								SPI_PROGRAM	! Program Fuse Map,
+								SPI_VERIFY_STATUS ! Read the status bit,
+								SPI_DISABLE ! Exit the programming mode"	;			
+				 			 														
+	"Erase Only"	=			"SVF_SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,
+								SPI_ENABLE	! Enable programming mode,
+								SPI_ERASE	! Erase the device, 
+								SPI_DISABLE ! Exit the programming mode"	;	
+								
+	
+	"Erase,Program,Verify" =   		"SVF_SPI_INIT 	! Initialize, 
+									SPI_READ_ID	! Check the IDCODE, 
+									SPI_ENABLE	! Enable the SRAM,
+									SPI_ERASE	! Erase the device,
+									SPI_PROGRAM_CONTROL0	! Program Control Register,
+				 			 		SPI_PROGRAM_STATUS	! Program SRAM,
+				 			 		SPI_VERIFY_SVF	! Verify CFG,									
+									SPI_PROGRAM_USERCODE	! Program USERCODE,
+									SPI_VERIFY_USERCODE		! Verify USERCODE,																		
+									SPI_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		SPI_DISABLE ! Exit the programming mode"	;		 			 		
+	
+	"Program" =   				"SVF_SPI_INIT 	! Initialize, 
+									SPI_READ_ID	! Check the IDCODE, 
+									SPI_ENABLE	! Enable the SRAM,
+									SPI_ERASE	! Erase the device,
+									SPI_PROGRAM_CONTROL0	! Program Control Register,
+				 			 		SPI_PROGRAM_STATUS	! Program SRAM,
+									SPI_PROGRAM_USERCODE	! Program USERCODE,
+									SPI_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		SPI_DISABLE ! Exit the programming mode"	;
+				 			 					 			 		
+	"Verify Only" = 		"SVF_SPI_INIT 	! Initialize, 
+							SPI_READ_ID	! Check the IDCODE, 
+							SPI_ENABLE	! Enable the SRAM,
+							SPI_VERIFY_CONTROL ! Verify Control Register,
+							SPI_VERIFY_USERCODE	! Verify USERCODE, 
+							SPI_VERIFY_SVF	! Verify the SRAM, 
+							SPI_VERIFY_DONE_BIT ! Verify Done Bit,
+							SPI_DISABLE ! Exit the programming mode";
+	
+	"Verify USERCODE" =     "SVF_SPI_INIT, 
+							 SPI_READ_ID, 
+							 SPI_VERIFY_USERCODE	! Verify USERCODE";
+	
+	"Display USERCODE" =	"SVF_SPI_INIT, 
+							 SPI_READ_ID, 
+							 SPI_SVFSAVE_USERCODE";
+							 
+							 													
+	"Read and Save"	=	"SVF_SPI_INIT, 
+						 SPI_READ_ID, 
+						 SPI_ENABLE	! Enable the SRAM, 
+						 SPI_SVFSAVE_CONTROL, 
+						 SPI_SVFSAVE_USERCODE,
+						 SPI_SVFSAVE_ARRAY, 
+						 SPI_DISABLE ! Exit the programming mode";												 
+	
+	"Display Control Register0" = "SVF_SPI_INIT ! Initialize,
+							     SPI_READ_ID	! Check the IDCODE,
+							     SPI_ENABLE	! Enable the SRAM,
+					 		     SPI_SVFSAVE_CONTROL,
+								 SPI_DISABLE ! Exit the programming mode";		
+	
+	"Program Control Register0" 		= "SVF_SPI_INIT ! Initialize,
+							     		   SPI_READ_ID	! Check the IDCODE,
+										   SPI_ENABLE	! Enable the SRAM,
+										   SPI_PROGRAM_CONTROL0	! Program Control Register,
+										   SPI_DISABLE ! Exit the programming mode";	
+																	 								 																															
+	"Verify ID" = "SVF_SPI_INIT 	! Initialize, 
+				   SPI_READ_ID	! Check the IDCODE";
+				   
+	"Display ID" = "SVF_SPI_INIT	! Initialize, 
+					SPI_READ_ID	! Check the IDCODE";								
+					 			 									
+	"Read Status Register" = "SVF_SPI_INIT ! Initialize,
+							 SPI_READ_ID, 
+							 SPI_SVFSAVE_STATUS !Read Status Register";		 
+	
+	"Refresh" = " 	SVF_SPI_INIT ! Initialize,
+					SPI_READ_ID,
+					SPI_REFRESH ! Refresh";
+	
+	"XSRAM Verify ID" = "SPI_INIT 	! Initialize, 
+				   		 SPI_READ_ID	! Check the IDCODE";
+	
+	"XSRAM Display ID" = "SPI_INIT 	! Initialize, 
+					SPI_READ_ID	! Check the IDCODE,
+					SPI_SAVE_ID";
+														
+	"XSRAM Verify Only" = 		"SVF_SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE, 
+								SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM,
+								SPI_VERIFY_CONTROL ! Verify Control Register,
+								SPI_VERIFY_USERCODE	! Verify USERCODE, 
+								SPI_VERIFY_SVF	! Verify the SRAM, 
+								SPI_VERIFY_DONE_BIT ! Verify Done Bit,
+								SPI_DISABLE ! Exit the programming mode";
+																	
+	"XSRAM Verify USERCODE" =     "SVF_SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+								 SPI_VERIFY_USERCODE	! Verify USERCODE,
+								 SPI_DISABLE ! Exit the programming mode";
+														
+	"XSRAM Read and Save"	=	"SVF_SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+								 SPI_SVFSAVE_CONTROL, 
+								 SPI_SVFSAVE_USERCODE,
+								 SPI_SVFSAVE_ARRAY, 
+								 SPI_DISABLE ! Exit the programming mode";		
+	
+	"XSRAM Refresh" =      "SVF_SPI_INIT ! Initialize,
+							SPI_READ_ID,
+							SPI_REFRESH ! Refresh";
+					
+	"XSRAM Display USERCODE" =	"SVF_SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+								 SPI_SVFSAVE_USERCODE,
+								 SPI_DISABLE ! Exit the programming mode";
+	
+	"XSRAM Read Status Register" =  "SVF_SPI_INIT ! Initialize,
+									 SPI_READ_ID, 
+									 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+						             SPI_SVFSAVE_STATUS !Read Status Register,
+						             SPI_DISABLE ! Exit the programming mode";			
+					 			 										 	
+	
+	"I2C Verify ID" = "	I2CINIT_SVF 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE";
+	
+	"I2C Read Status Register" = "I2CINIT_SVF 	! Initialize, 
+								  I2CREAD_ID	! Check the IDCODE, 
+							      I2C_SAVE_STATUS  ! Read status register";	
+							      
+	"I2C Erase,Program,Verify" =   "I2CINIT_SVF 	! Initialize, 
+									I2CREAD_ID	! Check the IDCODE, 
+									I2C_ENABLE	! Enable the SRAM,
+									I2C_ERASE	! Erase the SRAM,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2C_PROGRAM_CONTROL0	! Program Control Register,
+				 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+									I2CPROGRAM_USERCODE	! Program USERCODE,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2CVERIFY_USERCODE		! Verify USERCODE,
+									I2C_VERIFY	! Verify the SRAM, 									
+									I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		I2CCHECK_STATUS ! Read the status bit,		 		
+									I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C Program" =   "I2CINIT_SVF 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+						I2C_PROGRAM_CONTROL0	! Program Control Register,
+	 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+						I2CPROGRAM_USERCODE	! Program USERCODE,
+						I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+	 			 		I2CCHECK_STATUS ! Read the status bit,		 		
+						I2CDISABLE ! Exit the programming mode"	;
+
+	"I2C Fast Program" =   "I2CINIT_SVF 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+	 			 		I2CBURST_PROGRAM	! Program SRAM,
+	 			 		I2CVERIFY_USERCODE	! Verify USERCODE,
+	 			 		I2CVERIFY_DONE_BIT ! Verify Done Bit,
+						I2CDISABLE ! Exit the programming mode"	;			 			 		
+				 			 		
+	"I2C Verify Only" = "	I2CINIT_SVF 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE, 
+							I2C_ENABLE	! Enable the SRAM,
+							I2C_VERIFY	! Verify the SRAM, 
+							I2CVERIFY_USERCODE	! Verify USERCODE, 
+							I2CCHECK_STATUS ! Read the status bit, 
+							I2CVERIFY_DONE_BIT ! Verify Done Bit,
+							I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C Erase Only"	=	"I2CINIT_SVF 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE,
+							I2C_ENABLE	! Enable the SRAM, 
+							I2C_ERASE	! Erase the SRAM,
+							I2CCHECK_STATUS ! Read the status bit,
+		 			 		I2CDISABLE ! Exit the programming mode"	;
+			 			 						 			 								
+	
+	"I2C Refresh"	=	"I2CINIT_SVF 	! Initialize, 
+						 I2CREAD_ID	! Check the IDCODE,	
+						 I2CREFRESH ! Refresh";	
+	
+	"SSPI NVCM Verify ID" = " SVF_SPI_INIT ! Initialize,
+	                 		  SPI_READ_ID ! Verify ID" ;
+	                   
+	"SSPI NVCM Display ID" = " SVF_SPI_INIT ! Initialize,
+	                           SPI_SVFSAVE_ID" ;
+	
+	"SSPI NVCM Display USERCODE" = " SVF_SPI_INIT ! Initialize,
+	                                 SPI_READ_ID ! Verify ID,
+	                                 SPI_SVFSAVE_ID,
+	                                 SPI_READ_LTRIM_NVCM ! Write programming trim values,
+	                                 SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                 SPI_SVFSAVE_USERCODE ! Save USERCODE,
+	                                 SPI_DISABLE ! Exit the programming mode";
+	                                 					 			
+	"SSPI NVCM Program,Verify" = " SVF_SPI_INIT ! Initialize,
+				                  SPI_READ_ID	! Check the IDCODE, 
+				                  SPI_READ_LTRIM_NVCM ! Write programming trim values,
+				                  SPI_ENABLE_NVCM	! Enable the NVCM,
+				                  SPI_SECURITY_CHECK_NVCM ! Device security check,
+				                  SPI_PROGRAM_NVCM ! Program NVCM,
+				                  SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+				                  SPI_VERIFY_NVCM_SVF ! Verify NVCM,
+				                  SPI_VERIFY_USERCODE	! Verify USERCODE,
+				                  SVF_SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                      		  SVF_SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,	                      	                                                
+				                  SPI_PROGRAM_VERIFY_DONE_BIT ! Program and verify DONE bit,
+	                              SPI_DISABLE ! Exit the programming mode"	;	                              	                          
+	
+	"SSPI NVCM Program,Verify,Feature" = "SVF_SPI_INIT ! Initialize,
+	                          SPI_READ_ID	! Check the IDCODE,
+	                          SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                          SPI_ENABLE_NVCM	! Enable the NVCM,
+	                          SPI_SECURITY_CHECK_NVCM ! Device security check,	                          
+	                          SPI_PROGRAM_NVCM ! Program NVCM,
+                              SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+                              SPI_VERIFY_NVCM_SVF ! Verify NVCM,
+                              SPI_VERIFY_USERCODE	! Verify USERCODE,
+	                          SVF_SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                      	  SVF_SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,	                      
+	                      	  SPI_PROGRAM_VERIFY_DONE_BIT ! Program and verify DONE bit,
+	                          SPI_DISABLE ! Exit the programming mode"	; 
+	                          
+	"SSPI NVCM Program,Verify,Secure" =  " SVF_SPI_INIT ! Initialize,	
+		                                  SPI_READ_ID	! Check the IDCODE, 
+		                                  SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+		                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+		                                  SPI_SECURITY_CHECK_NVCM ! Device security check,
+		                                  SPI_PROGRAM_NVCM ! Program NVCM,
+		                                  SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+		                                  SPI_VERIFY_NVCM_SVF ! Verify NVCM,
+		                                  SPI_VERIFY_USERCODE	! Verify USERCODE,
+		                                  SVF_SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                      				  SVF_SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,	                      
+	                      			      SPI_PROGRAM_VERIFY_DONE_BIT ! Program and verify DONE bit,
+		                                  SPI_PROGRAM_SECURITY_BIT ! Secure Device,
+		                                  SPI_DISABLE ! Exit the programming mode"	;
+	
+	"SSPI NVCM Program" =        " SVF_SPI_INIT ! Initialize,
+		                          SPI_READ_ID	! Check the IDCODE, 
+		                          SPI_PROGRAM_LTRIM_NVCM ! Write programming trim values, 
+		                          SPI_ENABLE_NVCM	! Enable NVCM,
+		                          SPI_SECURITY_CHECK_NVCM ! Device security check,
+		                          SPI_PROGRAM_NVCM ! Program NVCM,
+		                          SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+		                          SVF_SPI_PROGRAM_FEATURE_BIT ! Program and verify Feature bits,
+		                          SVF_SPI_PROGRAM_FEATURE_ROW_NVCM ! Program and verify Feature row,
+		                          SPI_PROGRAM_DONE_BIT ! Program DONE bit,
+		                          SPI_DISABLE ! Exit the programming mode"	;
+	
+	"SSPI NVCM Blank Check" = " SVF_SPI_INIT ! Initialize,
+	                           SPI_READ_ID	! Check the IDCODE, 
+	                           SPI_READ_LTRIM_NVCM ! Write read trim values, 
+	                           SPI_ENABLE_NVCM	! Enable the NVCM,
+	                           SPI_BLANK_CHECK_NVCM ! Check if device is blank,
+	                           SPI_DISABLE ! Exit the programming mode";
+	
+	"SSPI NVCM Verify Only" =    " SVF_SPI_INIT 	! Initialize, 
+							      SPI_READ_ID	! Check the IDCODE, 
+							      SPI_READ_LTRIM_NVCM ! Write read trim values, 
+							      SPI_ENABLE_NVCM	! Enable the NVCM,
+							      SPI_VERIFY_NVCM_SVF	! Verify the NVCM, 
+						      	  SPI_VERIFY_USERCODE	! Verify USERCODE,	  
+						      	  SPI_VERIFY_STATUS ! Verify Stauts,
+						      	  SPI_VERIFY_FEATURE_BIT ! Verify Feature bits,
+						      	  SPI_VERIFY_FEATURE_ROW_NVCM ! Verify Feature row, 
+						      	  SPI_VERIFY_DONE_BIT ! Program DONE bit, 
+							      SPI_DISABLE ! Exit the programming mode"	;
+		                           
+	         
+	"SSPI NVCM Read and Save" = " SVF_SPI_INIT ! Initialize,
+	                          	  SPI_READ_ID ! Verify ID,
+	                              SPI_SVFSAVE_ID,
+	                              SPI_READ_LTRIM_NVCM ! Write read trim values, 
+	                              SPI_ENABLE_NVCM	! Enable the NVCM,
+	                              SPI_SVFSAVE_USERCODE ! Save USERCODE,
+	                              SVF_SPI_SAVE_NVCM ! Save NVCM array,
+	                              SVF_SPI_SAVE_FEATURE ! Save Feature row,
+	                              SPI_DISABLE ! Exit the programming mode"	;	                              
+	
+	"SSPI NVCM Read Status Register" =  " SVF_SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_READ_STATUS ! Read status register,
+	                                  SPI_DISABLE ! Exit the programming mode"	;			
+	
+	"SSPI NVCM Secure Device" = " SVF_SPI_INIT ! Initialize,	
+	                              SPI_READ_ID	! Check the IDCODE, 
+	                              SPI_PROGRAM_LTRIM_NVCM ! Write programming trim values, 
+	                              SPI_ENABLE_NVCM	! Enable the NVCM,
+	                              SPI_PROGRAM_SECURITY_BIT ! Secure Device,
+		                          SPI_DISABLE ! Exit the programming mode"	;
+	
+	"SSPI NVCM Program Feature Rows" = " SVF_SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_SVFSAVE_ID ! Displays ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_CHECK_FEATURE ! Check feature row,
+	                                  SPI_CHECK_STATUS ! Check if device is ready,
+	                                  SVF_SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                      			  SVF_SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,	
+	                                  SPI_CHECK_STATUS ! Check if device is ready,
+	                                  SPI_DISABLE ! Exit the programming mode"	;
+	                                 	
+	"SSPI NVCM Refresh" = " SVF_SPI_INIT ! Initialize,
+	                        SPI_READ_ID ! Verify ID,
+	                        SPI_REFRESH ! Refresh";	
+	
+	"SSPI NVCM Program USERCODE" = " SVF_SPI_INIT ! Initialize,	
+	                              SPI_READ_ID	! Check the IDCODE, 
+	                              SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                              SPI_ENABLE_NVCM	! Enable the NVCM,
+	                              SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+	                              SPI_VERIFY_USERCODE	! Verify USERCODE, 
+	                              SPI_DISABLE ! Exit the programming mode"	;
+	                                                      
+	"I2C NVCM Program,Verify" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_SECURITY_CHECK_NVCM ! Device security check,
+	                       I2C_PROGRAM_NVCM ! Program NVCM,
+	                       I2CPROGRAM_USERCODE_NVCM ! Program USERCODE,
+	                       I2C_VERIFY_NVCM   ! Verify NVCM,
+	                       I2CVERIFY_USERCODE_NVCM 	! Verify USERCODE,
+	                       I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       I2C_PROGRAM_DONE_BIT ! Program DONE bit,
+	                       I2C_VERIFY_DONE_BIT_NVCM ! Verify DONE bit,
+	                       I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+	                       I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+	                       I2CDISABLE_NEW_ADDR ! Exit the programming mode"	;  	                  
+				                  
+	"I2C NVCM Program,Verify,Secure" = " I2CINIT_SVF ! Initialize,
+					                       I2CREAD_ID ! Verify_ID,
+					                       I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+					                       I2C_ENABLE_NVCM ! Enable NVCM,
+					                       I2C_SECURITY_CHECK_NVCM ! Device security check,
+					                       I2C_PROGRAM_NVCM ! Program NVCM,
+					                       I2CPROGRAM_USERCODE_NVCM ! Program USERCODE,
+					                       I2C_VERIFY_NVCM   ! Verify NVCM,
+					                       I2CVERIFY_USERCODE_NVCM 	! Verify USERCODE,
+					                       I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+					                       I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+				                           I2C_PROGRAM_DONE_BIT ! Program DONE bit,
+					                       I2C_VERIFY_DONE_BIT_NVCM ! Verify DONE bit,
+					                       I2C_PROGRAM_SECURITY_BIT ! Secure Device,  
+				                           I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+					                       I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+					                       I2CDISABLE_NEW_ADDR ! Exit the programming mode"	;          
+                               	
+	"I2C NVCM Program" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_SECURITY_CHECK_NVCM ! Device security check,
+	                       I2C_PROGRAM_NVCM ! Program NVCM,
+	                       I2CPROGRAM_USERCODE_NVCM ! Program USERCODE,                      
+	                       I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       I2C_PROGRAM_DONE_BIT ! Program DONE bit,
+	                       I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+	                       I2CDISABLE_NEW_ADDR ! Exit the programming mode"	;                     
+                     
+	"I2C NVCM Blank Check" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_BLANK_CHECK_NVCM ! Check if device is blank,
+	                       I2CDISABLE ! Exit the programming mode"	; 
+
+	"I2C NVCM Verify Only" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_VERIFY_NVCM   ! Verify NVCM,
+	                       I2CVERIFY_USERCODE_NVCM 	! Verify USERCODE,
+	                       I2C_VERIFY_STATUS_NVCM ! Read the status bit,
+	                       I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       I2C_VERIFY_FEATURE_ROW_NVCM ! Verify Feature row,
+	                       I2C_VERIFY_DONE_BIT_NVCM ! Verify DONE bit,
+	                       I2CDISABLE ! Exit the programming mode"	;  
+	
+	"I2C NVCM Verify ID" = "I2CINIT_SVF !Initialize,
+	                        I2CREAD_ID ! Verify ID";
+	                        
+	"I2C NVCM Display ID" = " I2CINIT_SVF ! Initialize,
+	                          I2CSAVE_ID_SVF";
+
+	"I2C NVCM Display USERCODE" = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID_SVF, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2CSAVE_USERCODE_SVF ! Save USERCODE,
+	                          		I2CDISABLE ! Exit the programming mode";
+	
+	"I2C NVCM Read and Save" = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID_SVF, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2CSAVE_USERCODE_SVF ! Save USERCODE,
+	                          		I2CSAVE_NVCM_SVF ! Save NVCM array,
+	                          		I2CSAVE_FEATURE_SVF  ! Save Feature row,
+	                          		I2CDISABLE ! Exit the programming mode"	;
+	                          		
+	                              
+	"I2C NVCM Read Status Register"	 = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,	
+									I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+									I2C_ENABLE_NVCM ! Enable NVCM,
+									I2C_SAVE_STATUS  ! Read status register,
+									I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C NVCM Secure Device" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_PROGRAM_LTRIM_NVCM ! Write programming trim values, 
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_PROGRAM_SECURITY_BIT ! Secure Device,
+	                       I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C NVCM Program Feature Rows" = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID_SVF, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2C_CHECK_FEATURE_ROW ! Check feature row,
+	                          		I2CCHECK_STATUS ! Check if device ready,
+	                          		I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       			I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       			I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+					                I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+					                I2CCHECK_STATUS ! Check if device ready,
+					                I2CDISABLE_NEW_ADDR ! Exit the programming mode";
+	
+	"I2C NVCM Refresh" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2CREFRESH ! Refresh";	
+	                    
+	"Security Read Feature Rows" = " SVF_SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_SVFSAVE_ID ! Displays ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_CHECK_FEATURE ! Check if feature row empty,
+	                                  SPI_FEATURE_ROW_READ ! Read the Feature Row,
+	                                  SPI_DISABLE ! Exit the programming mode"	;
+	
+	"Security Program Feature Rows" = " SVF_SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_SVFSAVE_ID ! Displays ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_CHECK_FEATURE ! Check if feature row empty,
+	                                  SPI_CHECK_STATUS ! Check if device ready,
+	                                  SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                                  SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,
+	                                  SPI_CHECK_STATUS ! Check if device ready,
+	                                  SPI_DISABLE ! Exit the programming mode"	;
+	       
+	"Security Display TraceID" = " SVF_SPI_INIT ! Initialize,
+								   SPI_SAVE_TRACEID ! Display TraceID";
+                      		
+	
+	"Security I2C Read Feature Rows" = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID_SVF, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2C_CHECK_FEATURE_ROW ! Check for OTP,
+	                          		I2C_FEATURE_ROW_READ ! Read the Feature Row,
+	                          		I2CDISABLE ! Exit the programming mode"	;
+	                          		
+	"Security I2C Program Feature Rows" = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID_SVF, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values, 
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2C_CHECK_FEATURE_ROW ! Check feature row,
+	                          		I2CCHECK_STATUS ! Check if device ready,
+	                          		I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       			I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       			I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+					                I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+					                I2CCHECK_STATUS ! Check if device ready,
+					                I2CDISABLE_NEW_ADDR ! Exit the programming mode";
+					                
+	"Security I2C Display TraceID" = " I2CINIT_SVF ! Initialize,
+								   I2C_SAVE_TRACEID ! Display TraceID";
+    
+    "JTAGI2C Verify ID" = "JTAGI2CINIT_SVF 	! Initialize, 
+						   JTAGI2CREAD_ID	! Check the IDCODE";
+		
+	"JTAGI2C Read Status Register" = "JTAGI2CINIT_SVF 	! Initialize, 
+									 JTAGI2CREAD_ID	! Check the IDCODE, 
+									 JTAGI2CSAVE_ID,
+									 JTAGI2CSRAM_ENABLE	! Enable SRAM programming mode, 
+					 			 	 JTAGI2C_SAVE_STATUS,
+					 			 	 JTAGI2CDISABLE ! Exit the programming mode";
+	
+	"JTAGI2C Fast Program" = "JTAGI2CINIT_SVF 	! Initialize,   
+							  JTAGI2CREAD_ID	! Check the IDCODE,
+							  JTAGI2CSRAM_ENABLE	! Enable SRAM programming mode, 
+							  JTAGI2CSRAM_ERASE	! Erase the SRAM, 
+							  JTAGI2CBURST_PROGRAM	! Program Fuse Map,
+							  JTAGI2CVERIFY_USERCODE		! Verify USERCODE,
+							  JTAGI2CVERIFY_STATUS ! Read the status bit,
+							  JTAGI2CDISABLE ! Exit the programming mode"	;
+	
+	"JTAGI2C Erase Only"	=	"JTAGI2CINIT_SVF 	! Initialize, 
+								JTAGI2CREAD_ID	! Check the IDCODE,
+								JTAGI2CSRAM_ENABLE	! Enable SRAM programming mode, 
+							  	JTAGI2CSRAM_ERASE	! Erase the SRAM, 
+								JTAGI2CCHECK_STATUS ! Read the status bit,
+			 			 		JTAGI2CDISABLE ! Exit the programming mode"	;
+			 			 		              	 		     
+</Operation_List>
+<Operation_List label="TurboOperation">
+					                
+	"Bypass" = "INIT ! Initialize"	;
+	                        							
+</Operation_List>
+<Operation_List label="ChainSVFOperation">
+	
+	"Bypass" = "INIT ! Initialize" ;
+						 				 		     
+</Operation_List>
+<Operation_List label="SingleSVFOperationRevC">
+	
+	"Bypass" = "INIT 	! Initialize";
+	
+	"Manufacturing Read MES Fuses" = "SPI_DTR_INIT 	! Initialize, 
+									  SPI_READ_ID, 
+							          SPI_SAVE_ID,
+							          SPI_EFUSE_ENABLE,
+									  SPI_READ_MES_REGISTER ! Read the Manufacturing Register,
+									  SPI_DISABLE ! Exit the programming mode" ;
+									  
+	"Manufacturing Read DTR Fuses" = "SVF_SPI_INIT, 
+							 		  SPI_READ_ID, 
+							          SPI_SAVE_ID, 
+									  SPI_EFUSE_ENABLE	! Enable the programming mode,
+									  SPI_READ_DTR_REGISTER ! Read the Manufacturing Register,
+									  SPI_DISABLE ! Exit the programming mode" ;
+									
+	"Manufacturing Read DTR Fuses Only" = " SVF_SPI_INIT, 
+							 		  		SPI_READ_ID, 
+							          		SPI_SAVE_ID, 
+										    SPI_READ_DTR_REGISTER_ONLY ! Read the Manufacturing Register" ;
+			
+	
+	"Read Manufacturing Register" = " SVF_SPI_INIT, 
+							 		  SPI_READ_ID, 
+							          SPI_SAVE_ID, 
+									  SPI_EFUSE_ENABLE	! Enable the programming mode,
+									  SPI_READ_MANUFACTURING_REGISTER ! Read the Manufacturing Register,
+									  SPI_DISABLE ! Exit the programming mode" ;
+						
+	"Program Manufacturing Register" = "SVF_SPI_INIT, 
+							 		    SPI_READ_ID, 
+									    SPI_PSUEDO_SRAM_ENABLE	! Enable the programming mode,
+									    SPI_PROGRAM_MANUFACTURING_REGISTER ! Program the Manufacturing Register,
+									    SPI_DISABLE ! Exit the programming mode" ;
+									  						
+	"Slave SPI Disable Only" = "SVF_SPI_INIT 	! Initialize, 
+	 			 				SPI_DISABLE ! Exit the programming mode"	;
+	"Slave SPI Enable Only" = "SVF_SPI_INIT 	! Initialize, 
+						   	   SPI_READ_ID	! Check the IDCODE,
+						  	   SPI_ENABLE	! Enable XPROGRAM mode"	;
+						   
+	"Slave SPI Re-Initialize" = "SVF_SPI_INIT 	! Initialize,  
+							 SPI_READ_ID	! Check the IDCODE,
+						  	 SPI_ENABLE	! Enable programming mode, 
+							 SPI_ERASE	! Erase the device, 
+							 SPI_DISABLE ! Exit the programming mode"	;								
+											 		  	 								
+	"Fast Program" = 			"SVF_SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,								 
+								SPI_ENABLE	! Enable programming mode,
+								SPI_ERASE	! Erase the device, 
+								SPI_PROGRAM	! Program Fuse Map,
+								SPI_VERIFY_STATUS ! Read the status bit,
+								SPI_DISABLE ! Exit the programming mode"	;			
+				 			 														
+	"Erase Only"	=			"SVF_SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE,
+								SPI_ENABLE	! Enable programming mode,
+								SPI_ERASE	! Erase the device, 
+								SPI_DISABLE ! Exit the programming mode"	;	
+								
+	
+	"Erase,Program,Verify" =   		"SVF_SPI_INIT 	! Initialize, 
+									SPI_READ_ID	! Check the IDCODE, 
+									SPI_ENABLE	! Enable the SRAM,
+									SPI_ERASE	! Erase the device,
+									SPI_PROGRAM_CONTROL0	! Program Control Register,
+				 			 		SPI_PROGRAM_STATUS	! Program SRAM,
+									SPI_VERIFY_SVF	! Verify CFG,									
+									SPI_PROGRAM_USERCODE	! Program USERCODE,
+									SPI_VERIFY_USERCODE		! Verify USERCODE,																		
+									SPI_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		SPI_DISABLE ! Exit the programming mode"	;		 			 		
+	
+	"Program" =   				"SVF_SPI_INIT 	! Initialize, 
+									SPI_READ_ID	! Check the IDCODE, 
+									SPI_ENABLE	! Enable the SRAM,
+									SPI_ERASE	! Erase the device,
+									SPI_PROGRAM_CONTROL0	! Program Control Register,
+				 			 		SPI_PROGRAM_STATUS	! Program SRAM,
+									SPI_PROGRAM_USERCODE	! Program USERCODE,
+									SPI_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		SPI_DISABLE ! Exit the programming mode"	;
+				 			 					 			 		
+	"Verify Only" = 		"SVF_SPI_INIT 	! Initialize, 
+							SPI_READ_ID	! Check the IDCODE, 
+							SPI_ENABLE	! Enable the SRAM,
+							SPI_VERIFY_CONTROL ! Verify Control Register,
+							SPI_VERIFY_USERCODE	! Verify USERCODE, 
+							SPI_VERIFY_SVF	! Verify the SRAM, 
+							SPI_VERIFY_DONE_BIT ! Verify Done Bit,
+							SPI_DISABLE ! Exit the programming mode";
+	
+	"Verify USERCODE" =     "SVF_SPI_INIT, 
+							 SPI_READ_ID, 
+							 SPI_VERIFY_USERCODE	! Verify USERCODE";
+	
+	"Display USERCODE" =	"SVF_SPI_INIT, 
+							 SPI_READ_ID, 
+							 SPI_SVFSAVE_USERCODE";
+							 
+							 													
+	"Read and Save"	=	"SVF_SPI_INIT, 
+						 SPI_READ_ID, 
+						 SPI_ENABLE	! Enable the SRAM, 
+						 SPI_SVFSAVE_CONTROL, 
+						 SPI_SVFSAVE_USERCODE,
+						 SPI_SVFSAVE_ARRAY, 
+						 SPI_DISABLE ! Exit the programming mode";												 
+	
+	"Display Control Register0" = "SVF_SPI_INIT ! Initialize,
+							     SPI_READ_ID	! Check the IDCODE,
+							     SPI_ENABLE	! Enable the SRAM,
+					 		     SPI_SVFSAVE_CONTROL,
+								 SPI_DISABLE ! Exit the programming mode";		
+	
+	"Program Control Register0" 		= "SVF_SPI_INIT ! Initialize,
+							     		   SPI_READ_ID	! Check the IDCODE,
+										   SPI_ENABLE	! Enable the SRAM,
+										   SPI_PROGRAM_CONTROL0	! Program Control Register,
+										   SPI_DISABLE ! Exit the programming mode";	
+																	 								 																															
+	"Verify ID" = "SVF_SPI_INIT 	! Initialize, 
+				   SPI_READ_ID	! Check the IDCODE";
+				   
+	"Display ID" = "SVF_SPI_INIT	! Initialize, 
+					SPI_READ_ID	! Check the IDCODE";								
+					 			 									
+	"Read Status Register" = "SVF_SPI_INIT ! Initialize,
+							 SPI_READ_ID, 
+							 SPI_SVFSAVE_STATUS !Read Status Register";		 
+	
+	"Refresh" = " 	SVF_SPI_INIT ! Initialize,
+					SPI_READ_ID,
+					SPI_REFRESH ! Refresh";
+	
+	"XSRAM Verify ID" = "SPI_INIT 	! Initialize, 
+				   		 SPI_READ_ID	! Check the IDCODE";
+	
+	"XSRAM Display ID" = "SPI_INIT 	! Initialize, 
+					SPI_READ_ID	! Check the IDCODE,
+					SPI_SAVE_ID";
+														
+	"XSRAM Verify Only" = 		"SVF_SPI_INIT 	! Initialize, 
+								SPI_READ_ID	! Check the IDCODE, 
+								SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM,
+								SPI_VERIFY_CONTROL ! Verify Control Register,
+								SPI_VERIFY_USERCODE	! Verify USERCODE, 
+								SPI_VERIFY_SVF	! Verify the SRAM, 
+								SPI_VERIFY_DONE_BIT ! Verify Done Bit,
+								SPI_DISABLE ! Exit the programming mode";
+																	
+	"XSRAM Verify USERCODE" =     "SVF_SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+								 SPI_VERIFY_USERCODE	! Verify USERCODE,
+								 SPI_DISABLE ! Exit the programming mode";
+														
+	"XSRAM Read and Save"	=	"SVF_SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+								 SPI_SVFSAVE_CONTROL, 
+								 SPI_SVFSAVE_USERCODE,
+								 SPI_SVFSAVE_ARRAY, 
+								 SPI_DISABLE ! Exit the programming mode";		
+	
+	"XSRAM Refresh" =      "SVF_SPI_INIT ! Initialize,
+							SPI_READ_ID,
+							SPI_REFRESH ! Refresh";
+					
+	"XSRAM Display USERCODE" =	"SVF_SPI_INIT, 
+								 SPI_READ_ID, 
+								 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+								 SPI_SVFSAVE_USERCODE,
+								 SPI_DISABLE ! Exit the programming mode";
+	
+	"XSRAM Read Status Register" =  "SVF_SPI_INIT ! Initialize,
+									 SPI_READ_ID, 
+									 SPI_SRAM_TRANSPARENT_READ_ENABLE	! Enable the SRAM, 
+						             SPI_SVFSAVE_STATUS !Read Status Register,
+						             SPI_DISABLE ! Exit the programming mode";	 
+					 		     
+	"I2C Verify ID" = "	I2CINIT_SVF 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE";
+	
+	"I2C Read Status Register" = "I2CINIT_SVF 	! Initialize, 
+								  I2CREAD_ID	! Check the IDCODE, 
+							      I2C_SAVE_STATUS  ! Read status register";	
+							      
+	"I2C Erase,Program,Verify" =   "I2CINIT_SVF 	! Initialize, 
+									I2CREAD_ID	! Check the IDCODE, 
+									I2C_ENABLE	! Enable the SRAM,
+									I2C_ERASE	! Erase the SRAM,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2C_PROGRAM_CONTROL0	! Program Control Register,
+				 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+									I2CPROGRAM_USERCODE	! Program USERCODE,
+									I2CCHECK_STATUS ! Read the status bit,
+									I2CVERIFY_USERCODE		! Verify USERCODE,
+									I2C_VERIFY	! Verify the SRAM, 									
+									I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+				 			 		I2CCHECK_STATUS ! Read the status bit,		 		
+									I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C Program" =   "I2CINIT_SVF 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+						I2C_PROGRAM_CONTROL0	! Program Control Register,
+	 			 		I2C_PROGRAM_STATUS	! Program SRAM,
+						I2CPROGRAM_USERCODE	! Program USERCODE,
+						I2C_PROGRAM_DONE_BIT	! Program DONE bit,	
+	 			 		I2CCHECK_STATUS ! Read the status bit,		 		
+						I2CDISABLE ! Exit the programming mode"	;
+						
+
+	"I2C Fast Program" =   "I2CINIT_SVF 	! Initialize, 
+						I2CREAD_ID	! Check the IDCODE, 
+						I2C_ENABLE	! Enable the SRAM,
+						I2C_ERASE	! Erase the SRAM,
+						I2CCHECK_STATUS ! Read the status bit,
+	 			 		I2CBURST_PROGRAM	! Program SRAM,
+	 			 		I2CVERIFY_USERCODE	! Verify USERCODE,
+	 			 		I2CVERIFY_DONE_BIT ! Verify Done Bit,
+						I2CDISABLE ! Exit the programming mode"	;		 			 		
+				 			 		
+	"I2C Verify Only" = "	I2CINIT_SVF 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE, 
+							I2C_ENABLE	! Enable the SRAM,
+							I2C_VERIFY	! Verify the SRAM, 
+							I2CVERIFY_USERCODE	! Verify USERCODE, 
+							I2CVERIFY_DONE_BIT ! Verify Done Bit,
+							I2CCHECK_STATUS ! Read the status bit, 
+							I2CDISABLE ! Exit the programming mode"	;	
+	
+	"I2C Erase Only"	=	"I2CINIT_SVF 	! Initialize, 
+							I2CREAD_ID	! Check the IDCODE,
+							I2C_ENABLE	! Enable the SRAM, 
+							I2C_ERASE	! Erase the SRAM,
+							I2CCHECK_STATUS ! Read the status bit,
+		 			 		I2CDISABLE ! Exit the programming mode"	;
+			 			 						 			 								
+	
+	"I2C Refresh"	=	"I2CINIT_SVF 	! Initialize, 
+						 I2CREAD_ID	! Check the IDCODE,	
+						 I2CREFRESH ! Refresh";	
+						 
+	"SSPI NVCM Program,Verify" = " SVF_SPI_INIT ! Initialize,
+	                      SPI_READ_ID	! Check the IDCODE, 
+	                      SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                      SPI_ENABLE_NVCM	! Enable the NVCM,
+	                      SPI_SECURITY_CHECK_NVCM ! Device security check,
+	                      SVF_SPI_PROGRAM_NVCM ! Program NVCM,
+	                      SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+	                      SPI_VERIFY_NVCM_SVF ! Verify NVCM,
+	                      SPI_VERIFY_USERCODE	! Verify USERCODE,
+	                      SVF_SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                      SVF_SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,	                      
+	                      SPI_PROGRAM_VERIFY_DONE_BIT ! Program and verify DONE bit,
+	                      SPI_DISABLE ! Exit the programming mode"	;	              
+	
+	"SSPI NVCM Program,Verify,Feature" = "SVF_SPI_INIT ! Initialize,
+	                          SPI_READ_ID	! Check the IDCODE,
+	                          SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                          SPI_ENABLE_NVCM	! Enable the NVCM,
+	                          SPI_SECURITY_CHECK_NVCM ! Device security check,
+	                          SPI_PROGRAM_NVCM ! Program NVCM,
+                              SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+                              SPI_VERIFY_NVCM_SVF ! Verify NVCM,
+                              SPI_VERIFY_USERCODE	! Verify USERCODE,
+	                          SVF_SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,	                      
+	                          SVF_SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,
+	                          SPI_PROGRAM_VERIFY_DONE_BIT ! Program and verify DONE bit,
+	                          SPI_DISABLE ! Exit the programming mode"	; 
+	                                                    
+	"SSPI NVCM Program,Verify,Secure" =  " SVF_SPI_INIT ! Initialize,	
+	                                  SPI_READ_ID	! Check the IDCODE, 
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_SECURITY_CHECK_NVCM ! Device security check,
+	                                  SVF_SPI_PROGRAM_NVCM ! Program NVCM,
+	                                  SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+	                                  SPI_VERIFY_NVCM_SVF ! Verify NVCM,
+	                                  SPI_VERIFY_USERCODE	! Verify USERCODE,
+	                                  SVF_SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                                  SVF_SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,
+	                                  SPI_PROGRAM_VERIFY_DONE_BIT ! Program and verify DONE bit,
+	                                  SPI_PROGRAM_SECURITY_BIT ! Secure Device,
+	                                  SPI_DISABLE ! Exit the programming mode"	;
+	
+	"SSPI NVCM Program" =        "SVF_SPI_INIT ! Initialize,
+		                          SPI_READ_ID	! Check the IDCODE, 
+		                          SPI_PROGRAM_LTRIM_NVCM ! Write programming trim values, 
+		                          SPI_ENABLE_NVCM	! Enable the NVCM,
+		                          SPI_SECURITY_CHECK_NVCM ! Device security check,
+		                          SVF_SPI_PROGRAM_NVCM ! Program NVCM,
+		                          SPI_PROGRAM_USERCODE_NVCM ! Program USERCODE,
+		                          SVF_SPI_PROGRAM_FEATURE_BIT ! Program and verify Feature bits,
+		                          SVF_SPI_PROGRAM_FEATURE_ROW_NVCM ! Program and verify Feature row,
+		                          SPI_PROGRAM_DONE_BIT ! Program DONE bit,
+		                          SPI_DISABLE ! Exit the programming mode"	;
+	
+	"SSPI NVCM Blank Check" = " SVF_SPI_INIT ! Initialize,
+	                           SPI_READ_ID	! Check the IDCODE, 
+	                           SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+	                           SPI_ENABLE_NVCM	! Enable the NVCM,
+	                           SPI_BLANK_CHECK_NVCM ! Check if device is blank,
+	                           SPI_DISABLE ! Exit the programming mode";
+	
+	"SSPI NVCM Verify Only" =    " SVF_SPI_INIT 	! Initialize, 
+							      SPI_READ_ID	! Check the IDCODE, 
+							      SPI_READ_LTRIM_NVCM ! Write programming trim values, 
+							      SPI_ENABLE_NVCM	! Enable the NVCM,
+							      SPI_VERIFY_NVCM_SVF	! Verify the NVCM, 
+						      	  SPI_VERIFY_USERCODE	! Verify USERCODE, 
+							      SPI_VERIFY_STATUS ! Read the status bit,
+							      SVF_SPI_VERIFY_FEATURE_BIT ! Verify Feature bits,
+							      SVF_SPI_VERIFY_FEATURE_ROW_NVCM ! Verify Feature row,
+							      SPI_VERIFY_DONE_BIT ! Program DONE bit,
+							      SPI_DISABLE ! Exit the programming mode"	;
+	
+	"SSPI NVCM Verify ID" = " SVF_SPI_INIT ! Initialize,
+	                  		  SPI_READ_ID ! Verify ID" ;
+	                   
+	"SSPI NVCM Display ID" = "SVF_SPI_INIT ! Initialize,
+	                          SPI_SVFSAVE_ID" ;
+	
+	"SSPI NVCM Display USERCODE" = " SVF_SPI_INIT ! Initialize,
+	                               SPI_READ_ID ! Verify ID,
+	                               SPI_SVFSAVE_ID,
+	                               SPI_READ_LTRIM_NVCM ! Write programming trim values,
+	                               SPI_ENABLE_NVCM	! Enable the NVCM, 
+	                               SPI_SVFSAVE_USERCODE ! Save USERCODE,
+	                               SPI_DISABLE ! Exit the programming mode";	                           
+	         
+	"SSPI NVCM Read and Save" = " SVF_SPI_INIT ! Initialize,
+	                          	  SPI_READ_ID ! Verify ID,
+	                              SPI_SVFSAVE_ID,
+	                              SPI_READ_LTRIM_NVCM ! Write programming trim values,
+	                              SPI_ENABLE_NVCM	! Enable the NVCM,
+	                              SPI_SVFSAVE_USERCODE ! Save USERCODE,
+	                              SVF_SPI_SAVE_NVCM ! Save NVCM array,
+	                              SVF_SPI_SAVE_FEATURE ! Save Feature row,
+	                              SPI_DISABLE ! Exit the programming mode"	;
+	                              
+	
+	"SSPI NVCM Read Status Register" =  " SVF_SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_SVFSAVE_ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values,
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_READ_STATUS ! Read status register,
+	                                  SPI_DISABLE ! Exit the programming mode"	;			
+	
+	"SSPI NVCM Secure Device" = " SVF_SPI_INIT ! Initialize,	
+	                              SPI_READ_ID	! Check the IDCODE, 
+	                              SPI_PROGRAM_LTRIM_NVCM ! Write programming trim values,
+	                              SPI_ENABLE_NVCM	! Enable the NVCM,
+	                              SPI_PROGRAM_SECURITY_BIT ! Secure Device,
+	                              SPI_DISABLE ! Exit the programming mode"	;
+	                              
+	"SSPI NVCM Program Feature Rows" = " SVF_SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_SVFSAVE_ID ! Displays ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values,
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_CHECK_FEATURE ! Check feature row,
+	                                  SPI_CHECK_STATUS ! Check if device is ready,
+	                                  SVF_SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                                  SVF_SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,
+	                                  SPI_CHECK_STATUS ! Check if device is ready,
+	                                  SPI_DISABLE ! Exit the programming mode"	;	
+	                                  
+	
+	"SSPI NVCM Refresh" = " SVF_SPI_INIT ! Initialize,
+	                    	SPI_READ_ID ! Verify ID,
+	                    	SPI_REFRESH ! Refresh";	
+	                    	
+	"I2C NVCM Program,Verify" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_SECURITY_CHECK_NVCM ! Device security check,
+	                       I2C_PROGRAM_NVCM ! Program NVCM,
+	                       I2CPROGRAM_USERCODE_NVCM ! Program USERCODE,
+	                       I2C_VERIFY_NVCM   ! Verify NVCM,
+	                       I2CVERIFY_USERCODE_NVCM 	! Verify USERCODE,
+	                       I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       I2C_PROGRAM_DONE_BIT ! Program DONE bit,
+	                       I2C_VERIFY_DONE_BIT_NVCM ! Verify DONE bit,
+	                       I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+	                       I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+	                       I2CDISABLE_NEW_ADDR ! Exit the programming mode"	;  	                  
+				                  
+	"I2C NVCM Program,Verify,Secure" = " I2CINIT_SVF ! Initialize,
+					                       I2CREAD_ID ! Verify_ID,
+					                       I2C_READ_LTRIM_NVCM ! Write programming trim values,
+					                       I2C_ENABLE_NVCM ! Enable NVCM,
+					                       I2C_SECURITY_CHECK_NVCM ! Device security check,
+					                       I2C_PROGRAM_NVCM ! Program NVCM,
+					                       I2CPROGRAM_USERCODE_NVCM ! Program USERCODE,
+					                       I2C_VERIFY_NVCM   ! Verify NVCM,
+					                       I2CVERIFY_USERCODE_NVCM 	! Verify USERCODE,
+					                       I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+					                       I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+				                           I2C_PROGRAM_DONE_BIT ! Program DONE bit,
+					                       I2C_VERIFY_DONE_BIT_NVCM ! Verify DONE bit,
+					                       I2C_PROGRAM_SECURITY_BIT ! Secure Device,  
+				                           I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+					                       I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+					                       I2CDISABLE_NEW_ADDR ! Exit the programming mode"	;          
+                               	
+	"I2C NVCM Program" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_SECURITY_CHECK_NVCM ! Device security check,
+	                       I2C_PROGRAM_NVCM ! Program NVCM,
+	                       I2CPROGRAM_USERCODE_NVCM ! Program USERCODE,                      
+	                       I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       I2C_PROGRAM_DONE_BIT ! Program DONE bit,
+	                       I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+	                       I2CDISABLE_NEW_ADDR ! Exit the programming mode"	;                     
+                     
+	"I2C NVCM Blank Check" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_BLANK_CHECK_NVCM ! Check if device is blank,
+	                       I2CDISABLE ! Exit the programming mode"	; 
+
+	"I2C NVCM Verify Only" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_VERIFY_NVCM   ! Verify NVCM,
+	                       I2CVERIFY_USERCODE_NVCM 	! Verify USERCODE,
+	                       I2C_VERIFY_STATUS_NVCM ! Read the status bit,
+	                       I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       I2C_VERIFY_FEATURE_ROW_NVCM ! Verify Feature row,
+	                       I2C_VERIFY_DONE_BIT_NVCM ! Verify DONE bit,
+	                       I2CDISABLE ! Exit the programming mode"	; 
+	
+	"I2C NVCM Verify ID" = "I2CINIT_SVF !Initialize,
+	                        I2CREAD_ID ! Verify ID";
+	                        
+	"I2C NVCM Display ID" = " I2CINIT_SVF ! Initialize,
+	                          I2CSAVE_ID_SVF";
+
+	"I2C NVCM Display USERCODE" = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID_SVF, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2CSAVE_USERCODE_SVF ! Save USERCODE,
+	                          		I2CDISABLE ! Exit the programming mode";
+	
+	"I2C NVCM Read and Save" = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID_SVF, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2CSAVE_USERCODE_SVF ! Save USERCODE,
+	                          		I2CSAVE_NVCM_SVF ! Save NVCM array,
+	                          		I2CSAVE_FEATURE_SVF  ! Save Feature row,
+	                          		I2CDISABLE ! Exit the programming mode"	;
+	                          		
+	                              
+	"I2C NVCM Read Status Register"	 = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,	
+									I2C_READ_LTRIM_NVCM ! Write programming trim values,
+									I2C_ENABLE_NVCM ! Enable NVCM,
+									I2C_SAVE_STATUS  ! Read status register,
+									I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C NVCM Secure Device" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2C_PROGRAM_LTRIM_NVCM ! Write programming trim values,
+	                       I2C_ENABLE_NVCM ! Enable NVCM,
+	                       I2C_PROGRAM_SECURITY_BIT ! Secure Device,
+	                       I2CDISABLE ! Exit the programming mode"	;
+	
+	"I2C NVCM Program Feature Rows" = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID_SVF, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2C_CHECK_FEATURE_ROW ! Check feature row,
+	                          		I2CCHECK_STATUS ! Check if device ready,
+	                          		I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       			I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       			I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+					                I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+					                I2CCHECK_STATUS ! Check if device ready,
+					                I2CDISABLE_NEW_ADDR ! Exit the programming mode";
+	
+	"I2C NVCM Refresh" = " I2CINIT_SVF ! Initialize,
+	                       I2CREAD_ID ! Verify_ID,
+	                       I2CREFRESH ! Refresh";		
+	                    				
+	"Security Read Feature Rows" = " SVF_SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_SVFSAVE_ID ! Displays ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values,
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_CHECK_FEATURE ! Check if feature row empty,
+	                                  SPI_FEATURE_ROW_READ ! Read the Feature Row,
+	                                  SPI_DISABLE ! Exit the programming mode"	;
+	
+	"Security Program Feature Rows" = " SVF_SPI_INIT ! Initialize,
+	                                  SPI_READ_ID ! Verify ID,
+	                                  SPI_SVFSAVE_ID ! Displays ID,
+	                                  SPI_READ_LTRIM_NVCM ! Write programming trim values,
+	                                  SPI_ENABLE_NVCM	! Enable the NVCM,
+	                                  SPI_CHECK_FEATURE ! Check if feature row empty,
+	                                  SPI_CHECK_STATUS ! Check if device ready,
+	                                  SPI_PROGRAM_VERIFY_FEATURE_BIT ! Program and verify Feature bits,
+	                                  SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM ! Program and verify Feature row,
+	                                  SPI_CHECK_STATUS ! Check if device ready,
+	                                  SPI_DISABLE ! Exit the programming mode"	;
+	       
+	"Security Display TraceID" = " SVF_SPI_INIT ! Initialize,
+								   SPI_SAVE_TRACEID ! Display TraceID";
+                      		
+	
+	"Security I2C Read Feature Rows" = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID_SVF, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2C_CHECK_FEATURE_ROW ! Check for OTP,
+	                          		I2C_FEATURE_ROW_READ ! Read the Feature Row,
+	                          		I2CDISABLE ! Exit the programming mode"	;
+	                          		
+	"Security I2C Program Feature Rows" = " I2CINIT_SVF ! Initialize,
+									I2CREAD_ID ! Verify_ID,
+	                          		I2CSAVE_ID_SVF, 
+	                          		I2C_READ_LTRIM_NVCM ! Write programming trim values,
+	                          		I2C_ENABLE_NVCM ! Enable NVCM,
+	                          		I2C_CHECK_FEATURE_ROW ! Check feature row,
+	                          		I2CCHECK_STATUS ! Check if device ready,
+	                          		I2C_PROGRAM_FEATURE_BIT ! Program Feature bits,
+	                       			I2C_VERIFY_FEATURE_BIT ! Verify Feature bits,
+	                       			I2C_PROGRAM_FEATURE_ROW_NVCM ! Program Feature row,
+					                I2C_VERIFY_FEATURE_ROW_NEW_ADDR ! Verify Feature row,
+					                I2CCHECK_STATUS ! Check if device ready,
+					                I2CDISABLE_NEW_ADDR ! Exit the programming mode";
+					                
+	"Security I2C Display TraceID" = " I2CINIT_SVF ! Initialize,
+								   I2C_SAVE_TRACEID ! Display TraceID";
+	
+	
+	"JTAGI2C Verify ID" = "JTAGI2CINIT_SVF 	! Initialize, 
+						   JTAGI2CREAD_ID	! Check the IDCODE";
+		
+	"JTAGI2C Read Status Register" = "JTAGI2CINIT_SVF 	! Initialize, 
+									 JTAGI2CREAD_ID	! Check the IDCODE, 
+									 JTAGI2CSAVE_ID,
+									 JTAGI2CSRAM_ENABLE	! Enable SRAM programming mode, 
+					 			 	 JTAGI2C_SAVE_STATUS,
+					 			 	 JTAGI2CDISABLE ! Exit the programming mode";
+	
+	"JTAGI2C Fast Program" = "JTAGI2CINIT_SVF 	! Initialize,   
+							  JTAGI2CREAD_ID	! Check the IDCODE,
+							  JTAGI2CSRAM_ENABLE	! Enable SRAM programming mode, 
+							  JTAGI2CSRAM_ERASE	! Erase the SRAM, 
+							  JTAGI2CBURST_PROGRAM	! Program Fuse Map,
+							  JTAGI2CVERIFY_USERCODE		! Verify USERCODE,
+							  JTAGI2CVERIFY_STATUS ! Read the status bit,
+							  JTAGI2CDISABLE ! Exit the programming mode"	;
+	
+	"JTAGI2C Erase Only"	=	"JTAGI2CINIT_SVF 	! Initialize, 
+								JTAGI2CREAD_ID	! Check the IDCODE,
+								JTAGI2CSRAM_ENABLE	! Enable SRAM programming mode, 
+							  	JTAGI2CSRAM_ERASE	! Erase the SRAM, 
+								JTAGI2CCHECK_STATUS ! Read the status bit,
+			 			 		JTAGI2CDISABLE ! Exit the programming mode"	;
+			 			 									   						 		     
+</Operation_List>
+<Operation_List label="ChainSVFOperationRevC">
+	"Bypass" = "INIT 	! Initialize"	;
+</Operation_List>
+<Script>
+<![CDATA[
+int32 Temp_Row_Count = 0;
+function INIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	IF (Address_Length == 9470)
+	{
+		Temp_Row_Count = 62517;
+    }
+}
+function SPI_INIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	FREQUENCY 1E6 HZ;
+	IF (Address_Length == 9470)
+	{
+		Temp_Row_Count = 62517;
+    }
+    TRY 1 {
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_TRY_VERIFY  32 	TDI(#0^32)
+				  	TDO (0x00800000)
+				  	MASK(0x008C0000);
+		setpin ISPEN HIGH;
+	}
+	ELSE
+	{	
+		//print (0,"Key activation...");
+		setpin ISPEN HIGH;
+		setpin TRST LOW;
+		setpin TRST HIGH;
+		RUN_TEST DELAY 1000;
+		setpin ISPEN LOW;
+	    ! Shift in Key activation;
+	    SDR 40 TDI(0x512F6325FF);
+	    setpin ISPEN HIGH;
+	    setpin TRST HIGH;
+	    setpin TRST LOW;
+	    RUN_TEST DELAY 1000;	    
+	}
+	
+}
+function SVF_SPI_INIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	FREQUENCY 1E6 HZ;
+	IF (Address_Length == 9470)
+	{
+		Temp_Row_Count = 62517;
+    }
+	setpin TRST LOW;
+	setpin TRST HIGH;
+	RUN_TEST DELAY 1000;
+	setpin ISPEN LOW;
+    ! Shift in Key activation;
+    SDR 40 TDI(0x512F6325FF);
+    setpin ISPEN HIGH;
+    setpin TRST HIGH;
+    setpin TRST LOW;
+    RUN_TEST DELAY 1000;
+}
+function SPI_DTR_INIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	FREQUENCY 1E6 HZ;
+	IF (Address_Length == 9470)
+	{
+		Temp_Row_Count = 62517;
+    }
+    TRY 1 {
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_TRY_VERIFY  32 	TDI(#0^32)
+				  	TDO (0x00800000)
+				  	MASK(0x008C0000);
+		setpin ISPEN HIGH;
+	}
+	ELSE
+	{
+		//print (0,"Key activation...");
+		setpin TRST LOW;
+		setpin TRST HIGH;
+		RUN_TEST DELAY 100;
+		setpin ISPEN LOW;
+	    ! Shift in Key activation;
+	    SDR 40 TDI(0x512F6325FF);
+	    setpin ISPEN HIGH;
+	    setpin TRST HIGH;
+	    setpin TRST LOW;
+	    RUN_TEST DELAY 10;
+	}
+}
+function SPI_READ_ID 
+{
+	IDTDI[1] = $IDTDI[1];
+	setpin ISPEN LOW;
+	! Shift in IDCODE_PUB(0xE0) opcode;
+	SDR	32	TDI (0x00000007);
+	SDR_VERIFY	32	TDI (0x00000000)
+					TDO	(IDTDI[1])
+					MASK (0xFFFFFFFF);		
+	setpin ISPEN HIGH;				        
+}
+function SPI_SAVE_ID	{
+	datastream SavedID[1][ID_Length];
+	file	NewFile = "FILE_SAVE";
+	setpin ISPEN LOW; 
+	! Shift in IDCODE_PUB(0xE0) opcode;
+    	SDR 32 	TDI (0x00000007);
+	SDR	ID_Length	TDI (#0^ID_Length)
+				    TDO	(SavedID);
+	setpin ISPEN HIGH;
+	SavedID[1] = $SavedID[1];					
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedID);
+	fclose 	NewFile;
+}
+function SPI_SVFSAVE_ID	{
+	setpin ISPEN LOW; 
+	! Shift in IDCODE_PUB(0xE0) opcode;
+    SDR 32 	TDI (0x00000007);
+	SDR	ID_Length	TDI (#0^ID_Length)
+					TDO	(#0^ID_Length)
+					MASK(#0^ID_Length);
+	setpin ISPEN HIGH;					
+}
+function SPI_ENABLE {	
+	setpin ISPEN LOW;
+	! Shift in ISC ENABLE(0xC6) instruction;
+    SDR 32 TDI (0x00000063);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWV;
+}
+function SPI_SRAM_TRANSPARENT_READ_ENABLE {
+	setpin ISPEN LOW;
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+    SDR 32 TDI (0x0000002E);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWV;
+}
+function SPI_DISABLE {
+	setpin ISPEN LOW;
+	! Shift in ISC DISABLE(0x26) instruction;
+    SDR	32 	TDI (0x00000064);
+    setpin ISPEN HIGH;
+    RUN_TEST DELAY 200;
+    setpin ISPEN LOW;
+	! Shift in NO-OP(0xFF) instruction;
+    SDR	32 	TDI (0xFFFFFFFF);
+    setpin ISPEN HIGH;
+}
+function SPI_VERIFY_STATUS {
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO (0x00800000)
+			  	MASK(0x008C0000);
+	setpin ISPEN HIGH;				  	
+}
+function SPI_ERASE {
+	setpin ISPEN LOW;	
+	! Shift in ISC ERASE(0x0E) instruction;
+    SDR 32 TDI (0x00000070);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWE;	
+}
+function SPI_PROGRAM {
+	FuseArray_TDI.row = 1;
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+    setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	! Shift in LSC_BITSTREAM_BURST(0x7A) instruction;
+    SDR 32	TDI (0x0000005E);
+	! Shift in TOTAL_FUSE_MAP bits;
+    SDR	TotalFuse		TDI	(FuseArray_TDI);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWP;
+}
+function SPI_FAST_PROGRAM 
+{
+	int32	RowCount;
+	int32	RowRemain;
+	RowCount = (TotalFuse/8000);
+	RowRemain = (TotalFuse%8000);
+	FuseArray_TDI.row = 1;
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+    setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	! Shift in LSC_BITSTREAM_BURST(0x7A) instruction;
+    SDR 32	TDI (0x0000005E);
+    repeat RowCount{
+		SDR	8000 TDI (FuseArray_TDI[1]);
+		FuseArray_TDI[1] = FuseArray_TDI[1] >> 8000;
+	}	
+	IF (RowRemain != 0){
+		SDR	RowRemain TDI (FuseArray_TDI[1]);
+	}
+	setpin ISPEN HIGH;	
+	
+}
+function SPI_PROGRAM_STATUS {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+    setpin ISPEN HIGH;	
+    
+    RUN_TEST DELAY 1000;	
+    
+	repeat Address_Length{
+		setpin ISPEN LOW;
+		! Shift in LSC_PROG_INCR_RTI(0x82) instruction;
+    	SDR 32	TDI (0x00000041); 
+		! Shift in Data Row = RowCount; 			
+		SDR	Row_Width	TDI	(FuseArray_TDI[RowCount]);
+		RowCount = RowCount +1;	
+		RUN_TEST DELAY 1;	
+		setpin ISPEN HIGH;
+	} 
+	setpin ISPEN LOW;
+	SDR 32	TDI (0x0000005E);
+	setpin ISPEN HIGH;
+		
+}
+function SPI_PROGRAM_CONTROL0 {
+	IF (Control_Register_0_TDI.row = 1)
+	{
+		setpin ISPEN LOW;
+		! Shift in LSC_PROG_CTRL0(0x22) instruction;
+	    SDR 32 TDI (0x00000044);
+		SDR 32 TDI(Control_Register_0_TDI[1]);
+		RUN_TEST DELAY PWP; 
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_CTRL0(0x20) instruction;
+	    SDR 32 TDI (0x00000004);
+		SDR_VERIFY  32 TDI(0x00000000)
+					   TDO(Control_Register_0_TDI[1]);
+		setpin ISPEN HIGH;					   
+	}
+}
+function SPI_PROGRAM_DONE_BIT 
+{	
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+    setpin ISPEN HIGH;
+    
+    RUN_TEST DELAY 1000;
+    
+	setpin ISPEN LOW;
+	! Shift in ISC PROGRAM DONE(0x5E) instruction;
+    SDR	32 	TDI (0x0000007A);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 200;	
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	    TDO (0x00800000)
+			  	    MASK(0x008C0000);
+	setpin ISPEN HIGH;
+}
+function SPI_REFRESH {
+	setpin ISPEN LOW;
+	! Shift in LSC_REFRESH(0x79) instruction;
+	SDR 32	TDI (0x0000009E);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 200; 
+}
+function SPI_PROGRAM_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+		setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SDR 32	TDI (0x00000062);
+	    setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+	 	! Shift in ISC PROGRAM USERCODE(0xC2) instruction;
+	    SDR 32	TDI (0x00000043);
+	    SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+		setpin ISPEN HIGH;
+		RUN_TEST DELAY 100;				
+	}
+}
+function SPI_VERIFY_USERCODE {	
+    Usercode_TDI.row = 1;
+    TRY 1 {
+    	setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SDR 32	TDI (0x00000062);
+	    setpin ISPEN HIGH;
+    	setpin ISPEN LOW;
+		! Shift in READ USERCODE(0xC0) instruction;
+	    SDR 32 TDI (0x00000003);
+	    SDR_VERIFY 	Usercode_Length TDI (#0^Usercode_Length)
+									TDO	(Usercode_TDI[1])
+									MASK(0xFFFFFFFF);
+		setpin ISPEN HIGH;									
+	}
+	ELSE
+	{
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in ISC DISABLE(0x26) instruction;
+		SDR	32 	TDI (0x00000064);
+		setpin ISPEN HIGH;
+		print (1, "Failed in Function VERIFY USERCODE /see log file for more details/ ");
+		
+	}
+}
+function SPI_VERIFY_CONTROL {
+	IF (Control_Register_0_TDI.row = 1)
+	{
+		setpin ISPEN LOW;
+		! Shift in LSCC READ CONTROL 0(0x20) instruction;
+	    SDR 32 TDI (0x00000004);
+		SDR_VERIFY  32 TDI(0x00000000)
+				   	   TDO(Control_Register_0_TDI[1])
+				       MASK(0xFFFFFFFF);
+		setpin ISPEN HIGH;
+	}
+}
+function SPI_VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	TRY 1 {
+		setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    	SDR 32	TDI (0x00000062);
+    	setpin ISPEN HIGH; 
+    	
+    	RUN_TEST DELAY 1000;
+    	
+	    		
+	    repeat Address_Length {	
+	    	setpin ISPEN LOW;
+			! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+			SDR 8	TDI	(0x56);
+			SDR 24	TDI	(0x000084);
+	    	! Shift Out Data Row = RowCount;
+		    SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+									TDO	(FuseArray_TDI[RowCount]);	
+			setpin ISPEN HIGH;
+			setpin ISPEN LOW;
+			SDR 32 TDI(#1^32);	
+			setpin ISPEN HIGH;							
+			RowCount = RowCount +1;
+		}		
+	}
+	ELSE
+	{
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SDR	32 	TDI (0x00000064);
+		setpin ISPEN HIGH;
+		print (1, "Failed in Function VERIFY /see log file for more details/ ");
+	}	
+}
+function SPI_VERIFY_SVF {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH; 
+	RUN_TEST DELAY 1000;		    
+	repeat Address_Length {	
+		setpin ISPEN LOW;
+		! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+    	SDR 32	TDI	(0x00008456);	    
+    	! Shift Out Data Row = RowCount;
+	    SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+								TDO	(FuseArray_TDI[RowCount]);	
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		SDR 32 TDI(#1^32);
+		setpin ISPEN HIGH;																
+		RowCount = RowCount +1;										
+	}			
+}
+function SPI_SAVE_ARRAY {
+	int32	RowCount = 1;
+	datastream SavedFuseMap[Address_Length][Row_Width];
+	file NewFile = "FILE_SAVE";
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH; 
+	
+	RUN_TEST DELAY 1000;
+	
+	
+	repeat Address_Length {
+    	setpin ISPEN LOW;
+		! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+		SDR 8	TDI	(0x56);
+		SDR 24	TDI	(0x000084);		
+		SDR 	Row_Width	TDI	(#0^Row_Width)
+						    TDO	(SavedFuseMap[RowCount]);
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		SDR 32 TDI(#0^32);
+		setpin ISPEN HIGH;	
+		RowCount = RowCount +1;
+	}	
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+	fclose 	NewFile;
+}
+function SPI_SVFSAVE_ARRAY 
+{
+	setpin ISPEN LOW; 	
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH; 
+	RUN_TEST DELAY 1000; 
+    repeat Address_Length {
+    	setpin ISPEN LOW;
+		! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+		SDR 32	TDI	(0x00008456);
+		SDR_VERIFY 	Row_Width	TDI	(#0^Row_Width)
+							TDO	(#0^Row_Width)
+							MASK(#0^Row_Width);	
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		SDR 32 TDI(#0^32);
+		setpin ISPEN HIGH;																			
+	}		
+}
+function SPI_SAVE_USERCODE 
+{
+	datastream SavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	setpin ISPEN LOW;
+	! Shift in READ USERCODE(0xC0) instruction;
+    SDR 32	TDI (0x00000003);
+    SDR	Usercode_Length	TDI(#0^Usercode_Length)
+						TDO(SavedUsercode[1]);
+	setpin ISPEN HIGH;
+	SavedUsercode[1] = $SavedUsercode[1];						
+	// Write To file 
+	fopen NewFile att "wa"
+	format "SVF_Plus";	
+	fwrite NewFile (Usercode_TDI, SavedUsercode);
+	fclose 	NewFile;
+}
+function SPI_SAVE_USERCODE_NVCM 
+{
+	datastream SavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	setpin ISPEN LOW;
+	! Shift in READ USERCODE(0xC0) instruction;
+    SDR 32	TDI (0x00000003);
+    SDR	Usercode_Length	TDI(#0^Usercode_Length)
+						TDO(SavedUsercode[1]);
+	setpin ISPEN HIGH;
+	// Write To file 
+	fopen NewFile att "wa"
+	format "SVF_Plus";	
+	fwrite NewFile (Usercode_TDI, SavedUsercode);
+	fclose 	NewFile;
+}
+function SPI_SVFSAVE_USERCODE 
+{
+	setpin ISPEN LOW;
+	! Shift in READ USERCODE(0xC0) instruction;
+    SDR 32	TDI (0x00000003);
+	SDR_VERIFY	Usercode_Length	TDI(#0^Usercode_Length)
+								TDO(#0^Usercode_Length)
+								MASK(#0^Usercode_Length);
+	setpin ISPEN HIGH;						
+}
+function SPI_SAVE_CONTROL {
+	datastream SavedControl[1][32];
+	file	NewFile = "FILE_SAVE"; 
+	setpin ISPEN LOW;
+	! Shift in LSCC READ CONTROL_0(0x20) instruction;
+	SDR 32 TDI (0x00000004);
+	SDR  32 TDI(0xFFFFFFFF)
+			TDO(SavedControl);
+	setpin ISPEN HIGH;	  
+	SavedControl[1] = $SavedControl[1];
+	// Write To File 
+	fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (Control_Register_0_TDI, SavedControl);
+	fclose 	NewFile;
+}
+function SPI_SVFSAVE_CONTROL 
+{
+	setpin ISPEN LOW;
+	! Shift in LSCC READ CONTROL_0(0x20) instruction;
+	SDR 32 TDI (0x00000004);
+	SDR_VERIFY  32 TDI(0x00000000)
+				   TDO(0x00000000)
+				   MASK(0x00000000);
+	setpin ISPEN HIGH;	
+}
+function SPI_SAVE_STATUS 
+{
+	datastream SavedSTATUS[1][32];
+	file NewFile = "FILE_SAVE";
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	SDR	32	TDI(#0^32)
+			TDO(SavedSTATUS);
+	setpin ISPEN HIGH;			
+	print (0,SavedSTATUS);
+	SavedSTATUS[1] = $SavedSTATUS[1];	
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (STATUS_BIT, SavedSTATUS);
+	fclose 	NewFile;			  	
+}
+function SPI_SVFSAVE_STATUS 
+{
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	SDR_VERIFY  32 TDI(0x00000000)
+				  TDO(0x00000000)
+				  MASK(0x00000000);
+	setpin ISPEN HIGH;				  	
+}
+function SPI_ENABLE_NVCM 
+{
+	setpin ISPEN LOW;
+	! Shift in ISC ENABLE(0xC6) instruction;
+	SDR 32 TDI (0x00004063);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 200;
+}
+function SPI_ENABLE_TRANSPARENT_NVCM {
+	setpin ISPEN LOW;
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+    SDR 32 TDI (0x0000402E);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY 200;
+}
+function SPI_PROGRAM_LTRIM_NVCM 
+{
+	setpin ISPEN LOW;
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+	SDR 32 TDI (0x0000202E);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 200;
+	setpin ISPEN LOW;
+	! Shift in LSC_PROG_TRIM(0xD1) instruction;
+	SDR 96 TDI (0x000000420F4F28000400008B);
+	setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	! Shift in ISC DISABLE(0x26) instruction;
+    SDR	32 	TDI (0x00000064);
+    setpin ISPEN HIGH;
+}
+function SPI_READ_LTRIM_NVCM 
+{
+	setpin ISPEN LOW;
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+	SDR 32 TDI (0x0000202E);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 200;
+	setpin ISPEN LOW;
+	! Shift in LSC_PROG_TRIM(0xD1) instruction;
+	SDR 96 TDI (0x000000220F4F28000400008B);
+	setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	! Shift in ISC DISABLE(0x26) instruction;
+    SDR	32 	TDI (0x00000064);
+    setpin ISPEN HIGH;
+}
+function SPI_VERIFY_NVCM 
+{
+	int32	RowCount = 1;
+	int32   VerifyRowCount = 0;
+	FuseArray_TDI.row = 1;
+	VerifyRowCount = Temp_Row_Count;
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH; 
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_INCR_NV(0x73) instruction;
+	SDR 32	TDI	(0x000008CE);
+	TRY 1
+	{
+		! Shift out Data Row = RowCount; 			
+		SDR_TRY_VERIFY	128	TDI	(#0^128)
+						TDO	(FuseArray_TDI[RowCount]);
+		RowCount = RowCount +1;
+		VerifyRowCount = VerifyRowCount -1;
+	}
+	ELSE
+	{
+		RowCount = RowCount;
+	}
+	setpin ISPEN HIGH; 
+	TRY 1 {
+		repeat VerifyRowCount { 
+			setpin ISPEN LOW;
+			! Shift in LSC_READ_INCR_NV(0x73) instruction;
+			SDR 32	TDI	(0x000008CE); 
+			! Shift out Data Row = RowCount; 			
+			SDR_VERIFY	128	TDI	(#0^128)
+							TDO	(FuseArray_TDI[RowCount]);
+			setpin ISPEN HIGH;		
+			RowCount = RowCount +1;
+		}
+		setpin ISPEN LOW;
+		! Shift in NO-OP(0xFF) instruction;
+		SDR	32 	TDI (0xFFFFFFFF);
+		setpin ISPEN HIGH;										
+	}
+	ELSE
+	{
+		setpin ISPEN HIGH; 
+		setpin ISPEN LOW;
+		! Shift in ISC DISABLE(0x26) instruction;
+		SDR	32 	TDI (0x00000064);
+		setpin ISPEN HIGH;
+		print (1, "Failed in Function VERIFY /see log file for more details/ ");
+	}		
+}
+function SPI_VERIFY_NVCM_SVF 
+{
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH; 
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_INCR_NV(0x73) instruction;
+	SDR 32	TDI	(0x000008CE);
+	RUN_TEST DELAY PWV;
+	SDR	128	TDI	(#0^128);
+	setpin ISPEN HIGH;	
+	repeat Temp_Row_Count {
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_INCR_NV(0x73) instruction;
+		SDR 32	TDI	(0x000008CE); 
+		! Shift out Data Row = RowCount; 			
+		SDR_VERIFY	128	TDI	(#0^128)
+						TDO	(FuseArray_TDI[RowCount]);
+		setpin ISPEN HIGH;		
+		RowCount = RowCount +1;
+	}
+	setpin ISPEN LOW;
+	! Shift in NO-OP(0xFF) instruction;
+	SDR	32 	TDI (0xFFFFFFFF);
+	setpin ISPEN HIGH;											
+}
+function SPI_BLANK_CHECK_NVCM 
+{
+	TRY 1 {
+		setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    	SDR 32	TDI (0x00000062);
+    	setpin ISPEN HIGH; 
+    	setpin ISPEN LOW;
+		! Shift in LSC_READ_INCR_NV(0x73) instruction;
+		SDR 32	TDI (0xFFFF08CE);
+		RUN_TEST DELAY PWV;
+		SDR 128 	TDI(#0^128);
+		repeat Temp_Row_Count {
+			RUN_TEST DELAY PWV;
+		    SDR_VERIFY 128	TDI(#0^128)
+							TDO(#0^128);
+		}
+		setpin ISPEN HIGH;
+	}
+	ELSE
+	{
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in ISC DISABLE(0x26) instruction;
+		SDR	32 	TDI (0x00000064);
+		setpin ISPEN HIGH;
+		print (1, "Device is already programmed. Cannot continue.");
+	}		
+}
+function SPI_PROGRAM_NVCM 
+{
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+   	setpin ISPEN HIGH;
+   	repeat Temp_Row_Count {
+		setpin ISPEN LOW;
+		! Shift in LSC_PROG_INCR_NV(0x70) instruction;
+		SDR 32	TDI (0x0000000E);	
+		! Shift In Data Row = RowCount;	
+		SDR 128	TDI(FuseArray_TDI[RowCount]);
+		setpin ISPEN HIGH;
+		loop PWP {
+			RUN_TEST DELAY 2;
+			setpin ISPEN LOW;
+			! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+	    	SDR 32 TDI (0x0000000F);
+			SDR_VERIFY 1 TDI(#0) 
+			             TDO(#0);
+			setpin ISPEN HIGH;
+		}
+		RowCount = RowCount + 1;
+		setpin ISPEN HIGH;
+	}	
+}
+function SVF_SPI_PROGRAM_NVCM 
+{
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+   	setpin ISPEN HIGH;
+   	repeat Temp_Row_Count {
+		setpin ISPEN LOW;
+		! Shift in LSC_PROG_INCR_NV(0x70) instruction;
+		SDR 32	TDI (0x0000000E);
+		! Shift In Data Row = RowCount;
+		SDR 128	TDI(FuseArray_TDI[RowCount]);
+		setpin ISPEN HIGH;
+		RowCount = RowCount +1;	       
+		RUN_TEST DELAY 2;
+	}	
+}
+function SPI_SECURITY_CHECK_NVCM 
+{
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_VERIFY  32 	TDI(#0^32)
+						TDO(0x00000000)
+			  			MASK(0x02024000);
+		setpin ISPEN HIGH;				  	
+	}
+	ELSE
+	{	
+		setpin ISPEN HIGH;		
+		setpin ISPEN LOW;	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	   	SDR 32 TDI (0x00000064);
+	    setpin ISPEN HIGH;
+    	print (1,"The OTP is set. Cannot continue.");
+	}
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_VERIFY  32 	TDI(#0^32)
+							TDO(0x00000000)
+			  				MASK(0x008C0000);
+		setpin ISPEN HIGH;				  	
+	}
+	ELSE
+	{	
+		setpin ISPEN HIGH;		
+		setpin ISPEN LOW;	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	   	SDR 32 TDI (0x00000064);
+	    setpin ISPEN HIGH;
+    	print (1,"Device is already programmed. Cannot continue.");
+	}
+	
+}
+function SPI_PROGRAM_USERCODE_NVCM
+{
+	datastream SavedUsercode[1][Usercode_Length];
+	IF (Usercode_TDI.row = 1)
+	{
+	    setpin ISPEN LOW;
+	    ! Shift in ISC PROGRAM USERCODE(0xC2) instruction;
+	    SDR 32 TDI (0x00000043);
+	    SavedUsercode[1] = Usercode_TDI[1];
+	    //SavedUsercode[1] = $SavedUsercode[1];
+	    SDR Usercode_Length	TDI (SavedUsercode[1]);
+	    setpin ISPEN HIGH;	
+	    RUN_TEST DELAY PWP;		
+	}		
+}
+function SPI_PROGRAM_VERIFY_FEATURE_BIT
+{
+	datastream FeatureBitsArray[1][16];
+	IF (ArchArray_TDI.row = 1)
+	{
+	    FeatureBitsArray[1] = ArchArray_TDI[1];
+	    FeatureBitsArray[1] = $FeatureBitsArray[1];
+	    //print (0,FeatureBitsArray);
+	    setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SDR 32	TDI (0x00000062);
+	   	setpin ISPEN HIGH;
+	   	
+	    setpin ISPEN LOW;
+	    ! Shift in in LSC_PROG_FEABITS(0xF8) instruction;
+	    SDR 32 TDI (0x0000001F);
+	    SDR 16 TDI(FeatureBitsArray[1]);
+	    setpin ISPEN HIGH;
+	    loop PWP {
+			RUN_TEST DELAY PWP;
+			setpin ISPEN LOW;
+			! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+	    	SDR 32 TDI (0x0000000F);
+			SDR_VERIFY 1 TDI(#0) 
+			             TDO(#0);
+			setpin ISPEN HIGH;
+	    }
+	    setpin ISPEN HIGH;
+	    setpin ISPEN LOW;
+	    ! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	    SDR 32 TDI (0x000000DF);
+	    TRY 1 {
+	    	RUN_TEST DELAY PWV;
+	    	SDR_VERIFY 16 TDI (#0^16)
+	                      TDO (FeatureBitsArray[1])
+	                      MASK (0xFFFF);
+	        setpin ISPEN HIGH;
+	    }
+	    ELSE {
+	    	setpin ISPEN HIGH;		
+			setpin ISPEN LOW;	  
+			! Shift in ISC DISABLE(0x26) instruction;
+	   		SDR 32 TDI (0x00000064);
+	    	setpin ISPEN HIGH;
+    		print (1,"Failed to Program Feature Bits. Cannot continue.");
+        }
+	}
+}
+function SPI_PROGRAM_FEATURE_BIT
+{
+	datastream FeatureBitsArray[1][16];
+	IF (ArchArray_TDI.row = 1)
+	{
+	    FeatureBitsArray[1] = ArchArray_TDI[1];
+	    FeatureBitsArray[1] = $FeatureBitsArray[1];
+	    setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SDR 32	TDI (0x00000062);
+	   	setpin ISPEN HIGH;    
+	    setpin ISPEN LOW;
+	    ! Shift in in LSC_PROG_FEABITS(0xF8) instruction;
+	    SDR 32 TDI (0x0000001F);
+	    SDR 16 TDI(FeatureBitsArray[1]);
+	    setpin ISPEN HIGH;
+	    loop PWP {
+			RUN_TEST DELAY PWP;
+			setpin ISPEN LOW;
+			! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+	    	SDR 32 TDI (0x0000000F);
+			SDR_VERIFY 1 TDI(#0) 
+			             TDO(#0);
+			setpin ISPEN HIGH;
+	    }
+	    setpin ISPEN HIGH;
+	}
+}
+function SPI_VERIFY_FEATURE_BIT
+{
+	datastream FeatureBitsArray[1][16];
+	IF (ArchArray_TDI.row = 1)
+	{
+	    FeatureBitsArray[1] = ArchArray_TDI[1];
+	    FeatureBitsArray[1] = $FeatureBitsArray[1];
+	    setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SDR 32	TDI (0x00000062);
+	   	setpin ISPEN HIGH;
+	    setpin ISPEN LOW;
+	    ! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	    SDR 32 TDI (0x000000DF);
+	    TRY 1 {
+	    	RUN_TEST DELAY PWV;
+	    	SDR_VERIFY 16 TDI (#0^16)
+	                      TDO (FeatureBitsArray[1])
+	                      MASK (0xFFFF);
+	        setpin ISPEN HIGH;
+	    }
+	    ELSE {
+	    	setpin ISPEN HIGH;		
+			setpin ISPEN LOW;	  
+			! Shift in ISC DISABLE(0x26) instruction;
+	   		SDR 32 TDI (0x00000064);
+	    	setpin ISPEN HIGH;
+    		print (1,"Failed to Program Feature Bits. Cannot continue.");
+        }
+	}
+}
+function SVF_SPI_PROGRAM_VERIFY_FEATURE_BIT
+{
+	int32 delay_time = (PWP * PWV);
+	datastream FeatureBitsArray[1][16];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureBitsArray[1] = ArchArray_TDI[1];
+		FeatureBitsArray[1] = $FeatureBitsArray[1];
+		setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SDR 32	TDI (0x00000062);
+	   	setpin ISPEN HIGH;	
+		setpin ISPEN LOW;
+		! Shift in in LSC_PROG_FEABITS(0xF8) instruction;
+		SDR 32 TDI (0x0000001F);
+		SDR 16 TDI(FeatureBitsArray[1]);
+		setpin ISPEN HIGH;
+		RUN_TEST DELAY delay_time;
+		setpin ISPEN LOW;
+		! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+		SDR 32 TDI (0x0000000F);
+		SDR_VERIFY 1 TDI(#0) 
+		             TDO(#0);
+		setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_FEABITS(0xFB) instruction;
+		SDR 32 TDI (0x000000DF);
+		SDR_VERIFY 16 TDI (#0^16)
+		              TDO (FeatureBitsArray[1])
+		              MASK (0xFFFF);
+		setpin ISPEN HIGH;
+	}
+}
+function SVF_SPI_PROGRAM_FEATURE_BIT
+{
+	int32 delay_time = (PWP * PWV);
+	datastream FeatureBitsArray[1][16];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureBitsArray[1] = ArchArray_TDI[1];
+		FeatureBitsArray[1] = $FeatureBitsArray[1];
+		setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SDR 32	TDI (0x00000062);
+	   	setpin ISPEN HIGH;	
+		setpin ISPEN LOW;
+		! Shift in in LSC_PROG_FEABITS(0xF8) instruction;
+		SDR 32 TDI (0x0000001F);
+		SDR 16 TDI(FeatureBitsArray[1]);
+		setpin ISPEN HIGH;
+		RUN_TEST DELAY delay_time;
+		setpin ISPEN LOW;
+		! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+		SDR 32 TDI (0x0000000F);
+		SDR_VERIFY 1 TDI(#0) 
+		             TDO(#0);
+		setpin ISPEN HIGH;		
+	}
+}
+function SVF_SPI_VERIFY_FEATURE_BIT
+{
+	datastream FeatureBitsArray[1][16];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureBitsArray[1] = ArchArray_TDI[1];
+		FeatureBitsArray[1] = $FeatureBitsArray[1];
+		setpin ISPEN LOW;
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SDR 32	TDI (0x00000062);
+	   	setpin ISPEN HIGH;
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_FEABITS(0xFB) instruction;
+		SDR 32 TDI (0x000000DF);
+		SDR_VERIFY 16 TDI (#0^16)
+		              TDO (FeatureBitsArray[1])
+		              MASK(0xFFFF);
+		setpin ISPEN HIGH;
+	}
+}
+function SPI_PROGRAM_VERIFY_DONE_BIT
+{
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	! Shift in ISC_PROGRAM_DONE(0x5E) instruction;
+	SDR 32 TDI (0x0000007A);
+	setpin ISPEN HIGH;
+    RUN_TEST DELAY 200;
+    TRY 1 {
+        setpin ISPEN LOW;
+	    ! Shift out LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_VERIFY 32 TDI (#0^32)
+		       	      TDO (0x00800000)
+		              MASK (0x008C0000);
+		setpin ISPEN HIGH;
+	}
+	ELSE {
+		setpin ISPEN HIGH;		
+		setpin ISPEN LOW;	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	   	SDR 32 TDI (0x00000064);
+	    setpin ISPEN HIGH;
+	    print (1,"Verify DONE bit Failed. Cannot continue."); 
+   }
+}
+function SPI_VERIFY_DONE_BIT
+{
+	TRY 1 {
+        setpin ISPEN LOW;
+	    ! Shift out LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_VERIFY 32 TDI (#0^32)
+		       	      TDO (0x00800000)
+		              MASK (0x008C0000);
+		setpin ISPEN HIGH;
+	}
+	ELSE {
+		setpin ISPEN HIGH;		
+		setpin ISPEN LOW;	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	   	SDR 32 TDI (0x00000064);
+	    setpin ISPEN HIGH;   
+	    print (1,"Verify DONE bit Failed. Cannot continue."); 	
+   }
+}
+function SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM
+{
+	datastream FeatureArray[1][64];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		FeatureArray[1] = $FeatureArray[1];
+		//print (0,FeatureArray);
+		setpin ISPEN LOW;
+		! Shift in LSC_PROG_FEATURE( 0xE4) instruction;
+		SDR 32	TDI (0x00000027);
+		SDR 64 TDI(FeatureArray[1]);
+		setpin ISPEN HIGH;	
+		loop PWP {
+			RUN_TEST DELAY PWV;
+			setpin ISPEN LOW;
+			! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+			SDR 32 TDI (0x0000000F);
+			SDR_VERIFY 1 TDI(#0) 
+			             TDO(#0);
+			setpin ISPEN HIGH;
+		}
+		setpin ISPEN HIGH;			
+		setpin ISPEN LOW; 
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+		SDR 32	TDI (0x000000E7);
+		TRY 1 {
+			RUN_TEST DELAY PWV;
+			SDR_VERIFY 64 TDI (#0^64)
+		       		      TDO (FeatureArray[1])
+		       		      MASK (#1^64);
+			setpin ISPEN HIGH;
+		}
+		ELSE {
+			setpin ISPEN HIGH;		
+			setpin ISPEN LOW;	  
+			! Shift in ISC DISABLE(0x26) instruction;
+			SDR 32 TDI (0x00000064);
+			setpin ISPEN HIGH;
+			print (1,"Failed to Program Feature Row. Cannot continue.");
+		}	
+   }
+}
+function SPI_PROGRAM_FEATURE_ROW_NVCM
+{
+	datastream FeatureArray[1][64];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		FeatureArray[1] = $FeatureArray[1];
+		//print (0,FeatureArray);
+		setpin ISPEN LOW;
+		! Shift in LSC_PROG_FEATURE( 0xE4) instruction;
+		SDR 32	TDI (0x00000027);
+		SDR 64 TDI(FeatureArray[1]);
+		setpin ISPEN HIGH;	
+		loop PWP {
+			RUN_TEST DELAY PWP;
+			setpin ISPEN LOW;
+			! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+			SDR 32 TDI (0x0000000F);
+			SDR_VERIFY 1 TDI(#0) 
+			             TDO(#0);
+			setpin ISPEN HIGH;
+		}
+		setpin ISPEN HIGH;			
+   }
+}
+function SPI_VERIFY_FEATURE_ROW_NVCM
+{
+	datastream FeatureArray[1][64];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		FeatureArray[1] = $FeatureArray[1];
+		//print (0,FeatureArray);
+		setpin ISPEN LOW; 
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+		SDR 32	TDI (0x000000E7);
+		TRY 1 {
+			RUN_TEST DELAY PWV;
+			SDR_VERIFY 64 TDI (#0^64)
+		       		      TDO (FeatureArray[1])
+		       		      MASK (#1^64);
+			setpin ISPEN HIGH;
+		}
+		ELSE {
+			setpin ISPEN HIGH;		
+			setpin ISPEN LOW;	  
+			! Shift in ISC DISABLE(0x26) instruction;
+			SDR 32 TDI (0x00000064);
+			setpin ISPEN HIGH;			
+		}	
+   }
+}
+function SVF_SPI_PROGRAM_VERIFY_FEATURE_ROW_NVCM
+{
+	datastream FeatureArray[1][64];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		FeatureArray[1] = $FeatureArray[1];
+		//print (0,FeatureArray);
+		setpin ISPEN LOW;
+		! Shift in LSC_PROG_FEATURE( 0xE4) instruction;
+		SDR 32	TDI (0x00000027);
+		SDR 64 TDI(FeatureArray[1]);
+		setpin ISPEN HIGH;	
+		RUN_TEST DELAY PWP;
+		setpin ISPEN LOW; 
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+		SDR 32	TDI (0x000000E7);
+		SDR_VERIFY 64 TDI (#0^64)
+	       	          TDO (FeatureArray[1]);
+		setpin ISPEN HIGH;
+    }
+}
+function SVF_SPI_PROGRAM_FEATURE_ROW_NVCM
+{
+	datastream FeatureArray[1][64];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		FeatureArray[1] = $FeatureArray[1];
+		//print (0,FeatureArray);
+		setpin ISPEN LOW;
+		! Shift in LSC_PROG_FEATURE( 0xE4) instruction;
+		SDR 32	TDI (0x00000027);
+		SDR 64 TDI(FeatureArray[1]);
+		setpin ISPEN HIGH;	
+		RUN_TEST DELAY PWP;
+		setpin ISPEN LOW;
+		! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+		SDR 32 TDI (0x0000000F);
+		SDR_VERIFY 1 TDI(#0) 
+		             TDO(#0);
+		setpin ISPEN HIGH;
+		
+    }
+}
+function SVF_SPI_VERIFY_FEATURE_ROW_NVCM
+{
+	datastream FeatureArray[1][64];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		FeatureArray[1] = $FeatureArray[1];
+		//print (0,FeatureArray);
+		setpin ISPEN LOW; 
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+		SDR 32	TDI (0x000000E7);
+		RUN_TEST DELAY PWV;
+		SDR_VERIFY 64 TDI (#0^64)
+	       	          TDO (FeatureArray[1])
+	       	          MASK (#1^64);
+		setpin ISPEN HIGH;
+    }
+}
+function SPI_PROGRAM_SECURITY_BIT
+{
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH;
+	setpin ISPEN LOW;
+	! Shift in ISC_PROGRAM_SECURITY(0xCE) instruction;
+	SDR 32	TDI (0x00000073);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 200;
+}
+function SPI_SAVE_NVCM
+{
+	datastream SavedFuseMap[Temp_Row_Count][128];
+	file NewFile = "FILE_SAVE";
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH;  
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_INCR_NV(0x73) instruction;
+	SDR 32	TDI (0xFFFF08CE);
+	RUN_TEST DELAY PWV;
+	SDR 128 	TDI(#0^128);  
+	repeat Temp_Row_Count{	
+		RUN_TEST DELAY PWV;
+	    SDR	128	TDI	(#1^128)
+				TDO	(SavedFuseMap);		
+	}
+	setpin ISPEN HIGH;
+	// Write To file 
+	fopen NewFile att "wa"
+	format "SVF_Plus";	
+	fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+	fclose 	NewFile;
+}
+function SVF_SPI_SAVE_NVCM
+{
+	setpin ISPEN LOW;
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	setpin ISPEN HIGH;    
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_INCR_NV(0x73) instruction;
+	SDR 32	TDI (0xFFFF08CE);
+	RUN_TEST DELAY PWV;
+	SDR 128 	TDI(#0^128);
+	repeat Temp_Row_Count{	
+		RUN_TEST DELAY PWV;
+	    SDR	128	TDI	(#1^128)
+				TDO	(#0^128)
+				MASK(#0^128);		
+	}
+	setpin ISPEN HIGH;
+}
+function SPI_SAVE_FEATURE 
+{
+	datastream SaveFeatureArray[1][64];
+	datastream SaveFeatureBitsArray[1][16];
+	datastream FeatureSavedFuseMap[1][80];
+	file NewFile = "FILE_SAVE";	
+	setpin ISPEN LOW; 		  
+	! Shift in LSC_READ_FEATURE (0xE7) instruction;
+	SDR 32	TDI (0x000000E7);
+    SDR 64   TDI(#0^64)
+    		 TDO(SaveFeatureArray[1]);
+    setpin ISPEN HIGH;
+    SaveFeatureArray[1] = $SaveFeatureArray[1];
+	setpin ISPEN LOW; 				    	  
+	! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	SDR 32	 TDI (0x000000DF);
+    SDR 16   TDI (#0^16)
+    		 TDO(SaveFeatureBitsArray[1]);
+	setpin ISPEN HIGH;
+	SaveFeatureBitsArray[1] = $SaveFeatureBitsArray[1];
+	FeatureSavedFuseMap[1] = (SaveFeatureBitsArray[1] @ SaveFeatureArray[1]); 
+	// Write To file 
+	fopen NewFile att "wa"
+	format "SVF_Plus";	
+	fwrite NewFile (ArchArray_TDI, FeatureSavedFuseMap);
+	fclose 	NewFile;  
+}
+function SVF_SPI_SAVE_FEATURE 
+{
+	setpin ISPEN LOW; 		  
+	! Shift in LSC_READ_FEATURE (0xE7) instruction;
+	SDR 32	TDI (0x000000E7);
+    SDR 64   TDI (#1^64)
+    		 TDO (#0^64)
+    		 MASK (#0^64);
+	setpin ISPEN HIGH;
+    setpin ISPEN LOW; 				    	  
+	! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	SDR 32	 TDI (0x000000DF);
+    SDR 16  TDI (#1^16)
+    		TDO (#0^16)
+    		MASK (#0^16);
+	setpin ISPEN HIGH;
+}
+function SPI_READ_STATUS 
+{
+	datastream SavedSTATUS[1][32];
+	file NewFile = "FILE_SAVE";
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	SDR 32 TDI(#0^32)
+	       TDO(SavedSTATUS);
+	setpin ISPEN HIGH;			
+	print (0,SavedSTATUS);
+	SavedSTATUS[1] = $SavedSTATUS[1];
+	// Write To file 
+	fopen NewFile att "wa"
+	format "SVF_Plus";	
+	fwrite NewFile (STATUS_BIT, SavedSTATUS);
+	fclose 	NewFile; 				  	
+}
+function SPI_CHECK_FEATURE_ROW{
+	datastream FeatureArray[1][64];
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_VERIFY  32 	TDI(#0^32)
+						TDO(0x00000000)
+			  			MASK(0x02024000);
+		setpin ISPEN HIGH;				  	
+	}
+	ELSE
+	{	
+		setpin ISPEN HIGH;		
+		setpin ISPEN LOW;	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	   	SDR 32 TDI (0x00000064);
+	    setpin ISPEN HIGH;
+    	print (1,"The OTP is set. Cannot continue.");
+	}
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		//print (0,FeatureArray);
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+		SDR 32	TDI (0x000000E7);
+		TRY 1 {
+			SDR_VERIFY 64 TDI (#0^64)
+		       		      TDO (#0^64);
+			setpin ISPEN HIGH;
+		}
+		ELSE {
+			setpin ISPEN HIGH; 		
+			setpin ISPEN LOW;	  
+			! Shift in ISC DISABLE(0x26) instruction;
+			SDR 32 TDI (0x00000064);
+			setpin ISPEN HIGH; 	
+			print (1,"The Feature Row is already programmed. Cannot continue.");		
+		}	
+   }
+}
+function SPI_CHECK_STATUS {
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO(0x00000000)
+			  	MASK(0x000C0000);
+	setpin ISPEN HIGH; 
+}
+function SPI_FEATURE_ROW_READ
+{
+	datastream FeatureRow[1][80];
+	datastream FeatureArray[1][64];
+	datastream FeatureBitsArray[1][16];
+	file	NewFile = "FILE_SAVE"; 
+	setpin ISPEN LOW; 		  
+	! Shift in LSC_READ_FEATURE (0xE7) instruction;
+	SDR 32	TDI (0x000000E7);
+	SDR 64  TDI(#0^64)
+			TDO(FeatureArray[1]); 
+	setpin ISPEN HIGH;		
+	FeatureArray[1] = $FeatureArray[1];		         	
+	setpin ISPEN LOW; 			   	  
+	! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	SDR 32	 TDI (0x000000DF);
+    SDR 16  TDI (#1^16)
+    		TDO (FeatureBitsArray[1]);
+    setpin ISPEN HIGH;
+    FeatureBitsArray[1] = $FeatureBitsArray[1];
+    FeatureRow[1] = (FeatureBitsArray[1] @ FeatureArray[1]);
+	print (0,FeatureRow);
+	fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT,FeatureRow);
+	fclose 	NewFile;
+}
+function SPI_SAVE_TRACEID
+{
+	datastream SavedUID[1][64];
+	file	NewFile = "FILE_SAVE"; 
+	setpin ISPEN LOW; 
+	! Shift in LSC_UIDCODE_PUB(0x19) instruction;
+    SDR 32	TDI	(0x00000098);
+	SDR	64	TDI (#0^64)
+			TDO	(SavedUID);
+	setpin ISPEN HIGH;
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedUID);
+	fclose 	NewFile;
+}
+
+function SPI_CHECK_FEATURE {
+	TRY 1{
+		setpin ISPEN LOW;
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		SDR_VERIFY  32 	TDI(#0^32)
+						TDO(0x00000000)
+			  			MASK(0x02024000);
+		setpin ISPEN HIGH;
+	}
+	ELSE
+	{	
+		setpin ISPEN LOW;
+		! Shift in ISC DISABLE(0x26) instruction;
+	   	SDR 32 TDI (0x00000064);
+	   	setpin ISPEN HIGH;
+    	print (1,"The OTP is set. Cannot continue.");
+	}	
+	IF (ArchArray_TDI.row = 1)
+	{	
+		setpin ISPEN LOW; 
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+		SDR 32	TDI (0x000000E7);
+		TRY 1 {
+			SDR_VERIFY 64 TDI (#0^64)
+		       		      TDO (#0^64);
+			setpin ISPEN HIGH;
+		}
+		ELSE {
+			setpin ISPEN HIGH;		
+			setpin ISPEN LOW;	  
+			! Shift in ISC DISABLE(0x26) instruction;
+			SDR 32 TDI (0x00000064);
+			setpin ISPEN HIGH;
+			print (1,"Fature row is not blank. Cannot continue.");
+		}	
+   }
+
+}
+function I2CINIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	IF (Address_Length == 5624)
+	{
+		Temp_Row_Count = 11970;
+    }
+    TRY 1 {
+    	I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		I2C_RESTART;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+		SDR_TRY_VERIFY  32 	TDI(#0^32)
+				  	TDO (0x00800000)
+				  	MASK(0x008C0000);
+		I2C_STOP;
+	}
+	ELSE
+	{
+		I2C_STOP;
+		//print (0,"Activation Key....");
+		setpin TRST HIGH;
+		RUN_TEST DELAY 1000;
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in Key activation;
+		SDR 32 TDI(0x512F6325);
+		I2C_STOP;
+		setpin TRST LOW;
+	    RUN_TEST DELAY 10;
+	    
+	}
+}
+function I2CINIT_SVF {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	IF (Address_Length == 5624)
+	{
+		Temp_Row_Count = 11970;
+    }
+	//print (0,"Activation Key....");
+	setpin TRST HIGH;
+	RUN_TEST DELAY 1000;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in Key activation;
+	SDR 32 TDI(0x512F6325);
+	I2C_STOP;
+	setpin TRST LOW;
+    RUN_TEST DELAY 10;
+}
+function I2CREAD_ID {
+	IDTDI[1] = $IDTDI[1];
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in IDCODE_PUB(0xE0) opcode;
+	SDR	32	TDI (0x00000007);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR_VERIFY	32	TDI (0x00000000)
+					TDO	(IDTDI[1])
+					MASK (0xFFFFFFFF);					
+	I2C_STOP;				        
+}
+function I2CSAVE_ID_SVF	{
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+	! Shift in IDCODE_PUB(0xE0) opcode;
+    SDR 32 	TDI (0x00000007);
+    I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR	ID_Length	TDI (#0^ID_Length)
+					TDO	(#0^ID_Length)
+					MASK(#0^ID_Length);
+	I2C_STOP;	
+}
+function I2CSAVE_ID	{
+	datastream SavedID[1][ID_Length];
+	file	NewFile = "FILE_SAVE";
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in IDCODE_PUB(0xE0) opcode;
+    SDR 32 	TDI (0x00000007);
+    I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR	ID_Length	TDI (#0^ID_Length)
+					TDO	(SavedID);
+	I2C_STOP;				
+	SavedID[1] = $SavedID[1];	
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedID);
+	fclose 	NewFile;
+}
+function I2C_ENABLE	{
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in ISC ENABLE(0xC6) instruction;
+    SDR 32 TDI (0x00000063);
+    I2C_STOP;
+    RUN_TEST DELAY PWV;
+}
+function I2C_PROGRAM_LTRIM_NVCM 
+{
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+	SDR 32 TDI (0x0000202E);
+	I2C_STOP;
+	RUN_TEST DELAY 200;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_PROG_TRIM(0xD1) instruction;
+	SDR 96 TDI (0x000000420F4F28000400008B);
+	I2C_STOP;
+	RUN_TEST DELAY PWP;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in ISC DISABLE(0x26) instruction;
+    SDR	32 	TDI (0x00000064);
+    I2C_STOP;	
+}
+function I2C_READ_LTRIM_NVCM 
+{
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+	SDR 32 TDI (0x0000202E);
+	I2C_STOP;
+	RUN_TEST DELAY 200;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_PROG_TRIM(0xD1) instruction;
+	SDR 96 TDI (0x000000220F4F28000400008B);
+	I2C_STOP;
+	RUN_TEST DELAY PWP;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in ISC DISABLE(0x26) instruction;
+    SDR	32 	TDI (0x00000064);
+    I2C_STOP;	
+}
+function I2C_ENABLE_NVCM	{
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in ISC ENABLE(0xC6) instruction;
+    SDR 32 TDI (0x00004063);
+    I2C_STOP;
+    RUN_TEST DELAY PWV;
+}
+function I2CDISABLE	{
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in ISC DISABLE(0x26) instruction;
+    SDR	32 	TDI (0x00000064);
+    I2C_STOP;
+    RUN_TEST DELAY 200;    	    	
+}
+function I2CDISABLE_NEW_ADDR	{
+	datastream JTAGI2CN_WRITE[1][8];
+	JTAGI2CN_WRITE[1] = (NEW_I2C_ADDR_WRITE ) ;
+	
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (JTAGI2CN_WRITE[1]);
+	! Shift in ISC DISABLE(0x26) instruction;
+    SDR	32 	TDI (0x00000064);
+    I2C_STOP;
+    RUN_TEST DELAY 200;    	    	
+}
+function I2C_ERASE {	
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);		
+	! Shift in ISC ERASE(0x0E) instruction;
+    SDR 32 TDI (0x00000070);
+    RUN_TEST DELAY 5000;
+    I2C_STOP;    
+}
+function I2C_PROGRAM_STATUS {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+    I2C_STOP;
+    
+    RUN_TEST DELAY 1000;
+    
+    repeat Address_Length{
+		I2C_START;	
+	    ! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_PROG_INCR_RTI(0x82) instruction;
+	    SDR 32	TDI (0x00008441); 
+		! Shift in Data Row = RowCount; 			
+		SDR	Row_Width	TDI	(FuseArray_TDI[RowCount]);
+		I2C_STOP;	
+		I2C_START;	
+	    ! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		SDR 32	TDI (#0^32);
+		I2C_STOP; 
+		RowCount = RowCount +1;			
+	} 	
+	
+}
+function I2C_PROGRAM_CONTROL0 {
+	IF (Control_Register_0_TDI.row = 1)
+	{
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_PROG_CTRL0(0x22) instruction;
+	    SDR 32 TDI (0x00000044);
+		SDR 32 TDI(Control_Register_0_TDI[1]);
+		RUN_TEST DELAY PWP; 
+		I2C_STOP;
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_READ_CTRL0(0x20) instruction;
+	    SDR 32 TDI (0x00000004);
+	    I2C_RESTART;
+	    ! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+		SDR_VERIFY  32 TDI(0x00000000)
+					   TDO(Control_Register_0_TDI[1]);
+		I2C_STOP;					   
+	}
+}
+function I2C_PROGRAM_NVCM {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+   	I2C_STOP;
+   	repeat Temp_Row_Count {
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_PROG_INCR_NV(0x70) instruction;
+		SDR 32	TDI (0x0000000E);
+		! Shift In Data Row = RowCount;	
+		SDR 128	TDI(FuseArray_TDI[RowCount]);
+		I2C_STOP;
+		loop PWP {
+			RUN_TEST DELAY 2;
+			I2C_START;
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+			! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+	    	SDR 32 TDI (0x0000000F);
+	    	I2C_RESTART;
+	    	! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_READ);
+			SDR_VERIFY 1 TDI(#0) 
+			             TDO(#0);
+			I2C_STOP;
+		}
+		RowCount = RowCount + 1;
+		I2C_STOP;
+	}
+}
+function I2CBURST_PROGRAM {
+	FuseArray_TDI.row = 1;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+    I2C_STOP;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_BITSTREAM_BURST(0x7A) instruction;
+    SDR 32	TDI (0x0000005E);
+	! Shift in TOTAL_FUSE_MAP bits;
+    SDR	TotalFuse		TDI	(FuseArray_TDI);
+    I2C_STOP;
+	RUN_TEST DELAY PWP;
+}
+function I2CPROGRAM_USERCODE {
+	datastream SavedUsercode[1][Usercode_Length];
+	IF (Usercode_TDI.row = 1)
+	{
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	 	! Shift in ISC PROGRAM USERCODE(0xC2) instruction;
+	    SDR 32	TDI (0x00000043);
+	    SavedUsercode[1] = Usercode_TDI[1];
+	    SavedUsercode[1] = $SavedUsercode[1];
+	    SDR Usercode_Length	TDI	(SavedUsercode[1]);
+		I2C_STOP;	
+		RUN_TEST DELAY PWP;
+	}
+}
+function I2CPROGRAM_USERCODE_NVCM {
+	IF (Usercode_TDI.row = 1)
+	{
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SDR 32	TDI (0x00000062);
+	    I2C_STOP;
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	 	! Shift in ISC PROGRAM USERCODE(0xC2) instruction;
+	    SDR 32	TDI (0x00000043);
+	    SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+		I2C_STOP;	
+		RUN_TEST DELAY 100;
+	}
+}
+function I2C_PROGRAM_DONE_BIT {
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    SDR 32	TDI (0x00000062);
+    I2C_STOP;
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in ISC PROGRAM DONE(0x5E) instruction;
+    SDR	32 	TDI (0x0000007A);
+	I2C_STOP;	
+	RUN_TEST DELAY 200;
+}
+function I2CCHECK_STATUS {
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO(0x00000000)
+			  	MASK(0x000C0000);
+	I2C_STOP;
+}
+function I2C_VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	TRY 1 {
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    	SDR 32	TDI (0x00000062);
+    	I2C_STOP;    
+    	
+    	RUN_TEST DELAY 1000;
+    	    	      	
+		repeat Address_Length{
+			I2C_START;
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	    	! Shift in LSC_VERIFY_INCR_RTI(0x6A) instruction;
+		    SDR 32	TDI	(0x00008456);
+		    I2C_RESTART;
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_READ);
+			! Shift out Data Row = RowCount; 			
+			SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+									TDO	(FuseArray_TDI[RowCount]);
+			I2C_STOP;
+			I2C_START;
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	    	SDR 32	TDI	(#0^32);						
+			I2C_STOP;						
+			RowCount = RowCount +1;
+		}				
+	}
+	ELSE
+	{
+		I2C_STOP;
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SDR	32 	TDI (0x00000064);
+		I2C_STOP;		
+		print (1, "Failed in Function VERIFY /see log file for more details/ ");
+	}					
+}
+function I2CVERIFY_USERCODE {
+	datastream SavedUsercode[1][Usercode_Length];
+	IF (Usercode_TDI.row = 1)
+	{
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+		! Shift in READ USERCODE(0xC0) instruction;
+	    SDR 32 TDI (0x00000003);
+	    SavedUsercode[1] = Usercode_TDI[1];
+	    SavedUsercode[1] = $SavedUsercode[1];
+	    I2C_RESTART;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+	    SDR_VERIFY 	Usercode_Length TDI (#0^Usercode_Length)
+									TDO	(SavedUsercode[1])
+									MASK(0xFFFFFFFF);
+		I2C_STOP;									
+	}
+}
+function I2CVERIFY_USERCODE_NVCM {
+	IF (Usercode_TDI.row = 1)
+	{
+	    I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	    SDR 32	TDI (0x00000062);
+	    I2C_STOP;
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+		! Shift in READ USERCODE(0xC0) instruction;
+	    SDR 32 TDI (0x00000003);
+	    I2C_RESTART;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+	    SDR_VERIFY 	Usercode_Length TDI (#0^Usercode_Length)
+									TDO	(Usercode_TDI[1])
+									MASK(0xFFFFFFFF);
+		I2C_STOP;									
+	}
+}
+function I2CVERIFY_DONE_BIT {	
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  		TDO (0x00800000)
+			  		MASK(0x008C0000);
+	I2C_STOP;  	      	
+}
+function I2CREFRESH {
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+	! Shift in LSC_REFRESH(0x79) instruction;
+    SDR 32	TDI (0x0000009E);
+    I2C_STOP;
+    RUN_TEST DELAY 200;	
+}
+function I2C_SECURITY_CHECK_NVCM {
+	TRY 1{
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		I2C_RESTART;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+		SDR_VERIFY  32 	TDI(#0^32)
+						TDO(0x00000000)
+			  			MASK(0x02024000);
+		I2C_STOP;
+	}
+	ELSE
+	{	
+		I2C_START;
+		! Shift in Slave Address;	 
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+		! Shift in ISC DISABLE(0x26) instruction;
+	   	SDR 32 TDI (0x00000064);
+	   	I2C_STOP;
+    	print (1,"The OTP is set. Cannot continue.");
+	}
+	TRY 1{
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		I2C_RESTART;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+		SDR_VERIFY  32 	TDI(#0^32)
+				TDO(0x00000000)
+			  	MASK(0x00840000);
+		I2C_STOP;				  	
+	}
+	ELSE
+	{	
+		I2C_START;
+		! Shift in Slave Address;	 
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE); 	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	   	SDR 32 TDI (0x00000064);
+	    I2C_STOP;
+    	print (1,"Device is programmed. Cannot continue.");
+	}
+		
+}
+function I2C_PROGRAM_FEATURE_BIT
+{
+	datastream FeatureBitsArray[1][16];
+	IF (ArchArray_TDI.row = 1)
+	{
+	    FeatureBitsArray[1] = ArchArray_TDI[1];
+	    FeatureBitsArray[1] = $FeatureBitsArray[1];
+	    //print (0,FeatureBitsArray);
+	    I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    	SDR 32	TDI (0x00000062);
+    	I2C_STOP; 
+	    I2C_START;
+		! Shift in Slave Address;	 
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	    ! Shift in in LSC_PROG_FEABITS(0xF8) instruction;
+	    SDR 32 TDI (0x0000001F);
+	    SDR 16 TDI(FeatureBitsArray[1]);
+	    I2C_STOP;
+	    loop PWP {
+			RUN_TEST DELAY PWP;
+			I2C_START;
+			! Shift in Slave Address;	 
+			SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+			! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+	    	SDR 32 TDI (0x0000000F);
+	    	I2C_RESTART;
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_READ);
+			SDR_VERIFY 1 TDI(#0) 
+			             TDO(#0);
+			I2C_STOP;
+	    }
+	    I2C_STOP;
+	}
+}
+function I2C_PROGRAM_FEATURE_ROW_NVCM
+{
+	datastream FeatureArray[1][64];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		FeatureArray[1] = $FeatureArray[1];
+		//print (0,FeatureArray);
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    	SDR 32	TDI (0x00000062);
+    	I2C_STOP; 
+		I2C_START;
+		! Shift in Slave Address;	 
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_PROG_FEATURE( 0xE4) instruction;
+		SDR 32	TDI (0x00000027);
+		SDR 64 TDI(FeatureArray[1]);
+		I2C_STOP;
+		loop PWP {
+			RUN_TEST DELAY PWP;
+			I2C_START;
+			! Shift in Slave Address;	 
+			SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+			! Shift in LSC_CHECK_BUSY(0xF0) instruction;
+			SDR 32 TDI (0x0000000F);
+			I2C_RESTART;
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_READ);
+			SDR_VERIFY 1 TDI(#0) 
+			             TDO(#0);
+			I2C_STOP;
+		}
+		I2C_STOP;			
+   }
+}
+function I2C_VERIFY_FEATURE_BIT
+{
+	datastream FeatureBitsArray[1][16];
+	IF (ArchArray_TDI.row = 1)
+	{
+	    FeatureBitsArray[1] = ArchArray_TDI[1];
+	    FeatureBitsArray[1] = $FeatureBitsArray[1];
+	    I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    	SDR 32	TDI (0x00000062);
+    	I2C_STOP; 
+	    I2C_START;
+		! Shift in Slave Address;	 
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	    ! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	    SDR 32 TDI (0x000000DF);
+	    TRY 1 {
+	        I2C_RESTART;
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_READ);
+	    	SDR_VERIFY 16 TDI (#0^16)
+	                      TDO (FeatureBitsArray[1])
+	                      MASK (#1^16);
+	        I2C_STOP;
+	    }
+	    ELSE {
+	    	I2C_STOP;		
+			I2C_START;
+			! Shift in Slave Address;	 
+			SDR	8	TDI (SLAVE_ADDRESS_WRITE);	  
+			! Shift in ISC DISABLE(0x26) instruction;
+	   		SDR 32 TDI (0x00000064);
+	    	I2C_STOP;
+    		print (1,"Failed to Verify Feature Bits. Cannot continue.");
+        }
+	}
+}
+function I2C_VERIFY_DONE_BIT_NVCM
+{
+	TRY 1 {
+        I2C_START;
+		! Shift in Slave Address;	 
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	    ! Shift out LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		I2C_RESTART;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+		SDR_VERIFY 32 TDI (#0^32)
+		       	      TDO (0x00800000)
+		              MASK (0x008C0000);
+		I2C_STOP;
+	}
+	ELSE {
+		I2C_STOP;
+		I2C_START;		
+		! Shift in Slave Address;	 
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);	  
+		! Shift in ISC DISABLE(0x26) instruction;
+	   	SDR 32 TDI (0x00000064);
+	    I2C_STOP;  
+	    print (1,"Failed to Verify DONE bit. Cannot continue."); 	
+   }
+}
+function I2C_VERIFY_FEATURE_ROW_NVCM
+{
+	datastream FeatureArray[1][64];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		FeatureArray[1] = $FeatureArray[1];
+		//print (0,FeatureArray);
+		I2C_START;		
+		! Shift in Slave Address;	 
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+		SDR 32	TDI (0x000000E7);
+		TRY 1 {
+			I2C_RESTART;
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_READ);
+			SDR_VERIFY 64 TDI (#0^64)
+		       		      TDO (FeatureArray[1])
+		       		      MASK (#1^64);
+			I2C_STOP; 
+		}
+		ELSE {
+			I2C_STOP; 		
+			I2C_START;		
+			! Shift in Slave Address;	 
+			SDR	8	TDI (SLAVE_ADDRESS_WRITE);	  
+			! Shift in ISC DISABLE(0x26) instruction;
+			SDR 32 TDI (0x00000064);
+			I2C_STOP; 	
+			print (1,"Failed to Verify Feature Row. Cannot continue.");		
+		}	
+   }
+}
+function I2C_VERIFY_FEATURE_ROW_NEW_ADDR
+{
+	datastream FeatureArray[1][64];
+	datastream JTAGI2CN_WRITE[1][8];
+	datastream JTAGI2CN_READ[1][8];
+	
+	JTAGI2CN_WRITE[1] = (NEW_I2C_ADDR_WRITE ) ;
+	JTAGI2CN_READ[1] = (NEW_I2C_ADDR_READ ) ;
+	
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		FeatureArray[1] = $FeatureArray[1];
+		//print (0,FeatureArray);
+		I2C_START;		
+		! Shift in Slave Address;	 
+		SDR	8	TDI (JTAGI2CN_WRITE[1]);
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+		SDR 32	TDI (0x000000E7);
+		TRY 1 {
+			I2C_RESTART;
+			! Shift in Slave Address;
+			SDR	8	TDI (JTAGI2CN_READ[1]);
+			SDR_VERIFY 64 TDI (#0^64)
+		       		      TDO (FeatureArray[1])
+		       		      MASK (#1^64);
+			I2C_STOP; 
+		}
+		ELSE {
+			I2C_STOP; 		
+			I2C_START;		
+			! Shift in Slave Address;	 
+			SDR	8	TDI (JTAGI2CN_WRITE[1]);	  
+			! Shift in ISC DISABLE(0x26) instruction;
+			SDR 32 TDI (0x00000064);
+			I2C_STOP; 	
+			print (1,"Failed to Verify Feature Row. Cannot continue.");			
+		}	
+   }
+}
+function I2C_PROGRAM_SECURITY_BIT
+{
+	I2C_START;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	I2C_STOP; 
+	I2C_START;		
+	! Shift in Slave Address;	 
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in ISC_PROGRAM_SECURITY(0xCE) instruction;
+	SDR 32	TDI (0x00000073);
+	I2C_STOP;
+	RUN_TEST DELAY 200;
+}
+function I2C_BLANK_CHECK_NVCM 
+{
+	TRY 1 {
+		I2C_START;		
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+    	SDR 32	TDI (0x00000062);
+    	I2C_STOP; 
+    	I2C_START;		
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_READ_INCR(0x73) instruction;
+	   	SDR 32	TDI (0xFFFF08CE);
+	   	RUN_TEST DELAY PWP;
+		I2C_RESTART;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+		SDR_VERIFY 128	TDI(#0^128)
+						TDO(#0^128)
+						MASK(#0^128);
+		SDR_VERIFY 128	TDI(#0^128)
+						TDO(#0^128)
+						MASK(#0^128);
+		repeat Temp_Row_Count {
+		   	RUN_TEST DELAY PWV;
+			SDR_VERIFY 128	TDI(#0^128)
+							TDO(#0^128);
+		}
+		I2C_STOP;
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in NO-OP(0xFF) instruction;
+	    SDR	32 	TDI (0xFFFFFFFF);
+	    I2C_STOP;
+	}
+	ELSE
+	{
+		I2C_STOP;
+		I2C_START;		
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in ISC DISABLE(0x26) instruction;
+		SDR	32 	TDI (0x00000064);
+		I2C_STOP;
+		print (1, "Device is already programmed. Cannot continue.");
+	}		
+}
+function I2C_VERIFY_STATUS_NVCM {
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR_VERIFY  32 	TDI(#0^32)
+			  	TDO (0x00800000)
+			  	MASK(0x008C0000);
+	I2C_STOP;				  	
+}
+function I2C_VERIFY_NVCM 
+{
+	int32	RowCount = 1;
+	int32   VerifyRowCount = 0;
+	FuseArray_TDI.row = 1;
+	VerifyRowCount = Temp_Row_Count;
+	
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	I2C_STOP; 
+	
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_READ_INCR_NV(0x73) instruction;
+	SDR 32	TDI	(0x000008CE);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	TRY 1
+	{
+		! Shift out Data Row = RowCount; 			
+		SDR_TRY_VERIFY	128	TDI	(#0^128)
+							TDO	(FuseArray_TDI[RowCount]);
+		RowCount = RowCount +1;
+		VerifyRowCount = VerifyRowCount -1;
+	}
+	ELSE
+	{
+		RowCount = RowCount;
+	}
+	I2C_STOP; 
+	TRY 1 {
+		repeat VerifyRowCount {
+			I2C_START;		
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+			! Shift in LSC_READ_INCR(0x73) instruction;
+	   		SDR 32	TDI (0x000008CE);
+	   		I2C_RESTART;
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_READ);
+			! Shift Out Data Row = RowCount;
+		    SDR_VERIFY 128 	TDI(#0^128)
+				       		TDO(FuseArray_TDI[RowCount]);
+			I2C_STOP;
+			RowCount = RowCount +1;			
+		}
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in NO-OP(0xFF) instruction;
+	    SDR	32 	TDI (0xFFFFFFFF);
+	    I2C_STOP;
+	}
+	ELSE
+	{
+		I2C_STOP;
+		I2C_START;		
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in ISC DISABLE(0x26) instruction;
+		SDR	32 	TDI (0x00000064);
+		I2C_STOP;
+		print (1, "Failed in Function VERIFY /see log file for more details/ ");
+	}		
+}
+function I2CSAVE_USERCODE
+{
+	datastream SavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in READ USERCODE(0xC0) instruction;
+    SDR 32	TDI (0x00000003);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR	Usercode_Length	TDI(#0^Usercode_Length)
+						TDO(SavedUsercode[1]);
+	I2C_STOP;		
+	SavedUsercode[1] = $SavedUsercode[1];
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (Usercode_TDI, SavedUsercode);
+	fclose 	NewFile;				
+}
+function I2CSAVE_USERCODE_SVF
+{
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in READ USERCODE(0xC0) instruction;
+    SDR 32	TDI (0x00000003);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR_VERIFY	Usercode_Length	TDI(#0^Usercode_Length)
+					TDO(#0^Usercode_Length)
+					MASK(#0^Usercode_Length);
+	I2C_STOP;						
+}
+function I2CSAVE_NVCM_SVF
+{
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	I2C_STOP;   
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_READ_INCR(0x73) instruction;
+   	SDR 32	TDI (0xFFFF08CE);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	RUN_TEST DELAY PWV;
+	SDR_VERIFY 128	TDI(#0^128)
+					TDO(#0^128)
+					MASK(#0^128);
+	repeat Temp_Row_Count{	
+	    SDR	128	TDI	(#1^128)
+				TDO	(#0^128)
+				MASK(#0^128);		
+	}
+	I2C_STOP;
+}
+function I2CSAVE_FEATURE
+{
+	datastream FeatureRow[1][80];
+	datastream FeatureArray[1][64];
+	datastream FeatureBitsArray[1][16];
+	file	NewFile = "FILE_SAVE"; 
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	I2C_STOP; 
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);		  
+	! Shift in LSC_READ_FEATURE (0xE7) instruction;
+	SDR 32	TDI (0x000000E7);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR 64  TDI(#0^64)
+			TDO(FeatureArray[1]); 
+	I2C_STOP;		
+	FeatureArray[1] = $FeatureArray[1];		         	
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);				   	  
+	! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	SDR 32	 TDI (0x000000DF);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+    SDR 16  TDI (#1^16)
+    		TDO (FeatureBitsArray[1]);
+    I2C_STOP;
+    FeatureBitsArray[1] = $FeatureBitsArray[1];
+    FeatureRow[1] = (FeatureBitsArray[1] @ FeatureArray[1]);
+	print (0,FeatureRow);
+	fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT,FeatureRow);
+	fclose 	NewFile;
+}
+function I2CSAVE_FEATURE_SVF 
+{
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	I2C_STOP; 
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE); 		  
+	! Shift in LSC_READ_FEATURE (0xE7) instruction;
+	SDR 32	TDI (0x000000E7);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+    SDR 64   TDI (#1^64)
+    		 TDO (#0^64)
+    		 MASK (#0^64);
+	I2C_STOP;
+    I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);				    	  
+	! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	SDR 32	 TDI (0x000000DF);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+    SDR 16  TDI (#1^16)
+    		TDO (#0^16)
+    		MASK (#0^16);
+	I2C_STOP;
+}
+function I2C_SAVE_STATUS 
+{
+	datastream SavedSTATUS[1][32];
+	file NewFile = "FILE_SAVE";
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR 32 TDI (0x0000003C);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR 32 TDI(#0^32)
+	       TDO(SavedSTATUS);
+	I2C_STOP;			
+	print (0,SavedSTATUS);	
+	SavedSTATUS[1] = $SavedSTATUS[1];	
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (STATUS_BIT, SavedSTATUS);
+	fclose 	NewFile;		  	
+}
+function I2C_FEATURE_ROW_READ
+{
+	datastream FeatureRow[1][80];
+	datastream FeatureArray[1][64];
+	datastream FeatureBitsArray[1][16];
+	file	NewFile = "FILE_SAVE"; 
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	I2C_STOP; 
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE); 		  
+	! Shift in LSC_READ_FEATURE (0xE7) instruction;
+	SDR 32	TDI (0x000000E7);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR 64  TDI(#0^64)
+			TDO(FeatureArray[1]); 
+	I2C_STOP;
+	FeatureArray[1] = $FeatureArray[1];			         	
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);				    	  
+	! Shift in LSC_READ_FEABITS(0xFB) instruction;
+	SDR 32	 TDI (0x000000DF);
+	I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+    SDR 16  TDI (#1^16)
+    		TDO (FeatureBitsArray[1]);
+    I2C_STOP;
+    FeatureBitsArray[1] = $FeatureBitsArray[1];
+    FeatureRow[1] = (FeatureBitsArray[1] @ FeatureArray[1]);
+	//print (0,FeatureRow);
+	fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT,FeatureRow);
+	fclose 	NewFile;
+}
+function I2C_CHECK_FEATURE_ROW{
+	I2C_START;		
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR 32	TDI (0x00000062);
+	I2C_STOP; 
+	TRY 1{
+		I2C_START;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR 32 TDI (0x0000003C);
+		I2C_RESTART;
+		! Shift in Slave Address;
+		SDR	8	TDI (SLAVE_ADDRESS_READ);
+		SDR_VERIFY  32 	TDI(#0^32)
+						TDO(0x00000000)
+			  			MASK(0x02024000);
+		I2C_STOP;
+	}
+	ELSE
+	{	
+		I2C_START;
+		! Shift in Slave Address;	 
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE); 
+		! Shift in ISC DISABLE(0x26) instruction;
+	   	SDR 32 TDI (0x00000064);
+	   	I2C_STOP;
+    	print (1,"The OTP is set. Cannot continue.");
+	}
+	datastream FeatureArray[1][64];
+	IF (ArchArray_TDI.row = 1)
+	{
+		FeatureArray[1] = ArchArray_TDI[1] << 16;
+		//print (0,FeatureArray);
+		I2C_START;		
+		! Shift in Slave Address;	 
+		SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+		! Shift in LSC_READ_FEATURE (0xE7) instruction;
+		SDR 32	TDI (0x000000E7);
+		TRY 1 {
+			I2C_RESTART;
+			! Shift in Slave Address;
+			SDR	8	TDI (SLAVE_ADDRESS_READ);
+			SDR_VERIFY 64 TDI (#0^64)
+		       		      TDO (#0^64);
+			I2C_STOP; 
+		}
+		ELSE {
+			I2C_STOP; 		
+			I2C_START;		
+			! Shift in Slave Address;	 
+			SDR	8	TDI (SLAVE_ADDRESS_WRITE);	  
+			! Shift in ISC DISABLE(0x26) instruction;
+			SDR 32 TDI (0x00000064);
+			I2C_STOP; 	
+			print (1,"The Feature Row is already programmed. Cannot continue.");		
+		}	
+   }
+}
+function I2C_SAVE_TRACEID
+{
+	datastream SavedUID[1][64];
+	file	NewFile = "FILE_SAVE"; 
+	I2C_START;		
+	! Shift in Slave Address;	 
+	SDR	8	TDI (SLAVE_ADDRESS_WRITE);
+	! Shift in LSC_UIDCODE_PUB(0x19) instruction;
+    SDR 32	TDI	(0x00000098);
+    I2C_RESTART;
+	! Shift in Slave Address;
+	SDR	8	TDI (SLAVE_ADDRESS_READ);
+	SDR	64	TDI (#0^64)
+			TDO	(SavedUID);
+	I2C_STOP; 	
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedUID);
+	fclose 	NewFile;
+}
+
+function JTAGI2CINIT_SVF 
+{
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	HDR 1 TDI(#0);
+	HIR 8 TDI(#11111111);
+	TDR 0;
+	TIR 0;
+	ENDDR IDLE;
+	ENDIR IDLE;
+	STATE IDLE;
+	IF (Address_Length == 5624)
+	{
+		Temp_Row_Count = 11970;
+    }
+	! Shift in LSC_ENABLE_X(0x74) instruction;
+    SIR Instruction_Length TDI (LSC_ENABLE_X);
+    SDR 8 TDI(0x00);
+	RUN_TEST	IDLE	TCK 2 DELAY 10;
+	! I2C LSC_I2CI_CRBR_WT to set XO2 SCL frequency; 
+	SIR 8 TDI (0x9C);
+	! I2C Prescale Control Register Setting;
+	SDR 16 TDI(0x0000);                  
+	RUN_TEST	IDLE TCK 2 DELAY 1;
+	SDR 16 TDI(0x8000);                  
+	RUN_TEST	IDLE TCK 2 DELAY 1;	
+	
+	setpin TRST LOW;
+	setpin TRST HIGH;
+	RUN_TEST DELAY 3000;
+	
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	! Check ACK;
+	! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+	SIR	8	TDI  (0x9F);
+	SDR_VERIFY	8	TDI  (0x00)
+					TDO  (0x04)
+					MASK (0x24);
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Key activation;
+	SDR	16	TDI (0x10A4);
+	RUN_TEST IDLE TCK 1000 ;				
+    SDR	16	TDI (0x10C6);
+	RUN_TEST IDLE TCK 1000 ;	
+	SDR	16	TDI (0x10F4);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI (0x108A);
+	RUN_TEST IDLE TCK 1000 ;	
+	SDR	16	TDI  (0x5000);
+	RUN_TEST IDLE TCK 1000 ;
+		
+    setpin TRST HIGH;
+    setpin TRST LOW;
+    RUN_TEST DELAY 10;
+}
+
+function JTAGI2CINIT {
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	datastream JTAGI2CSLAVE_ADDR_READ[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	JTAGI2CSLAVE_ADDR_READ[1] = SLAVE_ADDRESS_READ;
+	JTAGI2CSLAVE_ADDR_READ[1] = $JTAGI2CSLAVE_ADDR_READ[1];
+	HDR 1 TDI(#0);
+	HIR 8 TDI(#11111111);
+	TDR 0;
+	TIR 0;
+	ENDDR IDLE;
+	ENDIR IDLE;
+	STATE IDLE;
+	IF (Address_Length == 5624)
+	{
+		Temp_Row_Count = 11970;
+    }
+    ! Shift in LSC_ENABLE_X(0x74) instruction;
+    SIR Instruction_Length TDI (LSC_ENABLE_X);
+    SDR 8 TDI(0x00);
+	RUN_TEST	IDLE	TCK 2 DELAY 10;
+	! I2C LSC_I2CI_CRBR_WT to set XO2 SCL frequency; 
+	SIR 8 TDI (0x9C);
+	! I2C Prescale Control Register Setting;
+	SDR 16 TDI(0x0000);                  
+	RUN_TEST	IDLE TCK 2 DELAY 1;
+	SDR 16 TDI(0x8000);                  
+	RUN_TEST	IDLE TCK 2 DELAY 1;	
+	TRY 1{
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		! Shift in Slave Address + WR;
+		SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+		RUN_TEST IDLE TCK 1000 ;
+		! Check ACK;
+		! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+		SIR	8	TDI  (0x9F);
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x04)
+						MASK (0x24);
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);				
+		! Shift in LSC_READ_STATUS(0x3C) instruction;
+		SDR	16	TDI (0x103C);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ;
+		! Shift in Slave Address + RD;
+		SDR	16	TDI  ((0x90) @ (JTAGI2CSLAVE_ADDR_READ[1]));
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x2000);
+		RUN_TEST IDLE TCK 1000 ;
+		! Shift in LSC_I2C_RXDR_RD(0x9E) instruction;
+		SIR	8	TDI  (0x9E);
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x00)
+						MASK (0x00);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x00)
+						MASK (0x00);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x01)
+						MASK (0x31);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x00)
+						MASK (0x00);						
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		SDR	16	TDI  (0x5800);
+		RUN_TEST IDLE TCK 1000 ;						
+	}
+	ELSE
+	{
+		//print (0,"Activation Keys...");
+		setpin TRST HIGH;
+		RUN_TEST DELAY 5000;
+		
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		! Shift in Slave Address + WR;
+		SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+		RUN_TEST IDLE TCK 1000 ;
+		! Check ACK;
+		! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+		SIR	8	TDI  (0x9F);
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x04)
+						MASK (0x24);
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		! Shift in Key activation;
+		SDR	16	TDI (0x10A4);
+		RUN_TEST IDLE TCK 1000 ;				
+	    SDR	16	TDI (0x10C6);
+		RUN_TEST IDLE TCK 1000 ;	
+		SDR	16	TDI (0x10F4);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI (0x108A);
+		RUN_TEST IDLE TCK 1000 ;	
+		SDR	16	TDI  (0x5000);
+		RUN_TEST IDLE TCK 1000 ;
+			
+	    setpin TRST LOW;
+		RUN_TEST DELAY 5000;
+	}
+}
+function JTAGI2CREAD_ID {
+
+	datastream DataByte[1][8];
+	datastream MaskByte[1][8];
+	datastream DataIDMask[1][32];
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	datastream JTAGI2CSLAVE_ADDR_READ[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	JTAGI2CSLAVE_ADDR_READ[1] = SLAVE_ADDRESS_READ;
+	JTAGI2CSLAVE_ADDR_READ[1] = $JTAGI2CSLAVE_ADDR_READ[1];
+	DataIDMask[1] = DEVICE_ID_MASK;
+	TRY 1{
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		! Shift in Slave Address + WR;
+		SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+		RUN_TEST IDLE TCK 1000 ;
+		! Check ACK;
+		! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+		SIR	8	TDI  (0x9F);
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x04)
+						MASK (0x24);
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		! Shift in IDCODE_PUB(0xE0) opcode;
+		SDR	16	TDI (0x10E0);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ;
+		! Shift in Slave Address + RD;
+		SDR	16	TDI  ((0x90) @ (JTAGI2CSLAVE_ADDR_READ[1]));
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x2000);
+		RUN_TEST IDLE TCK 1000 ;
+		DataByte[1] = (IDTDI[1]);
+		MaskByte[1] = (DataIDMask[1]);
+		! Shift in LSC_I2C_RXDR_RD(0x9E) instruction;
+		SIR	8	TDI  (0x9E);
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (DataByte[1])
+						MASK (MaskByte[1]);
+		DataByte[1] = (IDTDI[1] << 8);
+		MaskByte[1] = (DataIDMask[1] << 8);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (DataByte[1])
+						MASK (MaskByte[1]);
+		DataByte[1] = (IDTDI[1] << 16);
+		MaskByte[1] = (DataIDMask[1] << 16);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (DataByte[1])
+						MASK (MaskByte[1]);
+		DataByte[1] = (IDTDI[1] << 24);
+		MaskByte[1] = (DataIDMask[1] << 24);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (DataByte[1])
+						MASK (MaskByte[1]);								
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		SDR	16	TDI  (0x5800);
+		RUN_TEST IDLE TCK 1000 ;
+	}	
+	ELSE
+	{	
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		SDR	16	TDI  (0x5000);
+		RUN_TEST IDLE TCK 1000 ;	
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY 1000;     
+		     
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY 100;		
+		print (1,"Failed to read the Device's IDCODE. Please check the I2C Slave Address.");
+	}			        
+}
+function JTAGI2CSAVE_ID	{
+	datastream SavedID[1][ID_Length];
+	datastream DataByte[1][8];
+	file	NewFile = "FILE_SAVE";
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	datastream JTAGI2CSLAVE_ADDR_READ[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	JTAGI2CSLAVE_ADDR_READ[1] = SLAVE_ADDRESS_READ;
+	JTAGI2CSLAVE_ADDR_READ[1] = $JTAGI2CSLAVE_ADDR_READ[1];
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	! Check ACK;
+	! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+	SIR	8	TDI  (0x9F);
+	SDR_VERIFY	8	TDI  (0x00)
+					TDO  (0x04)
+					MASK (0x24);
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in IDCODE_PUB(0xE0) opcode;
+	SDR	16	TDI (0x10E0);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	! Shift in Slave Address + RD;
+	SDR	16	TDI  ((0x90) @ (JTAGI2CSLAVE_ADDR_READ[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x2000);
+	RUN_TEST IDLE TCK 1000 ;
+	! Shift in LSC_I2C_RXDR_RD(0x9E) instruction;
+	SIR	8	TDI  (0x9E);
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);
+	SavedID[1] = ((SavedID[1]) @ (DataByte[1])) << 8;
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);
+	SavedID[1] = ((SavedID[1]) @ (DataByte[1])) << 8;
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);
+	SavedID[1] = ((SavedID[1]) @ (DataByte[1])) << 8;
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);			
+	SavedID[1] = ((SavedID[1]) @ (DataByte[1])) << 8;				
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	SDR	16	TDI  (0x5800);
+	RUN_TEST IDLE TCK 1000 ;			
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedID);
+	fclose 	NewFile;
+}
+function JTAGI2CSRAM_ENABLE
+{
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	! Check ACK;
+	! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+	SIR	8	TDI  (0x9F);
+	SDR_VERIFY	8	TDI  (0x00)
+					TDO  (0x04)
+					MASK (0x24);
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in ISC ENABLE(0xC6) instruction;
+	SDR	16	TDI (0x10C6);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x5000);
+	RUN_TEST IDLE TCK 1000 ;
+}
+function JTAGI2CSRAM_ERASE
+{
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];	
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	! Check ACK;
+	! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+	SIR	8	TDI  (0x9F);
+	SDR_VERIFY	8	TDI  (0x00)
+					TDO  (0x04)
+					MASK (0x24);
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in ISC ERASE(0x0E) instruction;
+	SDR	16	TDI (0x100E);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1001);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x5000);
+	RUN_TEST IDLE TCK 2 DELAY 10;
+}
+function JTAGI2CBURST_PROGRAM
+{
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	datastream DataByte[1][8];
+	int32	ByteCount = 1;
+	int32	i = 0;
+	FuseArray_TDI.row = 1;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	! Check ACK;
+	! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+	SIR	8	TDI  (0x9F);
+	SDR_VERIFY	8	TDI  (0x00)
+					TDO  (0x04)
+					MASK (0x24);
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in LSC_INIT_ADDRESS(0x46) instruction;
+	SDR	16	TDI (0x1046);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	SDR	16	TDI  (0x5000);
+	RUN_TEST IDLE TCK 1000 ;
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	! Shift in LSC_BITSTREAM_BURST(0x7A) instruction;
+	SDR	16	TDI (0x107A);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	ByteCount = TotalFuse/8;
+	FuseArray_TDI[1] = $FuseArray_TDI[1];
+	repeat ByteCount {
+		DataByte[1] = (FuseArray_TDI[1] << i);
+		SDR	16	TDI ((0x10) @ (DataByte[1])); 
+		RUN_TEST IDLE TCK 1000 ;	
+		i = i + 8;
+	}
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	SDR	16	TDI  (0x5000);
+	RUN_TEST IDLE TCK 2 DELAY 1;
+}
+function JTAGI2CDISABLE	{
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	! Check ACK;
+	! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+	SIR	8	TDI  (0x9F);
+	SDR_VERIFY	8	TDI  (0x00)
+					TDO  (0x04)
+					MASK (0x24);
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in ISC DISABLE(0x26) instruction;
+	SDR	16	TDI (0x1026);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x5000);
+	RUN_TEST IDLE TCK 2 DELAY 200; 
+	! Shift in ISC DISABLE(0x26) instruction;
+    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	IDLE  TCK 2 DELAY 1000;     
+	     
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 2 DELAY 100; 	    	
+}
+function JTAGI2CCHECK_STATUS {
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	datastream JTAGI2CSLAVE_ADDR_READ[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	JTAGI2CSLAVE_ADDR_READ[1] = SLAVE_ADDRESS_READ;
+	JTAGI2CSLAVE_ADDR_READ[1] = $JTAGI2CSLAVE_ADDR_READ[1];
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	! Check ACK;
+	! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+	SIR	8	TDI  (0x9F);
+	SDR_VERIFY	8	TDI  (0x00)
+					TDO  (0x04)
+					MASK (0x24);
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);				
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR	16	TDI (0x103C);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	! Shift in Slave Address + RD;
+	SDR	16	TDI  ((0x90) @ (JTAGI2CSLAVE_ADDR_READ[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x2000);
+	RUN_TEST IDLE TCK 1000 ;
+	! Shift in LSC_I2C_RXDR_RD(0x9E) instruction;
+	SIR	8	TDI  (0x9E);
+	TRY 1{
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x00)
+						MASK (0x00);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x00)
+						MASK (0x00);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x00)
+						MASK (0x30);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x00)
+						MASK (0x00);						
+	}
+	ELSE
+	{
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		SDR	16	TDI  (0x5800);
+		RUN_TEST IDLE TCK 1000 ;
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY 1000;     
+		     
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY 100;
+		print (1,"Status Error. Cannot continue.");	
+	}								
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	SDR	16	TDI  (0x5800);
+	RUN_TEST IDLE TCK 1000 ;		
+}	
+function JTAGI2CVERIFY_STATUS {
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	datastream JTAGI2CSLAVE_ADDR_READ[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	JTAGI2CSLAVE_ADDR_READ[1] = SLAVE_ADDRESS_READ;
+	JTAGI2CSLAVE_ADDR_READ[1] = $JTAGI2CSLAVE_ADDR_READ[1];
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	! Check ACK;
+	! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+	SIR	8	TDI  (0x9F);
+	SDR_VERIFY	8	TDI  (0x00)
+					TDO  (0x04)
+					MASK (0x24);
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);				
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR	16	TDI (0x103C);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ;
+	! Shift in Slave Address + RD;
+	SDR	16	TDI  ((0x90) @ (JTAGI2CSLAVE_ADDR_READ[1]));
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	16	TDI  (0x2000);
+	RUN_TEST IDLE TCK 1000 ;
+	! Shift in LSC_I2C_RXDR_RD(0x9E) instruction;
+	SIR	8	TDI  (0x9E);
+	TRY 1{
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x00)
+						MASK (0x00);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x00)
+						MASK (0x00);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x01)
+						MASK (0x31);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x00)
+						MASK (0x00);						
+	}
+	ELSE
+	{
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		SDR	16	TDI  (0x5800);
+		RUN_TEST IDLE TCK 1000 ;
+		! Shift in ISC DISABLE(0x26) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 2 DELAY 1000;     
+		     
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 2 DELAY 100;
+		print (1,"Failed to verify DONE bit. Cannot continue.");
+	}								
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	SDR	16	TDI  (0x5800);
+	RUN_TEST IDLE TCK 1000 ;		
+}	
+function JTAGI2CPROGRAM_USERCODE {
+	datastream DataByte[1][8];
+	datastream SavedUsercode[1][Usercode_Length];
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	IF (Usercode_TDI.row = 1)
+	{
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		! Shift in Slave Address + WR;
+		SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+		RUN_TEST IDLE TCK 1000 ;
+		! Check ACK;
+		! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+		SIR	8	TDI  (0x9F);
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x04)
+						MASK (0x24);
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		! Shift in ISC PROGRAM USERCODE(0xC2) instruction;
+		SDR	16	TDI (0x10C2);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ;
+	    SavedUsercode[1] = Usercode_TDI[1];
+	    DataByte[1] = SavedUsercode[1];
+		SDR	16	TDI ((0x10) @ (DataByte[1])); 
+		RUN_TEST IDLE TCK 1000 ;
+		DataByte[1] = (SavedUsercode[1] << 8);
+		SDR	16	TDI ((0x10) @ (DataByte[1])); 
+		RUN_TEST IDLE TCK 1000 ;
+		DataByte[1] = (SavedUsercode[1] << 16);
+		SDR	16	TDI ((0x10) @ (DataByte[1])); 
+		RUN_TEST IDLE TCK 1000 ;
+		DataByte[1] = (SavedUsercode[1] << 24);
+		SDR	16	TDI ((0x10) @ (DataByte[1])); 
+		RUN_TEST IDLE TCK 1000 ;
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		SDR	16	TDI  (0x5000);
+		RUN_TEST IDLE TCK 2 DELAY 1; 	
+	}
+}
+function JTAGI2CVERIFY_USERCODE {
+	datastream DataByte[1][8];
+	datastream SavedUsercode[1][Usercode_Length];
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	datastream JTAGI2CSLAVE_ADDR_READ[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	JTAGI2CSLAVE_ADDR_READ[1] = SLAVE_ADDRESS_READ;
+	JTAGI2CSLAVE_ADDR_READ[1] = $JTAGI2CSLAVE_ADDR_READ[1];
+	IF (Usercode_TDI.row = 1)
+	{
+		SavedUsercode[1] = Usercode_TDI[1];
+	    ! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		! Shift in Slave Address + WR;
+		SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+		RUN_TEST IDLE TCK 1000 ; 
+		! Check ACK;
+		! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+		SIR	8	TDI  (0x9F);
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (0x04)
+						MASK (0x24);
+		! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		! Shift in READ USERCODE(0xC0) instruction;
+	    SDR	16	TDI (0x10C0);
+		RUN_TEST IDLE TCK 1000 ; 
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ; 
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ; 
+		SDR	16	TDI  (0x1000);
+		RUN_TEST IDLE TCK 1000 ; 
+		! Shift in Slave Address + RD;
+		SDR	16	TDI  ((0x90) @ (JTAGI2CSLAVE_ADDR_READ[1]));
+		RUN_TEST IDLE TCK 1000 ; 
+		SDR	16	TDI  (0x2000);
+		RUN_TEST IDLE TCK 1000 ; 
+		DataByte[1] = SavedUsercode[1];
+		! Shift in LSC_I2C_RXDR_RD(0x9E) instruction;
+		SIR	8	TDI  (0x9E);
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (DataByte[1])
+						MASK (0xFF);
+		DataByte[1] = (SavedUsercode[1] << 8);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (DataByte[1])
+						MASK (0xFF);	
+		DataByte[1] = (SavedUsercode[1] << 16);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (DataByte[1])
+						MASK (0xFF);
+		DataByte[1] = (SavedUsercode[1] << 24);
+		RUN_TEST IDLE TCK 1000 ;
+		SDR_VERIFY	8	TDI  (0x00)
+						TDO  (DataByte[1])
+						MASK (0xFF);										
+	    ! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+		SIR	8	TDI  (0x9D);
+		SDR	16	TDI  (0x5000);
+		RUN_TEST IDLE TCK 1000 ; 									
+	}
+}
+function JTAGI2C_SAVE_STATUS	{
+	datastream DataByte[1][8];
+	datastream SavedSTATUS[1][32];
+	file NewFile = "FILE_SAVE";
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	datastream JTAGI2CSLAVE_ADDR_READ[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	JTAGI2CSLAVE_ADDR_READ[1] = SLAVE_ADDRESS_READ;
+	JTAGI2CSLAVE_ADDR_READ[1] = $JTAGI2CSLAVE_ADDR_READ[1];	
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ; 
+	! Check ACK;
+	! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+	SIR	8	TDI  (0x9F);
+	SDR_VERIFY	8	TDI  (0x00)
+					TDO  (0x04)
+					MASK (0x24);
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in LSC_READ_STATUS(0x3C) instruction;
+	SDR	16	TDI (0x103C);
+	RUN_TEST IDLE TCK 1000 ; 
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ; 
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ; 
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ; 	
+	! Shift in Slave Address + RD;
+	SDR	16	TDI  ((0x90) @ (JTAGI2CSLAVE_ADDR_READ[1]));
+	RUN_TEST IDLE TCK 1000 ; 	
+	SDR	16	TDI  (0x2000);
+	RUN_TEST IDLE TCK 1000 ; 
+	! Shift in LSC_I2C_RXDR_RD(0x9E) instruction;
+	SIR	8	TDI  (0x9E);
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);
+	SavedSTATUS[1] = ((SavedSTATUS[1]) @ (DataByte[1])) << 8;
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);
+	SavedSTATUS[1] = ((SavedSTATUS[1]) @ (DataByte[1])) << 8;
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);
+	SavedSTATUS[1] = ((SavedSTATUS[1]) @ (DataByte[1])) << 8;
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);			
+	SavedSTATUS[1] = ((SavedSTATUS[1]) @ (DataByte[1])) << 8;				
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	SDR	16	TDI  (0x5000);
+	RUN_TEST IDLE TCK 1000 ; 
+	print (0,SavedSTATUS);
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (STATUS_BIT, SavedSTATUS);
+	fclose 	NewFile;
+}
+function JTAGI2CSAVE_USERCODE {
+	datastream DataByte[1][8];
+	datastream SavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	datastream JTAGI2CSLAVE_ADDR_WRITE[1][8];
+	datastream JTAGI2CSLAVE_ADDR_READ[1][8];
+	JTAGI2CSLAVE_ADDR_WRITE[1] = SLAVE_ADDRESS_WRITE;
+	JTAGI2CSLAVE_ADDR_WRITE[1] = $JTAGI2CSLAVE_ADDR_WRITE[1];
+	JTAGI2CSLAVE_ADDR_READ[1] = SLAVE_ADDRESS_READ;
+	JTAGI2CSLAVE_ADDR_READ[1] = $JTAGI2CSLAVE_ADDR_READ[1];	
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in Slave Address + WR;
+	SDR	16	TDI ((0x90) @ (JTAGI2CSLAVE_ADDR_WRITE[1]));
+	RUN_TEST IDLE TCK 1000 ; 
+	! Check ACK;
+	! Shift in LSC_I2C_SR_RD(0x9F) instruction;
+	SIR	8	TDI  (0x9F);
+	SDR_VERIFY	8	TDI  (0x00)
+					TDO  (0x04)
+					MASK (0x24);
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	! Shift in READ USERCODE(0xC0) instruction;
+    SDR	16	TDI (0x10C0);
+	RUN_TEST IDLE TCK 1000 ; 
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ; 
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ; 
+	SDR	16	TDI  (0x1000);
+	RUN_TEST IDLE TCK 1000 ; 	
+	! Shift in Slave Address + RD;
+	SDR	16	TDI  ((0x90) @ (JTAGI2CSLAVE_ADDR_READ[1]));
+	RUN_TEST IDLE TCK 1000 ; 	
+	SDR	16	TDI  (0x2000);
+	RUN_TEST IDLE TCK 1000 ; 
+	! Shift in LSC_I2C_RXDR_RD(0x9E) instruction;
+	SIR	8	TDI  (0x9E);
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);
+	SavedUsercode[1] = ((SavedUsercode[1]) @ (DataByte[1])) << 8;
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);
+	SavedUsercode[1] = ((SavedUsercode[1]) @ (DataByte[1])) << 8;
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);
+	SavedUsercode[1] = ((SavedUsercode[1]) @ (DataByte[1])) << 8;
+	RUN_TEST IDLE TCK 1000 ;
+	SDR	8	TDI  (0x00)
+			TDO  (DataByte[1]);			
+	SavedUsercode[1] = ((SavedUsercode[1]) @ (DataByte[1])) << 8;				
+	! Shift in LSC_I2C_TXDR_WT(0x9D) instruction;
+	SIR	8	TDI  (0x9D);
+	SDR	16	TDI  (0x5000);
+	RUN_TEST IDLE TCK 1000 ; 
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (Usercode_TDI, SavedUsercode);
+	fclose 	NewFile;
+}
+
+function SPI_EFUSE_ENABLE {
+	setpin ISPEN LOW;
+	! Shift in ISC ENABLE(0xC6) instruction;
+	SDR 32 TDI (0x00004063);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWP;
+}
+function SPI_PSUEDO_SRAM_ENABLE {
+	setpin ISPEN LOW;
+	! Shift in ISC ENABLE(0xC6) instruction;
+	SDR 32 TDI (0x00000063);
+    setpin ISPEN HIGH;
+	RUN_TEST DELAY PWP;
+}
+function SPI_READ_PES_REGISTER
+{
+	datastream PESManufacturing[1][128];
+	datastream PESArray[1][32];
+	
+	PESManufacturing[1] = 0x000000000000000000000000000000B2;
+	setpin ISPEN LOW;
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	SDR 32	TDI (0x00000009);
+	SDR 128	TDI (PESManufacturing[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 100;
+    
+    setpin ISPEN LOW;
+    ! Shift in LSC_READ_PES(0x11) instruction;
+    SDR 32	TDI (0x00000088);
+    RUN_TEST DELAY 10;
+    SDR 32 TDI(0x00000000)
+    	    TDO(PESArray[1]);
+    setpin ISPEN HIGH;
+   	PESArray[1] = $PESArray[1];
+    print (0,PESArray);
+    
+    setpin ISPEN LOW;		    
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	SDR 32	TDI (0x00000009);
+	SDR 128	TDI (0x00000000000000000000000000000000);
+	setpin ISPEN HIGH;
+}
+function SPI_READ_MES_REGISTER
+{
+	datastream MESManufacturing[1][128];
+	datastream MESArray[1][64];
+	file	NewFile = "FILE_SAVE";
+	
+	MESManufacturing[1] = 0x800000000000000000000000000000B2;
+	setpin ISPEN LOW;
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	SDR 32	TDI (0x00000009);
+	SDR 128	TDI (MESManufacturing[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 100;
+    
+    setpin ISPEN LOW;
+    ! Shift in LSC_READ_PES(0x11) instruction;
+    SDR 32	TDI (0x00000088);
+    RUN_TEST DELAY 10;
+    SDR 64 TDI(0x0000000000000000)
+    	    TDO(MESArray[1]);
+    setpin ISPEN HIGH;
+   	MESArray[1] = $MESArray[1];
+    print (0,MESArray);
+    
+    setpin ISPEN LOW;		    
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	SDR 32	TDI (0x00000009);
+	SDR 128	TDI (0x00000000000000000000000000000000);
+	setpin ISPEN HIGH;
+
+	
+    fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, MESArray);
+	fclose 	NewFile;
+}
+
+function SPI_READ_DTR_REGISTER
+{
+	datastream DTRArray[1][8];
+	datastream Manufacturing[1][128];
+	file	NewFile = "FILE_SAVE"; 
+	
+	Manufacturing[1] = 0x000000010000000000000000000000B2;
+	setpin ISPEN LOW;
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	SDR 32	TDI (0x00000009);
+	SDR 128	TDI (Manufacturing[1]);
+	setpin ISPEN HIGH;
+	RUN_TEST DELAY 10;
+	
+    setpin ISPEN LOW;
+	! Shift in LSC_READ_TEMP(0xE8) instruction;
+    SDR 64	TDI (0x0000000000000017);
+    setpin ISPEN HIGH;
+    RUN_TEST DELAY 10;
+    
+    setpin ISPEN LOW;
+    SDR 56	TDI (0x00000000000017);
+    SDR 8 TDI(0x00)
+    	   TDO(DTRArray[1]);
+    setpin ISPEN HIGH;
+    DTRArray[1] = ($DTRArray[1]);
+    print (0,DTRArray);
+	
+    setpin ISPEN LOW;		    
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	SDR 32	TDI (0x00000009);
+	SDR 128	TDI (0x00000000000000000000000000000000);
+	setpin ISPEN HIGH;   	
+	
+	fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, DTRArray);
+	fclose 	NewFile;
+	
+}
+function SPI_READ_DTR_REGISTER_ONLY
+{
+	datastream DTRArray[1][8];
+	file	NewFile = "FILE_SAVE"; 			    
+	setpin ISPEN LOW;
+	! Shift in LSC_READ_TEMP(0xE8) instruction;
+    SDR 64	TDI (0x0000000000000017);
+    setpin ISPEN HIGH;
+    RUN_TEST DELAY 1000;
+    setpin ISPEN LOW;
+    SDR 56	TDI (0x00000000000017);
+    SDR 8 TDI(0x00)
+    	   TDO(DTRArray[1]);
+    setpin ISPEN HIGH;
+    DTRArray[1] = ($DTRArray[1]);
+    print (0,DTRArray);   
+    fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, DTRArray);
+	fclose 	NewFile;
+}
+function SPI_READ_MANUFACTURING_REGISTER
+{
+	datastream Manufacturing[1][128];
+	datastream _Manufacturing[1][120];
+	file	NewFile = "FILE_SAVE"; 
+	setpin ISPEN LOW;		    
+	! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+    SDR 32	TDI (0x00000009);
+    SDR 128 TDI(0x000000000000000000000000000000B2)
+    	    TDO(Manufacturing[1]);
+    setpin ISPEN HIGH;	 
+   	_Manufacturing[1] = (Manufacturing[1] >> 8) ;
+   	Manufacturing[1] = (_Manufacturing[1]) @ (0x4D);
+   	print (0,Manufacturing);
+    fopen	NewFile att "wa" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, Manufacturing);
+	fclose 	NewFile;
+}
+function SPI_PROGRAM_MANUFACTURING_REGISTER
+{
+	IF (Config_Register_TDI.row = 1)
+	{
+		print (0,Config_Register_TDI);
+		setpin ISPEN LOW;
+		! Shift in LSC_MANUFACTURE_SHIFT(0x90) instruction;
+	    SDR 32	TDI (0x00000009);
+	    SDR 128 TDI(Config_Register_TDI[1]);
+	    setpin ISPEN HIGH;
+	    RUN_TEST DELAY 200;
+	}
+}
+]]>
+</Script>
+</SVF_Plus>

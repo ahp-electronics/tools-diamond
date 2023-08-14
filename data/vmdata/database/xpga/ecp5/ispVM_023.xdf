@@ -1,0 +1,2014 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+Created Ankit Jain 	
+Added Multiboot feature 3/6/2012:Ankit Jain
+Updated for Supporting ECP4UM device 4/18/2013: Edward Zhou  	
+Updated TotalFuses for stopping Dualboot and Multiboot crash. 09/26/2013, Edward Zhou
+Updated Multiboot fuses. 10/02/2013, Edward Zhou
+Added 85K Auto device and updated 85K device packages. 11/06/2013, Edward Zhou
+Updated Frequency list based on Roger's Sapphire sysConfig Model.doc on 01/10/2014. 01/10/2014, Edward Zhou
+Added ECP5UM Family, 85K Serdes and Serdes Auto devices. 02/12/2014, Edward Zhou
+Added ECP5U family, 85K non-Serdes virtual. 02/17/2014, Edward Zhou
+Removed LatticeECP4U/UM device. 02/28/2014, Edward Zhou
+Nguyen 03/04/2014 Added Serial Mode
+Edward 03/07/2014, Added ECP4.xfp file.
+Edward 03/11/2014, Updated multiboot_cfg_address.
+Edward 03/19/2014, Merged Nguyen's 03/13/2014 check-ins, which supports Manufacturing register.
+Edward 03/27/2014, updated mc1_mspi_persist bit and mc1_syn_ext_done bit.
+Nguyen 03/28/2014, updated mc1_sspi_persist bit and mc1_cpu_persist bit.
+Nguyen 03/28/2014, removed I2C
+Edward 04/17/2014, copied from ecp4 to create ecp5, and removed old ecp4 stuff which is commented off before.
+Edward 07/30/2014, change ECP5U/UM to ECP5U/UM -ES device.
+Edward 08/11/2014, added ECP5U/UM back to support both regular and -ES device.
+Edward 09/04/2014, added ECP5U/UM 45K devices, and 25K devices.
+Edward 10/01/2014, change device order from the smallest device to larger ones.
+Edward 11/10/2014, change colWidth for 45K device from 846 to 848.
+Edward 11/10/2014, update Data Bit for 45k device due to the colWidth change from 846 to 848.
+Edward 01/27/2015, Separate -ES device to different family so that we can remove license control for regular device. But, still control -ES devices.
+Edward 02/11/2015, remove "Slave SPI Fast Program, Refresh" operation based on 02-11-2015 Programmer meeting request.
+Nguyen 06/05/2015 Added ECP5UM5G family.
+Nguyen 06/25/15 Added "Slave SPI SEI Fast Program"
+Nguyen 11/03/15 Added support LFE5U-12F
+Nguyen 04/21/16 Added support LAE5U-12F Auto Device
+-->
+<ispXDF version="18.0">
+	<Family name="ECP5UM5G">
+       <FamilyAliasName>ECP5UM5G</FamilyAliasName>  	   
+	   <Device name="LFE5UM5G-25F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5UM5G-25F </CodeName>
+            <FullName> LFE5UM5G-25F </FullName>
+            <AliasName> LFE5UM5G-25F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x81111043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 592 </ColWidth>
+            <RowWidth> 7562 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 5681848 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>409</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5UM5G-25F  </PON>
+                <AliasPON> LFE5UM5G-25F </AliasPON>
+                <JDFFile> LFE5UM-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5UM5G-25F-XXMG285  </PON>
+                <AliasPON> LFE5UM5G-25F-XXMG285 </AliasPON>
+                <JDFFile> LFE5UM-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5UM5G-25F-XXBG381  </PON>
+                <AliasPON> LFE5UM5G-25F-XXBG381 </AliasPON>
+                <JDFFile> LFE5UM-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;7037;6899;6901;7163;7165;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;7039;7041;7043;7045;7047;7051;7053;7055;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>656</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>6897</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+       <Device name="LFE5UM5G-45F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5UM5G-45F </CodeName>
+            <FullName> LFE5UM5G-45F </FullName>
+            <AliasName> LFE5UM5G-45F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x81112043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 848 </ColWidth>
+            <RowWidth> 9470 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 10208312 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>510</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5UM5G-45F  </PON>
+                <AliasPON> LFE5UM5G-45F </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5UM5G-45F-XXMG285  </PON>
+                <AliasPON> LFE5UM5G-45F-XXMG285 </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5UM5G-45F-XXBG381  </PON>
+                <AliasPON> LFE5UM5G-45F-XXBG381 </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 554-pin CABGA </Type>
+                <PON> LFE5UM5G-45F-XXBG554 </PON>
+                <AliasPON> LFE5UM5G-45F-XXBG554 </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;8945;8807;8809;9071;9073;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;2;2;2;2;2;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;8947;8949;8951;8953;8955;8959;8961;8963;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>656</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;2;2;2;2;2;2;2;2;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>8805</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>2</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+       <Device name="LFE5UM5G-85F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5UM5G-85F </CodeName>
+            <FullName> LFE5UM5G-85F </FullName>
+            <AliasName> LFE5UM5G-85F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x81113043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1136 </ColWidth>
+            <RowWidth> 13294 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 19244856 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>750</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5UM5G-85F  </PON>
+                <AliasPON> LFE5UM5G-85F </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5UM5G-85F-XXMG285  </PON>
+                <AliasPON> LFE5UM5G-85F-XXMG285 </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5UM5G-85F-XXBG381  </PON>
+                <AliasPON> LFE5UM5G-85F-XXBG381 </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 554-pin CABGA </Type>
+                <PON> LFE5UM5G-85F-XXBG554 </PON>
+                <AliasPON> LFE5UM5G-85F-XXBG554 </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 756-pin CABGA </Type>
+                <PON> LFE5UM5G-85F-XXBG756 </PON>
+                <AliasPON> LFE5UM5G-85F-XXBG756 </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  			
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;12761;12623;12625;12887;12889;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;12763;12765;12767;12769;12771;12775;12777;12779;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>664</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>12621</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+       <Operation>        	
+            &quot;Fast Program&quot;
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase Only&quot;                        
+            &quot;Verify Only&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+            &quot;Display Control Register0&quot;
+			&quot;Program Control Register0&quot;
+            &quot;Read Status Register&quot;
+            &quot;FLASH TransFR&quot;
+            &quot;Refresh&quot;
+            &quot;Bypass&quot;
+
+			&quot;XSRAM SEI Fast Program&quot;
+			&quot;XSRAM Verify Only&quot;
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Verify USERCODE&quot;
+            &quot;XSRAM Display USERCODE&quot;                                   
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Read Status Register&quot; 
+            &quot;XSRAM Refresh&quot;
+            &quot;XSRAM Bypass&quot;
+						
+
+			&quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Verify ID&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;SPI Flash Bypass&quot;
+	    	&quot;SPI Flash Erase,Program,Verify Quad 1&quot;
+			&quot;Scan SPI Flash Device&quot;
+	    	
+	    	
+	    	&quot;Security Program Encryption Key Only&quot;
+	    	&quot;Security Program Feature Lock&quot;
+<!--	    	&quot;Security Program Feature Encryption Lock&quot;-->
+			&quot;Security Read Encryption Key&quot;
+			&quot;Security Program TraceID&quot;
+			&quot;Security Read TraceID&quot;
+			&quot;Security Read Status Register&quot;
+
+			
+			&quot;Slave SPI Fast Program&quot;
+			&quot;Slave SPI SEI Fast Program&quot;
+	    	&quot;Slave SPI Erase Only&quot;
+			&quot;Slave SPI Verify ID&quot;
+			&quot;Slave SPI Read and Save&quot;
+			&quot;Slave SPI Read Status Register&quot;
+			&quot;Slave SPI Upload to Static RAM&quot;
+						
+			&quot;Serial Program&quot;
+        	&quot;Serial Read DONE bit&quot;        
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0xE0</IDInstr>
+        <ISCRelease value="0x01" extension="*.bit;*.rbt;*.isc"/>
+		<XFPFile>ECP5.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP4 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;XSRAM;SECKEYS;SPI Background;SLAVESPI;SERIAL;</Programming_Mode_Control>     	     	
+     	<LicenseControl></LicenseControl>
+    </Family>          
+    <Family name="ECP5UM">
+       <FamilyAliasName>ECP5UM</FamilyAliasName>  	   
+	   <Device name="LFE5UM-25F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5UM-25F </CodeName>
+            <FullName> LFE5UM-25F </FullName>
+            <AliasName> LFE5UM-25F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x01111043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 592 </ColWidth>
+            <RowWidth> 7562 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 5681848 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>409</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5UM-25F  </PON>
+                <AliasPON> LFE5UM-25F </AliasPON>
+                <JDFFile> LFE5UM-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5UM-25F-XXMG285  </PON>
+                <AliasPON> LFE5UM-25F-XXMG285 </AliasPON>
+                <JDFFile> LFE5UM-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5UM-25F-XXBG381  </PON>
+                <AliasPON> LFE5UM-25F-XXBG381 </AliasPON>
+                <JDFFile> LFE5UM-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;7037;6899;6901;7163;7165;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;7039;7041;7043;7045;7047;7051;7053;7055;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>656</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>6897</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+	   <Device name="LAE5UM-25F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAE5UM-25F </CodeName>
+            <FullName> LAE5UM-25F </FullName>
+            <AliasName> LAE5UM-25F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x01111043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 592 </ColWidth>
+            <RowWidth> 7562 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 5681848 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>409</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LAE5UM-25F  </PON>
+                <AliasPON> LAE5UM-25F </AliasPON>
+                <JDFFile> LFE5UM-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LAE5UM-25F-XXMG285  </PON>
+                <AliasPON> LAE5UM-25F-XXMG285 </AliasPON>
+                <JDFFile> LFE5UM-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LAE5UM-25F-XXBG381  </PON>
+                <AliasPON> LAE5UM-25F-XXBG381 </AliasPON>
+                <JDFFile> LFE5UM-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;7037;6899;6901;7163;7165;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;7039;7041;7043;7045;7047;7051;7053;7055;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>656</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>6897</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+	   <Device name="LFE5UM-45F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5UM-45F </CodeName>
+            <FullName> LFE5UM-45F </FullName>
+            <AliasName> LFE5UM-45F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x01112043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 848 </ColWidth>
+            <RowWidth> 9470 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 10208312 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>510</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5UM-45F  </PON>
+                <AliasPON> LFE5UM-45F </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5UM-45F-XXMG285  </PON>
+                <AliasPON> LFE5UM-45F-XXMG285 </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5UM-45F-XXBG381  </PON>
+                <AliasPON> LFE5UM-45F-XXBG381 </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 554-pin CABGA </Type>
+                <PON> LFE5UM-45F-XXBG554 </PON>
+                <AliasPON> LFE5UM-45F-XXBG554 </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;8945;8807;8809;9071;9073;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;2;2;2;2;2;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;8947;8949;8951;8953;8955;8959;8961;8963;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>656</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;2;2;2;2;2;2;2;2;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>8805</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>2</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+	   <Device name="LAE5UM-45F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAE5UM-45F </CodeName>
+            <FullName> LAE5UM-45F </FullName>
+            <AliasName> LAE5UM-45F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x01112043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 848 </ColWidth>
+            <RowWidth> 9470 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 10208312 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>510</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LAE5UM-45F  </PON>
+                <AliasPON> LAE5UM-45F </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LAE5UM-45F-XXMG285  </PON>
+                <AliasPON> LAE5UM-45F-XXMG285 </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 554-pin CABGA </Type>
+                <PON> LAE5UM-45F-XXBG554 </PON>
+                <AliasPON> LAE5UM-45F-XXBG554 </AliasPON>
+                <JDFFile> LFE5UM-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;8945;8807;8809;9071;9073;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;2;2;2;2;2;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;8947;8949;8951;8953;8955;8959;8961;8963;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>656</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;2;2;2;2;2;2;2;2;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>8805</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>2</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+	   <Device name="LFE5UM-85F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5UM-85F </CodeName>
+            <FullName> LFE5UM-85F </FullName>
+            <AliasName> LFE5UM-85F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x01113043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1136 </ColWidth>
+            <RowWidth> 13294 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 19244856 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>750</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5UM-85F  </PON>
+                <AliasPON> LFE5UM-85F </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5UM-85F-XXMG285  </PON>
+                <AliasPON> LFE5UM-85F-XXMG285 </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5UM-85F-XXBG381  </PON>
+                <AliasPON> LFE5UM-85F-XXBG381 </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 554-pin CABGA </Type>
+                <PON> LFE5UM-85F-XXBG554 </PON>
+                <AliasPON> LFE5UM-85F-XXBG554 </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 756-pin CABGA </Type>
+                <PON> LFE5UM-85F-XXBG756 </PON>
+                <AliasPON> LFE5UM-85F-XXBG756 </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  			
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;12761;12623;12625;12887;12889;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;12763;12765;12767;12769;12771;12775;12777;12779;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>664</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>12621</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+	   <Device name="LAE5UM-85F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAE5UM-85F </CodeName>
+            <FullName> LAE5UM-85F </FullName>
+            <AliasName> LAE5UM-85F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x01113043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1136 </ColWidth>
+            <RowWidth> 13294 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 19244856 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>750</BScan_Length>            
+            <Package>
+                <Type> All </Type>
+                <PON> LAE5UM-85F </PON>
+                <AliasPON> LAE5UM-85F </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 756-pin CABGA </Type>
+                <PON> LAE5UM-85F-XXBG756 </PON>
+                <AliasPON> LAE5UM-85F-XXBG756 </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  			
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;12761;12623;12625;12887;12889;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;12763;12765;12767;12769;12771;12775;12777;12779;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>664</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>12621</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+        <Operation>        	
+            &quot;Fast Program&quot;
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase Only&quot;                        
+            &quot;Verify Only&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+            &quot;Display Control Register0&quot;
+			&quot;Program Control Register0&quot;
+            &quot;Read Status Register&quot;
+            &quot;FLASH TransFR&quot;
+            &quot;Refresh&quot;
+            &quot;Bypass&quot;
+
+			&quot;XSRAM SEI Fast Program&quot;
+			&quot;XSRAM Verify Only&quot;
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Verify USERCODE&quot;
+            &quot;XSRAM Display USERCODE&quot;                                   
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Read Status Register&quot; 
+            &quot;XSRAM Refresh&quot;
+            &quot;XSRAM Bypass&quot;
+						
+
+			&quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Verify ID&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;SPI Flash Bypass&quot;
+	    	&quot;SPI Flash Erase,Program,Verify Quad 1&quot;
+			&quot;Scan SPI Flash Device&quot;
+	    	
+	    	
+	    	&quot;Security Program Encryption Key Only&quot;
+	    	&quot;Security Program Feature Lock&quot;
+<!--	    	&quot;Security Program Feature Encryption Lock&quot;-->
+			&quot;Security Read Encryption Key&quot;
+			&quot;Security Program TraceID&quot;
+			&quot;Security Read TraceID&quot;
+			&quot;Security Read Status Register&quot;
+
+			
+<!--	    	&quot;Manufacturing Read MES Fuses&quot;-->
+<!--			&quot;Manufacturing Read DTR Fuses&quot;-->
+<!--			&quot;Manufacturing Read DTR Fuses Only&quot;-->
+<!--			&quot;Manufacturing Read CONFIG Register&quot;-->
+<!--			&quot;Manufacturing Program CONFIG Register&quot;-->
+<!--			&quot;Read Manufacturing Register&quot;-->
+<!--			&quot;Program Manufacturing Register&quot;-->
+<!--		    &quot;Manufacturing Read Status Register&quot;-->
+		
+			&quot;Slave SPI Fast Program&quot;
+			&quot;Slave SPI SEI Fast Program&quot;
+<!--	    	&quot;Slave SPI Fast Program,Refresh&quot; -->
+	    	&quot;Slave SPI Erase Only&quot;
+			&quot;Slave SPI Verify ID&quot;
+			&quot;Slave SPI Read and Save&quot;
+			&quot;Slave SPI Read Status Register&quot;
+			&quot;Slave SPI Upload to Static RAM&quot;
+			&quot;Slave SPI Program Encryption Key&quot;
+	    	&quot;Slave SPI Program Feature Lock&quot;
+						
+			&quot;Serial Program&quot;
+        	&quot;Serial Read DONE bit&quot;
+			
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0xE0</IDInstr>
+        <ISCRelease value="0x01" extension="*.bit;*.rbt;*.isc"/>
+		<XFPFile>ECP5.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP4 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;XSRAM;SECKEYS;SPI Background;SLAVESPI;SERIAL;</Programming_Mode_Control>     	
+     	<LicenseControl></LicenseControl> 
+    </Family>   
+    <Family name="ECP5U">
+       <FamilyAliasName>ECP5U</FamilyAliasName>  	
+       <Device name="LFE5U-12F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5U-12F </CodeName>
+            <FullName> LFE5U-12F </FullName>
+            <AliasName> LFE5U-12F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x21111043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 592 </ColWidth>
+            <RowWidth> 7562 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 5681848 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>409</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5U-12F  </PON>
+                <AliasPON> LFE5U-12F </AliasPON>
+                <JDFFile> LFE5U-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5U-12F-XXMG285  </PON>
+                <AliasPON> LFE5U-12F-XXMG285 </AliasPON>
+                <JDFFile> LFE5U-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5U-12F-XXBG381  </PON>
+                <AliasPON> LFE5U-12F-XXBG381 </AliasPON>
+                <JDFFile> LFE5U-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;7037;6899;6901;7163;7165;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;7039;7041;7043;7045;7047;7051;7053;7055;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>656</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>6897</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device>    
+       <Device name="LAE5U-12F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAE5U-12F </CodeName>
+            <FullName> LAE5U-12F </FullName>
+            <AliasName> LAE5U-12F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x21111043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 592 </ColWidth>
+            <RowWidth> 7562 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 5681848 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>409</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LAE5U-12F  </PON>
+                <AliasPON> LAE5U-12F </AliasPON>
+                <JDFFile> LFE5U-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LAE5U-12F-XXBG381  </PON>
+                <AliasPON> LAE5U-12F-XXBG381 </AliasPON>
+                <JDFFile> LFE5U-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;7037;6899;6901;7163;7165;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;7039;7041;7043;7045;7047;7051;7053;7055;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>656</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>6897</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device>
+	   <Device name="LFE5U-25F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5U-25F </CodeName>
+            <FullName> LFE5U-25F </FullName>
+            <AliasName> LFE5U-25F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x41111043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 592 </ColWidth>
+            <RowWidth> 7562 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 5681848 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>409</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5U-25F  </PON>
+                <AliasPON> LFE5U-25F </AliasPON>
+                <JDFFile> LFE5U-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5U-25F-XXMG285  </PON>
+                <AliasPON> LFE5U-25F-XXMG285 </AliasPON>
+                <JDFFile> LFE5U-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5U-25F-XXBG381  </PON>
+                <AliasPON> LFE5U-25F-XXBG381 </AliasPON>
+                <JDFFile> LFE5U-25F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;7037;6899;6901;7163;7165;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;7039;7041;7043;7045;7047;7051;7053;7055;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>656</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>6897</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+	   <Device name="LFE5U-45F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5U-45F </CodeName>
+            <FullName> LFE5U-45F </FullName>
+            <AliasName> LFE5U-45F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x41112043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 848 </ColWidth>
+            <RowWidth> 9470 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 10208312 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>510</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5U-45F  </PON>
+                <AliasPON> LFE5U-45F </AliasPON>
+                <JDFFile> LFE5U-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5U-45F-XXMG285  </PON>
+                <AliasPON> LFE5U-45F-XXMG285 </AliasPON>
+                <JDFFile> LFE5U-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5U-45F-XXBG381  </PON>
+                <AliasPON> LFE5U-45F-XXBG381 </AliasPON>
+                <JDFFile> LFE5U-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 554-pin CABGA </Type>
+                <PON> LFE5U-45F-XXBG554 </PON>
+                <AliasPON> LFE5U-45F-XXBG554 </AliasPON>
+                <JDFFile> LFE5U-45F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;8945;8807;8809;9071;9073;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;2;2;2;2;2;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;8947;8949;8951;8953;8955;8959;8961;8963;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>656</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;2;2;2;2;2;2;2;2;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>8805</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>2</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+	   <Device name="LFE5U-85F">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5U-85F </CodeName>
+            <FullName> LFE5U-85F </FullName>
+            <AliasName> LFE5U-85F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x41113043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1136 </ColWidth>
+            <RowWidth> 13294 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 19244856 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>750</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5U-85F  </PON>
+                <AliasPON> LFE5U-85F </AliasPON>
+                <JDFFile> LFE5U-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5U-85F-XXMG285  </PON>
+                <AliasPON> LFE5U-85F-XXMG285 </AliasPON>
+                <JDFFile> LFE5U-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5U-85F-XXBG381  </PON>
+                <AliasPON> LFE5U-85F-XXBG381 </AliasPON>
+                <JDFFile> LFE5U-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 554-pin CABGA </Type>
+                <PON> LFE5U-85F-XXBG554 </PON>
+                <AliasPON> LFE5U-85F-XXBG554 </AliasPON>
+                <JDFFile> LFE5U-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 756-pin CABGA </Type>
+                <PON> LFE5U-85F-XXBG756 </PON>
+                <AliasPON> LFE5U-85F-XXBG756 </AliasPON>
+                <JDFFile> LFE5U-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  			
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;12761;12623;12625;12887;12889;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;12763;12765;12767;12769;12771;12775;12777;12779;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>664</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>12621</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+        <Operation>        	
+            &quot;Fast Program&quot;
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase Only&quot;                        
+            &quot;Verify Only&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+            &quot;Display Control Register0&quot;
+			&quot;Program Control Register0&quot;
+            &quot;Read Status Register&quot;
+            &quot;FLASH TransFR&quot;
+            &quot;Refresh&quot;
+            &quot;Bypass&quot;
+
+			&quot;XSRAM SEI Fast Program&quot;
+			&quot;XSRAM Verify Only&quot;
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Verify USERCODE&quot;
+            &quot;XSRAM Display USERCODE&quot;                                   
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Read Status Register&quot; 
+            &quot;XSRAM Refresh&quot;
+            &quot;XSRAM Bypass&quot;
+						
+
+			&quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Verify ID&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;SPI Flash Bypass&quot;
+	    	&quot;SPI Flash Erase,Program,Verify Quad 1&quot;
+			&quot;Scan SPI Flash Device&quot;
+	    	
+	    	
+	    	&quot;Security Program Encryption Key Only&quot;
+	    	&quot;Security Program Feature Lock&quot;
+<!--	    	&quot;Security Program Feature Encryption Lock&quot;-->
+			&quot;Security Read Encryption Key&quot;
+			&quot;Security Program TraceID&quot;
+			&quot;Security Read TraceID&quot;
+			&quot;Security Read Status Register&quot;
+
+			
+<!--	    	&quot;Manufacturing Read MES Fuses&quot;-->
+			&quot;Manufacturing Read DTR Fuses&quot;
+			&quot;Manufacturing Read DTR Fuses Only&quot;
+<!--			&quot;Manufacturing Read CONFIG Register&quot;-->
+<!--			&quot;Manufacturing Program CONFIG Register&quot;-->
+			&quot;Read Manufacturing Register&quot;
+			&quot;Program Manufacturing Register&quot;
+<!--		    &quot;Manufacturing Read Status Register&quot;-->
+
+			
+			&quot;Slave SPI Fast Program&quot;
+			&quot;Slave SPI SEI Fast Program&quot;
+<!--	    	&quot;Slave SPI Fast Program,Refresh&quot; -->
+	    	&quot;Slave SPI Erase Only&quot;
+			&quot;Slave SPI Verify ID&quot;
+			&quot;Slave SPI Read and Save&quot;
+			&quot;Slave SPI Read Status Register&quot;
+			&quot;Slave SPI Upload to Static RAM&quot;
+						
+			&quot;Serial Program&quot;
+        	&quot;Serial Read DONE bit&quot;
+        
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0xE0</IDInstr>
+        <ISCRelease value="0x01" extension="*.bit;*.rbt;*.isc"/>
+		<XFPFile>ECP5.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP4 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;XSRAM;SECKEYS;SPI Background;SLAVESPI;SERIAL;</Programming_Mode_Control>     	
+     	<LicenseControl></LicenseControl> 
+    </Family>   
+    <Family name="ECP5UM_ENG">
+       <FamilyAliasName>ECP5UM_ENG</FamilyAliasName>  	   
+	   <Device name="LFE5UM-85F-ES">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5UM-85F-ES </CodeName>
+            <FullName> LFE5UM-85F-ES </FullName>
+            <AliasName> LFE5UM-85F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x01113043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1136 </ColWidth>
+            <RowWidth> 13294 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 19244856 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>750</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5UM-85F  </PON>
+                <AliasPON> LFE5UM-85F </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5UM-85F-XXMG285ES  </PON>
+                <AliasPON> LFE5UM-85F </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5UM-85F-XXBG381ES  </PON>
+                <AliasPON> LFE5UM-85F </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 554-pin CABGA </Type>
+                <PON> LFE5UM-85F-XXBG554ES </PON>
+                <AliasPON> LFE5UM-85F </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 756-pin CABGA </Type>
+                <PON> LFE5UM-85F-XXBG756ES </PON>
+                <AliasPON> LFE5UM-85F </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  			
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;12761;12623;12625;12887;12889;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;12763;12765;12767;12769;12771;12775;12777;12779;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>664</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>12621</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+	   <Device name="LAE5UM-85F-ES">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LAE5UM-85F-ES </CodeName>
+            <FullName> LAE5UM-85F-ES </FullName>
+            <AliasName> LAE5UM-85F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x01113043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1136 </ColWidth>
+            <RowWidth> 13294 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 19244856 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>750</BScan_Length>            
+            <Package>
+                <Type> All </Type>
+                <PON> LAE5UM-85F </PON>
+                <AliasPON> LAE5UM-85F </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 756-pin CABGA </Type>
+                <PON> LAE5UM-85F-XXBG756ES </PON>
+                <AliasPON> LAE5UM-85F </AliasPON>
+                <JDFFile> LFE5UM-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  			
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;12761;12623;12625;12887;12889;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;12763;12765;12767;12769;12771;12775;12777;12779;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>664</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>12621</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+        <Operation>        	
+            &quot;Fast Program&quot;
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase Only&quot;                        
+            &quot;Verify Only&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+            &quot;Display Control Register0&quot;
+			&quot;Program Control Register0&quot;
+            &quot;Read Status Register&quot;
+            &quot;FLASH TransFR&quot;
+            &quot;Refresh&quot;
+            &quot;Bypass&quot;
+
+			&quot;XSRAM SEI Fast Program&quot;
+			&quot;XSRAM Verify Only&quot;
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Verify USERCODE&quot;
+            &quot;XSRAM Display USERCODE&quot;                                   
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Read Status Register&quot; 
+            &quot;XSRAM Refresh&quot;
+            &quot;XSRAM Bypass&quot;
+
+						
+
+			&quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Verify ID&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;SPI Flash Bypass&quot;
+	    	&quot;SPI Flash Erase,Program,Verify Quad 1&quot;
+			&quot;Scan SPI Flash Device&quot;
+	    	
+
+	    	&quot;Security Program Encryption Key Only&quot;
+	    	&quot;Security Program Feature Lock&quot;
+<!--	    	&quot;Security Program Feature Encryption Lock&quot;-->
+			&quot;Security Read Encryption Key&quot;
+			&quot;Security Program TraceID&quot;
+			&quot;Security Read TraceID&quot;
+			&quot;Security Read Status Register&quot;
+	
+
+<!--	    	&quot;Manufacturing Read MES Fuses&quot;-->
+			&quot;Manufacturing Read DTR Fuses&quot;
+			&quot;Manufacturing Read DTR Fuses Only&quot;
+<!--			&quot;Manufacturing Read CONFIG Register&quot;-->
+<!--			&quot;Manufacturing Program CONFIG Register&quot;-->
+			&quot;Read Manufacturing Register&quot;
+			&quot;Program Manufacturing Register&quot;
+<!--		    &quot;Manufacturing Read Status Register&quot;-->
+
+		
+			&quot;Slave SPI Fast Program&quot;
+			&quot;Slave SPI SEI Fast Program&quot;
+<!--	    	&quot;Slave SPI Fast Program,Refresh&quot; -->
+	    	&quot;Slave SPI Erase Only&quot;
+			&quot;Slave SPI Verify ID&quot;
+			&quot;Slave SPI Read and Save&quot;
+			&quot;Slave SPI Read Status Register&quot;
+			&quot;Slave SPI Upload to Static RAM&quot;
+						
+			&quot;Serial Program&quot;
+        	&quot;Serial Read DONE bit&quot;
+			
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0xE0</IDInstr>
+        <ISCRelease value="0x01" extension="*.bit;*.rbt;*.isc"/>
+		<XFPFile>ECP5.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP4 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;XSRAM;SECKEYS;SPI Background;SLAVESPI;SERIAL;</Programming_Mode_Control>     	
+     	<LicenseControl>LSC_CONTROL_DEVICE</LicenseControl> 
+    </Family>   
+    <Family name="ECP5U_ENG">
+       <FamilyAliasName>ECP5U_ENG</FamilyAliasName>  	   
+	   <Device name="LFE5U-85F-ES">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LFE5U-85F-ES </CodeName>
+            <FullName> LFE5U-85F-ES </FullName>
+            <AliasName> LFE5U-85F </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LatticeECP5.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP5.svp"
+                         value="0x07"/>
+            <JtagID>0x41113043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1136 </ColWidth>
+            <RowWidth> 13294 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 19244856 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>750</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> LFE5U-85F  </PON>
+                <AliasPON> LFE5U-85F </AliasPON>
+                <JDFFile> LFE5U-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 285-pin CSFBGA </Type>
+                <PON> LFE5U-85F-XXMG285ES  </PON>
+                <AliasPON> LFE5U-85F </AliasPON>
+                <JDFFile> LFE5U-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 381-pin CABGA </Type>
+                <PON> LFE5U-85F-XXBG381ES  </PON>
+                <AliasPON> LFE5U-85F </AliasPON>
+                <JDFFile> LFE5U-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 554-pin CABGA </Type>
+                <PON> LFE5U-85F-XXBG554ES </PON>
+                <AliasPON> LFE5U-85F </AliasPON>
+                <JDFFile> LFE5U-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 756-pin CABGA </Type>
+                <PON> LFE5U-85F-XXBG756ES </PON>
+                <AliasPON> LFE5U-85F </AliasPON>
+                <JDFFile> LFE5U-85F.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  			
+            <ControlReg0>
+            	<Frequency>;2.4 MHz;4.8 MHz;9.7 MHz;
+            			    19.4 MHz;
+            			    38.8 MHz;62.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000001;100000;
+            							 110000;
+            							 111000;111011;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.1V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;12761;12623;12625;12887;12889;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;0;0;0;0;0;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;12763;12765;12767;12769;12771;12775;12777;12779;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>0</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>664</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;0;0;0;0;0;0;0;0;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>12621</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>0</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+        <Operation>        	
+            &quot;Fast Program&quot;
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase Only&quot;                        
+            &quot;Verify Only&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+            &quot;Display Control Register0&quot;
+			&quot;Program Control Register0&quot;
+            &quot;Read Status Register&quot;
+            &quot;FLASH TransFR&quot;
+            &quot;Refresh&quot;
+            &quot;Bypass&quot;
+
+
+			&quot;XSRAM SEI Fast Program&quot;
+			&quot;XSRAM Verify Only&quot;
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Verify USERCODE&quot;
+            &quot;XSRAM Display USERCODE&quot;                                   
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Read Status Register&quot; 
+            &quot;XSRAM Refresh&quot;
+            &quot;XSRAM Bypass&quot;
+						
+
+			&quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Verify ID&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;SPI Flash Bypass&quot;
+	    	&quot;SPI Flash Erase,Program,Verify Quad 1&quot;
+			&quot;Scan SPI Flash Device&quot;
+	    	
+
+	    	&quot;Security Program Encryption Key Only&quot;
+	    	&quot;Security Program Feature Lock&quot;
+<!--	    	&quot;Security Program Feature Encryption Lock&quot;-->
+			&quot;Security Read Encryption Key&quot;
+			&quot;Security Program TraceID&quot;
+			&quot;Security Read TraceID&quot;
+			&quot;Security Read Status Register&quot;
+			
+
+<!--	    	&quot;Manufacturing Read MES Fuses&quot;-->
+			&quot;Manufacturing Read DTR Fuses&quot;
+			&quot;Manufacturing Read DTR Fuses Only&quot;
+<!--			&quot;Manufacturing Read CONFIG Register&quot;-->
+<!--			&quot;Manufacturing Program CONFIG Register&quot;-->
+			&quot;Read Manufacturing Register&quot;
+			&quot;Program Manufacturing Register&quot;
+<!--		    &quot;Manufacturing Read Status Register&quot;-->
+			
+
+			&quot;Slave SPI Fast Program&quot;
+			&quot;Slave SPI SEI Fast Program&quot;
+<!--	    	&quot;Slave SPI Fast Program,Refresh&quot; -->
+	    	&quot;Slave SPI Erase Only&quot;
+			&quot;Slave SPI Verify ID&quot;
+			&quot;Slave SPI Read and Save&quot;
+			&quot;Slave SPI Read Status Register&quot;
+			&quot;Slave SPI Upload to Static RAM&quot;						
+
+			&quot;Serial Program&quot;
+        	&quot;Serial Read DONE bit&quot;        
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0xE0</IDInstr>
+        <ISCRelease value="0x01" extension="*.bit;*.rbt;*.isc"/>
+		<XFPFile>ECP5.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP4 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;XSRAM;SECKEYS;SPI Background;SLAVESPI;SERIAL;</Programming_Mode_Control>     	
+     	<LicenseControl>LSC_CONTROL_DEVICE</LicenseControl> 
+    </Family>   	
+</ispXDF>

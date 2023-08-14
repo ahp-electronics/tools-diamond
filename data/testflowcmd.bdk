@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="testflowcmd">
+  <CommandDef id="Cmd_HDL_Convert" type="CMD_TCL_SCRIPT" iterate="implementation.convert_srces">
+    <cmd_str>tohdl -d %@iterator.type@% -i %@iterator.source@% -o @iterator@</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc tohdl {args} {
+			set msg "tohdl $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_EdifIn" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE" iterate="postsynthesis_edifs">
+    <cmd_str>edif2ngd -l $device.family -d $device.device "@iterator@" "%@iterator.completebasename@%.ngo" #PROP_BD_EdfInBusNameConv #PROP_BD_EdfInRemLoc </cmd_str>    
+	<scripts>
+	<![CDATA[
+		proc edif2ngd {args} {
+			set msg "edif2ngd $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_EdifUpdate" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>edfupdate -t "${report_base}.tcy" -w "${report_base}.ngo" -m "${report_base}.ngo" "${report_base}.ngx"
+	</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc edfupdate {args} {
+			set msg "edfupdate $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_NGDBuild" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <!--cmd_str>ngdbuild  -a $device.family -d $device.device -p "${FOUNDRY}/${device.pm}/data" -p "${impl_dir}" "${report_base}.ngo" "${report_base}.ngd" #PROP_BD_EdfInLibPath
+	</cmd_str-->
+	<cmd_str>ngdbuild  -a $device.family -d $device.device -p "${FOUNDRY}/${device.pm}/data" -p "${impl_dir}" "${postsynthesis_edifs._ITERATOR.last.value.completebasename}.ngo" "${report_base}.ngd" #PROP_BD_EdfInLibPath
+	</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ngdbuild {args} {
+			set msg "ngdbuild $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_Map" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>map -a $device.family -p $device.device -t $device.package -s $device.speed "${report_base}.ngd" -o "${report_base}_map.ncd" -mp  "${report_base}.mrp" "${implementation.Logic Preference.absolutefilepath}" #PROP_MAP_PackLogMapDes #PROP_MAP_IgnorePreErr #PROP_MAP_SymCrossRef #PROP_MAP_SigCrossRef #PROP_MAP_OvermapDevice #PROP_MAP_GuideFileMapDes #PROP_MAP_RegRetiming #PROP_MAP_TimingDriven #PROP_MAP_TimingDrivenNodeRep #PROP_MAP_TimingDrivenPack #PROP_MAP_MapModArgs </cmd_str>
+	<scripts>
+	<![CDATA[
+		proc map {args} {
+			set msg "map $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_MapTrace" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>trce -v 1 -gt -o "${report_base}.tw1" "${report_base}_map.ncd" "${implementation.Logic Preference.absolutepath}/${implementation.Logic Preference.completebasename}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc trce {args} {
+			set msg "trce $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_Par_CmdFileGen" type="CMD_TCL_SCRIPT" >
+    <cmd_str/>
+	<scripts>
+	<![CDATA[
+		set prj_dir [runtime_property value project_dir]
+		set rep_name [runtime_property value report_base]
+		set prj_name [runtime_property value project.title]
+		set file_name "${rep_name}.p2t"
+		if {[catch {set cf [open $file_name w]} err]} {
+		    runtime_log -err "open $file_name is fialed: $err\n"
+		    return -code error
+		}
+		puts $cf "-w"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_EffortParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_RoutePassParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_NewRouteParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_DisableTDParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_CrDlyStFileParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_PrefErrorOut]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_RoutingCDP]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_RoutingCDR]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_PlcIterParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_PlcStCostTblParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_SaveBestRsltParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_RouteResOptParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_RouteDlyRedParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_PlcInputLimit]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_PlcInputNeighborSize]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_GuideFileParDes]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_RoutingOpt]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_ParRunPlaceOnly]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_ParMultiNodeList]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_ParNCDGuideFile]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_ParMatchFact]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_ParGuideRepMatch]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_parPathBased]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_parHold]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_PARClockSkew]"
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_PARModArgs]"
+		close $cf
+		set file_name "${rep_name}.p3t"
+		if {[catch {set cf [open $file_name w]} err]} {
+		    runtime_log -err "open $file_name is fialed: $err\n"
+		    return -code error
+		}
+		puts $cf "[runtime_strategy cmd_option PROP_PAR_RemoveDir]"
+		puts $cf "-log \"${rep_name}.log\""
+		puts $cf "-o \"${rep_name}.csv\""
+		set lpfpath [runtime_property value "implementation.Logic Preference.absolutepath"]
+		set lpfname [runtime_property value "implementation.Logic Preference.completebasename"]
+		puts $cf "-pr \"${lpfpath}/${lpfname}.prf\""
+		close $cf
+	]]>
+	</scripts>
+  </CommandDef>
+  <CommandDef id="Cmd_Par" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>mpartrce -p "${report_base}.p2t" -f "${report_base}.p3t" "${report_base}_map.ncd" "${report_base}.ncd"</cmd_str>
+	<CommandFile name="${report_base}.p2t" clean="FALSE" >
+	  <line>-w</line>
+	  <line>#PROP_PAR_EffortParDes</line>
+	  <line>#PROP_PAR_RoutePassParDes</line>
+	  <line>#PROP_PAR_NewRouteParDes</line>
+	  <line>#PROP_PAR_DisableTDParDes</line>
+	  <line>#PROP_PAR_CrDlyStFileParDes</line>
+	  <line>#PROP_PAR_PrefErrorOut</line>
+	  <line>#PROP_PAR_RoutingCDP</line>
+	  <line>#PROP_PAR_RoutingCDR</line>
+	  <line>#PROP_PAR_PlcIterParDes</line>
+	  <line>#PROP_PAR_PlcStCostTblParDes</line>
+	  <line>#PROP_PAR_SaveBestRsltParDes</line>
+	  <line>#PROP_PAR_RouteResOptParDes</line>
+	  <line>#PROP_PAR_RouteDlyRedParDes</line>
+	  <line>#PROP_PAR_PlcInputLimit</line>
+	  <line>#PROP_PAR_PlcInputNeighborSize</line>
+	  <line>#PROP_PAR_RoutingOpt</line>
+	  <line>#PROP_PAR_ParRunPlaceOnly</line>
+	  <line>#PROP_PAR_ParMultiNodeList</line>
+	  <line>#PROP_PAR_ParNCDGuideFile</line>
+	  <line>#PROP_PAR_ParMatchFact</line>
+	  <line>#PROP_PAR_ParGuideRepMatch</line>
+	  <line>#PROP_PAR_parPathBased</line>
+	  <line>#PROP_PAR_parHold</line>
+	  <line>#PROP_PAR_PARClockSkew</line>
+	  <line>#PROP_PAR_PARModArgs</line>
+	</CommandFile>
+	<CommandFile name="${report_base}.p3t" clean="TRUE" >
+	  <line>#PROP_PAR_RemoveDir</line>
+	  <line>-log "${report_base}.log"</line>
+	  <line>-o "${report_base}.csv"</line>
+	  <line>-pr "${implementation.Logic Preference.absolutepath}/${implementation.Logic Preference.completebasename}.prf"</line>
+	</CommandFile>
+	<scripts>
+	<![CDATA[
+		proc multipar {args} {
+			set msg "mpartrce $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_Par_CmdFileClean" type="CMD_TCL_SCRIPT">
+    <cmd_str/>
+	<scripts>
+	<![CDATA[
+	    set rep_name "[runtime_property value report_base]"
+		file delete "${rep_name}.p2t" "${rep_name}.p3t"
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_PARTrace" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>trce -v 1 -sp 3 -sphld m -sethld -fullname -o "${report_base}.twr" "${report_base}.ncd" "${implementation.Logic Preference.absolutepath}/${implementation.Logic Preference.completebasename}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc trce {args} {
+			set msg "trce $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_IOTiming" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>iotiming "${report_base}.ncd" "${implementation.Logic Preference.absolutepath}/${implementation.Logic Preference.completebasename}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc iotiming {args} {
+			set msg "iotiming $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_TimingSimFileVlg" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>ldbanno "${report_base}.ncd" -n Verilog -o "${report_base}.vo" -w -neg</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ldbanno {args} {
+			set msg "iotiming $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_TimingSimFileVHD" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>ldbanno "${report_base}.ncd" -n VHDL -o "${report_base}.vho" -w -neg</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ldbanno {args} {
+			set msg "iotiming $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_IBIS" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <cmd_str>ibisgen "${report_base}.pad" "${InstallPath}/cae_library/ibis/${device.PrimitiveLib}.ibs"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ibisgen {args} {
+			set msg "ibisgen $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <CommandDef id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE">
+    <CommandFile name="${report_base}.t2b" clean="TRUE" >
+	  <line>#PROP_BIT_DisableUESBitgen</line>	
+	  <line>#PROP_BIT_SDisRAMResBitGen</line>	
+	  <line>#PROP_BIT_RunDRCBitGen</line>	
+	</CommandFile>
+    <cmd_str>bitgen -f "${report_base}.t2b" -w "${report_base}.ncd" -jedec -e -s "${report_base}.sec" -k "${report_base}.bek" "${implementation.Logic Preference.absolutepath}/${implementation.Logic Preference.completebasename}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc bitgen {args} {
+			set msg "bitgen $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+</BaliFlowDef>

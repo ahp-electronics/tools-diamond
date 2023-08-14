@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xbel>
+<!-- 1. nodetype valid value : 0(pure folder), 1(report with status check)
+     2. editortype : 0 (html report), 1(text report), 2(message), 3(html report for LSE Timing)
+     3. "milestone" "task" and "report"'s value should be same with definition in bdk file
+-->
+
+<reportconfig version="1.0" >
+<!-- ***************************************************************
+HTML parser definition 
+ *************************************************************** -->
+<parserdef id="summary" milestone="" task="" report=""/>
+<parserdef id="synplify" milestone="Synthesis" task="Synplify_Synthesis" report="Report_SynplifyRep"/>
+<parserdef id="precision" milestone="Synthesis" task="Precision_Synthesis" report="Report_PrecisionRep"/>
+<parserdef id="lse" milestone="Synthesis" task="Lattice_Synthesis" report="Report_LSERep"/>
+<parserdef id="map" milestone="Map" task="Map" report="Report_MapRep"/>
+<parserdef id="par" milestone="PAR" task="PAR" report="Report_PARRep"/>
+<parserdef id="pad" milestone="PAR" task="PAR" report="Report_PADRep" />
+<parserdef id="bitstream" milestone="Export" task="Bitgen" report="Report_BitGen"/>
+<parserdef id="lsesta" milestone="Synthesis" task="Lattice_Synthesis" report="Report_LSETimingRep"/>
+<parserdef id="mapsta" milestone="Map" task="MapTrace" report="Report_MapTrace"/>
+<parserdef id="parsta" milestone="PAR" task="PARTrace" report="Report_PARTrace" />
+<parserdef id="iotimingsta" milestone="PAR" task="IOTiming" report="Report_IOTiming"/>
+<parserdef id="message" milestone="" task="" report="Report_Message" />
+<parserdef id="messagefilter" milestone="" task="" report="Report_MessageFilter"/>
+<parserdef id="tclcommand" milestone="" task="" report=""/>
+
+<!-- ***************************************************************
+Tool report item definition 
+ *************************************************************** 
+<toolreportdef id="toolsso" arg1="TOOL_Report" arg2="SSO" />
+<toolreportdef id="toolhle_genhierarchy" arg1="TOOL_Report" arg2="HDLE"/>
+<toolreportdef id="toolhle_runbkm" arg1="TOOL_Report" arg2="BKM"/>
+<toolreportdef id="toolpio" arg1="TOOL_Report" arg2="PIODRC" /> -->
+
+<!-- *************************************************************** -->
+<!-- ReportView tree architecture definition -->
+<!-- *************************************************************** -->
+<reportui>
+    <folder label="Project">
+        <node id="summary" label="Project Summary" editor="0" parser="summary" >
+			<visable value="true" />
+			<status type="file" />
+		</node>
+    </folder>
+    <folder label="Process Reports">
+        <node id="synplify" label="Synplify Pro" editor="0" parser="synplify" >
+			<visable value='%PNUseSynthesis@synplify@Synthesis@Synplify_Synthesis%'/>
+			<status type="process" arg1="Synthesis" arg2="Synplify_Synthesis" />
+		</node>	
+        <node id="precision" label="Precision" editor="0" parser="precision" >
+			<visable value='%PNUseSynthesis@precision@Synthesis@Precision_Synthesis%'/>
+			<status type="process" arg1="Synthesis" arg2="Precision_Synthesis" />
+		</node>
+		<node id="lse" label="Lattice LSE" editor="0" parser="lse" >
+			<visable value='%PNUseSynthesis@lse@Synthesis@Lattice_Synthesis%'/>
+			<status type="process" arg1="Synthesis" arg2="Lattice_Synthesis" />
+		</node>		
+        <node id="map" label="Map" editor="0" parser="map" >
+			<visable value='%BDKProcessExist@Map@Map%'/>
+			<status type="process" arg1="Map" arg2="Map" />
+		</node>
+        <node id="par" label="Place &amp; Route" editor="0" parser="par" >
+			<visable value='%BDKProcessExist@PAR@PAR%'/>
+			<status type="process" arg1="PAR" arg2="PAR" />
+		</node>		
+        <node id="pad" label="Signal/Pad" editor="0" parser="pad" >
+			<visable value='%BDKProcessExist@PAR@PAR%'/>
+			<status type="process" arg1="PAR" arg2="PAR" />
+		</node>
+        <node id="bitstream" label="Bitstream/JEDEC" editor="0" parser="bitstream" >
+			<visable value='%BDKProcessExist@Export@Bitgen%'/>
+			<status type="process" arg1="Export" arg2="Bitgen||Jedecgen" />
+		</node>
+    </folder>
+    <folder label="Analysis Reports" >
+	    <node id="lsesta" label="LSE Timing Report" editor="3" parser="lsesta" >
+			<visable value='%PNUseSynthesis@lse@Synthesis@Lattice_Synthesis%'/>
+			<status type="process" arg1="Synthesis" arg2="Lattice_Synthesis" />
+		</node>
+        <node id="mapsta" label="Map Trace" editor="0" parser="mapsta" >
+			<visable value='%BDKProcessExist@Map@MapTrace%'/>
+			<status type="process" arg1="Map" arg2="MapTrace" />
+		</node>
+        <node id="parsta" label="Place &amp; Route Trace" editor="0" parser="parsta" >
+			<visable value='%BDKProcessExist@PAR@PARTrace%'/>
+			<status type="process" arg1="PAR" arg2="PARTrace" />
+		</node>
+        <node id="powercheck" label="Thermal Analysis" editor="1" parser="null" >
+			<visable value='%BDKProcessExist@PAR@PowerCal%'/>
+			<status type="process" arg1="PAR" arg2="PowerCal" />
+			<reportfile value="%BDKFileFullName@Report_PowerCal%" />
+		</node>
+        <node id="iotimingsta" label="I/O Timing Analysis" editor="0" parser="iotimingsta" >
+			<visable value='%BDKProcessExist@PAR@IOTiming%'/>
+			<status type="process" arg1="PAR" arg2="IOTiming" />
+		</node>
+<!--        <node id="sso" label="I/O SSO Analysis" editor="0" parser="null" >
+			<visable value='%BDKProcessExist@PAR@SSO%'/>
+			<status type="process" arg1="PAR" arg2="SSO" />
+			<reportfile value="%BDKFileBaseName@Report_SSO%_sso.html" />
+		</node> -->
+		<node id="n2e" label="Equation Report" editor="1" parser="null" >
+			<visable value='%BDKProcessExist@Map@MapEqu%'/>
+			<status type="process" arg1="Map" arg2="MapEqu" />
+			<reportfile value="%BDKFileFullName@Report_MapEqu%" />
+		</node>
+    </folder>
+	<folder label="Tool Reports" >
+        <node id="toolsso" label="I/O SSO Analysis" editor="0" toolreport="1" >
+			<visable value='%BDKEnvMemEnabled@SSO%'/>
+			<status type="process" arg1="TOOL_Report" arg2="SSO" />
+		</node>
+        <node id="toolhle_genhierarchy" label="Hierarchy Parsing Report" editor="0" toolreport="1">
+			<visable value='true'/>
+			<status type="process" arg1="TOOL_Report" arg2="HDLE" />
+		</node>
+<!--        <node id="toolhle_runbkm" label="Run BKM Check" editor="0" toolreport="1">
+			<visable value='true'/>
+			<status type="process" arg1="TOOL_Report" arg2="BKM" />
+		</node> -->
+        <node id="toolpio" label="PIO DRC" editor="0" toolreport="1">
+			<visable value='true'/>
+			<status type="process" arg1="TOOL_Report" arg2="PIODRC" />
+		</node>		
+		<node id="tcllog" label="TCL Command Log" editor="0" parser="tclcommand">
+			<visable value='true'/>
+			<status type="file" />
+		</node>	
+		<node id="tooldec" label="ECO Editor Change Log" editor="0" toolreport="1">
+			<visable value='true'/>
+			<status type="process" arg1="TOOL_Report" arg2="DEC"/>
+		</node>	
+	</folder>
+	<folder label="Messages" >
+		<node id="allmsg" label="All Messages" editor="2" parser="message">
+			<visable value='true'/>
+			<status type="file" />
+			<reportfile value="%BDKFileFullName@Report_Message%" />
+		</node>
+		<node id="usrmsg" label="User Defined Filters" editor="2" parser="messagefilter">
+			<visable value='true'/>
+			<status type="file" />
+			<reportfile value="%BDKFileFullName@Report_Message%" />
+		</node>
+	</folder>
+</reportui>
+
+</reportconfig>
+

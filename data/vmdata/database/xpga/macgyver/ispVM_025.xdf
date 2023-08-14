@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+Created Nguyen, 02/16/2016 	
+-->
+<ispXDF version="18.0">
+    <Family name="PRISM">
+       <FamilyAliasName>PRISM</FamilyAliasName>  	   
+	   <Device name="SII1866">
+            <Comm> JTAG </Comm>
+            <Access> SSPI/I2C </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> SII1866 </CodeName>
+            <FullName> SII1866 </FullName>
+            <AliasName> SII1866 </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>macgyver.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACGYVER.svp"
+                         value="0x07"/>
+            <JtagID>0x012D0043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 848 </ColWidth>
+            <RowWidth> 9470 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 8002176 </TotalFuses> 
+            <PWP>  12 </PWP>
+            <PWE>  200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>39</BScan_Length>            
+			<Package>
+                <Type> All </Type>
+                <PON> SII1866  </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+           <Package>
+                <Type> 169-pin CSFBGA </Type>
+                <PON> SII1866-XXCSFPGA169  </PON>
+                <AliasPON> SII1866-XXZU169 </AliasPON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+			<ControlReg0>
+            	<Frequency>;2.0 MHz;3.0 MHz;6.0 MHz;12.0 MHz;24.0 MHz;48.0 MHz;</Frequency>
+            	<Master_Clock_Frequency>;101000;110000;111000;111100;111110;111111;</Master_Clock_Frequency>
+				<Clock_divider>;101000;110000;111000;111100;111110;111111;</Clock_divider>
+            </ControlReg0>         
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>CCLK,SN,SI,SO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;6500;6499;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;4;4;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+			<Multiboot_fuses>
+				<Multiboot_cfg_Address>;6607;6606;6605;6604;6603;6602;6601;6600;</Multiboot_cfg_Address>
+				<Multiboot_chip_sel_Column>4</Multiboot_chip_sel_Column>
+				<Multiboot_source_sel_Column>0</Multiboot_source_sel_Column>
+				<Multiboot_auto_add_Column>;4;4;4;4;4;4;4;4;</Multiboot_auto_add_Column>
+			</Multiboot_fuses>
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>6640</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>4</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+        <Operation>        	
+            &quot;Fast Program&quot;
+            &quot;Erase,Program,Verify&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;  
+            &quot;Read and Save&quot;                       
+            &quot;Verify ID&quot;
+            &quot;Read Status Register&quot;
+<!--            &quot;Display Control Register0&quot;-->
+<!--			&quot;Program Control Register0&quot;-->
+            &quot;Display ID&quot;
+<!--            &quot;Refresh&quot;-->
+            
+            
+            &quot;Manufacturing Read DTR Fuses&quot;
+            &quot;Manufacturing Read MES Fuses&quot;          
+            &quot;Manufacturing Read PES Fuses&quot;
+<!--            &quot;Read Manufacturing Register&quot;-->
+<!--			&quot;Program Manufacturing Register&quot;-->
+
+			&quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Erase,Program,Verify Quad 1&quot;
+	    	&quot;SPI Flash Bypass&quot;
+			&quot;Scan SPI Flash Device&quot;
+	    	
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0xE0</IDInstr>
+        <ISCRelease value="0x01" extension="*.bit;*.rbt;*.isc"/>
+		<DebugMode>No</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <STAPLSupport>NO</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>SNOW Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;SSPI SRAM;SPI;SECKEYS;</Programming_Mode_Control>  	
+     	<LicenseControl>LSC_CONTROL_DEVICE</LicenseControl>
+    </Family>   
+	
+</ispXDF>

@@ -1,0 +1,2886 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Spinti 07/22/05
+	xpga/ecp2 sub directory
+		.Contains device database file and all the algorithm files for ECP2 technology devices.
+	 ispVM_014.xdf  support :
+		. EC2 family.
+		. ECP2 family.
+	Thao 08/18/05: Added Sync_Ext_Done bit locations to devices LFEC250E_ES and LFECP250E_ES.
+	Spinti: 10/31/05: Removed LatticeEC2/ECP2-ES_ENG and LatticeEC2 families.
+	                  Changed LatticeEC2 device name and PON to match OPN, and removed ES.
+	Spinti: 12/09/05: Added LFE2-50 <Persistent_fuse>.
+	Spinti:  1/06/06: Added LFE2-12 and LFE2-21.
+	                  Added LatticeECP2M family and LFE2M-35.
+	Spinti:  2/06/06: Corrected the Row and Column widths and the Total Fuses for the ecp2m-35.
+	Spinti:  2/08/06: Changed LFE2-21 to LFE2-20.
+	Spinti:  2/16/06: Added LFE2-6, LFE2-35, and LFE2-70 engineering database.
+	                  Corrected LFE2-12E device ID.
+    	Spinti:  3/10/06  Added LFEC2-6E <Persistent_fuse> and <Sync_Ext_Done>.
+	                  Added LFE2-20E, LFE2-35E, LFE2-70E, and LFE2M-35E <Persistent_fuse_Column> and <Sync_Ext_Done_Column> values.
+	                  Corrected LFE2-50E <Sync_Ext_Done_Column> value.
+	Ong:	   3/15/06	Commented out the Verify Only and XSRAM Verify USERCODE operations.	
+	Spinti:  4/27/06  Removed LFE2-50E 900fpBGA.
+	Nguyen: 05/12/06 Changed the Control Register 0 frequency
+	Nguyen: 08/07/06 Released device support for the LFE2-12E 
+					 Released device support for the LFE2M-35E 		 
+    Spinti: 08/24/06 Added 144 TQFP, 208 PQFP, and 484 fpBGA packages to the ECP2-12E, after we released support!
+    Nguyen: 10/19/06 Added Calculate File's size Checksum and Calculate Device's size Checksum SPI Flash operations
+	Spinti: 11/02/06 Changed operation names to SPI Flash Calculate File Size Checksum and SPI Flash Calculate Device Size Checksum.
+    Spinti: 11/13/06 Added LFE2-6E, LFE2-20E, and LFE2-35E released support.
+    Spinti: 11/28/06 Updated the CR0 settings for 55MHz and 60MHz.
+    Spinti: 12/18/06 Added ECP2M-35 256-ball fpBGA.
+    Spinti: 12/20/06 Updated the CR0 settings for 2.5, 3.1, and 55MHz.
+    Spinti: 12/21/06 Updated the CR0 MHz settings.
+    Spinti: 12/22/06 Updated the CR0 51 MHz setting.
+    Spinti: 01/02/07 Corrected Persistent and Sync_Ext_Done fuses.
+    Spinti: 01/18/07 Removed the CR0 51 MHz setting.
+    Spinti: 01/23/07 Added LFE2-70E released support.
+    Nguyen: 02/15/07 Added the SoftIP field contains the default bitstream name to program into the device 
+    				 after encryption KEY programming for all devices.
+    Spinti: 03/07/07 Added encryption KEY programming for ECP2 and ECP2M.
+    03/28/07 Nguyen changed the "Refresh" operation to "Refresh from FLASH" operation
+    Spinti: 01/23/07 Added LatticeECP2/ECP2S, LatticeECP2S, LatticeECP2M/ECP2MS, and LatticeECP2MS families.
+    Spinti: 04/03/07 Changed TURBO_ECP2S.svp to TURBO_ECP2.svp.
+    Ong   : 04/03/07 Added AliasName and AliasPON to ECP2/ECP2S and ECP2M/ECP2MS.
+    Ong   : 04/06/07 Removed the package AliasPON to ECP2/ECP2S and ECP2M/ECP2MS.
+    Ong   : 04/09/07 Updated the sequential AlgoTemplate file name from ECP2.svp to ECP2S.svp			
+    Spinti: 04/24/07 Added LFE2M20E, LFE2M20SE, LFE2M50E, LFE2M50SE, LFE2M70E, and LFE2M70SE released support.
+    Spinti: 05/21/07 Added LFE2M70E-XXF1152 and LFE2M70SE-XXF1152.
+    Ong   : 05/23/07 Added PN-FN484/E2M socket adapter listing to LFE2M35SE. 
+    Ong   : 05/24/07 Uncommented the SPI XFlash Erase,Program,Verify LatticeECP2/ECP2S, LatticeECP2S, LatticeECP2M/ECP2MS, and LatticeECP2MS.
+			   Comment out LFE2M50E, LFE2M50SE and LFE2M50E/LFE2MSE support.
+    Spinti: 06/28/07 Added LFE2M50E and LFE2M50SE support.
+    Spinti: 07/16/07 Added LFE2M100E and LFE2M100SE support.
+    Ong   : 07/19/07 Added PN-QN208/E2, PN-FN256/E2, PN-TN144/E2, PN-FN484/E2 and PN-FN672/E2 socket adapter listing for LatticeECP2S family.
+          : 07/19/07 Added PN-FN256/E2M, PN-FN484/E2M and PN-FN672/E2M socket adapter listing for LatticeECP2MS family.
+    Spinti: 08/07/07 Updated <TotalFuses> with estimated encrypted bitstream sizes.
+    Nguyen: 08/10/07 changed to force the Non-S devices to use the ECP2.svp.
+    Spinti: 08/07/07 Updated <TotalFuses> with estimated encrypted bitstream sizes.
+    Spinti: 08/10/07 Changed the ECP2S/MS CR0 frequency selections to only 2.5, 5.4, 10, 34, and 41 MHz.
+    Spinti: 08/13/07 Changed the ECP2S/MS CR0 frequency selections for 5.4MHz and added 45MHz.
+    Spinti: 08/29/07 Changed the ECP2S/MS CR0 frequency selections.
+    Nguyen 09/27/07 Enabled STAPL support
+    Spinti: 10/08/07 Changed the ECP2S/MS CR0 frequency selections for 41MHz and 45MHz to match 34MHz per Jason's spread sheet.
+    Nguyen: 10/29/07 Updated the Control Register 1 Bits location for all the EC2M devices.
+    Spinti: 12/18/07 Added SPI XFlash Verify Only operations.
+    Spinti: 01/18/08 Updated <TotalFuses> for the non-S family with the estimated unencrypted bitstream sizes.
+	Nguyen: 03/04/08 changed the SPI XFLASH operations to SPI FLASH Background operations
+    Spinti: 03/27/08 Updated the some of the non-S to call the ECP2.svp instead of the ECP2S.svp.
+    Nguyen: 05/06/08 Added "FLASH TransFR" operation
+    Nguyen: 06/17/08 Added "Scan SPI Flash Device" and "SPI Flash Program" operations
+    Nguyen: 11/18/08 Changed the SECURITY Mode to SECKEYS Mode
+    Nguyen: 05/06/09 Added the SECPRODUCT Mode to support production encryption programming
+    Nguyen: 05/06/09 Added the "Security Fast Program with Encryption Option" to support production encryption programming
+    Nguyen: 05/11/09 Added the "Verify DONE bit" and "XSRAM Verify DONE bit" operations 
+    Nguyen: 06/04/10 Sync up the devices with Diamond v1.0 device list
+    
+-->
+<ispXDF version="16.0">
+	<Family name="LatticeECP2/ECP2S">
+		<Device name="LFE2-6E/LFE2-6SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-6E/LFE2-6SE </CodeName>
+            <FullName> LFE2-6E/LFE2-6SE </FullName>
+            <JtagID>0x01270043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2-6E/LFE2-6SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  --> 
+            </Voltage_Control>
+        </Device>
+ 		<Device name="LFE2-12E/LFE2-12SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-12E/LFE2-12SE </CodeName>
+            <FullName> LFE2-12E/LFE2-12SE </FullName>
+            <JtagID>0x01271043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2-12E/LFE2-12SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  --> 
+            </Voltage_Control>
+        </Device>
+ 		<Device name="LFE2-20E/LFE2-20SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-20E/LFE2-20SE </CodeName>
+            <FullName> LFE2-20E/LFE2-20SE </FullName>
+            <JtagID>0x01272043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2-20E/LFE2-20SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  --> 
+            </Voltage_Control>
+        </Device>
+ 		<Device name="LFE2-35E/LFE2-35SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-35E/LFE2-35SE </CodeName>
+            <FullName> LFE2-35E/LFE2-35SE </FullName>
+            <JtagID>0x01274043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2-35E/LFE2-35SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  --> 
+            </Voltage_Control>
+        </Device>
+ 		<Device name="LFE2-50E/LFE2-50SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-50E/LFE2-50SE </CodeName>
+            <FullName> LFE2-50E/LFE2-50SE </FullName>
+            <JtagID>0x01273043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2-50E/LFE2-50SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  --> 
+            </Voltage_Control>
+        </Device>
+ 		<Device name="LFE2-70E/LFE2-70SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-70E/LFE2-70SE </CodeName>
+            <FullName> LFE2-70E/LFE2-70SE </FullName>
+            <JtagID>0x01275043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2-70E/LFE2-70SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  --> 
+            </Voltage_Control>
+        </Device>
+      	<Operation>
+            &quot;Bypass&quot;
+        </Operation>
+        <Hidden>YES</Hidden>
+    </Family>
+	<Family name="LatticeECP2">
+		<Device name="LFE2-6E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-6E </CodeName>
+            <FullName> LFE2-6E </FullName>
+         	<AliasName> LFE2-6SE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01270043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth>  752 </ColWidth>
+            <RowWidth> 1936 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1552504 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>  100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>654</BScan_Length>
+            <SoftIP>lfec2_06e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-6E </PON>
+                <JDFFile> ecp2-6.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LFE2-6E-XXT144 </PON>
+                <JDFFile> ecp2-6.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFE2-6E-XXF256 </PON>
+                <JDFFile> ecp2-6.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;727;726;725;724;723;722;735;734;733;732;731;730;729;728;
+            	         738;737;736;
+            	         688;
+            	         687;
+            	         701;700;699;698;
+            	         697;696;695;
+            	         691;690;689;
+            	         694;693;692;</Address>
+            	<Column>;358;358;358;358;358;358;358;358;
+            			 358;358;358;358;358;358;358;358;
+            			 358;358;358;358;358;358;358;358;
+            			 358;358;358;358;358;358;358;358;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;73;71;67;66;65;64;69;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse> 
+           	    <Persistent_fuse_Address>;685;</Persistent_fuse_Address> 
+           	    <Persistent_fuse_Column>;393;</Persistent_fuse_Column> 
+            </Persistent_fuse>  
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>688</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>393</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+		</Device>
+		<Device name="LFE2-12E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-12E </CodeName>
+            <FullName> LFE2-12E </FullName>
+            <AliasName> LFE2-12SE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01271043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth>  752 </ColWidth>
+            <RowWidth> 3718 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 2978104 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>   100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>643</BScan_Length>
+            <SoftIP>lfec2_12e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-12E </PON>
+                <JDFFile> ecp2-12.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LFE2-12E-XXT144 </PON>
+                <JDFFile> ecp2-12.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LFE2-12E-XXQ208 </PON>
+                <JDFFile> ecp2-12.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFE2-12E-XXF256 </PON>
+                <JDFFile> ecp2-12.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2-12E-XXF484 </PON>
+                <JDFFile> ecp2-12.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;1915;1914;1913;1912;1911;1910;1923;1922;1921;1920;1919;1918;1917;1916;
+            	         1926;1925;1924;
+            	         1874;
+            	         1875;
+            	         1889;1888;1887;1886;
+            	         1885;1884;1883;
+            	         1879;1878;1877;
+            	         1882;1881;1880;</Address>
+            	<Column>;358;358;358;358;358;358;358;358;
+            			358;358;358;358;358;358;358;358;
+            			358;358;358;358;358;358;358;358;
+            			358;358;358;358;358;358;358;358;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;109;107;103;102;101;100;105;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse> 
+           	    <Persistent_fuse_Address>;1873;</Persistent_fuse_Address> 
+           	    <Persistent_fuse_Column>;393;</Persistent_fuse_Column> 
+            </Persistent_fuse>  
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>1876</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>393</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done>  
+		</Device>
+		<Device name="LFE2-20E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-20E </CodeName>
+            <FullName> LFE2-20E </FullName>
+            <AliasName> LFE2-20SE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01272043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1018 </ColWidth>
+            <RowWidth> 4312 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4626168 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>   100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>827</BScan_Length>
+            <SoftIP>lfec2_20e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-20E </PON>
+                <JDFFile> ecp2-20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LFE2-20E-XXQ208 </PON>
+                <JDFFile> ecp2-20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFE2-20E-XXF256 </PON>
+                <JDFFile> ecp2-20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2-20E-XXF484 </PON>
+                <JDFFile> ecp2-20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2-20E-XXF672 </PON>
+                <JDFFile> ecp2-20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;2509;2508;2507;2506;2505;2504;2517;2516;2515;2514;2513;2512;2511;2510;
+            	         2520;2519;2518;
+            	         2470;
+            	         2469;
+            	         2483;2482;2481;2480;
+            	         2479;2478;2477;
+            	         2473;2472;2471;
+            	         2476;2475;2474;</Address>
+            	<Column>;548;548;548;548;548;548;548;548;
+            			548;548;548;548;548;548;548;548;
+            			548;548;548;548;548;548;548;548;
+            			548;548;548;548;548;548;548;548;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;109;107;103;102;101;100;105;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse> 
+           	    <Persistent_fuse_Address>;2467;</Persistent_fuse_Address> 
+            	<Persistent_fuse_Column>;469;</Persistent_fuse_Column>  
+            </Persistent_fuse> 
+            <Sync_Ext_Done>  
+	        	<Sync_Ext_Done_Address>2470</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>469</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done>  
+		</Device>
+		<Device name="LFE2-35E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-35E </CodeName>
+            <FullName> LFE2-35E </FullName>
+            <AliasName> LFE2-35SE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01274043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1284 </ColWidth>
+            <RowWidth> 4906 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 6558120 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>  100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1011</BScan_Length>
+            <SoftIP>lfec2_35e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-35E </PON>
+                <JDFFile> ecp2-35.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2-35E-XXF484 </PON>
+                <JDFFile> ecp2-35.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2-35E-XXF672 </PON>
+                <JDFFile> ecp2-35.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;2509;2508;2507;2506;2505;2504;2517;2516;2515;2514;2513;2512;2511;2510;
+            	         2520;2519;2518;
+            	         2470;
+            	         2469;
+            	         2483;2482;2481;2480;
+            	         2479;2478;2477;
+            	         2473;2472;2471;
+            	         2476;2475;2474;</Address>
+            	<Column>;814;814;814;814;814;814;814;814;
+            			 814;814;814;814;814;814;814;814;
+            			 814;814;814;814;814;814;814;814;
+            			 814;814;814;814;814;814;814;814;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;145;143;139;138;137;136;141;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse> 
+           	    <Persistent_fuse_Address>;2467;</Persistent_fuse_Address> 
+            	<Persistent_fuse_Column>;469;</Persistent_fuse_Column>  
+            </Persistent_fuse> 
+            <Sync_Ext_Done>  
+	        	<Sync_Ext_Done_Address>2470</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>469</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done>  
+		</Device>
+		<Device name="LFE2-50E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-50E </CodeName>
+            <FullName> LFE2-50E </FullName>
+            <AliasName> LFE2-50SE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01273043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1643 </ColWidth>
+            <RowWidth> 5500 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 9331704 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>   10 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1219</BScan_Length>
+            <SoftIP>lfec2_50e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-50E </PON>
+                <JDFFile> ecp2-50.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2-50E-XXF484 </PON>
+                <JDFFile> ecp2-50.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2-50E-XXF672 </PON>
+                <JDFFile> ecp2-50.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;3103;3102;3101;3100;3099;3098;3111;3110;3109;3108;3107;3106;3105;3104;
+            	         3114;3113;3112;
+            	         3064;
+            	         3063;
+            	         3077;3076;3075;3074;
+            	         3073;3072;3071;
+            	         3067;3066;3065;
+            	         3070;3069;3068;</Address>
+            	<Column>;1173;1173;1173;1173;1173;1173;1173;1173;
+            			1173;1173;1173;1173;1173;1173;1173;1173;
+            			1173;1173;1173;1173;1173;1173;1173;1173;
+            			1173;1173;1173;1173;1173;1173;1173;1173;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;145;143;139;138;137;136;141;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;3061;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;469;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>3064</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>469</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+		<Device name="LFE2-70E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-70E </CodeName>
+            <FullName> LFE2-70E </FullName>
+            <AliasName> LFE2-70SE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01275043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2032 </ColWidth>
+            <RowWidth> 6688 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 13914744 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>  100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>654</BScan_Length>
+            <SoftIP>lfec2_70e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-70E </PON>
+                <JDFFile> ecp2-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2-70E-XXF672 </PON>
+                <JDFFile> ecp2-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFE2-70E-XXF900 </PON>
+                <JDFFile> ecp2-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;3697;3696;3695;3694;3693;3692;3675;3674;3673;3672;3671;3670;3699;3698;
+            	         3708;3707;3706;
+            	         3658;
+            	         3657;
+            	         3671;3670;3669;3668;
+            	         3667;3666;3665;
+            	         3661;3660;3659;
+            	         3664;3663;3662;</Address>
+            	<Column>;1562;1562;1562;1562;1562;1562;1562;1562;
+            			 1562;1562;1562;1562;1562;1562;1562;1562;
+            			 1562;1562;1562;1562;1562;1562;1562;1562;
+            			 1562;1562;1562;1562;1562;1562;1562;1562;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;181;179;175;174;173;172;177;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;3655;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;469;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>3658</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>469</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+        <Operation>
+		&quot;Fast Program&quot;
+<!--		&quot;Verify Only&quot;-->
+		&quot;Erase Only&quot;
+		&quot;Verify ID&quot;
+		&quot;Display ID&quot;
+		&quot;Display USERCODE&quot;
+		&quot;Read and Save&quot;
+<!--		&quot;Display Control Register0&quot;-->
+		&quot;Display Status Register&quot;
+		&quot;Refresh from FLASH&quot;
+		&quot;FLASH TransFR&quot;
+		&quot;Verify DONE bit&quot;
+		&quot;Bypass&quot;
+		
+		
+		&quot;XSRAM Verify ID&quot;
+<!--		&quot;XSRAM Verify USERCODE&quot;-->
+		&quot;XSRAM Read and Save&quot;
+		&quot;XSRAM Verify DONE bit&quot;
+		&quot;XSRAM Bypass&quot;
+		
+		&quot;Serial Program&quot;
+        &quot;Serial Read DONE bit&quot;
+        
+        &quot;SPI Flash Erase,Program,Verify&quot;
+		&quot;SPI Flash Erase,Program,Verify,Refresh&quot;
+		&quot;SPI Flash Program&quot;
+<!--		&quot;SPI Flash Program,Refresh&quot;-->
+		&quot;SPI Flash Verify Only&quot;
+		&quot;SPI Flash Erase All&quot;
+		&quot;SPI Flash Read and Save&quot;
+		&quot;SPI Flash Calculate File Size Checksum&quot;
+        &quot;SPI Flash Calculate Device Size Checksum&quot;
+		&quot;SPI Flash Bypass&quot;
+		&quot;Scan SPI Flash Device&quot;
+		
+		&quot;SPI Flash Background Erase,Program,Verify&quot;
+		&quot;SPI Flash Background Erase,Program,Verify,Refresh&quot;
+		&quot;SPI Flash Background Program&quot;
+		&quot;SPI Flash Background Verify Only&quot;
+		&quot;SPI Flash Background Erase All&quot;
+		&quot;SPI Flash Background Read and Save&quot;			
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.isc;*.bit;*.rbt"/>
+		<XFPFile>ECP2.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP2 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;Leave Alone;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;SPI;XSRAM;SERIAL;</Programming_Mode_Control>
+	</Family>
+	<Family name="LatticeECP2S">
+		<Device name="LFE2-6SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-6SE </CodeName>
+            <FullName> LFE2-6SE </FullName>
+            <AliasName> LFE2-6E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01270043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth>  752 </ColWidth>
+            <RowWidth> 1936 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1582452 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>  100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>654</BScan_Length>
+            <SoftIP>lfec2_06e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-6SE </PON>
+                <JDFFile> ecp2-6.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LFE2-6SE-XXT144 </PON>
+                <JDFFile> ecp2-6.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-TN144/E2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFE2-6SE-XXF256 </PON>
+                <JDFFile> ecp2-6.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN256/E2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;727;726;725;724;723;722;735;734;733;732;731;730;729;728;
+            	         738;737;736;
+            	         688;
+            	         687;
+            	         701;700;699;698;
+            	         697;696;695;
+            	         691;690;689;
+            	         694;693;692;</Address>
+            	<Column>;358;358;358;358;358;358;358;358;
+            			 358;358;358;358;358;358;358;358;
+            			 358;358;358;358;358;358;358;358;
+            			 358;358;358;358;358;358;358;358;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;73;71;67;66;65;64;69;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse> 
+           	    <Persistent_fuse_Address>;685;</Persistent_fuse_Address> 
+           	    <Persistent_fuse_Column>;393;</Persistent_fuse_Column> 
+            </Persistent_fuse>  
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>688</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>393</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+		</Device>
+		<Device name="LFE2-12SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-12SE </CodeName>
+            <FullName> LFE2-12SE </FullName>
+        	<AliasName> LFE2-12E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01271043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth>  752 </ColWidth>
+            <RowWidth> 3718 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3008116 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>   100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>643</BScan_Length>
+            <SoftIP>lfec2_12e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-12SE </PON>
+                <JDFFile> ecp2-12.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LFE2-12SE-XXT144 </PON>
+                <JDFFile> ecp2-12.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-TN144/E2"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LFE2-12SE-XXQ208 </PON>
+                <JDFFile> ecp2-12.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-QN208/E2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFE2-12SE-XXF256 </PON>
+                <JDFFile> ecp2-12.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN256/E2"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2-12SE-XXF484 </PON>
+                <JDFFile> ecp2-12.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN484/E2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;1915;1914;1913;1912;1911;1910;1923;1922;1921;1920;1919;1918;1917;1916;
+            	         1926;1925;1924;
+            	         1874;
+            	         1875;
+            	         1889;1888;1887;1886;
+            	         1885;1884;1883;
+            	         1879;1878;1877;
+            	         1882;1881;1880;</Address>
+            	<Column>;358;358;358;358;358;358;358;358;
+            			358;358;358;358;358;358;358;358;
+            			358;358;358;358;358;358;358;358;
+            			358;358;358;358;358;358;358;358;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;109;107;103;102;101;100;105;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse> 
+           	    <Persistent_fuse_Address>;1873;</Persistent_fuse_Address> 
+           	    <Persistent_fuse_Column>;393;</Persistent_fuse_Column> 
+            </Persistent_fuse>  
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>1876</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>393</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done>  
+		</Device>
+		<Device name="LFE2-20SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-20SE </CodeName>
+            <FullName> LFE2-20SE </FullName>
+            <AliasName> LFE2-20E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01272043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1018 </ColWidth>
+            <RowWidth> 4312 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4656116 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>   100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>827</BScan_Length>
+            <SoftIP>lfec2_20e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-20SE </PON>
+                <JDFFile> ecp2-20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 208-pin PQFP </Type>
+                <PON> LFE2-20SE-XXQ208 </PON>
+                <JDFFile> ecp2-20.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-QN208/E2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFE2-20SE-XXF256 </PON>
+                <JDFFile> ecp2-20.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN256/E2"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2-20SE-XXF484 </PON>
+                <JDFFile> ecp2-20.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN484/E2"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2-20SE-XXF672 </PON>
+                <JDFFile> ecp2-20.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN672/E2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;2509;2508;2507;2506;2505;2504;2517;2516;2515;2514;2513;2512;2511;2510;
+            	         2520;2519;2518;
+            	         2470;
+            	         2469;
+            	         2483;2482;2481;2480;
+            	         2479;2478;2477;
+            	         2473;2472;2471;
+            	         2476;2475;2474;</Address>
+            	<Column>;548;548;548;548;548;548;548;548;
+            			548;548;548;548;548;548;548;548;
+            			548;548;548;548;548;548;548;548;
+            			548;548;548;548;548;548;548;548;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;109;107;103;102;101;100;105;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse> 
+           	    <Persistent_fuse_Address>;2467;</Persistent_fuse_Address> 
+            	<Persistent_fuse_Column>;469;</Persistent_fuse_Column>  
+            </Persistent_fuse> 
+            <Sync_Ext_Done>  
+	        	<Sync_Ext_Done_Address>2470</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>469</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done>  
+		</Device>
+		<Device name="LFE2-35SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-35SE </CodeName>
+            <FullName> LFE2-35SE </FullName>
+	      <AliasName> LFE2-35E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01274043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1284 </ColWidth>
+            <RowWidth> 4906 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 6588148 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>  100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1011</BScan_Length>
+            <SoftIP>lfec2_35e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-35SE </PON>
+                <JDFFile> ecp2-35.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2-35SE-XXF484 </PON>
+                <JDFFile> ecp2-35.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN484/E2"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2-35SE-XXF672 </PON>
+                <JDFFile> ecp2-35.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN672/E2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;2509;2508;2507;2506;2505;2504;2517;2516;2515;2514;2513;2512;2511;2510;
+            	         2520;2519;2518;
+            	         2470;
+            	         2469;
+            	         2483;2482;2481;2480;
+            	         2479;2478;2477;
+            	         2473;2472;2471;
+            	         2476;2475;2474;</Address>
+            	<Column>;814;814;814;814;814;814;814;814;
+            			 814;814;814;814;814;814;814;814;
+            			 814;814;814;814;814;814;814;814;
+            			 814;814;814;814;814;814;814;814;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;145;143;139;138;137;136;141;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse> 
+           	    <Persistent_fuse_Address>;2467;</Persistent_fuse_Address> 
+            	<Persistent_fuse_Column>;469;</Persistent_fuse_Column>  
+            </Persistent_fuse> 
+            <Sync_Ext_Done>  
+	        	<Sync_Ext_Done_Address>2470</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>469</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done>  
+		</Device>
+		<Device name="LFE2-50SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-50SE </CodeName>
+            <FullName> LFE2-50SE </FullName>
+	      <AliasName> LFE2-50E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01273043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1643 </ColWidth>
+            <RowWidth> 5500 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 9361652 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>   10 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1219</BScan_Length>
+            <SoftIP>lfec2_50e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-50SE </PON>
+                <JDFFile> ecp2-50.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2-50SE-XXF484 </PON>
+                <JDFFile> ecp2-50.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN484/E2"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2-50SE-XXF672 </PON>
+                <JDFFile> ecp2-50.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN672/E2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;3103;3102;3101;3100;3099;3098;3111;3110;3109;3108;3107;3106;3105;3104;
+            	         3114;3113;3112;
+            	         3064;
+            	         3063;
+            	         3077;3076;3075;3074;
+            	         3073;3072;3071;
+            	         3067;3066;3065;
+            	         3070;3069;3068;</Address>
+            	<Column>;1173;1173;1173;1173;1173;1173;1173;1173;
+            			1173;1173;1173;1173;1173;1173;1173;1173;
+            			1173;1173;1173;1173;1173;1173;1173;1173;
+            			1173;1173;1173;1173;1173;1173;1173;1173;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;145;143;139;138;137;136;141;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;3061;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;469;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>3064</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>469</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+		<Device name="LFE2-70SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2-70SE </CodeName>
+            <FullName> LFE2-70SE </FullName>
+            <AliasName> LFE2-70E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01275043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2032 </ColWidth>
+            <RowWidth> 6688 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 13944692 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE>  100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>654</BScan_Length>
+            <SoftIP>lfec2_70e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2-70SE </PON>
+                <JDFFile> ecp2-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2-70SE-XXF672 </PON>
+                <JDFFile> ecp2-70.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN672/E2"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFE2-70SE-XXF900 </PON>
+                <JDFFile> ecp2-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;3697;3696;3695;3694;3693;3692;3675;3674;3673;3672;3671;3670;3699;3698;
+            	         3708;3707;3706;
+            	         3658;
+            	         3657;
+            	         3671;3670;3669;3668;
+            	         3667;3666;3665;
+            	         3661;3660;3659;
+            	         3664;3663;3662;</Address>
+            	<Column>;1562;1562;1562;1562;1562;1562;1562;1562;
+            			 1562;1562;1562;1562;1562;1562;1562;1562;
+            			 1562;1562;1562;1562;1562;1562;1562;1562;
+            			 1562;1562;1562;1562;1562;1562;1562;1562;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;181;179;175;174;173;172;177;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;3655;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;469;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>3658</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>469</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+        <Operation>
+		&quot;Fast Program&quot;
+<!--		&quot;Verify Only&quot;-->
+		&quot;Erase Only&quot;
+		&quot;Verify ID&quot;
+		&quot;Display ID&quot;
+		&quot;Display USERCODE&quot;
+		&quot;Read and Save&quot;
+<!--		&quot;Display Control Register0&quot;-->
+		&quot;Display Status Register&quot;
+		&quot;Refresh from FLASH&quot;
+		&quot;FLASH TransFR&quot;
+		&quot;Verify DONE bit&quot;
+		&quot;Bypass&quot;
+		
+		
+		
+		&quot;XSRAM Verify ID&quot;
+<!--		&quot;XSRAM Verify USERCODE&quot;-->
+		&quot;XSRAM Read and Save&quot;
+		&quot;XSRAM Verify DONE bit&quot;
+		&quot;XSRAM Bypass&quot;
+		
+		&quot;Serial Program&quot;
+        &quot;Serial Read DONE bit&quot;
+        
+        &quot;SPI Flash Erase,Program,Verify&quot;
+		&quot;SPI Flash Erase,Program,Verify,Refresh&quot;
+		&quot;SPI Flash Erase,Program&quot;
+<!--		&quot;SPI Flash Program,Refresh&quot;-->
+		&quot;SPI Flash Verify Only&quot;
+		&quot;SPI Flash Erase All&quot;
+		&quot;SPI Flash Read and Save&quot;
+		&quot;SPI Flash Calculate File Size Checksum&quot;
+        &quot;SPI Flash Calculate Device Size Checksum&quot;
+		&quot;SPI Flash Bypass&quot;
+		&quot;Scan SPI Flash Device&quot;
+		
+		&quot;SPI Flash Background Erase,Program,Verify&quot;
+		&quot;SPI Flash Background Erase,Program,Verify,Refresh&quot;
+		&quot;SPI Flash Background Erase,Program&quot;
+		&quot;SPI Flash Background Verify Only&quot;
+		&quot;SPI Flash Background Erase All&quot;
+		&quot;SPI Flash Background Read and Save&quot;
+					
+		&quot;Security Program Encryption Key&quot;
+		&quot;Security Read Encryption Key&quot;
+		&quot;Security Program Key Lock&quot;
+		&quot;Security Fast Program with Encryption Option&quot;
+        			
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.isc;*.bit;*.rbt"/>
+		<XFPFile>ECP2.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP2 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;Leave Alone;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;SECKEYS;SECPRODUCT;SPI;XSRAM;SERIAL;</Programming_Mode_Control>     	
+	</Family>
+	<Family name="LatticeECP2M/ECP2MS">
+		<Device name="LFE2M20E/LFE2M20SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M20E/LFE2M20SE </CodeName>
+            <FullName> LFE2M20E/LFE2M20SE </FullName>
+            <JtagID>0x01279043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2M20E/LFE2M20SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  --> 
+            </Voltage_Control>
+        </Device>
+		<Device name="LFE2M35E/LFE2M35SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M35E/LFE2M35SE </CodeName>
+            <FullName> LFE2M35E/LFE2M35SE </FullName>
+            <JtagID>0x0127A043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2M35E/LFE2M35SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  --> 
+            </Voltage_Control>
+   	     </Device>
+		<Device name="LFE2M50E/LFE2M50SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M50E/LFE2M50SE </CodeName>
+            <FullName> LFE2M50E/LFE2M50SE </FullName>
+            <JtagID>0x0127B043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2M50E/LFE2M50SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>    
+    	</Device> 
+	<Device name="LFE2M70E/LFE2M70SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M70E/LFE2M70SE </CodeName>
+            <FullName> LFE2M70E/LFE2M70SE </FullName>
+            <JtagID>0x0127C043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2M70E/LFE2M70SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  --> 
+            </Voltage_Control>
+        </Device>
+	<Device name="LFE2M100E/LFE2M100SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M100E/LFE2M100SE </CodeName>
+            <FullName> LFE2M100E/LFE2M100SE </FullName>
+            <JtagID>0x0127D043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>8</IRLength>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <Package>
+                <Type> All  </Type>
+                <PON> LFE2M100E/LFE2M100SE </PON>
+                <Adapter vendor="NA"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  --> 
+            </Voltage_Control>
+        </Device>
+      	<Operation>
+            &quot;Bypass&quot;
+        </Operation>
+        <Hidden>YES</Hidden>
+    </Family>
+	<Family name="LatticeECP2M">
+		<Device name="LFE2M20E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M20E </CodeName>
+            <FullName> LFE2M20E </FullName>
+            <AliasName> LFE2M20SE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01279043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1615 </ColWidth>
+            <RowWidth> 3720 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 6193784 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>680</BScan_Length>
+            <SoftIP>lfec2m20e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2M20E </PON>
+                <JDFFile> ecp2m-20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFE2M20E-XXF256 </PON>
+                <JDFFile> ecp2m-20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2M20E-XXF484 </PON>
+                <JDFFile> ecp2m-20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;1323;1322;1321;1320;1319;1318;1331;1330;1329;1328;1327;1326;1325;1324;
+            	         1334;1333;1332;
+            	         1284;
+            	         1283;
+            	         1297;1296;1295;1294;
+            	         1293;1292;1291;
+            	         1287;1286;1285;
+            	         1290;1289;1288;</Address>
+            	<Column>;1297;1297;1297;1297;1297;1297;1297;1297;
+            			1297;1297;1297;1297;1297;1297;1297;1297;
+            			1297;1297;1297;1297;1297;1297;1297;1297;
+            			1297;1297;1297;1297;1297;1297;1297;1297;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;145;143;139;138;137;136;141;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;1281;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;317;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>1284</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>317</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+		<Device name="LFE2M35E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M35E </CodeName>
+            <FullName> LFE2M35E </FullName>
+            <AliasName> LFE2M35SE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x0127A043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2042 </ColWidth>
+            <RowWidth> 4908 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 10290872 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>936</BScan_Length>
+            <SoftIP>lfec2m35e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2M35E </PON>
+                <JDFFile> ecp2m-35.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFE2M35E-XXF256 </PON>
+                <JDFFile> ecp2m-35.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2M35E-XXF484 </PON>
+                <JDFFile> ecp2m-35.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2M35E-XXF672 </PON>
+                <JDFFile> ecp2m-35.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;2511;2510;2509;2508;2507;2506;2519;2518;2517;2516;2515;2514;2513;2512;
+            	         2522;2521;2520;
+            	         2472;
+            	         2471;
+            	         2485;2484;2483;2482;
+            	         2481;2480;2479;
+            	         2475;2474;2473;
+            	         2478;2477;2476;</Address>
+            	<Column>;1724;1724;1724;1724;1724;1724;1724;1724;
+            			 1724;1724;1724;1724;1724;1724;1724;1724;
+            			 1724;1724;1724;1724;1724;1724;1724;1724;
+            			 1724;1724;1724;1724;1724;1724;1724;1724;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;145;143;139;138;137;136;141;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;2469;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;317;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>2472</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>317</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+		<Device name="LFE2M50E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M50E </CodeName>
+            <FullName> LFE2M50E </FullName>
+            <AliasName> LFE2M50SE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x0127B043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2419 </ColWidth>
+            <RowWidth> 6690 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 16541384 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1065</BScan_Length>
+            <SoftIP>lfec2m50e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2M50E </PON>
+                <JDFFile> ecp2m-50.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2M50E-XXF484 </PON>
+                <JDFFile> ecp2m-50.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2M50E-XXF672 </PON>
+                <JDFFile> ecp2m-50.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFE2M50E-XXF900 </PON>
+                <JDFFile> ecp2m-50.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;3105;3104;3103;3102;3101;3100;3113;3112;3111;3110;3109;3108;3107;3106;
+            	         3116;3115;3114;
+            	         3066;
+            	         3065;
+            	         3079;3078;3077;3076;
+            	         3075;3074;3073;
+            	         3069;3068;3067;
+            	         3072;3071;3070;</Address>
+            	<Column>;2101;2101;2101;2101;2101;2101;2101;2101;
+            			 2101;2101;2101;2101;2101;2101;2101;2101;
+            			 2101;2101;2101;2101;2101;2101;2101;2101;
+            			 2101;2101;2101;2101;2101;2101;2101;2101;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;114;112;108;107;106;105;110;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+              </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;3063;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;317;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>3066</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>317</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+		<Device name="LFE2M70E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M70E </CodeName>
+            <FullName> LFE2M70E </FullName>
+            <AliasName> LFE2M70SE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x0127C043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2799 </ColWidth>
+            <RowWidth> 7284 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 20748536 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1039</BScan_Length>
+            <SoftIP>lfec2m70e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2M70E </PON>
+                <JDFFile> ecp2m-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFE2M70E-XXF900 </PON>
+                <JDFFile> ecp2m-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+             <Package>
+                <Type> 1152-ball fpBGA </Type>
+                <PON> LFE2M70E-XXF1152 </PON>
+                <JDFFile> ecp2m-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;3699;3698;3697;3696;3695;3694;3707;3706;3705;3704;3703;3702;3701;3700;
+            	         3710;3709;3708;
+            	         3660;
+            	         3659;
+            	         3673;3672;3671;3670;
+            	         3669;3668;3667;
+            	         3663;3662;3661;
+            	         3666;3665;3664;</Address>
+            	<Column>;2481;2481;2481;2481;2481;2481;2481;2481;
+            			 2481;2481;2481;2481;2481;2481;2481;2481;
+            			 2481;2481;2481;2481;2481;2481;2481;2481;
+            			 2481;2481;2481;2481;2481;2481;2481;2481;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;114;112;108;107;106;105;110;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;3657;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;317;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>3660</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>317</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+		<Device name="LFE2M100E">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M100E </CodeName>
+            <FullName> LFE2M100E </FullName>
+            <AliasName> LFE2M100sE </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x0127D043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 3120 </ColWidth>
+            <RowWidth> 8472 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 26843000 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1311</BScan_Length>
+            <SoftIP>lfec2m100e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2M100E </PON>
+                <JDFFile> ecp2m-100.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFE2M100E-XXF900 </PON>
+                <JDFFile> ecp2m-100.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 1152-ball fpBGA </Type>
+                <PON> LFE2M100E-XXF1152 </PON>
+                <JDFFile> ecp2m-100.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>            
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;3.1 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;
+            			    10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;
+            			    41 MHz;45 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;000000;011110;011110;011110;011110;011110;
+            							 011110;011110;010001;000001;011110;001001;010001;
+            							 000001;010001;000001;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;000000;101110;100100;100001;111100;111110;
+            				    111111;111010;111011;110100;110111;110111;110000;
+            				    110000;110001;110001;110010;110011;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;4293;4292;4291;4290;4289;4288;4301;4300;4299;4298;4297;4296;4295;4294;
+            	         4304;4303;4302;
+            	         4254;
+            	         4253;
+            	         4267;4266;4265;4264;
+            	         4263;4262;4261;
+            	         4257;4256;4255;
+            	         4260;4259;4258;</Address>
+            	<Column>;2802;2802;2802;2802;2802;2802;2802;2802;
+            			 2802;2802;2802;2802;2802;2802;2802;2802;
+            			 2802;2802;2802;2802;2802;2802;2802;2802;
+            			 2802;2802;2802;2802;2802;2802;2802;2802;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;150;148;144;143;142;141;146;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;4251;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;317;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>4254</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>317</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+        <Operation>
+		&quot;Fast Program&quot;
+		&quot;Erase Only&quot;
+		&quot;Verify ID&quot;
+		&quot;Display ID&quot;
+		&quot;Display USERCODE&quot;
+		&quot;Read and Save&quot;
+		&quot;Display Status Register&quot;
+		&quot;Refresh from FLASH&quot;
+		&quot;FLASH TransFR&quot;
+		&quot;Verify DONE bit&quot;
+		&quot;Bypass&quot;
+		
+
+		&quot;XSRAM Verify ID&quot;
+		&quot;XSRAM Read and Save&quot;
+		&quot;XSRAM Verify DONE bit&quot;
+		&quot;XSRAM Bypass&quot;       
+
+		&quot;Serial Program&quot;
+        &quot;Serial Read DONE bit&quot;
+        
+        &quot;SPI Flash Erase,Program,Verify&quot;
+		&quot;SPI Flash Erase,Program,Verify,Refresh&quot;
+		&quot;SPI Flash Erase,Program&quot;
+<!--		&quot;SPI Flash Program,Refresh&quot;-->
+		&quot;SPI Flash Verify Only&quot;
+		&quot;SPI Flash Erase All&quot;
+		&quot;SPI Flash Read and Save&quot;
+		&quot;SPI Flash Calculate File Size Checksum&quot;
+        &quot;SPI Flash Calculate Device Size Checksum&quot;
+		&quot;SPI Flash Bypass&quot;
+		&quot;Scan SPI Flash Device&quot;
+		
+		&quot;SPI Flash Background Erase,Program,Verify&quot;
+		&quot;SPI Flash Background Erase,Program,Verify,Refresh&quot;
+		&quot;SPI Flash Background Erase,Program&quot;
+		&quot;SPI Flash Background Verify Only&quot;
+		&quot;SPI Flash Background Erase All&quot;
+		&quot;SPI Flash Background Read and Save&quot;			
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.isc;*.bit;*.rbt"/>
+		<XFPFile>ECP2.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP2 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;Leave Alone;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;SPI;XSRAM;SERIAL;</Programming_Mode_Control>
+	</Family>
+	<Family name="LatticeECP2MS">
+		<Device name="LFE2M20SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M20SE </CodeName>
+            <FullName> LFE2M20SE </FullName>
+            <AliasName> LFE2M20E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x01279043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 1615 </ColWidth>
+            <RowWidth> 3720 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 6223732 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>680</BScan_Length>
+            <SoftIP>lfec2m20e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2M20SE </PON>
+                <JDFFile> ecp2m-20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFE2M20SE-XXF256 </PON>
+                <JDFFile> ecp2m-20.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN256/E2M"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2M20SE-XXF484 </PON>
+                <JDFFile> ecp2m-20.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN484/E2M"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;145;143;139;138;137;136;141;</StatusIndex>
+            </Status_Control>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;1323;1322;1321;1320;1319;1318;1331;1330;1329;1328;1327;1326;1325;1324;
+            	         1334;1333;1332;
+            	         1284;
+            	         1283;
+            	         1297;1296;1295;1294;
+            	         1293;1292;1291;
+            	         1287;1286;1285;
+            	         1290;1289;1288;</Address>
+            	<Column>;1297;1297;1297;1297;1297;1297;1297;1297;
+            			1297;1297;1297;1297;1297;1297;1297;1297;
+            			1297;1297;1297;1297;1297;1297;1297;1297;
+            			1297;1297;1297;1297;1297;1297;1297;1297;</Column>
+            </ControlReg1>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;1281;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;317;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>1284</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>317</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+		<Device name="LFE2M35SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M35SE </CodeName>
+            <FullName> LFE2M35SE </FullName>
+            <AliasName> LFE2M35E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x0127A043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2042 </ColWidth>
+            <RowWidth> 4908 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 10320884 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>936</BScan_Length>
+            <SoftIP>lfec2m35e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2M35SE </PON>
+                <JDFFile> ecp2m-35.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFE2M35SE-XXF256 </PON>
+                <JDFFile> ecp2m-35.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN256/E2M"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2M35SE-XXF484 </PON>
+                <JDFFile> ecp2m-35.msk </JDFFile>
+		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN484/E2M"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2M35SE-XXF672 </PON>
+                <JDFFile> ecp2m-35.msk </JDFFile>
+  		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN672/E2M"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;2511;2510;2509;2508;2507;2506;2519;2518;2517;2516;2515;2514;2513;2512;
+            	         2522;2521;2520;
+            	         2472;
+            	         2471;
+            	         2485;2484;2483;2482;
+            	         2481;2480;2479;
+            	         2475;2474;2473;
+            	         2478;2477;2476;</Address>
+            	<Column>;1724;1724;1724;1724;1724;1724;1724;1724;
+            			 1724;1724;1724;1724;1724;1724;1724;1724;
+            			 1724;1724;1724;1724;1724;1724;1724;1724;
+            			 1724;1724;1724;1724;1724;1724;1724;1724;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;145;143;139;138;137;136;141;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;2469;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;317;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>2472</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>317</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+		<Device name="LFE2M50SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M50SE </CodeName>
+            <FullName> LFE2M50SE </FullName>
+            <AliasName> LFE2M50E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x0127B043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2419 </ColWidth>
+            <RowWidth> 6690 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 16571380 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1065</BScan_Length>
+            <SoftIP>lfec2m50e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2M50SE </PON>
+                <JDFFile> ecp2m-50.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFE2M50SE-XXF484 </PON>
+                <JDFFile> ecp2m-50.msk </JDFFile>
+  		    	<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN484/E2M"/>
+            </Package>
+            <Package>
+                <Type> 672-ball fpBGA </Type>
+                <PON> LFE2M50SE-XXF672 </PON>
+                <JDFFile> ecp2m-50.msk </JDFFile>
+  		    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FN672/E2M"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFE2M50SE-XXF900 </PON>
+                <JDFFile> ecp2m-50.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;3105;3104;3103;3102;3101;3100;3113;3112;3111;3110;3109;3108;3107;3106;
+            	         3116;3115;3114;
+            	         3066;
+            	         3065;
+            	         3079;3078;3077;3076;
+            	         3075;3074;3073;
+            	         3069;3068;3067;
+            	         3072;3071;3070;</Address>
+            	<Column>;2101;2101;2101;2101;2101;2101;2101;2101;
+            			 2101;2101;2101;2101;2101;2101;2101;2101;
+            			 2101;2101;2101;2101;2101;2101;2101;2101;
+            			 2101;2101;2101;2101;2101;2101;2101;2101;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;114;112;108;107;106;105;110;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;3063;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;317;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>3066</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>317</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device> 
+		<Device name="LFE2M70SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M70SE </CodeName>
+            <FullName> LFE2M70SE </FullName>
+            <AliasName> LFE2M70E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x0127C043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2799 </ColWidth>
+            <RowWidth> 7284 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 20778484 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1039</BScan_Length>
+            <SoftIP>lfec2m70e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2M70SE </PON>
+                <JDFFile> ecp2m-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFE2M70SE-XXF900 </PON>
+                <JDFFile> ecp2m-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+             <Package>
+                <Type> 1152-ball fpBGA </Type>
+                <PON> LFE2M70SE-XXF1152 </PON>
+                <JDFFile> ecp2m-70.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;3699;3698;3697;3696;3695;3694;3707;3706;3705;3704;3703;3702;3701;3700;
+            	         3710;3709;3708;
+            	         3660;
+            	         3659;
+            	         3673;3672;3671;3670;
+            	         3669;3668;3667;
+            	         3663;3662;3661;
+            	         3666;3665;3664;</Address>
+            	<Column>;2481;2481;2481;2481;2481;2481;2481;2481;
+            			 2481;2481;2481;2481;2481;2481;2481;2481;
+            			 2481;2481;2481;2481;2481;2481;2481;2481;
+            			 2481;2481;2481;2481;2481;2481;2481;2481;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;114;112;108;107;106;105;110;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;3657;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;317;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>3660</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>317</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+		<Device name="LFE2M100SE">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/XSRAM/SERIAL </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFE2M100SE </CodeName>
+            <FullName> LFE2M100SE </FullName>
+            <AliasName> LFE2M100E </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>ECP2S.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_ECP2.svp"
+                         value="0x03"/>
+            <JtagID>0x0127D043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 3120 </ColWidth>
+            <RowWidth> 8472 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 26872948 </TotalFuses> 
+            <PWP>   2 </PWP>
+            <PWE> 100 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1311</BScan_Length>
+            <SoftIP>lfec2m100e_default.bit</SoftIP>
+            <Package>
+                <Type> All </Type>
+                <PON> LFE2M100SE </PON>
+                <JDFFile> ecp2m-100.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFE2M100SE-XXF900 </PON>
+                <JDFFile> ecp2m-100.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 1152-ball fpBGA </Type>
+                <PON> LFE2M100SE-XXF1152 </PON>
+                <JDFFile> ecp2m-100.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>            
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;5.4 MHz;10.0 MHz;34 MHz;41 MHz;45 MHz;</Frequency>
+            	<Master_Clock_Frequency>;011110;011110;011110;011110;011110;011110;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;101010;111111;110000;110000;110000;</Clock_divider>
+            </ControlReg0>
+            <ControlReg1>
+            	<BitName>;31;30;29;28;27;26;25;24;23;22;21;20;19;18;
+            			 17;16;15;
+            			 14;
+            			 13;
+            			 12;11;10;9;
+            			 8;7;6;
+            			 5;4;3;
+            			 2;1;0;</BitName>
+            	<Address>;4293;4292;4291;4290;4289;4288;4301;4300;4299;4298;4297;4296;4295;4294;
+            	         4304;4303;4302;
+            	         4254;
+            	         4253;
+            	         4267;4266;4265;4264;
+            	         4263;4262;4261;
+            	         4257;4256;4255;
+            	         4260;4259;4258;</Address>
+            	<Column>;2802;2802;2802;2802;2802;2802;2802;2802;
+            			 2802;2802;2802;2802;2802;2802;2802;2802;
+            			 2802;2802;2802;2802;2802;2802;2802;2802;
+            			 2802;2802;2802;2802;2802;2802;2802;2802;</Column>
+            </ControlReg1>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CFG2;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;150;148;144;143;142;141;146;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+             <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;4251;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;317;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+	        	<Sync_Ext_Done_Address>4254</Sync_Ext_Done_Address>
+	        	<Sync_Ext_Done_Column>317</Sync_Ext_Done_Column>
+	        </Sync_Ext_Done>
+		</Device>
+        <Operation>
+		&quot;Fast Program&quot;
+		&quot;Erase Only&quot;
+		&quot;Verify ID&quot;
+		&quot;Display ID&quot;
+		&quot;Display USERCODE&quot;
+		&quot;Read and Save&quot;
+		&quot;Display Status Register&quot;
+		&quot;Refresh from FLASH&quot;
+		&quot;FLASH TransFR&quot;
+		&quot;Verify DONE bit&quot;
+		&quot;Bypass&quot;
+		
+
+		&quot;XSRAM Verify ID&quot;
+		&quot;XSRAM Read and Save&quot;
+		&quot;XSRAM Verify DONE bit&quot;
+		&quot;XSRAM Bypass&quot;       
+
+		&quot;Serial Program&quot;
+        &quot;Serial Read DONE bit&quot;
+        
+        &quot;SPI Flash Erase,Program,Verify&quot;
+		&quot;SPI Flash Erase,Program,Verify,Refresh&quot;
+		&quot;SPI Flash Erase,Program&quot;
+<!--		&quot;SPI Flash Program,Refresh&quot;-->
+		&quot;SPI Flash Verify Only&quot;
+		&quot;SPI Flash Erase All&quot;
+		&quot;SPI Flash Read and Save&quot;
+		&quot;SPI Flash Calculate File Size Checksum&quot;
+        &quot;SPI Flash Calculate Device Size Checksum&quot;
+		&quot;SPI Flash Bypass&quot;
+		&quot;Scan SPI Flash Device&quot;
+		
+		&quot;SPI Flash Background Erase,Program,Verify&quot;
+		&quot;SPI Flash Background Erase,Program,Verify,Refresh&quot;
+		&quot;SPI Flash Background Erase,Program&quot;
+		&quot;SPI Flash Background Verify Only&quot;
+		&quot;SPI Flash Background Erase All&quot;
+		&quot;SPI Flash Background Read and Save&quot;
+					
+		&quot;Security Program Encryption Key&quot;
+		&quot;Security Read Encryption Key&quot;
+		&quot;Security Program Key Lock&quot;
+		&quot;Security Fast Program with Encryption Option&quot;
+        			
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.isc;*.bit;*.rbt"/>
+		<XFPFile>ECP2.xfp</XFPFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>3</CFGPinCount>
+        <BitstreamModelTemplate>ECP2 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;Leave Alone;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;JTAG;SECKEYS;SECPRODUCT;SPI;XSRAM;SERIAL;</Programming_Mode_Control>     	
+	</Family>
+</ispXDF>

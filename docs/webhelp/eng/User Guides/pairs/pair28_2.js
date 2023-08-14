@@ -1,0 +1,22 @@
+var pairs =
+{
+"implementing":{"platform":1}
+,"platform":{"management":1,"designer":1}
+,"management":{"algorithm":1}
+,"algorithm":{"involves":1}
+,"involves":{"labeling":1,"ports":1}
+,"labeling":{"configuring":1}
+,"configuring":{"ports":1}
+,"ports":{"nodes":1}
+,"nodes":{"building":1,"editor":1}
+,"building":{"logic":1}
+,"logic":{"instructions":1,"editor":1}
+,"instructions":{"based":1}
+,"based":{"configurations":1}
+,"configurations":{"platform":1}
+,"designer":{"involves":1}
+,"editor":{"logic":1}
+,"designing":{"control":1}
+,"control":{"sequences":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,10 @@
+WrClock: CLK * 1 ;
+RdClock: CLK * 1 *(data_width/rdata_width) ;
+Reset: => 1; @100 => 0;
+Data: => 0; @100; @Reset & E0;*(num_rows + 3)@WrClock => COUNT;
+WrAddress: => 0;@100; @Reset & E0;*(num_rows*2 + 6)@WrClock => COUNT;
+WrClockEn: => 0; @100; @Reset & E0; => 1;
+WE: => 0; @Reset & E0; * (num_rows+3) @WrClock => 1; => 0;
+RdAddress: => 0;@100; @Reset & E0; *(num_rows*2 + 6)@RdClock => COUNT;
+RdClockEn: => 0; @100; @Reset & E0; => 1;
+

@@ -1,0 +1,1092 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!--
+	Spinti 04/30/03
+	XPGA/XPGA sub directory
+		.Contains new release device database file and all the algorithm files for ispXPGA technology devices.
+	 ispVM_006b.xdf  support :
+		. ispXPGA family.
+	Ong 06/11/03
+	XPGA Family
+		. Add socket adapter listing for LFX125B/C and LFX500B/C device families.
+	Spinti 08/14/03
+		. Changed LFX1200 680 package from fpBGA to fpSBGA.
+
+	Spinti 09/29/03
+		. Changed LFX125B/C  ID to rev. 0001 and IDMask from 0xFFFFFFFF to 0xEFFFFFFF.
+		. Changed LFX200B/C  ID to rev. 0001 and IDMask from 0xFFFFFFFF to 0xEFFFFFFF.
+		. Changed LFX500B/C  ID to rev. 0001 and IDMask from 0xFFFFFFFF to 0xEFFFFFFF.
+		. Changed LFX1200B/C ID to rev. 0001 and IDMask from 0xFFFFFFFF to 0xEFFFFFFF.
+	Nguyen 09/30/03
+		.Add <AliasPON> field
+		.Add <CDRFixed> field
+	Spinti 04/21/04
+		.Added ALL packages.
+	Spinti 05/17/04
+		.Added LFX125EB, LFX125EC, LFX200EB, LFX200EC, LFX500EB, LFX500EC, LFX1200EB, and LFX1200EC.
+	Spinti 06/17/04
+		.Commented out the LFX125EB, LFX125EC, LFX200EB, LFX200EC, LFX500EB, LFX500EC, LFX1200EB, and LFX1200EC for the V14.1.1 release.
+	Spinti 07/14/04
+		.Created ispXPGA-E family.
+	Ong    07/21/04
+             ispXPGA Family:
+            . Corrected socket adapter listing for 516fpBGA package.
+              "From PA-FH516/LFX200" to "PA-F516/LFX200".
+	Spinti 07/23/04
+		.Changed AliasPON's.
+	Spinti 07/23/04
+		. Added <DebugMode>YES</DebugMode>
+	Spinti 10/11/04
+		. Added JEDEC file support.
+		. Added Calculate Checksum operation (to ispXPGA-E family).
+	Spinti 10/13/04
+		. Added Calculate Checksum operation to ispXPGA family.
+	Spinti 10/14/04
+		. Removed Calculate Checksum operation from ispXPGA and ispXPGA-E families, since it calculates CRC.
+	Nguyen 11/18/04
+		.Added "Voltage_Control" field
+      Ong   . 12/09/04
+		. Removed Jtag Pins from Pin List, TCK, TMS, TDO and TDI.
+		. Added Init pin to Pin List.
+		. Changed VCC Supply listing for LFX125B/EB, LFX200B/EB, LFX500B/EB and LFX1200B/EB devices from "2.5V" to "2.5V/3.3V".
+	Ong   . 12/10/04
+            . Commented out Pin List.
+    Spinti: 02/09/05
+        . Removed <AliasPON> from ispXPGA-E family.
+    Nguyen: 04/06/05 Added Persistent_fuse for all devices
+    07/19/05 Nguyen combined ispXPGA and ispXPGA-E devices family
+	Ong   . 03/16/06
+      	. Commented out SRAM Verify Only, SRAM Verify USERCODE, XSRAM Verify Only and XSRAM Verify USERCODE operations.
+
+-->
+<ispXDF version="13.1">
+    <Comment>XPGA/XPGA technology Devices List</Comment>
+    <Family name="ispXPGA">
+    	<FamilyAliasName>ispXPGA-E</FamilyAliasName>
+        <Device name="LFX125B">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX125B </CodeName>
+            <FullName> LFX125B </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11881043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2544 </ColWidth>
+            <RowWidth>  408 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1037952 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>366</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX125B </PON>
+                <AliasPON> LFX125EB </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFX125B-XXF256 </PON>
+                <AliasPON> LFX125EB-XXF256 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LFX200"/>
+            </Package>
+                <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX125B-XXFH516 </PON>
+                <AliasPON> LFX125EB-XXFH516 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX125EB">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX125EB </CodeName>
+            <FullName> LFX125EB </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11881043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2544 </ColWidth>
+            <RowWidth>  408 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1037952 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>366</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX125EB </PON>
+<!--                <AliasPON> LFX125B </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFX125EB-XXF256 </PON>
+<!--                <AliasPON> LFX125B-XXF256 </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LFX200"/>
+            </Package>
+                <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX125EB-XXFH516 </PON>
+<!--                <AliasPON> LFX125B-XXFH516 </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX125C">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX125C </CodeName>
+            <FullName> LFX125C </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11880043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2544 </ColWidth>
+            <RowWidth>  408 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1037952 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>366</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX125C </PON>
+                <AliasPON> LFX125EC </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFX125C-XXF256 </PON>
+                <AliasPON> LFX125EC-XXF256 </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LFX200"/>
+            </Package>
+            <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX125C-XXFH516 </PON>
+                <AliasPON> LFX125EC-XXFH516 </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX125EC">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX125EC </CodeName>
+            <FullName> LFX125EC </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11880043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2544 </ColWidth>
+            <RowWidth>  408 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1037952 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>366</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX125EC </PON>
+<!--                <AliasPON> LFX125C </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFX125EC-XXF256 </PON>
+<!--                <AliasPON> LFX125C-XXF256 </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LFX200"/>
+            </Package>
+            <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX125EC-XXFH516 </PON>
+<!--                <AliasPON> LFX125C-XXFH516 </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX200B">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX200B </CodeName>
+            <FullName> LFX200B </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11885043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2896 </ColWidth>
+            <RowWidth>  544 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1575424 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>430</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX200B </PON>
+                <AliasPON> LFX200EB </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFX200B-XXF256 </PON>
+                <AliasPON> LFX200EB-XXF256 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LFX200"/>
+            </Package>
+            <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX200B-XXFH516 </PON>
+                <AliasPON> LFX200EB-XXFH516 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX200EB">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX200EB </CodeName>
+            <FullName> LFX200EB </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11885043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2896 </ColWidth>
+            <RowWidth>  544 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1575424 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>430</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX200EB </PON>
+<!--                <AliasPON> LFX200B </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFX200EB-XXF256 </PON>
+<!--                <AliasPON> LFX200B-XXF256 </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LFX200"/>
+            </Package>
+            <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX200EB-XXFH516 </PON>
+<!--                <AliasPON> LFX200B-XXFH516 </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX200C">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX200C </CodeName>
+            <FullName> LFX200C </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11884043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2896 </ColWidth>
+            <RowWidth>  544 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1575424 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>430</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX200C </PON>
+                <AliasPON> LFX200EC </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFX200C-XXF256 </PON>
+                <AliasPON> LFX200EC-XXF256 </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LFX200"/>
+            </Package>
+            <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX200C-XXFH516 </PON>
+                <AliasPON> LFX200EC-XXFH516 </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX200EC">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX200EC </CodeName>
+            <FullName> LFX200EC </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11884043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2896 </ColWidth>
+            <RowWidth>  544 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1575424 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>430</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX200EC </PON>
+<!--                <AliasPON> LFX200C </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFX200EC-XXF256 </PON>
+<!--                <AliasPON> LFX200C-XXF256 </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F256/LFX200"/>
+            </Package>
+            <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX200EC-XXFH516 </PON>
+<!--                <AliasPON> LFX200C-XXFH516 </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX500B">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX500B </CodeName>
+            <FullName> LFX500B </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11889043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 4304 </ColWidth>
+            <RowWidth>  748 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3219392 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>686</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX500B </PON>
+                <AliasPON> LFX500EB </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX500B-XXFH516 </PON>
+                <AliasPON> LFX500EB-XXFH516 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFX500B-XXF900 </PON>
+                <AliasPON> LFX500EB-XXF900 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F900/LFX1200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX500EB">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX500EB </CodeName>
+            <FullName> LFX500EB </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11889043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 4304 </ColWidth>
+            <RowWidth>  748 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3219392 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>686</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX500EB </PON>
+<!--                <AliasPON> LFX500B </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX500EB-XXFH516 </PON>
+<!--                <AliasPON> LFX500B-XXFH516 </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFX500EB-XXF900 </PON>
+<!--                <AliasPON> LFX500B-XXF900 </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F900/LFX1200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX500C">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX500C </CodeName>
+            <FullName> LFX500C </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11888043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 4304 </ColWidth>
+            <RowWidth>  748 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3219392 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>686</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX500C </PON>
+                <AliasPON> LFX500EC </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX500C-XXFH516 </PON>
+                <AliasPON> LFX500EC-XXFH516 </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFX500C-XXF900 </PON>
+                <AliasPON> LFX500EC-XXF900 </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F900/LFX1200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX500EC">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX500EC </CodeName>
+            <FullName> LFX500EC </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x11888043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 4304 </ColWidth>
+            <RowWidth>  748 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3219392 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>686</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX500EC </PON>
+<!--                <AliasPON> LFX500C </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 516-ball fpBGA </Type>
+                <PON> LFX500EC-XXFH516 </PON>
+<!--                <AliasPON> LFX500C-XXFH516 </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F516/LFX200"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFX500EC-XXF900 </PON>
+<!--                <AliasPON> LFX500C-XXF900 </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F900/LFX1200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX1200B">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX1200B </CodeName>
+            <FullName> LFX1200B </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x1188D043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 6240 </ColWidth>
+            <RowWidth> 1088 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 6789120    </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1006</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX1200B </PON>
+                <AliasPON> LFX1200EB </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball fpSBGA </Type>
+                <PON> LFX1200B-XXFE680 </PON>
+                <AliasPON> LFX1200EB-XXFE680 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FE680/LFX1200"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFX1200B-XXF900 </PON>
+                <AliasPON> LFX1200EB-XXF900 </AliasPON>
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F900/LFX1200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX1200EB">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX1200EB </CodeName>
+            <FullName> LFX1200EB </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x1188D043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 6240 </ColWidth>
+            <RowWidth> 1088 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 6789120    </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1006</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX1200EB </PON>
+<!--                <AliasPON> LFX1200B </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball fpSBGA </Type>
+                <PON> LFX1200EB-XXFE680 </PON>
+<!--                <AliasPON> LFX1200B-XXFE680 </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FE680/LFX1200"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFX1200EB-XXF900 </PON>
+<!--                <AliasPON> LFX1200B-XXF900 </AliasPON>-->
+                <MCtrl setting="00011100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F900/LFX1200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX1200C">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX1200C </CodeName>
+            <FullName> LFX1200C </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x1188C043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 6240 </ColWidth>
+            <RowWidth> 1088 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 6789120 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1006</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX1200C </PON>
+                <AliasPON> LFX1200EC </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball fpSBGA </Type>
+                <PON> LFX1200C-XXFE680 </PON>
+                <AliasPON> LFX1200EC-XXFE680 </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FE680/LFX1200"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFX1200C-XXF900 </PON>
+                <AliasPON> LFX1200EC-XXF900 </AliasPON>
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F900/LFX1200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Device name="LFX1200EC">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/CPU </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFX1200EC </CodeName>
+            <FullName> LFX1200EC </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>LAVA1.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_LAVA1.svp"
+                         value="0x1F"/>
+            <JtagID>0x1188C043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 6240 </ColWidth>
+            <RowWidth> 1088 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 6789120 </TotalFuses> 
+            <PWP>  13 </PWP>
+            <PWE> 200 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>1006</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFX1200EC </PON>
+<!--                <AliasPON> LFX1200C </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball fpSBGA </Type>
+                <PON> LFX1200EC-XXFE680 </PON>
+<!--                <AliasPON> LFX1200C-XXFE680 </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FE680/LFX1200"/>
+            </Package>
+            <Package>
+                <Type> 900-ball fpBGA </Type>
+                <PON> LFX1200EC-XXF900 </PON>
+<!--                <AliasPON> LFX1200C-XXF900 </AliasPON>-->
+                <MCtrl setting="00001100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F900/LFX1200"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            	            <!--	<PinList>DONE,INITN,PROGRAMN</PinList>  -->
+            </Voltage_Control>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2541;</Persistent_fuse_Column>
+            </Persistent_fuse>
+        </Device>
+        <Operation>
+        
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Calculate Data CRC&quot;
+<!--            &quot;Calculate Checksum&quot; -->
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+            &quot;Read DONE bit&quot;
+            &quot;Erase DONE bit&quot;
+            &quot;Program DONE bit&quot;
+            &quot;Refresh&quot;
+        
+            &quot;XEE Erase,Program,Verify&quot;
+            &quot;XEE Erase,Program,Verify,Refresh&quot;
+            &quot;XEE Erase,Program,Verify,Secure&quot;
+            &quot;XEE Verify ID&quot;
+            &quot;XEE Display ID&quot;
+            &quot;XEE Verify Only&quot;
+            &quot;XEE Erase Only&quot;
+            &quot;XEE Bypass&quot;
+            &quot;XEE Calculate Data CRC&quot;
+<!--            &quot;XEE Calculate Checksum&quot; -->
+            &quot;XEE Verify USERCODE&quot;
+            &quot;XEE Display USERCODE&quot;
+            &quot;XEE Read and Save&quot;
+            &quot;XEE Read DONE bit&quot;
+            &quot;XEE Erase DONE bit&quot;
+            &quot;XEE Program DONE bit&quot;
+            
+            &quot;SRAM Program,Verify&quot;
+            &quot;SRAM Program Only&quot;
+            &quot;SRAM Verify ID&quot;
+            &quot;SRAM Display ID&quot;
+<!--        &quot;SRAM Verify Only&quot;-->
+            &quot;SRAM Erase Only&quot;
+            &quot;SRAM Bypass&quot;
+            &quot;SRAM Calculate Data CRC&quot;
+<!--            &quot;SRAM Calculate Checksum&quot; -->
+<!--          &quot;SRAM Verify USERCODE&quot; -->
+            &quot;SRAM Display USERCODE&quot;
+            &quot;SRAM Read and Save&quot;
+            &quot;SRAM Read DONE bit&quot;
+            &quot;SRAM Erase DONE bit&quot;
+            &quot;SRAM Program DONE bit&quot;
+
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+<!--          &quot;XSRAM Verify Only&quot; -->
+            &quot;XSRAM Bypass&quot;
+            &quot;XSRAM Calculate Data CRC&quot;
+<!--            &quot;XSRAM Calculate Checksum&quot; -->
+<!--            &quot;XSRAM Verify USERCODE&quot;-->
+            &quot;XSRAM Display USERCODE&quot;
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Read DONE bit&quot;
+<!--        
+            &quot;PCM Erase,Program,Verify&quot;
+            &quot;PCM Erase,Program,Verify,Secure&quot;
+            &quot;PCM Verify Only&quot;
+            &quot;PCM Bypass&quot;
+            &quot;PCM Calculate Data CRC&quot;
+            &quot;PCM Verify USERCODE&quot;
+-->
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.isc;*.jed"/>
+	  	<XFPFile>LVBitGen.xfp</XFPFile>
+	  	<Compliant1532>YES</Compliant1532>
+	  	<CDRFixed>YES</CDRFixed>
+	  	<DebugMode>YES</DebugMode>
+	  	<CFGPinCount>1</CFGPinCount>
+	  	<BitstreamModelTemplate>LAVA1 Template</BitstreamModelTemplate>
+	  	<LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>  
+</ispXDF>

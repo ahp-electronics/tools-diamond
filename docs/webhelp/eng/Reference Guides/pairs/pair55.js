@@ -1,0 +1,25 @@
+var pairs =
+{
+"assigns":{"value":1}
+,"value":{"nominal":1}
+,"nominal":{"fpga":1,"voltage":1}
+,"fpga":{"core":1}
+,"core":{"voltage":1}
+,"voltage":{"central":1,"preference":1,"number":1,"symbol":1,"1.5":1,"1.5v":1,"temperature":1}
+,"central":{"array":1}
+,"array":{"excluding":1}
+,"excluding":{"temperature":1}
+,"temperature":{"voltage":1}
+,"preference":{"specified":1,"assigns":1}
+,"specified":{"derating":1}
+,"derating":{"factor":1}
+,"factor":{"1.0":1}
+,"device":{"support":1}
+,"space":{"number":1}
+,"number":{"voltage":1}
+,"symbol":{"optional":1}
+,"optional":{"example":1}
+,"following":{"preference":1}
+,"specifying":{"voltage":1}
+}
+;Search.control.loadWordPairs(pairs);

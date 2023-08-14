@@ -1,0 +1,22 @@
+var pairs =
+{
+"editing":{"device":1}
+,"device":{"information":1,"properties":1,"want":1}
+,"edit":{"device":1}
+,"properties":{"chain":1,"click":1,"dialog":1}
+,"diamond":{"programmer":1}
+,"programmer":{"select":1}
+,"select":{"device":1}
+,"want":{"edit":1}
+,"choose":{"edit":1,"device":1}
+,"click":{"button":1,"close":1}
+,"button":{"toolbar":1}
+,"toolbar":{"right-click":1}
+,"right-click":{"choose":1}
+,"dialog":{"box":1}
+,"box":{"edit":1}
+,"close":{"device":1}
+,"using":{"diamond":1}
+,"programming":{"fpga":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!--
+	Spinti 05/01/03
+	JTAG/GDXV sub directory
+		.Contains device database file and all the algorithm files for ispGDXV/VA devices.
+	 ispVM_000a.xdf  support :
+		. ispGDXV family
+		. ispGDXVA family
+	Spinti 07/23/04
+		. Added <DebugMode>YES</DebugMode>
+	Ong    12/13/04
+		. Add Voltage Control field.
+	Nguyen 07/21/05 combined ispGDXV and ispGDXVA into one
+-->
+<ispXDF version="15.4">
+    <Comment>JTAG/GDXV Devices List</Comment>
+    <Family name="ispGDXVA">
+    	<FamilyAliasName>ispGDXV</FamilyAliasName>
+        <Device name="ispGDX 80VA">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> GDX80VA    </CodeName>
+            <FullName> ispGDX 80VA </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10350043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 160            </ColWidth>
+            <RowWidth> 100            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 16000    </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>243</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> ispGDX80VA    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP          </Type>
+                <PON> ispGDX80VA-XXT100    </PON>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-T100/GX80VA"/>
+            </Package>
+            <Package>
+                <Type> 100-ball BGA          </Type>
+                <PON> ispGDX80VA-XXB100    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Contact Vendor"/>
+            </Package>
+ 		<Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+              <PinList>TCK,TMS,TDI,TDO,EPEN</PinList> 
+            </Voltage_Control>
+        </Device>
+        <Device name="ispGDX 160V">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> GDX160V    </CodeName>
+            <FullName> ispGDX 160V </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x00353043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 320            </ColWidth>
+            <RowWidth> 180            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 57600    </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>486</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> ispGDX160V    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP          </Type>
+                <PON> ispGDX160V-XXQ208    </PON>
+                <JDFFile> X160VQ20.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-Q208"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-208-28-05Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 272-ball BGA          </Type>
+                <PON> ispGDX160V-XXB272    </PON>
+                <JDFFile> X160VB27.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-B272-A1"/>
+            </Package>
+            <Package>
+                <Type> 208-ball fpBGA          </Type>
+                <PON> ispGDX160V-XXB208    </PON>
+                <JDFFile> X160VB20.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-FB208-C1"/>
+            </Package>
+ 		<Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+              <PinList>TCK,TMS,TDI,TDO,EPEN</PinList> 
+            </Voltage_Control>
+        </Device>
+        <Device name="ispGDX 160VA">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> GDX160VA    </CodeName>
+            <FullName> ispGDX 160VA </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10353043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 320            </ColWidth>
+            <RowWidth> 180            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 57600    </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>486</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> ispGDX160VA    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin PQFP          </Type>
+                <PON> ispGDX160VA-XXQ208    </PON>
+                <JDFFile> X160VAQ0.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-Q208"/>
+                <Adapter vendor="Emulation Technology"
+                         adapter_name="AS-208-28-05Q-600-YAM"/>
+            </Package>
+            <Package>
+                <Type> 272-ball BGA          </Type>
+                <PON> ispGDX160VA-XXB272    </PON>
+                <JDFFile> X160VAB7.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-B272-A1"/>
+            </Package>
+            <Package>
+                <Type> 208-ball BGA          </Type>
+                <PON> ispGDX160VA-XXB208    </PON>
+                <JDFFile> X160VA20.JDF </JDFFile>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="pDS4102-FB208-C1"/>
+            </Package>
+ 		<Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+              <PinList>TCK,TMS,TDI,TDO,EPEN</PinList> 
+            </Voltage_Control>
+        </Device>
+        <Device name="ispGDX 240VA">
+            <Comm> JTAG </Comm>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> GDX240VA    </CodeName>
+            <FullName> ispGDX 240VA </FullName>
+            <AlgoTemplate>LSC_JTAG.svp </AlgoTemplate>
+            <TurboAlgoTemplate name="LSC_TURBO_JTAG.svp"
+                         value="0x0F"/>
+            <JtagID>0x10354043</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    5            </IRLength>
+            <ColWidth> 480            </ColWidth>
+            <RowWidth> 260            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 124800    </TotalFuses>
+            <PWP> 12        </PWP>
+            <PWE> 220 </PWE>
+            <PWV>  1        </PWV>
+            <BScan_Length>726</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> ispGDX240VA    </PON>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 388-ball BGA          </Type>
+                <PON> ispGDX240VA-XXB388    </PON>
+                <!-- Model 300 Voltage Control Code -->
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FB388/GX240VA"/>
+            </Package>
+ 		<Voltage_Control>
+            	<VCCCore>3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+              <PinList>TCK,TMS,TDI,TDO,EPEN</PinList> 
+            </Voltage_Control>
+        </Device>
+        <Operation>
+            &quot;Erase,Program,Verify&quot;
+            &quot;Erase,Program,Verify,Secure&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Verify Only&quot;
+            &quot;Erase Only&quot;
+            &quot;Bypass&quot;
+            &quot;Calculate Checksum&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save JEDEC&quot;
+        </Operation>
+        <BypassInst>11111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed"/>
+        <DebugMode>YES</DebugMode>
+        <LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+</ispXDF>

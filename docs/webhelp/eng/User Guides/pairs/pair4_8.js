@@ -1,0 +1,20 @@
+var pairs =
+{
+"symbols":{"graphic":1,"title":1}
+,"graphic":{"representations":1}
+,"representations":{"components":1}
+,"components":{"term":1}
+,"term":{"symbol":1}
+,"symbol":{"usually":1,"gate":1,"editor":1}
+,"usually":{"refers":1}
+,"refers":{"electrical":1}
+,"electrical":{"symbol":1,"meaning":1}
+,"gate":{"sub-circuit":1}
+,"sub-circuit":{"draw":1}
+,"draw":{"graphic-only":1}
+,"graphic-only":{"symbols":1}
+,"title":{"blocks":1}
+,"blocks":{"symbol":1}
+,"editor":{"electrical":1}
+}
+;Search.control.loadWordPairs(pairs);

@@ -1,0 +1,25 @@
+var pairs =
+{
+"prohibits":{"site":1,"region":1}
+,"site":{"within":1,"site_name":1,"named":1}
+,"within":{"par":1,"quotation":1}
+,"device":{"support":1}
+,"prohibit":{"site":1,"region":1}
+,"region":{"region_name":1,"named":1,"reg1":1}
+,"following":{"command":1}
+,"command":{"prohibits":1}
+,"named":{"used":1,"placed":1,"reg1":1}
+,"term":{"keyword":1}
+,"keyword":{"reference":1}
+,"reference":{"design":1}
+,"design":{"element":1}
+,"element":{"named":1}
+,"placed":{"within":1}
+,"quotation":{"marks":1}
+,"marks":{"example":1}
+,"example":{"prohibit":1}
+,"reg1":{"defined":1,"r2c3":1}
+,"defined":{"design":1}
+,"r2c3":{"prohibit":1}
+}
+;Search.control.loadWordPairs(pairs);

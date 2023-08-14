@@ -1,0 +1,571 @@
+--------------------------------------------------------------------------------
+Lattice Synthesis Timing Report, Version  
+Tue Apr 11 11:59:41 2017
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights reserved.
+
+Report Information
+------------------
+Design:     counter_top
+Constraint file:  
+Report level:    verbose report, limited to 3 items per constraint
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+Constraint: create_clock -period 5.000000 -name clk1 [get_nets \counter_top_reveal_coretop_instance/jtck[0]]
+            1131 items scored, 1131 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Error:  The following path violates requirements by 7.296ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1P3DX    CK             \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i17  (from \counter_top_reveal_coretop_instance/jtck[0] +)
+   Destination:    FD1P3BX    D              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_i0_i0  (to \counter_top_reveal_coretop_instance/jtck[0] +)
+
+   Delay:                  12.416ns  (10.4% logic, 89.6% route), 12 logic levels.
+
+ Constraint Details:
+
+     12.416ns data_path \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i17 to \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_i0_i0 violates
+      5.000ns delay constraint less
+     -0.120ns L_S requirement (totaling 5.120ns) by 7.296ns
+
+ Path Details: \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i17 to \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_i0_i0
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.230             CK to Q              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i17 (from \counter_top_reveal_coretop_instance/jtck[0])
+Route        39   e 1.852                                  addr[0]
+LUT4        ---     0.105              D to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i1_4_lut_adj_126
+Route         2   e 1.158                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n18115
+LUT4        ---     0.105              B to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i8040_4_lut
+Route        16   e 1.574                                  n19
+LUT4        ---     0.105              C to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i12_3_lut
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/rd_dout_trig[0]
+LUT4        ---     0.105              C to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i7954_3_lut_4_lut_4_lut
+Route         1   e 0.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n39
+MUXL5       ---     0.075           ALUT to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i34
+Route         1   e 0.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n25
+MUXL5       ---     0.075             D1 to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i11
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n27
+LUT4        ---     0.105              C to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i31_3_lut
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n35
+LUT4        ---     0.105              A to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i7814_3_lut
+Route         1   e 0.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n18895
+MUXL5       ---     0.075           ALUT to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i7815
+Route         3   e 1.239                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jtdo_N_1241
+LUT4        ---     0.105              A to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i4261_2_lut
+Route         2   e 1.158                                  \counter_top_reveal_coretop_instance/er2_tdo[0]
+LUT4        ---     0.105              D to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i4270_4_lut
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_15__N_1147[0]
+                  --------
+                   12.416  (10.4% logic, 89.6% route), 12 logic levels.
+
+
+Error:  The following path violates requirements by 7.291ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1P3DX    CK             \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i18  (from \counter_top_reveal_coretop_instance/jtck[0] +)
+   Destination:    FD1P3BX    D              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_i0_i0  (to \counter_top_reveal_coretop_instance/jtck[0] +)
+
+   Delay:                  12.411ns  (10.4% logic, 89.6% route), 12 logic levels.
+
+ Constraint Details:
+
+     12.411ns data_path \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i18 to \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_i0_i0 violates
+      5.000ns delay constraint less
+     -0.120ns L_S requirement (totaling 5.120ns) by 7.291ns
+
+ Path Details: \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i18 to \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_i0_i0
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.230             CK to Q              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i18 (from \counter_top_reveal_coretop_instance/jtck[0])
+Route        38   e 1.847                                  addr[1]
+LUT4        ---     0.105              B to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i1_4_lut_adj_126
+Route         2   e 1.158                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n18115
+LUT4        ---     0.105              B to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i8040_4_lut
+Route        16   e 1.574                                  n19
+LUT4        ---     0.105              C to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i12_3_lut
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/rd_dout_trig[0]
+LUT4        ---     0.105              C to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i7954_3_lut_4_lut_4_lut
+Route         1   e 0.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n39
+MUXL5       ---     0.075           ALUT to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i34
+Route         1   e 0.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n25
+MUXL5       ---     0.075             D1 to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i11
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n27
+LUT4        ---     0.105              C to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i31_3_lut
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n35
+LUT4        ---     0.105              A to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i7814_3_lut
+Route         1   e 0.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n18895
+MUXL5       ---     0.075           ALUT to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i7815
+Route         3   e 1.239                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jtdo_N_1241
+LUT4        ---     0.105              A to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i4261_2_lut
+Route         2   e 1.158                                  \counter_top_reveal_coretop_instance/er2_tdo[0]
+LUT4        ---     0.105              D to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i4270_4_lut
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_15__N_1147[0]
+                  --------
+                   12.411  (10.4% logic, 89.6% route), 12 logic levels.
+
+
+Error:  The following path violates requirements by 7.275ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1P3DX    CK             \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i19  (from \counter_top_reveal_coretop_instance/jtck[0] +)
+   Destination:    FD1P3BX    D              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_i0_i0  (to \counter_top_reveal_coretop_instance/jtck[0] +)
+
+   Delay:                  12.395ns  (10.4% logic, 89.6% route), 12 logic levels.
+
+ Constraint Details:
+
+     12.395ns data_path \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i19 to \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_i0_i0 violates
+      5.000ns delay constraint less
+     -0.120ns L_S requirement (totaling 5.120ns) by 7.275ns
+
+ Path Details: \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i19 to \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_i0_i0
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.230             CK to Q              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/shift_reg__i19 (from \counter_top_reveal_coretop_instance/jtck[0])
+Route        35   e 1.831                                  addr[2]
+LUT4        ---     0.105              C to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i1_4_lut_adj_126
+Route         2   e 1.158                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n18115
+LUT4        ---     0.105              B to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i8040_4_lut
+Route        16   e 1.574                                  n19
+LUT4        ---     0.105              C to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i12_3_lut
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/rd_dout_trig[0]
+LUT4        ---     0.105              C to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i7954_3_lut_4_lut_4_lut
+Route         1   e 0.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n39
+MUXL5       ---     0.075           ALUT to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i34
+Route         1   e 0.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n25
+MUXL5       ---     0.075             D1 to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i11
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n27
+LUT4        ---     0.105              C to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i31_3_lut
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n35
+LUT4        ---     0.105              A to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i7814_3_lut
+Route         1   e 0.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/n18895
+MUXL5       ---     0.075           ALUT to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i7815
+Route         3   e 1.239                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/jtdo_N_1241
+LUT4        ---     0.105              A to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i4261_2_lut
+Route         2   e 1.158                                  \counter_top_reveal_coretop_instance/er2_tdo[0]
+LUT4        ---     0.105              D to Z              \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/i4270_4_lut
+Route         1   e 1.020                                  \counter_top_reveal_coretop_instance/counter_top_la0_inst_0/jtag_int_u/tm_crc_15__N_1147[0]
+                  --------
+                   12.395  (10.4% logic, 89.6% route), 12 logic levels.
+
+Warning: 12.296 ns is the maximum delay for this constraint.
+
+
+
+================================================================================
+Constraint: create_clock -period 5.000000 -name clk0 [get_nets clk1]
+            3936 items scored, 3936 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Error:  The following path violates requirements by 5.775ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1S3DX    CK             cnt_i50  (from clk1 +)
+   Destination:    FD1S3DX    D              cnt_i999  (to clk1 +)
+
+   Delay:                  10.895ns  (16.9% logic, 83.1% route), 31 logic levels.
+
+ Constraint Details:
+
+     10.895ns data_path cnt_i50 to cnt_i999 violates
+      5.000ns delay constraint less
+     -0.120ns L_S requirement (totaling 5.120ns) by 5.775ns
+
+ Path Details: cnt_i50 to cnt_i999
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.230             CK to Q              cnt_i50 (from clk1)
+Route         2   e 1.258                                  cnt[50]
+A1_TO_FCO   ---     0.212           A[2] to COUT           _add_1_1192_add_4_2
+Route         1   e 0.020                                  n17253
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_4
+Route         1   e 0.020                                  n17254
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_6
+Route         1   e 0.020                                  n17255
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_8
+Route         1   e 0.020                                  n17256
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_10
+Route         1   e 0.020                                  n17257
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_12
+Route         1   e 0.020                                  n17258
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_14
+Route         1   e 0.020                                  n17259
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_16
+Route         1   e 0.020                                  n17260
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_18
+Route         1   e 0.020                                  n17261
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_20
+Route         1   e 0.020                                  n17262
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_22
+Route         1   e 0.020                                  n17263
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_24
+Route         1   e 0.020                                  n17264
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_26
+Route         1   e 0.020                                  n17265
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_28
+Route         1   e 0.020                                  n17266
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_30
+Route         1   e 0.020                                  n17267
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_32
+Route         1   e 0.020                                  n17268
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_34
+Route         1   e 0.020                                  n17269
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_36
+Route         1   e 0.020                                  n17270
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_38
+Route         1   e 0.020                                  n17271
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_40
+Route         1   e 0.020                                  n17272
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_42
+Route         1   e 0.020                                  n17273
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_44
+Route         1   e 0.020                                  n17274
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_46
+Route         1   e 0.020                                  n17275
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_48
+Route         1   e 0.020                                  n17276
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_50
+Route         1   e 0.020                                  n17277
+FCI_TO_F    ---     0.187            CIN to S[2]           _add_1_1192_add_4_52
+Route        58   e 1.932                                  cout_adj_2670
+LUT4        ---     0.105              B to Z              i7_2_lut_rep_123
+Route       107   e 1.522                                  n19392
+LUT4        ---     0.105              A to Z              i9_3_lut_4_lut
+Route         1   e 1.020                                  n26
+LUT4        ---     0.105              D to Z              i16_4_lut_adj_199
+Route        50   e 1.802                                  n8985
+LUT4        ---     0.105              C to Z              mux_787_i50_3_lut
+Route         1   e 1.020                                  cnt_1022__N_1[999]
+                  --------
+                   10.895  (16.9% logic, 83.1% route), 31 logic levels.
+
+
+Error:  The following path violates requirements by 5.775ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1S3DX    CK             cnt_i50  (from clk1 +)
+   Destination:    FD1S3DX    D              cnt_i998  (to clk1 +)
+
+   Delay:                  10.895ns  (16.9% logic, 83.1% route), 31 logic levels.
+
+ Constraint Details:
+
+     10.895ns data_path cnt_i50 to cnt_i998 violates
+      5.000ns delay constraint less
+     -0.120ns L_S requirement (totaling 5.120ns) by 5.775ns
+
+ Path Details: cnt_i50 to cnt_i998
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.230             CK to Q              cnt_i50 (from clk1)
+Route         2   e 1.258                                  cnt[50]
+A1_TO_FCO   ---     0.212           A[2] to COUT           _add_1_1192_add_4_2
+Route         1   e 0.020                                  n17253
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_4
+Route         1   e 0.020                                  n17254
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_6
+Route         1   e 0.020                                  n17255
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_8
+Route         1   e 0.020                                  n17256
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_10
+Route         1   e 0.020                                  n17257
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_12
+Route         1   e 0.020                                  n17258
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_14
+Route         1   e 0.020                                  n17259
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_16
+Route         1   e 0.020                                  n17260
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_18
+Route         1   e 0.020                                  n17261
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_20
+Route         1   e 0.020                                  n17262
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_22
+Route         1   e 0.020                                  n17263
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_24
+Route         1   e 0.020                                  n17264
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_26
+Route         1   e 0.020                                  n17265
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_28
+Route         1   e 0.020                                  n17266
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_30
+Route         1   e 0.020                                  n17267
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_32
+Route         1   e 0.020                                  n17268
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_34
+Route         1   e 0.020                                  n17269
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_36
+Route         1   e 0.020                                  n17270
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_38
+Route         1   e 0.020                                  n17271
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_40
+Route         1   e 0.020                                  n17272
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_42
+Route         1   e 0.020                                  n17273
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_44
+Route         1   e 0.020                                  n17274
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_46
+Route         1   e 0.020                                  n17275
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_48
+Route         1   e 0.020                                  n17276
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_50
+Route         1   e 0.020                                  n17277
+FCI_TO_F    ---     0.187            CIN to S[2]           _add_1_1192_add_4_52
+Route        58   e 1.932                                  cout_adj_2670
+LUT4        ---     0.105              B to Z              i7_2_lut_rep_123
+Route       107   e 1.522                                  n19392
+LUT4        ---     0.105              A to Z              i9_3_lut_4_lut
+Route         1   e 1.020                                  n26
+LUT4        ---     0.105              D to Z              i16_4_lut_adj_199
+Route        50   e 1.802                                  n8985
+LUT4        ---     0.105              C to Z              mux_787_i49_3_lut
+Route         1   e 1.020                                  cnt_1022__N_1[998]
+                  --------
+                   10.895  (16.9% logic, 83.1% route), 31 logic levels.
+
+
+Error:  The following path violates requirements by 5.775ns
+
+ Logical Details:  Cell type  Pin type       Cell name  (clock net +/-)
+
+   Source:         FD1S3DX    CK             cnt_i50  (from clk1 +)
+   Destination:    FD1S3DX    D              cnt_i997  (to clk1 +)
+
+   Delay:                  10.895ns  (16.9% logic, 83.1% route), 31 logic levels.
+
+ Constraint Details:
+
+     10.895ns data_path cnt_i50 to cnt_i997 violates
+      5.000ns delay constraint less
+     -0.120ns L_S requirement (totaling 5.120ns) by 5.775ns
+
+ Path Details: cnt_i50 to cnt_i997
+
+   Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
+L_CO        ---     0.230             CK to Q              cnt_i50 (from clk1)
+Route         2   e 1.258                                  cnt[50]
+A1_TO_FCO   ---     0.212           A[2] to COUT           _add_1_1192_add_4_2
+Route         1   e 0.020                                  n17253
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_4
+Route         1   e 0.020                                  n17254
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_6
+Route         1   e 0.020                                  n17255
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_8
+Route         1   e 0.020                                  n17256
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_10
+Route         1   e 0.020                                  n17257
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_12
+Route         1   e 0.020                                  n17258
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_14
+Route         1   e 0.020                                  n17259
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_16
+Route         1   e 0.020                                  n17260
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_18
+Route         1   e 0.020                                  n17261
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_20
+Route         1   e 0.020                                  n17262
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_22
+Route         1   e 0.020                                  n17263
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_24
+Route         1   e 0.020                                  n17264
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_26
+Route         1   e 0.020                                  n17265
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_28
+Route         1   e 0.020                                  n17266
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_30
+Route         1   e 0.020                                  n17267
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_32
+Route         1   e 0.020                                  n17268
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_34
+Route         1   e 0.020                                  n17269
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_36
+Route         1   e 0.020                                  n17270
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_38
+Route         1   e 0.020                                  n17271
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_40
+Route         1   e 0.020                                  n17272
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_42
+Route         1   e 0.020                                  n17273
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_44
+Route         1   e 0.020                                  n17274
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_46
+Route         1   e 0.020                                  n17275
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_48
+Route         1   e 0.020                                  n17276
+FCI_TO_FCO  ---     0.033            CIN to COUT           _add_1_1192_add_4_50
+Route         1   e 0.020                                  n17277
+FCI_TO_F    ---     0.187            CIN to S[2]           _add_1_1192_add_4_52
+Route        58   e 1.932                                  cout_adj_2670
+LUT4        ---     0.105              B to Z              i7_2_lut_rep_123
+Route       107   e 1.522                                  n19392
+LUT4        ---     0.105              A to Z              i9_3_lut_4_lut
+Route         1   e 1.020                                  n26
+LUT4        ---     0.105              D to Z              i16_4_lut_adj_199
+Route        50   e 1.802                                  n8985
+LUT4        ---     0.105              C to Z              mux_787_i48_3_lut
+Route         1   e 1.020                                  cnt_1022__N_1[997]
+                  --------
+                   10.895  (16.9% logic, 83.1% route), 31 logic levels.
+
+Warning: 10.775 ns is the maximum delay for this constraint.
+
+
+Timing Report Summary
+--------------
+--------------------------------------------------------------------------------
+Constraint                              |   Constraint|       Actual|Levels
+--------------------------------------------------------------------------------
+                                        |             |             |
+create_clock -period 5.000000 -name     |             |             |
+clk1 [get_nets                          |             |             |
+\counter_top_reveal_coretop_instance/jtc|             |             |
+k[0]]                                   |     5.000 ns|    12.296 ns|    12 *
+                                        |             |             |
+create_clock -period 5.000000 -name     |             |             |
+clk0 [get_nets clk1]                    |     5.000 ns|    10.775 ns|    31 *
+                                        |             |             |
+--------------------------------------------------------------------------------
+
+
+2 constraints not met.
+
+--------------------------------------------------------------------------------
+Critical Nets                           |   Loads|  Errors| % of total
+--------------------------------------------------------------------------------
+n19392                                  |     107|    3232|     63.79%
+                                        |        |        |
+cout_adj_2670                           |      58|    2508|     49.50%
+                                        |        |        |
+n17263                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17264                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17265                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17266                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17267                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17268                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17269                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17270                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17271                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17272                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17273                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17274                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17275                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17276                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17277                                  |       1|    2508|     49.50%
+                                        |        |        |
+n17262                                  |       1|    2308|     45.55%
+                                        |        |        |
+n17261                                  |       1|    2108|     41.60%
+                                        |        |        |
+n17260                                  |       1|    1860|     36.71%
+                                        |        |        |
+n17259                                  |       1|    1612|     31.81%
+                                        |        |        |
+n28_adj_2723                            |       1|    1500|     29.60%
+                                        |        |        |
+n8361                                   |      50|    1500|     29.60%
+                                        |        |        |
+n26                                     |       1|    1400|     27.63%
+                                        |        |        |
+n8985                                   |      50|    1400|     27.63%
+                                        |        |        |
+n17258                                  |       1|    1364|     26.92%
+                                        |        |        |
+n17257                                  |       1|    1116|     22.02%
+                                        |        |        |
+n26_adj_2992                            |       1|     936|     18.47%
+                                        |        |        |
+n9141                                   |      24|     936|     18.47%
+                                        |        |        |
+n17256                                  |       1|     868|     17.13%
+                                        |        |        |
+cout_adj_2781                           |       8|     724|     14.29%
+                                        |        |        |
+n17169                                  |       1|     724|     14.29%
+                                        |        |        |
+n17170                                  |       1|     724|     14.29%
+                                        |        |        |
+n17171                                  |       1|     724|     14.29%
+                                        |        |        |
+n17172                                  |       1|     724|     14.29%
+                                        |        |        |
+n17173                                  |       1|     724|     14.29%
+                                        |        |        |
+n17174                                  |       1|     724|     14.29%
+                                        |        |        |
+n17175                                  |       1|     724|     14.29%
+                                        |        |        |
+n17176                                  |       1|     724|     14.29%
+                                        |        |        |
+n17177                                  |       1|     724|     14.29%
+                                        |        |        |
+n17178                                  |       1|     724|     14.29%
+                                        |        |        |
+n17179                                  |       1|     724|     14.29%
+                                        |        |        |
+n17180                                  |       1|     724|     14.29%
+                                        |        |        |
+n17181                                  |       1|     724|     14.29%
+                                        |        |        |
+n17182                                  |       1|     724|     14.29%
+                                        |        |        |
+n17183                                  |       1|     724|     14.29%
+                                        |        |        |
+n17184                                  |       1|     724|     14.29%
+                                        |        |        |
+n17185                                  |       1|     724|     14.29%
+                                        |        |        |
+n17186                                  |       1|     724|     14.29%
+                                        |        |        |
+n17187                                  |       1|     724|     14.29%
+                                        |        |        |
+n17188                                  |       1|     724|     14.29%
+                                        |        |        |
+n17189                                  |       1|     724|     14.29%
+                                        |        |        |
+n17190                                  |       1|     724|     14.29%
+                                        |        |        |
+n17255                                  |       1|     620|     12.24%
+                                        |        |        |
+n17168                                  |       1|     524|     10.34%
+                                        |        |        |
+--------------------------------------------------------------------------------
+
+
+Timing summary:
+---------------
+
+Timing errors: 5067  Score: 24101604
+
+Constraints cover  531253 paths, 4409 nets, and 9103 connections (83.7% coverage)
+
+
+Peak memory: 148426752 bytes, TRCE: 12972032 bytes, DLYMAN: 0 bytes
+CPU_TIME_REPORT: 0 secs 

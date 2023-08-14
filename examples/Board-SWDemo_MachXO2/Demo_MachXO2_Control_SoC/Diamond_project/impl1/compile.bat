@@ -1,0 +1,1 @@
+isp8asm_win control_SoC_demo.asm -o prom_init.hex -s 1024

@@ -1,0 +1,20 @@
+var pairs =
+{
+"device":{"programming":1}
+,"programming":{"options":1}
+,"options":{"svf":1,"download":1,"dialog":1,"want":1}
+,"svf":{"debugger":1,"options":1,"stapl":1}
+,"setting":{"device":1}
+,"download":{"debugger":1}
+,"debugger":{"choose":1}
+,"choose":{"configuration":1}
+,"configuration":{"options":1}
+,"dialog":{"box":1}
+,"box":{"opens":1}
+,"select":{"options":1}
+,"want":{"click":1}
+,"debugging":{"svf":1}
+,"stapl":{"vme":1}
+,"vme":{"files":1}
+}
+;Search.control.loadWordPairs(pairs);

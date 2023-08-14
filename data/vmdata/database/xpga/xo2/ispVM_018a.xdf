@@ -1,0 +1,2351 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Nguyen 05/03/10
+	xpga/XO2 sub directory
+		.Contains device database file and all the algorithm files for XO2 technology devices.
+	 ispVM_018.xdf  support :
+		. MachXO2 family.
+		. Nguyen 03/09/11 Nguyen removed the "Leave Alone"
+	
+     Nguyen 05/17/11
+     	. Added XO2-7000 devices
+     Nguyen 05/20/11
+     	. Added all XO2 devices
+     Nguyen 06/22/11
+     	. Added XO2U devices
+     EGZ 09/13/12
+        . Added package XO2-4000HE-184csBGA
+     Nguyen 01/09/14
+     	. Added the MachXO2-2000ZE in 49-WLCSP package
+	egz 10/10/2014
+		. Added MachXO2-7000HC CABGA400 package, and LCMXO2-4000UHC device. 4000UHC is virtual device of 7000HC. 
+	egz 11/03/2014
+		. Added persist fuse.
+	Nguyen 11/10/14
+		. Changed the Erase Times SOF-123178
+										XO2-256	XO2-640	XO2-1200	XO2-2000
+			Programmer V3.0 and newer		2		3		3.5			10
+			Programmer Proposed Limits		9		12		15			15
+			
+	02/11/15  Nguyen added "I2C Recovery Erase Only" operation due to Steve Hossner requested	
+	03/06/2015 EGZ update device voltage.
+	04/07/2015, EGZ, added 32QFN package for MachXO2-1200 and 84QFN package for MachXO2-4000 per ECN# 124098.
+	04/29/15 Nguyen added "XSRAM SEI Fast Program" operation
+	09/12/17 Nguyen added "XFLASH Erase,Program,Verify,Secure and TransFR" operation sof-128042
+-->
+
+<ispXDF version="18.0">
+    <Family name="MachXO2">
+       <FamilyAliasName>MachXO2-ES</FamilyAliasName>  
+       <Device name="LCMXO2-256ZE">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-256ZE </CodeName>
+            <FullName> LCMXO2-256ZE </FullName>
+            <AliasName> LCMXO2-256ZE_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2_256.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2_256.svp"
+                         value="0x07"/>
+            <JtagID>0x012B0043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 504 </ColWidth>
+            <RowWidth> 186 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 73600 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  900 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>104</BScan_Length>     
+            <ExternalASC> 0 </ExternalASC>       
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-256ZE </PON>
+                <AliasPON> LCMXO2-256ZE-ES </AliasPON>
+                <JDFFile> lcmxo2_256.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2-256ZE-XXTG100 </PON>
+                <AliasPON> LCMXO2-256ZE-XXTG100CES </AliasPON>
+                <JDFFile> lcmxo2_256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T100-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 64-ball ucBGA </Type>
+                <PON> LCMXO2-256ZE-XXMG64 </PON>
+                <AliasPON> LCMXO2-256ZE-XXMG64CES </AliasPON>
+                <JDFFile> lcmxo2_256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M64-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-256ZE-XXMG132 </PON>
+                <AliasPON> LCMXO2-256ZE-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>  
+            <Package>
+                <Type> 32-pin QFN </Type>
+                <PON> LCMXO2-256ZE-XXSG32 </PON>
+                <AliasPON> LCMXO2-256ZE-XXSG32ES </AliasPON>
+                <JDFFile> lcmxo2_256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-S32-LCMXO2"/>
+            </Package>  
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0>          
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;185;185;185;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;412;408;406;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>185</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>488</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device>
+       <Device name="LCMXO2-256HC">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-256HC </CodeName>
+            <FullName> LCMXO2-256HC </FullName>
+            <AliasName> LCMXO2-256HC_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2_256.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2_256.svp"
+                         value="0x07"/>
+            <JtagID>0x012B8043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 504 </ColWidth>
+            <RowWidth> 186 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 73600 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  900 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>104</BScan_Length>   
+            <ExternalASC> 0 </ExternalASC>         
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-256HC </PON>
+                <AliasPON> LCMXO2-256HC-ES </AliasPON>
+                <JDFFile> lcmxo2_256.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>  
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2-256HC-XXTG100 </PON>
+                <AliasPON> LCMXO2-256HC-XXTG100CES </AliasPON>
+                <JDFFile> lcmxo2_256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T100-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 64-ball ucBGA </Type>
+                <PON> LCMXO2-256HC-XXMG64 </PON>
+                <AliasPON> LCMXO2-256HC-XXMG64CES </AliasPON>
+                <JDFFile> lcmxo2_256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M64-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-256HC-XXMG132 </PON>
+                <AliasPON> LCMXO2-256HC-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>   
+            <Package>
+                <Type> 32-pin QFN </Type>
+                <PON> LCMXO2-256HC-XXSG32 </PON>
+                <AliasPON> LCMXO2-256HC-XXSG32ES </AliasPON>
+                <JDFFile> lcmxo2_256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-S32-LCMXO2"/>
+            </Package>          
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;185;185;185;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;412;408;406;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>185</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>488</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device>       
+       <Device name="LCMXO2-640ZE">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-640ZE </CodeName>
+            <FullName> LCMXO2-640ZE </FullName>
+            <AliasName> LCMXO2-640ZE_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012B1043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 888 </ColWidth>
+            <RowWidth> 215 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  24576 </EColumn>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 171904 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  1200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>152</BScan_Length>    
+            <ExternalASC> 0 </ExternalASC>        
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-640ZE </PON>
+                <AliasPON> LCMXO2-640ZE-ES </AliasPON>
+                <JDFFile> lcmxo2_640.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2-640ZE-XXTG100 </PON>
+                <AliasPON> LCMXO2-640ZE-XXTG100CES </AliasPON>
+                <JDFFile> lcmxo2_640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T100-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-640ZE-XXMG132C </PON>
+                <AliasPON> LCMXO2-640ZE-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>   
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0>          
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;214;214;214;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;796;792;790;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>214</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>872</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device>
+       <Device name="LCMXO2-640HC">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-640HC </CodeName>
+            <FullName> LCMXO2-640HC </FullName>
+            <AliasName> LCMXO2-640HC_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012B9043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 888 </ColWidth>
+            <RowWidth> 215 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  24576 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 171904 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  1200 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>152</BScan_Length>  
+            <ExternalASC> 2 </ExternalASC>          
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-640HC </PON>
+                <AliasPON> LCMXO2-640HC-ES </AliasPON>
+                <JDFFile> lcmxo2_640.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2-640HC-XXTG100 </PON>
+                <AliasPON> LCMXO2-640HC-XXTG100CES </AliasPON>
+                <JDFFile> lcmxo2_640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T100-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-640HC-XXMG132 </PON>
+                <AliasPON> LCMXO2-640HC-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>  
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0>           
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;214;214;214;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;796;792;790;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>214</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>872</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>      
+        <Device name="LCMXO2-1200ZE">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO2-1200ZE </CodeName>
+            <FullName> LCMXO2-1200ZE </FullName>
+            <AliasName> LCMXO2-1200ZE_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012B2043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1080 </ColWidth>
+            <RowWidth> 333 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  65536 </EColumn>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 343936 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>208</BScan_Length>   
+            <ExternalASC> 0 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-1200ZE </PON>
+                <AliasPON> LCMXO2-1200ZE-ES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2-1200ZE-XXTG100 </PON>
+                <AliasPON> LCMXO2-1200ZE-XXTG100CES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T100/LCMXO2"/>
+            </Package>            
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-1200ZE-XXTG144 </PON>
+                <AliasPON> LCMXO2-1200ZE-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144/LCMXO2"/>
+            </Package>            
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-1200ZE-XXMG132 </PON>
+                <AliasPON> LCMXO2-1200ZE-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 32-pin QFN </Type>
+                <PON> LCMXO2-1200ZE-XXSG32 </PON>
+                <AliasPON> LCMXO2-1200ZE-XXSG32CES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-S32-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 25-ball WLCSP </Type>
+                <PON> LCMXO2-1200ZE-XXUWG25 </PON>
+                <AliasPON> LCMXO2-1200ZE-XXUWG25IES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-UWG25-LCMXO2-1200"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;330;330;330;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;844;840;838;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>330</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>920</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device>                 
+       <Device name="LCMXO2-1200HC">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO2-1200HC </CodeName>
+            <FullName> LCMXO2-1200HC </FullName>
+            <AliasName> LCMXO2-1200HC_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012BA043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1080 </ColWidth>
+            <RowWidth> 333 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  65536 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 343936 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>208</BScan_Length>  
+            <ExternalASC> 4 </ExternalASC>                      
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-1200HC </PON>
+                <AliasPON> LCMXO2-1200HC-ES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2-1200HC-XXTG100 </PON>
+                <AliasPON> LCMXO2-1200HC-XXTG100CES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T100-LCMXO2"/>
+            </Package>            
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-1200HC-XXTG144 </PON>
+                <AliasPON> LCMXO2-1200HC-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>            
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-1200HC-XXMG132 </PON>
+                <AliasPON> LCMXO2-1200HC-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 32-pin QFN </Type>
+                <PON> LCMXO2-1200HC-XXSG32 </PON>
+                <AliasPON> LCMXO2-1200HC-XXSG32CES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-S32-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;330;330;330;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;844;840;838;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>330</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>920</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device> 
+       <Device name="LCMXO2-640UHC">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO2-640UHC </CodeName>
+            <FullName> LCMXO2-640UHC </FullName>
+            <AliasName> LCMXO2-640UHC_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012BA043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1080 </ColWidth>
+            <RowWidth> 333 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  65536 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 343936 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>208</BScan_Length>    
+            <ExternalASC> 2 </ExternalASC>                    
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-640UHC </PON>
+                <AliasPON> LCMXO2-640UHC-ES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+           <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-640UHC-XXTG144 </PON>
+                <AliasPON> LCMXO2-640UHC-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>            
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;330;330;330;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;844;840;838;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>330</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>920</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+       </Device>
+       <Device name="LCMXO2-2000ZE">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-2000ZE </CodeName>
+            <FullName> LCMXO2-2000ZE </FullName>
+            <AliasName> LCMXO2-2000ZE_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012B3043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length>  
+            <ExternalASC> 0 </ExternalASC>                      
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-2000ZE </PON>
+                <AliasPON> LCMXO2-2000ZE-ES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package> 
+            <Package>
+                <Type> 49-pin WLCSP </Type>
+                <PON> LCMXO2-2000ZE-XXTG100 </PON>
+                <AliasPON> LCMXO2-2000ZE-XXUWG49CTR </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-UWG49-LCMXO2-2000"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2-2000ZE-XXTG100 </PON>
+                <AliasPON> LCMXO2-2000ZE-XXTG100CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T100-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-2000ZE-XXTG144 </PON>
+                <AliasPON> LCMXO2-2000ZE-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-2000ZE-XXMG132 </PON>
+                <AliasPON> LCMXO2-2000ZE-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2-2000ZE-XXBG256 </PON>
+                <AliasPON> LCMXO2-2000ZE-XXBG256CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2-2000ZE-XXFTG256 </PON>
+                <AliasPON> LCMXO2-2000ZE-XXFTG256CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>        
+        <Device name="LCMXO2-2000HC">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-2000HC </CodeName>
+            <FullName> LCMXO2-2000HC </FullName>
+            <AliasName> LCMXO2-2000HC_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012BB043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length> 
+            <ExternalASC> 6 </ExternalASC>                       
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-2000HC </PON>
+                <AliasPON> LCMXO2-2000HC-ES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2-2000HC-XXTG100 </PON>
+                <AliasPON> LCMXO2-2000HC-XXTG100CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T100-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-2000HC-XXTG144 </PON>
+                <AliasPON> LCMXO2-2000HC-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-2000HC-XXMG132 </PON>
+                <AliasPON> LCMXO2-2000HC-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2-2000HC-XXBG256 </PON>
+                <AliasPON> LCMXO2-2000HC-XXBG256CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2-2000HC-XXFTG256 </PON>
+                <AliasPON> LCMXO2-2000HC-XXFTG256CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO2-1200UHC">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-1200UHC </CodeName>
+            <FullName> LCMXO2-1200UHC </FullName>
+            <AliasName> LCMXO2-1200UHC_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012BB043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length>   
+            <ExternalASC> 6 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-1200UHC </PON>
+                <AliasPON> LCMXO2-1200UHC-ES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2-1200UHC-XXFTG256 </PON>
+                <AliasPON> LCMXO2-1200UHC-XXFTG256CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LCMXO2-1200UHC-XXFG484 </PON>
+                <AliasPON> LCMXO2-1200UHC-XXFG484CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO2-2000HE">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-2000HE </CodeName>
+            <FullName> LCMXO2-2000HE </FullName>
+            <AliasName> LCMXO2-2000HE_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012B3043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1272 </ColWidth>
+            <RowWidth> 420 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  81920 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 491264 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  1500 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length>   
+            <ExternalASC> 6 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-2000HE </PON>
+                <AliasPON> LCMXO2-2000HE-ES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2-2000HE-XXTG100 </PON>
+                <AliasPON> LCMXO2-2000HE-XXTG100CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T100-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-2000HE-XXTG144 </PON>
+                <AliasPON> LCMXO2-2000HE-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-2000HE-XXMG132 </PON>
+                <AliasPON> LCMXO2-2000HE-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2-2000HE-XXBG256 </PON>
+                <AliasPON> LCMXO2-2000HE-XXBG256CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2-2000HE-XXFTG256 </PON>
+                <AliasPON> LCMXO2-2000HE-XXFTG256CES </AliasPON>
+                <JDFFile> lcmxo2_2000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;417;417;417;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1036;1032;1030;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>417</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1112</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>        
+        <Device name="LCMXO2-4000ZE">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-4000ZE </CodeName>
+            <FullName> LCMXO2-4000ZE </FullName>
+            <AliasName> LCMXO2-4000ZE_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012B4043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>          
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>   
+            <ExternalASC> 0 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-4000ZE </PON>
+                <AliasPON> LCMXO2-4000ZE-ES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-4000ZE-XXTG144 </PON>
+                <AliasPON> LCMXO2-4000ZE-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-4000ZE-XXMG132 </PON>
+                <AliasPON> LCMXO2-4000ZE-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2-4000ZE-XXBG256 </PON>
+                <AliasPON> LCMXO2-4000ZE-XXBG256CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2-4000ZE-XXFTG256 </PON>
+                <AliasPON> LCMXO2-4000ZE-XXFTG256CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 332-ball caBGA </Type>
+                <PON> LCMXO2-4000ZE-XXBG332 </PON>
+                <AliasPON> LCMXO2-4000ZE-XXBG332CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B332-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LCMXO2-4000ZE-XXFG484 </PON>
+                <AliasPON> LCMXO2-4000ZE-XXFG484CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 84-pin QFN </Type>
+                <PON> LCMXO2-4000ZE-XXQN84 </PON>
+                <AliasPON> LCMXO2-4000ZE-XXQN84CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-Q84-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO2-4000HC">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-4000HC </CodeName>
+            <FullName> LCMXO2-4000HC </FullName>
+            <AliasName> LCMXO2-4000HC_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012BC043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>  
+            <ExternalASC> 8 </ExternalASC>                      
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-4000HC </PON>
+                <AliasPON> LCMXO2-4000HC-ES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-4000HC-XXTG144 </PON>
+                <AliasPON> LCMXO2-4000HC-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-4000HC-XXMG132 </PON>
+                <AliasPON> LCMXO2-4000HC-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2-4000HC-XXBG256 </PON>
+                <AliasPON> LCMXO2-4000HC-XXBG256CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2-4000HC-XXFTG256 </PON>
+                <AliasPON> LCMXO2-4000HC-XXFTG256CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 332-ball caBGA </Type>
+                <PON> LCMXO2-4000HC-XXBG332 </PON>
+                <AliasPON> LCMXO2-4000HC-XXBG332CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B332-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LCMXO2-4000HC-XXFG484 </PON>
+                <AliasPON> LCMXO2-4000HC-XXFG484CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 84-pin QFN </Type>
+                <PON> LCMXO2-4000HC-XXQN84 </PON>
+                <AliasPON> LCMXO2-4000HC-XXQN84CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-Q84-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO2-2000UHC">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-2000UHC </CodeName>
+            <FullName> LCMXO2-2000UHC </FullName>
+            <AliasName> LCMXO2-2000UHC_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012BC043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>   
+            <ExternalASC> 8 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-2000UHC </PON>
+                <AliasPON> LCMXO2-2000UHC-ES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LCMXO2-2000UHC-XXFG484 </PON>
+                <AliasPON> LCMXO2-2000UHC-XXFG484CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO2-4000HE">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-4000HE </CodeName>
+            <FullName> LCMXO2-4000HE </FullName>
+            <AliasName> LCMXO2-4000HE_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012B4043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>          
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>   
+            <ExternalASC> 8 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-4000HE </PON>
+                <AliasPON> LCMXO2-4000HE-ES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-4000HE-XXTG144 </PON>
+                <AliasPON> LCMXO2-4000HE-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2-4000HE-XXMG132 </PON>
+                <AliasPON> LCMXO2-4000HE-XXMG132CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 184-ball csBGA </Type>
+                <PON> LCMXO2-4000HE-XXMG184 </PON>
+                <AliasPON> LCMXO2-4000HE-XXMG184CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M184-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2-4000HE-XXBG256 </PON>
+                <AliasPON> LCMXO2-4000HE-XXBG256CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2-4000HE-XXFTG256 </PON>
+                <AliasPON> LCMXO2-4000HE-XXFTG256CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 332-ball caBGA </Type>
+                <PON> LCMXO2-4000HE-XXBG332 </PON>
+                <AliasPON> LCMXO2-4000HE-XXBG332CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B332-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LCMXO2-4000HE-XXFG484 </PON>
+                <AliasPON> LCMXO2-4000HE-XXFG484CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 84-pin QFN </Type>
+                <PON> LCMXO2-4000HE-XXQN84 </PON>
+                <AliasPON> LCMXO2-4000HE-XXQN84CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-Q84-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+        <Device name="LCMXO2-2000UHE">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-2000UHE </CodeName>
+            <FullName> LCMXO2-2000UHE </FullName>
+            <AliasName> LCMXO2-2000UHE_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012B4043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <RowWidth> 623 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  98304 </EColumn>          
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 835328 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>552</BScan_Length>   
+            <ExternalASC> 6 </ExternalASC>                     
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-2000UHE </PON>
+                <AliasPON> LCMXO2-2000UHE-ES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LCMXO2-2000UHE-XXFG484 </PON>
+                <AliasPON> LCMXO2-2000UHE-XXFG484CES </AliasPON>
+                <JDFFile> lcmxo2_4000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;620;620;620;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1324;1320;1318;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>620</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1400</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>
+       <Device name="LCMXO2-7000ZE">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-7000ZE </CodeName>
+            <FullName> LCMXO2-7000ZE </FullName>
+            <AliasName> LCMXO2-7000ZE_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012B5043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length> 
+            <ExternalASC> 0 </ExternalASC>                       
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-7000ZE </PON>
+                <AliasPON> LCMXO2-7000ZE-ES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-7000ZE-XXTG144 </PON>
+                <AliasPON> LCMXO2-7000ZE-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>            
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2-7000ZE-XXBG256 </PON>
+                <AliasPON> LCMXO2-7000ZE-XXBG256CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2-7000ZE-XXFTG256 </PON>
+                <AliasPON> LCMXO2-7000ZE-XXFTG256CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 332-ball caBGA </Type>
+                <PON> LCMXO2-7000ZE-XXBG332 </PON>
+                <AliasPON> LCMXO2-7000ZE-XXBG332CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B332-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LCMXO2-7000ZE-XXFG484 </PON>
+                <AliasPON> LCMXO2-7000ZE-XXFG484CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>  
+        <Device name="LCMXO2-7000HE">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-7000HE </CodeName>
+            <FullName> LCMXO2-7000HE </FullName>
+            <AliasName> LCMXO2-7000HE_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012B5043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>            
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>      
+            <ExternalASC> 8 </ExternalASC>                  
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-7000HE </PON>
+                <AliasPON> LCMXO2-7000HE-ES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-7000HE-XXTG144 </PON>
+                <AliasPON> LCMXO2-7000HE-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144-LCMXO2"/>
+            </Package>            
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2-7000HE-XXBG256 </PON>
+                <AliasPON> LCMXO2-7000HE-XXBG256CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2-7000HE-XXFTG256 </PON>
+                <AliasPON> LCMXO2-7000HE-XXFTG256CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 332-ball caBGA </Type>
+                <PON> LCMXO2-7000HE-XXBG332 </PON>
+                <AliasPON> LCMXO2-7000HE-XXBG332CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B332-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LCMXO2-7000HE-XXFG484 </PON>
+                <AliasPON> LCMXO2-7000HE-XXFG484CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device> 
+        <Device name="LCMXO2-7000HC">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-7000HC </CodeName>
+            <FullName> LCMXO2-7000HC </FullName>
+            <AliasName> LCMXO2-7000HC_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012BD043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>  
+            <ExternalASC> 8 </ExternalASC>                      
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-7000HC </PON>
+                <AliasPON> LCMXO2-7000HC-ES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2-7000HC-XXTG144 </PON>
+                <AliasPON> LCMXO2-7000HC-XXTG144CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-T144/LCMXO2"/>
+            </Package>            
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2-7000HC-XXBG256 </PON>
+                <AliasPON> LCMXO2-7000HC-XXBG256CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2-7000HC-XXFTG256 </PON>
+                <AliasPON> LCMXO2-7000HC-XXFTG256CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-FT256-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 332-ball caBGA </Type>
+                <PON> LCMXO2-7000HC-XXBG332 </PON>
+                <AliasPON> LCMXO2-7000HC-XXBG332CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B332-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 400-ball caBGA </Type>
+                <PON> LCMXO2-7000HC-XXBG400 </PON>
+                <AliasPON> LCMXO2-7000HC-XXBG400CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B400-LCMXO2"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LCMXO2-7000HC-XXFG484 </PON>
+                <AliasPON> LCMXO2-7000HC-XXFG484CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-F484-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>   
+        <Device name="LCMXO2-4000UHC">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>5</Pins>
+            <CodeName> LCMXO2-4000UHC </CodeName>
+            <FullName> LCMXO2-4000UHC </FullName>
+            <AliasName> LCMXO2-4000UHC_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>XO2.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_XO2.svp"
+                         value="0x07"/>
+            <JtagID>0x012BD043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 1992 </ColWidth>
+            <RowWidth> 770 </RowWidth>
+            <ArchLength>  80 </ArchLength>
+            <EAddress>   1  </EAddress>
+            <EColumn>  262144 </EColumn>           
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1441280 </TotalFuses> 
+            <PWP>  10 </PWP>
+            <PWE>  3000 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>664</BScan_Length>  
+            <ExternalASC> 8 </ExternalASC>                      
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2-4000UHC </PON>
+                <AliasPON> LCMXO2-4000HC-ES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>                
+            <Package>
+                <Type> 400-ball caBGA </Type>
+                <PON> LCMXO2-4000UHC-XXBG400 </PON>
+                <AliasPON> LCMXO2-4000UHC-XXBG400CES </AliasPON>
+                <JDFFile> lcmxo2_7000.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-B400-LCMXO2"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.1 MHz;2.5 MHz;3.2 MHz;4.3 MHz;5.5 MHz;7 MHz;8.3 MHz;9.2 MHz;
+            			    10 MHz;13 MHz;15 MHz;20 MHz;27 MHz;30 MHz;33 MHz;38 MHz;
+            			    44 MHz;53 MHz;66 MHz;89 MHz;133 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;010110;000011;010001;011011;100000;100011;
+            							 100110;101100;101110;110011;110110;110111;111000;111001;
+            							 111010;111011;111100;111101;111111;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;001010;010110;000011;010001;011011;100000;100011;
+            				    100110;101100;101110;110011;110110;110111;111000;111001;
+            				    111010;111011;111100;111101;111111;</Clock_divider>
+            </ControlReg0> 
+            <Voltage_Control>
+            	<VCCCore>2.5V/3.3V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+			<Persistent_fuse> 
+	            <Persistent_fuse_Address>;765;765;765;</Persistent_fuse_Address> 
+	            <Persistent_fuse_Column>;1756;1752;1750;</Persistent_fuse_Column> 
+	        </Persistent_fuse>   
+            <Sync_Ext_Done> 
+	        	<Sync_Ext_Done_Address>765</Sync_Ext_Done_Address>  
+	        	<Sync_Ext_Done_Column>1832</Sync_Ext_Done_Column>  
+	        </Sync_Ext_Done> 
+        </Device>   
+        <Operation>
+        	&quot;FLASH Erase,Program,Verify&quot;
+        	&quot;FLASH Program,Verify,skip Erase&quot;        	
+        	&quot;FLASH Erase,Program,Verify,Secure&quot;
+        	&quot;FLASH Erase,Program,Verify,Secure Plus&quot;
+        	&quot;FLASH Program&quot;
+        	&quot;FLASH Program,skip Erase&quot;
+        	&quot;FLASH CFG Erase,Program,Verify&quot;
+        	&quot;FLASH CFG Verify Only&quot;
+        	&quot;FLASH CFG and UFM Erase,Program,Verify&quot;
+        	&quot;FLASH Verify Only&quot;
+			&quot;FLASH Erase Only&quot;
+			&quot;FLASH Erase CFG Only&quot;
+			&quot;FLASH Erase CFG and UFM Only&quot;
+			&quot;FLASH Verify ID&quot;
+			&quot;FLASH Display ID&quot;	
+	    	&quot;FLASH Display USERCODE&quot;
+			&quot;FLASH Read and Save&quot;
+			&quot;FLASH Calculate Checksum&quot;
+			&quot;FLASH UFM Program,Verify&quot;
+			&quot;FLASH UFM Erase&quot;			
+			&quot;FLASH Verify UFM&quot;			
+<!--			&quot;FLASH UFM Read and Program&quot;-->
+			&quot;FLASH Read Status Register&quot;			
+			&quot;FLASH Secure Device&quot;
+			&quot;FLASH Secure Plus&quot;
+			&quot;FLASH Refresh&quot;
+			&quot;FLASH Verify Feature Rows&quot;
+			&quot;FLASH Program Feature Rows&quot;
+			&quot;FLASH Bypass&quot;
+			
+			
+			&quot;XFLASH Erase,Program,Verify&quot;
+        	&quot;XFLASH Erase,Program,Verify,Secure&quot;
+        	&quot;XFLASH Erase,Program,Verify,Secure and TransFR&quot;
+        	&quot;XFLASH Erase,Program,Verify,Secure Plus&quot;
+        	&quot;XFLASH Erase,Program,Verify,Refresh&quot;
+        	&quot;XFLASH Verify Feature Rows&quot;
+			&quot;XFLASH Program Feature Rows&quot;
+			&quot;XFLASH Erase,Program,Verify,Feature&quot;
+			&quot;XFLASH CFG Erase,Program,Verify&quot;
+			&quot;XFLASH CFG Verify Only&quot;
+			&quot;XFLASH CFG Erase,Program,Verify and TransFR&quot;
+			&quot;XFLASH Erase,Program,Verify,Feature and TransFR&quot;
+			&quot;XFLASH Erase,Program,Verify,Feature,Secure and TransFR&quot;
+        	&quot;XFLASH Program and TransFR&quot;
+        	&quot;XFLASH Program and Clamping IO&quot;
+        	&quot;XFLASH TransFR&quot;
+        	&quot;XFLASH Clamping IO&quot;
+        	&quot;XFLASH Erase Only&quot;	
+        	&quot;XFLASH Erase CFG Only&quot;
+        	&quot;XFLASH Erase DONE&quot;			
+        	&quot;XFLASH Verify Only&quot;
+			&quot;XFLASH Read and Save&quot;
+			&quot;XFLASH Calculate Checksum&quot;
+			&quot;XFLASH UFM Program,Verify&quot;
+			&quot;XFLASH UFM Erase&quot;
+<!--			&quot;XFLASH UFM Read and Program&quot;-->
+			&quot;XFLASH Read Status Register&quot;
+			&quot;XFLASH Display USERCODE&quot;
+			&quot;XFLASH Secure Device&quot;
+			&quot;XFLASH Secure Plus&quot;
+			&quot;XFLASH Program DONE&quot;
+			&quot;XFLASH Bypass&quot;
+            
+            &quot;SRAM Fast Program&quot;
+            &quot;SRAM Erase,Program,Verify&quot;
+            &quot;SRAM Erase Only&quot;                        
+            &quot;SRAM Verify Only&quot;
+            &quot;SRAM Verify ID&quot;
+            &quot;SRAM Display ID&quot;
+            &quot;SRAM Display USERCODE&quot;
+            &quot;SRAM Read and Save&quot;
+            &quot;SRAM Display Control Register0&quot;
+			&quot;SRAM Program Control Register0&quot;
+            &quot;SRAM Read Status Register&quot;
+            &quot;SRAM Refresh&quot;
+            &quot;SRAM Bypass&quot;
+
+			&quot;XSRAM SEI Fast Program&quot;
+			&quot;XSRAM Verify Only&quot;
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Verify USERCODE&quot;
+            &quot;XSRAM Display USERCODE&quot;                                   
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Read Status Register&quot; 
+            &quot;XSRAM Refresh&quot;
+            &quot;XSRAM Bypass&quot;						
+			
+<!--			&quot;Manufacturing Read MES Fuses&quot;-->
+<!--			&quot;Manufacturing Read DTR Fuses&quot;-->
+<!--			&quot;Manufacturing Read PES Fuses&quot;-->
+<!--			&quot;Read Manufacturing Register&quot;-->
+<!--			&quot;Program Manufacturing Register&quot;-->
+<!--			&quot;Security Erase Feature Rows&quot;-->
+			&quot;Security Read Feature Rows&quot;
+			&quot;Security Program Feature Rows&quot;
+			&quot;Security Program Password Key&quot;
+			&quot;Security Program Password Key with Lock&quot;
+			&quot;Security Erase Feature Row with Password Key&quot;
+			&quot;Security Read Status Register&quot;
+			&quot;Security Display TraceID&quot;				
+			
+			&quot;Security Flash EPV with Password&quot;
+			&quot;Security Flash Program with Password&quot;
+			&quot;Security Flash Verify with Password&quot;
+			&quot;Security Flash Erase with Password&quot;
+			&quot;Security XFlash EPV with Password&quot;
+			&quot;Security XFlash Program with Password&quot;
+			&quot;Security XFlash Verify with Password&quot;
+			&quot;Security XFlash Erase with Password&quot;
+			&quot;Security Fast Program with Password&quot;
+			&quot;Security SRAM EPV with Password&quot;
+			&quot;Security SRAM Verify with Password&quot;
+			&quot;Security SRAM Erase with Password&quot;
+			&quot;Security XSRAM SEI Fast Program with Password&quot;
+			&quot;Security XSRAM Verify with Password&quot;
+			
+			
+			&quot;Security EPV with Password Key Option&quot;
+			&quot;Security EPV with my_ASSP, Password Key Option&quot;
+			&quot;Security EPV with my_ASSP Option&quot;
+			&quot;Security EPVS with my_ASSP Option&quot;
+			&quot;Security EPV with OTP Option&quot;
+			&quot;Security Background EPV with OTP Option&quot;
+			&quot;Security EPVS with OTP Option&quot;
+			&quot;Security EPV with Full OTP Option&quot;
+			&quot;Security EPVS with Full OTP Option&quot;
+			
+			&quot;SPI Flash Erase,Program,Verify&quot;
+			&quot;SPI Flash Background Erase,Program,Verify&quot;
+			&quot;SPI Flash Erase,Program&quot;
+			&quot;SPI Flash Background Erase,Program&quot;
+			&quot;SPI Flash Verify ID&quot;
+			&quot;SPI Flash Background Verify ID&quot;
+	    	&quot;SPI Flash Verify Only&quot;
+	    	&quot;SPI Flash Background Verify Only&quot;
+	    	&quot;SPI Flash Erase All&quot;
+	    	&quot;SPI Flash Background Erase All&quot;
+	    	&quot;SPI Flash Read and Save&quot;
+	    	&quot;SPI Flash Background Read and Save&quot;
+	    	&quot;SPI Flash Calculate File Size Checksum&quot;
+        	&quot;SPI Flash Calculate Device Size Checksum&quot;
+	    	&quot;SPI Flash Bypass&quot;
+	    	&quot;Scan SPI Flash Device&quot;
+	    	
+	    	
+	    	&quot;Slave SPI Erase,Program,Verify&quot;
+	    	&quot;Slave SPI Fast Configuration&quot;
+	    	&quot;Slave SPI Erase,Program,Verify,Secure&quot;
+	    	&quot;Slave SPI Erase,Program,Verify,Secure Plus&quot;
+	    	&quot;Slave SPI CFG Erase,Program,Verify&quot;
+	    	&quot;Slave SPI CFG Verify Only&quot;
+	    	&quot;Slave SPI Erase Only&quot;			
+	    	&quot;Slave SPI Verify Only&quot;
+			&quot;Slave SPI Verify ID&quot;
+			&quot;Slave SPI Display ID&quot;
+			&quot;Slave SPI Verify USERCODE&quot;
+			&quot;Slave SPI Display USERCODE&quot;
+			&quot;Slave SPI Read and Save&quot;
+<!--			&quot;Slave SPI RAM Read and Save&quot;-->
+			&quot;Slave SPI Read Status Register&quot;
+			&quot;Slave SPI UFM Program,Verify&quot;
+			&quot;Slave SPI UFM Erase&quot;
+			&quot;Slave SPI Background Erase,Program,Verify&quot;
+	    	&quot;Slave SPI Background Erase,Program,Verify,Secure&quot;
+	    	&quot;Slave SPI Background Erase,Program,Verify,Secure Plus&quot;
+	    	&quot;Slave SPI Background CFG Erase,Program,Verify&quot;
+	    	&quot;Slave SPI Background CFG Verify Only&quot;
+	    	&quot;Slave SPI Background Program Feature Rows&quot;
+			&quot;Slave SPI Background Erase,Program,Verify,Feature&quot;
+	    	&quot;Slave SPI Background Erase Only&quot;
+	    	&quot;Slave SPI Background Verify Only&quot;
+	    	&quot;Slave SPI Background SEI Fast Program&quot;
+	    	&quot;Slave SPI Refresh&quot;
+	    	&quot;Slave SPI Erase,Program,Verify with Password&quot;
+	    	&quot;Slave SPI Fast Configuration with Password&quot;
+	    	&quot;Slave SPI Verify Only with Password&quot;
+	    	&quot;Slave SPI Erase Only with Password&quot;
+	    	
+	    	&quot;I2C Erase,Program,Verify&quot;
+	    	&quot;I2C Program&quot;
+	    	&quot;I2C Erase,Program,Verify,Secure&quot;
+	    	&quot;I2C Erase,Program,Verify,Secure Plus&quot;
+	    	&quot;I2C Fast Configuration&quot;
+	    	&quot;I2C Erase Only&quot;
+	    	&quot;I2C Verify Only&quot;
+			&quot;I2C Verify ID&quot;
+			&quot;I2C Display ID&quot;
+			&quot;I2C Program Feature Rows&quot;
+			&quot;I2C Erase,Program,Verify,Feature&quot;
+			&quot;I2C Erase,Program,Verify,Feature,Secure&quot;	
+			&quot;I2C Erase,Program,Verify,Feature,Secure Plus&quot;
+			&quot;I2C Recovery Erase Only&quot;		
+			&quot;I2C Background Erase,Program,Verify&quot;	 
+			&quot;I2C Background Erase,Program,Verify,Secure&quot;
+	    	&quot;I2C Background Erase,Program,Verify,Secure Plus&quot; 
+	    	&quot;I2C Background Erase,Program,Verify and TransFR&quot;
+	    	&quot;I2C Background Erase,Program,Verify,Feature and TransFR&quot;			
+	    	&quot;I2C Background Program&quot; 
+	    	&quot;I2C Background Erase Only&quot;
+	    	&quot;I2C Background Verify Only&quot;
+	    	&quot;I2C Background Program Feature Rows&quot;
+	    	&quot;I2C Refresh&quot; 	
+	    	&quot;I2C Program Password Key&quot;
+			&quot;I2C Program Password Key with Lock&quot;
+			&quot;I2C Erase Feature Row with Password Key&quot;
+			&quot;I2C EPV with Password Key Option&quot;
+			&quot;I2C EPV with my_ASSP Option&quot;  
+			&quot;I2C EPV with my_ASSP, Password Key Option&quot;
+	    	&quot;I2C Erase,Program,Verify with Password&quot;
+	    	&quot;I2C Fast Configuration with Password&quot;
+	    	&quot;I2C Verify Only with Password&quot;
+	    	&quot;I2C Erase Only with Password&quot;	  
+	    			
+			
+			&quot;JTAGI2C Erase,Program,Verify&quot;
+	    	&quot;JTAGI2C Program&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify,Secure&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify,Secure Plus&quot;
+	    	&quot;JTAGI2C Erase Only&quot;			
+	    	&quot;JTAGI2C Verify Only&quot;
+			&quot;JTAGI2C Verify ID&quot;
+			&quot;JTAGI2C Display ID&quot;
+			&quot;JTAGI2C Read Feature Rows&quot;
+			&quot;JTAGI2C Program Feature Rows&quot;
+			&quot;JTAGI2C Erase,Program,Verify,Feature&quot;	
+			&quot;JTAGI2C Erase,Program,Verify,Feature,Secure&quot;	
+			&quot;JTAGI2C Erase,Program,Verify,Feature,Secure Plus&quot;		
+			&quot;JTAGI2C Recovery Erase Only&quot;	
+			&quot;JTAGI2C Background Erase,Program,Verify&quot;	 
+			&quot;JTAGI2C Background Erase,Program,Verify,Secure&quot;
+	    	&quot;JTAGI2C Background Erase,Program,Verify,Secure Plus&quot; 
+	    	&quot;JTAGI2C Background Erase,Program,Verify and TransFR&quot;
+	    	&quot;JTAGI2C Background Erase,Program,Verify,Feature and TransFR&quot;
+	    	&quot;JTAGI2C Background Program&quot; 
+	    	&quot;JTAGI2C Background Erase Only&quot;
+	    	&quot;JTAGI2C Background Verify Only&quot;
+	    	&quot;JTAGI2C Background Program Feature Rows&quot;
+	    	&quot;JTAGI2C Refresh&quot;
+<!--	    	&quot;JTAGI2C Program Password Key&quot;-->
+<!--			&quot;JTAGI2C Program Password Key with Lock&quot;-->
+<!--			&quot;JTAGI2C Erase Feature Row with Password Key&quot;-->
+<!--			&quot;JTAGI2C EPV with Password Key Option&quot;-->
+			&quot;JTAGI2C EPV with my_ASSP Option&quot;
+			&quot;JTAGI2C EPV with my_ASSP, Password Key Option&quot;
+	    	&quot;JTAGI2C Erase,Program,Verify with Password&quot;
+	    	&quot;JTAGI2C Fast Configuration with Password&quot;
+	    	&quot;JTAGI2C Verify Only with Password&quot;
+	    	&quot;JTAGI2C Erase Only with Password&quot;
+	    	
+	    	&quot;PTM Erase,Program,Verify&quot;
+        	&quot;PTM Program&quot;
+			&quot;PTM Erase Only&quot;	
+			&quot;PTM Verify Only&quot;
+	    	&quot;PTM Verify ID&quot;
+			&quot;PTM Read Status Register&quot;
+			&quot;PTM Bypass&quot;
+				
+			
+	    	&quot;PTM Background Erase,Program,Verify&quot;
+	    	&quot;PTM Background Erase,Program,Verify,Refresh&quot;	    	
+	    	&quot;PTM Background Program,Verify and TransFR&quot;	
+        	&quot;PTM Background Erase Only&quot;	
+			&quot;PTM Background Verify Only&quot;
+	    	&quot;PTM Background Verify ID&quot;
+			&quot;PTM Background Program Feature Rows&quot;
+			&quot;PTM Background Bypass&quot;
+	    	
+			
+	    	&quot;ASC Erase,Program,Verify&quot;
+	    	&quot;ASC Program&quot;
+			&quot;ASC Erase Only&quot;			
+	    	&quot;ASC Verify Only&quot; 
+	    	&quot;ASC Verify ID&quot;   
+	    	&quot;ASC Read and Save&quot;
+	    	&quot;ASC Calculate Data CRC&quot;
+	    	&quot;ASC Read Status Register&quot;  
+	    	&quot;ASC Read FaultLog Registers&quot;
+	    	&quot;ASC Read FaultLog Memory&quot;
+	    	&quot;ASC FaultLog Erase Only&quot;	    	
+	    	&quot;ASC Erase,Program,Verify,I2CSA&quot;
+	    	
+	    	
+	    	&quot;ASC Background Erase,Program,Verify&quot;
+	    	&quot;ASC Background Erase Only&quot;			
+	    	&quot;ASC Background Verify Only&quot; 
+	    	&quot;ASC Background Verify ID&quot;   
+	    	&quot;ASC Background Read and Save&quot;
+	    	&quot;ASC Background Calculate Data CRC&quot;
+	    	&quot;ASC Background Read Status Register&quot;
+	    	&quot;ASC Background Erase,Program,Verify,I2CSA&quot; 
+	    	
+	    	&quot;I2CASC Erase,Program,Verify&quot;
+	    	&quot;I2CASC Erase Only&quot;			
+	    	&quot;I2CASC Verify Only&quot; 
+	    	&quot;I2CASC Verify ID&quot;   
+	    	&quot;I2CASC Read and Save&quot;
+	    	&quot;I2CASC Calculate Data CRC&quot;
+	    	&quot;I2CASC Read Status Register&quot;  
+	    	&quot;I2CASC Background Erase,Program,Verify&quot;
+	    	&quot;I2CASC Background Erase Only&quot;			
+	    	&quot;I2CASC Background Verify Only&quot; 
+	    	&quot;I2CASC Background Verify ID&quot;   
+	    	&quot;I2CASC Background Read and Save&quot;
+	    	&quot;I2CASC Background Read Status Register&quot;
+			
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0xE0</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed;*.isc"/>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <BitstreamModelTemplate>XO2 Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;FLASH;XFLASH;SRAM;XSRAM;SECKEYS;SECURITY;SECPRODUCT;SPI;SLAVESPI;I2C;Parallel Flash;PTM;PTM Background;</Programming_Mode_Control>     	
+    </Family>   
+</ispXDF>

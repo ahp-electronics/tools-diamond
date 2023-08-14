@@ -1,0 +1,48 @@
+library verilog;
+use verilog.vl_types.all;
+entity cdr_delayline is
+    port(
+        INCLK           : in     vl_logic;
+        LS0             : in     vl_logic_vector(3 downto 0);
+        LS1             : in     vl_logic_vector(3 downto 0);
+        LS2             : in     vl_logic_vector(3 downto 0);
+        LS3             : in     vl_logic_vector(3 downto 0);
+        LS4             : in     vl_logic_vector(3 downto 0);
+        LS5             : in     vl_logic_vector(3 downto 0);
+        LS6             : in     vl_logic_vector(3 downto 0);
+        LS7             : in     vl_logic_vector(3 downto 0);
+        LS8             : in     vl_logic_vector(3 downto 0);
+        LS9             : in     vl_logic_vector(3 downto 0);
+        LS10            : in     vl_logic_vector(3 downto 0);
+        LS11            : in     vl_logic_vector(3 downto 0);
+        LS12            : in     vl_logic_vector(3 downto 0);
+        LS13            : in     vl_logic_vector(3 downto 0);
+        LS14            : in     vl_logic_vector(3 downto 0);
+        LS15            : in     vl_logic_vector(3 downto 0);
+        LS16            : in     vl_logic_vector(3 downto 0);
+        LS17            : in     vl_logic_vector(3 downto 0);
+        MS0             : in     vl_logic_vector(3 downto 0);
+        MS1             : in     vl_logic_vector(3 downto 0);
+        MS2             : in     vl_logic_vector(3 downto 0);
+        MS3             : in     vl_logic_vector(3 downto 0);
+        MS4             : in     vl_logic_vector(3 downto 0);
+        MS5             : in     vl_logic_vector(3 downto 0);
+        MS6             : in     vl_logic_vector(3 downto 0);
+        MS7             : in     vl_logic_vector(3 downto 0);
+        MS8             : in     vl_logic_vector(3 downto 0);
+        MS9             : in     vl_logic_vector(3 downto 0);
+        MS10            : in     vl_logic_vector(3 downto 0);
+        MS11            : in     vl_logic_vector(3 downto 0);
+        MS12            : in     vl_logic_vector(3 downto 0);
+        MS13            : in     vl_logic_vector(3 downto 0);
+        MS14            : in     vl_logic_vector(3 downto 0);
+        MS15            : in     vl_logic_vector(3 downto 0);
+        MS16            : in     vl_logic_vector(3 downto 0);
+        MS17            : in     vl_logic_vector(3 downto 0);
+        OUTCLK          : out    vl_logic_vector(15 downto 0);
+        OUTCLK_INT      : out    vl_logic_vector(17 downto 0);
+        OUTDEL_FB_15    : out    vl_logic;
+        OUTDEL_FB_7     : out    vl_logic;
+        RST_N           : in     vl_logic
+    );
+end cdr_delayline;

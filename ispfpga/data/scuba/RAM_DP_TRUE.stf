@@ -1,0 +1,15 @@
+ClockA: CLK * 1 ;
+ClockB: CLK * 1 *(data_width/rdata_width) ;
+ResetA: => 1; @100 => 0;
+ResetB: => 1; @100 => 0; 
+DataInA: => 0; @100; @ResetA & E0;*(num_rows + 3)@ClockA => COUNT;
+AddressA: => 0;@100; @ResetA & E0;*(num_rows*2 + 6)@ClockA => COUNT;
+ClockEnA: => 0; @100; @ResetA & E0; => 1;
+WrA: => 0; @ResetA & E0; * (num_rows+3) @ClockA => 1; => 0;
+// Read B while writing A. Then write-read B.
+WrB: => 0; @ResetB & E0; @WrA & E1; @ WrA & E0; *(num_rows + 3)@ClockA;
+      *(num_rows*(data_width/rdata_width)+3) @ClockB => 1; => 0;  
+DataInB: => 0; @100; @ResetB & E0; @WrB & E1; *(num_rows + 3)@ClockB => COUNT;
+AddressB: => 0;@100; @ResetB & E0; @WrB & E1; *(num_rows*2 + 6)@ClockB => COUNT;
+ClockEnB: => 0; @100; @ResetB & E0; => 1;
+

@@ -1,0 +1,361 @@
+DATA:
+    PATTERN  (--, --, FILE(--, --));      
+    WREN   ( 1, 1, b01110000);
+    WRDI   ( 1, 1, b00100000);
+    RDSR   ( 1, 1, b11101011);
+    WRSR   ( 1, 1, b10000000);
+    READ   ( 1, 1, b11010000);
+    PP   ( 1, 1, b01000001);
+    BE   ( 1, 1, b11100011);
+    SE   ( 1, 1, b00011011);
+    RES   ( 1, 1, b11111001); 	
+    DEVICE_ID  (1,1,FILE(ID, --)); 
+DATA_END;
+
+PROTOCOL:	PCM;
+
+SIGNAL_DECL: 
+	inout L_f_cs;
+	buffer  clock;
+SIGNAL_DECL_END;
+             
+BUS_DECL: 
+    /CE = L_f_cs;
+BUS_DECL_END;
+
+FUNCTION INITIAL;
+	SIR	8	TDI(FF) ;
+	SETPIN jtagISPEN_PIN 1;
+	SETPIN jtagTMS_PIN   1;
+	SETPIN jtagTRST_PIN 0;
+	clock   HIGH;
+	SET_ROW (PATTERN, 0);
+	Addr = START_ADDRESS;
+END_FUNCTION;
+
+FUNCTION FINALIZE;
+	SETPIN jtagTRST_PIN 1;
+END_FUNCTION;
+
+FUNCTION CHECK_ID;
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,hF9,--);
+	SEND_BYTE (1,h00,--);
+	RECEIVE_BYTE (1,DEVICE_ID,hFF,BREAK);
+	SETPIN jtagISPEN_PIN 1;
+END_FUNCTION;
+
+FUNCTION CHECK_RDID;
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,hF9,--);
+	RECEIVE_BYTE (1,h1F,hFF,BREAK);
+	RECEIVE_BYTE (1,DEVICE_ID,hFF,BREAK);
+	SETPIN jtagISPEN_PIN 1;
+END_FUNCTION;
+
+FUNCTION POWER2;
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,hBC,--);
+	SEND_BYTE (1,h54,--);
+	SEND_BYTE (1,h01,--);
+	SEND_BYTE (1,h65,--);
+	SETPIN jtagISPEN_PIN 1;
+	
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,RDSR,--);
+	LOOP 100;
+	LDELAY  1.00E SEC;
+		RECEIVE_BYTE (1,h81,h81,BREAK);
+	END_LOOP;
+	SETPIN jtagISPEN_PIN 1;
+	
+END_FUNCTION;
+
+FUNCTION CHECKPOWER2;
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,hBC,--);
+	SEND_BYTE (1,h54,--);
+	SEND_BYTE (1,h01,--);
+	SEND_BYTE (1,h65,--);
+	SETPIN jtagISPEN_PIN 1;
+	
+	DELAY  10.00E SEC;
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,h9D,--);
+	SETPIN jtagISPEN_PIN 1;
+	
+	DELAY  10.00E SEC;
+	
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,hD5,--);
+	SETPIN jtagISPEN_PIN 1;
+	
+	DELAY  10.00E SEC;
+	
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,RDSR,--);
+	LOOP 100;
+	LDELAY  1.00E SEC;
+		RECEIVE_BYTE (1,h81,h81,BREAK);
+	END_LOOP;
+	SETPIN jtagISPEN_PIN 1;
+	
+	
+	
+END_FUNCTION;
+
+FUNCTION ERASE_ALL;
+	Addr = START_ADDRESS;
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,hE3,--);
+	SEND_BYTE (1,h29,--);
+	SEND_BYTE (1,h01,--);
+	SEND_BYTE (1,h59,--);
+	SETPIN jtagISPEN_PIN 1;
+	DELAY  1000.00E SEC;
+		
+	SETPIN jtagISPEN_PIN b0;
+	SEND_BYTE (1,RDSR,--);
+	LOOP 100;
+	LDELAY  1.00E SEC;
+		RECEIVE_BYTE (1,hB5,hFF,BREAK);
+	END_LOOP;
+	SETPIN jtagISPEN_PIN 1;
+	
+END_FUNCTION;
+
+FUNCTION PROGRAM;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	REPEAT 0;
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,h41,--);
+	SEND_BYTE (3,Addr,--);
+	BURST (256,PATTERN);
+	SETPIN jtagISPEN_PIN b11;
+	
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,RDSR,--);
+	LOOP 1000;
+	LDELAY  1.00E-002 SEC;
+		RECEIVE_BYTE (1,hB5,hFF,BREAK);
+	END_LOOP;
+	SETPIN jtagISPEN_PIN b11;
+	Addr = Addr +256;
+	END_REPEAT;
+END_FUNCTION;
+
+FUNCTION VERIFY;
+	Addr = START_ADDRESS;
+	RESET_BURST;
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,READ,--);
+	SEND_BYTE (3,Addr,--);
+	SEND_BYTE (1,h00,--);
+	VERIFY_BURST (0,PATTERN);
+	SETPIN jtagISPEN_PIN 1;
+END_FUNCTION;
+
+FUNCTION BLANK_CHECK;
+	Addr = START_ADDRESS;
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,READ,--);
+	SEND_BYTE (3,Addr,--);
+	SEND_BYTE (1,h00,--);
+	VERIFY_BURST (0,hFF);
+	SETPIN jtagISPEN_PIN 1;
+	
+END_FUNCTION;
+
+FUNCTION READBACK;
+	Addr = START_ADDRESS;
+	SETPIN jtagISPEN_PIN 0;
+	SEND_BYTE (1,READ,--);
+	SEND_BYTE (3,Addr,--);
+	SEND_BYTE (1,h00,--);
+	VERIFY_BURST (0,?);
+	SETPIN jtagISPEN_PIN 1;
+END_FUNCTION;
+
+OPERATION Verify ID;
+  	INT32 Addr = 0;
+    Call INITIAL;
+    Call CHECK_RDID;
+END_OPERATION;
+
+OPERATION Erase,Program,Verify;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+	$ POWER of 2 Mode Checking...
+	Call CHECKPOWER2;
+	
+    $ Programming...
+	Call PROGRAM;
+
+	$ Finalizing...
+	Call FINALIZE;
+	
+    $ Verifying...
+	Call VERIFY;
+
+    $ Finalizing...
+	Call FINALIZE;	
+       
+END_OPERATION;
+
+OPERATION Program;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+	$ POWER of 2 Mode Checking...
+	Call CHECKPOWER2;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Finalizing...
+	Call FINALIZE;	
+
+END_OPERATION;
+
+OPERATION Verify Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Verifying...
+	Call VERIFY;
+
+    $ Finalizing...
+	Call FINALIZE;	
+
+END_OPERATION;
+
+OPERATION Read and Save;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Reading Back...
+	Call READBACK;
+
+    $ Finalizing...
+	Call FINALIZE;	
+
+END_OPERATION;
+
+OPERATION Erase Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+		
+    $ Erasing All...
+	Call ERASE_ALL;
+	
+    $ Finalizing...
+	Call FINALIZE;	
+
+END_OPERATION;
+
+OPERATION Erase All;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Erasing All...
+	Call ERASE_ALL;
+	
+    $ Finalizing...
+	Call FINALIZE;	
+
+END_OPERATION;
+
+OPERATION Erase Sector(s) Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+		
+    $ Erasing Sector(s)...
+	Call ERASE_ALL;
+	
+    $ Finalizing...
+	Call FINALIZE;	
+
+END_OPERATION;
+
+OPERATION Blank Check;
+	INT32 Addr = 0;
+    
+    $ Initializing...
+	Call INITIAL;	
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Blank Checking...
+	Call BLANK_CHECK;
+    
+    $ Finalizing...
+	Call FINALIZE;	
+
+END_OPERATION;
+
+OPERATION Set POWER2 Mode;
+	INT32 Addr = 0;
+	  
+	$ Initializing...
+	Call INITIAL;	
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ POWER of 2 Mode Enabling...
+	Call POWER2;
+	
+	$ Finalizing...
+	Call FINALIZE;	
+
+	$ Set the “Power of 2” page size completed. Please Power cycle the Device...
+END_OPERATION;
+
+OPERATION Disabled;
+    INT32 Idx1 = 0;
+    $ Resetting...
+    SIR	8	TDI (18) ;
+	RUNTEST	IDLE	3 TCK	2.00E-002 SEC;
+	$ FPGA Loader Disabled.Please Reset the target FPGA device...
+END_OPERATION;
+OPERATION Uploaded;
+    INT32 Idx1 = 0;
+    $ Uploading...
+    SIR	8	TDI (23) ;
+	RUNTEST	IDLE	3 TCK	2.00E-002 SEC;
+END_OPERATION;
+OPERATION Bypass;
+	INT32 Addr = 0;
+END_OPERATION;            
+            

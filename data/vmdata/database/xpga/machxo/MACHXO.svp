@@ -1,0 +1,3903 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<!-- 08/12/03 Spinti Created from a copy of LAVA1.svp and added SERIAL_PROGRAM from Orca4.svp
+	02/03/04 Spinti: Changed FLASH Uploaded to FLASH Upload to Static RAM, and changed the function call from
+                       REFRESH_FUNCTION to UPLOAD_FUNCTION.
+ 			     Created UPLOAD_FUNCTION that performs enable and disable.
+      03/04/05 Spinti: Changed the PROGRAM_SECURITY, PROGRAM_DONE_BIT, and ERASE_DONE_BIT pulse width to 50.
+    	03/07/05 Spinti: Changed the DISABLE delay to 200ms, and DISCHARGE delay to 10ms.
+    	03/29/05 Nguyen changed the TCK deley to 3
+    		 Nguyen added ISC_DATA_SHIFT instruction to shift the data before the program instruction
+	07/05/05 Nguyen added MDR_FUNCTION to support TransFR    
+	07/08/05 Nguyen changed the refresh operation from entering SRAM mode to clear all the SRAM
+	to stay with FLASH mode changing the config register to get into SRAM mode to clear the SRAM.
+	Switch back into FLASH mode first then issue the ISC_DISABLE instruction.
+	When programming the DONE fuse use the looping algorithm also.Don't use only fixed pulse width.
+	
+	07/26/05 Nguyen changed the fixed fulse width based on the number come from PDE
+	ERASE:
+	Wait 100ms for each iteration and allow 100 iterations max (10 seconds total time).  
+	Parts are taking more like 1.5 - 2.5seconds typically with a test program limit of 3 seconds. 
+	PROGRAM: 
+	Wait 1ms for each iteration and allow 10 iterations max (10ms total time).  
+	Parts are taking < 1ms typically with a test program limit of 1ms.
+	
+	08/16/05 Nguyen added DIRECT_FLASH_ERASE and DIRECT_SVF_FLASH_ERASE functions to clear the SRAM before flash erase 
+	on direct flash programming
+ 	08/23/05 Nguyen added "XFLASH Program USF with Static EBR" and "XSRAM Read EBR"
+ 	10/26/05 Nguyen changed the TCK from 3 to 5
+ 	10/27/05 Nguyen added "Program Only" flow for FLASH Program only
+ 	11/07/05 Nguyen changed DRPAUSE to DRCAPTURE to support looping
+ 	11/07/05 Spinti: Optimized Erase and Programming flows based on Yoshita Yerramiili's feedback.
+ 	                 Changes are commented below with // rcs: 
+	
+	01/04/06 Nguyen added "FLASH Calculate Checksum" Operation	 
+	01/18/06 Ong   : Added "Veriy ID" to Flash Operation List.  
+	06/14/06 Nguyen changed the LDDELAY STATE from DRCAPTURE back to DRPAUSE to make it JTAG SVF compliance
+	06/21/06 Ong   : Added Verfiy Done Bit to Verfiy Only operation for FLASH.  	
+	10/04/06 Spinti: Correct typo; changed "Veirfy" to "Verify".
+	10/16/06 Nguyen added "XSRAM Display USERCODE" and "XFLASH Display USERCODE" to the operation list
+	11/17/06 Nguyen added "XFLASH Calculate Checksum" Operation.	
+	12/05/06 Ong   : Verify Done Bit to be done prior to Disable for FLASH Verify Only operation.
+	01/09/07 Nguyen reduced the erasing time.
+	01/10/07 Nguyen took out the discharge instruction (howard requested)
+	01/15/07 Ong   : Added Verify Done Bit to FLASH Verify Only and Verify Only for RevC and RevD generated svf files.
+	03/19/07 Nguyen added MDRDelay to support TransFR
+	07/20/07 Nguyen modified to support "SRAM Program,Verify" Operation
+	09/12/07 Nguyen changed the LSDR keyword to the loop keyword to be consistent with XP2 (Howard requested)
+	08/17/08 Nguyen added "FLASH Secure Device", "XFALSH Secure Device" and "SRAM Secure Device" operations
+	10/28/08 Nguyen Changed TDO(0XFF)and MASK(0x04) for Verify Done Bit to TDO(0X1D) and no MASK. Checks all availabe bits.   
+	10/28/08 Nguyen Changed the FLASH Program DONE Bit function to using the fixed 50 ms
+	10/28/08 Nguyen added the Verify DONE Bit to the end of FLASH programming to check the SRAM DONE bit.
+	10/31/08 Nguyen changed the TCK from 2 to 5.
+	11/26/08 Nguyen added the "FLASH Erase,Program" and "FLASH Verify,Secure" operations
+	01/12/09 Nguyen added BYPASS instruction after the  ISC_XPROGRAM_ENABLE, LSCC_RESET_ADDRESS to prevent I/O glitch on Background mode
+	03/27/09 Nguyen added the "XFLASH Program,Secure and TransFR" operations
+	07/14/09 Nguyen Added the SVF_CHECKSUM_ARRAY to support embedded checksum
+-->
+<SVF_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+	<!-- Length fields are in number if bits -->
+	<Instruction_Length value="INSTRUCTION_REGISTER_LENGTH"/> 
+	<Row_Width			value="DEVICE_ROW_WIDTH"/> 
+	<Address_Length		value="ADDRESS_REGISTER_LENGTH"/> 
+	<Address length="ADDRESS_LENGTH">
+		INI_ADDRESS			
+	</Address>
+	<ID_Length 			value="DEVICE_ID_LENGTH"/>
+	<Usercode_Length 	value="DEVICE_USERCODE_LENGTH"/>
+	<BSCAN_Length value="BSCAN_REGISTER_LENGTH"/> 
+	<Bscan length="BSCAN_LENGTH">
+		BSCAN_DATA
+	</Bscan>
+	<BscanMask length="BSCAN_LENGTH">
+		BSCAN_MASK
+	</BscanMask>
+	<TotalFuse value="TOTAL_FUSE_MAP"/>
+	<PWP	value="PROGRAMING_PULSE_WIDTH"/>
+	<PWV	value="VERIFY_PULSE_WIDTH"/>
+	<PWE	value="ERASE_PULSE_WIDTH"/>
+	<MDRDelay value="MDR_DELAY"/>
+	<Instruction>
+		EXTEST	 			= 0xD5;
+		INTEST	 			= 0x2C;
+		CLAMP	 			= 0x20;
+		HIGH_Z	 			= 0x18;
+		BPRELOAD 			= 0x1C;
+		ISC_ENABLE 			= 0x15;
+		ISC_XPROGRAM_ENABLE = 0x35;
+		ISC_SRAM_ENABLE 	= 0x55;
+		ISC_DISABLE			= 0x1E;
+		ISC_ADDRESS_SHIFT 	= 0x01;
+		ISC_DATA_SHIFT 		= 0x02;
+		ISC_ERASE 			= 0x03;
+		ISC_PROGRAM			= 0x07;
+		ISC_READ			= 0x0A;
+		ISC_PROGRAM_USERCODE		= 0x1A;
+		ISC_PROGRAM_PES = 0x0F;
+		ISC_READ_PES = 0x11;
+		USERCODE 			= 0x17;
+		ISC_PROGRAM_SECURITY	= 0x09;
+		ISC_PROGRAM_DONE 		= 0x2F;
+		ISC_ERASE_DONE			= 0x24;
+		ISC_DISCHARGE			= 0x14;
+		IDCODE 				= 0x16;
+		BYPASS				= 0xFF;
+		ISC_NOOP			= 0x30;
+		<!-- Alternate Instructions -->
+		LSCC_PROGRAM_INCR_RTI	= 0x67;
+		LSCC_READ_INCR_RTI 		= 0x6A;
+		<!-- Proprietary Mode Instructions -->
+      	LSCC_TRANSPARENT_ENABLE	= 0x75;
+		LSCC_BITSTREAM_BURST	= 0x04;
+		LSCC_RESET_ADDRESS		= 0x21;
+		LSCC_REFRESH			= 0x23;
+		READ_STATUS			= 0xB2;
+		CONFIG_SHIFT		= 0x22;
+		READ_CONFIG			= 0xEA;
+		PROGRAM_REFRESH		= 0x4F;
+		PROGRAM_RAM			= 0x27;
+		PRO_INCR_RTI_RAM	= 0x68;	
+	</Instruction>
+</Parameter>
+<Data>
+	<DataField	name="IDTDI">
+		<FieldBlock	row_width="DEVICE_ID_LENGTH">
+			ID_DATA
+		</FieldBlock>
+	</DataField>
+	<DataField	name="BSCANPROGRAM">
+		<FieldBlock	row_width="BSCAN_REGISTER_LENGTH">
+			MDR_BSCANPROGRAM
+		</FieldBlock>
+	</DataField>
+	<DataField	name="BSCANPROGRAMMASK">
+		<FieldBlock	row_width="BSCAN_REGISTER_LENGTH">
+			MDR_BSCANPROGRAMMASK
+		</FieldBlock>
+	</DataField>
+</Data>
+<Operation_List>	
+	"FLASH Bypass"	=	"INIT 	! Initialize";
+	"FLASH Verify ID" = 	"INIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"Verify ID" = 		"INIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"FLASH Display ID" = "INIT, READ_ID, SAVE_ID";
+	"FLASH Verify USERCODE"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_ENABLE	! Enable the programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 								
+	"FLASH Display USERCODE"	=	"INIT, 
+									 READ_ID	! Check the IDCODE,
+									 SAVE_ID,
+									FLASH_ENABLE	! Enable the programming mode, 
+									SAVE_USERCODE,
+									DISABLE ! Exit the programming mode";
+	"FLASH Disable Only" = "INIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"FLASH Enable Only" = "INIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   IO_STATE ! Program Bscan register,
+						   FLASH_ENABLE	! Enable the programming mode"	;
+	"FLASH Erase DONE bit"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								ERASE_DONE_BIT	! Erase the done bit, 
+		 			 			DISABLE ! Exit the programming mode"	;
+	"FLASH Program DONE bit"	=	"INIT 	! Initialize, 
+									 READ_ID	! Check the IDCODE,
+									 IO_STATE ! Program Bscan register,
+									 FLASH_ENABLE	! Enable the programming mode, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit,
+		 			 				 DISABLE ! Exit the programming mode,
+		 			 				 VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	"FLASH Read DONE bit" = 	"INIT, 
+								 READ_ID, 
+								 FLASH_ENABLE	! Enable the programming mode, 
+								 READ_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"FLASH Re-Initialize" = "INIT 	! Initialize,  
+						  	 FLASH_ENABLE	! Enable programming mode, 
+						  	 DIRECT_FLASH_ERASE	! Erase the device, 
+	 			 		  	 DISABLE ! Exit the programming mode"	;
+	
+	"FLASH Erase,Program,Verify" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_FLASH_ERASE	! Erase the device,
+								CHECK_STATUS ! Read the status bit,
+								PROGRAM_STATUS	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	
+	"FLASH Erase,Program" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_FLASH_ERASE	! Erase the device,
+								CHECK_STATUS ! Read the status bit,
+								PROGRAM_STATUS	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			 			 			
+	"FLASH Erase,Program,Verify,Secure" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	
+	"FLASH Secure Device" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+			 			 		
+	"FLASH Program"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode,
+							DIRECT_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							PROGRAM_STATUS	! Program Fuse Map, 
+							PROGRAM_USERCODE	! Program USERCODE,
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							CHECK_STATUS ! Read the status bit, 							
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;		
+	"FLASH Verify Only" =	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							VERIFY_DONE_BIT ! Verify Done Bit,
+							DISABLE ! Exit the programming mode"	;
+	
+	"FLASH Verify,Secure" =	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							VERIFY_DONE_BIT ! Verify Done Bit,
+							PROGRAM_SECURITY ! Secure device,
+							DISABLE ! Exit the programming mode"	;
+													
+	"FLASH Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							DIRECT_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+		 			 			
+	
+	"FLASH Calculate Data CRC"	=	"INIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+									 IO_STATE ! Program Bscan register,
+						 			 FLASH_ENABLE	! Enable programming mode, 
+						             SAVE_ARRAY,
+						             SAVE_USERCODE,
+			 						 DISABLE";
+	"FLASH Calculate Checksum"	=	"INIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+									 IO_STATE ! Program Bscan register,
+						 			 FLASH_ENABLE	! Enable programming mode, 
+						             SAVE_ARRAY,
+						             SAVE_USERCODE,
+			 						 DISABLE";			 						 
+	"FLASH Read and Save"	=	"INIT, 
+								 READ_ID, 
+								 SAVE_ID, 
+								 IO_STATE ! Program Bscan register,
+								 FLASH_ENABLE, 
+								 SAVE_ARRAY, 
+								 SAVE_USERCODE, 
+								 DISABLE";
+	
+	"FLASH Read Status Register" = "INIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 SAVE_ID,
+					 			 FLASH_ENABLE,
+					 			 SAVE_CONFIG_BIT,
+					 			 DISABLE";
+	"FLASH Capture Only" = "	INIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 							 
+	"FLASH Upload to Static RAM" = " 	INIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";
+	"XFLASH Upload to Static RAM" = " 	INIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";
+	"XFLASH Bypass"	=	"INIT 	! Initialize";
+	"XFLASH Verify ID" = 	"INIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"XFLASH Display ID" = "INIT, READ_ID, SAVE_ID";
+	"XFLASH Verify USERCODE"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 
+	"Verify USERCODE"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 								
+	"XFLASH Display USERCODE"	=	"INIT, 
+									 READ_ID	! Check the IDCODE,
+									 SAVE_ID,
+									FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 	SAVE_USERCODE,
+								 	DISABLE ! Exit the programming mode";
+	"XFLASH Disable Only" = "INIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"XFLASH Enable Only" = "INIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode"	;
+	"XFLASH Erase DONE bit"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								ERASE_DONE_BIT	! Erase the done bit, 
+		 			 			DISABLE ! Exit the programming mode"	;
+	"XFLASH Program DONE bit"	=	"INIT 	! Initialize, 
+									 READ_ID	! Check the IDCODE,
+									 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit,
+		 			 				 DISABLE ! Exit the programming mode"	;
+	"XFLASH Read DONE bit" = 	"INIT, 
+								 READ_ID, 
+								 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 READ_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"XFLASH Read Status Register" = "INIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 SAVE_ID,
+					 			 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+					 			 SAVE_CONFIG_BIT,
+					 			 DISABLE ! Exit the programming mode";	
+	"XFLASH Capture Only" = "	INIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+					 			 
+	"XFLASH Re-Initialize" = "INIT 	! Initialize,  
+						  	 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+						  	 FLASH_ERASE	! Erase the device, 
+	 			 		  	 DISABLE ! Exit the programming mode"	;
+	
+	
+	"XFLASH TransFR" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+			 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program and TransFR" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		IO_STATE ! Program Bscan register,
+			 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;
+	"XFLASH Program,Secure and TransFR" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		CHECK_STATUS ! Read the status bit,
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		IO_STATE ! Program Bscan register,
+			 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;			 			 		
+	
+	"XFLASH Program USF with Static EBR" =	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+											FLASH_ERASE	! Erase the device, 
+											CHECK_STATUS ! Read the status bit,
+						 			 		PROGRAM_STATUS	! Program Fuse Map,
+						 			 		PROGRAM_USERCODE	! Program USERCODE,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_VERIFY	! Verify Fuse Map, 
+											VERIFY_USERCODE		! Verify USERCODE,
+						 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+											CHECK_STATUS ! Read the status bit,
+						 			 		DISABLE ! Exit the programming mode"	;								
+	
+	"XFLASH Program USF from PROM file" =	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+											FLASH_ERASE	! Erase the device, 
+											CHECK_STATUS ! Read the status bit,
+						 			 		PROGRAM_STATUS	! Program Fuse Map,
+						 			 		PROGRAM_USERCODE	! Program USERCODE,
+											CHECK_STATUS ! Read the status bit,
+											FLASH_VERIFY	! Verify Fuse Map, 
+											VERIFY_USERCODE		! Verify USERCODE,
+						 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+											CHECK_STATUS ! Read the status bit,
+						 			 		DISABLE ! Exit the programming mode"	;
+	
+	"XFLASH Erase,Program,Verify" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+		
+	"XFLASH Erase,Program,Verify,Secure" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	
+	"XFLASH Secure Device" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,  
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+			 			 		
+	"XFLASH Program"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+							FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							PROGRAM_STATUS	! Program Fuse Map, 
+							PROGRAM_USERCODE	! Program USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							DISABLE ! Exit the programming mode"	;		
+	"XFLASH Verify Only" =	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							DISABLE ! Exit the programming mode" ;
+							
+	"XFLASH Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+							FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+		 			 			
+	
+	"XFLASH Calculate Data CRC"	=	"INIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+									 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+						             SAVE_ARRAY,
+						             SAVE_USERCODE,
+			 						 DISABLE";
+	"XFLASH Calculate Checksum"	=	"INIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+									 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+						             SAVE_ARRAY,
+						             SAVE_USERCODE,
+			 						 DISABLE";					 						 
+	"XFLASH Read and Save"	=	"INIT, 
+								 READ_ID, 
+								 SAVE_ID, 
+								 FLASH_TRANSPARENT_ENABLE, 
+								 SAVE_ARRAY, 
+								 SAVE_USERCODE, 
+								 DISABLE";
+								 
+	"SRAM Bypass"	=	"INIT 	! Initialize";
+	"SRAM Verify ID" = 	"INIT 	! Initialize, 
+						 READ_ID ! Check the IDCODE"; 
+	"SRAM Display ID" = "INIT, READ_ID, SAVE_ID";
+	
+	"SRAM Verify USERCODE"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"SRAM Display USERCODE"	=	"INIT, READ_ID, SAVE_ID,SRAM_ENABLE,SAVE_USERCODE,DISABLE";
+	
+	
+	"SRAM Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"SRAM Enable Only" = "INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register,
+						SRAM_ENABLE	! Enable SRAM programming mode"	;
+	"SRAM Fast Program" = "	INIT 	! Initialize,   
+								READ_ID	! Check the IDCODE,
+								IO_STATE ! Program Bscan register,
+						 		SRAM_ENABLE	! Enable SRAM programming mode,
+								ERASE	! Erase the device, 
+								BURST_PROGRAM	! Program Fuse Map,
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	;
+						
+	"SRAM Program,Verify" = "INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register, 
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE	! Erase the device,
+							PROGRAM	! Program Fuse Map,
+							VERIFY	! Verify Fuse Map, 
+							PROGRAM_USERCODE	! Program USERCODE,							
+			 			 	VERIFY_USERCODE		! Verify USERCODE, 
+			 			 	PROGRAM_DONE_BIT	! Program DONE bit,							
+				 			DISABLE ! Exit the programming mode"	;
+	"SRAM Erase,Program,Verify" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								VERIFY	! Verify Fuse Map, 
+								PROGRAM_USERCODE	! Program USERCODE,								
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		DISABLE ! Exit the programming mode"	;					
+	"SRAM Program,Verify,Secure"	=	"INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE, 
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									ERASE	! Erase the device, 
+									PROGRAM	! Program Fuse Map, 
+									VERIFY	! Verify Fuse Map,
+									PROGRAM_USERCODE	! Program USERCODE,									 
+				 			 		VERIFY_USERCODE		! Verify USERCODE, 
+				 			 		PROGRAM_SECURITY ! Secure device,
+				 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+				 			 		DISABLE ! Exit the programming mode"	;
+	
+	"SRAM Secure Device" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		DISABLE ! Exit the programming mode"	;
+			 			 		
+	"SRAM Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program Only" = "	INIT 	! Initialize, 
+					READ_ID	! Check the IDCODE,  
+					IO_STATE ! Program Bscan register,
+					SRAM_ENABLE	! Enable SRAM programming mode, 
+					ERASE	! Erase the device, 
+					PROGRAM	! Program Fuse Map,
+					PROGRAM_USERCODE	! Program USERCODE,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+		 			DISABLE ! Exit the programming mode"	;
+	"SRAM Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,  
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Re-Initialize" = " INIT 	! Initialize,
+						SRAM_ENABLE	! Enable SRAM programming mode, 
+						ERASE	! Erase the device, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	
+	"SRAM Re-Initialize" = " INIT 	! Initialize,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Erase DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! Erase DONE bit,
+							PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Read Status Register" = "INIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 SAVE_ID,
+					 			 SRAM_ENABLE	! Enable SRAM programming mode,
+					 			 SAVE_CONFIG_BIT,
+					 			 DISABLE ! Exit the programming mode";	
+	"SRAM Capture Only" = "	INIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+	"SRAM Read DONE bit"	=	"INIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 READ_DONE_BIT	! Erase the done bit"	;
+	
+	"SRAM Calculate Data CRC"	=	"INIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+								 IO_STATE ! Program Bscan register,
+					 			 SRAM_ENABLE	! Enable SRAM programming mode, 
+					             SAVE_ARRAY,
+					             SAVE_USERCODE,
+		 						 DISABLE";
+	"SRAM Calculate Checksum"	=	"INIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+								 IO_STATE ! Program Bscan register,
+					 			 SRAM_ENABLE	! Enable SRAM programming mode, 
+					             SAVE_ARRAY,
+					             SAVE_USERCODE,
+		 						 DISABLE";		 						 
+	"SRAM Read and Save"	=	"INIT, 
+						 READ_ID, 
+						 SAVE_ID, 
+						 IO_STATE ! Program Bscan register,
+						 SRAM_ENABLE, 
+						 SAVE_ARRAY, 
+						 SAVE_USERCODE, 
+						 DISABLE";
+	"SRAM Refresh" = " 	INIT !Initialize,
+						READ_ID !Check the IDCODE,
+						REFRESH_FUNCTION ! Refresh";
+					             
+	"XSRAM Bypass"	=	"	INIT 	! Initialize"	;
+	"XSRAM Verify ID" = 	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE"	; 
+	"XSRAM Display ID" = "INIT, READ_ID, SAVE_ID";								
+	"XSRAM Disable Only" = "	INIT 	! Initialize, 
+	 			 				DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode"	;
+	"XSRAM Read and Save"	=	"INIT, 
+								 READ_ID, 
+								 SAVE_ID, 
+								 SRAM_TRANSPARENT_READ_ENABLE, 
+								 SAVE_ARRAY, 
+								 SAVE_USERCODE, 
+								 DISABLE";					 
+	"XSRAM Calculate Data CRC"	=	"INIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+									 SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+						             SAVE_ARRAY,
+						             SAVE_USERCODE,
+			 						 DISABLE";
+	
+	"XSRAM Calculate Checksum"	=	"INIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+									 SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+						             SAVE_ARRAY,
+						             SAVE_USERCODE,
+			 						 DISABLE";
+			 						 	 			 		
+	"XSRAM Verify Only"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+								VERIFY	! Verify Fuse Map, 
+		 			 			VERIFY_USERCODE		! Verify USERCODE, 
+		 			 			DISABLE ! Exit the programming mode"	;
+	"XSRAM Verify USERCODE"	=	"	INIT 	! Initialize, 
+									READ_ID	! Check the IDCODE,
+									SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+									VERIFY_USERCODE		! Verify USERCODE,
+			 			 			DISABLE ! Exit the programming mode"	;
+	"XSRAM Read DONE bit"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+					 			SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,  
+					 			READ_DONE_BIT	! Read the done bit,
+					 			DISABLE ! Exit the programming mode"	;				             
+	"XSRAM Read Status Register" = "INIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 SAVE_ID,
+					 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+					 			 SAVE_CONFIG_BIT,
+					 			 DISABLE ! Exit the programming mode";	
+	"XSRAM Capture Only" = "	INIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+	"Capture Only" = "	INIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+	"XSRAM Display USERCODE"	=	"INIT, READ_ID, SAVE_ID,SRAM_TRANSPARENT_READ_ENABLE,SAVE_USERCODE,DISABLE";											 			 
+						
+</Operation_List>
+<Operation_List label="SingleSVFOperation">
+	"FLASH Bypass"	=	"SVFINIT 	! Initialize";
+	"FLASH Verify ID" = 	"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"Verify ID" = 		"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"FLASH Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"FLASH Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_ENABLE	! Enable PROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 								
+	"FLASH Display USERCODE"	=	"SVFINIT, 
+									 READ_ID	! Check the IDCODE,
+									 FLASH_ENABLE	! Enable PROGRAM mode, 
+									 SVF_SAVE_USERCODE,
+									 DISABLE ! Exit the programming mode";
+	"FLASH Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"FLASH Enable Only" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   IO_STATE ! Program Bscan register,
+						   FLASH_ENABLE	! Enable the programming mode"	;
+	"FLASH Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								ERASE_DONE_BIT	! Erase the done bit, 
+		 			 			DISABLE ! Exit the programming mode"	;
+	"FLASH Program DONE bit"	=	"SVFINIT 	! Initialize, 
+									 READ_ID	! Check the IDCODE,
+									 IO_STATE ! Program Bscan register,
+									 FLASH_ENABLE	! Enable the programming mode, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit,
+		 			 				 DISABLE ! Exit the programming mode,
+		 			 				 VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	"FLASH Read DONE bit" = 	"SVFINIT, 
+								 READ_ID, 
+								 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 SVF_SAVE_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"FLASH Re-Initialize" = "SVFINIT 	! Initialize,  
+						  	 FLASH_ENABLE	! Enable programming mode, 
+						  	 DIRECT_FLASH_ERASE	! Erase the device, 
+	 			 		  	 DISABLE ! Exit the programming mode"	;
+	
+	"FLASH Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map,
+								VERIFY_USERCODE	! Verify USERCODE, 
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			 			 		
+	"FLASH Erase,Program" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_FLASH_ERASE	! Erase the device,
+								CHECK_STATUS ! Read the status bit,
+								PROGRAM_STATUS	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			 			 					 			 		
+	"Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map,
+								VERIFY_USERCODE	! Verify USERCODE, 
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+		
+	"Program Only" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;	
+	"FLASH Erase,Program,Verify,Secure" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE, 
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	
+	"FLASH Secure Device" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+			 			 		
+	"Erase,Program,Verify,Secure" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE, 
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	
+	"Secure Device" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+			 			 		
+	"FLASH Program"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode,
+							DIRECT_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							PROGRAM_STATUS	! Program Fuse Map, 
+							PROGRAM_USERCODE	! Program USERCODE,
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							CHECK_STATUS ! Read the status bit, 							
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;		
+	"Program"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode,
+							DIRECT_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							PROGRAM_STATUS	! Program Fuse Map, 
+							PROGRAM_USERCODE	! Program USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;		
+	
+	"FLASH Verify Only" =	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE, 
+							CHECK_STATUS ! Read the status bit, 
+							VERIFY_DONE_BIT ! Verify Done Bit,
+							DISABLE ! Exit the programming mode"	;
+	"FLASH Verify,Secure" =	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							VERIFY_DONE_BIT ! Verify Done Bit,
+							PROGRAM_SECURITY ! Secure device,
+							DISABLE ! Exit the programming mode"	;
+															
+	"Verify Only" =	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE, 
+							CHECK_STATUS ! Read the status bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	
+	"FLASH Erase Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							DIRECT_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+		 			 			
+	"Erase Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							DIRECT_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	
+	"FLASH Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+									 IO_STATE ! Program Bscan register,
+						 			 FLASH_ENABLE	! Enable programming mode, 
+						             SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE,
+			 						 DISABLE";
+	"FLASH Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 READ_ID, 
+								 	 SVF_SAVE_ID, 
+								 	 FLASH_ENABLE	! Enable programming mode, 
+						             SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE,
+						             DISABLE";			 						 
+	"FLASH Read and Save"	=	"SVFINIT, 
+								 READ_ID, 
+								 SVF_SAVE_ID, 
+								 IO_STATE ! Program Bscan register,
+								 FLASH_ENABLE, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE, 
+								 DISABLE";
+	
+	"FLASH Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 FLASH_ENABLE,
+					 			 SAVE_CONFIG_BIT,
+					 			 DISABLE";
+	"FLASH Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+	"FLASH Upload to Static RAM" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";
+	"XFLASH Upload to Static RAM" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";				 			 							 
+	"XFLASH Bypass"	=	"SVFINIT 	! Initialize";
+	"XFLASH Verify ID" = 	"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"XFLASH Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"XFLASH Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 
+	"Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	;								
+	"XFLASH Display USERCODE"	=	"SVFINIT, 
+								     READ_ID	! Check the IDCODE,
+									FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 	SVF_SAVE_USERCODE,
+								 	DISABLE ! Exit the programming mode";
+	"XFLASH Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"XFLASH Enable Only" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode"	;
+	"XFLASH Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								ERASE_DONE_BIT	! Erase the done bit, 
+		 			 			DISABLE ! Exit the programming mode"	;
+	"XFLASH Program DONE bit"	=	"SVFINIT 	! Initialize, 
+									 READ_ID	! Check the IDCODE,
+									 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit,
+		 			 				 DISABLE ! Exit the programming mode"	;
+	"XFLASH Read DONE bit" = 	"SVFINIT, 
+								 READ_ID, 
+								 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 SVF_SAVE_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"XFLASH Re-Initialize" = "SVF_INIT 	! Initialize,  
+						  	 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+						  	 FLASH_ERASE	! Erase the device, 
+	 			 		  	 DISABLE ! Exit the programming mode"	;
+	
+	"XFLASH TransFR" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						IO_STATE ! Program Bscan register,
+	 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program and TransFR" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		IO_STATE ! Program Bscan register,
+			 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program,Secure and TransFR" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		IO_STATE ! Program Bscan register,
+			 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;
+			 			 		
+	"XFLASH Program USF with Static EBR" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XFLASH mode, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS_EBR	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XFLASH Program USF from PROM file"	= "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XFLASH mode, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS_EBR	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;		 			 		
+	
+	"XFLASH Erase,Program,Verify" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+		
+	"XFLASH Erase,Program,Verify,Secure" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	
+	"XFLASH Secure Device" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+			 			 		
+	"XFLASH Program"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+							FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							PROGRAM_STATUS	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE, 
+							CHECK_STATUS ! Read the status bit, 
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							DISABLE ! Exit the programming mode"	;		
+	"XFLASH Verify Only" =	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							DISABLE ! Exit the programming mode"   ;
+	"XFLASH Erase Only"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+							FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+		 			 			
+	
+	"XFLASH Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+									 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+						             SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE,
+			 						 DISABLE";
+	"XFLASH Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 READ_ID, 
+								 	 SVF_SAVE_ID, 
+								 	 FLASH_TRANSPARENT_ENABLE	! Enable programming mode, 
+						             SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE,
+						             DISABLE";					 						 
+	"XFLASH Read and Save"	=	"SVFINIT, 
+								 READ_ID, 
+								 SVF_SAVE_ID, 
+								 FLASH_TRANSPARENT_ENABLE, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"XFLASH Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 FLASH_TRANSPARENT_ENABLE, 
+					 			 SVF_SAVE_CONFIG_BIT,
+					 			 DISABLE";	
+	"XFLASH Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+	"SRAM Bypass"	=	"SVFINIT 	! Initialize";
+	"SRAM Verify ID" = 	"SVFINIT 	! Initialize, 
+						 READ_ID ! Check the IDCODE"; 
+	"SRAM Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"SRAM Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"SRAM Display USERCODE"	=	"SVFINIT, READ_ID, SRAM_ENABLE, SVF_SAVE_USERCODE, DISABLE";
+	"SRAM Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"SRAM Enable Only" = "SVFINIT 	! Initialize, 
+						  READ_ID	! Check the IDCODE,
+						  IO_STATE ! Program Bscan register,
+						  SRAM_ENABLE	! Enable SRAM programming mode"	;
+	"SRAM Fast Program" = "	SVFINIT 	! Initialize,   
+								READ_ID	! Check the IDCODE,
+								IO_STATE ! Program Bscan register,
+						 		SRAM_ENABLE	! Enable SRAM programming mode,
+								ERASE	! Erase the device, 
+								BURST_PROGRAM	! Program Fuse Map,
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	;
+							  
+	"SRAM Program,Verify" = "SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,  
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map,
+							VERIFY	! Verify Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							VERIFY_USERCODE		! Verify USERCODE, 
+							PROGRAM_DONE_BIT	! Program DONE bit,
+				 			DISABLE ! Exit the programming mode"	;
+	"SRAM Erase,Program,Verify" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								VERIFY	! Verify Fuse Map, 
+								PROGRAM_USERCODE	! Program USERCODE,								
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		DISABLE ! Exit the programming mode"	;					
+	"SRAM Program,Verify,Secure"	=	"SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE, 
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									ERASE	! Erase the device, 
+									PROGRAM	! Program Fuse Map, 
+									VERIFY	! Verify Fuse Map, 
+									PROGRAM_USERCODE	! Program USERCODE,									
+				 			 		VERIFY_USERCODE		! Verify USERCODE, 
+				 			 		PROGRAM_SECURITY ! Secure device,
+				 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+				 			 		DISABLE ! Exit the programming mode"	;
+	
+	"SRAM Secure Device" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		DISABLE ! Exit the programming mode"	;
+			 			 		
+	"SRAM Erase Only"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program Only" = "SVFINIT 	! Initialize, 
+					READ_ID	! Check the IDCODE,  
+					IO_STATE ! Program Bscan register,
+					SRAM_ENABLE	! Enable SRAM programming mode, 
+					ERASE	! Erase the device, 
+					PROGRAM	! Program Fuse Map,
+					PROGRAM_USERCODE	! Program USERCODE,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+		 			DISABLE ! Exit the programming mode"	;
+	"SRAM Verify Only"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,  
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Re-Initialize" = "SVFINIT 	! Initialize,
+					   SRAM_ENABLE	! Enable SRAM programming mode, 
+					   ERASE	! Erase the device,
+					   DISABLE ! Exit the programming mode"	;
+	"SRAM Re-Initialize" = "SVFINIT 	! Initialize,
+						   SRAM_ENABLE	! Enable SRAM programming mode, 
+						   ERASE	! Erase the device,
+						   DISABLE ! Exit the programming mode"	;
+	"SRAM Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! Erase DONE bit,
+							PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 SVF_SAVE_DONE_BIT	! Erase the done bit"	;
+	
+	"SRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+								 IO_STATE ! Program Bscan register,
+					 			 SRAM_ENABLE	! Enable SRAM programming mode, 
+					             SVF_SAVE_ARRAY,
+					             SVF_SAVE_USERCODE,
+		 						 DISABLE";
+	"SRAM Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 READ_ID, 
+								 	 SVF_SAVE_ID, 
+								 	 SRAM_ENABLE	! Enable programming mode, 
+						             SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE,
+						             DISABLE";	
+		 						 		 						 
+	"SRAM Read and Save"	=	"SVFINIT, 
+						 		 READ_ID, 
+								 SVF_SAVE_ID, 
+								 IO_STATE ! Program Bscan register,
+								 SRAM_ENABLE, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"SRAM Refresh" = " SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						REFRESH_FUNCTION ! Refresh";
+					             
+	"SRAM Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 SRAM_ENABLE, 
+					 			 SVF_SAVE_CONFIG_BIT,
+					 			 DISABLE";							
+	"SRAM Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+	"XSRAM Bypass"	=	"SVFINIT 	! Initialize"	;
+	"XSRAM Verify ID" = 	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE"	; 
+	"XSRAM Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";							
+	"XSRAM Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode"	;
+	"XSRAM Read and Save"	=	"SVFINIT, 
+								 READ_ID, 
+								 SVF_SAVE_ID, 
+								 SRAM_TRANSPARENT_READ_ENABLE, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE, 
+								 DISABLE";					 
+	"XSRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+						 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+						             SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE,
+			 						 DISABLE";
+	
+	"XSRAM Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 READ_ID,
+									 SVF_SAVE_ID,									 
+									 SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+						             SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE,
+						             DISABLE";
+			 						 	 			 		
+	"XSRAM Verify Only"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+					 			SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,  
+					 			SVF_SAVE_DONE_BIT	! Read the done bit,
+					 			DISABLE ! Exit the programming mode"	;				             
+	"XSRAM Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+					 			 SVF_SAVE_CONFIG_BIT,
+					 			 DISABLE ! Exit the programming mode";	
+	"XSRAM Capture Only" = "SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;	
+	"XSRAM Display USERCODE"	=	"SVFINIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SVF_SAVE_USERCODE, DISABLE";
+											 			 
+	"Capture Only" = "SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+						
+</Operation_List>
+<Operation_List label="TurboOperation">
+	"FLASH Bypass"	=	"INIT 	! Initialize";
+	"FLASH Verify ID" = 	"INIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"Verify ID" = 		"INIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"FLASH Display ID" = "INIT, READ_ID, SAVE_ID";
+	"FLASH Verify USERCODE"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_ENABLE	! Enable PROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 							
+	"FLASH Display USERCODE"	=	"INIT, 
+									 READ_ID	! Check the IDCODE,
+									FLASH_ENABLE	! Enable PROGRAM mode, 
+								 	SAVE_USERCODE,
+								 	DISABLE ! Exit the programming mode";
+	"FLASH Disable Only" = "INIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"FLASH Enable Only" = "INIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   FLASH_ENABLE	! Enable the programming mode"	;
+	"FLASH Erase DONE bit"	=	"INIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase the done bit"	;
+	"FLASH Program DONE bit"	=	"INIT 	! Initialize, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit"	;
+	"FLASH Read DONE bit" = 	"INIT, 
+								 READ_ID, 
+								 FLASH_ENABLE	! Enable the PROGRAM mode, 
+								 READ_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"FLASH Re-Initialize" = "INIT 	! Initialize,  
+						  	 DIRECT_FLASH_ERASE	! Erase the device"	;
+	
+	"FLASH Erase,Program,Verify" = "	INIT 	! Initialize, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE, 
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map,
+								VERIFY_USERCODE	! Verify USERCODE,  
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+	
+	"FLASH Erase,Program" = "	INIT 	! Initialize, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE, 
+								CHECK_STATUS ! Read the status bit,
+								FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+									
+	"FLASH Erase,Program,Verify,Secure" = "	INIT 	! Initialize, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE, 
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE, 
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+	
+	"FLASH Secure Device" = "	INIT 	! Initialize, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+			 			 		
+	"FLASH Program"	=	"	INIT 	! Initialize, 
+							DIRECT_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							PROGRAM_STATUS	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,  
+							CHECK_STATUS ! Read the status bit, 
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit"	;		
+	"FLASH Verify Only" =	"	INIT 	! Initialize, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE, 
+							CHECK_STATUS ! Read the status bit"	;
+	"FLASH Verify,Secure" =	"	INIT 	! Initialize, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							VERIFY_DONE_BIT ! Verify Done Bit,
+							PROGRAM_SECURITY ! Secure device"	;							
+	"FLASH Erase Only"	=	"	INIT 	! Initialize, 
+							DIRECT_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit"	;
+		 			 			
+	
+	"FLASH Calculate Data CRC"	=	"INIT ! Initialize,
+									 SAVE_ARRAY,
+						             SAVE_USERCODE";
+	"FLASH Calculate Checksum"	=	"INIT ! Initialize,
+									 SAVE_ARRAY,
+						             SAVE_USERCODE";						             
+	"FLASH Read and Save"	=	"INIT, 
+								 FLASH_ENABLE, 
+								 SAVE_ARRAY, 
+								 SAVE_USERCODE";
+	
+	"FLASH Read Status Register" = "INIT ! Initialize,
+					 			 SAVE_CONFIG_BIT";	
+	"FLASH Capture Only" = "	INIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;	
+	"FLASH Upload to Static RAM" = " 	INIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";
+	"XFLASH Upload to Static RAM" = " 	INIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";												 			 							 
+	"XFLASH Bypass"	=	"INIT 	! Initialize";
+	"XFLASH Verify ID" = 	"INIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"XFLASH Display ID" = "INIT, READ_ID, SAVE_ID";
+	"XFLASH Verify USERCODE"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 
+	"Verify USERCODE"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 								
+	"XFLASH Display USERCODE"	=	"INIT, 
+									 READ_ID	! Check the IDCODE,
+									FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 	SAVE_USERCODE,
+								 	DISABLE ! Exit the programming mode";
+	"XFLASH Disable Only" = "INIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"XFLASH Enable Only" = "INIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode"	;
+	"XFLASH Erase DONE bit"	=	"INIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase the done bit"	;
+	"XFLASH Program DONE bit"	=	"INIT 	! Initialize, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit"	;
+	"XFLASH Read DONE bit" = 	"INIT, 
+								 READ_ID, 
+								 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 READ_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"XFLASH Re-Initialize" = "INIT 	! Initialize,  
+						  	 FLASH_ERASE	! Erase the device"	;
+	
+	"XFLASH TransFR" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						IO_STATE ! Program Bscan register,
+			 			FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program and TransFR" = "	INIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+								DISABLE ! Exit the programming mode,
+								IO_STATE ! Program Bscan register,
+								FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program,Secure and TransFR" = "	INIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+								CHECK_STATUS ! Read the status bit,
+								DISABLE ! Exit the programming mode,
+								IO_STATE ! Program Bscan register,
+								FLASH_MDR ! Transparent Field Reconfiguration"	;
+	"XFLASH Program USF with Static EBR" = "	INIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+	"XFLASH Program USF from PROM file"	= "	INIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;								
+	
+	"XFLASH Erase,Program,Verify" = "	INIT 	! Initialize,
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+		
+	"XFLASH Erase,Program,Verify,Secure" = "	INIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+	
+	"XFLASH Secure Device" = "	INIT 	! Initialize, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+			 			 		
+	"XFLASH Program"	=	"	INIT 	! Initialize, 
+							FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							PROGRAM_STATUS	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE, 
+							CHECK_STATUS ! Read the status bit, 
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit"	;		
+	"XFLASH Verify Only" =	"	INIT 	! Initialize, 
+							FLASH_VERIFY	! Verify Fuse Map,
+							VERIFY_USERCODE	! Verify USERCODE, 
+							CHECK_STATUS ! Read the status bit"	;
+	"XFLASH Erase Only"	=	"	INIT 	! Initialize, 
+							FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit"	;
+		 			 			
+	
+	"XFLASH Calculate Data CRC"	=	"INIT ! Initialize,
+									 SAVE_ARRAY,
+						             SAVE_USERCODE";
+	"XFLASH Calculate Checksum"	=	"INIT ! Initialize,
+									 SAVE_ARRAY,
+						             SAVE_USERCODE";						             
+	"XFLASH Read and Save"	=	"INIT, 
+								 SAVE_ARRAY, 
+								 SAVE_USERCODE";
+	"XFLASH Read Status Register" = "INIT ! Initialize,
+					 			 SAVE_CONFIG_BIT";	
+	"XFLASH Capture Only" = "	INIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;			
+	
+			
+			 						 		 			 
+	"SRAM Bypass"	=	"INIT 	! Initialize";
+	"SRAM Verify ID" = 	"INIT 	! Initialize, 
+						 READ_ID ! Check the IDCODE"; 
+	"SRAM Display ID" = "INIT, READ_ID, SAVE_ID";
+	
+	"SRAM Verify USERCODE"	=	"INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"SRAM Display USERCODE"	=	"INIT, READ_ID, SAVE_USERCODE";
+	
+	"SRAM Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"SRAM Enable Only" = "INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						SRAM_ENABLE	! Enable SRAM programming mode"	;
+	
+	"SRAM Fast Program" = "	SVFINIT 	! Initialize,   
+									ERASE	! Erase the device, 
+								BURST_PROGRAM	! Program Fuse Map,
+								VERIFY_USERCODE		! Verify USERCODE"	;
+						
+	"SRAM Program,Verify" = "INIT 	! Initialize,
+							ERASE	! Erase the device,  
+							PROGRAM	! Program Fuse Map,
+							VERIFY	! Verify Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							VERIFY_USERCODE		! Verify USERCODE, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Erase,Program,Verify" = "	INIT 	! Initialize, 
+									ERASE	! Erase the device, 
+									PROGRAM	! Program Fuse Map,
+									VERIFY	! Verify Fuse Map, 
+									PROGRAM_USERCODE	! Program USERCODE,									
+				 			 		VERIFY_USERCODE		! Verify USERCODE, 
+				 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;					
+	"SRAM Program,Verify,Secure"	=	"INIT 	! Initialize, 
+										ERASE	! Erase the device, 
+										PROGRAM	! Program Fuse Map, 
+										VERIFY	! Verify Fuse Map, 
+										PROGRAM_USERCODE	! Program USERCODE,										
+					 			 		VERIFY_USERCODE		! Verify USERCODE, 
+					 			 		PROGRAM_SECURITY ! Secure device,
+					 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+					 			 		
+	"SRAM Secure Device" = "	INIT 	! Initialize, 
+								PROGRAM_SECURITY ! Secure device"	;
+								
+	"SRAM Erase Only"	=	"	INIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+	"SRAM Program Only" = 	"INIT 	! Initialize, 
+						ERASE	! Erase the device, 
+						PROGRAM	! Program Fuse Map,
+						PROGRAM_USERCODE	! Program USERCODE,
+						PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Verify Only"	=	"INIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE"	;
+	"Re-Initialize" = " INIT 	! Initialize,
+						ERASE	! Erase the device"	;	
+	"SRAM Re-Initialize" = " INIT 	! Initialize,
+							ERASE	! Erase the device"	;
+	"SRAM Erase DONE bit"	=	"INIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase the done bit"	;
+	"SRAM Program DONE bit"	=	"INIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase DONE bit,
+								PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Read DONE bit"	=	"INIT 	! Initialize, 
+								 READ_DONE_BIT	! Erase the done bit"	;
+	"SRAM Calculate Data CRC"	=	"INIT ! Initialize,
+									 SAVE_ARRAY,
+						             SAVE_USERCODE";
+	"SRAM Calculate Checksum"	=	"INIT ! Initialize,
+									 SAVE_ARRAY,
+						             SAVE_USERCODE";						             
+	"SRAM Read and Save"	=	"INIT, 
+								 SAVE_ARRAY, 
+								 SAVE_USERCODE";
+	"SRAM Refresh" = " 	INIT !Initialize,
+						READ_ID !Check the IDCODE,
+						REFRESH_FUNCTION ! Refresh";
+	"SRAM Read Status Register" = "INIT ! Initialize,
+					 			 SAVE_CONFIG_BIT";									 								
+	"SRAM Capture Only" = "	INIT 	! Initialize,
+						IO_STATE ! Capture Bscan register"	;					 			 
+	"XSRAM Bypass"	=	"	INIT 	! Initialize"	;
+	"XSRAM Verify ID" = 	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE"	; 
+	"XSRAM Display ID" = "INIT, READ_ID, SAVE_ID";								
+	"XSRAM Disable Only" = "	INIT 	! Initialize, 
+	 			 				DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode"	;
+	"XSRAM Read and Save"	=	"INIT, 
+								 SAVE_ARRAY, 
+								 SAVE_USERCODE";					 
+	"XSRAM Calculate Data CRC"	=	"INIT ! Initialize,
+									 SAVE_ARRAY,
+						             SAVE_USERCODE";
+	"XSRAM Calculate Checksum"	=	"INIT ! Initialize,
+									 SAVE_ARRAY,
+						             SAVE_USERCODE";						             
+	"XSRAM Verify Only"	=	"	INIT 	! Initialize, 
+								VERIFY	! Verify Fuse Map, 
+		 			 			VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Verify USERCODE"	=	"	INIT 	! Initialize, 
+									VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Read DONE bit"	=	"INIT 	! Initialize, 
+								READ_DONE_BIT	! Read the done bit"	;				             
+	"XSRAM Read Status Register" = "INIT ! Initialize,
+					 			 SAVE_CONFIG_BIT";										 
+	"XSRAM Capture Only" = "	INIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;					 			 
+	"Capture Only" = "	INIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;
+	"XSRAM Display USERCODE"	=	"INIT, READ_ID, SAVE_USERCODE";													 			 
+								
+</Operation_List>
+<Operation_List label="ChainSVFOperation">
+	"FLASH Bypass"	=	"SVFINIT 	! Initialize";
+	"FLASH Verify ID" = 	"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE";
+	"Verify ID" = 		"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE";  
+	"FLASH Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"FLASH Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_ENABLE	! Enable PROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 							
+	"FLASH Display USERCODE"	=	"SVFINIT, 
+									 READ_ID	! Check the IDCODE,
+									FLASH_ENABLE	! Enable PROGRAM mode, 
+								 	SVF_SAVE_USERCODE,
+								 	DISABLE ! Exit the programming mode";
+	"FLASH Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"FLASH Enable Only" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   FLASH_ENABLE	! Enable the programming mode"	;
+	"FLASH Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase the done bit"	;
+	"FLASH Program DONE bit"	=	"SVFINIT 	! Initialize, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit"	;
+	"FLASH Read DONE bit" = 	"SVFINIT, 
+								 READ_ID, 
+								 FLASH_ENABLE	! Enable PROGRAM mode, 
+								 SVF_SAVE_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"FLASH Re-Initialize" = "SVFINIT 	! Initialize,  
+						  	 DIRECT_FLASH_ERASE	! Erase the device"	;
+	
+	"FLASH Erase,Program,Verify" = "SVFINIT 	! Initialize, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+	
+	"FLASH Erase,Program" = "SVFINIT 	! Initialize, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+									
+	"FLASH Erase,Program,Verify,Secure" = "SVFINIT 	! Initialize, 
+								DIRECT_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+	
+	"FLASH Secure Device" = "	SVFINIT 	! Initialize, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+			 			 		
+	"FLASH Program"	=	"SVFINIT 	! Initialize, 
+							DIRECT_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							PROGRAM_STATUS	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE, 
+							CHECK_STATUS ! Read the status bit, 
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit"	;		
+	"FLASH Verify Only" =	"SVFINIT 	! Initialize, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit"	;
+	"FLASH Verify,Secure" =	"	SVFINIT 	! Initialize, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							VERIFY_DONE_BIT ! Verify Done Bit,
+							PROGRAM_SECURITY ! Secure device"	;							
+	"FLASH Erase Only"	=	"SVFINIT 	! Initialize, 
+							DIRECT_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit"	;
+		 			 			
+	
+	"FLASH Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE";
+	"FLASH Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE";						             
+	"FLASH Read and Save"	=	"SVFINIT, 
+								 FLASH_ENABLE, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE";
+	"FLASH Read Status Register" = "SVFINIT ! Initialize,
+					 			 SVF_SAVE_CONFIG_BIT";									 
+	"FLASH Capture Only" = "	SVFINIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;					 			 
+	"FLASH Upload to Static RAM" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";
+	"XFLASH Upload to Static RAM" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";							 
+	"XFLASH Bypass"	=	"SVFINIT 	! Initialize";
+	"XFLASH Verify ID" = 	"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"XFLASH Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"XFLASH Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 
+	"Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 																 
+	"XFLASH Display USERCODE"	=	"SVFINIT, 
+									 READ_ID	! Check the IDCODE,
+									FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+								 	SVF_SAVE_USERCODE,
+								 	DISABLE ! Exit the programming mode";
+	"XFLASH Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"XFLASH Enable Only" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode"	;
+	"XFLASH Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase the done bit"	;
+	"XFLASH Program DONE bit"	=	"SVFINIT 	! Initialize, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit"	;
+	"XFLASH Read DONE bit" = 	"SVFINIT, 
+								 READ_ID, 
+								 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 SVF_SAVE_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"XFLASH Re-Initialize" = "SVFINIT 	! Initialize,  
+						  	 FLASH_ERASE	! Erase the device"	;
+	
+	"XFLASH TransFR" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						IO_STATE ! Program Bscan register,
+	 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program and TransFR" = "SVFINIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+								DISABLE ! Exit the programming mode,
+								IO_STATE ! Program Bscan register,
+								FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program,Secure and TransFR" = "SVFINIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+								CHECK_STATUS ! Read the status bit,
+								DISABLE ! Exit the programming mode,
+								IO_STATE ! Program Bscan register,
+								FLASH_MDR ! Transparent Field Reconfiguration"	;
+	"XFLASH Program USF with Static EBR" = "SVFINIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS_EBR	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+	"XFLASH Program USF from PROM file" = "SVFINIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS_EBR	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+		
+		
+	"XFLASH Erase,Program,Verify" = "SVFINIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+		
+	"XFLASH Erase,Program,Verify,Secure" = "SVFINIT 	! Initialize, 
+								FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+	
+	"XFLASH Secure Device" = "	SVFINIT 	! Initialize, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+			 			 		
+	"XFLASH Program"	=	"SVFINIT 	! Initialize, 
+							FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							PROGRAM_STATUS	! Program Fuse Map, 
+							PROGRAM_USERCODE	! Program USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit"	;		
+	"XFLASH Verify Only" =	"SVFINIT 	! Initialize, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit"	;
+	"XFLASH Erase Only"	=	"SVFINIT 	! Initialize, 
+							FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit"	;
+		 			 			
+	
+	"XFLASH Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE";
+	"XFLASH Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE";								             
+	"XFLASH Read and Save"	=	"SVFINIT, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE";
+	"XFLASH Read Status Register" = "SVFINIT ! Initialize,
+					 			 SVF_SAVE_CONFIG_BIT";	
+	"XFLASH Capture Only" = "	SVFINIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;					 			 								 
+	"SRAM Bypass"	=	"SVFINIT 	! Initialize";
+	"SRAM Verify ID" = 	"SVFINIT 	! Initialize, 
+						 READ_ID ! Check the IDCODE"; 
+	"SRAM Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"SRAM Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"SRAM Display USERCODE"	=	"SVFINIT, READ_ID, SVF_SAVE_USERCODE";
+	"SRAM Disable Only" = "SVFINIT 	! Initialize, 
+	 			 		   DISABLE ! Exit the programming mode"	;
+	 			 		
+	"SRAM Enable Only" = "SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						SRAM_ENABLE	! Enable SRAM programming mode"	;
+	
+	"SRAM Fast Program" = "	SVFINIT 	! Initialize,   
+								ERASE	! Erase the device, 
+								BURST_PROGRAM	! Program Fuse Map,
+								VERIFY_USERCODE		! Verify USERCODE"	;
+						
+	"SRAM Program,Verify" = "SVFINIT 	! Initialize,
+							ERASE	! Erase the device,  
+							PROGRAM	! Program Fuse Map,
+							VERIFY	! Verify Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							VERIFY_USERCODE		! Verify USERCODE, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Erase,Program,Verify" = "SVFINIT 	! Initialize, 
+									ERASE	! Erase the device, 
+									PROGRAM	! Program Fuse Map,
+									VERIFY	! Verify Fuse Map, 
+									PROGRAM_USERCODE	! Program USERCODE,									
+				 			 		VERIFY_USERCODE		! Verify USERCODE, 
+				 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;					
+	"SRAM Program,Verify,Secure"	=	"SVFINIT 	! Initialize,
+										ERASE	! Erase the device,  
+										PROGRAM	! Program Fuse Map, 
+										VERIFY	! Verify Fuse Map, 
+										PROGRAM_USERCODE	! Program USERCODE,										
+					 			 		VERIFY_USERCODE		! Verify USERCODE, 
+					 			 		PROGRAM_SECURITY ! Secure device,
+					 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Secure Device" = "	SVFINIT 	! Initialize, 
+								PROGRAM_SECURITY ! Secure device"	;
+			 			 							 			 		
+	"SRAM Erase Only"	=	"SVFINIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+	"SRAM Program Only" = 	"SVFINIT 	! Initialize, 
+						ERASE	! Erase the device, 
+						PROGRAM	! Program Fuse Map,
+						PROGRAM_USERCODE	! Program USERCODE,
+						PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Verify Only"	=	"SVFINIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE"	;
+	"Re-Initialize" = " SVFINIT 	! Initialize,
+						ERASE	! Erase the device"	;	
+	"SRAM Re-Initialize" = " SVFINIT 	! Initialize,
+							ERASE	! Erase the device"	;
+	"SRAM Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase the done bit"	;
+	"SRAM Program DONE bit"	=	"SVFINIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase DONE bit,
+								PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+								 SVF_SAVE_DONE_BIT	! Erase the done bit"	;
+	"SRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE";
+	"SRAM Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE";						             
+	"SRAM Read and Save"	=	"SVFINIT, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE";
+	"SRAM Refresh" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						REFRESH_FUNCTION ! Refresh";
+	"SRAM Read Status Register" = "SVFINIT ! Initialize,
+					 			 SVF_SAVE_CONFIG_BIT";									 								
+	"SRAM Capture Only" = "	SVFINIT 	! Initialize,
+							IO_STATE ! Capture Bscan register"	;					 			 
+	"XSRAM Bypass"	=	"SVFINIT 	! Initialize"	;
+	"XSRAM Verify ID" = 	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE"	; 
+	"XSRAM Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";							
+	"XSRAM Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode"	;
+	"XSRAM Read and Save"	=	"SVFINIT, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE";					 
+	"XSRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE";
+	"XSRAM Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE";						             
+	"XSRAM Verify Only"	=	"SVFINIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+								SVF_SAVE_DONE_BIT	! Read the done bit"	;				             
+	"XSRAM Read Status Register" = "SVFINIT ! Initialize,
+					 			 SVF_SAVE_CONFIG_BIT";										
+	"XSRAM Capture Only" = "	SVFINIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;
+	"XSRAM Display USERCODE"	=	"SVFINIT, READ_ID, SVF_SAVE_USERCODE";													 			 
+	"Capture Only" = "	SVFINIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;					 			 
+								
+</Operation_List>
+<Operation_List label="SingleSVFOperationRevC">
+	"FLASH Bypass"	=	"SVFINIT 	! Initialize";
+	"FLASH Verify ID" = 	"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"Verify ID" = 		"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"FLASH Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"FLASH Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_ENABLE	! Enable PROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 							
+	"FLASH Display USERCODE"	=	"SVFINIT, 
+									 READ_ID	! Check the IDCODE,
+									 FLASH_ENABLE	! Enable PROGRAM mode, 
+									 SVF_SAVE_USERCODE,
+									 DISABLE ! Exit the programming mode";
+	"FLASH Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"FLASH Enable Only" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   IO_STATE ! Program Bscan register,
+						   FLASH_ENABLE	! Enable the programming mode"	;
+	"FLASH Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								ERASE_DONE_BIT	! Erase the done bit, 
+		 			 			DISABLE ! Exit the programming mode"	;
+	"FLASH Program DONE bit"	=	"SVFINIT 	! Initialize, 
+									 READ_ID	! Check the IDCODE,
+									 IO_STATE ! Program Bscan register,
+									 FLASH_ENABLE	! Enable the programming mode, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit,
+		 			 				 DISABLE ! Exit the programming mode,
+		 			 				 VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	"FLASH Read DONE bit" = 	"SVFINIT, 
+								 READ_ID, 
+								 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 SVF_SAVE_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"FLASH Re-Initialize" = "SVFINIT 	! Initialize,  
+						  	 FLASH_ENABLE	! Enable programming mode, 
+						  	 DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+	 			 		  	 DISABLE ! Exit the programming mode"	;
+	
+	"FLASH Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map,
+								VERIFY_USERCODE	! Verify USERCODE, 
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	
+	"FLASH Erase,Program" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			 			 		
+	"Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map,
+								VERIFY_USERCODE	! Verify USERCODE, 
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+		
+	"Program Only" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			 			 		
+	"FLASH Erase,Program,Verify,Secure" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE, 
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+			 			 		
+	"FLASH Secure Device" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode,  
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;			 			 		
+	
+	"Erase,Program,Verify,Secure" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode, 
+								DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE, 
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;
+	
+	"Secure Device" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								FLASH_ENABLE	! Enable the programming mode,  
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+			 			 		
+	"FLASH Program"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode,
+							DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							SVF_PROGRAM_STATUS	! Program Fuse Map, 
+							PROGRAM_USERCODE	! Program USERCODE,
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							CHECK_STATUS ! Read the status bit, 							
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;		
+	"Program"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode,
+							DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							SVF_PROGRAM_STATUS	! Program Fuse Map, 
+							PROGRAM_USERCODE	! Program USERCODE,
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							CHECK_STATUS ! Read the status bit, 							
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT ! Verify SRAM DONE Bit"	;		
+	
+	"FLASH Verify Only" =	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE, 
+							CHECK_STATUS ! Read the status bit, 
+							VERIFY_DONE_BIT ! Verify Done Bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"FLASH Verify,Secure" =	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							VERIFY_DONE_BIT ! Verify Done Bit,
+							PROGRAM_SECURITY ! Secure device,
+							DISABLE ! Exit the programming mode"	;		 			 		
+	"Verify Only" =	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE, 
+							CHECK_STATUS ! Read the status bit,
+							VERIFY_DONE_BIT ! Verify Done Bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	
+	"FLASH Erase Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+		 			 			
+	"Erase Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							FLASH_ENABLE	! Enable the programming mode, 
+							DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+		 			 			
+	
+	"FLASH Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+									 IO_STATE ! Program Bscan register,
+						 			 FLASH_ENABLE	! Enable programming mode, 
+						             SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE,
+			 						 DISABLE";
+	"FLASH Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 READ_ID, 
+								 	 SVF_SAVE_ID, 
+								 	 FLASH_ENABLE	! Enable programming mode, 
+						             SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE,
+						             DISABLE";			 						 
+	"FLASH Read and Save"	=	"SVFINIT, 
+								 READ_ID, 
+								 SVF_SAVE_ID, 
+								 IO_STATE ! Program Bscan register,
+								 FLASH_ENABLE, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE, 
+								 DISABLE";
+	
+	"FLASH Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 FLASH_ENABLE,
+					 			 SVF_SAVE_CONFIG_BIT,
+					 			 DISABLE";	
+	"FLASH Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+	"FLASH Upload to Static RAM" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";
+	"XFLASH Upload to Static RAM" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";				 			 							 
+	"XFLASH Bypass"	=	"SVFINIT 	! Initialize";
+	"XFLASH Verify ID" = 	"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"XFLASH Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"XFLASH Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 
+	"Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 								
+	"XFLASH Display USERCODE"	=	"SVFINIT, 
+								     READ_ID	! Check the IDCODE,
+									FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 	SVF_SAVE_USERCODE,
+								 	DISABLE ! Exit the programming mode";
+	"XFLASH Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"XFLASH Enable Only" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode"	;
+	"XFLASH Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								ERASE_DONE_BIT	! Erase the done bit, 
+		 			 			DISABLE ! Exit the programming mode"	;
+	"XFLASH Program DONE bit"	=	"SVFINIT 	! Initialize, 
+									 READ_ID	! Check the IDCODE,
+									 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit,
+		 			 				 DISABLE ! Exit the programming mode"	;
+	"XFLASH Read DONE bit" = 	"SVFINIT, 
+								 READ_ID, 
+								 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 SVF_SAVE_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"XFLASH Re-Initialize" = "SVF_INIT 	! Initialize,  
+						  	 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+						  	 SVF_FLASH_ERASE	! Erase the device, 
+	 			 		  	 DISABLE ! Exit the programming mode"	;
+	"XFLASH TransFR" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						IO_STATE ! Program Bscan register,
+	 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program and TransFR" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		IO_STATE ! Program Bscan register,
+			 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program,Secure and TransFR" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode,
+			 			 		IO_STATE ! Program Bscan register,
+			 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;
+	"XFLASH Program USF with Static EBR" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS_EBR	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	
+	"XFLASH Program USF from PROM file" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS_EBR	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+		
+	"XFLASH Erase,Program,Verify" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+		
+	"XFLASH Erase,Program,Verify,Secure" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	
+	"XFLASH Secure Device" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+			 			 		
+	"XFLASH Program"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+							SVF_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							SVF_PROGRAM_STATUS	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE, 
+							CHECK_STATUS ! Read the status bit, 
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							DISABLE ! Exit the programming mode"	;		
+	"XFLASH Verify Only" =	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XFLASH Erase Only"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+							SVF_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+		 			 			
+	
+	"XFLASH Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+									 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+						             SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE,
+			 						 DISABLE";
+	"FLASH Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 READ_ID, 
+								 	 SVF_SAVE_ID, 
+								 	 FLASH_TRANSPARENT_ENABLE	! Enable programming mode, 
+						             SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE,
+						             DISABLE";			 						 
+	"XFLASH Read and Save"	=	"SVFINIT, 
+								 READ_ID, 
+								 SVF_SAVE_ID, 
+								 FLASH_TRANSPARENT_ENABLE, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"XFLASH Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 FLASH_TRANSPARENT_ENABLE, 
+					 			 SVF_SAVE_CONFIG_BIT,
+					 			 DISABLE";	
+	"XFLASH Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+	"SRAM Bypass"	=	"SVFINIT 	! Initialize";
+	"SRAM Verify ID" = 	"SVFINIT 	! Initialize, 
+						 READ_ID ! Check the IDCODE"; 
+	"SRAM Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"SRAM Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"SRAM Display USERCODE"	=	"SVFINIT, READ_ID, SRAM_ENABLE, SVF_SAVE_USERCODE,DISABLE";
+	"SRAM Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"SRAM Enable Only" = "SVFINIT 	! Initialize, 
+						  READ_ID	! Check the IDCODE,
+						  IO_STATE ! Program Bscan register,
+						  SRAM_ENABLE	! Enable SRAM programming mode"	;
+	"SRAM Fast Program" = "	SVFINIT 	! Initialize,   
+								READ_ID	! Check the IDCODE,
+								IO_STATE ! Program Bscan register,
+						 		SRAM_ENABLE	! Enable SRAM programming mode,
+								ERASE	! Erase the device, 
+								BURST_PROGRAM	! Program Fuse Map,
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	;
+							  
+	"SRAM Program,Verify" = "SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,  
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map,
+							VERIFY	! Verify Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							VERIFY_USERCODE		! Verify USERCODE, 
+							PROGRAM_DONE_BIT	! Program DONE bit,
+				 			DISABLE ! Exit the programming mode"	;
+	"SRAM Erase,Program,Verify" = "SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								VERIFY	! Verify Fuse Map, 
+								PROGRAM_USERCODE	! Program USERCODE,								
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		DISABLE ! Exit the programming mode"	;					
+	"SRAM Program,Verify,Secure"	=	"SVFINIT 	! Initialize, 
+									READ_ID	! Check the IDCODE, 
+									IO_STATE ! Program Bscan register,
+									SRAM_ENABLE	! Enable SRAM programming mode, 
+									ERASE	! Erase the device, 
+									PROGRAM	! Program Fuse Map, 
+									VERIFY	! Verify Fuse Map, 
+									PROGRAM_USERCODE	! Program USERCODE,									
+				 			 		VERIFY_USERCODE		! Verify USERCODE, 
+				 			 		PROGRAM_SECURITY ! Secure device,
+				 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+				 			 		DISABLE ! Exit the programming mode"	;
+	
+	"SRAM Secure Device" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		DISABLE ! Exit the programming mode"	;
+			 			 		
+	"SRAM Erase Only"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program Only" = "SVFINIT 	! Initialize, 
+					READ_ID	! Check the IDCODE,  
+					IO_STATE ! Program Bscan register,
+					SRAM_ENABLE	! Enable SRAM programming mode, 
+					ERASE	! Erase the device, 
+					PROGRAM	! Program Fuse Map,
+					PROGRAM_USERCODE	! Program USERCODE,
+					PROGRAM_DONE_BIT	! Program DONE bit,
+		 			DISABLE ! Exit the programming mode"	;
+	"SRAM Verify Only"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,  
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Re-Initialize" = "SVFINIT 	! Initialize,
+					   SRAM_ENABLE	! Enable SRAM programming mode, 
+					   ERASE	! Erase the device,
+					   DISABLE ! Exit the programming mode"	;
+	"SRAM Re-Initialize" = "SVFINIT 	! Initialize,
+						   SRAM_ENABLE	! Enable SRAM programming mode, 
+						   ERASE	! Erase the device,
+						   DISABLE ! Exit the programming mode"	;
+	"SRAM Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! Erase DONE bit,
+							PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 SVF_SAVE_DONE_BIT	! Erase the done bit"	;
+	
+	"SRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+								 READ_ID	! Check the IDCODE,
+								 IO_STATE ! Program Bscan register,
+					 			 SRAM_ENABLE	! Enable SRAM programming mode, 
+					             SVF_SAVE_ARRAY,
+					             SVF_SAVE_USERCODE,
+		 						 DISABLE";
+	"SRAM Calculate Checksum"	=	"SVFINIT ! Initialize,
+								 READ_ID,
+								 SVF_SAVE_ID,
+								 SRAM_ENABLE	! Enable SRAM programming mode, 
+					             SVF_CHECKSUM_ARRAY,
+					             SVF_SAVE_USERCODE,
+					             DISABLE";		 						 
+	"SRAM Read and Save"	=	"SVFINIT, 
+						 		 READ_ID, 
+								 SVF_SAVE_ID, 
+								 IO_STATE ! Program Bscan register,
+								 SRAM_ENABLE, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"SRAM Refresh" = " SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						REFRESH_FUNCTION ! Refresh";
+					             
+	"SRAM Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 SRAM_ENABLE,
+					 			 SVF_SAVE_CONFIG_BIT,
+					 			 DISABLE";							
+	"SRAM Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+	"XSRAM Bypass"	=	"SVFINIT 	! Initialize"	;
+	"XSRAM Verify ID" = 	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE"	; 
+	"XSRAM Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";							
+	"XSRAM Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode"	;
+	"XSRAM Read and Save"	=	"SVFINIT, 
+								 READ_ID, 
+								 SVF_SAVE_ID, 
+								 SRAM_TRANSPARENT_READ_ENABLE, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE, 
+								 DISABLE";					 
+	"XSRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 READ_ID	! Check the IDCODE,
+						 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+						             SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE,
+			 						 DISABLE";
+	"XSRAM Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 READ_ID,
+									 SVF_SAVE_ID,
+									 SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+						             SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE,
+						             DISABLE";	 			 		
+	"XSRAM Verify Only"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+					 			SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,  
+					 			SVF_SAVE_DONE_BIT	! Read the done bit,
+					 			DISABLE ! Exit the programming mode"	;				             
+	"XSRAM Read Status Register" = "SVFINIT ! Initialize,
+					 			 READ_ID	! Check the IDCODE,
+					 			 SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT programming mode,
+					 			 SVF_SAVE_CONFIG_BIT,
+					 			 DISABLE ! Exit the programming mode";	
+	"XSRAM Capture Only" = "SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;	
+	"XSRAM Display USERCODE"	=	"SVFINIT, READ_ID, SRAM_TRANSPARENT_READ_ENABLE, SVF_SAVE_USERCODE,DISABLE";										 			 
+	"Capture Only" = "SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;					 			 
+						
+</Operation_List>
+<Operation_List label="ChainSVFOperationRevC">
+	"FLASH Bypass"	=	"SVFINIT 	! Initialize";
+	"FLASH Verify ID" = 	"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"Verify ID" = 		"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"FLASH Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"FLASH Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_ENABLE	! Enable PROGRAM mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 							
+	"FLASH Display USERCODE"	=	"SVFINIT, 
+									 READ_ID	! Check the IDCODE,
+									FLASH_ENABLE	! Enable PROGRAM mode, 
+								 	SVF_SAVE_USERCODE,
+								 	DISABLE ! Exit the programming mode";
+	"FLASH Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"FLASH Enable Only" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   FLASH_ENABLE	! Enable the programming mode"	;
+	"FLASH Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase the done bit"	;
+	"FLASH Program DONE bit"	=	"SVFINIT 	! Initialize, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit"	;
+	"FLASH Read DONE bit" = 	"SVFINIT, 
+								 READ_ID, 
+								 FLASH_ENABLE	! Enable PROGRAM mode, 
+								 SVF_SAVE_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"FLASH Re-Initialize" = "SVFINIT 	! Initialize,  
+						  	 DIRECT_SVF_FLASH_ERASE	! Erase the device"	;
+	
+	"FLASH Erase,Program,Verify" = "SVFINIT 	! Initialize, 
+								DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+	
+	"FLASH Erase,Program" = "SVFINIT 	! Initialize, 
+								DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+									
+	"FLASH Erase,Program,Verify,Secure" = "SVFINIT 	! Initialize, 
+								DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+	
+	"FLASH Secure Device" = "	SVFINIT 	! Initialize, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+			 			 		
+	"FLASH Program"	=	"SVFINIT 	! Initialize, 
+							DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							SVF_PROGRAM_STATUS	! Program Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE, 
+							CHECK_STATUS ! Read the status bit, 
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit"	;		
+	"FLASH Verify Only" =	"SVFINIT 	! Initialize, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit"	;
+	"FLASH Verify,Secure" =	"	SVFINIT 	! Initialize, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							VERIFY_DONE_BIT ! Verify Done Bit,
+							PROGRAM_SECURITY ! Secure device"	;							
+	"FLASH Erase Only"	=	"SVFINIT 	! Initialize, 
+							DIRECT_SVF_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit"	;
+		 			 			
+	
+	"FLASH Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE";
+	"FLASH Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 FLASH_ENABLE,
+									 SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE";						             
+	"FLASH Read and Save"	=	"SVFINIT, 
+								 FLASH_ENABLE, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE";
+	"FLASH Read Status Register" = "SVFINIT ! Initialize,
+					 			 SVF_SAVE_CONFIG_BIT";									 
+	"FLASH Capture Only" = "	SVFINIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;					 			 
+	"FLASH Upload to Static RAM" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";
+	"XFLASH Upload to Static RAM" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						UPLOAD_FUNCTION ! Uploaded";							 
+	"XFLASH Bypass"	=	"SVFINIT 	! Initialize";
+	"XFLASH Verify ID" = 	"SVFINIT 	! Initialize, 
+						 	READ_ID ! Check the IDCODE"; 
+	"XFLASH Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"XFLASH Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 	
+	"Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+								VERIFY_USERCODE		! Verify USERCODE,
+								DISABLE ! Exit the programming mode"	; 																 
+	"XFLASH Display USERCODE"	=	"SVFINIT, 
+									 READ_ID	! Check the IDCODE,
+									FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode,
+								 	SVF_SAVE_USERCODE,
+								 	DISABLE ! Exit the programming mode";
+	"XFLASH Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"XFLASH Enable Only" = "SVFINIT 	! Initialize, 
+						   READ_ID	! Check the IDCODE,
+						   FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode"	;
+	"XFLASH Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase the done bit"	;
+	"XFLASH Program DONE bit"	=	"SVFINIT 	! Initialize, 
+									 FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+							   		 CHECK_STATUS ! Read the status bit"	;
+	"XFLASH Read DONE bit" = 	"SVFINIT, 
+								 READ_ID, 
+								 FLASH_TRANSPARENT_ENABLE	! Enable XPROGRAM mode, 
+								 SVF_SAVE_DONE_BIT,
+								 DISABLE ! Exit the programming mode";
+	
+	"XFLASH Re-Initialize" = "SVFINIT 	! Initialize,  
+						  	 SVF_FLASH_ERASE	! Erase the device"	;
+	
+	"XFLASH TransFR" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE, 
+						IO_STATE ! Program Bscan register,
+	 			 		FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program and TransFR" = "SVFINIT 	! Initialize, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit,
+								DISABLE ! Exit the programming mode,
+								IO_STATE ! Program Bscan register,
+								FLASH_MDR ! Transparent Field Reconfiguration"	;
+	
+	"XFLASH Program,Secure and TransFR" = "SVFINIT 	! Initialize, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+								CHECK_STATUS ! Read the status bit,
+								DISABLE ! Exit the programming mode,
+								IO_STATE ! Program Bscan register,
+								FLASH_MDR ! Transparent Field Reconfiguration"	;
+	"XFLASH Program USF with Static EBR" = "SVFINIT 	! Initialize, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS_EBR	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+	"XFLASH Program USF from PROM file"	= "SVFINIT 	! Initialize, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS_EBR	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;														
+		
+	"XFLASH Erase,Program,Verify" = "SVFINIT 	! Initialize, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+								CHECK_STATUS ! Read the status bit"	;
+		
+	"XFLASH Erase,Program,Verify,Secure" = "SVFINIT 	! Initialize, 
+								SVF_FLASH_ERASE	! Erase the device, 
+								CHECK_STATUS ! Read the status bit,
+			 			 		SVF_PROGRAM_STATUS	! Program Fuse Map,
+			 			 		PROGRAM_USERCODE	! Program USERCODE,
+								CHECK_STATUS ! Read the status bit,
+								FLASH_VERIFY	! Verify Fuse Map, 
+								VERIFY_USERCODE	! Verify USERCODE,
+			 			 		FLASH_PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+	
+	"XFLASH Secure Device" = "	SVFINIT 	! Initialize, 
+								PROGRAM_SECURITY ! Secure device,
+			 			 		CHECK_STATUS ! Read the status bit"	;
+			 			 		
+	"XFLASH Program"	=	"SVFINIT 	! Initialize, 
+							SVF_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit,
+							SVF_PROGRAM_STATUS	! Program Fuse Map, 
+							PROGRAM_USERCODE	! Program USERCODE,
+							CHECK_STATUS ! Read the status bit, 
+							FLASH_PROGRAM_DONE_BIT	! Program DONE bit"	;		
+	"XFLASH Verify Only" =	"SVFINIT 	! Initialize, 
+							FLASH_VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE	! Verify USERCODE,
+							CHECK_STATUS ! Read the status bit"	;
+	"XFLASH Erase Only"	=	"SVFINIT 	! Initialize, 
+							SVF_FLASH_ERASE	! Erase the device, 
+							CHECK_STATUS ! Read the status bit"	;
+		 			 			
+	
+	"XFLASH Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE";
+	"XFLASH Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE";						             
+	"XFLASH Read and Save"	=	"SVFINIT, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE";
+	"XFLASH Read Status Register" = "SVFINIT ! Initialize,
+					 			 SVF_SAVE_CONFIG_BIT";	
+	"XFLASH Capture Only" = "	SVFINIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;					 			 								 
+	"SRAM Bypass"	=	"SVFINIT 	! Initialize";
+	"SRAM Verify ID" = 	"SVFINIT 	! Initialize, 
+						 READ_ID ! Check the IDCODE"; 
+	"SRAM Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";
+	"SRAM Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"SRAM Display USERCODE"	=	"SVFINIT, READ_ID, SVF_SAVE_USERCODE";
+	"SRAM Disable Only" = "SVFINIT 	! Initialize, 
+	 			 		   DISABLE ! Exit the programming mode"	;
+	 			 		
+	"SRAM Enable Only" = "SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						SRAM_ENABLE	! Enable SRAM programming mode"	;
+	
+	"SRAM Fast Program" = "	SVFINIT 	! Initialize,   
+								ERASE	! Erase the device, 
+								BURST_PROGRAM	! Program Fuse Map,
+								VERIFY_USERCODE		! Verify USERCODE"	;
+						
+	"SRAM Program,Verify" = "SVFINIT 	! Initialize,
+							ERASE	! Erase the device,  
+							PROGRAM	! Program Fuse Map,
+							VERIFY	! Verify Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							VERIFY_USERCODE		! Verify USERCODE, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Erase,Program,Verify" = "SVFINIT 	! Initialize, 
+									ERASE	! Erase the device, 
+									PROGRAM	! Program Fuse Map,
+									VERIFY	! Verify Fuse Map, 
+									PROGRAM_USERCODE	! Program USERCODE,									
+				 			 		VERIFY_USERCODE		! Verify USERCODE, 
+				 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;					
+	"SRAM Program,Verify,Secure"	=	"SVFINIT 	! Initialize,
+										ERASE	! Erase the device,  
+										PROGRAM	! Program Fuse Map, 
+										VERIFY	! Verify Fuse Map,
+										PROGRAM_USERCODE	! Program USERCODE,										 
+					 			 		VERIFY_USERCODE		! Verify USERCODE, 
+					 			 		PROGRAM_SECURITY ! Secure device,
+					 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+					 			 		
+	"SRAM Secure Device" = "	SVFINIT 	! Initialize, 
+								PROGRAM_SECURITY ! Secure device"	;	
+												 			 		
+	"SRAM Erase Only"	=	"SVFINIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+	"SRAM Program Only" = 	"SVFINIT 	! Initialize, 
+						ERASE	! Erase the device, 
+						PROGRAM	! Program Fuse Map,
+						PROGRAM_USERCODE	! Program USERCODE,
+						PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Verify Only"	=	"SVFINIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+							VERIFY_USERCODE		! Verify USERCODE"	;
+	"Re-Initialize" = " SVFINIT 	! Initialize,
+						ERASE	! Erase the device"	;	
+	"SRAM Re-Initialize" = " SVFINIT 	! Initialize,
+							ERASE	! Erase the device"	;
+	"SRAM Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase the done bit"	;
+	"SRAM Program DONE bit"	=	"SVFINIT 	! Initialize, 
+								ERASE_DONE_BIT	! Erase DONE bit,
+								PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+								 SVF_SAVE_DONE_BIT	! Erase the done bit"	;
+	"SRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE";
+	"SRAM Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE";						             
+	"SRAM Read and Save"	=	"SVFINIT, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE";
+	"SRAM Refresh" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						REFRESH_FUNCTION ! Refresh";
+	"SRAM Read Status Register" = "SVFINIT ! Initialize,
+					 			 SVF_SAVE_CONFIG_BIT";									 								
+	"SRAM Capture Only" = "	SVFINIT 	! Initialize,
+							IO_STATE ! Capture Bscan register"	;					 			 
+	"XSRAM Bypass"	=	"SVFINIT 	! Initialize"	;
+	"XSRAM Verify ID" = 	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE"	; 
+	"XSRAM Display ID" = "SVFINIT, READ_ID, SVF_SAVE_ID";							
+	"XSRAM Disable Only" = "SVFINIT 	! Initialize, 
+	 			 			DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+					!		SRAM_TRANSPARENT_READ_ENABLE	! Enable SRAM TRANSPARENT mode"	;
+	"XSRAM Read and Save"	=	"SVFINIT, 
+								 SVF_SAVE_ARRAY, 
+								 SVF_SAVE_USERCODE";					 
+	"XSRAM Calculate Data CRC"	=	"SVFINIT ! Initialize,
+									 SVF_SAVE_ARRAY,
+						             SVF_SAVE_USERCODE";
+	"XSRAM Calculate Checksum"	=	"SVFINIT ! Initialize,
+									 SVF_CHECKSUM_ARRAY,
+						             SVF_SAVE_USERCODE";						             
+	"XSRAM Verify Only"	=	"SVFINIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Verify USERCODE"	=	"SVFINIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+								SVF_SAVE_DONE_BIT	! Read the done bit"	;				             
+	"XSRAM Read Status Register" = "SVFINIT ! Initialize,
+					 			 SVF_SAVE_CONFIG_BIT";										
+	"XSRAM Capture Only" = "	SVFINIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;		
+	"XSRAM Display USERCODE"	=	"SVFINIT, READ_ID, SVF_SAVE_USERCODE";											 			 
+	"Capture Only" = "	SVFINIT 	! Initialize,
+								IO_STATE ! Capture Bscan register"	;					 			 
+								
+</Operation_List>
+<Script>
+<![CDATA[
+function INIT {
+	! Row_Width	  : DEVICE_ROW_WIDTH; 
+	! Address_Length : ADDRESS_REGISTER_LENGTH; 
+	HDR HDR_LENGTH TDI(HDR_PATTERN);
+	HIR HIR_LENGTH TDI(HIR_PATTERN);
+	TDR TDR_LENGTH TDI(TDR_PATTERN);
+	TIR TIR_LENGTH TDI(TIR_PATTERN);
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+}
+
+
+function SVFINIT {
+	! Row_Width	  : DEVICE_ROW_WIDTH; 
+	! Address_Length : ADDRESS_REGISTER_LENGTH; 
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+}
+
+function PRELOAD {
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+}
+
+function INI_PRELOAD {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(#1^BSCAN_Length);
+}
+function SAMPLE {				
+   ! Shift in Sample(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   STATE DRPAUSE;
+   STATE IDLE;
+}
+
+function INI_SAMPLE {				
+   ! Shift in Sample(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   STATE DRPAUSE;
+   STATE IDLE;
+}
+function CAPTURE {	
+	datastream SavedBScanTDO[1][BSCAN_Length];	
+	file NewFile = "FILE_SAVE";		
+   ! Shift in Sample(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(#1^BSCAN_Length)
+   					TDO(SavedBScanTDO[1]);
+   Bscan[1] = SavedBScanTDO[1];	
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+   // Write To file 
+   fopen NewFile att "w"
+					 format "SVF_Plus";	
+   fwrite NewFile (BSCAN_TDO, Bscan);
+   fclose 	NewFile;
+   
+}
+
+function DYNAMIC {	
+   ENDDR DRPAUSE;
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1])
+   					DMASK(BscanMask[1]);
+   STATE IDLE;
+}
+
+
+function FLASH_ENABLE {
+	! Shift in ISC ENABLE(0x15) instruction;
+    SIR Instruction_Length TDI (ISC_ENABLE);
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;
+}
+function FLASH_TRANSPARENT_ENABLE {
+	! Shift in XPROGRAM ENABLE(0x35) instruction;
+    SIR Instruction_Length TDI (ISC_XPROGRAM_ENABLE);
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+}
+function SRAM_ENABLE {
+	! Shift in ISC SRAM ENABLE(0x55) instruction;
+    SIR Instruction_Length TDI (ISC_SRAM_ENABLE);
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;
+}
+function SRAM_TRANSPARENT_READ_ENABLE {
+	! Shift in LSCC_SRAM_TRANSPARENT_ENABLE(0x75) instruction;
+    SIR Instruction_Length TDI (LSCC_TRANSPARENT_ENABLE);
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;
+}
+
+function DISABLE {
+	! Shift in ISC DISABLE(0x1E) instruction;
+    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+//	RUN_TEST	IDLE  TCK 5 DELAY 200;         // rcs: removed
+	RUN_TEST	IDLE  TCK 5 DELAY 50;          // rcs: added
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+}
+function READ_ID {
+	! Shift in IDCODE(0x16) instruction;
+    SIR Instruction_Length 	TDI (IDCODE);
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+					        TDO	(IDTDI[1])
+					        MASK (DEVICE_ID_MASK);
+}
+
+function ERASE {
+	! Shift in ISC ERASE(0x03) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	TCK 5 DELAY PWE;
+	
+}
+
+function FLASH_ERASE {	
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	IDLE  TCK 5 DELAY PWE;
+	loop 100 {
+		RUN_TEST IDLE  TCK 5 DELAY 100;
+		SDR_VERIFY 1 TDI(#0) TDO(#1);
+	}
+}
+
+function DIRECT_FLASH_ERASE {		
+	! Shift in ISC SRAM ENABLE(0x55) instruction;
+	SIR Instruction_Length TDI (ISC_SRAM_ENABLE);
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;
+	
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	TCK 5 DELAY PWE;
+	
+	! Shift in ISC ENABLE(0x15) instruction;    // rcs: added
+	SIR Instruction_Length TDI (ISC_ENABLE);    // rcs: added
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;        // rcs: added
+
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	IDLE  TCK 5 DELAY PWE;
+	loop 100 {
+		RUN_TEST IDLE  TCK 5 DELAY 100;
+		SDR_VERIFY 1 TDI(#0) TDO(#1);
+	}
+}
+
+function SVF_FLASH_ERASE {			
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	IDLE  TCK 5 DELAY 10000;
+	SDR_VERIFY 1 TDI(#0) TDO(#1);
+}
+
+function DIRECT_SVF_FLASH_ERASE {	
+	! Shift in ISC SRAM ENABLE(0x55) instruction;
+	SIR Instruction_Length TDI (ISC_SRAM_ENABLE);
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;
+	
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	TCK 5 DELAY PWE;
+	
+	
+	! Shift in ISC ENABLE(0x15) instruction;    // rcs: added
+	SIR Instruction_Length TDI (ISC_ENABLE);    // rcs: added
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;        // rcs: added
+	
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	IDLE  TCK 5 DELAY 10000;
+	SDR_VERIFY 1 TDI(#0) TDO(#1);
+}
+
+function CHECK_STATUS {
+	! Shift in READ STATUS(0xB2) instruction;
+	SIR Instruction_Length TDI (READ_STATUS);
+	RUN_TEST IDLE TCK 5 DELAY PWV; 
+	SDR_VERIFY  1 TDI(#0)
+				  TDO(#0);	
+}
+
+function PROGRAM_STATUS {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	! Shift in INIT ADDRESS(0x21) instruction;
+	SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST IDLE TCK 5  DELAY PWP;	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	repeat Address_Length {			
+		! Shift in DATA SHIFT(0x02) instruction;
+		SIR Instruction_Length 	TDI (ISC_DATA_SHIFT);
+		
+		! Shift in Row = RowCount;
+		SDR	Row_Width	TDI	(FuseArray_TDI);	
+		
+		! Shift in LSCC PROGRAM INCR RTI(0x67) instruction;
+		SIR Instruction_Length	TDI (LSCC_PROGRAM_INCR_RTI);
+		RUN_TEST IDLE TCK 5  DELAY 1;
+		loop 10 {
+			RUN_TEST DRPAUSE DELAY 1;
+			SDR_VERIFY 1 TDI(#0) TDO(#1);
+		}	   
+		RowCount = RowCount +1;
+	} // repeat
+	! Shift in INIT ADDRESS(0x21) instruction;
+	SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST IDLE TCK 5  DELAY PWP;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+}
+
+function PROGRAM_STATUS_EBR {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	EFuseArray_MASK.row = 1;
+	! Shift in INIT ADDRESS(0x21) instruction;
+	SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST IDLE TCK 5  DELAY PWP;	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	repeat Address_Length {			
+		! Shift in DATA SHIFT(0x02) instruction;
+		SIR Instruction_Length 	TDI (ISC_DATA_SHIFT);	
+		! Shift in Row = RowCount;
+		SDR	Row_Width	TDI	(FuseArray_TDI)
+						DMASK (EFuseArray_MASK);	
+		! Shift in LSCC PROGRAM INCR RTI(0x67) instruction;
+    	SIR Instruction_Length	TDI (LSCC_PROGRAM_INCR_RTI);
+		RUN_TEST IDLE TCK 5  DELAY 1;
+		loop 10 {
+			RUN_TEST DRPAUSE DELAY 1;
+			SDR_VERIFY 1 TDI(#0) TDO(#1);
+		}
+		RowCount = RowCount +1;
+	} // repeat
+	! Shift in INIT ADDRESS(0x21) instruction;
+	SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST IDLE TCK 5  DELAY PWP;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	
+}
+function SVF_PROGRAM_STATUS {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	! Shift in INIT ADDRESS(0x21) instruction;
+	SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST IDLE TCK 5  DELAY PWP;	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	repeat Address_Length {		
+		! Shift in DATA SHIFT(0x02) instruction;
+		SIR Instruction_Length 	TDI (ISC_DATA_SHIFT);	
+		! Shift in Row = RowCount;
+		SDR	Row_Width	TDI	(FuseArray_TDI);	
+		! Shift in LSCC PROGRAM INCR RTI(0x67) instruction;
+    	SIR Instruction_Length	TDI (LSCC_PROGRAM_INCR_RTI);
+		RUN_TEST IDLE TCK 5  DELAY 10;
+		STATE DRPAUSE;
+		RowCount = RowCount +1;
+	} // repeat
+}
+function SVF_PROGRAM_STATUS_EBR {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	EFuseArray_MASK.row = 1;
+	! Shift in INIT ADDRESS(0x21) instruction;
+	SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST IDLE TCK 5  DELAY PWP;	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	repeat Address_Length {		
+		! Shift in DATA SHIFT(0x02) instruction;
+		SIR Instruction_Length 	TDI (ISC_DATA_SHIFT);	
+		! Shift in Row = RowCount;
+		SDR	Row_Width	TDI	(FuseArray_TDI)
+						DMASK (EFuseArray_MASK);	
+		! Shift in LSCC PROGRAM INCR RTI(0x67) instruction;
+    	SIR Instruction_Length	TDI (LSCC_PROGRAM_INCR_RTI);
+		RUN_TEST IDLE TCK 5  DELAY 1;
+		STATE DRPAUSE;
+		RowCount = RowCount +1;
+	} // repeat
+}
+function PROGRAM {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	! Shift in LSCC RESET ADDRESS(0x21) instruction;
+    SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST	IDLE TCK 5 DELAY 	PWP;
+	repeat Address_Length {		
+		! Shift in DATA SHIFT(0x02) instruction;
+		SIR Instruction_Length 	TDI (ISC_DATA_SHIFT);	
+		! Shift in Row = RowCount;
+		SDR	Row_Width	TDI	(FuseArray_TDI);	
+		! Shift in LSCC PROGRAM INCR RTI(0x67) instruction;
+    	SIR Instruction_Length	TDI (LSCC_PROGRAM_INCR_RTI);
+		RUN_TEST IDLE TCK 5  DELAY 1;
+		STATE DRPAUSE;
+		RowCount = RowCount +1;
+	} // repeat
+}
+
+function PROGRAM_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+	 	! Shift in READ USERCODE(0x17) instruction;
+	    SIR Instruction_Length TDI (USERCODE);
+		SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+		! Shift in ISC PROGRAM USERCODE(0x1A) instruction;
+	    SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+		RUN_TEST	TCK 5   DELAY 	10;
+	}
+}
+function PROGRAM_DONE_BIT {
+	! Shift in ISC PROGRAM DONE(0x2F) instruction;
+    SIR	Instruction_Length 	TDI (ISC_PROGRAM_DONE);
+	// Goto Run Test Idle 
+	RUN_TEST	IDLE TCK 5 DELAY 50;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (BYPASS)
+									TDO(0x1D);
+}
+function FLASH_PROGRAM_DONE_BIT {
+	! Shift in ISC PROGRAM DONE(0x2F) instruction;
+    SIR	Instruction_Length 	TDI (ISC_PROGRAM_DONE);
+	RUN_TEST	IDLE TCK 5 DELAY 50;
+	SDR_VERIFY 1 TDI(#0) TDO(#1);
+	! Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (BYPASS)
+									TDO(0x1D);
+}
+function VERIFY_DONE_BIT {	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (BYPASS)
+						TDO(0x1D);		   	      	
+}
+function ERASE_DONE_BIT {
+	! Shift in ISC ERASE DONE(0x24) instruction;
+    SIR	Instruction_Length 	TDI (ISC_ERASE_DONE);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 5 DELAY 50;
+}
+// Verify Functions _____________________________________________
+function VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	FuseArray_MASK.row = 1;
+	TRY 1 {
+		! Shift in LSCC RESET ADDRESS(0x21) instruction;
+	    SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+		RUN_TEST	IDLE TCK 5 DELAY 	PWV;
+		! Shift in LSCC READ INCR RTI(0x6A) instruction;
+	    SIR Instruction_Length	TDI	(LSCC_READ_INCR_RTI);
+		repeat Address_Length {
+			RUN_TEST	IDLE TCK 5 DELAY 	PWV;
+			! Shift Out Data Row = RowCount;
+		    SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+									TDO	(FuseArray_TDI)
+									MASK(FuseArray_MASK);
+			RowCount = RowCount +1;
+		}
+	}
+	ELSE
+	{
+		! Shift in ISC DISABLE(0x1E) instruction;
+	    SIR	Instruction_Length 	TDI (ISC_DISABLE);
+		RUN_TEST	IDLE  TCK 5 DELAY 50;         
+		! Shift in BYPASS(0xFF) instruction;
+	    SIR	Instruction_Length 	TDI (BYPASS);
+		RUN_TEST	IDLE  TCK 5 DELAY 1;
+		print (1, "Failed in Function VERIFY /see log file for more details/ ");
+	}
+					
+}
+function FLASH_VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	! Shift in LSCC RESET ADDRESS(0x21) instruction;
+    SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST	IDLE TCK 5 DELAY 	PWV;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	! Shift in LSCC READ INCR RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(LSCC_READ_INCR_RTI);
+	repeat Address_Length {
+		RUN_TEST	IDLE TCK 5 DELAY 	PWV;
+		! Shift Out Data Row = RowCount;
+	    SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+								TDO	(FuseArray_TDI);
+		RowCount = RowCount +1;
+	}
+}
+function VERIFY_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+		! Shift in READ USERCODE(0x17) instruction;
+	    SIR Instruction_Length TDI (USERCODE);
+	    RUN_TEST	TCK 5  DELAY 	PWV;
+		SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+									TDO	(Usercode_TDI);
+	}
+}
+
+function PROGRAM_SECURITY {
+	! Shift in ISC PROGRAM SECURITY(0x09) instruction;
+    SIR Instruction_Length	TDI	(ISC_PROGRAM_SECURITY);
+	RUN_TEST	TCK 	5 DELAY 	50;
+	STATE IDLE;
+}
+
+function SAVE_ID	{
+	datastream SavedID[1][ID_Length];
+	file	NewFile = "FILE_SAVE"; 
+	! Shift in IDCODE(0x16) instruction;
+    SIR Instruction_Length	TDI	(IDCODE);
+	SDR	ID_Length	TDI (#1^ID_Length)
+					TDO	(SavedID);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedID);
+	fclose 	NewFile;
+}
+function SVF_SAVE_ID	{
+	! Shift in IDCODE(0x16) instruction;
+    SIR Instruction_Length 	TDI (IDCODE);
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+							TDO	(IDTDI[1])
+							MASK (#0^ID_Length);
+}
+function SAVE_ARRAY {
+	int32	RowCount = 1;
+	datastream SavedFuseMap[Address_Length][Row_Width];
+	file NewFile = "FILE_SAVE";
+
+	Address.row = 1;	
+	! Shift in LSCC RESET ADDRESS(0x21) instruction;
+    SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST	IDLE TCK 5 DELAY 	PWV;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	! Shift in LSCC READ INCR RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(LSCC_READ_INCR_RTI);
+	repeat Address_Length {
+		RUN_TEST	TCK 5 DELAY 	PWV;						
+		! Shift Out Data Row = RowCount;
+	    SDR Row_Width 	TDI (#1^Row_Width)
+						TDO (SavedFuseMap);
+		RowCount = RowCount +1;
+	}
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+	fclose 	NewFile;
+}
+function SVF_SAVE_ARRAY {
+	int32	RowCount = 1;
+	Address.row = 1;	
+	! Shift in LSCC RESET ADDRESS(0x21) instruction;
+    SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST	IDLE TCK 5 DELAY 	PWV;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	! Shift in LSCC READ INCR RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(LSCC_READ_INCR_RTI);
+	repeat Address_Length {
+		RUN_TEST	TCK 5 DELAY 	PWV;
+		! Shift Out Data Row = RowCount;
+	    SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+								TDO	(#1^Row_Width)
+								MASK (#0^Row_Width);
+		RowCount = RowCount +1;
+	}
+}
+function SVF_CHECKSUM_ARRAY {
+	int32	RowCount = 1;
+	Address.row = 1;	
+	! Shift in LSCC RESET ADDRESS(0x21) instruction;
+    SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST	IDLE TCK 5 DELAY 	PWV;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	! Shift in LSCC READ INCR RTI(0x6A) instruction;
+    SIR Instruction_Length	TDI	(LSCC_READ_INCR_RTI);
+	repeat Address_Length {
+		RUN_TEST	TCK 5 DELAY 	PWV;
+		! Shift Out Data Row = RowCount;
+	    SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+								TDO	(#1^Row_Width)
+								CMASK (#0^Row_Width);
+		RowCount = RowCount +1;
+	}
+}
+function SAVE_USERCODE {
+	datastream SavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	! Shift in READ USERCODE(0x17) instruction;
+    SIR Instruction_Length	TDI (USERCODE);
+    RUN_TEST	TCK 5 DELAY 	PWV;
+	SDR	Usercode_Length	TDI(#1^Usercode_Length)
+						TDO(SavedUsercode);
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (Usercode_TDI, SavedUsercode);
+	fclose 	NewFile;
+}
+function SVF_SAVE_USERCODE {
+	! Shift in READ USERCODE(0x17) instruction;
+    SIR Instruction_Length TDI (USERCODE);
+    RUN_TEST	TCK 5 DELAY 	PWV;
+	SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+								TDO	(#1^Usercode_Length)
+								MASK(#0^Usercode_Length);
+}
+
+function SAVE_STATUS {
+	datastream SavedSTATUS[1][32];
+	file NewFile = "FILE_SAVE";
+	! Shift in LSCC READ STATUS(0x53) instruction;
+    SIR Instruction_Length	TDI (LSCC_READ_STATUS);
+	SDR	32	TDI(#1^32)
+			TDO(SavedSTATUS);
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (STATUS_BIT, SavedSTATUS);
+	fclose 	NewFile;
+}
+function SVF_SAVE_STATUS {
+	! Shift in LSCC READ STATUS(0x53) instruction;
+    SIR Instruction_Length TDI (LSCC_READ_STATUS);
+	SDR_VERIFY 	32 TDI (#1^32)
+				   TDO	(#1^32)
+				   MASK(#0^32);
+}
+function READ_DONE_BIT {
+	datastream SavedDONE_BIT[1][Instruction_Length];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length	TDI	(BYPASS)
+							TDO (SavedDONE_BIT);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (DONE_BIT, SavedDONE_BIT);
+	fclose 	NewFile;
+}
+function SVF_SAVE_DONE_BIT {
+	! Shift in BYPASS(0xFF) instruction;
+    SIR_VERIFY Instruction_Length	TDI	(BYPASS)
+				TDO (#1^Instruction_Length)
+				MASK(#0^Instruction_Length);
+}
+function REFRESH_FUNCTION {
+	! Shift in LSCC REFRESH(0x23) instruction;
+    SIR Instruction_Length	TDI (LSCC_REFRESH);
+	RUN_TEST IDLE TCK 5 DELAY PWP; 
+
+	! Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length	TDI (BYPASS);
+	RUN_TEST IDLE TCK 100 DELAY 1;
+}
+
+function UPLOAD_FUNCTION {
+	
+	! Shift in ISC SRAM ENABLE(0x55) instruction;
+    SIR Instruction_Length TDI (ISC_SRAM_ENABLE);
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;
+	
+    ! Shift in ISC ERASE(0x03) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	TCK 5 DELAY PWE;
+	
+	
+	! Shift in ISC ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (ISC_ENABLE);
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;
+
+	! Shift in ISC DISABLE(0x1E) instruction;
+  	SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+
+	! Shift in BYPASS(0xFF) instruction;
+  	SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 100 DELAY 1;
+}
+function SAVE_CONFIG_BIT {	
+	datastream SavedCONFIG_BIT[1][4];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in Read Config(0xEA) instruction;
+	SIR  Instruction_Length  TDI (READ_CONFIG);
+	RUN_TEST IDLE TCK 5 DELAY PWV;
+	SDR  4  TDI (0xFF) 
+			 TDO (SavedCONFIG_BIT) ;	
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (STATUS_BIT, SavedCONFIG_BIT);
+	fclose 	NewFile;
+}
+
+function SVF_SAVE_CONFIG_BIT {	
+	! Shift in Read Config(0xEA) instruction;
+	SIR  Instruction_Length  TDI (READ_CONFIG);
+	RUN_TEST IDLE TCK 5 DELAY PWV;
+	SDR_VERIFY  4  TDI (#1^4) 
+			 		TDO ((#1^4) 
+			 		MASK ((#0^4);
+}
+function BURST_PROGRAM {
+	FuseArray_TDI.row = 1;
+	! Shift in LSCC RESET ADDRESS(0x21) instruction;
+    SIR Instruction_Length	TDI (LSCC_RESET_ADDRESS);
+	RUN_TEST	IDLE TCK 5 DELAY 	PWP;
+	! Shift in BYPASS(0xFF) instruction;
+    SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 1;
+	! Shift in LSCC BITSTREAM BURST(0x04) instruction;
+    SIR Instruction_Length	TDI (LSCC_BITSTREAM_BURST);
+	! Shift in TOTAL_FUSE_MAP bits;
+    SDR	TotalFuse		TDI	(FuseArray_TDI);
+	RUN_TEST	IDLE TCK 5 DELAY PWP;
+}
+function FLASH_MDR
+{					        
+	! Shift in ISC SRAM ENABLE(0x55) instruction;
+    SIR Instruction_Length TDI (ISC_SRAM_ENABLE);
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;
+    ! Shift in ISC ERASE(0x03) instruction;
+    SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	TCK 5 DELAY PWE;
+	! Phase 2 Boundary Scan Locks Outputs;
+    ! Shift in ISC ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (ISC_ENABLE);
+	RUN_TEST	IDLE	TCK 5 DELAY PWP;
+	! Phase 3 Device Configuration;
+	! Shift in ISC DISABLE(0x1E) instruction;
+  	SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	IDLE  TCK 5 DELAY MDRDelay;
+	! Phase 4 Boundary Scan Released;
+	! Shift in BYPASS(0xFF) instruction;
+  	SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 100 DELAY 1;
+}		
+]]>
+</Script>
+</SVF_Plus>

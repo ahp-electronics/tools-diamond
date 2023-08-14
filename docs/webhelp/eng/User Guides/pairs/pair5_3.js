@@ -1,0 +1,25 @@
+var pairs =
+{
+"output":{"files":1,"file":1}
+,"platform":{"designer":1}
+,"designer":{"output":1,"automatically":1}
+,"automatically":{"generates":1}
+,"generates":{"background":1}
+,"background":{"hdl":1}
+,"hdl":{"files":1}
+,"files":{"compile":1,"programming":1}
+,"compile":{"design":1}
+,"design":{"generate":1}
+,"generate":{"jedec":1}
+,"jedec":{"process":1,"fpga":1,"files":1}
+,"process":{"produces":1}
+,"produces":{"merged":1}
+,"merged":{"jedec":1}
+,"fpga":{"asc":1}
+,"asc":{"jedec":1}
+,"programming":{"ecp5u":1}
+,"ecp5u":{"output":1}
+,"file":{".bit":1}
+,"building":{"design":1}
+}
+;Search.control.loadWordPairs(pairs);

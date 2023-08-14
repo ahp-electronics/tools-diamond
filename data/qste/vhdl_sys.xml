@@ -1,0 +1,1513 @@
+<Folder treetype="root" label="System Templates" >
+<SubFolder treetype="node" label="PMI" >
+<Template treetype="leaf" label="add" >&lt;your_inst_label> : pmi_add
+    generic map (
+       pmi_data_width => ,
+       pmi_result_width => ,
+       pmi_sign => ,	-- "on","off"
+       pmi_family => 
+    )
+    port map (
+     DataA => ,
+     DataB => ,
+     Cin => ,
+     Result => ,
+     Cout => ,
+     Overflow =>
+   );</Template>
+<Template treetype="leaf" label="addsub" >&lt;your_inst_label> : pmi_addsub
+    generic map (
+       pmi_data_width => ,
+       pmi_result_width => , 
+       pmi_sign => , 	-- "on", "off"
+       pmi_family =>
+    )
+    port map (
+     DataA => ,
+     DataB => ,
+     Cin => ,
+     Add_Sub => ,
+     Result => ,
+     Cout => ,
+     Overflow =>
+   );</Template>
+<Template treetype="leaf" label="complex_mult" >&lt;your_inst_label> : pmi_complex_mult
+    generic map (
+       pmi_dataa_width => , 
+       pmi_datab_width => ,
+       pmi_sign => , 								-- "on", "off"
+       pmi_additional_pipeline => , 
+       pmi_input_reg => , 							-- "on", "off"
+       pmi_output_reg => , 						-- "on", "off"
+       pmi_family => ,
+       pmi_mult_mode => ,
+       pmi_implementation => 						-- "DSP, "LUT" 
+    )
+    port map (
+      DataA_Re => ,
+	  DataA_Im => ,
+	  DataB_Re => ,
+	  DataB_Im => ,
+      Clock => ,
+	  ClkEn => ,
+      Aclr => ,
+      Result_Re => ,
+	  Result_Im => 
+   );</Template>     
+<Template treetype="leaf" label="constant_mult" >&lt;your_inst_label> : pmi_constant_mult
+    generic map (
+       pmi_dataa_width => , 
+       pmi_datab_width => ,
+       pmi_sign => , 	-- "on", "off"
+       pmi_additional_pipeline => , 
+       pmi_constant_value => , 
+       pmi_input_reg => , 	-- "on", "off"
+       pmi_output_reg => , 	-- "on", "off"
+       pmi_family => ,
+       pmi_implementation => 	-- "DSP, "LUT" 
+    )
+    port map (
+     DataA => ,
+     Clock => ,
+     ClkEn => ,
+     Aclr => ,
+     Result => 
+   );</Template>
+<Template treetype="leaf" label="counter" >&lt;your_inst_label> : pmi_counter
+    generic map (
+       pmi_data_width => , 
+       pmi_updown => , 	-- "up", "down" , "up-down"
+       pmi_family =>
+    )
+    port map (
+     Clock => ,
+     Clk_En => ,
+     Aclr => ,
+     UpDown => ,
+     Q =>
+   );</Template>
+<Template treetype="leaf" label="distributed_dpram" >&lt;your_inst_label> : pmi_distributed_dpram
+    generic map (
+       pmi_addr_depth => , 
+       pmi_addr_width => , 
+       pmi_data_width => , 
+       pmi_regmode => , 	-- "reg", "noreg"
+       pmi_init_file => , 
+       pmi_init_file_format => ,	 -- "binary", "hex"
+       pmi_family =>
+    )
+    port map (
+     WrAddress => ,
+     Data => ,
+     WrClock => ,
+     WE => ,
+     WrClockEn => ,
+     RdAddress => ,
+     RdClock => ,
+     RdClockEn => ,
+     Reset => ,
+     Q =>
+   );</Template>
+<Template treetype="leaf" label="distributed_rom" >&lt;your_inst_label> : pmi_distributed_rom
+    generic map (
+       pmi_addr_depth => , 
+       pmi_addr_width => , 
+       pmi_data_width => , 
+       pmi_regmode => ,	-- "reg", "noreg" 
+       pmi_init_file => , 
+       pmi_init_file_format => , 	-- "binary", "hex"
+       pmi_family =>
+    )
+    port map (
+     Address => ,
+     OutClock => ,
+     OutClockEn => ,
+     Reset => ,
+     Q =>
+   );</Template>
+<Template treetype="leaf" label="distributed_shift_reg" >&lt;your_inst_label> : pmi_distributed_shift_reg
+    generic map (
+       pmi_data_width => , 
+       pmi_regmode => , 	-- "reg", "noreg"
+       pmi_shiftreg_type => , 	-- "fixed", "variable", "lossless"
+       pmi_num_shift => , 
+       pmi_num_width => , 
+       pmi_max_shift => , 
+       pmi_max_width => , 
+       pmi_init_file => ,		
+       pmi_init_file_format => ,	-- "binary", "hex"
+       pmi_family =>
+    )
+    port map (
+     Din => ,
+     Addr => ,
+     Clock => ,
+     ClockEn => ,
+     Reset => ,
+     Q =>
+   );</Template>
+<Template treetype="leaf" label="distributed_spram" >&lt;your_inst_label> : pmi_distributed_spram
+    generic map(
+       pmi_addr_depth => , 
+       pmi_addr_width => , 
+       pmi_data_width => , 
+       pmi_regmode => , 	-- "reg", "noreg"
+       pmi_init_file => ,
+       pmi_init_file_format => , 	-- "binary", "hex"
+       pmi_family =>
+    )
+    port map(
+     Address => ,
+     Data => ,
+     Clock => ,
+     ClockEn => ,
+     WE => ,
+     Reset =>,
+     Q => 
+   );</Template>
+<Template treetype="leaf" label="dsp_casmultaddsub" >&lt;your_inst_label> : pmi_dsp_casmultaddsub
+    generic map (
+       pmi_dataa_width => , 
+       pmi_datab_width => , 
+       pmi_additional_pipeline => , 
+       pmi_input_reg => ,					-- "on", "off" 
+       pmi_output_reg => , 				-- "on", "off"
+       pmi_family => ,
+       pmi_gsr => , 							-- "enable", "disable"
+       pmi_reg_inputa0_clk => , 			-- "CLK0", "CLK1", "CLK2", "CLK3"
+       pmi_reg_inputa0_ce => , 			-- "CE0", "CE1", "CE2", "CE3"
+       pmi_reg_inputa0_rst => , 			-- "RST0", "RST1", "RST2", "RST3"
+       pmi_reg_inputa1_clk => , 
+       pmi_reg_inputa1_ce => , 
+       pmi_reg_inputa1_rst => , 
+       pmi_reg_inputb0_clk => , 
+       pmi_reg_inputb0_ce => , 
+       pmi_reg_inputb0_rst => , 
+       pmi_reg_inputb1_clk => , 
+       pmi_reg_inputb1_ce => , 
+       pmi_reg_inputb1_rst => , 
+       pmi_reg_pipeline0_clk => , 
+       pmi_reg_pipeline0_ce => , 
+       pmi_reg_pipeline0_rst => , 
+       pmi_reg_pipeline1_clk => , 
+       pmi_reg_pipeline1_ce => , 
+       pmi_reg_pipeline1_rst => , 
+       pmi_reg_output_clk => , 
+       pmi_reg_output_ce => , 
+       pmi_reg_output_rst => , 
+       pmi_reg_signeda_0_clk => , 
+       pmi_reg_signeda_0_ce => , 
+       pmi_reg_signeda_0_rst => , 
+       pmi_reg_signeda_1_clk => , 
+       pmi_reg_signeda_1_ce => , 
+       pmi_reg_signeda_1_rst => , 
+       pmi_reg_signedb_0_clk => , 
+       pmi_reg_signedb_0_ce => , 
+       pmi_reg_signedb_0_rst => , 
+       pmi_reg_signedb_1_clk => , 
+       pmi_reg_signedb_1_ce => , 
+       pmi_reg_signedb_1_rst => , 
+       pmi_reg_addnsub_0_clk => , 
+       pmi_reg_addnsub_0_ce => , 
+       pmi_reg_addnsub_0_rst => , 
+       pmi_reg_addnsub_1_clk => , 
+       pmi_reg_addnsub_1_ce => , 
+       pmi_reg_addnsub_1_rst => 
+    )
+    port map (
+     A0 => ,
+	  A1 => ,
+     B0 => ,
+	  B1 => ,
+     SRIA => ,
+     SRIB => ,
+     CLK0 => ,
+     CLK1 => ,
+     CLK2 => ,
+     CLK3 => ,
+     CE0 => ,
+     CE1 => ,
+     CE2 => ,
+     CE3 => ,
+     RST0 => ,
+     RST1 => ,
+     RST2 => ,
+     RST3 => ,
+     SignA => ,
+     SignB => ,
+     ShiftA0 => ,
+     ShiftA1 => ,
+     ShiftB0 => ,
+     ShiftB1 => ,
+     ADDNSUB => ,
+	  SignCIN => ,
+	  CIN => ,
+	  SignSUM => ,
+     SUM => ,
+     SROA => ,
+     SROB => 
+   );</Template>      
+<Template treetype="leaf" label="dsp_mac" >&lt;your_inst_label> : pmi_dsp_mac
+    generic map(
+       pmi_dataa_width => , 
+       pmi_datab_width => , 
+       pmi_additional_pipeline => , 
+       pmi_input_reg => , 	-- "on", "off"
+       pmi_family => ,
+       pmi_gsr => ,	-- "enable", "disable" 
+       pmi_source_control_a => ,	-- "parallel", "shift"
+       pmi_source_control_b => ,	-- "parallel", "shift"
+       pmi_reg_inputa_clk => , 	-- "CLK0", "CLK1", "CLK2", "CLK3"
+       pmi_reg_inputa_ce => ,	-- "CE0", "CE1", "CE2", "CE3" 
+       pmi_reg_inputa_rst => , 	-- "RST0", "RST1", "RST2", "RST3"
+       pmi_reg_inputb_clk => ,
+       pmi_reg_inputb_ce => , 			
+       pmi_reg_inputb_rst => , 			
+       pmi_reg_pipeline_clk => , 		
+       pmi_reg_pipeline_ce => , 			
+       pmi_reg_pipeline_rst => , 		
+       pmi_reg_output_clk => , 			
+       pmi_reg_output_ce => , 			
+       pmi_reg_output_rst => , 			
+       pmi_reg_signeda_0_clk => , 		
+       pmi_reg_signeda_0_ce => , 		
+       pmi_reg_signeda_0_rst => , 		
+       pmi_reg_signeda_1_clk => , 		
+       pmi_reg_signeda_1_ce => , 		
+       pmi_reg_signeda_1_rst => , 		
+       pmi_reg_signedb_0_clk => , 		
+       pmi_reg_signedb_0_ce => ,		 	
+       pmi_reg_signedb_0_rst => , 		
+       pmi_reg_signedb_1_clk => , 		
+       pmi_reg_signedb_1_ce => , 		
+       pmi_reg_signedb_1_rst => , 		
+       pmi_reg_addnsub_0_clk => , 		
+       pmi_reg_addnsub_0_ce => , 		
+       pmi_reg_addnsub_0_rst => , 		
+       pmi_reg_addnsub_1_clk => , 		
+       pmi_reg_addnsub_1_ce => , 		
+       pmi_reg_addnsub_1_rst => , 		
+       pmi_reg_accumsload_0_clk => , 	
+       pmi_reg_accumsload_0_ce => , 	
+       pmi_reg_accumsload_0_rst => , 	
+       pmi_reg_accumsload_1_clk => , 	
+       pmi_reg_accumsload_1_ce => , 	
+       pmi_reg_accumsload_1_rst => 
+    )
+    port map (
+     A => ,
+     B => ,
+     SRIA => ,
+     SRIB => ,
+     CLK0 => ,
+     CLK1 => ,
+     CLK2 => ,
+     CLK3 => ,
+     CE0 => ,
+     CE1 => ,
+     CE2 => ,
+     CE3 => ,
+     RST0 => ,
+     RST1 => ,
+     RST2 => ,
+     RST3 => ,
+     SignA => ,
+     SignB => ,
+     SourceA => ,
+     SourceB => ,
+     ADDNSUB => ,
+     LD => ,
+     ACCUMSLOAD => ,
+     ACCUM => ,
+     OVERFLOW => ,
+     SROA => ,
+     SROB => 
+   );</Template>
+<Template treetype="leaf" label="dsp_mult" >&lt;your_inst_label> : pmi_dsp_mult
+    generic map (
+       pmi_dataa_width => ,
+       pmi_datab_width => ,
+       pmi_additional_pipeline => ,
+       pmi_input_reg => ,	-- "on", "off"
+       pmi_output_reg => ,	-- "on", "off"
+       pmi_family => ,
+       pmi_gsr => ,	-- "enable", "disable"
+       pmi_source_control_a => ,	-- "parallel", "shift"
+       pmi_source_control_b => ,	-- "parallel", "shift"
+       pmi_reg_inputa_clk => ,	-- "CLK0", "CLK1", "CLK2", "CLK3"
+       pmi_reg_inputa_ce => ,	-- "CE0", "CE1", "CE2", "CE3"
+       pmi_reg_inputa_rst => , 	-- "RST0", "RST1", "RST2", "RST3"
+       pmi_reg_inputb_clk => ,
+       pmi_reg_inputb_ce => ,		
+       pmi_reg_inputb_rst => ,	
+       pmi_reg_pipeline_clk => ,	
+       pmi_reg_pipeline_ce => ,	
+       pmi_reg_pipeline_rst => ,	
+       pmi_reg_output_clk => ,	
+       pmi_reg_output_ce => ,		
+       pmi_reg_output_rst => ,	
+       pmi_reg_signeda_clk => ,	
+       pmi_reg_signeda_ce => ,	
+       pmi_reg_signeda_rst => ,	
+       pmi_reg_signedb_clk => ,	
+       pmi_reg_signedb_ce => ,	
+       pmi_reg_signedb_rst => ,
+       pmi_pipelined_mode =>
+    )
+    port map (
+     A => ,
+     B => ,
+     SRIA => ,
+     SRIB => ,
+     CLK0 => ,
+     CLK1 => ,
+     CLK2 => ,
+     CLK3 => ,
+     CE0 => ,
+     CE1 => ,
+     CE2 => ,
+     CE3 => ,
+     RST0 => ,
+     RST1 => ,
+     RST2 => ,
+     RST3 => ,
+     SignA => ,
+     SignB => ,
+     SourceA => ,
+     SourceB => ,
+     P => ,
+     SROA => ,
+     SROB => 
+   );</Template>
+<Template treetype="leaf" label="dsp_multaddsub" >&lt;your_inst_label> : pmi_dsp_multaddsub
+    generic map (
+       pmi_dataa_width => , 
+       pmi_datab_width => , 
+       pmi_additional_pipeline => , 
+       pmi_input_reg => ,	-- "on", "off" 
+       pmi_output_reg => , 	-- "on", "off"
+       pmi_family => ,
+       pmi_gsr => , 	-- "enable", "disable"
+       pmi_source_control_a0 => , -- "parallel", "shift"
+       pmi_source_control_a1 => , 
+       pmi_source_control_b0 => , 
+       pmi_source_control_b1 => , 
+       pmi_reg_inputa0_clk => , 	-- "CLK0", "CLK1", "CLK2", "CLK3"
+       pmi_reg_inputa0_ce => , 	-- "CE0", "CE1", "CE2", "CE3"
+       pmi_reg_inputa0_rst => , 	-- "RST0", "RST1", "RST2", "RST3"
+       pmi_reg_inputa1_clk => , 
+       pmi_reg_inputa1_ce => , 
+       pmi_reg_inputa1_rst => , 
+       pmi_reg_inputb0_clk => , 
+       pmi_reg_inputb0_ce => , 
+       pmi_reg_inputb0_rst => , 
+       pmi_reg_inputb1_clk => , 
+       pmi_reg_inputb1_ce => , 
+       pmi_reg_inputb1_rst => , 
+       pmi_reg_pipeline0_clk => , 
+       pmi_reg_pipeline0_ce => , 
+       pmi_reg_pipeline0_rst => , 
+       pmi_reg_pipeline1_clk => , 
+       pmi_reg_pipeline1_ce => , 
+       pmi_reg_pipeline1_rst => , 
+       pmi_reg_output_clk => , 
+       pmi_reg_output_ce => , 
+       pmi_reg_output_rst => , 
+       pmi_reg_signeda_0_clk => , 
+       pmi_reg_signeda_0_ce => , 
+       pmi_reg_signeda_0_rst => , 
+       pmi_reg_signeda_1_clk => , 
+       pmi_reg_signeda_1_ce => , 
+       pmi_reg_signeda_1_rst => , 
+       pmi_reg_signedb_0_clk => , 
+       pmi_reg_signedb_0_ce => , 
+       pmi_reg_signedb_0_rst => , 
+       pmi_reg_signedb_1_clk => , 
+       pmi_reg_signedb_1_ce => , 
+       pmi_reg_signedb_1_rst => , 
+       pmi_reg_addnsub_0_clk => , 
+       pmi_reg_addnsub_0_ce => , 
+       pmi_reg_addnsub_0_rst => , 
+       pmi_reg_addnsub_1_clk => , 
+       pmi_reg_addnsub_1_ce => , 
+       pmi_reg_addnsub_1_rst => 
+    )
+    port map (
+     A0 => ,
+     B0 => ,
+     SRIA => ,
+     SRIB => ,
+     CLK0 => ,
+     CLK1 => ,
+     CLK2 => ,
+     CLK3 => ,
+     CE0 => ,
+     CE1 => ,
+     CE2 => ,
+     CE3 => ,
+     RST0 => ,
+     RST1 => ,
+     RST2 => ,
+     RST3 => ,
+     SignA => ,
+     SignB => ,
+     ShiftA0 => ,
+     ShiftA1 => ,
+     ShiftB0 => ,
+     ShiftB1 => ,
+     ADDNSUB => ,
+     SUM => ,
+     SROA => ,
+     SROB => 
+   );</Template>
+<Template treetype="leaf" label="dsp_multaddsubsum" >&lt;your_inst_label> : pmi_dsp_multaddsubsum
+    generic map (
+       pmi_dataa_width => ,
+       pmi_datab_width => ,
+       pmi_additional_pipeline => ,
+       pmi_input_reg => ,		-- "on", "off"
+       pmi_output_reg => ,		-- "on", "off"
+       pmi_family => ,
+       pmi_gsr => ,		-- "enable", "disable"
+       pmi_source_control_a0 => ,		-- "parallel", "shift"
+       pmi_source_control_a1 => ,
+       pmi_source_control_a2 => ,
+       pmi_source_control_a3 => ,
+       pmi_source_control_b0 => ,
+       pmi_source_control_b1 => ,
+       pmi_source_control_b2 => ,
+       pmi_source_control_b3 => ,
+       pmi_reg_inputa0_clk => ,		-- "CLK0", "CLK1", "CLK2", "CLK3"
+       pmi_reg_inputa0_ce => ,		-- "CE0", "CE1", "CE2", "CE3"
+       pmi_reg_inputa0_rst => ,		-- "RST0", "RST1", "RST2", "RST3"
+       pmi_reg_inputa1_clk => ,
+       pmi_reg_inputa1_ce => ,
+       pmi_reg_inputa1_rst => ,
+       pmi_reg_inputa2_clk => ,
+       pmi_reg_inputa2_ce => ,
+       pmi_reg_inputa2_rst => ,
+       pmi_reg_inputa3_clk => ,
+       pmi_reg_inputa3_ce => ,
+       pmi_reg_inputa3_rst => ,
+       pmi_reg_inputb0_clk => ,
+       pmi_reg_inputb0_ce => ,
+       pmi_reg_inputb0_rst => ,
+       pmi_reg_inputb1_clk => ,
+       pmi_reg_inputb1_ce => ,
+       pmi_reg_inputb1_rst => ,
+       pmi_reg_inputb2_clk => ,
+       pmi_reg_inputb2_ce => ,
+       pmi_reg_inputb2_rst => ,
+       pmi_reg_inputb3_clk => ,
+       pmi_reg_inputb3_ce => ,
+       pmi_reg_inputb3_rst => ,
+       pmi_reg_pipeline0_clk => ,
+       pmi_reg_pipeline0_ce => ,
+       pmi_reg_pipeline0_rst => ,
+       pmi_reg_pipeline1_clk => ,
+       pmi_reg_pipeline1_ce => ,
+       pmi_reg_pipeline1_rst => ,
+       pmi_reg_pipeline2_clk => ,
+       pmi_reg_pipeline2_ce => ,
+       pmi_reg_pipeline2_rst => ,
+       pmi_reg_pipeline3_clk => ,
+       pmi_reg_pipeline3_ce => ,
+       pmi_reg_pipeline3_rst => ,
+       pmi_reg_output_clk => ,
+       pmi_reg_output_ce => ,
+       pmi_reg_output_rst => ,
+       pmi_reg_signeda_0_clk => ,
+       pmi_reg_signeda_0_ce => ,
+       pmi_reg_signeda_0_rst => ,
+       pmi_reg_signeda_1_clk => ,
+       pmi_reg_signeda_1_ce => ,
+       pmi_reg_signeda_1_rst => ,
+       pmi_reg_signedb_0_clk => ,
+       pmi_reg_signedb_0_ce => ,
+       pmi_reg_signedb_0_rst => ,
+       pmi_reg_signedb_1_clk => ,
+       pmi_reg_signedb_1_ce => ,
+       pmi_reg_signedb_1_rst => ,
+       pmi_reg_addnsub1_0_clk => ,
+       pmi_reg_addnsub1_0_ce => ,
+       pmi_reg_addnsub1_0_rst => ,
+       pmi_reg_addnsub1_1_clk => ,
+       pmi_reg_addnsub1_1_ce => ,
+       pmi_reg_addnsub1_1_rst => ,
+       pmi_reg_addnsub3_0_clk => ,
+       pmi_reg_addnsub3_0_ce => ,
+       pmi_reg_addnsub3_0_rst => ,
+       pmi_reg_addnsub3_1_clk => ,
+       pmi_reg_addnsub3_1_ce => ,
+       pmi_reg_addnsub3_1_rst =>  
+    )
+    port map (
+     A0 => ,
+     B0 => ,
+     SRIA => ,
+     SRIB => ,
+     CLK0 => ,
+     CLK1 => ,
+     CLK2 => ,
+     CLK3 => ,
+     CE0 => ,
+     CE1 => ,
+     CE2 => ,
+     CE3 => ,
+     RST0 => ,
+     RST1 => ,
+     RST2 => ,
+     RST3 => ,
+     SignA => ,
+     SignB => ,
+     ShiftA0 => ,
+     ShiftA1 => ,
+     ShiftA2 => ,
+     ShiftA3 => ,
+     ShiftB0 => ,
+     ShiftB1 => ,
+     ShiftB2 => ,
+     ShiftB3 => ,
+     ADDNSUB1 => ,
+     ADDNSUB3 => ,
+     SUM => ,
+     SROA => ,
+     SROB => 
+   );</Template>
+<Template treetype="leaf" label="fifo" >&lt;your_inst_label> : pmi_fifo
+    generic map (
+       pmi_data_width => ,
+       pmi_data_depth => ,
+       pmi_full_flag => ,
+       pmi_empty_flag => ,
+       pmi_almost_full_flag => ,
+       pmi_almost_empty_flag => ,
+       pmi_regmode => ,	-- "reg", "noreg"
+       pmi_family => ,
+       pmi_implementation => 	-- "EBR", "LUT"
+    )
+    port map (
+     Data => ,
+     Clock => ,
+     WrEn => ,
+     RdEn => ,
+     Reset => ,
+     Q => ,
+     Empty => ,
+     Full => ,
+     AlmostEmpty => ,
+     AlmostFull =>
+   );</Template>
+<Template treetype="leaf" label="fifo_dc" >&lt;your_inst_label> : pmi_fifo_dc
+    generic map (
+       pmi_data_width_w => ,
+       pmi_data_width_r => ,
+       pmi_data_depth_w => ,
+       pmi_data_depth_r => ,
+       pmi_full_flag => ,
+       pmi_empty_flag => ,
+       pmi_almost_full_flag => ,
+       pmi_almost_empty_flag => ,
+       pmi_regmode => ,		-- "reg", "noreg"
+       pmi_resetmode => ,		-- "async", "sync"
+       pmi_family => ,
+       pmi_implementation => 		-- "EBR", "LUT"
+    )
+    port map (
+     Data => ,
+     WrClock => ,
+     RdClock => ,
+     WrEn => ,
+     RdEn => ,
+     Reset => ,
+     RPReset => ,
+     Q => ,
+     Empty => ,
+     Full => ,
+     AlmostEmpty => ,
+     AlmostFull =>
+   );</Template>
+<Template treetype="leaf" label="mac" >&lt;your_inst_label> : pmi_mac
+    generic map (
+       pmi_dataa_width => ,
+       pmi_datab_width => ,
+       pmi_accum_width => ,
+       pmi_sign => ,		-- "on", "off"
+       pmi_additional_pipeline => ,
+       pmi_add_sub => ,		-- "add", "sub"
+       pmi_input_reg => ,		-- "on", "off"
+       pmi_family => ,
+       pmi_implementation => 		-- "DSP", "LUT"
+    )
+    port map (
+     DataA => ,
+     DataB => ,
+     Clock => ,
+     ClkEn => ,
+     Aclr => ,
+     Result =>
+   );</Template>
+<Template treetype="leaf" label="mult" >&lt;your_inst_label> : pmi_mult
+    generic map (
+       pmi_dataa_width => ,
+       pmi_datab_width => ,
+       pmi_sign => ,		-- "on", "off"
+       pmi_additional_pipeline => ,
+       pmi_input_reg => ,		-- "on", "off"
+       pmi_output_reg => ,		-- "on", "off"
+       pmi_family => ,
+       pmi_implementation => 		-- "DSP", "LUT"
+    )
+    port map (
+     DataA => ,
+     DataB => ,
+     Clock => ,
+     ClkEn => ,
+     Aclr => ,
+     Result =>
+   );</Template>
+<Template treetype="leaf" label="multaddsub" >&lt;your_inst_label> : pmi_multaddsub
+    generic map (
+       pmi_dataa_width => ,
+       pmi_datab_width => ,
+       pmi_sign => ,		-- "on", "off"
+       pmi_additional_pipeline => ,
+       pmi_add_sub => ,		-- "add", "sub"
+       pmi_input_reg => ,		-- "on", "off"
+       pmi_output_reg => ,		-- "on", "off"
+       pmi_family => ,
+       pmi_implementation => 		-- "DSP", "LUT" 
+    )
+    port map (
+     DataA0 => ,
+     DataA1 => ,
+     DataB0 => ,
+     DataB1 => ,
+     Clock => ,
+     ClkEn => ,
+     Aclr => ,
+     Result => 
+   );</Template>
+<Template treetype="leaf" label="multaddsubsum" >&lt;your_inst_label> :  pmi_multaddsubsum
+     generic map (
+       pmi_dataa_width => ,
+       pmi_datab_width => ,
+       pmi_sign => ,		-- "on", "off"
+       pmi_additional_pipeline => ,
+       pmi_add_sub0 => ,		-- "add", "sub"
+       pmi_add_sub1 => ,
+       pmi_input_reg => ,		-- "on", "off"
+       pmi_output_reg => ,		-- "on", "off"
+       pmi_family => ,
+       pmi_implementation => 		-- "LUT", "DSP"
+    )
+    port map (
+     DataA0 => ,
+     DataA1 => ,
+     DataA2 => ,
+     DataA3 => ,
+     DataB0 => ,
+     DataB1 => ,
+     DataB2 => ,
+     DataB3 => ,
+     Clock => ,
+     ClkEn => ,
+     Aclr => ,
+     Result =>
+   );</Template>
+<Template treetype="leaf" label="pll" >&lt;your_inst_label> : pmi_pll
+    generic map(
+       pmi_freq_clki => ,
+       pmi_freq_clkfb => ,
+       pmi_freq_clkop => ,
+       pmi_freq_clkos => ,
+       pmi_freq_clkok => ,
+       pmi_family => ,
+       pmi_phase_adj => ,
+       pmi_duty_cycle => ,
+       pmi_clkfb_source => ,	-- "INTERNAL", "CLKOP", "USERCLOCK"
+       pmi_fdel => ,	-- "on", "off"
+       pmi_fdel_val => 
+    )
+    port map (
+     CLKI => ,
+     CLKFB => ,
+     RESET => ,
+     CLKOP => ,
+     CLKOS => ,
+     CLKOK => ,
+     CLKOK2 => ,
+     LOCK =>
+   );</Template>
+<Template treetype="leaf" label="pll_fp" >&lt;your_inst_label> : pmi_pll_fp
+    generic map(
+       pmi_freq_clki => ,
+       pmi_freq_clkfb => ,
+       pmi_freq_clkop => ,
+       pmi_freq_clkos => ,
+       pmi_freq_clkok => ,
+       pmi_family => ,
+       pmi_phase_adj => ,
+       pmi_duty_cycle => ,
+       pmi_clkfb_source => ,	-- "INTERNAL", "CLKOP", "USERCLOCK", "CLKOS"
+       pmi_fdel => ,		-- "on", "off"
+       pmi_fdel_val => 
+    )
+    port map (
+     CLKI => ,
+     CLKFB => ,
+     RESET => ,
+     CLKOP => ,
+     CLKOS => ,
+     CLKOK => ,
+     CLKOK2 => ,
+     LOCK =>
+   );</Template>
+<Template treetype="leaf" label="ram_dp" >&lt;your_inst_label> : pmi_ram_dp
+    generic map (
+       pmi_wr_addr_depth => ,
+       pmi_wr_addr_width => ,
+       pmi_wr_data_width => ,
+       pmi_rd_addr_depth => ,
+       pmi_rd_addr_width => ,
+       pmi_rd_data_width => ,
+       pmi_regmode => ,	-- "reg", "noreg"
+       pmi_gsr => ,	-- "enable", "disable"
+       pmi_resetmode => ,	-- "async", "sync"
+       pmi_optimization => ,  -- "speed", "area"
+       pmi_init_file => ,
+       pmi_init_file_format => ,	-- "binary", "hex"
+       pmi_family =>
+    )
+    port map (
+     Data => ,
+     WrAddress => ,
+     RdAddress => ,
+     WrClock => ,
+     RdClock => ,
+     WrClockEn => ,
+     RdClockEn => ,
+     WE => ,
+     Reset => ,
+     Q =>
+   );</Template>
+<Template treetype="leaf" label="ram_dp_true" >&lt;your_inst_label> : pmi_ram_dp_true
+    generic map (
+       pmi_addr_depth_a => ,
+       pmi_addr_width_a => ,
+       pmi_data_width_a => ,
+       pmi_addr_depth_b => ,
+       pmi_addr_width_b => ,
+       pmi_data_width_b => ,
+       pmi_regmode_a => ,		-- "reg", "noreg"
+       pmi_regmode_b => ,
+       pmi_gsr => ,		-- "enable", "disable"
+       pmi_resetmode => ,		-- "async", "sync"
+       pmi_optimization => ,    -- "speed", "area"
+       pmi_init_file => ,
+       pmi_init_file_format => ,		-- "binary", "hex"
+       pmi_write_mode_a => ,		-- "normal", "writethrough", "readbeforewrite"
+       pmi_write_mode_b => ,
+       pmi_family => 
+    )
+    port map (
+     DataInA => ,
+     DataInB => ,
+     AddressA => ,
+     AddressB => ,
+     ClockA => ,
+     ClockB => ,
+     ClockEnA => ,
+     ClockEnB => ,
+     WrA => ,
+     WrB => ,
+     ResetA => ,
+     ResetB => ,
+     QA => ,
+     QB => 
+   );</Template>
+<Template treetype="leaf" label="ram_dq" >&lt;your_inst_label> : pmi_ram_dq
+    generic map(
+       pmi_addr_depth => ,
+       pmi_addr_width => ,
+       pmi_data_width => ,
+       pmi_regmode => ,		-- "reg", "noreg"
+       pmi_gsr => ,		-- "enable", "disable"
+       pmi_resetmode => ,		-- "async", "sync"
+       pmi_optimization => ,    -- "speed", "area"
+       pmi_init_file => ,
+       pmi_init_file_format => ,		-- "binary", "hex"
+       pmi_write_mode => ,		-- "normal", "writethrough", "readbeforewrite"
+       pmi_family => 
+    )
+    port map(
+     Data => ,
+     Address => ,
+     Clock => ,
+     ClockEn => ,
+     WE => ,
+     Reset => ,
+     Q => 
+   );</Template>
+<Template treetype="leaf" label="rom" >&lt;your_inst_label> : pmi_rom
+    generic map (
+       pmi_addr_depth => ,
+       pmi_addr_width => ,
+       pmi_data_width => ,
+       pmi_regmode => ,	-- "reg", "noreg"
+       pmi_gsr => ,	-- "enable", "disable"
+       pmi_resetmode => ,	-- "async", "sync"
+       pmi_optimization => ,  -- "area" | "speed"
+       pmi_init_file => ,
+       pmi_init_file_format => ,	-- "binary", "hex"
+       pmi_family => 
+    )
+    port map (
+     Address => , 
+     OutClock => ,
+     OutClockEn => ,
+     Reset => ,
+     Q => 
+    );</Template>
+<Template treetype="leaf" label="sub" >&lt;your_inst_label> : pmi_sub
+    generic map (
+       pmi_data_width => ,
+       pmi_result_width => ,
+       pmi_sign => ,	-- "on", "off"
+       pmi_family => 
+    )
+    port map (
+     DataA => ,
+     DataB => ,
+     Cin => ,
+     Result => ,
+     Cout => ,
+     Overflow => 
+   );</Template>
+</SubFolder>
+<SubFolder treetype="node" label="Common" >
+<Template treetype="leaf" label="Architecture Body" >ARCHITECTURE &lt;architecture_name> OF &lt;entity_name> IS
+	-- insert local declarations here
+
+	SIGNAL &lt;signal_name> : STD_LOGIC;
+	SIGNAL &lt;signal_name> : STD_LOGIC;
+BEGIN
+	-- insert synthesizable code here
+
+	-- Process statement
+
+	-- Concurrent signal assignment
+
+	-- Conditional signal assignment
+
+	-- Selected signal assignment
+
+	-- Component instantiation statement
+
+	-- Generate statement
+END &lt;architecture_name>;</Template>
+<Template treetype="leaf" label="Assert" >ASSERT (&lt;condition>)
+	REPORT "Insert your message here" SEVERITY &lt;_severity_level>;
+</Template>
+<Template treetype="leaf" label="Block" >-- Note that blocks must appear in the body of architectures. They may
+-- optionally have port declarations and a port map.
+&lt;block_name> : BLOCK
+	-- place optional port declarations here.
+	-- place optional port map here.
+	-- place local signal declarations here.
+BEGIN
+	-- insert synthesizable code here
+END BLOCK;
+</Template>
+<Template treetype="leaf" label="Case" >-- Note that a case statement must include when clauses for all possible 
+-- values of the selector. Use the "when others" clause to handle any 
+-- values of the selector not handled elsewhere.
+CASE &lt;selector> IS
+	WHEN &lt;first_condition> =>
+		-- insert statements to be executed if first condition is true.
+	WHEN &lt;second_condition> =>
+		-- insert statements to be executed if first condition is true.
+	-- Use another when clause for each additional condition
+	WHEN OTHERS =>
+		-- insert statements to be executed if no other condition is true.
+END CASE;
+</Template>
+<Template treetype="leaf" label="Clock Generator" >-- This is a template that can be used in a VHDL testbench
+-- to generate a simple clock oscillator.
+PROCESS
+BEGIN
+	CONSTANT clock_low_duration:TIME:=100ns;
+	CONSTANT clock_high_duration:TIME:=100ns;
+	&lt;clock_signal> &lt;= '0';
+	WAIT FOR clock_low_duration;
+	&lt;clock_signal> &lt;= '1';
+	WAIT FOR clock_high_duration;
+END PROCESS;
+</Template>
+<Template treetype="leaf" label="Component Declaration" >-- Component declarations go in either the architecture declaration section
+-- or in a package.
+component &lt;Component_Name>
+	generic( &lt;parameter_name> : string := &lt;default_value>;
+		 &lt;parameter_name> : integer := &lt;default_value> );
+	port(
+	-- enter port declarations here
+		 &lt;input_name>, &lt;input_name> : in std_logic;
+		 &lt;bidir_name>, &lt;bidir_name> : inout std_logic;
+		 &lt;output_name>, &lt;output_name> : out std_logic
+	);
+end component;
+</Template>
+<Template treetype="leaf" label="Component Instance" >-- Component instances go in the architecture body
+&lt;Instance_Name> : &lt;Component_Name>
+	generic map ( &lt;parameter_name> => &lt;parameter_value> ,
+		      &lt;parameter_name> => &lt;parameter_value>);
+	port map(
+	-- enter port connections here.
+		&lt;component_port> => &lt;connect_port> ,
+		&lt;component_port> => &lt;connect_port>
+	);
+</Template>
+<Template treetype="leaf" label="Constant Declaration" >constant &lt;Constant_Name> : &lt;Type_Name> := &lt;Constant_Value>;</Template>
+<Template treetype="leaf" label="Design: Counter" >LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY &lt;entity_name> IS
+	PORT( 
+		&lt;data> : IN INTEGER RANGE 0 TO &lt;count_value>;
+		&lt;clk>  : IN STD_LOGIC;
+		&lt;clrn> : IN STD_LOGIC;
+		&lt;ena>  : IN STD_LOGIC;
+		&lt;ld>   : IN STD_LOGIC;
+		&lt;count> : OUT INTEGER RANGE 0 TO &lt;count_value>
+	);
+END &lt;entity_name>;
+
+ARCHITECTURE &lt;arch_name> OF &lt;entity_name> IS
+	SIGNAL &lt;tmp_count> : INTEGER RANGE 0 TO &lt;count_value>;
+BEGIN
+	PROCESS (&lt;clk>, &lt;clrn>)
+	BEGIN
+		IF &lt;clrn> = '0' THEN
+			&lt;tmp_count> &lt;= 0;
+		ELSIF (&lt;clk>'EVENT AND &lt;clk> = '1') THEN
+			IF &lt;ld> = '1' THEN
+				&lt;tmp_count> &lt;= &lt;data>;
+			ELSE
+				IF &lt;ena> = '1' THEN
+					&lt;tmp_count> &lt;= &lt;tmp_count> + 1;
+				ELSE
+					&lt;tmp_count> &lt;= &lt;tmp_count>;
+				END IF;
+			END IF;
+		END IF;
+	END PROCESS;
+
+	&lt;count> &lt;= &lt;tmp_count>;
+END &lt;arch_name>;
+</Template>
+<Template treetype="leaf" label="Design: D-Flipflop" >LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY &lt;entity_name> IS
+	PORT(
+		&lt;d>    : IN STD_LOGIC;
+		&lt;clk>  : IN STD_LOGIC;
+		&lt;clrn> : IN STD_LOGIC;
+		&lt;ena>  : IN STD_LOGIC;
+		&lt;q>    : OUT STD_LOGIC
+	);
+END &lt;entity_name>;
+
+ARCHITECTURE &lt;arch_name> OF &lt;entity_name> IS
+	SIGNAL &lt;tmp_q> : STD_LOGIC;
+BEGIN
+	PROCESS (&lt;clk>, &lt;clrn>)
+	BEGIN
+		IF &lt;clrn> = '0' THEN
+			&lt;tmp_q> &lt;= '0';
+		ELSIF (&lt;clk>'EVENT AND &lt;clk> = '1') THEN
+			IF &lt;ena> = '1' THEN
+				&lt;tmp_q> &lt;= &lt;d>;
+			ELSE
+				&lt;tmp_q> &lt;= &lt;tmp_q>;
+			END IF;
+		END IF;
+	END PROCESS;
+
+	&lt;q> &lt;= &lt;tmp_q>;
+END &lt;arch_name>;
+</Template>
+<Template treetype="leaf" label="Design: Tri-state Buffer" >LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY &lt;entity_name> IS
+	PORT(
+		&lt;oe>   : IN STD_LOGIC;
+		&lt;data> : IN STD_LOGIC;
+		&lt;tri>  : OUT STD_LOGIC
+	);
+END &lt;entity_name>;
+
+ARCHITECTURE &lt;arch_name> OF &lt;entity_name> IS
+BEGIN
+	PROCESS (&lt;oe>, &lt;data>)
+	BEGIN
+		IF &lt;oe> = '0' THEN
+			&lt;tri> &lt;= 'Z';
+		ELSE
+			&lt;tri> &lt;= &lt;data>;
+		END IF;
+	END PROCESS;
+END &lt;arch_name>;
+</Template>
+<Template treetype="leaf" label="Entity Declaration" >entity &lt;Entity_Name> is
+	generic( &lt;parameter_name> : string := &lt;default_value>;
+		 &lt;parameter_name> : integer := default_value> );
+	port(
+	-- enter port declarations here
+		 &lt;input_name>, &lt;input_name> : in std_logic;
+		 &lt;input_vector_name> : in std_logic_vector ( &lt;range_high> downto &lt;range_low> );
+		 &lt;bidir_name>, &lt;bidir_name> : inout std_logic;
+		 &lt;output_name>, &lt;output_name> : out std_logic
+	);
+end &lt;Entity_Name>;
+</Template>
+<Template treetype="leaf" label="FF with AP" >	
+-- This is a template for a process that will synthesize flip-flops
+-- with an asynchronous preset and rising edge sensitive clock.
+process (&lt;?Clock_Signal?>, &lt;?Async_Preset_Signal?>)
+begin
+	if (&lt;?Async_Preset_Signal?> = '1') then -- async preset condition
+		-- assign outputs to '1' here
+	elsif (rising_edge(&lt;?Clock_Signal?>)) then
+		-- assign action for normal operation here
+	end if;
+end process;
+</Template>
+<Template treetype="leaf" label="FF with AR" >
+-- This is a template for a process that will synthesize flip-flops
+-- with an asynchronous reset and rising edge sensitive clock.
+process (&lt;?Clock_Signal?>, &lt;?Async_Reset_Signal?>)
+begin
+	if (&lt;?Async_Reset_Signal?> = '1') then -- async reset condition
+		-- assign outputs to '0' here
+	elsif (rising_edge(&lt;?Clock_Signal?>)) then
+		-- assign action for normal operation here
+	end if;
+end process;
+</Template>
+<Template treetype="leaf" label="FF with AR/AP" >
+-- This is a template for a process that will synthesize flip-flops
+-- with an asynchronous reset, asynchronous preset, and rising edge sensitive clock.
+process (&lt;?Clock_Signal?>, &lt;?Async_Reset_Signal?>, &lt;?Async_Preset_Signal?>)
+begin
+	if (&lt;?Async_Reset_Signal?> = '1') then -- async reset condition
+		-- assign outputs to '0' here
+	elsif (&lt;?Async_Preset_Signal?> = '1') then -- async preset condition
+		-- assign outputs to '1' here
+	elsif (rising_edge(&lt;?Clock_Signal?>)) then
+		-- assign action for normal operation here
+	end if;
+end process;
+</Template>
+<Template treetype="leaf" label="FF with CE" >
+-- This is a template for a process that will synthesize flip-flops
+-- with a clock enable and rising edge sensitive clock.
+process (&lt;?Clock_Signal?>)
+begin
+	if (rising_edge(&lt;?Clock_Signal?>)) then
+		if (&lt;?Clock_Enable?> = '1') then
+			-- assign action for normal operation here
+		end if;
+	end if;
+end process;
+</Template>
+<Template treetype="leaf" label="FF with CE/AR/AP" >
+-- This is a template for a process that will synthesize flip-flops
+-- with a clock enable, asynchronous reset, asynchronous preset, 
+-- and rising edge sensitive clock.
+process (&lt;?Clock_Signal?>, &lt;?Async_Reset_Signal?>, &lt;?Async_Preset_Signal?>)
+begin
+	if (&lt;?Async_Reset_Signal?> = '1') then -- async reset condition
+		-- assign outputs to '0' here
+	elsif (&lt;?Async_Preset_Signal?> = '1') then -- async preset condition
+		-- assign outputs to '1' here
+	elsif (rising_edge(&lt;?Clock_Signal?>)) then
+		if (&lt;?Clock_Enable?> = '1') then
+			-- assign action for normal operation here
+		end if;
+	end if;
+end process;
+</Template>
+<Template treetype="leaf" label="FF with CE/SR/SP" >
+-- This is a template for a process that will synthesize flip-flops
+-- with a clock enable, synchronous reset, synchronous preset, and 
+-- rising edge sensitive clock.
+process (&lt;?Clock_Signal?>)
+begin
+	if (rising_edge(&lt;?Clock_Signal?>)) then
+		if (&lt;?Clock_Enable?> = '1') then -- clock enable condition
+			if (&lt;?Sync_Reset_Signal?> = '1') then -- sync reset condition
+				-- assign outputs to '0' here
+			elsif (&lt;?Sync_Preset_Signal?> = '1') then -- sync preset condition
+				-- assign outputs to '1' here
+			else
+				-- assign action for normal operation here
+			end if;
+		end if;
+	end if;
+end process;
+</Template>
+<Template treetype="leaf" label="FF with SP" >
+-- This is a template for a process that will synthesize flip-flops
+-- with a synchronous preset and rising edge sensitive clock.
+process (&lt;?Clock_Signal?>)
+begin
+	if (rising_edge(&lt;?Clock_Signal?>)) then
+		if (&lt;?Sync_Preset_Signal?> = '1') then -- sync preset condition
+			-- assign outputs to '1' here
+		else
+			-- assign action for normal operation here
+		end if;
+	end if;
+end process;
+</Template>
+<Template treetype="leaf" label="FF with SR" >
+-- This is a template for a process that will synthesize flip-flops
+-- with a synchronous reset and rising edge sensitive clock.
+process (&lt;?Clock_Signal?>)
+begin
+	if (rising_edge(&lt;?Clock_Signal?>)) then
+		if (&lt;?Sync_Reset_Signal?> = '1') then -- sync reset condition
+			-- assign outputs to '0' here
+		else
+			-- assign action for normal operation here
+		end if;
+	end if;
+end process;
+</Template>
+<Template treetype="leaf" label="FF with SR/SP" >
+-- This is a template for a process that will synthesize flip-flops
+-- with a synchronous reset, synchronous preset, and rising edge sensitive clock.
+process (&lt;?Clock_Signal?>)
+begin
+	if (rising_edge(&lt;?Clock_Signal?>)) then
+		if (&lt;?Sync_Reset_Signal?> = '1') then -- sync reset condition
+			-- assign outputs to '0' here
+		elsif (&lt;?Sync_Preset_Signal?> = '1') then -- sync preset condition
+			-- assign outputs to '1' here
+		else
+			-- assign action for normal operation here
+		end if;
+	end if;
+end process;
+</Template>
+<Template treetype="leaf" label="For Loop(downto)" >for &lt;Loop_Variable> in &lt;Upper_Bounds> downto &lt;Lower_Bounds> loop
+	-- enter statements here.
+end loop;
+</Template>
+<Template treetype="leaf" label="For Loop(to)" >for &lt;Loop_Variable> in &lt;Lower_Bounds> to &lt;Upper_Bounds> loop
+	-- enter statements here.
+end loop;
+</Template>
+<Template treetype="leaf" label="For-Generate" >&lt;generate_label>:
+FOR &lt;index_var> IN &lt;index_range> GENERATE
+	-- statements here
+END GENERATE;
+</Template>
+<Template treetype="leaf" label="FSM with AR" >ENTITY &lt;fsm_name> IS
+	PORT(
+		&lt;clk> : IN STD_LOGIC;
+		&lt;reset> : IN STD_LOGIC;
+		&lt;input_name>, &lt;input_name> : IN STD_LOGIC;
+		&lt;output_name>, &lt;output_name> : OUT STD_LOGIC
+	);
+END &lt;fsm_name>;
+
+ARCHITECTURE &lt;arch_name> OF &lt;fsm_name> IS
+	TYPE STATE_TYPE IS ( &lt;state_name>+ &lt;state_name>, ... );
+	SIGNAL &lt;state>: STATE_TYPE;
+BEGIN
+	PROCESS (&lt;clk>)
+	BEGIN
+		IF &lt;reset> = '1' THEN
+			&lt;state> &lt;= &lt;state_name>;
+		ELSIF &lt;clk>'EVENT AND &lt;clk> = '1' THEN
+			CASE &lt;state> IS
+				WHEN &lt;state_name> =>
+					IF &lt;condition> THEN
+						&lt;state> &lt;= &lt;state_name>;
+					END IF;
+
+				WHEN &lt;state_name> =>
+					IF &lt;condition> THEN
+						&lt;state> &lt;= &lt;state_name>;
+					END IF;
+
+				WHEN &lt;state_name> =>
+					IF &lt;condition> THEN
+						&lt;state> &lt;= &lt;state_name>;
+					END IF;
+
+			END CASE;
+		END IF;
+	END PROCESS;
+
+	WITH &lt;state> SELECT
+		&lt;output_name> &lt;= &lt;value_1> WHEN &lt;state_name>,
+			         &lt;value_2> WHEN &lt;state_name>,
+			         &lt;value_3> WHEN &lt;state_name>;
+
+END &lt;arch_name>;
+</Template>
+<Template treetype="leaf" label="FSM without AR" >ENTITY &lt;fsm_name> IS
+	PORT(
+		&lt;clk> : IN STD_LOGIC;
+		&lt;input_name>, &lt;input_name> : IN STD_LOGIC;
+		&lt;output_name>, &lt;output_name> : OUT STD_LOGIC
+	);
+END &lt;fsm_name>;
+
+ARCHITECTURE &lt;arch_name> OF &lt;fsm_name> IS
+	TYPE STATE_TYPE IS ( &lt;state_name>+ &lt;state_name>, ... );
+	SIGNAL &lt;state>: STATE_TYPE;
+BEGIN
+	PROCESS (&lt;clk>)
+	BEGIN
+		IF &lt;clk>'EVENT AND &lt;clk> = '1' THEN
+			CASE &lt;state> IS
+				WHEN &lt;state_name> =>
+					IF &lt;condition> THEN
+						&lt;state> &lt;= &lt;state_name>;
+					END IF;
+
+				WHEN &lt;state_name> =>
+					IF &lt;condition> THEN
+						&lt;state> &lt;= &lt;state_name>;
+					END IF;
+
+				WHEN &lt;state_name> =>
+					IF &lt;condition> THEN
+						&lt;state> &lt;= &lt;state_name>;
+					END IF;
+
+			END CASE;
+		END IF;
+	END PROCESS;
+
+	WITH &lt;state> SELECT
+		&lt;output_name> &lt;= &lt;value_1> WHEN &lt;state_name>,
+			         &lt;value_2> WHEN &lt;state_name>,
+			         &lt;value_3> WHEN &lt;state_name>;
+
+END &lt;arch_name>;
+</Template>
+<Template treetype="leaf" label="Function Body" >	function &lt;?Function_Name?> ( 
+		-- insert parameter declarations here
+		) return &lt;?Type?> is
+		-- insert local variable declarations here
+	begin
+		-- insert code for function here
+	end;
+</Template>
+<Template treetype="leaf" label="Function Declaration" >	-- Function declarations normally appear in packages. Note that all parameters of
+	-- a function must be inputs to the function.
+	function &lt;?Function_Name?> ( 
+		-- insert parameter declarations here
+		) return &lt;?Type?>;
+</Template>
+<Template treetype="leaf" label="Header" >--
+-- File            : &lt;filename>.vhd
+-- Author          : &lt;author>
+-- Date            : &lt;month>/&lt;day>/&lt;year>
+-- Version         : &lt;major>.&lt;minor>
+-- Abstract        : &lt;description>
+--
+-- Modification History:
+-- Date        By       Version    Change Description
+--
+-- ===========================================================
+-- 00/00/00    xxx      x.x        Original
+-- 
+-- ===========================================================
+</Template>
+<Template treetype="leaf" label="If" >if (&lt;Condition_Expression>) then
+	-- insert statements to be executed if this condition is true.
+end if;
+</Template>
+<Template treetype="leaf" label="If-Else" >if (&lt;Condition_Expression>) then
+	-- insert statements to be executed if this condition is true.
+else
+	-- insert statements to be executed if this condition is false.
+end if;
+</Template>
+<Template treetype="leaf" label="If-Elsif" >if (&lt;First_Condition_Expression>) then
+	-- insert statements to be executed if this condition is true.
+elsif (&lt;Second_Condition_Expression>) then
+	-- insert statements to be executed if this condition is true.
+else
+	-- insert statements to be executed if all above conditions are false.
+end if;
+</Template>
+<Template treetype="leaf" label="If-Generate" >&lt;generate_label>:
+IF &lt;expression> GENERATE
+	// statements here
+END GENERATE;
+</Template>
+<Template treetype="leaf" label="Labeled For Loop" >&lt;loop_label>:
+FOR &lt;index_var> IN &lt;index_range> LOOP
+  // statements here
+END LOOP &lt;loop_label>;
+</Template>
+<Template treetype="leaf" label="Library (IEEE)" >-- Library and Use statements for IEEE packages
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+</Template>
+<Template treetype="leaf" label="Library Clause" >LIBRARY &lt;library_name>;
+</Template>
+<Template treetype="leaf" label="Overall Structure" >-- Context clause
+
+	-- Library clause
+
+	-- Use clause
+
+-- Library Units
+
+	-- Package declaration (optional)
+
+	-- Package body (optional)
+
+	-- Entity declaration
+
+	-- Architecture body
+</Template>
+<Template treetype="leaf" label="Package" >package &lt;Package_Name> is
+	-- insert signal, type, subtype, and subprogram declarations here.
+
+	-- Type declaration
+
+	-- Subtype declaration
+
+	-- Constant declaration
+
+	-- Signal declaration
+
+	-- Component declaration
+
+end &lt;Package_Name>;
+</Template>
+<Template treetype="leaf" label="Package Body" >package body &lt;Package_Name> is
+	-- insert subprogram bodies here.
+end;
+</Template>
+<Template treetype="leaf" label="Port Declaration" >&lt;Port_Name> : &lt;Mode> &lt;Type_Name> := &lt;Default_Value>;
+</Template>
+<Template treetype="leaf" label="Procedure Body" >procedure &lt;Procedure_Name> ( 
+	-- insert parameter declarations here
+		&lt;actual_parameter>, &lt;actual_parameter>
+	) is
+	-- insert local variable declarations here
+begin
+	-- insert code for procedure here
+end;
+</Template>
+<Template treetype="leaf" label="Procedure Declaration" >-- Procedure declarations normally appear in packages.
+procedure &lt;Procedure_Name> ( 
+	-- insert parameter declarations here
+		&lt;actual_parameter>, &lt;actual_parameter>
+	);
+</Template>
+<Template treetype="leaf" label="Process" >-- This is a general template for a process. If the process is to synthesize into
+-- purely combinatorial logic, be sure to include all signals that affect the
+-- behavior or the process in the sensitivity list.
+process (&lt;Sensitivity_List>)
+begin
+end process;
+</Template>
+<Template treetype="leaf" label="Process - Comb.Logic" >&lt;process_label>:
+PROCESS( &lt;signal_1>, &lt;signal_2>, ... )
+	VARIABLE &lt;var> : STD_LOGIC;
+	VARIABLE &lt;var> : STD_LOGIC;
+BEGIN
+	-- Signal assignment statement
+
+	-- Varialble assignment statement
+
+	-- Procedure call statement
+
+	-- If statement
+
+	-- Case statement
+
+	-- Loop statement
+
+END PROCESS &lt;process_label>;
+</Template>
+<Template treetype="leaf" label="Process - Seq.Logic" >&lt;process_label>:
+PROCESS
+	VARIABLE &lt;var> : STD_LOGIC;
+	VARIABLE &lt;var> : STD_LOGIC;
+BEGIN
+	WAIT UNTIL &lt;clk_signal> = '1';
+
+	-- Signal assignment statement
+
+	-- Varialble assignment statement
+
+	-- Procedure call statement
+
+	-- If statement
+
+	-- Case statement
+
+	-- Loop statement
+
+END PROCESS &lt;process_label>;
+</Template>
+<Template treetype="leaf" label="Select Signal Assignment" >-- Note that a selected signal assignment is a concurrent statement and must
+-- appear outside of a process. Also, an assignment to the target must be made
+-- for all values of the selector. Use the "when others" clause to handle any 
+-- values of the selector not handled elsewhere.
+WITH &lt;Expression> SELECT
+	&lt;Signal_Name> &lt;= &lt;First_Expression> WHEN &lt;First_Constant_Value>,
+			 &lt;Second_Expression> WHEN &lt;Second_Constant_Value>,
+	-- Use additional clauses for each additional condition
+			 &lt;Last_Expression> WHEN OTHERS;
+</Template>
+<Template treetype="leaf" label="Signal Assignment" >&lt;signal_name> &lt;= &lt;expression>;
+</Template>
+<Template treetype="leaf" label="Signal Declaration" >signal &lt;Signal_Name> : &lt;Type_Name> := &lt;Initial_Value>;
+
+</Template>
+<Template treetype="leaf" label="Subtype" >SUBTYPE &lt;subtype_name> IS &lt;type_name> RANGE &lt;low_value> TO &lt;high_value>;
+SUBTYPE &lt;array_subtype_name> IS &lt;array_type_name> ( &lt;high_index> DOWNTO &lt;low_index> );
+</Template>
+<Template treetype="leaf" label="Subtype(integer)" >subtype &lt;Type_Name> is integer range &lt;Lower_Bound> to &lt;Upper_Bound>;
+</Template>
+<Template treetype="leaf" label="Type" >TYPE &lt;enumerated_type_name> IS ( &lt;name>, &lt;name>, ... );
+TYPE &lt;range_type_name> IS RANGE &lt;integer_1> TO &lt;integer_2>;
+TYPE &lt;array_type_name> IS ARRAY (INTEGER RANGE &lt;>) OF &lt;type_name>;
+TYPE &lt;array_type_name> IS ARRAY (&lt;integer_1> DOWNTO &lt;integer_2>) OF &lt;type_name>;
+</Template>
+<Template treetype="leaf" label="Use Clause" >USE &lt;library_name>.&lt;package_name>.ALL;
+</Template>
+<Template treetype="leaf" label="Variable Assignment" >&lt;variable_name> := &lt;expression>;
+</Template>
+<Template treetype="leaf" label="Variable Declaration" >variable &lt;Variable_Name> : &lt;Type_Name> := &lt;Initial_Value>;
+</Template>
+<Template treetype="leaf" label="Wait For" >wait for &lt;Time_Expression>;
+</Template>
+<Template treetype="leaf" label="Wait On" >wait on &lt;List_Of_Signals>;
+</Template>
+<Template treetype="leaf" label="Wait Until" >wait until &lt;Condition>;
+</Template>
+<Template treetype="leaf" label="Wait Until(clock)" >WAIT UNTIL &lt;clk> = '1';
+</Template>
+<Template treetype="leaf" label="While Loop" >&lt;loop_label>:
+WHILE (&lt;boolean_expression>) LOOP
+	-- enter statements here.
+END LOOP &lt;loop_label>;
+</Template>
+</SubFolder>
+</Folder>

@@ -1,0 +1,688 @@
+#log _circuit_name.txt
+
+#ifndef _ch_align_mask_word
+#define _ch_align_mask_word none
+#endif
+#ifndef _ch_align_a_word 
+#define _ch_align_a_word none
+#endif
+#ifndef _ch_align_b_word 
+#define _ch_align_b_word none
+#endif
+#ifndef _ch_align_mask_bit 
+#define _ch_align_mask_bit none
+#endif
+#ifndef _enable_quad_align
+#define _enable_quad_align none
+#endif
+#macro converter7(arg1,arg2)
+#if arg1 == "Serial RapidIO"
+#define arg2 "1x RapidIO"
+#elif arg1 == "PCI Express"
+#define arg2 "1x PCI Express"
+#else
+#define arg2 arg1
+#endif
+#endmacro
+#macro converter8(arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8)
+#if #arg0 == "all" && arg1 == "1x RapidIO" && arg2 == "1x RapidIO" && arg3 == "1x RapidIO" && arg4 == "1x RapidIO"
+#define arg5 "4x Serial RapidIO"
+#define arg6 "4x Serial RapidIO"
+#define arg7 "4x Serial RapidIO"
+#define arg8 "4x Serial RapidIO"
+#elif #arg0 == "all" && arg1 == "1x PCI Express" && arg2 == "1x PCI Express" && arg3 == "1x PCI Express" && arg4 == "1x PCI Express"
+#define arg5 "4x PCI Express"
+#define arg6 "4x PCI Express"
+#define arg7 "4x PCI Express"
+#define arg8 "4x PCI Express"
+#else
+#define arg5 arg1
+#define arg6 arg2
+#define arg7 arg3
+#define arg8 arg4
+#endif
+#endmacro
+#converter7(_channel_A_options, _channel_A_options_new2)
+#converter7(_channel_B_options, _channel_B_options_new2)
+#converter7(_channel_C_options, _channel_C_options_new2)
+#converter7(_channel_D_options, _channel_D_options_new2)
+#converter8(_channel_align_mode, _channel_A_options_new2, _channel_B_options_new2, _channel_C_options_new2, _channel_D_options_new2, _channel_A_options_new3, _channel_B_options_new3, _channel_C_options_new3, _channel_D_options_new3)
+# This file is used by the simulation model as well as the ispLEVER bitstream
+# generation process to automatically initialize the PCS quad to the mode
+# selected in the IPexpress. This file is expected to be modified by the
+# end user to adjust the PCS quad to the final design requirements.
+# channel_0 is in _channel_A_options mode
+# channel_1 is in _channel_B_options mode
+# channel_2 is in _channel_C_options mode
+# channel_3 is in _channel_D_options mode
+
+#if _channel_A_options_new3 == "SONET(STS-12, STS-48)"
+#if _rate_mode == "full_rate"
+ch0 0B 0C  # Auto SOH, STS-48 
+ch0 13 03  # Powerup Channel
+#else
+ch0 0B 0D  # Auto SOH, STS-12 
+ch0 13 0F  # Powerup Channel, Half Rate
+#endif
+#elif _channel_A_options_new3 != "Disabled"
+#if _rate_mode == "full_rate"
+ch0 13 03  # Powerup Channel
+#else
+ch0 13 0F  # Powerup Channel, Half Rate
+#endif
+#endif
+#if _channel_A_options_new3 == "Fibre Channel(Single SERDES)" || _channel_A_options_new3 == "Gigabit Ethernet" 
+ch0 00 09  # rx_sof enabled
+#elif _channel_A_options_new3 == "XAUI" || _channel_A_options_new3 == "4x Serial RapidIO" || _channel_A_options_new3 == "4x PCI Express" || _channel_A_options_new3 == "1x PCI Express" || _channel_A_options_new3 == "1x RapidIO" 
+ch0 00 01
+#elif _channel_A_options_new3 == "8b10b"
+#if _enable_10g_lsm == 1
+ch0 00 01
+#else
+ch0 00 00
+#endif
+#endif
+#if _channel_B_options_new3 == "SONET(STS-12, STS-48)"
+#if _rate_mode == "full_rate"
+ch1 0B 0C  # Auto SOH, STS-48 
+ch1 13 03  # Powerup Channel
+#else
+ch1 0B 0D  # Auto SOH, STS-12 
+ch1 13 0F  # Powerup Channel, Half Rate
+#endif
+#elif _channel_B_options_new3 != "Disabled"
+#if _rate_mode == "full_rate"
+ch1 13 03  # Powerup Channel
+#else
+ch1 13 0F  # Powerup Channel, Half Rate
+#endif
+#endif
+#if _channel_B_options_new3 == "Fibre Channel(Single SERDES)" || _channel_B_options_new3 == "Gigabit Ethernet" 
+ch1 00 09
+#elif _channel_B_options_new3 == "XAUI" || _channel_B_options_new3 == "4x Serial RapidIO" || _channel_B_options_new3 == "4x PCI Express" || _channel_B_options_new3 == "1x PCI Express" || _channel_B_options_new3 == "1x RapidIO" 
+ch1 00 01
+#elif _channel_B_options_new3 == "8b10b"
+#if _enable_10g_lsm == 1
+ch1 00 01
+#else
+ch1 00 00
+#endif
+#endif
+#if _channel_C_options_new3 == "SONET(STS-12, STS-48)"
+#if _rate_mode == "full_rate"
+ch2 0B 0C  # Auto SOH, STS-48 
+ch2 13 03  # Powerup Channel
+#else
+ch2 0B 0D  # Auto SOH, STS-12 
+ch2 13 0F  # Powerup Channel, Half Rate
+#endif
+#elif _channel_C_options_new3 != "Disabled"
+#if _rate_mode == "full_rate"
+ch2 13 03  # Powerup Channel
+#else
+ch2 13 0F  # Powerup Channel, Half Rate
+#endif
+#endif
+#if _channel_C_options_new3 == "Fibre Channel(Single SERDES)" || _channel_C_options_new3 == "Gigabit Ethernet" 
+ch2 00 09
+#elif _channel_C_options_new3 == "XAUI" || _channel_C_options_new3 == "4x Serial RapidIO" || _channel_C_options_new3 == "4x PCI Express" || _channel_C_options_new3 == "1x PCI Express" || _channel_C_options_new3 == "1x RapidIO" 
+ch2 00 01
+#elif _channel_C_options_new3 == "8b10b"
+#if _enable_10g_lsm == 1
+ch2 00 01
+#else
+ch2 00 00
+#endif
+#endif
+#if _channel_D_options_new3 == "SONET(STS-12, STS-48)"
+#if _rate_mode == "full_rate"
+ch3 0B 0C  # Auto SOH, STS-48 
+ch3 13 03  # Powerup Channel
+#else
+ch3 0B 0D  # Auto SOH, STS-12 
+ch3 13 0F  # Powerup Channel, Half Rate
+#endif
+#elif _channel_D_options_new3 != "Disabled"
+#if _rate_mode == "full_rate"
+ch3 13 03  # Powerup Channel
+#else
+ch3 13 0F  # Powerup Channel, Half Rate
+#endif
+#endif
+#if _channel_D_options_new3 == "Fibre Channel(Single SERDES)" || _channel_D_options_new3 == "Gigabit Ethernet" 
+ch3 00 09
+#elif _channel_D_options_new3 == "XAUI" || _channel_D_options_new3 == "4x Serial RapidIO" || _channel_D_options_new3 == "4x PCI Express" || _channel_D_options_new3 == "1x PCI Express" || _channel_D_options_new3 == "1x RapidIO" 
+ch3 00 01
+#elif _channel_D_options_new3 == "8b10b"
+#if _enable_10g_lsm == 1
+ch3 00 01
+#else
+ch3 00 00
+#endif
+#endif
+#if #_enable_quad_align == "none"
+#if #_channel_align_mode == "all"  
+quad 00 00  
+#elif #_channel_align_mode == "align_01"
+quad 00 00 
+#elif #_channel_align_mode == "align_23"
+quad 00 08 
+#elif #_channel_align_mode == "align_01_23"
+quad 00 00 
+#else
+quad 00 00
+#endif
+#elif #_enable_quad_align == "group_0"
+#if #_channel_align_mode == "all"
+quad 00 10 
+#elif #_channel_align_mode == "align_01"
+quad 00 10
+#elif #_channel_align_mode == "align_23"
+quad 00 18
+#elif #_channel_align_mode == "align_01_23"
+quad 00 10
+#else
+quad 00 10
+#endif
+#elif #_enable_quad_align == "group_1"
+#if #_channel_align_mode == "all"
+quad 00 11
+#elif #_channel_align_mode == "align_01"
+quad 00 11
+#elif #_channel_align_mode == "align_23"
+quad 00 19
+#elif #_channel_align_mode == "align_01_23"
+quad 00 11
+#else
+quad 00 11
+#endif
+#elif #_enable_quad_align == "group_2"
+#if #_channel_align_mode == "all"
+quad 00 12
+#elif #_channel_align_mode == "align_01"
+quad 00 12
+#elif #_channel_align_mode == "align_23"
+quad 00 1A
+#elif #_channel_align_mode == "align_01_23"
+quad 00 12
+#else
+quad 00 12
+#endif
+#elif #_enable_quad_align == "group_3"
+#if #_channel_align_mode == "all"
+quad 00 13
+#elif #_channel_align_mode == "align_01"
+quad 00 13
+#elif #_channel_align_mode == "align_23"
+quad 00 1B
+#elif #_channel_align_mode == "align_01_23"
+quad 00 13
+#else
+quad 00 13
+#endif
+#endif
+#if #_channel_align_mode == "all"
+quad 01 00  # MCA mclk select to ch0
+#elif #_channel_align_mode == "align_01" 
+quad 01 E0  # MCA mclk select to ch0
+#elif #_channel_align_mode == "align_23"
+quad 01 A4  # MCA mclk select to ch0
+#elif #_channel_align_mode == "align_01_23"
+quad 01 A0  # MCA mclk select to ch0
+#else 
+quad 01 E4  
+#endif
+#if #_ch_align_mask_word == "none"
+#else
+quad 07 _ch_align_mask_word  # MCA alignment mask
+#endif
+#if #_ch_align_a_word == "none"
+#else
+quad 08 _ch_align_a_word  # MCA alignment character
+#endif
+#if #_ch_align_b_word == "none"
+#else
+quad 09 _ch_align_b_word  # MCA alignment character
+#endif
+#if #_ch_align_mask_bit == "none"
+#else
+#if _ch_align_mask_bit == 0 && _ch_align_a_bit == 0 && _ch_align_b_bit == 0
+quad 0A 00
+#elif _ch_align_mask_bit == 0 && _ch_align_a_bit == 0 && _ch_align_b_bit == 1
+quad 0A 01
+#elif _ch_align_mask_bit == 0 && _ch_align_a_bit == 1 && _ch_align_b_bit == 0
+quad 0A 04
+#elif _ch_align_mask_bit == 0 && _ch_align_a_bit == 1 && _ch_align_b_bit == 1
+quad 0A 05
+#elif _ch_align_mask_bit == 1 && _ch_align_a_bit == 0 && _ch_align_b_bit == 0
+quad 0A 10
+#elif _ch_align_mask_bit == 1 && _ch_align_a_bit == 0 && _ch_align_b_bit == 1
+quad 0A 11
+#elif _ch_align_mask_bit == 1 && _ch_align_a_bit == 1 && _ch_align_b_bit == 0
+quad 0A 14
+#elif _ch_align_mask_bit == 1 && _ch_align_a_bit == 1 && _ch_align_b_bit == 1
+quad 0A 15
+#endif
+#endif
+#if _refclk_mode == 00
+quad 28 40  # Reference clock multiplier
+#elif _refclk_mode == 01
+quad 28 50  # Reference clock multiplier
+#elif _refclk_mode == 10
+quad 28 60  # Reference clock multiplier
+#endif
+#if _ref_clock_select == "refclk"
+quad 29 01  # default
+#elif _ref_clock_select == "rxrefclk"
+quad 29 09  # rxrefclk
+#elif _ref_clock_select == "ff_refclk"
+quad 29 11  # FPGA sourced refclk
+#elif _ref_clock_select == "all"
+quad 29 01  # set to 01
+#endif
+#if _channel_A_options_new3 != "Disabled"
+quad 02 00  # ref_pclk source is ch0
+#elif _channel_B_options_new3 != "Disabled"
+quad 02 15  # ref_pclk source is ch1
+#elif _channel_C_options_new3 != "Disabled"
+quad 02 2A  # ref_pclk source is ch2
+#elif _channel_D_options_new3 != "Disabled"
+quad 02 3F  # ref_pclk source is ch3
+#endif
+#if _channel_A_options_new3 == "SERDES Only(10/20-bit)" || _channel_B_options_new3 == "SERDES Only(10/20-bit)" || _channel_C_options_new3 == "SERDES Only(10/20-bit)" || _channel_D_options_new3 == "SERDES Only(10/20-bit)" 
+#if _20_bit_ch_a == 1 || _20_bit_ch_b == 1 || _20_bit_ch_c == 1 || _20_bit_ch_d == 1 
+quad 19 8C  # ENABLE word_align_en port, FPGA bus width is 16-bit/20-bit
+#elif _20_bit_ch_a == 0 || _20_bit_ch_b == 0 || _20_bit_ch_c == 0 || _20_bit_ch_d == 0
+quad 19 80  # ENABLE word_align_en port, FPGA bus width is 8-bit/10-bit 
+#endif
+#endif
+#if _channel_A_options_new3 == "SERDES Only(8/16-bit)" || _channel_B_options_new3 == "SERDES Only(8/16-bit)" || _channel_C_options_new3 == "SERDES Only(8/16-bit)" || _channel_D_options_new3 == "SERDES Only(8/16-bit)"
+#if _16_bit_ch_a == 1 || _16_bit_ch_b == 1 || _16_bit_ch_c == 1 || _16_bit_ch_d == 1
+quad 19 0C  # FPGA bus width is 16-bit/20-bit
+#elif _16_bit_ch_a == 0 || _16_bit_ch_b == 0 || _16_bit_ch_c == 0 || _16_bit_ch_d == 0
+# quad 19 00  # FPGA bus width is 8-bit/10-bit (default)
+#endif
+#endif
+#if _channel_A_options_new3 == "SONET(STS-12, STS-48)" || _channel_B_options_new3 == "SONET(STS-12, STS-48)" || _channel_C_options_new3 == "SONET(STS-12, STS-48)" || _channel_D_options_new3 == "SONET(STS-12, STS-48)" 
+quad 18 20  # SONET Mode
+#if _16_bit_ch_a == 1 || _16_bit_ch_b == 1 || _16_bit_ch_c == 1 || _16_bit_ch_d == 1
+quad 19 0C  # FPGA bus width is 16-bit/20-bit
+#elif _16_bit_ch_a == 0 || _16_bit_ch_b == 0 || _16_bit_ch_c == 0 || _16_bit_ch_d == 0
+# quad 19 00  # FPGA bus width is 8-bit/10-bit (default)
+#endif
+#endif
+#if _channel_A_options_new3 == "SONET(STS-12, STS-48)"
+ch0 01 0A  # SERDES tx MSB first, rx MSB first
+ch0 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization
+#endif
+#if _channel_B_options_new3 == "SONET(STS-12, STS-48)"
+ch1 01 0A  # SERDES tx MSB first, rx MSB first
+ch1 14 90  # 16% pre-emphasis 
+ch1 15 10  # +6dB equalization
+#endif
+#if _channel_C_options_new3 == "SONET(STS-12, STS-48)"
+ch2 01 0A  # SERDES tx MSB first, rx MSB first
+ch2 14 90  # 16% pre-emphasis 
+ch2 15 10  # +6dB equalization
+#endif
+#if _channel_D_options_new3 == "SONET(STS-12, STS-48)"
+ch3 01 0A  # SERDES tx MSB first, rx MSB first
+ch3 14 90  # 16% pre-emphasis 
+ch3 15 10  # +6dB equalization
+#endif
+#if _channel_A_options_new3 == "Gigabit Ethernet" || _channel_B_options_new3 == "Gigabit Ethernet" || _channel_C_options_new3 == "Gigabit Ethernet" || _channel_D_options_new3 == "Gigabit Ethernet"
+# quad 18 00  # Gigabit Ethernet Mode
+quad 14 7F  # Word Alignment Mask
+quad 15 03  # +ve K
+quad 16 7C  # -ve K
+quad 0D 97  # Watermark level on CTC
+quad 0E 0B  # insertion/deletion control of CTC
+quad 11 BC  # /I2/ pattern for CTC match
+quad 12 50
+quad 13 04
+quad 1D 57  # GbE Tx CRC polynomial
+quad 1E 1E  # GbE Rx CRC polynomial
+#if _16_bit_ch_a == 1 || _16_bit_ch_b == 1 || _16_bit_ch_c == 1 || _16_bit_ch_d == 1
+quad 19 0C  # FPGA bus width is 16-bit/20-bit
+#elif _16_bit_ch_a == 0 || _16_bit_ch_b == 0 || _16_bit_ch_c == 0 || _16_bit_ch_d == 0
+# quad 19 00  # FPGA bus width is 8-bit/10-bit (default)
+#endif
+#endif
+#if _channel_A_options_new3 == "Gigabit Ethernet"
+ch0 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization
+#endif
+#if _channel_B_options_new3 == "Gigabit Ethernet"
+ch1 14 90  # 16% pre-emphasis 
+ch1 15 10  # +6dB equalization
+#endif
+#if _channel_C_options_new3 == "Gigabit Ethernet"
+ch2 14 90  # 16% pre-emphasis 
+ch2 15 10  # +6dB equalization
+#endif
+#if _channel_D_options_new3 == "Gigabit Ethernet"
+ch3 14 90  # 16% pre-emphasis 
+ch3 15 10  # +6dB equalization
+#endif
+#if _channel_A_options_new3 == "Fibre Channel(Single SERDES)" || _channel_B_options_new3 == "Fibre Channel(Single SERDES)" || _channel_C_options_new3 == "Fibre Channel(Single SERDES)" || _channel_D_options_new3 == "Fibre Channel(Single SERDES)"
+quad 18 08  # Fibre Channel Mode
+quad 14 7F  # Word Alignment Mask
+quad 15 03  # +ve K
+quad 16 7C  # -ve K
+quad 0D A6  # Watermark level on CTC
+quad 0E 05  # insertion/deletion control of CTC
+quad 0F BC  # FC Idle pattern for CTC match
+quad 10 95
+quad 11 B5
+quad 12 B5
+quad 13 40
+quad 1D 60  # FC Tx CRC polynomial
+# quad 1E 00  # FC Rx CRC polynomial
+#if _16_bit_ch_a == 1 || _16_bit_ch_b == 1 || _16_bit_ch_c == 1 || _16_bit_ch_d == 1
+quad 19 0C  # FPGA bus width is 16-bit/20-bit
+#elif _16_bit_ch_a == 0 || _16_bit_ch_b == 0 || _16_bit_ch_c == 0 || _16_bit_ch_d == 0
+# quad 19 00  # FPGA bus width is 8-bit/10-bit (default)
+#endif
+#endif
+#if _channel_A_options_new3 == "Fibre Channel(Single SERDES)"
+ch0 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization
+#endif
+#if _channel_B_options_new3 == "Fibre Channel(Single SERDES)"
+ch1 14 90  # 16% pre-emphasis 
+ch1 15 10  # +6dB equalization
+#endif
+#if _channel_C_options_new3 == "Fibre Channel(Single SERDES)"
+ch2 14 90  # 16% pre-emphasis 
+ch2 15 10  # +6dB equalization
+#endif
+#if _channel_D_options_new3 == "Fibre Channel(Single SERDES)"
+ch3 14 90  # 16% pre-emphasis 
+ch3 15 10  # +6dB equalization
+#endif
+#if _channel_A_options_new3 == "XAUI"
+quad 18 01  # XAUI Mode
+quad 14 7F  # Word Alignment Mask
+quad 15 03  # +ve K
+quad 16 7C  # -ve K
+quad 0D 97  # Watermark level on CTC
+quad 0E 00  # insertion/deletion control of CTC
+quad 12 1C  # XAUI /R/ pattern for CTC match
+quad 13 01
+#if _16_bit_ch_a == 1
+quad 19 4C  # MCA x4 alignment
+#elif _16_bit_ch_a == 0
+quad 19 40  # MCA x4 alignment
+#endif
+quad 04 0F  # MCA enable 4 channels
+quad 05 00  # MCA latency
+quad 06 05  # MCA depth
+ch0 14 90  # 16% pre-emphasis 
+ch1 14 90  # 16% pre-emphasis 
+ch2 14 90  # 16% pre-emphasis 
+ch3 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization
+ch1 15 10  # +6dB equalization
+ch2 15 10  # +6dB equalization
+ch3 15 10  # +6dB equalization
+#endif
+#if _channel_A_options_new3 == "1x PCI Express" || _channel_B_options_new3 == "1x PCI Express" || _channel_C_options_new3 == "1x PCI Express" || _channel_D_options_new3 == "1x PCI Express" 
+quad 18 04  # PCI Express x1 Mode
+quad 14 7F  # Word Alignment Mask
+quad 15 03  # +ve K
+quad 16 7C  # -ve K
+quad 0D 97  # Watermark level on CTC
+quad 0E 00  # insertion/deletion control of CTC
+quad 12 1C  # pattern for CTC match
+quad 13 01
+#if _16_bit_ch_a == 1 || _16_bit_ch_b == 1 || _16_bit_ch_c == 1 || _16_bit_ch_d == 1
+quad 19 0C  # FPGA bus width is 16-bit/20-bit
+#elif _16_bit_ch_a == 0 || _16_bit_ch_b == 0 || _16_bit_ch_c == 0 || _16_bit_ch_d == 0
+# quad 19 00  # FPGA bus width is 8-bit/10-bit (default)
+#endif
+#endif
+#if _channel_A_options_new3 == "1x PCI Express"
+ch0 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization
+#endif
+#if _channel_B_options_new3 == "1x PCI Express"
+ch1 14 90  # 16% pre-emphasis 
+ch1 15 10  # +6dB equalization
+#endif
+#if _channel_C_options_new3 == "1x PCI Express"
+ch2 14 90  # 16% pre-emphasis 
+ch2 15 10  # +6dB equalization
+#endif
+#if _channel_D_options_new3 == "1x PCI Express"
+ch3 14 90  # 16% pre-emphasis 
+ch3 15 10  # +6dB equalization
+#endif
+#if _channel_A_options_new3 == "4x PCI Express" && #_channel_align_mode == "all"
+quad 18 04  # PCI Express x4 Mode
+quad 14 7F  # Word Alignment Mask
+quad 15 03  # +ve K
+quad 16 7C  # -ve K
+# quad 0D 97  # Watermark level on CTC
+quad 0E 00  # insertion/deletion control of CTC
+quad 12 1C  # pattern for CTC match
+quad 13 01
+#if _16_bit_ch_a == 1
+quad 19 4C  # MCA x4 alignment
+#elif _16_bit_ch_a == 0
+quad 19 40  # MCA x4 alignment
+#endif
+quad 04 0F  # MCA enable 4 channels
+quad 05 01  # MCA latency
+quad 06 06  # MCA depth
+ch0 14 90  # 16% pre-emphasis 
+ch1 14 90  # 16% pre-emphasis 
+ch2 14 90  # 16% pre-emphasis 
+ch3 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization
+ch1 15 10  # +6dB equalization
+ch2 15 10  # +6dB equalization
+ch3 15 10  # +6dB equalization
+#endif
+#if _channel_A_options_new3 == "1x RapidIO" || _channel_B_options_new3 == "1x RapidIO" || _channel_C_options_new3 == "1x RapidIO" || _channel_D_options_new3 == "1x RapidIO"
+quad 18 02  # Rapid IO Mode
+quad 14 7F  # Word Alignment Mask
+quad 15 03  # +ve K
+quad 16 7C # -ve K
+# quad 0D 97 # Watermark level on CTC
+quad 0E 00  # insertion/deletion control of CTC
+quad 12 FD  # pattern for CTC match
+quad 13 01
+#if _16_bit_ch_a == 1 || _16_bit_ch_b == 1 || _16_bit_ch_c == 1 || _16_bit_ch_d == 1
+quad 19 0C  # FPGA bus width is 16-bit/20-bit
+#elif _16_bit_ch_a == 0 || _16_bit_ch_b == 0 || _16_bit_ch_c == 0 || _16_bit_ch_d == 0
+# quad 19 00  # FPGA bus width is 8-bit/10-bit (default)
+#endif
+#endif
+#if _channel_A_options_new3 == "1x RapidIO"
+ch0 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization
+#endif
+#if _channel_B_options_new3 == "1x RapidIO"
+ch1 14 90  # 16% pre-emphasis 
+ch1 15 10  # +6dB equalization
+#endif
+#if _channel_C_options_new3 == "1x RapidIO"
+ch2 14 90  # 16% pre-emphasis 
+ch2 15 10  # +6dB equalization
+#endif
+#if _channel_D_options_new3 == "1x RapidIO"
+ch3 14 90  # 16% pre-emphasis 
+ch3 15 10  # +6dB equalization
+#endif
+#if _channel_A_options_new3 == "4x Serial RapidIO" && #_channel_align_mode == "all"
+quad 18 02  # Rapid IO x4 Mode
+quad 14 7F  # Word Alignment Mask
+quad 15 03  # +ve K
+quad 16 7C  # -ve K
+quad 0D 97  # Watermark level on CTC
+quad 0E 00  # insertion/deletion control of CTC
+quad 12 FD  # pattern for CTC match
+quad 13 01
+#if _16_bit_ch_a == 1
+quad 19 4C  # MCA x4 alignment
+#elif _16_bit_ch_a == 0
+quad 19 40  # MCA x4 alignment
+#endif
+quad 04 0F  # MCA enable 4 channels
+quad 05 00  # MCA latency
+# quad 06 05  # MCA depth
+ch0 14 90  # 16% pre-emphasis 
+ch1 14 90  # 16% pre-emphasis 
+ch2 14 90  # 16% pre-emphasis 
+ch3 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization
+ch1 15 10  # +6dB equalization
+ch2 15 10  # +6dB equalization
+ch3 15 10  # +6dB equalization
+#endif
+#if _channel_A_options_new3 == "8b10b" || _channel_B_options_new3 == "8b10b" || _channel_C_options_new3 == "8b10b" || _channel_D_options_new3 == "8b10b"
+#if #_channel_align_mode ==  "all"
+quad 04 0F  # MCA enable 4 channels
+#elif #_channel_align_mode ==  "align_01"
+quad 04 03  # MCA enable 4 channels
+#elif #_channel_align_mode ==  "align_23"
+quad 04 0C  # MCA enable 4 channels
+#elif #_channel_align_mode ==  "None"
+quad 04 00  # MCA enable 4 channels
+#endif
+
+#if _enable_10g_lsm == 1
+quad 18 11  # 8b10b Mode
+#else
+quad 18 10  # 8b10b Mode
+#endif
+# quad 14 7F  # Word Alignment Mask
+# quad 15 03  # +ve K
+# quad 16 7C  # -ve K
+#if _16_bit_ch_a == 1 || _16_bit_ch_b == 1 || _16_bit_ch_c == 1 || _16_bit_ch_d == 1
+#if _enable_10g_lsm == 1
+#if #_channel_align_mode ==  "all"
+quad 19 4C  # Enable Internal LSM, FPGA bus width is 16-bit/20-bit
+#elif #_channel_align_mode ==  "align_01"
+quad 19 1C  # Enable Internal LSM, FPGA bus width is 16-bit/20-bit
+#elif #_channel_align_mode ==  "align_23"
+quad 19 2C  # Enable Internal LSM, FPGA bus width is 16-bit/20-bit
+#elif #_channel_align_mode ==  "None"
+quad 19 0C  # Enable Internal LSM, FPGA bus width is 16-bit/20-bit
+#endif
+#else
+#if #_channel_align_mode ==  "all"
+quad 19 CC  # Enable word_align_en port, FPGA bus width is 16-bit/20-bit
+#elif #_channel_align_mode ==  "align_01"
+quad 19 9C  # Enable word_align_en port, FPGA bus width is 16-bit/20-bit
+#elif #_channel_align_mode ==  "align_23"
+quad 19 AC  # Enable word_align_en port, FPGA bus width is 16-bit/20-bit
+#elif #_channel_align_mode ==  "None"
+quad 19 8C  # Enable word_align_en port, FPGA bus width is 16-bit/20-bit
+#endif
+#endif
+#elif _16_bit_ch_a == 0 || _16_bit_ch_b == 0 || _16_bit_ch_c == 0 || _16_bit_ch_d == 0
+#if _enable_10g_lsm == 1
+#if #_channel_align_mode ==  "all"
+quad 19 40  # Enable Internal LSM, FPGA bus width is 8-bit/10-bit
+#elif #_channel_align_mode ==  "align_01"
+quad 19 10  # Enable Internal LSM, FPGA bus width is 8-bit/10-bit
+#elif #_channel_align_mode ==  "align_23"
+quad 19 20  # Enable Internal LSM, FPGA bus width is 8-bit/10-bit
+#elif #_channel_align_mode ==  "None"
+quad 19 00  # Enable Internal LSM, FPGA bus width is 8-bit/10-bit
+#endif
+#else
+#if #_channel_align_mode ==  "all"
+quad 19 C0  # Enable word_align_en port, FPGA bus width is 8-bit/10-bit
+#elif #_channel_align_mode ==  "align_01"
+quad 19 90  # Enable word_align_en port, FPGA bus width is 8-bit/10-bit
+#elif #_channel_align_mode ==  "align_23"
+quad 19 A0  # Enable word_align_en port, FPGA bus width is 8-bit/10-bit
+#elif #_channel_align_mode ==  "None"
+quad 19 80  # Enable word_align_en port, FPGA bus width is 8-bit/10-bit
+#endif
+#endif
+#endif
+#endif
+#if _channel_A_options_new3 == "8b10b"
+ch0 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization
+#endif
+#if _channel_B_options_new3 == "8b10b"
+ch1 14 90  # 16% pre-emphasis 
+ch1 15 10  # +6dB equalization
+#endif
+#if _channel_C_options_new3 == "8b10b"
+ch2 14 90  # 16% pre-emphasis 
+ch2 15 10  # +6dB equalization
+#endif
+#if _channel_D_options_new3 == "8b10b"
+ch3 14 90  # 16% pre-emphasis 
+ch3 15 10  # +6dB equalization
+#endif
+#if _channel_A_options_new3 == "SERDES Only(8/16-bit)" || _channel_B_options_new3 == "SERDES Only(8/16-bit)" || _channel_C_options_new3 == "SERDES Only(8/16-bit)" || _channel_D_options_new3 == "SERDES Only(8/16-bit)"
+quad 18 60 # 8-bit SERDES Only 
+#endif
+#if _channel_A_options_new3 == "SERDES Only(8/16-bit)"
+ch0 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization
+#endif
+#if _channel_B_options_new3 == "SERDES Only(8/16-bit)"
+ch1 14 90  # 16% pre-emphasis 
+ch1 15 10  # +6dB equalization
+#endif
+#if _channel_C_options_new3 == "SERDES Only(8/16-bit)"
+ch2 14 90  # 16% pre-emphasis 
+ch2 15 10  # +6dB equalization
+#endif
+#if _channel_D_options_new3 == "SERDES Only(8/16-bit)"
+ch3 14 90  # 16% pre-emphasis 
+ch3 15 10  # +6dB equalization
+#endif
+#if _channel_A_options_new3 == "SERDES Only(10/20-bit)" || _channel_B_options_new3 == "SERDES Only(10/20-bit)" || _channel_C_options_new3 == "SERDES Only(10/20-bit)" || _channel_D_options_new3 == "SERDES Only(10/20-bit)" 
+quad 18 10  # Serdes 10-bit (8b10b disabled)
+quad 14 00  # Always match all word alignment bits
+# quad 15 03  # +ve K
+# quad 16 7C  # -ve K
+# quad 17 00
+#endif
+#if _channel_A_options_new3 == "SERDES Only(10/20-bit)"
+ch0 14 90  # 16% pre-emphasis 
+ch0 15 10  # +6dB equalization 
+ch0 05 03  # 8b10b disabled
+#endif
+#if _channel_B_options_new3 == "SERDES Only(10/20-bit)"
+ch1 14 90  # 16% pre-emphasis 
+ch1 15 10  # +6dB equalization
+ch1 05 03  # 8b10b disabled
+#endif
+#if _channel_C_options_new3 == "SERDES Only(10/20-bit)"
+ch2 14 90  # 16% pre-emphasis 
+ch2 15 10  # +6dB equalization
+ch2 05 03  # 8b10b disabled
+#endif
+#if _channel_D_options_new3 == "SERDES Only(10/20-bit)"
+ch3 14 90  # 16% pre-emphasis 
+ch3 15 10  # +6dB equalization 
+ch3 05 03  # 8b10b disabled
+#endif
+#if _channel_A_options_new3 == "XAUI" || #_channel_align_mode != "None"
+quad 30 04  # Set TX Sync Bit
+#endif
+
+# These lines must appear last in the autoconfig file.  These lines apply the correct 
+# reset sequence to the PCS block upon bitstream configuration
+#if _channel_A_options_new3 != "Disabled" || _channel_B_options_new3 != "Disabled" || _channel_C_options_new3 != "Disabled" || _channel_D_options_new3 != "Disabled"
+quad 41 00  # de-assert serdes_rst
+quad 40 ff  # assert datapath reset for all channels
+#if _channel_A_options_new3 == "XAUI" || #_channel_align_mode != "None"
+quad 41 03  # assert MCA reset
+quad 41 00  # de-assert MCA reset
+#endif
+quad 40 00  # de-assert datapath reset for all channels
+#endif
+
+
+

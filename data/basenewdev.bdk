@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- New futures introduced since ECP4 -->
+<BaliFlowDef title="basenewdev">
+  <CommandDef id="Cmd_IBIS" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>ibisgen "${report_base}.ncd" !IBISGen:ibs_file "${report_base}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc ibisgen {args} {
+			set msg "ibisgen $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>    
+</BaliFlowDef>

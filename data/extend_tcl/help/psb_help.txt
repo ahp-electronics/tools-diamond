@@ -1,0 +1,818 @@
+[psb]
+Platform Manager II extended Tcl commands
+
+For more information on a specific command, type help command-name:
+  psb_vmon          Platform Manager II voltage monitor commands
+  psb_trim          Platform Manager II trim/margin commands
+  psb_vid           Platform Manager II vid commands
+  psb_imon          Platform Manager II current monitor commands
+  psb_tmon          Platform Manager II temperature monitor commands
+  psb_fan           Platform Manager II fan control commands
+  psb_lbd_flow      Platform Manager II logiBuilder flow commands
+  psb_lbd_sqn       Platform Manager II logiBuilder sequencer commands
+  psb_lbd_svsy      Platform Manager II logiBuilder supervisory commands
+  psb_lbd_timer     Platform Manager II logiBuilder timer commands
+  psb_lbd_impt      Platform Manager II logiBuilder import HDL commands
+  psb_usp_glb       Platform Manager II user signal pool global commands
+  psb_usp_port      Platform Manager II user signal pool port commands
+  psb_usp_node      Platform Manager II user signal pool node commands
+  psb_usp_asc       Platform Manager II user signal pool ASC commands
+  psb_usp_gpio      Platform Manager II user signal pool GP/IO commands
+  psb_usp_hvport    Platform Manager II user signal pool HV output commands
+  psb_global        Platform Manager II global setting commands
+  psb_summary       Platform Manager II summary commands
+  psb_faultlogger   Platform Manager II fault logger commands
+
+
+[psb_engine]
+psb_engine new - New a ptm file only, not load to database
+  Usage:
+    psb_engine new -ptmfile < ptm file  path name >    Ptm file path name
+                    -prjname <project name> -prjpath <project path>    
+                    -devpart <device part>
+                    -implname <implement name> -implpath <implement path>
+                    -devfamily <device family> -devdevname <fpga device name>
+                    -devpkgname <package name> -ascdevices <asc devices>
+    -ptmfile:       Ptm file path name
+    -prjname:       Project name
+    -prjpath:       Project path
+    -devpart:       Device part name
+    -implname:      Implement name
+    -implpath:      Implement path
+    -devfamily:     Device family
+    -devdevname:    FPGA Device name
+    -devpkgname:    Device package name
+    -ascdevices:    Asc devices (the format is  <asc device>:<asc number>;…)
+
+psb_engine open - Open a ptm file and load to database
+  Usage:
+    psb_engine open -ptmfile <ptm file path name>
+                    [-prjname <project name>] [-prjpath <project path>]
+                    [-devpart <device part>]
+                    [-implname <implement name>] [-implpath <implement path>]
+                    [-devfamily <device family>] [-devdevname <fpga device name>]
+                    [-devpkgname <package name>] [-ascdevices <asc devices>]
+    -ptmfile:       Ptm file path name
+    -prjname:       Project name
+    -prjpath:       Project path
+    -devpart:       Device part name
+    -implname:      Implement name
+    -implpath:      Implement path
+    -devfamily:     Device family
+    -devdevname:    FPGA Device name
+    -devpkgname:    Device package name
+    -ascdevices:    Asc devices (the format is  <asc device>:<asc number>;…)
+
+psb_engine save - Save current project
+  Usage:
+    psb_engine save [-ptmfile < ptm file path name >]
+    -ptmfile:       Ptm file path name
+        
+psb_engine close - Close current project
+  Usage:
+    psb_engine close [-force]
+    -force:         Flag to close the project without saving changes.
+        
+psb_engine compile - Compile current project
+  Usage:
+    psb_engine compile
+        
+psb_engine drc - DRC check current project
+  Usage:
+    psb_engine drc
+        
+psb_engine generate -Generate ASC jedec file:
+  Usage:
+    psb_engine generate -asc <0…7> -jed <asc jedec file>
+    -asc:           ASC Number
+    -jed:           Jedec file name
+
+
+[psb_vmon]
+psb_vmon set - Set voltage monitor parameter values
+  Usage:
+    psb_vmon set -asc<0-7> -pin<1…> 
+                    [-name <name> |
+                        -comp[a|b] -name <name> [-tp <value>] [-type <OV|UV>]]
+                    [-gf <On|Off>] [-window <On|Off>] [-vol <nominal voltage>]
+    -asc:           ASC number
+    -pin:           pin number
+    -name:          voltage monitor schematic net name
+    -comp:          comparator type
+    -logicname:     voltage monitor logical signal name
+    -tp:            trip point value
+    -type:          type Over/Under
+    -gf:            glitch filter
+    -window:        window mode
+    -vol:           Vnominal voltage
+
+
+[psb_hvmon]
+psb_hvmon set - Set voltage monitor parameter values
+  Usage:
+    psb_hvmon set -asc<0-7> -pin<1…> 
+                    [-name <name> |
+                        -comp[a|b] -name <name> [-tp <value>] [-type <OV|UV>]]
+                    [-gf <On|Off>] [-window <On|Off>] [-vol <nominal voltage>]
+    -asc:           ASC number
+    -pin:           pin number
+    -name:          voltage monitor schematic net name
+    -comp:          comparator type
+    -logicname:     voltage monitor logical signal name
+    -tp:            trip point value
+    -type:          type Over/Under
+    -gf:            glitch filter
+    -window:        window mode
+    -vol:           Vnominal voltage
+
+
+[psb_trim]
+psb_trim set - Set trim/margin parameter values
+  Usage:
+    psb_trim set -asc<0-7> -trimdacs <6|8>
+    -asc:           ASC number
+    -trimdacs:      the number of TrimDACs 
+    
+    psb_trim set -asc<0-7> -trim<1…> [-profile1 <Target Profile 1>]
+                    [-profile2 < Target Profile 2>] [-dcdc <DC-DC Converter>]
+                    [-name <Schematic Net Name>] [-vbpz <V-BPZ Selection>]
+                    [-msar <Max Supply Adjustment Range>]
+                    [-mdcr <Maximum DAC Code Range>]
+                    [-acv <Attenuation Crossover Voltage>]
+                    [-commode <Configuration Mode>] [-clt_polarity <CLT Polarity>]
+                    [-bpz <BPZ Voltage>] [-dcp0 <DAC Code Profile 0>]
+                    [-dcp1 <DAC Code Profile 1>] [-dcp2 <DAC Code Profile 2>]
+                    [-rpupdac <RpupDAC>] [-rpdndac <RpdnDAC>]
+                    [-rseries <Rseries>] [-rpupsupply <Rpupsupply>]
+                    [-rpdnsupply <Rpdnsupply>]
+                    [-rvp0 <Realized Voltage Profile 0>]
+                    [-rvp1 <Realized Voltage Profile 1>]
+                    [-rvp2 <Realized Voltage Profile 2>]
+                    [-dip0 <DAC Current (uA) Profile 0>]
+                    [-dip1 <DAC Current (uA) Profile 1>]
+                    [-dip2 <DAC Current (uA) Profile 2>]
+                    [-rsupply <Divider Rsupply>] [-rground <Divider Rground>]
+                    [-ref <Divider Reference>]
+
+    -asc:           ASC number
+    -trim:          trim number
+    -profile1:      Target Profile 1
+    -profile2:      Target Profile 2
+    -dcdc:          DC-DC Converter
+    -name:          Schematic Net Name
+    -vbpz:          V-BPZ Selection
+    -msar:          Max Supply Adjustment Range
+    -mdcr:          Maximum DAC Code Range
+    -acv:           Attenuation Crossover Voltage
+    -commode:       Configuration Mode
+    -clt_polarity:  CLT Polarity
+    -bpz:           BPZ Voltage
+    -dcp0:          DAC Code Profile 0
+    -dcp1:          DAC Code Profile 1
+    -dcp2:          DAC Code Profile 2
+    -rpupdac:       RpupDAC
+    -rpdndac:       RpdnDAC
+    -rseries:       Rseries
+    -rpupsupply:    Rpupsupply
+    -rpdnsupply:    Rpdnsupply
+    -rvp0:          Realized Voltage Profile 0
+    -rvp1:          Realized Voltage Profile 1
+    -rvp2:          Realized Voltage Profile 2
+    -dip0:          DAC Current (uA) Profile 0
+    -dip1:          DAC Current (uA) Profile 1
+    -dip2:          DAC Current (uA) Profile 2
+    -rsupply:       Divider Rsupply
+    -rground:       Divider Rground
+    -ref:           Divider Reference
+
+psb_trim calc - Calculate the trim/margin
+    psb_trim calc -asc <0-7|all> -trim <1…|all>
+
+    -asc:           ASC number
+    -trim:          trim number
+
+
+[psb_vid]
+psb_vid new - Create a new VID Table
+  Usage:
+    psb_vid new -name <table name>
+
+psb_vid set - Set Voltage ID parameter values
+  Usage:
+    psb_vid set –asc<0-7> –vid<1…> [–table <table name>]
+                    [–sbpn <Select Bus  Port / Node>] [–spn <Strobe Port / Node>]
+                    [–edge <Strobe Edge>] [–port <DC-DC Enable Port>]
+                    [–logic <DC-DC Enable Logic>]
+
+    -asc:           ASC number
+    -vid:           VID number
+    -table:         Table name
+    -sbpn:          Select Bus  Port / Node
+    -spn:           Strobe Port / Node
+    -edge:          Strobe Edge>
+    -port:          DC-DC Enable Port
+    -logic:         DC-DC Enable Logic
+
+
+[psb_imon]
+psb_imon set - Set current monitor parameter values
+  Usage:
+    psb_imon set -asc<0-7> -pin<1…> -name <name> [-sense <Sense Resistor>]
+                    [-gf <ON|OFF>] [-logicmode <Logic Mode>]
+                    [-lowsense <Low Side Sense>]
+
+    -asc:           ASC number
+    -pin:           Pin number
+    -name:          Schematic Net Name
+    -sense:         Sense Resistor
+    -gf:            Glitch Filter
+    -logicmode:     Logic Mode
+    -lowsense:      Low Side Sense
+
+    psb_imon set -asc<0-7> -pin<1…> -comp <a|b> [-hyst <ON|OFF>]
+                    [-comp <a|b> -gain <10|25|50|100>]
+                    [-vccommon <Gnd|Supply>]
+                    [-comp <a|b|f> -tp <trip point>]
+
+    -asc:           ASC number
+    -pin:           pin number
+    -comp:          comparator type
+    -hyst:          Hysteresis
+
+    psb_imon set -asc<0-7> -pin<1…> -comp <a|b|f> [-logicname <name>]
+                    [-tp <trip point>] [-vdrop <V-Drop>] [-peak <Peak Power>]
+                    
+    -asc:           ASC number
+    -pin:           pin number
+    -comp:          comparator type
+    -logicname:     user defined name
+    -tp:            trip point
+    -vdrop:         V-Drop
+    -peak:          Peak Power
+
+
+[psb_himon]
+psb_himon set - Set current monitor parameter values
+  Usage:
+    psb_himon set -asc<0-7> -pin<1…> -name <name> [-sense <Sense Resistor>]
+                    [-gf <ON|OFF>] [-logicmode <Logic Mode>]
+                    [-lowsense <Low Side Sense>]
+
+    -asc:           ASC number
+    -pin:           Pin number
+    -name:          Schematic Net Name
+    -sense:         Sense Resistor
+    -gf:            Glitch Filter
+    -logicmode:     Logic Mode
+
+    psb_himon set -asc<0-7> -pin<1…> -comp <a|b> [-hyst <ON|OFF>]
+                    [-comp <a|b> -gain <10|25|50|100>]
+                    [-vccommon <Gnd|Supply>]
+                    [-comp <a|b|f> -tp <trip point>]
+
+    -asc:           ASC number
+    -pin:           pin number
+    -comp:          comparator type
+    -hyst:          Hysteresis
+
+    psb_himon set -asc<0-7> -pin<1…> -comp <a|b|f> [-logicname <name>]
+                    [-tp <trip point>] [-vdrop <V-Drop>] [-peak <Peak Power>]
+                    
+    -asc:           ASC number
+    -pin:           pin number
+    -comp:          comparator type
+    -logicname:     user defined name
+    -tp:            trip point
+    -vdrop:         V-Drop
+    -peak:          Peak Power
+
+
+[psb_tmon]
+psb_tmon set - Set current monitor parameter values
+  Usage:
+    psb_tmon set -asc<0-7> -errorcode <-165|255>
+    -asc:           ASC number
+    -errorcode:     the TempMONs error code
+    
+    psb_tmon set -asc<0-7> -pin<1…> -name <name>
+                    [-offset <-20 to +20>] [-avg <1|8|16>]
+                    [-ideal <1 – 2>] [-fault <Short|Open>] [-diode <>]
+
+    -asc:           ASC number
+    -pin:           pin number
+    -name:          Schematic Net Name
+    -offset:        Offset
+    -avg:           Measurement Averaging (Filter Coefficient)
+    -ideal:         Ideality Factor
+    -fault:         Short Fault Measurement Reading (C)
+    -diode:         Sensor Configuration
+    
+    psb_tmon set -asc<0-7> -pin<1…> -comp <a|b> [-name <name>]
+                    [-tp <-65 to +155>] [-dir <Over|Under>]
+                    [-hyst <0 to 63>] [-offset <-20 to +20>]
+                    [-ideal <1 - 2>] [-beta <50 - 500>] [-avg <1|8|16>]
+    -asc:           ASC number
+    -pin:           pin number
+    -comp:          comparator type
+    -logicname:     user defined name
+    -tp:            trip point
+    -dir:           trip point direction
+    -hyst:          hysteresis
+    -offset:        offset
+    -ideal:         ideality factor
+    -beta:          beta value
+    -avg:           number of averages
+
+
+[psb_fan]
+psb_fan add - Add current monitor parameter values
+  Usage:
+    psb_fan add –name <fan name>
+                    [-type <2 Wire|3 Wire(Low Side Drive)|3 Wire(High Side Drive)|4 Wire>]
+                    [-mode <Alarm(Active High)|Alarm(Active Low)|Tach (2 Pulses/Rev)>]
+                    [-alarm_interval <100-1000>] [-alarm_filter <1-10>]
+                    [-startup_enable <YES|NO>] [-startup_period <1-8>]
+                    [-startup_speed <1|2|3|4>] [-speed1 <1-100>]
+                    [-speed2 <1-100>] [-speed3 <1-100>]
+                    [-pwm_freq <PWM Frequency>] [-pwm_polarity <PWM Polarity>]
+                    [-speed_high_bit <>] [-speed_low_bit <>]
+                    [-runoff <Run Off>] [-alarm_out <Alarm Out>]
+                    [-pwm_out <PWM Out>] [-alarm_sense <Tach Alarm Sense>]
+
+    -name:          user defined name
+    -newname:       user defined name
+    -type:          Fan Type
+    -mode:          Sense Type
+    -alarm_interval:tach alarm interval
+    -alarm_filter:  tach alarm filter
+    -startup_enable:startup enable
+    -startup_period:startup period
+    -startup_speed: startup speed
+    -speed1:        speed 1
+    -speed2:        speed 2
+    -speed3:        speed 3
+    -pwm_freq:      PWM Frequency
+    -pwm_polarity:  PWM Polarity
+    -speed_high_bit:Speed High Bit
+    -speed_low_bit: Speed Low Bit
+    -runoff:        Run Off
+    -alarm_out:     Alarm Out
+    -pwm_out:       PWM Out
+    -alarm_sense:   Tach Alarm Sense
+
+psb_fan set - Set current monitor parameter values
+  Usage:
+    psb_fan set –name <fan name> -newname <new fan name>
+                    [-type <2 Wire|3 Wire(Low Side Drive)|3 Wire(High Side Drive)|4 Wire>] 
+                    [-mode <Alarm(Active High)|Alarm(Active Low)|Tach (2 Pulses/Rev)>]
+                    [-alarm_interval <100-1000>] [-alarm_filter <1-10>]
+                    [-startup_enable <YES|NO>] [-startup_period <1-8>]
+                    [-startup_speed <1|2|3|4>] [-speed1 <1-100>]
+                    [-speed2 <1-100>] [-speed3 <1-100>]
+                    [-pwm_freq <PWM Frequency>] [-pwm_polarity <PWM Polarity>]
+                    [-speed_high_bit <>] [-speed_low_bit <>]
+                    [-runoff <Run Off>] [-alarm_out <Alarm Out>]
+                    [-pwm_out <PWM Out>] [-alarm_sense <Tach Alarm Sense>]
+
+    -name:          user defined name
+    -newname:       user defined name
+    -type:          Fan Type
+    -mode:          Sense Type
+    -alarm_interval:tach alarm interval
+    -alarm_filter:  tach alarm filter
+    -startup_enable:startup enable
+    -startup_period:startup period
+    -startup_speed: startup speed
+    -speed1:        speed 1
+    -speed2:        speed 2
+    -speed3:        speed 3
+    -pwm_freq:      PWM Frequency
+    -pwm_polarity:  PWM Polarity
+    -speed_high_bit:Speed High Bit
+    -speed_low_bit: Speed Low Bit
+    -runoff:        Run Off
+    -alarm_out:     Alarm Out
+    -pwm_out:       PWM Out
+    -alarm_sense:   Tach Alarm Sense
+
+psb_fan remove - Remove specified fan from the fan list in system
+  Usage:
+    psb_fan remove -name <fan name>
+
+psb_fan export - Export configuration of given fan
+  Usage:
+    psb_fan export -name <fan name> -p <file path>
+
+psb_fan import - Add a new fan whose configuration is specified in given file
+  Usage:
+    psb_fan import -name <fan name> -p <file path>
+
+psb_fan dup - Duplicate given fan to w new fan
+  Usage:
+    psb_fan dup -name <fan name> -newname <new fan name>
+
+
+[psb_lbd_flow]
+psb_lbd_flow genHDL - Generate Verilog or VHDL file
+  Usage:
+    psb_lbd_flow gen_hdl [<Verilog|VHDL>]
+
+psb_lbd_flow drc - DRC check
+  Usage:
+    psb_lbd_flow drc
+
+psb_lbd_flow ImptLbd - Import a logiBuilder to replace the current one
+  Usage:
+    psb_lbd_flow import <logiBuilder name>
+
+psb_lbd_flow ExptLbd - Export a logiBuilder design
+  Usage:
+    psb_lbd_flow export <logiBuilder name>
+
+
+[psb_lbd_sqn]
+psb_lbd_sqn add_sm - Add a state machine after the exist ones
+  Usage:
+    psb_lbd_sqn add_sm [<state machine name>]
+
+psb_lbd_sqn remove_sm - Remove a state machine specified by smIdx
+  Usage:
+    psb_lbd_sqn remove_sm <smIdx>
+
+psb_lbd_sqn rename_sm - Rename a state machine specified by smIdx
+  Usage:
+    psb_lbd_sqn rename_sm –smidex <smIdx> -name <state machine name>
+
+psb_lbd_sqn insert_instr - Insert instructions at instrIdx
+  Usage:
+    psb_lbd_sqn insert_instr -smidx <smIdx> -idx <instrIdx>  [-instr <instruction name>]
+                    [-bexpr <Boolean expression>] [-outlist <outputs>]
+                    [-timer <timer name>] [-bexpr_go <step>]
+                    [-else_go <step>] [-tout_go <step>]
+                    [-toutlist <outputs>] [-bexpr_outlist <outputs>]
+                    [-else_outlist <outputs>] [-goto <step>]
+                    [-irp <yes|no>] [-cmt <comments>]
+    -smidx:         state machine index
+    -idx:           instruction index        
+    -instr:         instruction name: OUTPUTS, WAIT_BOOLEXPR, WAIT_TIMER,
+                                WAIT_BEXPR_TIMER, HALT, NOP,
+                                IFTHENELSE, IFTHENELSE_TIMER, GOTO,
+                                STARTTIMER, STOPTIMER
+    -bexpr:         boolean expression
+    -outlist:       outputs
+    -timer:         timer name
+    -bexpr_go:      step number
+    -else_go:       step number
+    -tout_go:       step number
+    -toutlist:      outputs
+    -bexpr_outlist: outputs
+    -else_outlist:  outputs
+    -goto:          step number
+    -irp:           interrupt
+    -cmt:           comments
+    
+
+psb_lbd_sqn remove_instr - Remove instructions from instrIdx
+  Usage:
+    psb_lbd_sqn remove_instr -idx <instrIdx> [-num <instruction number that removed>]
+
+psb_lbd_sqn set_instr - Set(modify) the instruction specified by instrIdx
+  Usage:
+    psb_lbd_sqn set_instr -smidx <smIdx> -idx <instrIdx> [-instr <instruction name>]
+                    [-bexpr <Boolean expression>] [-outlst <outputs>]
+                    [-timer <timer name>] [-bexpr_go <step>]
+                    [-else_go <step>] [-tout_go <step>]
+                    [-toutlist <outputs>] [-bexpr_outlist <outputs>]
+                    [-else_outlist <outputs>] [-goto <step>]
+                    [-irp <yes|no>] [-cmt <comments>]
+    -smidx:         state machine index
+    -idx:           instruction index        
+    -instr:         instruction name: OUTPUTS, WAIT_BOOLEXPR, WAIT_TIMER,
+                                WAIT_BEXPR_TIMER, HALT, NOP,
+                                IFTHENELSE, IFTHENELSE_TIMER, GOTO,
+                                STARTTIMER, STOPTIMER
+    -bexpr:         boolean expression
+    -outlist:       outputs
+    -timer:         timer name
+    -bexpr_go:      step number
+    -else_go:       step number
+    -tout_go:       step number
+    -toutlist:      outputs
+    -bexpr_outlist: outputs
+    -else_outlist:  outputs
+    -goto:          step number
+    -irp:           interrupt
+    -cmt:           comments
+
+psb_lbd_sqn insert_excpt - Insert exception entries at excptIdx
+  Usage:
+    psb_lbd_sqn insert_excpt -smidx <smIdx> -idx <excptIdx> -bexpr <Boolean expression>
+                    {-outname <output name> -outtype <output type>}+
+                    -jmp <step>
+    -smidx:         state machine index
+    -idx:           exception index
+    -bexpr:         boolean expression
+    -outname:       output name
+    -outtype:       output type
+    -jmp:           step number
+
+psb_lbd_sqn remove_excpt - Remove exception entries from excptIdx
+  Usage:
+    psb_lbd_sqn remove_excpt -idx <excptIdx> [-num <excpt number that removed>]
+
+psb_lbd_sqn set_excpt - Set (modify) the exception entry
+  Usage:
+    psb_lbd_sqn set_excpt -smidx <smIdx> -idx <excptIdx> -bexpr <Boolean expression>
+                    [-outname <output name> -outtype <output type>]
+                    [-cmt <comments>] -jmp <step>
+    -smidx:         state machine index
+    -idx:           exception index
+    -bexpr:         boolean expression
+    -outname:       output name
+    -outtype:       output type
+    -cmt:           comments
+    -jmp:           step number
+
+
+[psb_lbd_svsy]
+psb_lbd_svsy insert - Insert equations at eqnIdx
+  Usage:
+    psb_lbd_svsy insert -idx <eqnIdx> -outname <output name>
+                    -asstype <assignment type>
+                    -bexpr <Boolean expression>
+                    [-cmt <comments>]
+    -idx:           equation index
+    -outname:       output name
+    -asstype:       assignment type
+    -bexpr:         boolean expression
+    -cmt:           comments
+
+psb_lbd_svsy remove - Remove equations from eqnIdx
+  Usage:
+    psb_lbd_svsy remove -idx <eqnIdx> [-num <eqn number that removed>]
+
+psb_lbd_svsy set - Set (modify) the equation
+  Usage:
+    psb_lbd_svsy set -idx <eqnIdx> -outname <output name>
+                    -asstype <assignment type>
+                    -bexpr <Boolean expression>
+                    [-cmt <comments>]
+    -idx:           equation index
+    -outname:       output name
+    -asstype:       assignment type
+    -bexpr:         boolean expression
+    -cmt:           comments
+
+
+[psb_lbd_timer]
+psb_lbd_timer add - Add timers
+  Usage:
+    psb_lbd_timer add [-name <timer name>] [-clksrc <timer source>] 
+                    -prd <period> [-unit <NS|US|MS|S>]
+    -name:          timer name
+    -clksrc:        timer source
+    -prd:           the terminal count period
+    -unit:          timer unit
+
+psb_lbd_timer remove - Remove timers from timerIdx
+  Usage:
+    psb_lbd_timer remove -idx <timerIdx> [-num <timer number that removed>]
+
+psb_lbd_timer calc - Calculate all timers
+  Usage:
+    psb_lbd_timer calc
+
+psb_lbd_timer set - Set (modify) the timer
+  Usage:
+    psb_lbd_timer set -idx <timerIdx> [-name <timer name>]
+                    [-clksrc <timer source>] [-prd <period>] [-unit <NS|US|MS|S>]
+    -idx:           timer index
+    -name:          timer name
+    -clksrc:        timer source
+    -prd:           the terminal count period
+    -unit:          timer unit
+
+
+[psb_lbd_impt]
+psb_lbd_impt add - Add sub-modules at the end
+  Usage:
+    psb_lbd_impt add -mod <module name> -inst <instance name>
+                    -lan <Verilog|VHDL> -src <source file> 
+                    -ptmap {<portname signame>}+
+    -mod:           module name
+    -inst:          instance name
+    -lan:           language, Verilog or VHDL
+    -src:           source file
+    -ptmap:         a set of portname-signame pair
+
+psb_lbd_impt remove - Remove modules
+  Usage:
+    psb_lbd_impt remove -idx <moduleIdx> [-num <module number that removed>]
+
+psb_lbd_impt set - Set (modify) the module
+  Usage:
+    psb_lbd_impt set -idx <moduleIdx> [-mod <module name>]
+                    [-inst <instance name>] [-lan <Verilog|VHDL>]
+                    [-src <source file>] [-ptmap {<portname signame>}+]
+    -idx:           module index
+    -mod:           module name
+    -inst:          instance name
+    -lan:           language, Verilog or VHDL
+    -src:           source file
+    -ptmap:         a set of portname-signame pair
+
+
+[psb_usp_glb]
+psb_usp_glb drc - DRC check
+  Usage:
+    psb_usp_glb drc
+
+
+[psb_usp_port]
+psb_usp_port set - Set port information
+  Usage:
+    psb_usp_port set [-name <old_user_name>] -newname <new_user_name> 
+                    [-type <IN|OUT|INOUT>] [-regtype <REG|COM>]
+                    [-rst_lvl <DONOT_CARE|LOW|HIGH>]
+    -name:          old user name
+    -newname:       new user name
+    -type:          port type
+    -regtype:       register type
+    -rst_lvl:       reset level
+
+psb_usp_port clear - Set default values to the specified signal
+  Usage:
+    psb_usp_port clear [-name <user_name>]
+
+psb_usp_port setgroup - Add/Modify a group
+  Usage:
+    psb_usp_port setgroup -name <grp_name> <sig_name1> [<sig_name2>…]
+
+
+[psb_usp_node]
+psb_usp_node add - Add node information
+  Usage:
+    psb_usp_node add -name <node_name> [-regtype <REG|COM>]
+                    [-rst_lvl <DONOT_CARE|LOW|HIGH>] [-tim_rsv <TRUE|FALSE>]
+    -index:         node index
+    -name:          node name
+    -regtype:       register type
+    -rst_lvl:       reset level
+    -tim_rsv:       reserved for timer
+
+psb_usp_node set - Set node information
+  Usage:
+    psb_usp_node set -name <node_name> [-regtype <REG|COM>]
+                    [-rst_lvl <DONOT_CARE|LOW|HIGH>] [-tim_rsv <TRUE|FALSE>]
+    -name:          node name
+    -regtype:       register type
+    -rst_lvl:       reset level
+    -tim_rsv:       reserved for timer
+
+psb_usp_node remove - Remove specified nodes
+  Usage:
+    psb_usp_node remove [-all] [-name <node_name1> <node_name2>…]
+
+psb_usp_node clear - Set default values to the specified signal
+  Usage:
+    psb_usp_port clear [-name <user_name>]
+
+psb_usp_node setgroup - Add/Modify a group
+  Usage:
+    psb_usp_node setgroup -name <grp_name> <sig_name1> [<sig_name2>…]
+
+
+[psb_usp_gpio]
+psb_usp_gpio set - Set attributes of an ASC GPIO
+  Usage:
+    psb_usp_gpio set –asc <0…7> –pin <1…> [-name <user-defined-name>]
+                    [-type <IN|OUT>] [-regtype <REG|COM>] 
+                    [-rst_lvl <DONOT_CARE|LOW|HIGH>] [-pull <Up|Down>]
+    -asc:           asc number
+    -pin:           pin number
+    -name:          user defined name
+    -type:          gpio type
+    -regtype:       register type
+    -rst_lvl:       reset level
+    -pull:          pull model
+
+psb_usp_gpio clear - Set default values to the specified signal
+  Usage:
+    psb_usp_gpio clear [–asc <0…7> -pin <1…>]
+
+
+[psb_usp_hvport]
+psb_usp_hvport set - Set attributes of a HVOut signal
+  Usage:
+    psb_usp_hvport set –asc <0…7> –pin <1…> [-name <user-defined-name>]
+                    [-regtype <REG|COM>] [-rst_lvl <DONOT_CARE|LOW|HIGH>]
+                    [-vol <12|10|8|6>] [-srcc <100|50|25|12.5>]
+                    [-sinkc <3000|500|250|100>] [-freq <31.25 kHz|15.625 kHz>]
+                    [-oset <Charge Pump|Open Drain>] [-pwm <Static|Switched>]
+                    [-pulsewidth <pulse width>]
+
+    -asc:           asc number
+    -pin:           pin number
+    -name:          user defined name
+    -regtype:       register type
+    -rst_lvl:       reset level
+    -vol:           voltage
+    -srcc:          source current
+    -sinkc:         sink current
+    -freq:          frequency select
+    -oset:          output setting
+    -pwm:           output mode
+    -pulsewidth:    pulse width
+
+psb_usp_hvport clear - Set default values to the specified signal
+  Usage:
+    psb_usp_hvport clear [–asc <0…7> -pin <1…>]
+
+
+[psb_usp_gcs]
+psb_usp_gcs set - Set attributes of a HVOut signal
+  Usage:
+    psb_usp_gcs set –asc <0…7> [-output <HVOUT1|HVOUT2|HVOUT3|HVOUT4|GPIO2|GPIO3>
+                     -input <TWI|I2C|GPIO4|GPIO5|GPIO6|GPIO7|GPIO8|GPIO9
+                             |IMONF1|IMONF2|VMON4_A|VMON9_A
+                             |IMON1 HCM 1|IMON2 HCM 2|VMON5 HCM 3|VMON6 HCM 4>
+                     [-invert <Not inverted|Inverted>]]
+                    [-hcm <HVIMON|LVIMON|VMON5|VMON6>
+                     -control <HVOUT1_Ctrl|HVOUT2_Ctrl|HVOUT3_Ctrl|HVOUT4_Ctrl
+                               |GPIO2_Ctrl|GPIO3_Ctrl>]
+                    [-threshold < By CFG|By TWI>]
+    -asc:           asc number
+    -output:        output
+    -input:         control output
+    -invert:        output invert
+    -hcm:           hysteretic control module
+    -control:       TWI control signal
+    -threshold:     IMON1 threshold source
+
+
+[psb_global]
+psb_global set - Set global attributes
+  Usage:
+    psb_global set –asc<0-7> [-name <user defined name>]
+                    [-clt_rate < >]
+                    [-reset_type <Mandatory|Optional> -reset_source <>]
+                    [-i2c_rexternal <>] [-i2c_adx <0x00 to 0xFF>]
+
+    psb_global set [-dcdc_lib_dir <>] [-vid_dir <>]
+                    [-eia_resistor_std <>] [-open_resistor <>]
+                    [-channel <vmon|hvmon|imon|tmon -tp <>]
+                    [-channel imon -comp f –tp <>]
+                    [-progma <>] [-ext_ucontrol <>] [-bgr_progma <>]
+                    [-digit_i2c_saddr <>] [-clock <asc0|signal> -signalname <>]
+                    [-boot_mode <Normal | GoldenImage>] [-spi_dir <>]
+                    [-dual_boot_spi_flash <>]
+                    [-ascvm_crc_error_count <4|8|12|16>]
+                    [-ascvm_twi_error_count <1…63>]
+                    [-ascvm_rdat_ram <DIST|EBR>] [-ascvm_wdat_ram<DIST|EBR>]
+
+
+[psb_summary]
+psb_summary get - Get the consumptions
+  Usage:
+    psb_summary get [-lut] [-ebr] [-pio] [-asccount]
+    
+    psb_summary get -blocks <enabled|disabled|status>
+                    -blockname <block name>
+
+
+[psb_faultlogger]
+psb_faultlogger get - Get the consumptions
+  Usage:
+    psb_faultlogger set [-enable <0|1|2>]
+                    [-trigsigname <trigger signal name>]
+                    [-loglocation <ee|sram|ufm|spi>]
+                    [-busysigname <busy signal name>]
+                    [-fullsigname <full signal name>]
+                    [-logsigname <signal name> -asc <0…7> -addr <0…7>]
+                    [-logsigname <signal name> -usr <0…3> -addr <0…7>]
+                    [-logasc <0|1|…>]
+                    [-timestamp <0|1>]
+                    [-spidir <>] 
+                    [-model <spi memory model>]
+                    [-usrfield <0,1,2,3,4>]
+                    [-storage_ram <DIST|EBR>]
+    -enable:        0 for Fault Logging Disabled
+                    1 for Enable ASC-based Fault Logging
+                    2 for Enable MICO-based Fault Logging
+    -trigsigname:    trigger signal name
+    -loglocation:   Location
+    -busysigname:   Busy Signal Name
+    -fullsigname:   Full Signal name
+    -logsigname:    Signal Name
+    -asc:           Set User Signals to Log for ASC-based Fault Logger
+    -usr:           Set User Signals to Log for MICO-based Fault Logger
+    -addr:          Register addresses
+    -logasc:        0 for Log ASC0,
+                    1 for Log ASC0 through ASC1,
+                    2 for Log ASC0 through ASC2,
+                    ...
+    -timestamp:     Include Timestamp
+    -spidir:        SPI directiory
+    -model:         SPI memory model
+    -usrfield:      user log fields
+    -storage_ram:   distributed RAM

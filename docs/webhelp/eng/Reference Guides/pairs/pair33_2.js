@@ -1,0 +1,21 @@
+var pairs =
+{
+"fine":{"hdl":1,"fdel0":1,"delay":1}
+,"hdl":{"attribute":1}
+,"fdel0":{"fdel1":1}
+,"fdel1":{"fdel2":1}
+,"fdel2":{"fdel47":1}
+,"delay":{"attached":1,"element":1,"parameters":1}
+,"attached":{"delay":1}
+,"element":{"attribute":1}
+,"attribute":{"takes":1}
+,"takes":{"fdel":1}
+,"fdel":{"delay":1}
+,"parameters":{"opposite":1}
+,"opposite":{"coarse":1}
+,"device":{"support":1}
+,"adding":{"fpga":1}
+,"fpga":{"attributes":1}
+,"attributes":{"hdl":1}
+}
+;Search.control.loadWordPairs(pairs);

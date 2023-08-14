@@ -1,0 +1,45 @@
+library verilog;
+use verilog.vl_types.all;
+entity aludp is
+    port(
+        clk             : in     vl_logic;
+        rst             : in     vl_logic;
+        alu_ok          : in     vl_logic;
+        mul_b           : in     vl_logic_vector(31 downto 0);
+        mul_c           : in     vl_logic_vector(31 downto 0);
+        mul_s           : out    vl_logic_vector(31 downto 0);
+        alu_a           : in     vl_logic_vector(31 downto 0);
+        alu_b           : in     vl_logic_vector(31 downto 0);
+        alu_s           : out    vl_logic_vector(31 downto 0);
+        alu_co          : out    vl_logic;
+        alu_bs          : out    vl_logic;
+        alu_sn          : out    vl_logic;
+        alu_od          : out    vl_logic;
+        alu_eq          : out    vl_logic;
+        do_sub          : in     vl_logic;
+        do_xor          : in     vl_logic;
+        do_add          : in     vl_logic;
+        do_set          : in     vl_logic;
+        do_chk          : in     vl_logic;
+        do_mov          : in     vl_logic;
+        do_sft1         : in     vl_logic;
+        do_sft8         : in     vl_logic;
+        do_sft24        : in     vl_logic;
+        do_msk          : in     vl_logic;
+        do_mul          : in     vl_logic;
+        msk_op          : in     vl_logic_vector(1 downto 0);
+        msk_set         : in     vl_logic_vector(9 downto 0);
+        msk_idx         : in     vl_logic_vector(4 downto 0);
+        chk_op          : in     vl_logic;
+        use_carry       : in     vl_logic;
+        clear_eq        : in     vl_logic;
+        sign_ext        : in     vl_logic;
+        alu_a_rnd       : in     vl_logic;
+        alu_a_36        : in     vl_logic;
+        alu_a_5c        : in     vl_logic;
+        alu_a_is0       : in     vl_logic;
+        alu_a_is1       : in     vl_logic;
+        alu_b_sel_u     : in     vl_logic;
+        alu_b_ovr       : in     vl_logic
+    );
+end aludp;

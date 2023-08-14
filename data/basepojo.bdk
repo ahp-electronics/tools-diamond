@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title ="basepojo">
+    <MileStoneDef id ="cmppojo" title ="Compile_Pojo" main_task ="Task_CompilePojo"/>
+	<MileStoneDef id ="pojo_encryption" title ="PojoEncryption">
+		<SubTasks>
+		  <Task definition="pojo_encryption::pojo_encryptioncore" />
+		</SubTasks>
+	</MileStoneDef>	
+	<TaskDef id ="Task_WrpPojo" title ="Wrap_Pojo" lable="Generate ASC Jedec File" depend_on_milestones="cmppojo">
+		<Target id ="target">
+			<Command using_def="Cmd_POJOWrp"/>
+		</Target>
+	</TaskDef>
+	<TaskDef id ="Task_MrgPojo" title ="Merge_Pojo" lable="Merge POJOII Jedec File" depend_on_milestones="cmppojo,export:Task_JEDEC">
+		<Target id ="target">
+			<Command using_def="Cmd_POJOJdc"/>
+			<!--if condition='implementation.PTM.ddt._COUNT &gt; 0' cmd="Cmd_POJODdt"/-->
+			<if condition='implementation.PTM.hasddt' cmd="Cmd_POJODdt"/>
+		</Target>
+	</TaskDef>
+	<TaskDef id ="Task_CopyJed" title ="Copy_MainJed" lable="Copy Jedec File" visible="false" depend_on_milestones="export:Task_JEDEC">
+		<Target id ="target">
+			<Command using_def="Cmd_CopyJED"/>
+		</Target>
+	</TaskDef>
+	<TaskDef id ="Task_BitgenPOJOII" title ="BitgenPOJOII" lable="PTM Jedec File" depend_on_milestones="cmppojo,export:Task_JEDEC">
+		<Target id ="target">
+			<Command using_def="Cmd_POJOBitGen"/>
+		</Target>
+		<Report using_def="Report_JDec"/>
+	</TaskDef>
+	<TaskDef id ="Task_BitgenPOJOIIExpt" title ="BitgenPOJOIIExpt" lable="JEDEC File" visible ='device.has_intasc' depend_on_milestones="export:Task_JEDEC">
+		<Target id ="target">
+			<Command using_def="Cmd_POJOJdcExpt" />
+			<Command using_def="Cmd_POJO_Rename" />
+		</Target>
+	</TaskDef>
+	<TaskDef id ="Task_CompilePojo" title ="Compile_Pojo" lable="Compile POJOII Design" depend_on_properties="implementation.PTM">
+		<Target id ="target">
+			<Command using_def="Cmd_POJOCmp"/>
+		</Target>
+	</TaskDef>
+	<TaskDef id ="pojo_encryption::pojo_encryptioncore" title ="PojoEncryption" type="internal" depend_on_properties="implementation.PTM">
+		<Target id ="target">
+			<Command using_def="pojo_subsynthesis::Cmd_POJOEncrpt"/>
+			<Command using_def="pojo_subsynthesis::Cmd_Synplify"/>
+			<Command using_def="pojo_subtranslate::Cmd_EdifIn"/>
+		</Target>
+		<Report id="encryptioncore" value="ASCVM.edi,ASCVM.ngo"/>
+	</TaskDef>
+  	<CommandDef id="Cmd_POJOWrp" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG" iterate="implementation.PTM.asc">
+		<cmd_str>psbascwrap -pmc "${implementation.PTM.pmc}" -asc "${implementation.PTM.absolutepath}/%@iterator.name@%" -jed "${implementation.PTM.absolutepath}/%@iterator.basename@%.jed"</cmd_str>
+		<scripts>
+			<![CDATA[
+				proc psbascwrap {args} {
+					set msg "\npsbascwrap $args\n";
+					runtime_log $msg;
+					set msg "This is a demo about running POJOII asc engine.\n";
+					runtime_log $msg;
+				}
+			]]>
+		</scripts>  
+	</CommandDef>
+	<CommandDef id="Cmd_POJOJdc" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+		<cmd_str>mergejedec 2 "${report_base}_pojo.jed" "${report_base}.jed" "${implementation.PTM.absolutepath}/${implementation.PTM.jed}"</cmd_str>
+		<scripts>
+			<![CDATA[
+				proc Mergejedec {args} {
+					set msg "\nmergejedec $args\n";
+					runtime_log $msg;
+					set msg "This is a demo about running POJOII mergejedec engine.\n";
+					runtime_log $msg;
+				}
+			]]>
+		</scripts>  
+	</CommandDef>
+	<VariableDef name="POJO:EXPORT" value='defined(implementation.PTM) ? "${implementation.PTM.absolutepath}/${implementation.PTM.jed}":"${project_dir}/${implementation.pojo_jedec}"' />
+  	<CommandDef id="Cmd_POJOJdcExpt" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+		<cmd_str>mergejedec -type pojo2 -obj "${report_base}_pojo.jed" -xo2 "${report_base}.jed" -asc "${project_dir}/${implementation.pojo_jedec}"</cmd_str>
+		<scripts>
+			<![CDATA[
+				proc Mergejedec {args} {
+					set msg "\nmergejedec $args\n";
+					runtime_log $msg;
+					set msg "This is a demo about running POJOII mergejedec engine.\n";
+					runtime_log $msg;
+				}
+			]]>
+		</scripts>  
+	</CommandDef>
+	<CommandDef id="Cmd_POJO_Rename" type="CMD_TCL_SCRIPT">
+		<cmd_str/>
+		<scripts>
+			<![CDATA[
+				if [catch {
+					set current_dir [pwd]
+					foreach fname [glob -nocomplain -directory ${current_dir} *_pojo.jed] {
+						set report_base_pojo [file tail [file rootname $fname] ]
+						set report_base [string trimright ${report_base_pojo} "_pojo.jed"]
+						file delete ${report_base}.jed
+						file rename ${report_base_pojo}.jed ${report_base}.jed
+					}
+				} err ] {
+					runtime_log -err $err
+				}
+			]]>
+		</scripts>  
+	</CommandDef>
+	<CommandDef id="Cmd_CopyJED" type="CMD_TCL_SCRIPT">
+		<cmd_str>file copy -force "${report_base}.jed" "${report_base}_main.jed" </cmd_str>
+	</CommandDef>
+	<CommandDef id="Cmd_POJOBitGen" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+		<cmd_str>psbasccfgwrap -ptm ${implementation.PTM} -path "${impl_dir}" -prj "${report_base}"</cmd_str>
+		<scripts>
+			<![CDATA[
+				proc psbasccfgwrap {args} {
+					set msg "\nmergejedec $args\n";
+					runtime_log $msg;
+					set msg "This is a demo about running POJOII psbasccfgwrap engine.\n";
+					runtime_log $msg;
+				}
+			]]>
+		</scripts>  
+	</CommandDef>
+	<VariableDef name="SYNVHDL2008" value='strategy.PROP_SYN_VHDL2008 =="set_option -vhdl2008 1"?true:false' />
+	<VariableDef name="LSEVHDL2008" value='strategy.PROP_LST_VHDL2008 =="-vh2008"?true:false' />
+	<VariableDef name="VHDL2008" value='implementation.synthesis == "synplify"?!SYNVHDL2008:!LSEVHDL2008' />	
+  	<CommandDef id="Cmd_POJOCmp" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+       <CommandFile id="POJOCmp_CmdFile" name="psbrtl.cmd" clean="FALSE">
+         <line>-devfamily "${project.device.family}"</line>
+         <line>-devName $project.device.device</line>
+         <!--<line iterate="project.device.ascs">-%@iterator._FIRST@% %@iterator._SECOND@%</line>-->
+         <line> -asc_order "${project.device.asc_order}"</line>
+       </CommandFile>
+		<cmd_str>psbrtlwrap -in "${implementation.PTM.absolutefilepath}" -file psbrtl.cmd -ldffile "${ProjectPath}" -lpf "${implementation.LPF.absolutefilepath}" -impl_dir "${impl_dir}" -impl "${implementation.title}" -family "${project.device.family}" -vhdl2008 !LSEVHDL2008 -primitiveLib "${device.PrimitiveLib}" -synthesis "${implementation.synthesis}"</cmd_str>
+		<scripts>
+			<![CDATA[
+				proc psbrtlwrap {args} {
+					set msg "\npsbrtlwrap $args\n";
+					runtime_log $msg;
+					set msg "This is a demo about running POJOII compile engine.\n";
+					runtime_log $msg;
+				}
+			]]>
+		</scripts>  
+	</CommandDef>
+	<VariableDef name="DDT:ascfile" iterate="implementation.PTM.ddtfiles" value='-ascfile "${implementation.PTM.absolutepath}/%@iterator.name@%"' />
+  	<CommandDef id="Cmd_POJODdt" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+		<cmd_str>ddtcmd -oft -boot -device $device.device -golden "${impl_dir}/${report_base}_pojo.jed" -format int -of "${impl_dir}/${report_base}.mcs" -flashsize 128 -asc ${project.device.exascnum} !DDT:ascfile</cmd_str>
+		<scripts>
+			<![CDATA[
+				proc Cmd_POJODdt {args} {
+					set msg "\ddt $args\n";
+					runtime_log $msg;
+					set msg "This is a demo about running POJOII ddt engine.\n";
+					runtime_log $msg;
+				}
+			]]>
+		</scripts>  
+	</CommandDef>
+	<CommandDef id="pojo_subsynthesis::Cmd_POJOEncrpt" type="CMD_TCL_SCRIPT_SOURCE">
+		<cmd_str>gen_pojo_synplify_tcl no_argument</cmd_str>
+		<scripts>pojo_encryption.tcl</scripts>
+	</CommandDef>
+	<CommandDef id="pojo_subsynthesis::Cmd_Synplify" type="CMD_EXTERNAL_ENGINE">
+		<cmd_str>synpwrap -prj "ASCVM_synplify.tcl" -log "ASCVM.srf"</cmd_str>
+	</CommandDef>
+  <CommandDef id="pojo_subtranslate::Cmd_EdifIn" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <cmd_str>edif2ngd -ip "${InstallPath}/module/platform_builder" -ic ASCVM -nopropwarn -l "${device.family}" -d $device.device -path "${impl_dir}" -path "${project_dir}" #PROP_BD_EdfMemPath "ASCVM.edi" "ASCVM.ngo" #PROP_BD_EdfInBusNameConv #PROP_BD_EdfInRemLoc #PROP_BD_CmdLineArgs</cmd_str>    
+	<scripts>
+	<![CDATA[
+		proc edif2ngd {args} {
+			set msg "edif2ngd $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about running POJOII sub-flow.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>	
+</BaliFlowDef>

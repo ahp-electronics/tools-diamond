@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<BaliFlowDef title="lattice">
+
+  <MileStoneDef id ="lattice_synthesis" title ="Synthesis">
+
+    <!-- if condition ='defined(implementation.Reveal)&amp;&amp;(implementation.Reveal.level=="rtl" || (!defined(implementation.Reveal.level) &amp;&amp; !implementation.is_mix_hdls))' default="Task_Synthesis_Lattice_0" task="Task_Synthesis_Lattice_0" -->
+
+	<!--if condition ='defined(implementation.Reveal) &amp;&amp;(implementation.synthesisable_srces_count == 0&amp;&amp;implementation.EDIF._COUNT &gt; 0)' default="Task_Synthesis_Lattice_0" task="Task_Synthesis_Lattice_1" -->
+
+      <!--elif condition ='defined(implementation.Reveal)&amp;&amp;(implementation.Reveal.level=="edif" || (!defined(implementation.Reveal.level) &amp;&amp;implementation.is_mix_hdls))' task="Task_Synthesis_Lattice_1" >
+
+      </elif -->
+
+    <!--/if-->
+
+	<if condition ="implementation.synthesisable_srces_count &gt; 0" task="Task_Synthesis_Lattice_3" />
+
+    <SubTasks>
+
+      <!--if condition='defined(implementation.Reveal)&amp;&amp;(implementation.Reveal.level=="edif" || (!defined(implementation.Reveal.level) &amp;&amp;implementation.is_mix_hdls))' task = "Task_Synthesis_Lattice_ngo" /-->
+
+      <if condition ='defined(implementation.Reveal) &amp;&amp; (implementation.synthesisable_srces_count == 0&amp;&amp;implementation.EDIF._COUNT &gt; 0)' task = "Task_Synthesis_Lattice_ngo" />
+
+      <if condition ='defined(implementation.Reveal) &amp;&amp; (implementation.synthesisable_srces_count == 0&amp;&amp;implementation.EDIF._COUNT &gt; 0)' default="Task_Compile_Lattice_0" task="Task_Compile_Lattice_1" />
+
+    </SubTasks>
+
+  </MileStoneDef>
+
+  
+
+  <VariableDef name="LSE_DEFRTLVDB" value='implementation.def_top ==""?.vdbs/${report_base}_rtl.vdb:.vdbs/${implementation.def_top}_rtl.vdb' />
+
+  <VariableDef name="LSE_DEFTECHVDB" value='implementation.def_top ==""?.vdbs/${report_base}_tech.vdb:.vdbs/${implementation.def_top}_tech.vdb' />
+
+  <VariableDef name="LSE_DEFTWR" value='implementation.def_top ==""?${report_base}_lse.twr:${implementation.def_top}_lse.twr' />
+
+
+
+  <TaskDef id = "Task_Synthesis_Lattice_0" title="Lattice_Synthesis" lable="Lattice Synthesis Engine" depend_on_milestones="hdlgen" depend_on_properties="implementation.synthesis_hdls, implementation.LDC, implementation.RTL_Reveal, implementation.EDIF">
+
+    <Target id ="target">
+
+      <if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Rtl_Reveal_CmdGen" />
+
+      <if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Reveal" />
+
+      <Command using_def="Cmd_Cmdgen_Lattice_ngd0" />
+
+      <Command using_def="Cmd_Lattice" />
+
+      <if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Reveal_Clean" />
+
+    </Target>
+
+    <Report using_def="Report_NGD"/>
+
+	<!--Report using_def="Report_TchVdb"/-->	
+
+  </TaskDef>
+
+   
+
+  <TaskDef id = "Task_Synthesis_Lattice_1" title="Lattice_Synthesis" lable="Lattice Synthesis Engine" depend_on_milestones="lattice_synthesis:Task_Synthesis_Lattice_ngo,reveal_core_gen:reveal_core_gen::synthesis_core" depend_on_properties="implementation.EDIF_Reveal">
+
+    <Target id ="target">
+
+      <!-- if condition = 'defined(implementation.Reveal)' cmd = "Cmd_EDIF_Reveal_CmdGen"/ -->
+
+      <!-- if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Reveal" / -->
+
+      <!--Command using_def="Cmd_Cmdgen_Lattice_ngd1" / -->
+
+      <!--Command using_def="Cmd_Lattice" / -->
+
+      <Command using_def="Cmd_RevealEdif" />
+
+      <Command using_def="Cmd_LSENGDBuild" />
+
+      <if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Reveal_Clean" />
+
+    </Target>
+
+    <Report using_def="Report_NGD"/>
+
+	<!--Report using_def="Report_TchVdb"/-->
+
+  </TaskDef>
+
+  
+
+	<TaskDef id = "Task_Synthesis_Lattice_3" title="Lattice_Synthesis" lable="Lattice Synthesis Engine" depend_on_milestones="hdlgen" depend_on_properties="implementation.synthesis_hdls, implementation.LDC, implementation.RTL_Reveal, implementation.EDIF">
+
+		<Target id ="target">
+
+			<if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Rtl_Reveal_CmdGen" />
+
+			<if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Reveal" />
+
+			<if condition = 'implementation.strategy.PROP_LST_IOInsertion=="True"' cmd = "Cmd_Cmdgen_Lattice_ngd0">
+
+				<default>
+
+					<Command using_def="Cmd_Cmdgen_Lattice_ngo"/>
+
+				</default>
+
+			</if>
+
+			<Command using_def="Cmd_Lattice" />	
+
+			<if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Reveal_Clean" />
+
+		</Target>
+
+		<Report using_def="Report_NGD"/>
+
+		<!--Report using_def="Report_TchVdb"/-->		
+
+	</TaskDef>
+
+  
+
+  <TaskDef id = "Task_Synthesis_Lattice_ngo" title="Lattice_Synthesis_ngo" type="internal" depend_on_milestones="hdlgen" depend_on_properties="implementation.synthesis_hdls, implementation.LDC, implementation.EDIF">
+
+    <Target id ="target">
+
+      <Command using_def="Cmd_Cmdgen_Lattice_ngo" />
+
+      <Command using_def="Cmd_Lattice" />
+
+      <Command using_def="Cmd_LSEEdifSourceIn" />
+
+    </Target>
+
+    <Report id="Report_Synthesis" value="$(report_base).ngo"/>
+
+    <Report id ="Report_EdifSrcIn" iterate="implementation.EDIF" value ="%@iterator.completebasename@%.ngo"/>
+
+  </TaskDef>
+
+
+
+  <TaskDef id = "Task_LseMap" title ="Map" lable="Map Design" target="Map_Target"
+
+           depend_on_milestones="lattice_synthesis" depend_on_properties="implementation.Logic Preference">
+
+    <Report using_def="Report_MAP_NCD"/>
+
+	<Report using_def="Report_MapVdb"/>	
+
+  </TaskDef>
+
+  <!--The following two virtual task definitions are for Tool Report SSO and PIODRC, which should depend on
+
+      LSE synthesis.
+
+  -->
+
+  <TaskDef id ="tool_report::lse_sso" title ="SSO" depend_on_milestones="lattice_synthesis" >
+
+    <Target id ="target">
+
+    </Target>
+
+  </TaskDef>
+
+  <TaskDef id ="tool_report::lse_piodrc" title ="PIODRC" depend_on_milestones="lattice_synthesis" >
+
+    <Target id ="target">
+
+    </Target>
+
+  </TaskDef>
+
+  
+
+  <!-- The following two items are for lattice compile step -->
+
+  <TaskDef id = "Task_Compile_Lattice_0" title="LSE_Compile" type="internal" lable="Lattice Synthesis Compile Engine" depend_on_milestones="hdlgen" depend_on_properties="implementation.synthesis_hdls, implementation.RTL_Reveal">
+
+    <Target id ="target">
+
+      <if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Rtl_Reveal_CmdGen" />
+
+      <if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Reveal" />
+
+      <Command using_def="Cmd_Cmdgen_Lattice_Cmp0" />
+
+      <Command using_def="Cmd_Compile" />
+
+      <if condition = 'defined(implementation.Reveal)' cmd = "Cmd_Reveal_Clean" />
+
+    </Target>
+
+    <Report using_def="Report_LSEData"/>
+
+	<!--Report using_def="Report_RtlVdb"/-->
+
+  </TaskDef>
+
+  
+
+  <TaskDef id = "Task_Compile_Lattice_1" title="LSE_Compile" type="internal" lable="Lattice Synthesis Compile Engine" depend_on_milestones="hdlgen" depend_on_properties="implementation.synthesis_hdls">
+
+    <Target id ="target">
+
+      <Command using_def="Cmd_Cmdgen_Lattice_Cmp1" />
+
+      <Command using_def="Cmd_Compile" />
+
+    </Target>
+
+    <Report using_def="Report_LSEData"/>
+
+	<!--Report using_def="Report_RtlVdb"/-->	
+
+  </TaskDef>
+
+
+
+  <CommandDef id="Cmd_Cmdgen_Lattice_ngd0" type="CMD_TCL_SCRIPT_SOURCE">
+
+    <cmd_str>gen_lattice_prj hdl_ngd !Synthesis:REVEAL</cmd_str>
+
+    <scripts>syn_lattice.tcl</scripts>
+
+  </CommandDef>
+
+  
+
+  <CommandDef id="Cmd_Cmdgen_Lattice_ngd1" type="CMD_TCL_SCRIPT_SOURCE">
+
+    <cmd_str>gen_lattice_prj ngo_ngd </cmd_str>
+
+    <scripts>syn_lattice.tcl</scripts>
+
+  </CommandDef>
+
+  
+
+  <CommandDef id="Cmd_Cmdgen_Lattice_ngo" type="CMD_TCL_SCRIPT_SOURCE">
+
+    <cmd_str>gen_lattice_prj hdl_ngo </cmd_str>
+
+    <scripts>syn_lattice.tcl</scripts>
+
+  </CommandDef>
+
+  
+
+  <CommandDef id="Cmd_Lattice" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+
+    <cmd_str>synthesis -f "${report_base}_lattice.synproj"</cmd_str>
+
+	<scripts>
+
+		<![CDATA[
+
+			proc synpwrap {args} {
+
+				set msg "synthesis $args\n";
+
+				runtime_log $msg;
+
+				set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+
+				runtime_log $msg;
+
+				runtime_log "......\n";
+
+				runtime_log "......\n";
+
+			}
+
+		]]>
+
+	</scripts>
+
+  </CommandDef>
+
+  
+
+  <CommandDef id="Cmd_LSEEdifSourceIn" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG" iterate="implementation.EDIF">
+
+    <cmd_str>edif2ngd -l "${device.family}" -d $device.device -path "${impl_dir}" -path "${project_dir}" #PROP_LST_EdfMemPath "@iterator@" "%@iterator.completebasename@%.ngo" -cbn SYNPLIFY #PROP_LST_EdfInRemLoc </cmd_str>    
+
+	<scripts>
+
+	<![CDATA[
+
+		proc edif2ngd {args} {
+
+			set msg "edif2ngd $args\n";
+
+			runtime_log $msg;
+
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+
+			runtime_log $msg;
+
+		}
+
+	]]>
+
+	</scripts>  
+
+  </CommandDef>
+
+  
+
+  <CommandDef id="Cmd_LSENGDBuild" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+
+    <cmd_str>ngdbuild  -a "${device.family}" -d $device.device #PROP_LST_EdfHardtimer !NGDBuild:device_ngo_path !NGDBuild:ngo_path #PROP_LST_EdfInLibPath "${postsynthesis_edifngos._ITERATOR.last.value.completebasename}.ngo" "${report_base}.ngd" 
+
+	</cmd_str>
+
+	<scripts>
+
+	<![CDATA[
+
+		proc ngdbuild {args} {
+
+			set msg "ngdbuild $args\n";
+
+			runtime_log $msg;
+
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+
+			runtime_log $msg;
+
+		}
+
+	]]>
+
+	</scripts>  
+
+  </CommandDef>
+
+  
+
+  <!-- The following three items are for LSE Compile Step -->
+
+  <CommandDef id="Cmd_Cmdgen_Lattice_Cmp0" type="CMD_TCL_SCRIPT_SOURCE">
+
+    <cmd_str>gen_lattice_prj hdl_ngd_Compile !Synthesis:REVEAL</cmd_str>
+
+    <scripts>syn_lattice.tcl</scripts>
+
+  </CommandDef>
+
+  
+
+  <CommandDef id="Cmd_Cmdgen_Lattice_Cmp1" type="CMD_TCL_SCRIPT_SOURCE">
+
+    <cmd_str>gen_lattice_prj hdl_ngo_Compile</cmd_str>
+
+    <scripts>syn_lattice.tcl</scripts>
+
+  </CommandDef>
+
+  
+
+  <CommandDef id="Cmd_Compile" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+
+    <cmd_str>synthesis -comp -f "${report_base}_lattice.synproj"</cmd_str>
+
+  </CommandDef>
+
+
+
+</BaliFlowDef>

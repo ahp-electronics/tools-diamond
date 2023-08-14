@@ -1,0 +1,202 @@
+#include "ngdin.prp"
+#include "synopsys.prp"
+#include "orca.prp"
+
+// Ext Name    Ext type    Int Name       Int Type {Data Trans} Exclus.  Over.
+
+// Non-Black box props. All "ASIC" block properties are computed dynamically
+// in the PMs.
+
+// PIO props
+SLEWRATE       string      SLEWRATE       string                         TRUE
+IO_TYPE        string      IO_TYPE        string                         TRUE
+IO_TYPES       string      IO_TYPE        string                         TRUE
+PCICLAMP       string      PCICLAMP       string                         TRUE
+
+// IO sysConfig
+PERSISTENT     string      PERSISTENT     string                        TRUE
+PROHIBIT       string      PROHIBIT       string                        TRUE
+CONFIG_*       string      CONFIG_        string                        TRUE
+DONE_*         string      DONE           string                        TRUE
+MCCLK_FREQ     string      MCCLK_FREQ     string                        TRUE
+WAKE_UP        integer     WAKE_UP        integer                       TRUE
+COMPRESS_*     string      COMPRESS       string                        TRUE
+
+//
+NORETIME       string      NORETIME       string                        TRUE
+FREQUENCY_PIN* string      FREQUENCY_PIN  string                        TRUE
+
+// EBR, added here as all 5g based devices use them
+MEM_INIT_FILE  string      MEM_INIT_FILE  string                        TRUE
+MEM_LPC_FILE   string      MEM_LPC_FILE   string                        TRUE
+
+
+// LOGIC INSERTER property (REVEAL)
+RVL_*          string      RVL            string                        TRUE
+
+// Ext Name    Ext type    Int Name       Int Type {Data Trans} Exclus.  Over.
+// For wild cards(*), int name is irrelevant
+
+// PIO/IOL
+BANK           integer     BANK           integer                        TRUE
+VCMT           string      VCMT           string                         TRUE
+REFCIRCUIT     string      REFCIRCUIT     string                         TRUE
+TERMINATEVTT   integer     TERMINATEVTT   string                         TRUE
+DIFFCURRENT    string      DIFFCURRENT    string                         TRUE
+PWRSAVE        string      PWRSAVE        string                         TRUE
+DELAYTYPE      string      DELAYTYPE      string                         TRUE
+BESTFIT        string      BESTFIT        string                         TRUE
+CLKEDGE        string      CLKEDGE        string                         TRUE
+EXTENDED       string      EXTENDED       string                         TRUE
+STEP           string      STEP           string                         TRUE
+AIL            string      AIL            string                         TRUE
+FINE           string      FINE           string                         TRUE
+COARSE         string      COARSE         string                         TRUE
+REGSET         string      INITSTATE      string                         TRUE
+VREFMODE       string      VREF           string                         TRUE
+AILRST         string      SRMODE         string    { ENABLED=ASYNC,DISABLED=LSR_OVER_CE}     FALSE      TRUE
+SRMODE         string      SRMODE         string                         TRUE
+CLKODEL        string      CLKODEL        string                         TRUE
+CLKIDEL        string      CLKIDEL        string                         TRUE
+ECLKDEL        string      ECLKDEL        string                         TRUE
+
+// EBR
+DATA_WIDTH*    integer     DATA_WIDTH     string                         TRUE
+
+// CUST_MACO
+DELUP*           string      DELUP          string                      TRUE
+DELDN*           string      DELDN          string                      TRUE
+SETUP*           string      SETUP          string                      TRUE
+SETDN*           string      SETDN          string                      TRUE
+HLDUP*           string      HLDUP          string                      TRUE
+HLDDN*           string      HLDDN          string                      TRUE
+PINTYPE          string      PINTYPE        string                      TRUE
+
+// RDBK
+FF_RDCFG_CLK     string   FF_RDCFG_CLK      string                      TRUE
+RDCFG_DATA_SYNC  string   RDCFG_DATA_SYNC   string                      TRUE
+FF_RDCFG         string   FF_RDCFG          string                      TRUE
+
+// properties need special treatment
+A_INITVAL_*        string         A_INITVAL_     string {b->h} FALSE   TRUE
+B_INITVAL_*        string         B_INITVAL_     string {b->h} FALSE   TRUE
+SMI_OFFSET         string         SMI_OFFSET     string {b->h,d->h} FALSE   TRUE
+
+// PIO props
+ECK_PDEL       string      ECK_PDEL       string                         TRUE
+MILLIAMPS      string      DRIVE          string                         TRUE
+TERMINATEVCCIO integer     TERMINATEVCCIO  string                        TRUE 
+TERMINATEGND   integer     TERMINATEGND   string                         TRUE
+UPDT           string      UPDT           string                         TRUE
+REFDRIVER      string      REFDRIVER      string                         TRUE
+REFGROUP       string      REFGROUP       string                         TRUE
+// IOL props
+IMPEDANCE      integer     IMPEDANCE      string                         TRUE
+// cycle stealing
+SCK_PDEL       string      SCK_PDEL       string                         TRUE
+// IO sysConfig
+IOCONFIG*      string      IOCONFIG       string                        TRUE
+SPI*           string      SPI            string                        TRUE
+// MACO support
+IS_MACO        string      IS_MACO        string                        TRUE
+// PCS
+AMP_BOOST        string    AMP_BOOST      string                        TRUE
+INIT_ID_A          string          INIT_ID_A     string {h->4b} FALSE TRUE
+INIT_ID_B          string          INIT_ID_B     string {h->4b} FALSE TRUE
+INIT_ID_C          string          INIT_ID_C     string {h->4b} FALSE TRUE
+MIB_MEM            string            MIB_MEM     string {h->185b} FALSE TRUE
+SMI_MEM            string            SMI_MEM     string {h->128b} FALSE TRUE
+AEPOINTER*         string          AEPOINTER     string            TRUE
+AFPOINTER*         string          AFPOINTER     string            TRUE
+ALU_*              string               ALU_     string            TRUE
+AMP_BOOST          string          AMP_BOOST     string            TRUE
+ASB_*              string               ASB_     string            TRUE
+A_*                string                 A_     string            TRUE
+B_*                string                 B_     string            TRUE
+CH0_*              string               CH0_     string            TRUE
+CH1_*              string               CH1_     string            TRUE
+CH2_*              string               CH2_     string            TRUE
+CH3_*              string               CH3_     string            TRUE
+CLK0_PDEL          string          CLK0_PDEL     string            TRUE
+CLK1_PDEL          string          CLK1_PDEL     string            TRUE
+CLK2_PDEL          string          CLK2_PDEL     string            TRUE
+CLK3_PDEL          string          CLK3_PDEL     string            TRUE
+CLK4_PDEL          string          CLK4_PDEL     string            TRUE
+CLK5_PDEL          string          CLK5_PDEL     string            TRUE
+CLK6_PDEL          string          CLK6_PDEL     string            TRUE
+CLK7_PDEL          string          CLK7_PDEL     string            TRUE
+CLKA_PDEL          string          CLKA_PDEL     string            TRUE
+CLKB_PDEL          string          CLKB_PDEL     string            TRUE
+CLKFB_*            string             CLKFB_     string            TRUE
+CLKIN_*            string             CLKIN_     string            TRUE
+CLKI_*             string              CLKI_     string            TRUE
+CLKOP_*            string             CLKOP_     string            TRUE
+CLKOS_*            string             CLKOS_     string            TRUE
+CLKR_PDEL          string          CLKR_PDEL     string            TRUE
+CLKW_PDEL          string          CLKW_PDEL     string            TRUE
+CLK_PDEL           string           CLK_PDEL     string            TRUE
+CONFIG_FILE        string        CONFIG_FILE     string            TRUE
+CORE_ID            string            CORE_ID     string            TRUE
+CSDECODE*          string           CSDECODE     string            TRUE
+DATA_*             string              DATA_     string            TRUE
+DCNTL_ADJVAL       string       DCNTL_ADJVAL     string            TRUE
+DCSMODE            string            DCSMODE     string            TRUE
+DIV                string                DIV     string            TRUE
+DRIVERMODE         string         DRIVERMODE     string            TRUE
+EBR_*              string               EBR_     string            TRUE
+ER*                string                 ER     string            TRUE
+FLOCK_ACCURACY     string     FLOCK_ACCURACY     string            TRUE
+FPGA_PRIORITY      string      FPGA_PRIORITY     string            TRUE
+FREQLOCK           string           FREQLOCK     string            TRUE
+FULLPOINTER*       string        FULLPOINTER     string            TRUE
+GLITCH_TOLERANCE   string   GLITCH_TOLERANCE     string            TRUE
+GMCFREQSEL         string         GMCFREQSEL     string            TRUE
+GSR                string                GSR     string            TRUE
+INIT               string               INIT     string            TRUE
+INITVAL_*          string           INITVAL_     string            TRUE
+INIT_*             string              INIT_     string            TRUE
+INTERRUPT_*        string         INTERRUPT_     string            TRUE
+JTAG_FLASH_PRGRM   string   JTAG_FLASH_PRGRM     string            TRUE
+LF_*               string                LF_     string            TRUE
+LOCK_DELAY         string         LOCK_DELAY     string            TRUE
+LSC_MACO_SEC       string       LSC_MACO_SEC     string            TRUE
+M2Q                string                M2Q     string            TRUE
+MASTER_*           string            MASTER_     string            TRUE
+MEM_*              string               MEM_     string            TRUE
+MORCLKA_PDEL       string       MORCLKA_PDEL     string            TRUE
+MORCLKB_PDEL       string       MORCLKB_PDEL     string            TRUE
+MORCLKR_PDEL       string       MORCLKR_PDEL     string            TRUE
+MORCLK_PDEL        string        MORCLK_PDEL     string            TRUE
+MPI_*              string               MPI_     string            TRUE
+MPLACEMENT         string         MPLACEMENT     string            TRUE
+MTIMING            string            MTIMING     string            TRUE
+OUTPUTMODE         string         OUTPUTMODE     string            TRUE
+PARITY             string             PARITY     string            TRUE
+PHASEADJ           string           PHASEADJ     string            TRUE
+QF*                string                 QF     string            TRUE
+REFCLK_*           string            REFCLK_     string            TRUE
+REGMODE*           string            REGMODE     string            TRUE
+RESETMODE          string          RESETMODE     string            TRUE
+SLAVE_SYNCMODE     string     SLAVE_SYNCMODE     string            TRUE
+SMI_*              string               SMI_     string            TRUE
+SPREAD*            string             SPREAD     string            TRUE
+SYSBUS_CONFIG_FILE string SYSBUS_CONFIG_FILE     string            TRUE
+SYS_CLK_SEL        string        SYS_CLK_SEL     string            TRUE
+TESTF*             string              TESTF     string            TRUE
+TESTOFX            string            TESTOFX     string            TRUE
+TESTQ              string              TESTQ     string            TRUE
+TRAN               string               TRAN     string            TRUE
+USERCODE           string           USERCODE     string            TRUE
+VCO_*              string               VCO_     string            TRUE
+WRITEMODE*         string          WRITEMODE     string            TRUE
+ddr_clk_PDEL       string       ddr_clk_PDEL     string            TRUE
+fclk_PDEL          string          fclk_PDEL     string            TRUE
+ff_clk_mac_PDEL    string    ff_clk_mac_PDEL     string            TRUE
+qdr_clk_PDEL       string       qdr_clk_PDEL     string            TRUE
+rld_*              string               rld_     string            TRUE
+rxs4ls4_ck_PDEL    string    rxs4ls4_ck_PDEL     string            TRUE
+sclk_PDEL          string          sclk_PDEL     string            TRUE
+sdck2_PDEL         string         sdck2_PDEL     string            TRUE
+sdck_PDEL          string          sdck_PDEL     string            TRUE
+sysclk_ff_PDEL     string     sysclk_ff_PDEL     string            TRUE
+txs4ls2_ck_PDEL    string    txs4ls2_ck_PDEL     string            TRUE

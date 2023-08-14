@@ -1,0 +1,1074 @@
+       Lattice Mapping Report File for Design Module 'control_soc_demo'
+
+Design Information
+------------------
+
+Command line:   map -a MachXO2 -p LCMXO2-1200HC -t CSBGA132 -s 5 -oc Commercial
+     control_SoC_demo_impl1.ngd -o control_SoC_demo_impl1_map.ncd -pr
+     control_SoC_demo_impl1.prf -mp control_SoC_demo_impl1.mrp C:/work/SWDemoPro
+     ject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/control_soc_demo.
+     lpf -c 0
+Target Vendor:  LATTICE
+Target Device:  LCMXO2-1200HCCSBGA132
+Target Speed:   5
+Mapper:  xo2c00,  version:  Diamond_1.3_Production (92)
+Mapped on:  10/25/11  14:13:53
+
+Design Summary
+--------------
+
+   Number of registers:    466
+      PFU registers:    460
+      PIO registers:    6
+   Number of SLICEs:           473 out of   640 (74%)
+      SLICEs(logic/ROM):       160 out of   160 (100%)
+      SLICEs(logic/ROM/RAM):   313 out of   480 (65%)
+          As RAM:           45 out of   480 (9%)
+          As Logic/ROM:    268 out of   480 (56%)
+   Number of logic LUT4s:     659
+   Number of distributed RAM:  45 (90 LUT4s)
+   Number of ripple logic:     92 (184 LUT4s)
+   Number of shift registers:   0
+   Total number of LUT4s:     933
+   Number of PIO sites used: 26 out of 105 (25%)
+      Number of PIO sites used for single ended IOs: 24
+      Number of PIO sites used for differential IOs: 2 (represented by 1 PIO
+     comps in NCD)
+   Number of block RAMs:  3 out of 7 (43%)
+   Number of GSRs:  1 out of 1 (100%)
+   EFB used :       No
+   JTAG used :      No
+   Readback used :  No
+   Oscillator used :  Yes
+   Startup used :   No
+   POR :            On
+   Bandgap :        On
+   Number of Power Controller:  0 out of 1 (0%)
+   Number of Dynamic Bank Controller (BCINRD):  0 out of 4 (0%)
+   Number of Dynamic Bank Controller (BCLVDSO):  0 out of 1 (0%)
+   Number of DCCA:  0 out of 8 (0%)
+   Number of DCMA:  0 out of 2 (0%)
+   Number of PLLs:  0 out of 1 (0%)
+   Number of DQSDLLs:  0 out of 2 (0%)
+   Number of CLKDIVC:  0 out of 4 (0%)
+   Number of ECLKSYNCA:  0 out of 4 (0%)
+   Number of ECLKBRIDGECS:  0 out of 2 (0%)
+   Notes:-
+      1. Total number of LUT4s = (Number of logic LUT4s) + 2*(Number of
+     distributed RAMs) + 2*(Number of ripple logic)
+      2. Number of logic LUT4s does not include count of distributed RAM and
+     ripple logic.
+
+                                    Page 1
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+Design Summary (cont)
+---------------------
+   Number of clocks:  3
+     Net clk_c: 284 loads, 261 rising, 23 falling (Driver: OSCH_inst )
+     Net uart_rx_c: 1 loads, 1 rising, 0 falling (Driver: PIO uart_rx )
+     Net TIME_INST/sec_clock: 13 loads, 13 rising, 0 falling (Driver:
+     TIME_INST/sec_clock )
+   Number of Clock Enables:  43
+     Net adc_wb_inst/adc_inst/latch_result: 4 loads, 4 LSLICEs
+     Net adc_wb_inst/adc_inst/SSD_ADC/rollover: 4 loads, 4 LSLICEs
+     Net adc_wb_inst/adc_inst/SSD_ADC/box_ave/accumulate: 8 loads, 8 LSLICEs
+     Net TIME_INST/n3378: 9 loads, 9 LSLICEs
+     Net n10684: 2 loads, 2 LSLICEs
+     Net n10664: 4 loads, 0 LSLICEs
+     Net SPI_INST/n9100: 1 loads, 1 LSLICEs
+     Net SPI_INST/n3464: 2 loads, 2 LSLICEs
+     Net SPI_INST/n69: 3 loads, 3 LSLICEs
+     Net SPI_INST/n3395: 1 loads, 1 LSLICEs
+     Net SPI_INST/n3472: 4 loads, 4 LSLICEs
+     Net SPI_INST/n49: 4 loads, 4 LSLICEs
+     Net SPI_INST/rx_latch_flag: 4 loads, 4 LSLICEs
+     Net reg_rd: 7 loads, 7 LSLICEs
+     Net SPI_INST/n290: 1 loads, 1 LSLICEs
+     Net n2642: 1 loads, 1 LSLICEs
+     Net n10236: 5 loads, 5 LSLICEs
+     Net n2976: 1 loads, 1 LSLICEs
+     Net n9219: 1 loads, 1 LSLICEs
+     Net rom_ce: 2 loads, 0 LSLICEs
+     Net UART_INST/u_txmitt/n562: 1 loads, 1 LSLICEs
+     Net UART_INST/u_txmitt/n10254: 9 loads, 9 LSLICEs
+     Net UART_INST/u_txmitt/n3421: 6 loads, 6 LSLICEs
+     Net n1506: 4 loads, 4 LSLICEs
+     Net UART_INST/u_txmitt/n10269: 1 loads, 1 LSLICEs
+     Net UART_INST/n3397: 2 loads, 2 LSLICEs
+     Net UART_INST/u_rxcver/n3513: 1 loads, 1 LSLICEs
+     Net UART_INST/u_rxcver/n3469: 4 loads, 4 LSLICEs
+     Net UART_INST/u_rxcver/n8452: 1 loads, 1 LSLICEs
+     Net UART_INST/u_rxcver/n3503: 1 loads, 1 LSLICEs
+     Net UART_INST/n10267: 6 loads, 6 LSLICEs
+     Net UART_INST/u_rxcver/n3382: 2 loads, 2 LSLICEs
+     Net UART_INST/u_modem/dsrn_d1: 1 loads, 1 LSLICEs
+     Net n3377: 4 loads, 4 LSLICEs
+     Net div_wr_strobe: 4 loads, 4 LSLICEs
+     Net n2694: 2 loads, 2 LSLICEs
+     Net lm8_inst/u1_isp8/n3423: 2 loads, 2 LSLICEs
+     Net lm8_inst/u1_isp8/data_cyc: 5 loads, 5 LSLICEs
+     Net lm8_inst/u1_isp8/n9328: 1 loads, 1 LSLICEs
+     Net lm8_inst/u1_isp8/n8409: 1 loads, 1 LSLICEs
+     Net lm8_inst/u1_isp8/addr_cyc: 6 loads, 6 LSLICEs
+     Net lm8_inst/u1_isp8/u1_isp8_flow_cntl/prom_enable: 4 loads, 0 LSLICEs
+     Net lm8_inst/u1_isp8/u1_isp8_flow_cntl/n3388: 2 loads, 2 LSLICEs
+   Number of LSRs:  23
+     Net rst_n_c: 52 loads, 52 LSLICEs
+     Net adc_wb_inst/adc_inst/SSD_ADC/rollover: 5 loads, 5 LSLICEs
+     Net wb_rst: 10 loads, 9 LSLICEs
+     Net SPI_INST/n804: 4 loads, 4 LSLICEs
+     Net wb_ack_10: 2 loads, 2 LSLICEs
+     Net SPI_INST/n1585: 3 loads, 3 LSLICEs
+
+                                    Page 2
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+Design Summary (cont)
+---------------------
+     Net SPI_INST/n10252: 1 loads, 1 LSLICEs
+     Net SPI_INST/reg_ssmask_0: 1 loads, 0 LSLICEs
+     Net SPI_INST/n9126: 1 loads, 1 LSLICEs
+     Net n10659: 1 loads, 1 LSLICEs
+     Net wb_ack_0: 1 loads, 1 LSLICEs
+     Net n10236: 1 loads, 1 LSLICEs
+     Net n4411: 5 loads, 5 LSLICEs
+     Net UART_INST/u_txmitt/n3670: 5 loads, 5 LSLICEs
+     Net UART_INST/n10204: 2 loads, 2 LSLICEs
+     Net UART_INST/u_txmitt/n3: 1 loads, 1 LSLICEs
+     Net UART_INST/u_rxcver/n7637: 6 loads, 6 LSLICEs
+     Net UART_INST/u_rxcver/hunt: 1 loads, 1 LSLICEs
+     Net UART_INST/u_rxcver/n3691: 1 loads, 1 LSLICEs
+     Net UART_INST/u_intface/n10260: 1 loads, 1 LSLICEs
+     Net UART_INST/u_intface/rbr_rd: 1 loads, 1 LSLICEs
+     Net lm8_rst: 1 loads, 1 LSLICEs
+     Net lm8_inst/u1_isp8/rst_n_reg: 44 loads, 44 LSLICEs
+   Number of nets driven by tri-state buffers:  0
+   Top 10 highest fanout non-clock nets:
+     Net TIME_INST/GND_net: 104 loads
+     Net wb_addr_0: 54 loads
+     Net rst_n_c: 52 loads
+     Net wb_addr_1: 49 loads
+     Net lm8_inst/u1_isp8/rst_n_reg: 45 loads
+     Net adc_wb_inst/adc_inst/SSD_ADC/GND_net: 42 loads
+     Net lm8_inst/u1_isp8/instr_13: 34 loads
+     Net lm8_inst/u1_isp8/instr_0: 30 loads
+     Net wb_addr_2: 30 loads
+     Net addr_20: 28 loads
+
+
+
+
+   Number of warnings:  14
+   Number of errors:    0
+
+Design Errors/Warnings
+----------------------
+
+WARNING: logical net 'adc_wb_inst/adc_inst/SSD_ADC/sigma_760_add_4_1/CI' has no
+     driver
+WARNING: logical net 'adc_wb_inst/adc_inst/SSD_ADC/counter_761_add_4_1/CI' has
+     no driver
+WARNING: logical net 'adc_wb_inst/adc_inst/SSD_ADC/box_ave/add_497_1/CI' has no
+     driver
+WARNING: logical net 'TIME_INST/minutes_755_add_4_1/CI' has no driver
+WARNING: logical net 'TIME_INST/seconds_754_add_4_1/CI' has no driver
+WARNING: logical net 'TIME_INST/hours_756_add_4_1/CI' has no driver
+WARNING: logical net 'TIME_INST/counter_753_add_4_1/CI' has no driver
+WARNING: logical net 'SPI_INST/data_cnt_752_add_4_1/CI' has no driver
+WARNING: logical net 'UART_INST/u_txmitt/sub_10_add_2_1/CI' has no driver
+WARNING: logical net 'UART_INST/u_rxcver/add_505_1/CI' has no driver
+WARNING: logical net 'UART_INST/u_rxcver/equal_17_0/CI' has no driver
+WARNING: logical net 'UART_INST/u_rxcver/add_513_1/CI' has no driver
+WARNING: logical net 'lm8_inst/u1_isp8/u1_isp8_flow_cntl/add_491_1/CI' has no
+     driver
+
+                                    Page 3
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+Design Errors/Warnings (cont)
+-----------------------------
+WARNING: OSCH 'OSCH_inst' has mismatching FREQUENCY preference value of 2.08 MHz
+     and NOM_FREQ value of 24.18 MHz.
+
+IO (PIO) Attributes
+-------------------
+
++---------------------+-----------+-----------+------------+
+| IO Name             | Direction | Levelmode | IO         |
+|                     |           |  IO_TYPE  | Register   |
++---------------------+-----------+-----------+------------+
+| analog_cmp_p        | INPUT     | LVDS25    |            |
++---------------------+-----------+-----------+------------+
+| spi_miso            | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| sda                 | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| scl                 | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| spi_mosi            | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| uart_rx             | INPUT     | LVCMOS33  | IN         |
++---------------------+-----------+-----------+------------+
+| sw_0                | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| spi_csn             | OUTPUT    | LVCMOS33  | OUT        |
++---------------------+-----------+-----------+------------+
+| spi_sclk            | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| uart_tx             | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| sw_1                | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| led_0               | OUTPUT    | LVCMOS33  | OUT        |
++---------------------+-----------+-----------+------------+
+| led_1               | OUTPUT    | LVCMOS33  | OUT        |
++---------------------+-----------+-----------+------------+
+| sw_2                | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| led_2               | OUTPUT    | LVCMOS33  | OUT        |
++---------------------+-----------+-----------+------------+
+| sw_3                | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| rst_n               | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| xin                 | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| lock_pll            | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| clk_pll             | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| clk                 | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| audio_pwm_out       | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| analog_out          | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+
+                                    Page 4
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+IO (PIO) Attributes (cont)
+--------------------------
+| led_3               | OUTPUT    | LVCMOS33  | OUT        |
++---------------------+-----------+-----------+------------+
+| xout                | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+
+Removed logic
+-------------
+
+Block lm8_inst/i1 undriven or does not drive anything - clipped.
+Block lm8_inst/u1_isp8/i1 undriven or does not drive anything - clipped.
+Block lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/scuba_vhi_inst
+     undriven or does not drive anything - clipped.
+Block lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/addsubd undriven
+     or does not drive anything - clipped.
+Block lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_sp
+     ramXO2binarynonenoreg12416/scuba_vlo_inst undriven or does not drive
+     anything - clipped.
+Block lm8_inst/u1_isp8/pmi_distributed_dprampmi_distributed_dpramXO2binarynoneno
+     reg8532/scuba_vlo_inst undriven or does not drive anything - clipped.
+Block lm8_inst/u1_isp8/i53/scuba_vlo_inst undriven or does not drive anything -
+     clipped.
+Block lm8_inst/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg8532/
+     scuba_vlo_inst undriven or does not drive anything - clipped.
+Block UART_INST/u_rxcver/i2 undriven or does not drive anything - clipped.
+Block SPI_INST/i2 undriven or does not drive anything - clipped.
+Block led_sw_inst/i1 undriven or does not drive anything - clipped.
+Signal rst was merged into signal rst_n_c
+Signal n7422 was merged into signal n10236
+Signal lm8_inst/u1_isp8/instr_l1_0 was merged into signal lm8_inst/u1_isp8/n5680
+Signal lm8_inst/u1_isp8/u1_isp8_alu/add_sel was merged into signal
+     lm8_inst/u1_isp8/u1_isp8_alu/add_sel_inv
+Signal lm8_inst/u1_isp8/n5892 was merged into signal lm8_inst/u1_isp8/clrc
+Signal lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/add_sub_inv was
+     merged into signal lm8_inst/u1_isp8/u1_isp8_alu/add_sel_inv
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/n249 was merged into signal
+     lm8_inst/u1_isp8/u1_isp8_flow_cntl/n8312
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_s
+     pramXO2binarynonenoreg12416/dec0_wre3 was merged into signal
+     lm8_inst/u1_isp8/sp_we
+Signal lm8_inst/u1_isp8/n5708 was merged into signal lm8_inst/u1_isp8/n10210
+Signal n10682 was merged into signal lm8_inst/u1_isp8/rst_n_reg
+Signal UART_INST/u_txmitt/n3406 was merged into signal UART_INST/u_txmitt/n562
+Signal SPI_INST/n299 was merged into signal SPI_INST/reg_ssmask_0
+Signal n3660 was merged into signal wb_rst
+Signal n10723 was merged into signal clk_c
+Signal VCC_net undriven or does not drive anything - clipped.
+Signal lm8_inst/VCC_net undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/VCC_net undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/scuba_vlo
+     undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/VCC_net undriven or does not drive
+     anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_rompmi_romXO2hexprom_init.hexasync
+     disablenoreg18101024/scuba_vlo undriven or does not drive anything -
+     clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_rompmi_romXO2hexprom_init.hexasync
+
+                                    Page 5
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+Removed logic (cont)
+--------------------
+     disablenoreg18101024/scuba_vhi undriven or does not drive anything -
+     clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_s
+     pramXO2binarynonenoreg12416/scuba_vhi undriven or does not drive anything -
+     clipped.
+Signal lm8_inst/u1_isp8/pmi_distributed_dprampmi_distributed_dpramXO2binarynonen
+     oreg8532/scuba_vhi undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/i53/scuba_vhi undriven or does not drive anything -
+     clipped.
+Signal lm8_inst/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg8532
+     /scuba_vhi undriven or does not drive anything - clipped.
+Signal lm8_wb_inst/pmi_rompmi_romXO2hexmenu.hexsyncdisablenoreg8101024/scuba_vlo
+     undriven or does not drive anything - clipped.
+Signal lm8_wb_inst/pmi_rompmi_romXO2hexmenu.hexsyncdisablenoreg8101024/scuba_vhi
+     undriven or does not drive anything - clipped.
+Signal lm8_inst/GND_net undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/GND_net undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/scuba_vhi
+     undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/addsub_0/S0
+     undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/addsubd/S1
+     undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/co4d undriven
+     or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/addsubd/COUT
+     undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/co4 undriven or
+     does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/add_491_11/S1 undriven or does not
+     drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/add_491_11/CO undriven or does not
+     drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/add_491_1/S0 undriven or does not
+     drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/add_491_1/CI undriven or does not
+     drive anything - clipped.
+Signal lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_s
+     pramXO2binarynonenoreg12416/scuba_vlo undriven or does not drive anything -
+     clipped.
+Signal lm8_inst/u1_isp8/pmi_distributed_dprampmi_distributed_dpramXO2binarynonen
+     oreg8532/scuba_vlo undriven or does not drive anything - clipped.
+Signal lm8_inst/u1_isp8/i53/scuba_vlo undriven or does not drive anything -
+     clipped.
+Signal lm8_inst/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg8532
+     /scuba_vlo undriven or does not drive anything - clipped.
+Signal UART_INST/u_rxcver/VCC_net undriven or does not drive anything - clipped.
+Signal UART_INST/u_rxcver/add_513_1/S0 undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/add_513_1/CI undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/equal_17_16/S0 undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/equal_17_16/CO undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/equal_17_15/S1 undriven or does not drive anything -
+
+                                    Page 6
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+Removed logic (cont)
+--------------------
+     clipped.
+Signal UART_INST/u_rxcver/equal_17_15/S0 undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/equal_17_13/S1 undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/equal_17_13/S0 undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/equal_17_0/S1 undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/equal_17_0/S0 undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/equal_17_0/CI undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/add_505_17/S1 undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/add_505_17/CO undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/add_505_1/S0 undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/add_505_1/CI undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/add_513_17/S1 undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_rxcver/add_513_17/CO undriven or does not drive anything -
+     clipped.
+Signal UART_INST/u_txmitt/sub_10_add_2_1/S0 undriven or does not drive anything
+     - clipped.
+Signal UART_INST/u_txmitt/sub_10_add_2_1/CI undriven or does not drive anything
+     - clipped.
+Signal UART_INST/u_txmitt/sub_10_add_2_17/CO undriven or does not drive anything
+     - clipped.
+Signal SPI_INST/VCC_net undriven or does not drive anything - clipped.
+Signal SPI_INST/data_cnt_752_add_4_7/S1 undriven or does not drive anything -
+     clipped.
+Signal SPI_INST/data_cnt_752_add_4_7/CO undriven or does not drive anything -
+     clipped.
+Signal SPI_INST/data_cnt_752_add_4_1/S0 undriven or does not drive anything -
+     clipped.
+Signal SPI_INST/data_cnt_752_add_4_1/CI undriven or does not drive anything -
+     clipped.
+Signal led_sw_inst/GND_net undriven or does not drive anything - clipped.
+Signal TIME_INST/counter_753_add_4_1/S0 undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/counter_753_add_4_1/CI undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/hours_756_add_4_9/S1 undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/hours_756_add_4_9/CO undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/seconds_754_add_4_9/S1 undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/seconds_754_add_4_9/CO undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/hours_756_add_4_1/S0 undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/hours_756_add_4_1/CI undriven or does not drive anything -
+
+                                    Page 7
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+Removed logic (cont)
+--------------------
+     clipped.
+Signal TIME_INST/seconds_754_add_4_1/S0 undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/seconds_754_add_4_1/CI undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/counter_753_add_4_25/CO undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/minutes_755_add_4_9/S1 undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/minutes_755_add_4_9/CO undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/minutes_755_add_4_1/S0 undriven or does not drive anything -
+     clipped.
+Signal TIME_INST/minutes_755_add_4_1/CI undriven or does not drive anything -
+     clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/box_ave/add_497_11/CO undriven or does not
+     drive anything - clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/box_ave/add_497_1/S0 undriven or does not
+     drive anything - clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/box_ave/add_497_1/CI undriven or does not
+     drive anything - clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/counter_761_add_4_11/S1 undriven or does not
+     drive anything - clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/counter_761_add_4_11/CO undriven or does not
+     drive anything - clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/counter_761_add_4_1/S0 undriven or does not
+     drive anything - clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/counter_761_add_4_1/CI undriven or does not
+     drive anything - clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/sigma_760_add_4_11/S1 undriven or does not
+     drive anything - clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/sigma_760_add_4_11/CO undriven or does not
+     drive anything - clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/sigma_760_add_4_1/S0 undriven or does not
+     drive anything - clipped.
+Signal adc_wb_inst/adc_inst/SSD_ADC/sigma_760_add_4_1/CI undriven or does not
+     drive anything - clipped.
+Block i4 was optimized away.
+Block lm8_inst/u1_isp8/i6443 was optimized away.
+Block lm8_inst/u1_isp8/i4675 was optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_alu/i8367 was optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_alu/i4697 was optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/INV_0 was
+     optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_flow_cntl/equal_126_i16 was optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_sp
+     ramXO2binarynonenoreg12416/LUT4_0 was optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_idec/i4702 was optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_io_cntl/i21 was optimized away.
+Block UART_INST/u_txmitt/i2429 was optimized away.
+Block SPI_INST/i83 was optimized away.
+Block reset_gen_inst/i2651 was optimized away.
+Block TIME_INST/i113 was optimized away.
+Block i2 was optimized away.
+Block lm8_inst/i2 was optimized away.
+Block lm8_inst/u1_isp8/i2 was optimized away.
+
+                                    Page 8
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+Removed logic (cont)
+--------------------
+Block lm8_inst/u1_isp8/u1_isp8_alu/pmi_addsubpmi_addsubXO2off88/scuba_vlo_inst
+     was optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_flow_cntl/i2 was optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_rompmi_romXO2hexprom_init.hexasyncd
+     isablenoreg18101024/scuba_vlo_inst was optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_rompmi_romXO2hexprom_init.hexasyncd
+     isablenoreg18101024/scuba_vhi_inst was optimized away.
+Block lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_sp
+     ramXO2binarynonenoreg12416/scuba_vhi_inst was optimized away.
+Block lm8_inst/u1_isp8/pmi_distributed_dprampmi_distributed_dpramXO2binarynoneno
+     reg8532/scuba_vhi_inst was optimized away.
+Block lm8_inst/u1_isp8/i53/scuba_vhi_inst was optimized away.
+Block lm8_inst/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg8532/
+     scuba_vhi_inst was optimized away.
+Block lm8_wb_inst/pmi_rompmi_romXO2hexmenu.hexsyncdisablenoreg8101024/scuba_vlo_
+     inst was optimized away.
+Block lm8_wb_inst/pmi_rompmi_romXO2hexmenu.hexsyncdisablenoreg8101024/scuba_vhi_
+     inst was optimized away.
+
+Memory Usage
+------------
+
+    INFO: Design contains EBR with GSR enabled. The GSR is only applicable for
+         output registers except FIFO.
+    /lm8_inst/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg8532:
+    EBRs: 0
+    RAM SLICEs: 12
+    Logic SLICEs: 2
+    PFU Registers: 16
+/lm8_inst/u1_isp8/i53:
+    EBRs: 0
+    RAM SLICEs: 12
+    Logic SLICEs: 0
+    PFU Registers: 0
+/lm8_inst/u1_isp8/pmi_distributed_dprampmi_distributed_dpramXO2binarynonenoreg85
+     32:
+    EBRs: 0
+    RAM SLICEs: 12
+    Logic SLICEs: 0
+    PFU Registers: 0
+/lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO
+     2binarynonenoreg12416:
+    EBRs: 0
+    RAM SLICEs: 9
+    Logic SLICEs: 0
+    PFU Registers: 0
+/lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_rompmi_romXO2hexprom_init.hexasyncdisabl
+     enoreg18101024:
+    EBRs: 2
+    RAM SLICEs: 0
+    Logic SLICEs: 0
+    PFU Registers: 0
+    -Contains EBR pmi_romXhprom_initadn18101024_0_1_0:  TYPE= DP8KC,  Width_A=
+         9,  Depth_A= 1024,  REGMODE_A= NOREG,  REGMODE_B= NOREG,  RESETMODE=
+         ASYNC,  ASYNC_RESET_RELEASE= ASYNC,  WRITEMODE_A= NORMAL,  WRITEMODE_B=
+
+                                    Page 9
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+Memory Usage (cont)
+-------------------
+         NORMAL,  GSR= ENABLED,  MEM_INIT_FILE= prom_init.hex,  MEM_LPC_FILE=
+         pmi_romXhprom_initadn18101024__PMIR__1024__18__18H
+    -Contains EBR pmi_romXhprom_initadn18101024_0_0_1:  TYPE= DP8KC,  Width_A=
+         9,  Depth_A= 1024,  REGMODE_A= NOREG,  REGMODE_B= NOREG,  RESETMODE=
+         ASYNC,  ASYNC_RESET_RELEASE= ASYNC,  WRITEMODE_A= NORMAL,  WRITEMODE_B=
+         NORMAL,  GSR= ENABLED,  MEM_INIT_FILE= prom_init.hex,  MEM_LPC_FILE=
+         pmi_romXhprom_initadn18101024__PMIR__1024__18__18H
+/lm8_wb_inst/pmi_rompmi_romXO2hexmenu.hexsyncdisablenoreg8101024:
+    EBRs: 1
+    RAM SLICEs: 0
+    Logic SLICEs: 0
+    PFU Registers: 0
+    -Contains EBR pmi_romXhmenusdn8101024_0_0_0:  TYPE= DP8KC,  Width_A= 8,
+         Depth_A= 1024,  REGMODE_A= NOREG,  REGMODE_B= NOREG,  RESETMODE= SYNC,
+         ASYNC_RESET_RELEASE= SYNC,  WRITEMODE_A= NORMAL,  WRITEMODE_B= NORMAL,
+         GSR= ENABLED,  MEM_INIT_FILE= menu.hex,  MEM_LPC_FILE=
+         pmi_romXhmenusdn8101024__PMIR__1024__8__8H
+
+OSC Summary
+-----------
+
+OSC 1:                                     Pin/Node Value
+  OSC Instance Name:                                OSCH_inst
+  OSC Type:                                         OSCH
+  STDBY Input:                                      NONE
+  OSC Output:                              PIN,NODE clk_c
+  OSC Nominal Frequency (MHz):                      24.18
+
+ASIC Components
+---------------
+
+Instance Name: OSCH_inst
+         Type: OSCH
+Instance Name: lm8_wb_inst/pmi_rompmi_romXO2hexmenu.hexsyncdisablenoreg8101024/p
+     mi_romXhmenusdn8101024_0_0_0
+         Type: DP8KC
+Instance Name: lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_rompmi_romXO2hexprom_init.
+     hexasyncdisablenoreg18101024/pmi_romXhprom_initadn18101024_0_1_0
+         Type: DP8KC
+Instance Name: lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_rompmi_romXO2hexprom_init.
+     hexasyncdisablenoreg18101024/pmi_romXhprom_initadn18101024_0_0_1
+         Type: DP8KC
+
+GSR Usage
+---------
+
+GSR Component:
+   The Global Set Reset (GSR) resource has been used to implement a global reset
+        of the design. The reset signal used for GSR control is 'wb_rst'.
+
+GSR Property:
+   The design components with GSR property set to ENABLED will respond to global
+        set reset while the components with GSR property set to DISABLED will
+        not.
+
+Components with disabled GSR Property
+-------------------------------------
+
+                                   Page 10
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+GSR Usage (cont)
+----------------
+
+These components have the GSR property set to DISABLED. The components will not
+     respond to the reset signal 'wb_rst' via the GSR component.
+
+Type and number of components of the type:
+   Register = 231
+
+Type and instance name of component:
+   Register : adc_wb_inst/adc_inst/ave_data_out_i0_i0_i7
+   Register : adc_wb_inst/adc_inst/ave_data_out_i0_i0_i6
+   Register : adc_wb_inst/adc_inst/ave_data_out_i0_i0_i5
+   Register : adc_wb_inst/adc_inst/ave_data_out_i0_i0_i4
+   Register : adc_wb_inst/adc_inst/ave_data_out_i0_i0_i3
+   Register : adc_wb_inst/adc_inst/ave_data_out_i0_i0_i2
+   Register : adc_wb_inst/adc_inst/ave_data_out_i0_i0_i1
+   Register : adc_wb_inst/adc_inst/ave_data_out_i0_i0_i0
+   Register : adc_wb_inst/adc_inst/SSD_ADC/accum_i0_i0_i7
+   Register : adc_wb_inst/adc_inst/SSD_ADC/accum_i0_i0_i6
+   Register : adc_wb_inst/adc_inst/SSD_ADC/accum_i0_i0_i5
+   Register : adc_wb_inst/adc_inst/SSD_ADC/accum_i0_i0_i4
+   Register : adc_wb_inst/adc_inst/SSD_ADC/accum_i0_i0_i3
+   Register : adc_wb_inst/adc_inst/SSD_ADC/accum_i0_i0_i2
+   Register : adc_wb_inst/adc_inst/SSD_ADC/accum_i0_i0_i1
+   Register : adc_wb_inst/adc_inst/SSD_ADC/sigma_760__i9
+   Register : adc_wb_inst/adc_inst/SSD_ADC/sigma_760__i8
+   Register : adc_wb_inst/adc_inst/SSD_ADC/sigma_760__i7
+   Register : adc_wb_inst/adc_inst/SSD_ADC/sigma_760__i6
+   Register : adc_wb_inst/adc_inst/SSD_ADC/sigma_760__i5
+   Register : adc_wb_inst/adc_inst/SSD_ADC/sigma_760__i4
+   Register : adc_wb_inst/adc_inst/SSD_ADC/sigma_760__i3
+   Register : adc_wb_inst/adc_inst/SSD_ADC/sigma_760__i2
+   Register : adc_wb_inst/adc_inst/SSD_ADC/sigma_760__i1
+   Register : adc_wb_inst/adc_inst/SSD_ADC/delta
+   Register : adc_wb_inst/adc_inst/SSD_ADC/rollover
+   Register : adc_wb_inst/adc_inst/SSD_ADC/accum_rdy
+   Register : adc_wb_inst/adc_inst/SSD_ADC/accum_i0_i0_i0
+   Register : adc_wb_inst/adc_inst/SSD_ADC/sigma_760__i0
+   Register : adc_wb_inst/adc_inst/SSD_ADC/counter_761__i0
+   Register : adc_wb_inst/adc_inst/SSD_ADC/counter_761__i1
+   Register : adc_wb_inst/adc_inst/SSD_ADC/counter_761__i2
+   Register : adc_wb_inst/adc_inst/SSD_ADC/counter_761__i3
+   Register : adc_wb_inst/adc_inst/SSD_ADC/counter_761__i4
+   Register : adc_wb_inst/adc_inst/SSD_ADC/counter_761__i5
+   Register : adc_wb_inst/adc_inst/SSD_ADC/counter_761__i6
+   Register : adc_wb_inst/adc_inst/SSD_ADC/counter_761__i7
+   Register : adc_wb_inst/adc_inst/SSD_ADC/counter_761__i8
+   Register : adc_wb_inst/adc_inst/SSD_ADC/counter_761__i9
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/raw_data_d1_i7
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/raw_data_d1_i6
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/raw_data_d1_i5
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/raw_data_d1_i4
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/raw_data_d1_i3
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/raw_data_d1_i2
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/raw_data_d1_i1
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i10
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i9
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i8
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i7
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i6
+
+                                   Page 11
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+GSR Usage (cont)
+----------------
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i5
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i4
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i3
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i2
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i1
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/sample_d1
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/sample_d2
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/raw_data_d1_i0
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/accum_i0_i0_i0
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/count_762__i0
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/count_762__i1
+   Register : adc_wb_inst/adc_inst/SSD_ADC/box_ave/count_762__i2
+   Register : TIME_INST/minutes_755__i0
+   Register : TIME_INST/seconds_reg_i1
+   Register : TIME_INST/seconds_reg_i2
+   Register : TIME_INST/seconds_reg_i3
+   Register : TIME_INST/seconds_reg_i4
+   Register : TIME_INST/seconds_reg_i5
+   Register : TIME_INST/seconds_reg_i6
+   Register : TIME_INST/seconds_reg_i7
+   Register : TIME_INST/minutes_reg_i1
+   Register : TIME_INST/minutes_reg_i2
+   Register : TIME_INST/minutes_reg_i3
+   Register : TIME_INST/minutes_reg_i4
+   Register : TIME_INST/minutes_reg_i5
+   Register : TIME_INST/seconds_754__i0
+   Register : TIME_INST/minutes_reg_i6
+   Register : TIME_INST/minutes_reg_i7
+   Register : TIME_INST/hours_reg_i1
+   Register : TIME_INST/hours_reg_i2
+   Register : TIME_INST/hours_reg_i3
+   Register : TIME_INST/hours_reg_i4
+   Register : TIME_INST/hours_reg_i5
+   Register : TIME_INST/hours_reg_i6
+   Register : TIME_INST/seconds_754__i1
+   Register : TIME_INST/seconds_754__i2
+   Register : TIME_INST/seconds_754__i3
+   Register : TIME_INST/seconds_754__i4
+   Register : TIME_INST/seconds_754__i5
+   Register : TIME_INST/seconds_754__i6
+   Register : TIME_INST/seconds_754__i7
+   Register : TIME_INST/minutes_755__i1
+   Register : TIME_INST/minutes_755__i2
+   Register : TIME_INST/minutes_755__i3
+   Register : TIME_INST/minutes_755__i4
+   Register : TIME_INST/minutes_755__i5
+   Register : TIME_INST/minutes_755__i6
+   Register : TIME_INST/minutes_755__i7
+   Register : TIME_INST/hours_reg_i7
+   Register : TIME_INST/counter_753__i0
+   Register : TIME_INST/hours_756__i0
+   Register : TIME_INST/counter_753__i1
+   Register : TIME_INST/counter_753__i2
+   Register : TIME_INST/counter_753__i3
+   Register : TIME_INST/counter_753__i4
+   Register : TIME_INST/counter_753__i5
+
+                                   Page 12
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+GSR Usage (cont)
+----------------
+   Register : TIME_INST/counter_753__i6
+   Register : TIME_INST/counter_753__i7
+   Register : TIME_INST/counter_753__i8
+   Register : TIME_INST/counter_753__i9
+   Register : TIME_INST/counter_753__i10
+   Register : TIME_INST/counter_753__i11
+   Register : TIME_INST/counter_753__i12
+   Register : TIME_INST/counter_753__i13
+   Register : TIME_INST/counter_753__i14
+   Register : TIME_INST/sec_clock
+   Register : TIME_INST/hours_reg_i0
+   Register : TIME_INST/minutes_reg_i0
+   Register : TIME_INST/seconds_reg_i0
+   Register : TIME_INST/counter_753__i15
+   Register : TIME_INST/counter_753__i16
+   Register : TIME_INST/counter_753__i17
+   Register : TIME_INST/counter_753__i18
+   Register : TIME_INST/counter_753__i19
+   Register : TIME_INST/counter_753__i20
+   Register : TIME_INST/counter_753__i21
+   Register : TIME_INST/counter_753__i22
+   Register : TIME_INST/counter_753__i23
+   Register : TIME_INST/counter_753__i24
+   Register : TIME_INST/hours_756__i1
+   Register : TIME_INST/hours_756__i2
+   Register : TIME_INST/hours_756__i3
+   Register : TIME_INST/hours_756__i4
+   Register : TIME_INST/hours_756__i5
+   Register : TIME_INST/hours_756__i6
+   Register : TIME_INST/hours_756__i7
+   Register : reset_gen_inst/reset_counter_750__i3
+   Register : reset_gen_inst/reset_counter_750__i0
+   Register : reset_gen_inst/reset_counter_750__i1
+   Register : reset_gen_inst/rst1_out
+   Register : reset_gen_inst/reset_counter_750__i2
+   Register : SPI_INST/n_status_i1
+   Register : SPI_INST/n_status_i2
+   Register : SPI_INST/n_status_i0
+   Register : lm8_wb_inst/lm8_ext_io_din_i4
+   Register : lm8_wb_inst/lm8_ext_io_din_i5
+   Register : lm8_wb_inst/lm8_ext_io_din_i6
+   Register : lm8_wb_inst/lm8_ext_io_din_i7
+   Register : lm8_wb_inst/dat_o_i2
+   Register : lm8_wb_inst/dat_o_i3
+   Register : lm8_wb_inst/dat_o_i4
+   Register : lm8_wb_inst/dat_o_i5
+   Register : lm8_wb_inst/dat_o_i6
+   Register : lm8_wb_inst/dat_o_i7
+   Register : lm8_wb_inst/dat_o_i8
+   Register : lm8_wb_inst/lm8_ext_io_din_i0
+   Register : lm8_wb_inst/lm8_ext_io_din_i1
+   Register : lm8_wb_inst/lm8_ext_io_din_i2
+   Register : lm8_wb_inst/dat_o_i1
+   Register : lm8_wb_inst/lm8_ext_io_din_i3
+   Register : UART_INST/u_intface/ext_addr_i8
+   Register : UART_INST/u_intface/ext_addr_i7
+
+                                   Page 13
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+GSR Usage (cont)
+----------------
+   Register : UART_INST/u_intface/ext_addr_i6
+   Register : UART_INST/u_intface/ext_addr_i5
+   Register : UART_INST/u_intface/ext_addr_i4
+   Register : UART_INST/u_intface/ext_addr_i3
+   Register : UART_INST/u_intface/ext_addr_i2
+   Register : UART_INST/u_intface/ext_addr_i1
+   Register : lm8_inst/u1_isp8/rst2_out
+   Register : lm8_inst/u1_isp8/page_ptr1___i1
+   Register : lm8_inst/u1_isp8/rst_n_reg
+   Register : lm8_inst/u1_isp8/wren_il_rd
+   Register : lm8_inst/u1_isp8/wren_alu_rd
+   Register : lm8_inst/u1_isp8/page_ptr1___i2
+   Register : lm8_inst/u1_isp8/page_ptr2___i4
+   Register : lm8_inst/u1_isp8/page_ptr2___i5
+   Register : lm8_inst/u1_isp8/page_ptr2___i6
+   Register : lm8_inst/u1_isp8/page_ptr2___i7
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_dout_i7
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_dout_i6
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_dout_i5
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_dout_i4
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_dout_i3
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_dout_i2
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_dout_i1
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_mem_rd
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_mem_wr
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_dout_i0
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_io_rd
+   Register : lm8_inst/u1_isp8/u1_isp8_io_cntl/ext_io_wr
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_jmp_reg_i0_i0_i3
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_jmp_reg_i0_i0_i2
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_jmp_reg_i0_i0_i1
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_cyc_int
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pc_i0_i0_i0
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/i1093
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/ret_reg
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/data_cyc_int
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/ext_addr_cyc_int
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/i1097
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_jmp_reg_i0_i0_i0
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_rd1_i0
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_rd1_i1
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_rd1_i2
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_rd1_i3
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_rd1_i4
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_rd1_i5
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_rd1_i6
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_rd1_i7
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/i1111
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i0
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i1
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i2
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i3
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/ack_reg
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_jmp_reg_i0_i0_i8
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_jmp_reg_i0_i0_i7
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_jmp_reg_i0_i0_i6
+
+                                   Page 14
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+GSR Usage (cont)
+----------------
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_jmp_reg_i0_i0_i5
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pc_i0_i0_i9
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pc_i0_i0_i8
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pc_i0_i0_i7
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pc_i0_i0_i6
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pc_i0_i0_i5
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pc_i0_i0_i4
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pc_i0_i0_i3
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pc_i0_i0_i2
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_jmp_reg_i0_i0_i4
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pc_i0_i0_i1
+   Register : lm8_inst/u1_isp8/u1_isp8_flow_cntl/addr_jmp_reg_i0_i0_i9
+
+Components with synchronous local reset also reset by asynchronous GSR
+----------------------------------------------------------------------
+
+These components have the GSR property set to ENABLED and the local reset is
+     synchronous. The components will respond to the synchronous local reset and
+     to the unrelated asynchronous reset signal 'wb_rst' via the GSR component.
+
+Type and number of components of the type:
+   Register = 62
+   DP8KC = 1
+
+Type and instance name of component:
+   Register : SPI_INST/data_cnt_752__i5
+   Register : SPI_INST/data_cnt_752__i4
+   Register : SPI_INST/data_cnt_752__i3
+   Register : SPI_INST/data_cnt_752__i2
+   Register : SPI_INST/data_cnt_752__i1
+   Register : SPI_INST/clock_cnt_751__i4
+   Register : SPI_INST/clock_cnt_751__i3
+   Register : SPI_INST/clock_cnt_751__i2
+   Register : SPI_INST/clock_cnt_751__i1
+   Register : SPI_INST/data_cnt_752__i0
+   Register : SPI_INST/clock_cnt_751__i0
+   Register : SPI_INST/SS_N_MASTER_0
+   Register : SPI_INST/reg_trdy
+   Register : SPI_INST/rx_latch_flag
+   Register : SPI_INST/read_wait_done
+   Register : SPI_INST/reg_wr
+   Register : lm8_wb_inst/data_8bit___i8
+   Register : lm8_wb_inst/data_8bit___i7
+   Register : lm8_wb_inst/data_8bit___i6
+   Register : lm8_wb_inst/data_8bit___i5
+   Register : lm8_wb_inst/data_8bit___i4
+   Register : lm8_wb_inst/data_8bit___i3
+   Register : lm8_wb_inst/data_8bit___i2
+   Register : lm8_wb_inst/ack_o
+   Register : lm8_wb_inst/data_8bit___i1
+   Register : lm8_wb_inst/SPI_ACK_O
+   Register : UART_INST/u_txmitt/counter_i10
+   Register : UART_INST/u_txmitt/counter_i14
+   Register : UART_INST/u_txmitt/counter_i12
+   Register : UART_INST/u_txmitt/counter_i8
+   Register : UART_INST/u_txmitt/tsr_i0_i0_i6
+   Register : UART_INST/u_txmitt/tsr_i0_i0_i5
+   Register : UART_INST/u_txmitt/tsr_i0_i0_i4
+   Register : UART_INST/u_txmitt/tsr_i0_i0_i3
+   Register : UART_INST/u_txmitt/tsr_i0_i0_i2
+
+                                   Page 15
+
+
+
+
+Design:  control_soc_demo                              Date:  10/25/11  14:13:53
+
+GSR Usage (cont)
+----------------
+   Register : UART_INST/u_txmitt/tsr_i0_i0_i1
+   Register : UART_INST/u_txmitt/tx_cnt_758__i2
+   Register : UART_INST/u_txmitt/counter_i15
+   Register : UART_INST/u_txmitt/counter_i9
+   Register : UART_INST/u_txmitt/tsr_empty
+   Register : UART_INST/u_txmitt/counter_i13
+   Register : UART_INST/u_txmitt/tsr_i0_i0_i0
+   Register : UART_INST/u_txmitt/counter_i11
+   Register : UART_INST/u_rxcver/rsr_i0_i0_i1
+   Register : UART_INST/u_rxcver/rsr_i0_i0_i2
+   Register : UART_INST/u_rxcver/rsr_i0_i0_i3
+   Register : UART_INST/u_rxcver/rsr_i0_i0_i4
+   Register : UART_INST/u_rxcver/rsr_i0_i0_i5
+   Register : UART_INST/u_rxcver/rsr_i0_i0_i6
+   Register : UART_INST/u_rxcver/rsr_i0_i0_i7
+   Register : UART_INST/u_rxcver/databit_recved_num_757__i0
+   Register : UART_INST/u_rxcver/tx_cnt_758__i0
+   Register : UART_INST/u_rxcver/tx_cnt_758__i1
+   Register : UART_INST/u_rxcver/hunt_one
+   Register : UART_INST/u_rxcver/rbr_i0_i0_i6
+   Register : UART_INST/u_rxcver/rsr_i0_i0_i0
+   Register : UART_INST/u_rxcver/databit_recved_num_757__i3
+   Register : UART_INST/u_rxcver/databit_recved_num_757__i2
+   Register : UART_INST/u_rxcver/databit_recved_num_757__i1
+   Register : UART_INST/u_intface/rbr_rd_nonfifo
+   Register : UART_INST/u_intface/rbr_datardy
+   Register : UART_INST/u_intface/thr_wr
+   DP8KC : lm8_wb_inst/pmi_rompmi_romXO2hexmenu.hexsyncdisablenoreg8101024/pmi_r
+        omXhmenusdn8101024_0_0_0
+
+EBR components with enabled GSR
+-------------------------------
+
+These EBR components have the GSR property set to ENABLED. The components will
+     respond to the asynchronous reset signal 'wb_rst' via the GSR component.
+
+Type and number of components of the type:
+   DP8KC = 3
+
+Type and instance name of component:
+   DP8KC : lm8_wb_inst/pmi_rompmi_romXO2hexmenu.hexsyncdisablenoreg8101024/pmi_r
+        omXhmenusdn8101024_0_0_0
+   DP8KC : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_rompmi_romXO2hexprom_init.hexa
+        syncdisablenoreg18101024/pmi_romXhprom_initadn18101024_0_1_0
+   DP8KC : lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_rompmi_romXO2hexprom_init.hexa
+        syncdisablenoreg18101024/pmi_romXhprom_initadn18101024_0_0_1
+
+Run Time and Memory Usage
+-------------------------
+
+   Total CPU Time: 0 secs
+   Total REAL Time: 0 secs
+   Peak Memory Usage: 42 MB
+
+
+
+
+
+
+
+
+                                   Page 16
+
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995
+     AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent
+     Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems
+     All rights reserved.
+Copyright (c) 2002-2011 Lattice Semiconductor
+     Corporation,  All rights reserved.

@@ -1,0 +1,1270 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Spinti 02/04/05
+	xpga/machxo sub directory
+		.Contains device database file and all the algorithm files for MachXO technology devices.
+	 ispVM_013.xdf  support :
+		. MachXO family.
+	02/11/05 Spinti: Added LCMXO256C, LCMXO256E, LCMXO256C-ES, and LCMXO256E-ES.
+	02/16/05 Spinti: Added Hidden flag.
+	02/28/05 Spinti: Added Hidden flag, again.
+	03/31/05 Nguyen: Using the MACHXO_ES.svp for ES devices
+	06/23/05 Nguyen took out unnecessary operations
+	06/30/05 Nguyen added the mask files
+	07/01/05 Nguyen added XFLASH Program and TransFR operation
+	07/05/05 Nguyen added HIDDEN= YES
+	07/08/05 Nguyen removed "Read Status Register" Operation
+	08/16/05 Nguyen removed the MACHXO_ES Family 
+			 Added LCMXO640-ENG devices
+	08/16/05 Spinti: Added LCMXO1200C/E and LCMXO2280C/E.
+	08/17/05 Nguyen: Added EBR fields LCMXO1200C/E and LCMXO2280C/E.
+	09/06/05 Nguyen added FPGA Loader support
+	09/15/05 Ong   : Added Socket Adapter Listing for MachXO device family.
+				1. PA-T100/LCMXO640C and PA-T100/LCMXO640E
+				2. PA-F256/LCMXO640C and PA-F256/LCMXO640E
+	09/19/05 Ong   : Removed PA-T100/LCMXO640C and PA-T100/LCMXO640E socket adapter listing 
+			     for LCMXO1200C/E and LCMXO2280C/E. Not pin compatible to existing socket.
+	10/21/05 Ong   : Commented out the 100csBGA support listing for LCMXO1200C/E and LCMXO2280C/E.
+			     Does not support the 100 ball csBGA package.	
+	01/03/06 Nguyen added "FLASH Calculate Checksum" Operation
+	01/20/06 Ong   : Added Socket Adapter Listing for MachXO device family.
+				1. PA-T100/LCMXO1200C and PA-T100/LCMXO1200E
+				2. PA-T144/LCMXO640E
+				3. PA-FT256/LCMXOC
+	03/06/06 Ong   : Added Socket Adapter Listing for MachXO 1200C/E and 2280C/E device family.
+				1. PA-FT256/LCMXOC and PA-FT256/LCMXOE
+				2. PA-FT324/LCMXOC and PA-FT324/LCMXOE
+				3. PA-T144/LCMXO640C
+
+	03/16/06 Ong   :	Commented out the following operations: SRAM Verify USERCODE, SRAM Verify USERCODE, 
+                        and XSRAM Verify USERCODE.
+	07/07/06 Nguyen: Added support	LA-MachXO devices.
+	09/14/06 Nguyen: change support FPGA LOader to Parallel Flash
+	10/16/06 Nguyen added "XSRAM Display USERCODE" and "XFLASH Display USERCODE" to the operation lists
+	11/17/06 Spinti: Added "XFLASH Calculate Checksum" Operation.	
+	12/13/06 Nguyen changed the default IO State to "HIGHZ" (Howard requested)
+	01/02/07 Nguyen change to improve the turbo
+	07/20/07 Nguyen modified to support "SRAM Program,Verify" Operation	
+	07/16/07 Ong   : Added 132 csBGA socket adapter listing for LCMXO640C/E, LCMXO1200C/E and LCMXO2280C/E.
+				1. PN-M132/LCMXO640C
+				2. PN-M132/LCMXO640E 
+	08/15/07 Ong   : Commented out the "SRAM Verify Only" operation.
+	09/07/07 Ong   : Updated the names to the M100, T100, T144, and FT324 SAB's that have been converted to lead-free with PA(N).
+	08/17/08 Nguyen added "FLASH Secure Device", "XFALSH Secure Device" and "SRAM Secure Device" operations
+	10/13/08 Spinti: Added "SRAM Program Only" operation back in per customer requests.
+	10/28/08 Nguyen: Added "FLASH Program DONE bit" operation per customer requests.
+	10/30/08 Spinti: Changed the PA-F256/LCMXO640C and PA-F256/LCMXO640E socket adpaters to PA-FT256/LCMXOC and PA-FT256/LCMXOE, respectively.
+	11/26/08 Nguyen added the "FLASH Erase,Program" and "FLASH Verify,Secure" operations
+	03/27/09 Nguyen added the "XFLASH Program,Secure and TransFR" operations
+	03/26/09 Spinti: Added the 256 caBGA package to the 640, 1200, and 2280.
+	06/04/10 Nguyen: sync up the devices with Diamond v1.0 device list
+	11/01/10 Nguyen: Added Socket Adapter Listing for MachXO device family.
+				1. PN-B256/LCMXOC and PN-B256/LCMXOE
+
+-->
+
+<ispXDF version="15.3.2">
+    <Family name="MachXO">
+       <FamilyAliasName>MachXO-ES</FamilyAliasName>
+       <Device name="LCMXO256C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO256C </CodeName>
+            <FullName> LCMXO256C </FullName>
+            <AliasName> LCMXO256C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01281043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 192 </ColWidth>
+            <RowWidth> 295 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 56640 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>160</BScan_Length>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO256C </PON>
+                <AliasPON> LCMXO256C-ES </AliasPON>
+                <JDFFile> lcmxo256.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-ball csBGA </Type>
+                <PON> LCMXO256C-XXM100 </PON>
+                <AliasPON> LCMXO256C-XXM100ES </AliasPON>
+                <JDFFile> lcmxo256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-M100/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO256C-XXT100 </PON>
+                <AliasPON> LCMXO256C-XXT100ES </AliasPON>
+                <JDFFile> lcmxo256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO640C"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>         
+       <Device name="LAMXO256C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAMXO256C </CodeName>
+            <FullName> LAMXO256C </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01281043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 192 </ColWidth>
+            <RowWidth> 295 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 56640 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>160</BScan_Length>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LAMXO256C-XXTN100 </PON>
+                <JDFFile> lcmxo256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO640C"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>         
+       <Device name="LCMXO256E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO256E </CodeName>
+            <FullName> LCMXO256E </FullName>
+            <AliasName> LCMXO256E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01280043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 192 </ColWidth>
+            <RowWidth> 295 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 56640 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>160</BScan_Length>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO256E </PON>
+                <AliasPON> LCMXO256E-ES </AliasPON>
+                <JDFFile> lcmxo256.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-ball csBGA </Type>
+                <PON> LCMXO256E-XXM100 </PON>
+                <AliasPON> LCMXO256E-XXM100ES </AliasPON>
+                <JDFFile> lcmxo256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-M100/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO256E-XXT100 </PON>
+                <AliasPON> LCMXO256E-XXT100ES </AliasPON>
+                <JDFFile> lcmxo256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO640E"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>
+       <Device name="LAMXO256E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAMXO256E </CodeName>
+            <FullName> LAMXO256E </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01280043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 192 </ColWidth>
+            <RowWidth> 295 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 56640 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>160</BScan_Length>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LAMXO256E-XXTN100 </PON>
+                <JDFFile> lcmxo256.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO640E"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>
+       <Device name="LCMXO640C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO640C </CodeName>
+            <FullName> LCMXO640C </FullName>
+            <AliasName> LCMXO640C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01285043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 236 </ColWidth>
+            <RowWidth> 551 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 130036 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>320</BScan_Length>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO640C </PON>
+                <AliasPON> LCMXO640C-ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-ball csBGA </Type>
+                <PON> LCMXO640C-XXM100 </PON>
+                <AliasPON> LCMXO640C-XXM100ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-M100/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO640C-XXT100 </PON>
+                <AliasPON> LCMXO640C-XXT100ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO640C-XXM132 </PON>
+                <AliasPON> LCMXO640C-XXM132ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO640C-XXT144 </PON>
+                <AliasPON> LCMXO640C-XXT144ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO640C-XXB256 </PON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="PN-B256/LCMXOC"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LCMXO640C-XXF256 </PON>
+                <AliasPON> LCMXO640C-XXF256ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FT256/LCMXOC"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>            
+       <Device name="LAMXO640C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAMXO640C </CodeName>
+            <FullName> LAMXO640C </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01285043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 236 </ColWidth>
+            <RowWidth> 551 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 130036 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>320</BScan_Length>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO640C </PON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LAMXO640C-XXTN100 </PON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LAMXO640C-XXTN144 </PON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LAMXO640C-XXFTN256 </PON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FT256/LCMXO640C"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>     
+       <Device name="LCMXO640E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO640E </CodeName>
+            <FullName> LCMXO640E </FullName>
+            <AliasName> LCMXO640E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01284043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 236 </ColWidth>
+            <RowWidth> 551 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 130036 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>320</BScan_Length>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO640E </PON>
+                <AliasPON> LCMXO640E-ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-ball csBGA </Type>
+                <PON> LCMXO640E-XXM100 </PON>
+                <AliasPON> LCMXO640E-XXM100ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-M100/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO640E-XXT100 </PON>
+                <AliasPON> LCMXO640E-XXT100ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO640E-XXM132 </PON>
+                <AliasPON> LCMXO640E-XXM132ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO640E-XXT144 </PON>
+                <AliasPON> LCMXO640E-XXT144ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO640E-XXB256 </PON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="PN-B256/LCMXOE"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LCMXO640E-XXF256 </PON>
+                <AliasPON> LCMXO640E-XXF256ES </AliasPON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FT256/LCMXOE"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device>         
+       <Device name="LAMXO640E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAMXO640E </CodeName>
+            <FullName> LAMXO640E </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01284043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 236 </ColWidth>
+            <RowWidth> 551 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 130036 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>320</BScan_Length>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO640E </PON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LAMXO640E-XXTN100 </PON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LAMXO640E-XXTN144 </PON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LAMXO640E-XXFTN256 </PON>
+                <JDFFile> lcmxo640.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FT256/LCMXO640E"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device>       
+        <Device name="LCMXO1200C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO1200C </CodeName>
+            <FullName> LCMXO1200C </FullName>
+            <AliasName> LCMXO1200C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01289043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 348 </ColWidth>
+            <RowWidth> 796 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 277008 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>32 to 175</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO1200C </PON>
+                <AliasPON> LCMXO1200C-ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO1200C-XXT100 </PON>
+                <AliasPON> LCMXO1200C-XXT100ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO1200C"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO1200C-XXM132 </PON>
+                <AliasPON> LCMXO1200C-XXM132ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO1200C-XXT144 </PON>
+                <AliasPON> LCMXO1200C-XXT144ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO1200C-XXB256 </PON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="PN-B256/LCMXOC"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO1200C-XXFT256 </PON>
+                <AliasPON> LCMXO1200C-XXF256ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FT256/LCMXOC"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>     
+       <Device name="LCMXO1200E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO1200E </CodeName>
+            <FullName> LCMXO1200E </FullName>
+            <AliasName> LCMXO1200E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01288043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 348 </ColWidth>
+            <RowWidth> 796 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 277008 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>32 to 175</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO1200E </PON>
+                <AliasPON> LCMXO1200E-ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO1200E-XXT100 </PON>
+                <AliasPON> LCMXO1200E-XXT100ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO1200E"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO1200E-XXM132 </PON>
+                <AliasPON> LCMXO1200E-XXM132ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO1200E-XXT144 </PON>
+                <AliasPON> LCMXO1200E-XXT144ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO1200E-XXB256 </PON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="PN-B256/LCMXOE"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO1200E-XXFT256 </PON>
+                <AliasPON> LCMXO1200E-XXF256ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FT256/LCMXOE"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>         
+       <Device name="LAMXO1200E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAMXO1200E </CodeName>
+            <FullName> LAMXO1200E </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x01288043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 348 </ColWidth>
+            <RowWidth> 796 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 277008 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>424</BScan_Length>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>32 to 175</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO1200E </PON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LAMXO1200E-XXTN100 </PON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO1200E"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LAMXO1200E-XXTN144 </PON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LAMXO1200E-XXFTN256 </PON>
+                <AliasPON> LCMXO1200E-XXF256ES </AliasPON>
+                <JDFFile> lcmxo1200.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FT256/LCMXOE"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>     
+       <Device name="LCMXO2280C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO2280C </CodeName>
+            <FullName> LCMXO2280C </FullName>
+            <AliasName> LCMXO2280C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x0128D043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 436 </ColWidth>
+            <RowWidth> 1116 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 486576 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>544</BScan_Length>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>1 to 144</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>146 to 289</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR1</EBRName>
+            </EBR>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>291 to 434</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR2</EBRName>
+            </EBR>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2280C </PON>
+                <AliasPON> LCMXO2280C-ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2280C-XXT100 </PON>
+                <AliasPON> LCMXO2280C-XXT100ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO1200C"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2280C-XXM132 </PON>
+                <AliasPON> LCMXO2280C-XXM132ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2280C-XXT144 </PON>
+                <AliasPON> LCMXO2280C-XXT144ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LCMXO640C"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2280C-XXB256 </PON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="PN-B256/LCMXOC"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2280C-XXFT256 </PON>
+                <AliasPON> LCMXO2280C-XXF256ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FT256/LCMXOC"/>
+            </Package>
+            <Package>
+                <Type> 324-ball ftBGA </Type>
+                <PON> LCMXO2280C-XXFT324 </PON>
+                <AliasPON> LCMXO2280C-XXF324ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-FT324/LCMXOC"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+       </Device>     
+       <Device name="LCMXO2280E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LCMXO2280E </CodeName>
+            <FullName> LCMXO2280E </FullName>
+            <AliasName> LCMXO2280E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x0128C043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 436 </ColWidth>
+            <RowWidth> 1116 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 486576 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>544</BScan_Length>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>1 to 144</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>146 to 289</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR1</EBRName>
+            </EBR>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>291 to 434</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR2</EBRName>
+            </EBR>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LCMXO2280E </PON>
+                <AliasPON> LCMXO2280E-ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LCMXO2280E-XXT100 </PON>
+                <AliasPON> LCMXO2280E-XXT100ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO1200E"/>
+            </Package>
+            <Package>
+                <Type> 132-ball csBGA </Type>
+                <PON> LCMXO2280E-XXM132 </PON>
+                <AliasPON> LCMXO2280E-XXM132ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PN-M132/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LCMXO2280E-XXT144 </PON>
+                <AliasPON> LCMXO2280E-XXT144ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 256-ball caBGA </Type>
+                <PON> LCMXO2280E-XXB256 </PON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="PN-B256/LCMXOE"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LCMXO2280E-XXFT256 </PON>
+                <AliasPON> LCMXO2280E-XXF256ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FT256/LCMXOE"/>
+            </Package>
+            <Package>
+                <Type> 324-ball ftBGA </Type>
+                <PON> LCMXO2280E-XXFT324 </PON>
+                <AliasPON> LCMXO2280E-XXF324ES </AliasPON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-FT324/LCMXOE"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device>         
+       <Device name="LAMXO2280E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LAMXO2280E </CodeName>
+            <FullName> LAMXO2280E </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MACHXO.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MACHXO.svp"
+                         value="0x07"/>
+            <JtagID>0x0128C043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   8 </IRLength>
+            <ColWidth> 436 </ColWidth>
+            <RowWidth> 1116 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 486576 </TotalFuses> 
+            <PWP>  1 </PWP>
+            <PWE>  1 </PWE>
+            <PWV>  1 </PWV>
+            <BScan_Length>544</BScan_Length>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>1 to 144</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>146 to 289</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR1</EBRName>
+            </EBR>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>291 to 434</EBRColumn>
+            	<EBRAddress>69</EBRAddress>
+            	<EBRName>EBR2</EBRName>
+            </EBR>
+            <Status_Control>
+            	<StatusBitName>;MODE;TARGET;</StatusBitName>
+            	<StatusControl>;in;in;</StatusControl>
+            	<StatusIndex>;0;1;</StatusIndex>
+            </Status_Control>
+            <Package>
+                <Type> All </Type>
+                <PON> LAMXO2280E </PON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+            </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LAMXO2280E-XXTN100 </PON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LCMXO1200E"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON> LAMXO2280E-XXTN144 </PON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LCMXO640E"/>
+            </Package>
+            <Package>
+                <Type> 256-ball ftBGA </Type>
+                <PON> LAMXO2280E-XXFTN256 </PON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-FT256/LCMXOE"/>
+            </Package>
+            <Package>
+                <Type> 324-ball ftBGA </Type>
+                <PON> LAMXO2280E-XXFTN324 </PON>
+                <JDFFile> lcmxo2280.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-FT324/LCMXOE"/>
+            </Package>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>No</VCCJ>
+                  <PinList>TCK,TMS,TDI,TDO</PinList>
+            </Voltage_Control>
+        </Device>         
+        <Operation>
+        	&quot;FLASH Erase,Program,Verify&quot;
+        	&quot;FLASH Erase,Program,Verify,Secure&quot;
+<!--        	&quot;FLASH Erase,Program&quot; -->
+<!--        	&quot;FLASH Verify,Secure&quot; -->
+			&quot;FLASH Verify Only&quot;
+			&quot;FLASH Erase Only&quot;
+			&quot;FLASH Verify ID&quot;
+			&quot;FLASH Display ID&quot;	
+	    	&quot;FLASH Display USERCODE&quot;
+			&quot;FLASH Read and Save&quot;
+			&quot;FLASH Calculate Checksum&quot;
+<!--			&quot;FLASH Read Status Register&quot;-->
+			
+			&quot;FLASH Program DONE bit&quot;
+			&quot;FLASH Read DONE bit&quot;
+			&quot;FLASH Secure Device&quot;
+			&quot;FLASH Bypass&quot;
+			
+			
+			&quot;XFLASH Erase,Program,Verify&quot;
+        	&quot;XFLASH Erase,Program,Verify,Secure&quot;
+        	&quot;XFLASH Program and TransFR&quot;
+        	&quot;XFLASH Program,Secure and TransFR&quot;
+        	&quot;XFLASH TransFR&quot;
+        	&quot;XFLASH Program USF from PROM file&quot;
+        	&quot;XFLASH Verify Only&quot;
+			&quot;XFLASH Erase Only&quot;
+			&quot;XFLASH Read and Save&quot;
+			&quot;XFLASH Calculate Checksum&quot;
+			&quot;XFLASH Display USERCODE&quot;
+			&quot;XFLASH Upload to Static RAM&quot;
+			&quot;XFLASH Secure Device&quot;
+			&quot;XFLASH Bypass&quot;
+            
+            &quot;SRAM Program,Verify&quot;
+			&quot;SRAM Program Only&quot;
+<!--	      &quot;SRAM Verify Only&quot;-->
+            &quot;SRAM Verify ID&quot;
+            &quot;SRAM Display ID&quot;
+            &quot;SRAM Erase Only&quot;
+<!--        &quot;SRAM Verify USERCODE&quot;-->
+            &quot;SRAM Display USERCODE&quot;
+            &quot;SRAM Read and Save&quot;
+<!--        &quot;SRAM Read Status Register&quot;-->
+            &quot;SRAM Read DONE bit&quot;
+            &quot;SRAM Secure Device&quot;
+            &quot;SRAM Bypass&quot;
+
+            &quot;XSRAM Display ID&quot;
+<!--        &quot;XSRAM Verify USERCODE&quot;-->
+            &quot;XSRAM Read and Save&quot;
+            &quot;XSRAM Display USERCODE&quot;
+            &quot;XSRAM Bypass&quot;
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed;*.isc"/>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="FALSE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>2</CFGPinCount>
+     	<BitstreamModelTemplate>Magma Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;Leave Alone;All 1's;All 0's;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;FLASH;XFLASH;SRAM;XSRAM;Parallel Flash;</Programming_Mode_Control>
+     	<ICFFile>\xpga\machxo\lcmxo.icf</ICFFile>
+    </Family>   
+</ispXDF>

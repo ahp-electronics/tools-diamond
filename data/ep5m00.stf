@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file defines properties of ecp2m devices -->
+<StrategyConfig parent="base_ec.stf" version="1.0">
+
+<!-- *************************************************************** -->
+<!-- Place & Route Design Property --> 
+<!-- *************************************************************** -->
+
+<!-- _RoutingCDP=S,SLIST,Congestion-Driven Placement -->
+<!--        _RoutingCDP0=S,LITEM,0,0 -->
+<!--        _RoutingCDP1=S,LITEM,1,1 -->
+<!--        _RoutingCDP1=S,LITEM,Auto,A -->
+<Property
+	name="PROP_PAR_RoutingCDP"
+	tclid="par_cdp"
+	type="list">
+	<Value
+		defaultValue="Auto"
+	/>
+	<CmdLines>
+		<Correlation driverValue="0" cmdline="-exp parCDP=0"/>
+		<Correlation driverValue="1" cmdline="-exp parCDP=1"/>
+		<Correlation driverValue="Auto" cmdline="-exp parCDP=auto"/>
+	</CmdLines>
+</Property>
+
+<!-- _RoutingCDR=S,SLIST,Congestion-Driven Routing -->
+<!--        _RoutingCDR0=S,LITEM,0,0 -->
+<!--        _RoutingCDR1=S,LITEM,1,1 -->
+<!--        _RoutingCDR1=S,LITEM,Auto,A -->
+<Property
+	name="PROP_PAR_RoutingCDR"
+	tclid="par_cdr"
+	type="list">
+	<Value
+		defaultValue="1"
+	/>
+	<CmdLines>
+		<Correlation driverValue="0" cmdline="-exp parCDR=0"/>
+		<Correlation driverValue="1" cmdline="-exp parCDR=1"/>
+		<Correlation driverValue="Auto" cmdline="-exp parCDR=auto"/>
+	</CmdLines>
+</Property>
+
+<!-- *************************************************************** -->
+<!-- *****************************  PropertySet *************************** -->
+<!-- *************************************************************** -->
+
+<!-- *****************************  Timing Simulation *************************** -->
+<PropertySet	
+	name="PROPSET_TIMSIMFILE" >
+  <Include>
+<!--      <PropertyUIItem> PROPUI_TIM_TimSimFormat </PropertyUIItem> -->
+      <PropertyUIItem> PROUIP_TIM_TimSimHierSep </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_WriteVerboseNetlist </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_NegStupHldTim </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_TimSimGenX </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_TimSimGenPUR </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_MinSpeedGrade </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_TrgtSpeedGrade </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_ModPreSimDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_MaxDelSimDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TIM_TransportModeOfPathDelay </PropertyUIItem>
+  </Include>            
+</PropertySet>
+
+<!-- *****************************  Bitgen *************************** -->
+<!-- new: PROPUI_BIT_SearchPthBitGen -->
+<PropertySet	
+	name="PROPSET_BITGEN" >
+  <Include>
+      <PropertyUIItem> PROPUI_BIT_RunDRCBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_CreateBitFile </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_OutFormatBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_OutFormatPromGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_ByteWideBitMirror </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_NoHeader </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_ConModBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_DisRAMResBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_SearchPthBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TMCHK_EnableCheck </PropertyUIItem>
+  </Include>		       
+</PropertySet>
+
+<!-- *************************************************************** -->
+<!-- *****************************  Strategy Ui *************************** -->
+<!-- *************************************************************** -->	
+<!-- "parent" value must be defined before use it -->
+<StrategyUI name="STYUI_Normal">			
+	<Group name="GROUP_Synthesis" parent="root" label="Synthesize Design" type="0" data="" />
+		<Group name="GROUP_Synplify" parent="GROUP_Synthesis" label="Synplify Pro" type="1" data="PROPSET_Synplify" />
+		<!--<Group name="GROUP_Precision" parent="GROUP_Synthesis" label="Precision" type="1" data="PROPSET_Precision" />-->	
+		<Group name="GROUP_LST" parent="GROUP_Synthesis" label="LSE" type="1" data="PROPSET_LST" />
+	<Group name="GROUP_BuildDatabase" parent="root" label="Translate Design" type="1" data="PROPSET_Edif" />
+	<Group name="GROUP_MapDesign" parent="root" label="Map Design" type="1" data="PROPSET_Map" />
+        <Group name="GROUP_MapSTA" parent="GROUP_MapDesign" label="Map Trace" type="1" data="PROPSET_MAPTRACE" />
+	<Group name="GROUP_PLACE" parent="root" label="Place &amp; Route Design" type="1" data="PROPSET_PlaceRoute" />
+	   <Group name="GROUP_PARSTA" parent="GROUP_PLACE" label="Place &amp; Route Trace" type="1" data="PROPSET_PARTRACE" />
+	   <Group name="GROUP_IOTIMING" parent="GROUP_PLACE" label="IO Timing Analysis" type="1" data="PROPSET_IOTIMING" />
+	<Group name="GROUP_TIMSIM" parent="root" label="Timing Simulation" type="1" data="PROPSET_TIMSIMFILE" />
+	<Group name="GROUP_BITGEN" parent="root" label="Bitstream" type="1" data="PROPSET_BITGEN" />
+</StrategyUI>
+
+</StrategyConfig>

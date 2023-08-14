@@ -1,0 +1,27 @@
+var pairs =
+{
+"deleting":{"net":1}
+,"net":{"pins":1,"attached":1,"deleted":1}
+,"pins":{"delete":1,"select":1,"removed":1}
+,"delete":{"signal":1,"net":1,"choose":1,"click":1,"button":1}
+,"signal":{"pin":1}
+,"pin":{"pin":1,"unrouted":1,"removed":1,"longer":1}
+,"unrouted":{"net":1}
+,"attached":{"pin":1,"eliminated":1}
+,"removed":{"net":1,"nets":1}
+,"deleted":{"pin":1,"delete":1}
+,"longer":{"connection":1}
+,"connection":{"(logically":1}
+,"(logically":{"physically)":1}
+,"physically)":{"net":1}
+,"select":{"net":1}
+,"choose":{"edit":1}
+,"edit":{"delete":1}
+,"click":{"delete":1}
+,"button":{"actions":1}
+,"actions":{"panel":1}
+,"panel":{"net":1}
+,"nets":{"attached":1}
+,"eliminated":{"database":1}
+}
+;Search.control.loadWordPairs(pairs);

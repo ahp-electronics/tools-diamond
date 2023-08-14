@@ -1,0 +1,1931 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<!-- 06/21/02 Nguyen took out 	MANUFACTURING_ENABLE  SRAM Enable function
+     07/15/02 Nguyen changed "SRAM Read DONE bit" function : added enable SRAM mode 
+	      before READ DONE bit
+	      Added Verify DONE bit in PROGRAM_DONE_BIT function
+     10/31/02 Spinti: Added "SRAM Program Only" function 
+     10/01/03 Spinti: Changed PROGRAM_DONE_BIT.
+                      Added delay after ISC_DISABLE and Changed BYPASS to ISC_DISABLE for Verify Done Bit.
+     10/13/03 Nguyen/Ong: SRAM Program DONE Bit - Changed function from "PROGRAM_DONE_BIT" to "SRAM_PROGRAM_DONE_BIT".
+     10/27/03 Nguyen added support of Comment "!"   
+     03/04/05 Spinti: Changed the PROGRAM_DONE_BIT and ERASE_DONE_BIT pulse width to 50.
+     03/07/05 Nguyen: Changed delay after ISC_DISABLE anf ISC_DISCHARGE to 10.
+     03/07/05 Spinti: Changed the DISABLE delay to 200ms.
+     06/21/06 Ong   : Added Verfiy Done Bit to Verfiy Only operation for EE and XEE modes.
+-->
+<SVF_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1"/>
+</Setup>
+<Parameter>
+	<!-- Length fields are in number if bits -->
+	<Instruction_Length value="INSTRUCTION_REGISTER_LENGTH"/> 
+	<Row_Width			value="DEVICE_ROW_WIDTH"/> 
+	<Address_Length		value="ADDRESS_REGISTER_LENGTH"/> 
+	<Address length="ADDRESS_LENGTH">
+		INI_ADDRESS			
+	</Address>
+	<ID_Length 			value="DEVICE_ID_LENGTH"/>
+	<Usercode_Length 	value="DEVICE_USERCODE_LENGTH"/>
+	<BSCAN_Length value="BSCAN_REGISTER_LENGTH"/> 
+	<Bscan length="BSCAN_LENGTH">
+		BSCAN_DATA
+	</Bscan>
+	<BscanMask length="BSCAN_LENGTH">
+		BSCAN_MASK
+	</BscanMask>
+	<PWP	value="PROGRAMING_PULSE_WIDTH"/>
+	<PWV	value="VERIFY_PULSE_WIDTH"/>
+	<PWE	value="ERASE_PULSE_WIDTH"/>
+	<Instruction>
+		BYPASS				= 0xFF;
+		BPRELOAD 			= 0x1C;
+		IDCODE 				= 0x16;
+		USERCODE 			= 0x17;
+		EXTEST	 			= 0x00;
+		INTEST	 			= 0x2C;
+		HIGH_Z	 			= 0x18;
+		CLAMP	 				= 0x20;
+		ISC_ENABLE 				= 0x15;
+		ISC_DISABLE				= 0x1E;
+		ISC_ADDRESS_SHIFT 		= 0x01;
+		ISC_DATA_SHIFT			= 0x02;
+		ISC_ERASE 				= 0x03;
+		ISC_PROGRAM_INCR 		= 0x27;
+		ISC_PROGRAM				= 0x07;
+		ISC_READ_INCR	 		= 0x2A;
+		ISC_READ				= 0x0A;
+		ISC_PROGRAM_SECURITY	= 0x09;
+		ISC_PROGRAM_DONE 		= 0x2F;
+		ISC_ERASE_DONE			= 0x24;
+		ISC_PROGRAM_USERCODE	= 0x1A;
+		ISC_ADDRESS_INIT		= 0x21;
+		ISC_NOOP				= 0x30;
+		ISC_PROGRAM_ASIC		= 0xA6;
+		ISC_READ_ASIC			= 0xAB;
+		ISC_DISCHARGE			= 0x14;
+		<!-- Alternate Instructions -->
+		LSCC_PROGRAM_INCR_RTI	= 0x67;
+		LSCC_READ_INCR_RTI 		= 0x69;	
+		<!-- Proprietary Mode Instructions -->
+		LSCC_X_ENABLE			= 0x35;
+		LSCC_SRAM_ENABLE		= 0x55;
+      	LSCC_SRAM_READ_ENABLE	= 0x75;
+		<!-- IP instructions -->
+		LSCC_IPA				= 0x32;
+		LSCC_IPTESTA			= 0x33;
+		LSCC_IPB				= 0x38;
+		LSCC_IPTESTB			= 0x39;	
+		<!-- Manufacturing instructions -->
+		LSCC_MANUFACTURING_SHIFT = 0x80;
+		LSCC_ERASE_ALL			 = 0x10;
+		LSCC_PROGRAM_PES		 = 0x0F;
+		LSCC_READ_PES			 = 0x11;
+		LSCC_USER_LOGIC_RESET	 = 0x22;
+		
+	</Instruction>
+</Parameter>
+<Data>
+	<DataField	name="IDTDI">
+		<FieldBlock	row_width="DEVICE_ID_LENGTH">
+			ID_DATA
+		</FieldBlock>
+	</DataField>
+</Data>
+<Operation_List>
+	<!-- EE Operations -->
+	"Bypass"	=	"	INIT 	! Initialize"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"INIT, READ_ID, SAVE_ID";
+	"Refresh" = " 	INIT !Initialize,
+					READ_ID !Check the IDCODE,
+					IO_STATE ! Program Bscan register,
+					ENABLE ! Enter Programming Mode,
+					DISABLE ! Exit Programming Mode";
+
+	"Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						ENABLE	! Enable the programming mode"	;
+						
+	"Read and Save JEDEC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"Calculate Checksum"	=	"INIT, SAVE_ID, IO_STATE, 
+								 ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+								 
+	"Read and Save ISC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"Read and Save"	=	"INIT, SAVE_ID, IO_STATE, 
+								 ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"Calculate Data CRC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"Erase,Program,Verify" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								ENABLE	! Enable the programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map, 
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map, 
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT"	;
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								ENABLE	! Enable the programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Display USERCODE"	=	"INIT, READ_ID, 
+								ENABLE	! Enable the programming mode, 
+								SAVE_USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	
+	"Erase DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Program DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Read DONE bit" = 	"INIT, READ_ID, READ_DONE_BIT";
+	
+	"Re-Initialize" = "   INIT 	! Initialize,  
+						  ENABLE	! Enable programming mode, 
+						  ERASE	! Erase the device, 
+	 			 		  DISABLE ! Exit the programming mode"	;
+	"Capture Only" = "	INIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+
+	<!-- X-EE Operaitons -->
+	"XEE Bypass"	=	"	INIT 	! Initialize"	;
+	"XEE Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"XEE Display ID" = 	"INIT, READ_ID, SAVE_ID";
+	"XEE Refresh" = " 	INIT !Initialize,
+						READ_ID !Check the IDCODE,
+						IO_STATE ! Program Bscan register,
+						ENABLE ! Enter Programming Mode,
+						DISABLE ! Exit Programming Mode";
+
+	"XEE Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"XEE Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						XEE_ENABLE	! Enable XEE programming mode"	;
+						
+	"XEE Read and Save JEDEC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 XEE_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"XEE Calculate Checksum"	=	"INIT, SAVE_ID, IO_STATE, 
+								 XEE_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";							 			 	
+	"XEE Read and Save"	=	"INIT, SAVE_ID, IO_STATE, 
+								 XEE_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"XEE Read and Save ISC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 XEE_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"XEE Calculate Data CRC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 XEE_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";	
+	"XEE Erase,Program,Verify" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								XEE_ENABLE	! Enable XEE programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Erase,Program,Verify,Refresh" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								XEE_ENABLE	! Enable XEE programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+			 			 		DISABLE ! Exit XEE programming mode,
+			 			 		ENABLE ! Enter Programming Mode,
+								DISABLE ! Exit Programming Mode"	;
+	"XEE Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											XEE_ENABLE	! Enable XEE programming mode, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map, 
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+						 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Program Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							XEE_ENABLE	! Enable XEE programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map, 
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							XEE_ENABLE	! Enable the programming mode, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT"	;
+	"XEE Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								XEE_ENABLE	! Enable XEE programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,	 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Display USERCODE"	=	"INIT, READ_ID, 
+								XEE_ENABLE	! Enable XEE programming mode, 
+								SAVE_USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							XEE_ENABLE	! Enable XEE programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Erase DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							XEE_ENABLE	! Enable XEE programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Program DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							XEE_ENABLE	! Enable XEE programming mode, 
+							PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Read DONE bit" = 	"INIT, READ_ID, READ_DONE_BIT";
+	
+	"XEE Re-Initialize" = "   INIT 	! Initialize,  
+						       XEE_ENABLE	! Enable XEE programming mode, 
+							   ERASE	! Erase the device, 
+	 			 			   DISABLE ! Exit the programming mode"	;
+
+	<!-- SRAM Operaitons -->
+	"SRAM Bypass"	=	"	INIT 	! Initialize"	;
+	"SRAM Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"SRAM Display ID" = 	"INIT, READ_ID, SAVE_ID";
+	"SRAM Refresh" = " 	INIT !Initialize,
+						READ_ID !Check the IDCODE,
+						IO_STATE ! Program Bscan register,
+						ENABLE ! Enter Programming Mode,
+						DISABLE ! Exit Programming Mode";
+
+	"SRAM Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						SRAM_ENABLE	! Enable SRAM programming mode"	;
+						
+	"SRAM Read and Save JEDEC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 SRAM_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"SRAM Calculate Checksum"	=	"INIT, SAVE_ID, IO_STATE, 
+								 SRAM_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";							 			 	
+	
+	"SRAM Read and Save ISC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 SRAM_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"SRAM Read and Save"	=	"INIT, SAVE_ID, IO_STATE, 
+								 SRAM_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"SRAM Calculate Data CRC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 SRAM_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"SRAM Erase,Program,Verify" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								ERASE_DONE_BIT	! Erase DONE bit,
+								FAST_PROGRAM 	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE 	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program,Verify" = "	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								ERASE_DONE_BIT	! Erase DONE bit,
+								FAST_PROGRAM 	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE 	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											SRAM_ENABLE	! Enable SRAM programming mode, 
+											ERASE_DONE_BIT	! Erase DONE bit,
+											FAST_PROGRAM 	! Program Fuse Map, 
+											FAST_PROGRAM_USERCODE 	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit, 
+						 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! Erase DONE bit,
+							FAST_PROGRAM 	! Program Fuse Map, 
+							FAST_PROGRAM_USERCODE 		! Program USERCODE,
+							SRAM_PROGRAM_DONE_BIT 	! Program DONE bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Display USERCODE"	=	"INIT, READ_ID, 
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								SAVE_USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Erase Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! ERASE DONE bit,
+							SRAM_ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	
+	"SRAM Erase DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program DONE bit"	=	"INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! Erase DONE bit,
+							SRAM_PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Read DONE bit"	=	"INIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 IO_STATE ! Program Bscan register, 
+					 SRAM_ENABLE	! Enable SRAM programming mode, 
+					 READ_DONE_BIT	! Erase the done bit,
+					 DISABLE ! Exit the programming mode"	;
+	"SRAM Re-Initialize" = "   INIT 	! Initialize,  
+						       SRAM_ENABLE	! Enable SRAM programming mode,
+							 ERASE_DONE_BIT	! ERASE DONE bit, 
+							 SRAM_ERASE	! Erase the device, 
+	 			 			 DISABLE ! Exit the programming mode"	;
+	<!-- XSRAM Operaitons -->
+	"XSRAM Bypass"	=	"	INIT 	! Initialize"	;
+	"XSRAM Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"XSRAM Display ID" = 	"INIT, READ_ID, SAVE_ID";
+
+	"XSRAM Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+					!	IO_STATE ! Program Bscan register, 
+						SRAM_READ_ENABLE	! Enable XSRAM mode"	;
+						
+	"XSRAM Read and Save JEDEC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 SRAM_READ_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"XSRAM Calculate Checksum"	=	"INIT, SAVE_ID, IO_STATE, 
+								 SRAM_READ_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";							 			 	
+	
+	"XSRAM Read and Save ISC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 SRAM_READ_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"XSRAM Read and Save"	=	"INIT, SAVE_ID, IO_STATE, 
+								 SRAM_READ_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"XSRAM Calculate Data CRC"	=	"INIT, SAVE_ID, IO_STATE, 
+								 SRAM_READ_ENABLE, SAVE_ARRAY, SAVE_USERCODE, 
+								 DISABLE";
+	"XSRAM Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							SRAM_READ_ENABLE	! Enable SRAM programming mode, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_READ_ENABLE	! Enable SRAM programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Display USERCODE"	=	"INIT, READ_ID, 
+								SRAM_READ_ENABLE	! Enable SRAM programming mode, 
+								SAVE_USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	
+	"XSRAM Read DONE bit"	=	"INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+					 	IO_STATE ! Program Bscan register, 
+					 	SRAM_READ_ENABLE	! Enable SRAM programming mode,  
+					 	READ_DONE_BIT	! Erase the done bit,
+					 	DISABLE ! Exit the programming mode"	;
+
+</Operation_List>
+<Operation_List label="SingleSVFOperation">
+	"Bypass"	=	"	SVFINIT 	! Initialize"	;
+	"Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"SVFINIT, READ_ID, SVF_SAVE_ID";
+	"Refresh" = " 	SVFINIT !Initialize,
+					READ_ID !Check the IDCODE,
+					IO_STATE ! Program Bscan register,
+					ENABLE ! Enter Programming Mode,
+					DISABLE ! Exit Programming Mode";
+
+	"Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Enable Only" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						ENABLE	! Enable the programming mode"	;
+						
+	"Read and Save JEDEC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"Calculate Checksum"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	
+	"Read and Save ISC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"Read and Save"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"Calculate Data CRC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+								 							 
+	"Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								ENABLE	! Enable the programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase,Program,Verify,Secure"	=	"	SVFINIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											ENABLE	! Enable the programming mode, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map, 
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+						 			 		DISABLE ! Exit the programming mode"	;
+	"Program Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map, 
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Verify Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT ! Verify Done Bit"	;
+	"Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								ENABLE	! Enable the programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Display USERCODE"	=	"SVFINIT, READ_ID, 
+								ENABLE	! Enable the programming mode, 
+								SVF_SAVE_USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"Erase Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Secure Device"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							ENABLE	! Enable the programming mode, 
+							PROGRAM_SECURITY ! Secure device,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							ENABLE	! Enable the programming mode, 
+							PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Read DONE bit" = 	"SVFINIT, READ_ID, SVF_SAVE_DONE_BIT";
+	
+	"Re-Initialize" = "   SVFINIT 	! Initialize,  
+						  ENABLE	! Enable programming mode, 
+						  ERASE	! Erase the device, 
+	 			 		  DISABLE ! Exit the programming mode"	;
+	"Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+
+	<!-- X-EE Operaitons -->
+	"XEE Bypass"	=	"	SVFINIT 	! Initialize"	;
+	"XEE Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"XEE Display ID" = 	"SVFINIT, READ_ID, SVF_SAVE_ID";
+	"XEE Refresh" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						IO_STATE ! Program Bscan register,
+						ENABLE ! Enter Programming Mode,
+						DISABLE ! Exit Programming Mode";
+
+	"XEE Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"XEE Enable Only" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						XEE_ENABLE	! Enable XEE programming mode"	;
+						
+	"XEE Read and Save JEDEC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 XEE_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"XEE Calculate Checksum"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 XEE_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";							 			 	
+	
+	"XEE Read and Save ISC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 XEE_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"XEE Read and Save"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 XEE_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"XEE Calculate Data CRC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 XEE_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";	
+								 
+	"XEE Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								XEE_ENABLE	! Enable XEE programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Erase,Program,Verify,Refresh" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								XEE_ENABLE	! Enable XEE programming mode, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+			 			 		DISABLE ! Exit XEE programming mode,
+			 			 		ENABLE ! Enter Programming Mode,
+								DISABLE ! Exit Programming Mode"	;
+	"XEE Erase,Program,Verify,Secure"	=	"	SVFINIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											XEE_ENABLE	! Enable XEE programming mode, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map, 
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+						 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Program Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							XEE_ENABLE	! Enable XEE programming mode, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map, 
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Verify Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							XEE_ENABLE	! Enable the programming mode, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+							DISABLE ! Exit the programming mode,
+							VERIFY_DONE_BIT ! Verify Done Bit"	;
+	"XEE Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								XEE_ENABLE	! Enable XEE programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,	 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Display USERCODE"	=	"SVFINIT, READ_ID, 
+								XEE_ENABLE	! Enable XEE programming mode, 
+								SVF_SAVE_USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Erase Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							XEE_ENABLE	! Enable XEE programming mode, 
+							ERASE	! Erase the device, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Secure Device"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							XEE_ENABLE	! Enable XEE programming mode, 
+							PROGRAM_SECURITY ! Secure device,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							XEE_ENABLE	! Enable XEE programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							XEE_ENABLE	! Enable XEE programming mode, 
+							PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XEE Read DONE bit" = 	"SVFINIT, READ_ID, SVF_SAVE_DONE_BIT";
+	
+	"XEE Re-Initialize" = "   SVFINIT 	! Initialize,  
+						  XEE_ENABLE	! Enable programming mode, 
+						  ERASE	! Erase the device, 
+	 			 		  DISABLE ! Exit the programming mode"	;
+
+	<!-- SRAM Operaitons -->
+	"SRAM Bypass"	=	"	SVFINIT 	! Initialize"	;
+	"SRAM Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"SRAM Display ID" = 	"SVFINIT, READ_ID, SVF_SAVE_ID";
+	"SRAM Refresh" = " 	SVFINIT !Initialize,
+						READ_ID !Check the IDCODE,
+						IO_STATE ! Program Bscan register,
+						ENABLE ! Enter Programming Mode,
+						DISABLE ! Exit Programming Mode";
+
+	"SRAM Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Enable Only" = "	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							SRAM_ENABLE	! Enable SRAM programming mode"	;
+						
+	"SRAM Read and Save JEDEC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 SRAM_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"SRAM Calculate Checksum"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 SRAM_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";							 			 	
+	
+	"SRAM Read and Save ISC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 SRAM_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"SRAM Read and Save"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 SRAM_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"SRAM Calculate Data CRC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 SRAM_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";	
+								 
+	"SRAM Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								ERASE_DONE_BIT	! Erase DONE bit,
+								FAST_PROGRAM	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program,Verify" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								ERASE_DONE_BIT	! Erase DONE bit,
+								FAST_PROGRAM	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program Only" = "	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE, 
+								IO_STATE ! Program Bscan register,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								ERASE_DONE_BIT	! Erase DONE bit,
+								FAST_PROGRAM	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE	! Program USERCODE,
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit, 
+			 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Erase,Program,Verify,Secure"	=	"	SVFINIT 	! Initialize, 
+											READ_ID	! Check the IDCODE, 
+											IO_STATE ! Program Bscan register,
+											SRAM_ENABLE	! Enable SRAM programming mode, 
+											ERASE_DONE_BIT	! Erase DONE bit,
+											FAST_PROGRAM	! Program Fuse Map, 
+											FAST_PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit, 
+						 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Verify Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Display USERCODE"	=	"SVFINIT, READ_ID, 
+								SRAM_ENABLE	! Enable SRAM programming mode, 
+								SVF_SAVE_USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Erase Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! ERASE DONE bit,
+							SRAM_ERASE	! Erase the device, 
+							DISABLE ! Exit the programming mode"	;
+	"SRAM Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							ERASE_DONE_BIT	! Erase the done bit, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							SRAM_ENABLE	! Enable SRAM programming mode, 
+							SRAM_PROGRAM_DONE_BIT	! Program DONE bit,
+		 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+					 READ_ID	! Check the IDCODE,
+					 IO_STATE ! Program Bscan register, 
+					 SRAM_ENABLE	! Enable SRAM programming mode, 
+					 SVF_SAVE_DONE_BIT	! Read the done bit,
+					 DISABLE ! Exit the programming mode"	;	
+
+
+	"SRAM Re-Initialize" = "   SVFINIT 	! Initialize,  
+						  SRAM_ENABLE	! Enable programming mode,
+						  ERASE_DONE_BIT	! ERASE DONE bit, 
+						  SRAM_ERASE	! Erase the device,
+						  DISABLE ! Exit the programming mode"	;
+
+	<!-- XSRAM Operaitons -->
+	"XSRAM Bypass"	=	"	SVFINIT 	! Initialize"	;
+	"XSRAM Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"XSRAM Display ID" = 	"SVFINIT, READ_ID, SVF_SAVE_ID";
+
+	"XSRAM Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE,
+							IO_STATE ! Program Bscan register, 
+							SRAM_READ_ENABLE	! Enable XSRAM mode"	;
+						
+	"XSRAM Read and Save JEDEC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 SRAM_READ_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"XSRAM Calculate Checksum"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 SRAM_READ_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";							 			 	
+	
+	"XSRAM Read and Save ISC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 SRAM_READ_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"XSRAM Read and Save"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 SRAM_READ_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";
+	"XSRAM Calculate Data CRC"	=	"SVFINIT, READ_ID, SVF_SAVE_ID, IO_STATE, 
+								 SRAM_READ_ENABLE, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE, 
+								 DISABLE";	
+								 
+	"XSRAM Verify Only"	=	"	SVFINIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							IO_STATE ! Program Bscan register,
+							SRAM_READ_ENABLE	! Enable SRAM programming mode, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE, 
+		 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SRAM_READ_ENABLE	! Enable SRAM programming mode, 
+								VERIFY_USERCODE		! Verify USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Display USERCODE"	=	"SVFINIT, READ_ID, 
+								SRAM_READ_ENABLE	! Enable SRAM programming mode, 
+								SVF_SAVE_USERCODE,
+			 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+					 	SRAM_READ_ENABLE	! Enable SRAM programming mode,  
+					 	READ_DONE_BIT	! Erase the done bit,
+					 	DISABLE ! Exit the programming mode"	;
+</Operation_List>
+<Operation_List label="TurboOperation">
+	<!-- EE Operations -->
+	"Bypass"	=	"	INIT 	! Initialize"	;
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"INIT, READ_ID, SAVE_ID";
+	"Refresh" = " 	INIT !Initialize,
+					ENABLE ! Enter Programming Mode";
+
+	"Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						ENABLE	! Enable the programming mode"	;
+						
+	"Read and Save JEDEC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	
+	"Calculate Checksum"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+								 
+	"Read and Save ISC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"Read and Save"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"Calculate Data CRC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	
+	"Erase,Program,Verify" = "	INIT 	! Initialize, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map, 
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Program Only"	=	"	INIT 	! Initialize, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map, 
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Verify Only"	=	"	INIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"Display USERCODE"	=	"INIT, SAVE_USERCODE"	;
+	"Erase Only"	=	"	INIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+	"Secure Device"	=	"	INIT 	! Initialize, 
+							PROGRAM_SECURITY ! Secure device"	;
+	"Erase DONE bit"	=	"INIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"Program DONE bit"	=	"INIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Read DONE bit" = 	"INIT,READ_DONE_BIT";
+	
+	"Re-Initialize" = "   INIT 	! Initialize,  
+						  ENABLE	! Enable programming mode, 
+						  ERASE	! Erase the device"	;
+	"Capture Only" = "	INIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+
+	<!-- X-EE Operaitons -->
+	"XEE Bypass"	=	"	INIT 	! Initialize"	;
+	"XEE Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"XEE Display ID" = 	"INIT, READ_ID, SAVE_ID";
+	"XEE Refresh" = " 	INIT !Initialize,
+						ENABLE ! Enter Programming Mode";
+
+	"XEE Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"XEE Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						XEE_ENABLE	! Enable XEE programming mode"	;
+						
+	"XEE Read and Save JEDEC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"XEE Calculate Checksum"	=	"INIT,SAVE_ARRAY, SAVE_USERCODE";							 			 	
+	
+	"XEE Read and Save ISC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"XEE Read and Save"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"XEE Calculate Data CRC"	=	"INIT,SAVE_ARRAY, SAVE_USERCODE";
+	
+	"XEE Erase,Program,Verify" = "	INIT 	! Initialize, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"XEE Erase,Program,Verify,Refresh" = "	INIT 	! Initialize, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map,
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+						 			 		DISABLE ! Exit XEE programming mode,
+						 			 		ENABLE ! Enter Programming Mode"	;
+	"XEE Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map, 
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"XEE Program Only"	=	"	INIT 	! Initialize, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map, 
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"XEE Verify Only"	=	"	INIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"XEE Verify USERCODE"	=	"	INIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"XEE Display USERCODE"	=	"INIT, SAVE_USERCODE"	;
+	"XEE Erase Only"	=	"	INIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+	"XEE Secure Device"	=	"	INIT 	! Initialize, 
+							PROGRAM_SECURITY ! Secure device"	;
+	"XEE Erase DONE bit"	=	"INIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"XEE Program DONE bit"	=	"INIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"XEE Read DONE bit" = 	"INIT,READ_DONE_BIT";
+	
+	"XEE Re-Initialize" = "   INIT 	! Initialize,  
+						       XEE_ENABLE	! Enable XEE programming mode, 
+							   ERASE	! Erase the device"	;
+
+	<!-- SRAM Operaitons -->
+	"SRAM Bypass"	=	"	INIT 	! Initialize"	;
+	"SRAM Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"SRAM Display ID" = 	"INIT, READ_ID, SAVE_ID";
+	"SRAM Refresh" = " 	INIT !Initialize,
+						ENABLE ! Enter Programming Mode";
+
+	"SRAM Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						SRAM_ENABLE	! Enable SRAM programming mode"	;
+						
+	"SRAM Read and Save JEDEC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"SRAM Calculate Checksum"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";							 			 	
+	"SRAM Read and Save ISC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"SRAM Read and Save"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"SRAM Calculate Data CRC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";	
+	
+	"SRAM Erase,Program,Verify" = "	INIT 	! Initialize,
+								ERASE_DONE_BIT	! Erase DONE bit,  
+								FAST_PROGRAM	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit"	;
+	"SRAM Program,Verify" = "	INIT 	! Initialize,
+								ERASE_DONE_BIT	! Erase DONE bit,  
+								FAST_PROGRAM	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit"	;
+	"SRAM Program Only" = "	INIT 	! Initialize,
+								ERASE_DONE_BIT	! Erase DONE bit,  
+								FAST_PROGRAM	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE	! Program USERCODE,
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit"	;
+	"SRAM Erase,Program,Verify,Secure"	=	"	INIT 	! Initialize,
+											ERASE_DONE_BIT	! Erase DONE bit, 
+											FAST_PROGRAM	! Program Fuse Map, 
+											FAST_PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit"	;
+	"SRAM Program Only"	=	"	INIT 	! Initialize,
+							ERASE_DONE_BIT	! Erase DONE bit, 
+							FAST_PROGRAM	! Program Fuse Map, 
+							FAST_PROGRAM_USERCODE		! Program USERCODE,
+							SRAM_PROGRAM_DONE_BIT 	! Program DONE bit"	;
+	"SRAM Verify Only"	=	"	INIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"SRAM Verify USERCODE"	=	"	INIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"SRAM Display USERCODE"	=	"INIT, SAVE_USERCODE"	;
+	"SRAM Erase Only"	=	"	INIT 	! Initialize, 
+							ERASE_DONE_BIT	! ERASE DONE bit,
+							SRAM_ERASE	! Erase the device"	;
+	"SRAM Erase DONE bit"	=	"INIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"SRAM Program DONE bit"	=	"INIT 	! Initialize, 
+							SRAM_PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"SRAM Read DONE bit"	=	"INIT 	! Initialize,  
+					 SRAM_ENABLE	! Enable SRAM programming mode, 
+					 READ_DONE_BIT	! Erase the done bit"	;
+	"SRAM Re-Initialize" = "   INIT 	! Initialize,  
+						       SRAM_ENABLE	! Enable SRAM programming mode,
+							 ERASE_DONE_BIT	! ERASE DONE bit, 
+							 SRAM_ERASE	! Erase the device"	;
+
+	<!-- XSRAM Operaitons -->
+	"XSRAM Bypass"	=	"	INIT 	! Initialize"	;
+	"XSRAM Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"XSRAM Display ID" = 	"INIT, READ_ID, SAVE_ID";
+
+	"XSRAM Disable Only" = "	INIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						SRAM_READ_ENABLE	! Enable XSRAM mode"	;
+						
+	"XSRAM Read and Save JEDEC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"XSRAM Calculate Checksum"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";							 			 	
+	"XSRAM Read and Save ISC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"XSRAM Read and Save"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";
+	"XSRAM Calculate Data CRC"	=	"INIT, SAVE_ARRAY, SAVE_USERCODE";	
+	
+	"XSRAM Verify Only"	=	"	INIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Verify USERCODE"	=	"	INIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Display USERCODE"	=	"INIT, SAVE_USERCODE"	;
+	"XSRAM Read DONE bit"	=	"INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+					 	SRAM_READ_ENABLE	! Enable SRAM programming mode,  
+					 	READ_DONE_BIT	! Erase the done bit"	;
+	
+</Operation_List>
+<Operation_List label="ChainSVFOperation">
+	<!-- EE Operations -->
+	"Bypass"	=	"	SVFINIT 	! Initialize"	;
+	"Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Display ID" = 	"SVFINIT, READ_ID, SVF_SAVE_ID";
+	"Refresh" = " 	SVFINIT !Initialize,
+					ENABLE ! Enter Programming Mode";
+
+	"Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"Enable Only" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						ENABLE	! Enable the programming mode"	;
+						
+	"Read and Save JEDEC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	
+	"Calculate Checksum"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	
+	"Read and Save ISC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"Read and Save"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"Calculate Data CRC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+								 
+	"Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Erase,Program,Verify,Secure"	=	"	SVFINIT 	! Initialize, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map, 
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Program Only"	=	"	SVFINIT 	! Initialize, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map, 
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Verify Only"	=	"	SVFINIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"Display USERCODE"	=	"SVFINIT, SVF_SAVE_USERCODE"	;
+	"Erase Only"	=	"	SVFINIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+	"Secure Device"	=	"	SVFINIT 	! Initialize, 
+							PROGRAM_SECURITY ! Secure device"	;
+	"Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"Read DONE bit" = 	"SVFINIT,SVF_SAVE_DONE_BIT";
+	
+	"Re-Initialize" = "   SVFINIT 	! Initialize,  
+						  ENABLE	! Enable programming mode, 
+						  ERASE	! Erase the device"	;
+	"Capture Only" = "	SVFINIT 	! Initialize,
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Capture Bscan register"	;
+
+	<!-- X-EE Operaitons -->
+	"XEE Bypass"	=	"	SVFINIT 	! Initialize"	;
+	"XEE Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"XEE Display ID" = 	"SVFINIT, READ_ID, SVF_SAVE_ID";
+	"XEE Refresh" = " 	SVFINIT !Initialize,
+						ENABLE ! Enter Programming Mode";
+
+	"XEE Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	 			 		
+	"XEE Enable Only" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						XEE_ENABLE	! Enable XEE programming mode"	;
+						
+	"XEE Read and Save JEDEC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"XEE Calculate Checksum"	=	"SVFINIT,SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";							 			 	
+	"XEE Read and Save ISC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"XEE Read and Save"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"XEE Calculate Data CRC"	=	"SVFINIT,SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	
+	"XEE Erase,Program,Verify" = "	SVFINIT 	! Initialize, 
+								ERASE	! Erase the device, 
+								PROGRAM	! Program Fuse Map,
+								PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"XEE Erase,Program,Verify,Refresh" = "	SVFINIT 	! Initialize, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map,
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit, 
+						 			 		DISABLE ! Exit XEE programming mode,
+						 			 		ENABLE ! Enter Programming Mode"	;
+	"XEE Erase,Program,Verify,Secure"	=	"	SVFINIT 	! Initialize, 
+											ERASE	! Erase the device, 
+											PROGRAM	! Program Fuse Map, 
+											PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"XEE Program Only"	=	"	SVFINIT 	! Initialize, 
+							ERASE	! Erase the device, 
+							PROGRAM	! Program Fuse Map, 
+							PROGRAM_USERCODE		! Program USERCODE,
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"XEE Verify Only"	=	"	SVFINIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"XEE Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"XEE Display USERCODE"	=	"SVFINIT, SVF_SAVE_USERCODE"	;
+	"XEE Erase Only"	=	"	SVFINIT 	! Initialize, 
+							ERASE	! Erase the device"	;
+	"XEE Secure Device"	=	"	SVFINIT 	! Initialize, 
+							PROGRAM_SECURITY ! Secure device"	;
+	"XEE Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"XEE Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"XEE Read DONE bit" = 	"SVFINIT,SVF_SAVE_DONE_BIT";
+	
+	"XEE Re-Initialize" = "   SVFINIT 	! Initialize,  
+						       XEE_ENABLE	! Enable XEE programming mode, 
+							   ERASE	! Erase the device"	;
+
+	<!-- SRAM Operaitons -->
+	"SRAM Bypass"	=	"	SVFINIT 	! Initialize"	;
+	"SRAM Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"SRAM Display ID" = 	"SVFINIT, READ_ID, SVF_SAVE_ID";
+	"SRAM Refresh" = " 	SVFINIT !Initialize,
+						ENABLE ! Enter Programming Mode";
+
+	"SRAM Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"SRAM Enable Only" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						SRAM_ENABLE	! Enable SRAM programming mode"	;
+						
+	"SRAM Read and Save JEDEC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"SRAM Calculate Checksum"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";							 			 	
+	"SRAM Read and Save ISC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"SRAM Read and Save"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"SRAM Calculate Data CRC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";	
+	
+	"SRAM Erase,Program,Verify" = "	SVFINIT 	! Initialize,
+								ERASE_DONE_BIT	! Erase DONE bit, 
+								FAST_PROGRAM	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit"	;
+	"SRAM Program,Verify" = "	SVFINIT 	! Initialize,
+								ERASE_DONE_BIT	! Erase DONE bit, 
+								FAST_PROGRAM	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE	! Program USERCODE,
+								VERIFY	! Verify Fuse Map, 
+			 			 		VERIFY_USERCODE		! Verify USERCODE, 
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit"	;
+	"SRAM Program Only" = "	SVFINIT 	! Initialize,
+								ERASE_DONE_BIT	! Erase DONE bit, 
+								FAST_PROGRAM	! Program Fuse Map,
+								FAST_PROGRAM_USERCODE	! Program USERCODE,
+			 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit"	;
+	"SRAM Erase,Program,Verify,Secure"	=	"	SVFINIT 	! Initialize,
+											ERASE_DONE_BIT	! Erase DONE bit, 
+											FAST_PROGRAM	! Program Fuse Map, 
+											FAST_PROGRAM_USERCODE	! Program USERCODE,
+											VERIFY	! Verify Fuse Map, 
+						 			 		VERIFY_USERCODE		! Verify USERCODE, 
+						 			 		PROGRAM_SECURITY ! Secure device,
+						 			 		SRAM_PROGRAM_DONE_BIT 	! Program DONE bit"	;
+	"SRAM Program Only"	=	"	SVFINIT 	! Initialize,
+							ERASE_DONE_BIT	! Erase DONE bit, 
+							FAST_PROGRAM	! Program Fuse Map, 
+							FAST_PROGRAM_USERCODE		! Program USERCODE,
+							SRAM_PROGRAM_DONE_BIT 	! Program DONE bit"	;
+	"SRAM Verify Only"	=	"	SVFINIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"SRAM Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"SRAM Display USERCODE"	=	"SVFINIT, SVF_SAVE_USERCODE"	;
+	"SRAM Erase Only"	=	"	SVFINIT 	! Initialize, 
+							ERASE_DONE_BIT	! ERASE DONE bit,
+							SRAM_ERASE	! Erase the device"	;
+	"SRAM Erase DONE bit"	=	"SVFINIT 	! Initialize, 
+							ERASE_DONE_BIT	! Erase the done bit"	;
+	"SRAM Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							SRAM_PROGRAM_DONE_BIT	! Program DONE bit"	;
+	
+	"SRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+					 SRAM_ENABLE	! Enable SRAM programming mode, 
+					 SVF_SAVE_DONE_BIT	! Read the done bit"	;
+	"SRAM Re-Initialize" = "   SVFINIT 	! Initialize,  
+						       SRAM_ENABLE	! Enable SRAM programming mode,
+							 ERASE_DONE_BIT	! ERASE DONE bit, 
+							   SRAM_ERASE	! Erase the device"	;
+
+	<!-- XSRAM Operaitons -->
+	"XSRAM Bypass"	=	"	SVFINIT 	! Initialize"	;
+	"XSRAM Verify ID" = 	"	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"XSRAM Display ID" = 	"SVFINIT, READ_ID, SVF_SAVE_ID";
+
+	"XSRAM Disable Only" = "	SVFINIT 	! Initialize, 
+	 			 		DISABLE ! Exit the programming mode"	;
+	"XSRAM Enable Only" = "	SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+						SRAM_READ_ENABLE	! Enable XSRAM mode"	;
+						
+	"XSRAM Read and Save JEDEC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"XSRAM Calculate Checksum"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";							 			 	
+	"XSRAM Read and Save ISC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"XSRAM Read and Save"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";
+	"XSRAM Calculate Data CRC"	=	"SVFINIT, SVF_SAVE_ARRAY, SVF_SAVE_USERCODE";	
+	
+	"XSRAM Verify Only"	=	"	SVFINIT 	! Initialize, 
+							VERIFY	! Verify Fuse Map, 
+		 			 		VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Verify USERCODE"	=	"	SVFINIT 	! Initialize, 
+								VERIFY_USERCODE		! Verify USERCODE"	;
+	"XSRAM Display USERCODE"	=	"SVFINIT, SVF_SAVE_USERCODE"	;
+	"XSRAM Program DONE bit"	=	"SVFINIT 	! Initialize, 
+							PROGRAM_DONE_BIT	! Program DONE bit"	;
+	"XSRAM Read DONE bit"	=	"SVFINIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						IO_STATE ! Program Bscan register, 
+					 	SRAM_READ_ENABLE	! Enable SRAM programming mode,  
+					 	READ_DONE_BIT	! Erase the done bit"	;
+
+</Operation_List>
+<Script>
+<![CDATA[
+// reviewed: kiu 11/28/2000
+function INIT {
+	! Row_Width	  : DEVICE_ROW_WIDTH; 
+	! Address_Length : ADDRESS_REGISTER_LENGTH;
+	HDR HDR_LENGTH TDI(HDR_PATTERN);
+	HIR HIR_LENGTH TDI(HIR_PATTERN);
+	TDR TDR_LENGTH TDI(TDR_PATTERN);
+	TIR TIR_LENGTH TDI(TIR_PATTERN);
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+}
+
+// reviewed: kiu 11/28/2000
+function SVFINIT {
+	! Row_Width	  : DEVICE_ROW_WIDTH; 
+	! Address_Length : ADDRESS_REGISTER_LENGTH;
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+}
+
+// reviewed: kiu 11/28/2000
+function PRELOAD {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+}
+
+// reviewed: kiu 11/28/2000
+function INI_PRELOAD {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(#0^BSCAN_Length);
+}
+// reviewed: kiu 11/28/2000
+function SAMPLE {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   STATE DRPAUSE;
+   STATE IDLE;
+}
+
+// reviewed: kiu 11/28/2000
+function INI_SAMPLE {				
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   STATE DRPAUSE;
+   STATE IDLE;
+}
+
+function CAPTURE {	
+	datastream SavedBScanTDO[1][BSCAN_Length];	
+	file NewFile = "FILE_SAVE";		
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(#0^BSCAN_Length)
+   					TDO(SavedBScanTDO[1]);
+   Bscan[1] = SavedBScanTDO[1];	
+   ! Shift in Preload(0x1C) instruction;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+   // Write To file 
+   fopen NewFile att "w"
+					 format "SVF_Plus";	
+   fwrite NewFile (BSCAN_TDO, Bscan);
+   fclose 	NewFile;
+   
+}
+function DYNAMIC {	
+   ! Shift in Preload(0x1C) instruction;
+   ENDDR DRPAUSE;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1])
+   					DMASK(BscanMask[1]);
+   STATE IDLE;
+}
+// reviewed: kiu 11/28/2000
+function ENABLE {
+	! Shift in ISC ENABLE(0x15) instruction;
+	SIR Instruction_Length TDI (ISC_ENABLE);
+	RUN_TEST	TCK 3
+				DELAY 20;
+}
+
+// reviewed: kiu 10/02/2001
+function XEE_ENABLE {
+	! Shift in LSCC XEE ENABLE(0x35) instruction;
+	SIR Instruction_Length TDI (LSCC_X_ENABLE);
+	RUN_TEST	TCK 3
+				DELAY 20;
+}
+
+// added: kiu 10/02/2001
+function SRAM_READ_ENABLE {
+	! Shift in LSCC SRAM READ ENABLE(0x75) instruction;
+	SIR Instruction_Length TDI (LSCC_SRAM_READ_ENABLE);
+	RUN_TEST	TCK 3
+				DELAY 20;
+}
+
+// reviewed: kiu 10/02/2001
+function SRAM_ENABLE {
+	! Shift in LSCC SRAM ENABLE(0x55) instruction;
+	SIR Instruction_Length TDI (LSCC_SRAM_ENABLE);
+	RUN_TEST	TCK 3
+				DELAY 20;
+}
+
+// reviewed: kiu 11/28/2000
+function DISABLE {
+	! Shift in ISC DISABLE(0x1E) instruction;
+	SIR	Instruction_Length 	TDI (ISC_DISABLE);
+	RUN_TEST	TCK 3
+				DELAY 200;
+}
+
+// reviewed: kiu 11/28/2000
+function READ_ID {
+	! Shift in IDCODE(0x16) instruction;
+	SIR Instruction_Length 	TDI (IDCODE);
+	STATE IDLE;
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+					TDO	(IDTDI[1])
+					MASK (DEVICE_ID_MASK);
+}
+
+function ERASE {
+	! Shift in ISC ERASE(0x03) instruction;
+	SIR Instruction_Length TDI (ISC_ERASE);
+	RUN_TEST 	TCK 3 DELAY PWE;
+	! Shift in ISC DISCHARGE(0x14) instruction;
+	SIR Instruction_Length TDI (ISC_DISCHARGE);
+	RUN_TEST 	TCK 3 DELAY 10;
+}
+
+function SRAM_ERASE {
+	int32	RowCount = 1;
+	! Shift in ISC ADDRESS INIT(0x21) instruction;
+	SIR Instruction_Length	TDI (ISC_ADDRESS_INIT);
+	STATE IDLE;
+	! Shift in ISC PROGRAM INCR(0x27) instruction;
+	SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+
+	// Program the rest of the device
+	repeat Address_Length {
+		! Shift in Row = RowCount;
+		SDR	Row_Width	TDI	(#1^Row_Width);
+		RUN_TEST	TCK 	3
+					DELAY 	1;
+		RowCount = RowCount + 1;
+	} // repeat
+	! Shift in ISC PROGRAM USERCODE(0x1A) instruction;
+	SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+	SDR Usercode_Length	TDI	(#1^Usercode_Length);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	1;
+
+}
+
+// Program Functions _____________________________________________
+//03/16/01 Nguyen added new function PROGRAM_VERIFY to support concurent
+function	PROGRAM_VERIFY	{
+	int32	Row = 1;
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;
+	
+	! Shift in ISC ADDRESS INIT(0x21) instruction;
+	SIR Instruction_Length	TDI (ISC_ADDRESS_INIT);
+	STATE IDLE;
+	! Shift in ISC PROGRAM INCR(0x27) instruction;
+    SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+	STATE DRPAUSE;
+	! Shift in Data Row = RowCount;
+	SDR	Row_Width	TDI	(FuseArray_TDI[Row]);
+	
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWP;
+				
+	! Shift in ISC READ INCR(0x2A) instruction; 
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+				
+	// Program the rest of the device
+	repeat Address_Length - 1	{
+		RowCount = RowCount + 1;
+		! Shift in out Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(FuseArray_TDI[Row+1])
+								TDO (FuseArray_TDI[Row]);
+		Row = Row + 1;
+		
+		! Shift in ISC PROGRAM INCR(0x27) instruction;
+    	SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		
+		! Shift in ISC READ INCR(0x2A) instruction; 
+		SIR Instruction_Length	TDI	(ISC_READ_INCR);
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+	}			
+	
+	! Shift out Data Row = RowCount; 
+	SDR_VERIFY	Row_Width	TDI	(#1^Row_Width)
+							TDO	(FuseArray_TDI[Row]);
+	Address[1] = #1@(#0^(Address_Length-1));
+}
+// reviewed: kiu 11/28/2000
+function PROGRAM {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+
+	! Shift in ISC ADDRESS INIT(0x21) instruction;
+	SIR Instruction_Length	TDI (ISC_ADDRESS_INIT);
+	STATE IDLE;
+
+	! Shift in ISC PROGRAM INCR(0x27) instruction;
+	SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+
+	// Program the rest of the device
+	repeat Address_Length {
+		! Shift in Data Row = RowCount; 
+		SDR	Row_Width	TDI	(FuseArray_TDI);
+		RUN_TEST	TCK 	3
+					DELAY 	PWP;
+		RowCount = RowCount + 1 ;
+	} // repeat
+}
+function FAST_PROGRAM {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+
+	! Shift in ISC ADDRESS INIT(0x21) instruction;
+	SIR Instruction_Length	TDI (ISC_ADDRESS_INIT);
+	STATE IDLE;
+
+	! Shift in ISC PROGRAM INCR(0x27) instruction;
+	SIR Instruction_Length	TDI (ISC_PROGRAM_INCR);
+
+	// Program the rest of the device
+	repeat Address_Length {
+		! Shift in Data Row = RowCount;
+		SDR	Row_Width	TDI	(FuseArray_TDI);
+		RUN_TEST	TCK 	3
+					DELAY 	1;
+		RowCount = RowCount + 1 ;
+	} // repeat
+}
+
+
+// reviewed: kiu 11/28/2000
+function PROGRAM_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+		! Shift in ISC PROGRAM USERCODE(0x1A) instruction;
+		SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+		SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+		RUN_TEST	TCK	3 DELAY	PWP;
+	}
+}
+function FAST_PROGRAM_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+		! Shift in ISC PROGRAM USERCODE(0x1A) instruction;
+		SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+		SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+		RUN_TEST	TCK	3 DELAY	1;
+	}
+}
+
+// 03/09/01 Nguyen removed the Program DONE bit from DISABLE fuction
+// and make it into seperation function
+function PROGRAM_DONE_BIT {
+	! Shift in ISC PROGRAM DONE(0x2F) instruction;
+	SIR	Instruction_Length 	TDI (ISC_PROGRAM_DONE);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 3
+				DELAY 50;
+	STATE IDLE;
+	//Verify DONE Bit
+	! Shift in ISC DISABLE(0x1E) instruction;
+    SIR Instruction_Length TDI (ISC_DISABLE);
+	RUN_TEST IDLE TCK 3 DELAY 200;
+	SIR_VERIFY Instruction_Length TDI(ISC_DISABLE)
+				      TDO(0xFF)
+			   	      MASK(0x04);
+}
+function SRAM_PROGRAM_DONE_BIT {
+	! Shift in ISC PROGRAM DONE(0x2F) instruction; 
+	SIR	Instruction_Length 	TDI (ISC_PROGRAM_DONE);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 3
+				DELAY PWP;
+	STATE IDLE;
+	! Shift in ISC DISABLE(0x1E) instruction;
+    SIR Instruction_Length TDI (ISC_DISABLE);
+	RUN_TEST IDLE TCK 3 DELAY 200;
+	! Shift in LSCC SRAM ENABLE(0x55) instruction;
+	SIR Instruction_Length TDI (LSCC_SRAM_ENABLE);
+	RUN_TEST IDLE TCK 3 DELAY 1E-1;
+	! Shift in IDCODE(0x16) instruction;
+	SIR_VERIFY Instruction_Length TDI(IDCODE)
+				      TDO(0xFF)
+			   	      MASK(0x04);
+}
+
+function VERIFY_DONE_BIT {	
+	! Shift in IDCODE(0x16) instruction;
+    SIR_VERIFY	Instruction_Length 	TDI (IDCODE)
+						TDO(0xFF)
+			   	      	MASK(0x04);			   	      	
+}
+//03/09/01 Nguyen added new function to support erase DONE bit operation
+function ERASE_DONE_BIT {
+	! Shift in ISC ERASE DONE(0x24) instruction;
+	SIR	Instruction_Length 	TDI (ISC_ERASE_DONE);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 3
+				DELAY 50;
+	STATE IDLE;
+}
+// reviewed: kiu 11/28/2000
+function PROGRAM_SECURITY {
+	! Shift in ISC PROGRAM SECURITY(0x09) instruction; 
+	SIR Instruction_Length	TDI	(ISC_PROGRAM_SECURITY);
+	RUN_TEST	TCK 	3
+				DELAY 	50;
+	STATE IDLE;
+}
+
+// Verify Functions _____________________________________________
+// reviewed: kiu 11/28/2000
+function VERIFY {
+	int32	RowCount = 1;
+	FuseArray_TDI.row = 1;
+	Address.row = 1;	
+	! Shift in ISC ADDRESS SHIFT(0x01) instruction; 
+	SIR Instruction_Length	TDI (ISC_ADDRESS_SHIFT);
+	SDR	Address_Length TDI(Address[1]);  
+	! Shift in ISC READ INCR(0x2A) instruction; 
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	repeat Address_Length {
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+		! Shift Out Data Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+								TDO	(FuseArray_TDI);
+		RowCount = RowCount +1;
+	}
+}
+
+// reviewed: kiu 11/28/2000
+function VERIFY_USERCODE {
+	IF (Usercode_TDI.row = 1)
+	{
+		! Shift in READ USERCODE(0x17) instruction; 
+		SIR Instruction_Length TDI (USERCODE);
+		SDR_VERIFY	Usercode_Length TDI (#1^Usercode_Length)
+									TDO	(Usercode_TDI);
+	}
+}
+
+// Read n Save Functions _____________________________________________ 
+// reviewed: kiu 11/28/2000
+function SAVE_ID	{
+	datastream SavedID[1][ID_Length];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in IDCODE(0x16) instruction;
+	SIR Instruction_Length	TDI	(IDCODE);
+	SDR	ID_Length	TDI (#1^ID_Length)
+					TDO	(SavedID);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (ID, SavedID);
+	fclose 	NewFile;
+}
+function SVF_SAVE_ID	{
+	! Shift in IDCODE(0x16) instruction;
+	SIR Instruction_Length 	TDI (IDCODE);
+	STATE IDLE;
+	SDR_VERIFY	ID_Length	TDI (#1^ID_Length)
+							TDO	(IDTDI[1])
+							MASK (#0^ID_Length);
+}
+// reviewed: kiu 11/28/2000
+function SAVE_ARRAY {
+	int32	RowCount = 1;
+	datastream SavedFuseMap[Address_Length][Row_Width];
+	file NewFile = "FILE_SAVE";
+	Address.row = 1;	
+	
+	! Shift in ISC ADDRESS SHIFT(0x01) instruction;
+	SIR Instruction_Length	TDI (ISC_ADDRESS_SHIFT);
+	SDR	Address_Length TDI(Address[1]);
+	! Shift in ISC READ INCR(0x2A) instruction;   
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	
+	// Program the rest of the device 
+	repeat Address_Length {
+		// Goto Run Test Idle
+		RUN_TEST	TCK 	3
+						DELAY 	PWV;						
+		! Shift Out Data Row = RowCount;
+		SDR Row_Width 	TDI (#0^Row_Width)
+						TDO (SavedFuseMap);
+		RowCount = RowCount +1;
+	}
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (FuseArray_TDI, SavedFuseMap);
+	fclose 	NewFile;
+}
+function SVF_SAVE_ARRAY {
+	int32	RowCount = 1;
+	Address.row = 1;	
+	! Shift in ISC ADDRESS SHIFT(0x01) instruction; 
+	SIR Instruction_Length	TDI (ISC_ADDRESS_SHIFT);
+	SDR	Address_Length TDI(Address[1]);  
+	! Shift in ISC READ INCR(0x2A) instruction;
+	SIR Instruction_Length	TDI	(ISC_READ_INCR);
+	
+	repeat Address_Length {
+		// Goto Run Test Idle 
+		RUN_TEST	TCK 	3
+					DELAY 	PWV;
+		! Shift Out Data Row = RowCount;
+		SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+								TDO	(#1^Row_Width)
+								MASK (#0^Row_Width);
+		RowCount = RowCount +1;
+	}
+}
+// reviewed: kiu 11/28/2000
+function SAVE_USERCODE {
+	datastream SavedUsercode[1][Usercode_Length];
+	file NewFile = "FILE_SAVE";
+	! Shift in READ USERCODE(0x17) instruction;
+	SIR Instruction_Length	TDI (USERCODE);
+	// Goto Run Test Idle 
+	RUN_TEST	TCK 	3
+				DELAY 	PWV;
+	SDR	Usercode_Length	TDI(#1^Usercode_Length)
+						TDO(SavedUsercode);
+	// Write To file 
+	fopen NewFile att "wa"
+					 format "SVF_Plus";	
+	fwrite NewFile (Usercode_TDI, SavedUsercode);
+	fclose 	NewFile;
+}
+function SVF_SAVE_USERCODE {
+	! Shift in READ USERCODE(0x17) instruction;
+	SIR Instruction_Length TDI (USERCODE);
+	SDR_VERIFY 	Usercode_Length TDI (#1^Usercode_Length)
+								TDO	(#1^Usercode_Length)
+								MASK(#0^Usercode_Length);
+}
+//03/09/01 Nguyen added new function Read DONE bit to support Read DONE bit operation
+function READ_DONE_BIT {
+	datastream SavedDONE_BIT[1][Instruction_Length];
+	file	NewFile = "FILE_SAVE"; 
+	
+	! Shift in IDCODE(0x16) instruction; 
+	SIR Instruction_Length	TDI	(0x16)
+							TDO (SavedDONE_BIT);
+	// Write To File 
+	fopen	NewFile att "w" format "SVF_Plus";
+	fwrite	NewFile (DONE_BIT, SavedDONE_BIT);
+	fclose 	NewFile;
+}
+function SVF_SAVE_DONE_BIT {
+	! Shift in IDCODE(0x16) instruction;
+	SIR_VERIFY Instruction_Length	TDI	(0x16)
+				TDO (#1^Instruction_Length)
+				MASK(#0^Instruction_Length);
+}
+]]>
+</Script>
+</SVF_Plus>

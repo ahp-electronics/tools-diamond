@@ -1,0 +1,27 @@
+var pairs =
+{
+"isrx1a":{"primitive":1}
+,"input":{"1-bit":1,"logic":1,"data":1}
+,"1-bit":{"shift":1}
+,"shift":{"register":1}
+,"architectures":{"supported":1}
+,"inputs":{"clk":1}
+,"clk":{"rst":1}
+,"rst":{"rstail":1}
+,"rstail":{"runail":1}
+,"outputs":{"update":1}
+,"update":{"lock":1}
+,"register":{"input":1}
+,"logic":{"uses":1}
+,"uses":{"adaptive":1}
+,"adaptive":{"capture":1}
+,"capture":{"input":1}
+,"data":{"following":1}
+,"following":{"symbolic":1}
+,"symbolic":{"diagram":1}
+,"diagram":{"shows":1}
+,"shows":{"flip-flop":1}
+,"flip-flop":{"structure":1}
+,"structure":{"primitive":1}
+}
+;Search.control.loadWordPairs(pairs);

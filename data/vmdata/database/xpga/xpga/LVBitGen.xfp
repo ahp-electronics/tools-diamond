@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		FPGA_Plus	SYSTEM	"FPGA_Plus.dtd" >
+<FPGA_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+<Operation name="Write_Configuration_Embedded_Bitstream">
+	call write_configuration_embedded_bitstream;
+</Operation>
+<Data name="DataPattern">
+    <Row width="36">
+        h0000 FFFF FFFF FFFF ABAA AAAA AAAA AAAA BBBB BBBB BBBB BBBB CCCC CCCC CCCC CCCC DDDD DDDD,
+        h0001 FFFF FFFF FFFF ABAA AAAA AAAA AAAA BBBB BBBB BBBB BBBB CCCC CCCC CCCC CCCC DDDD DDDD,
+        h0002 FFFF FFFF FFFF ABAA AAAA AAAA AAAA BBBB BBBB BBBB BBBB CCCC CCCC CCCC CCCC DDDD DDDD,
+        h0003 FFFF FFFF FFFF AAAA AAAA AAAA AAAA BBBB BBBB BBBB BBBB CCCC CCCC CCCC CCCC DDDD DDDD,
+        h0004 FFFF FFFF FFFF AAAA AAAA AAAA AAAA BBBB BBBB BBBB BBBB CCCC CCCC CCCC CCCC DDDD DDDD,
+        h0005 FFFF FFFF FFFF AAAA AAAA AAAA AAAA BBBB BBBB BBBB BBBB CCCC CCCC CCCC CCCC DDDD DDDD,
+        h0006 FFFF FFFF FFFF AAAA AAAA AAAA AAAA BBBB BBBB BBBB BBBB CCCC CCCC CCCC CCCC DDDD DDDD,
+        h0007 FFFF FFFF FFFF AAAA AAAA AAAA AAAA BBBB BBBB BBBB BBBB CCCC CCCC CCCC CCCC DDDD DDDD,
+        h0008 FFFF FFFF FFFF AAAA AAAA AAAA AAAA BBBB BBBB BBBB BBBB CCCC CCCC CCCC CCCC DDDD DDDD
+    </Row>
+</Data>
+<Data name="Preamble">
+    <Row width="2"> b1000001110100111 </Row>
+</Data>
+<Data name="Usercode">
+    <Row width="4"> h0120c043 </Row>
+</Data>
+<!-- Dummy bytes before preamble -->
+<Data name="HeaderDummy">
+	<Row width="8"> hFFFFFFFF FFFFFFFF</Row>
+</Data>
+<!-- Dummy bytes after preamble to start CRC -->
+<Data name="CRCDummy">
+	<Row width="4"> hFFFFFFFF</Row>
+</Data>
+<Data name="RowPadding">
+	<Row width="8"> hFFFFFFFF FFFFFFFF </Row>
+</Data>
+<!-- Supercool row padding -->
+<Data name="SCRowPadding">
+	<Row width="8"> hFFFFFFFF FFFFFFFF </Row>
+</Data>
+<!-- LAVA1 row padding -->
+<Data name="LV1RowPadding">
+	<Row width="12"> hFFFFFFFF FFFFFFFF FFFFFFFF</Row>
+</Data>
+<Data name="SCReadRowPadding">
+	<Row width="9"> hFFFFFFFF FFFFFFFF FF</Row>
+</Data>
+<Data name="LV1ReadRowPadding">
+	<Row width="12"> hFFFFFFFF FFFFFFFF FFFFFFFF</Row>
+</Data>
+<Data name="ReadRowPadding">
+	<Row width="9"> hFFFFFFFF FFFFFFFF FF</Row>
+</Data>
+<Parameter>
+    BYTE	StartByte = hFE;
+    BYTE	Done = hBF;
+    BYTE	DoneSecure = h3F;
+    
+    DATASTREAM HEADER_DUMMY = hFFFFFFFFFFFFFFFF;
+	DATASTREAM PREAMBLE = h83A7;
+	DATASTREAM TRAILING_HEADER = hFFFFFFFF;
+	DATASTREAM CRC_STARTER = hFFFF;
+	DATASTREAM DATA_FRAME_HEADER = hFE;
+	DATASTREAM STOP_BYTES = hFFFFFFFFFFFFFFFFFFFFFFFF;
+	DATASTREAM STOP_CRC_CALCULATION = hFF;
+	DATASTREAM POST_AMBLE = hFFFFFFFFFFFFFFFF;
+	DATASTREAM DONE = hBF;
+</Parameter>
+<Script>
+<![CDATA[
+function write_configuration_embedded_bitstream
+{
+	//
+	// Drive all pins high
+	//
+	cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+	cpu_set_pin( CPU_CS_PIN, CPU_HIGH );
+	cpu_set_pin( CPU_WRITE_EN_PIN, CPU_HIGH );
+	cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+	cpu_send_register();
+	
+	//
+	// Drive PROG pin low
+	//
+	cpu_set_pin( CPU_PROG_PIN, CPU_LOW );
+	cpu_send_register();
+	
+	//
+	// Check INIT pin low
+	//
+	cpu_check_pin( CPU_INIT_PIN, CPU_LOW, 5000, 100 );
+	
+	//
+	// Check DONE pin low
+	//
+	cpu_check_pin( CPU_DONE_PIN, CPU_LOW, 5000, 100 );
+	
+	//
+	// Drive PROG pin high
+	//
+	cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+	cpu_send_register();
+	
+	//
+	// Check INIT pin high
+	//
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 5000, 100 );
+	
+	//
+	// Drive WRITE_EN pin low
+	//
+	cpu_set_pin( CPU_WRITE_EN_PIN, CPU_LOW );
+	cpu_send_register();
+	
+	//
+	// Drive CCLK pin low
+	//
+	cpu_set_pin( CPU_CCLK_PIN, CPU_LOW );
+	cpu_send_register();
+	
+	//
+	// Drive CS pin low
+	//
+	cpu_set_pin( CPU_CS_PIN, CPU_LOW );
+	cpu_send_register();
+	
+	//
+	// Blast bitstream data
+	//
+	cpu_bitstream_data();
+	
+	//
+	// Check INIT pin high
+	//
+	cpu_check_pin( CPU_INIT_PIN, CPU_HIGH, 5000, 500 );
+	
+	//
+	// Check DONE pin high
+	//
+	cpu_check_pin( CPU_DONE_PIN, CPU_HIGH, 5000, 500 );
+	
+	//
+	// Drive all pins high
+	//
+	cpu_set_pin( CPU_PROG_PIN, CPU_HIGH );
+	cpu_set_pin( CPU_CS_PIN, CPU_HIGH );
+	cpu_set_pin( CPU_WRITE_EN_PIN, CPU_HIGH );
+	cpu_set_pin( CPU_CCLK_PIN, CPU_HIGH );
+	cpu_send_register();
+}
+
+]]>
+</Script>	
+</FPGA_Plus>

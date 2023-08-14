@@ -1,0 +1,20 @@
+var pairs =
+{
+"downloading":{"design":1}
+,"design":{"files":1,"program":1}
+,"specified":{"processing":1}
+,"processing":{"options":1}
+,"options":{"program":1}
+,"program":{"command":1,"click":1}
+,"command":{"download":1}
+,"download":{"design":1}
+,"files":{"daisy-chained":1}
+,"daisy-chained":{"devices":1}
+,"diamond":{"programmer":1}
+,"programmer":{"choose":1}
+,"choose":{"design":1}
+,"click":{"toolbar":1}
+,"using":{"diamond":1}
+,"programming":{"fpga":1}
+}
+;Search.control.loadWordPairs(pairs);

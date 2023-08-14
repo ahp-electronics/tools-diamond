@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spirit:component>
+	<spirit:vendor>Lattice Semiconductor Corporation</spirit:vendor>
+    <spirit:library>Architecture_Modules</spirit:library>
+    <spirit:name>I2C</spirit:name>
+    <spirit:version>1.1</spirit:version>
+
+    <spirit:fileSets>
+        <spirit:fileset>
+          <spirit:name>Diamond_Synthesis</spirit:name>
+          <spirit:group>synthesis</spirit:group>
+          <spirit:file>
+            <spirit:name>${sbp_path}/${instance}/${instance}.v</spirit:name>
+            <spirit:fileType>verilogSource</spirit:fileType>
+          </spirit:file>
+        </spirit:fileset>
+        <spirit:fileset>
+          <spirit:name>Diamond_Synthesis</spirit:name>
+          <spirit:group>synthesis</spirit:group>
+          <spirit:file>
+            <spirit:name>${sbp_path}/${instance}/${instance}.vhd</spirit:name>
+            <spirit:fileType>vhdlSource</spirit:fileType>
+          </spirit:file>
+        </spirit:fileset>
+
+        <spirit:fileset>
+          <spirit:name>Diamond_Simulation</spirit:name>
+          <spirit:group>simulation</spirit:group>
+          <spirit:file>
+            <spirit:name>${sbp_path}/${instance}/${instance}.v</spirit:name>
+            <spirit:fileType>verilogSource</spirit:fileType>
+          </spirit:file>
+        </spirit:fileset>
+        <spirit:fileset>
+          <spirit:name>Diamond_Simulation</spirit:name>
+          <spirit:group>simulation</spirit:group>
+          <spirit:file>
+            <spirit:name>${sbp_path}/${instance}/${instance}.vhd</spirit:name>
+            <spirit:fileType>vhdlSource</spirit:fileType>
+          </spirit:file>
+        </spirit:fileset>
+    </spirit:fileSets>
+
+    <spirit:componentGenerators>
+      <spirit:componentGenerator spirit:hidden="true" spirit:scope="instance">
+        <spirit:name>Configuration</spirit:name>
+        <spirit:apiType>none</spirit:apiType>
+        <spirit:transportMethods>
+          <spirit:transportMethod>file</spirit:transportMethod>
+        </spirit:transportMethods>
+        <spirit:generatorExe>${sbp_path}/${instance}/generate_core.tcl</spirit:generatorExe>
+        <spirit:group>CONFIG</spirit:group>
+      </spirit:componentGenerator>
+      <spirit:componentGenerator spirit:hidden="true" spirit:scope="instance">
+        <spirit:name>CreateNGD</spirit:name>
+        <spirit:apiType>none</spirit:apiType>
+        <spirit:transportMethods>
+          <spirit:transportMethod>file</spirit:transportMethod>
+        </spirit:transportMethods>
+        <spirit:generatorExe>${sbp_path}/${instance}/generate_ngd.tcl</spirit:generatorExe>
+        <spirit:group>CONFIG</spirit:group>
+      </spirit:componentGenerator>
+      <spirit:componentGenerator spirit:hidden="true" spirit:scope="instance">
+        <spirit:name>Generation</spirit:name>
+        <spirit:apiType>none</spirit:apiType>
+        <spirit:transportMethods>
+          <spirit:transportMethod>file</spirit:transportMethod>
+        </spirit:transportMethods>
+        <spirit:generatorExe>${sbp_path}/${instance}/generate_core.tcl</spirit:generatorExe>
+        <spirit:group>GENERATE</spirit:group>
+      </spirit:componentGenerator>
+    </spirit:componentGenerators>
+
+    <spirit:vendorExtensions>
+      <lattice:date>2013-09-22.14:14:33</lattice:date>
+      <lattice:TYPE>Module</lattice:TYPE>
+      <lattice:devicefamily>sn5w00,wi5s00</lattice:devicefamily>
+      <lattice:familys>
+       <lattice:family>
+         <lattice:name>sn5w00</lattice:name>
+         <lattice:supportdevice></lattice:supportdevice>
+         <lattice:supportpackage></lattice:supportpackage>
+       </lattice:family>
+       <lattice:family>
+         <lattice:name>wi5s00</lattice:name>
+         <lattice:supportdevice></lattice:supportdevice>
+         <lattice:supportpackage></lattice:supportpackage>
+       </lattice:family>
+      </lattice:familys>
+      <lattice:DesignEntry>Verilog HDL,VHDL</lattice:DesignEntry>
+      <lattice:Diamond>3.1</lattice:Diamond>
+      <lattice:about>mergedProjects/ipexpress/i2c_tab.htm</lattice:about>
+      <lattice:Help>iphelp.htm</lattice:Help>
+      <lattice:attributes>
+          <lattice:attribute lattice:name="BBox">false</lattice:attribute>
+      </lattice:attributes>
+      <lattice:elements/>
+      <lattice:lpc/>
+    </spirit:vendorExtensions>
+</spirit:component>

@@ -1,0 +1,1389 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!--
+	Nguyen 04/15/02
+	ORCA sub directory
+		. Contains device database file and all the algorithm files for ORCA devices such as:
+	.ispVM_004.xdf support:
+		. ORCA4ExxE family
+		. ORCA3LxxB family
+		. ORCA3C/T family
+		. Algorithm files for ORCA series 4
+		. orca4.svp
+		. turbo_orca4.svp
+		. Algorithm files for ORCA series 3
+		. orca3.svp
+		. turbo_orca3.svp
+	Spinti 09/13/02
+	    Added support for ORCA FPSC devices.
+	Spinti 10/21/03
+	    Added support for the ORSO42G5 and ORT42G5 devices.
+	Spinti 11/03/03
+	    Added support for the ORSPI4 devices.
+	Ong    07/21/04
+		 ORCA Device Families:
+	Spinti 02/08/05
+        Added <AliasName> ORSPII </AliasName> to ORSPI4.
+        Added <AliasName>or4e8x850h</AliasName> to ORT8850H.
+        Added <AliasName>or4e8x850l</AliasName> to ORT8850L.
+	Spinti 03/07/05
+        Added ORCA/FPSC Hidden family for multiple device ID scanning support.
+	Tim 12/1/06
+	  Added ORCA2 template for orca2 files.
+	Spinti. 05/24/07
+		. Moved ORCA2C/T to mature.
+
+-->
+<ispXDF version="13.1">
+    <Comment>Device List</Comment>
+	<Family name="ORCA/FPSC">
+        <Device name="ORSO42G5/82G5">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORSO42G5/82G5 </CodeName>
+            <FullName> ORSO42G5/82G5 </FullName>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <JtagID>0x4144803B</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength> 6 </IRLength>
+            <Package>
+                <Type> All </Type>
+                <PON> ORSO42G5/82G5 </PON>
+                <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="ORT42G5/82G5">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORT42G5/82G5 </CodeName>
+            <FullName> ORT42G5/82G5 </FullName>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <JtagID>0x8144803B</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength> 6 </IRLength>
+            <ColWidth> 1304 </ColWidth>
+            <Package>
+                <Type> All </Type>
+                <PON> ORT42G5/82G5 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>        
+        <Device name="OR3L225B/OR3T30">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3l00b</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3L225B/OR3T30 </CodeName>
+            <FullName> OR3L225B/OR3T30 </FullName>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <JtagID>0x8643003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength> 3 </IRLength>
+            <Package>
+                <Type> All </Type>
+                <PON> OR3L225B/OR3T30 </PON>
+            </Package>
+        </Device>
+        <Device name="OR3C55/OR3T55">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3C55/OR3T55 </CodeName>
+            <FullName> OR3C55/OR3T55 </FullName>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <JtagID>0x0483003B</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength> 3 </IRLength>
+            <Package>
+                <Type> All </Type>
+                <PON> OR3C55/OR3T55 </PON>
+            </Package>
+        </Device>
+        <Device name="OR3C80/OR3T80">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3C80/OR3T80 </CodeName>
+            <FullName> OR3C80/OR3T80 </FullName>
+            <AlgoTemplate>NOOP.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="NOOP.svp"
+                         value="0x01"/>
+            <JtagID>0x0683003B</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength> 3 </IRLength>
+            <Package>
+                <Type> All </Type>
+                <PON> OR3C80/OR3T80 </PON>
+            </Package>
+        </Device>
+        <Operation>
+            &quot;Bypass&quot;
+        </Operation>
+        <Hidden>YES</Hidden>
+        <LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+	<Family name="ORCA FPSC">
+        <Device name="ORLI10G">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORLI10G </CodeName>
+            <FullName> ORLI10G </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x0144803B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 1304            </ColWidth>
+            <BitstreamColWidth> 1284 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3176768    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>2178</BScan_Length>
+            <Package>
+                <Type> 680-ball PBGAM          </Type>
+                <PON> ORLI10G-XXBM680        </PON>
+                <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="ORSO42G5">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORSO42G5 </CodeName>
+            <FullName> ORSO42G5 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x4144803B</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6 </IRLength>
+            <ColWidth> 1304 </ColWidth>
+            <BitstreamColWidth> 1284 </BitstreamColWidth>
+            <RowWidth>    1 </RowWidth>
+            <UESPhysicalBits>32</UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3176768 </TotalFuses> 
+            <PWP> 1 </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1 </PWV>
+            <BScan_Length>2178</BScan_Length>
+            <Package>
+                <Type> 484-ball BGA </Type>
+                <PON> ORSO42G5-XXB484 </PON>
+                <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="ORSO82G5">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORSO82G5 </CodeName>
+            <FullName> ORSO82G5 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x4144803B</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6 </IRLength>
+            <ColWidth> 1304 </ColWidth>
+            <BitstreamColWidth> 1284 </BitstreamColWidth>
+            <RowWidth> 1 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3176768 </TotalFuses> 
+            <PWP> 1 </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1 </PWV>
+            <BScan_Length>2178</BScan_Length>
+            <Package>
+                <Type> 680-ball PBGAM </Type>
+                <PON> ORSO82G5-XXBM680 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="ORSPI4">
+            <Comm> JTAG </Comm>
+			<Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORSPI4 </CodeName>
+            <FullName> ORSPI4 </FullName>
+            <AliasName> ORSPII </AliasName>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x80C4803B</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6 </IRLength>
+            <ColWidth> 1560 </ColWidth>
+            <BitstreamColWidth> 1540 </BitstreamColWidth>
+            <RowWidth>    1 </RowWidth>
+            <UESPhysicalBits>32</UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4798784 </TotalFuses> 
+            <PWP> 1 </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1 </PWV>
+            <BScan_Length>1966</BScan_Length>
+            <Package>
+                <Type> 1036-ball fpSBGA </Type>
+                <PON> ORSPI4-XXFE1036 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 1156-ball fpBGA </Type>
+                <PON> ORSPI4-XXF1156 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+<!--                
+        <Device name="ORT4622">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORT4622 </CodeName>
+            <FullName> ORT4622 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x8407003B</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>   3 </IRLength>
+            <ColWidth> 292 </ColWidth>
+            <RowWidth>   1 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 548960 </TotalFuses> 
+            <PWP> 1 </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1 </PWV>
+            <BScan_Length>573</BScan_Length>
+            <Package>
+                <Type> All  </Type>
+                <PON> ORT4622 </PON>
+            </Package>
+            <Package>
+                <Type> 432-ball EBGA    </Type>
+                <PON> ORT4622BC432-DB   </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball PBGAM   </Type>
+                <PON> ORT4622BM680-DB   </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+-->
+        <Device name="ORT42G5">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORT42G5 </CodeName>
+            <FullName> ORT42G5 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x8144803B</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6 </IRLength>
+            <ColWidth> 1304 </ColWidth>
+            <BitstreamColWidth> 1284 </BitstreamColWidth>
+            <RowWidth>    1 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3176768 </TotalFuses> 
+            <PWP> 1 </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1 </PWV>
+            <BScan_Length>2178</BScan_Length>
+            <Package>
+                <Type> 484-ball BGA </Type>
+                <PON> ORT42G5-XXB484 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>        
+        <Device name="ORT82G5">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORT82G5 </CodeName>
+            <FullName> ORT82G5 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x8144803B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 1304            </ColWidth>
+            <BitstreamColWidth> 1284 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3176768    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>2178</BScan_Length>
+            <Package>
+                <Type> 680-ball PBGAM          </Type>
+                <PON> ORT82G5-XXBM680        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>        
+        <Device name="ORT8850L">
+            <Comm> JTAG </Comm>
+			<Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORT8850L </CodeName>
+            <FullName> ORT8850L </FullName>
+            <AliasName>or4e8x850l</AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x0384803B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 920            </ColWidth>
+            <BitstreamColWidth> 900 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1652544    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>1218</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> ORT8850L </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 352-ball PBGA          </Type>
+                <PON> ORT8850L-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball PBGAM          </Type>
+                <PON> ORT8850L-XXBM680    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="ORT8850H">
+            <Comm> JTAG </Comm>
+			<Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> ORT8850H </CodeName>
+            <FullName> ORT8850H </FullName>
+            <AliasName>or4e8x850h</AliasName>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x00C4803B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 1560         </ColWidth>
+            <BitstreamColWidth> 1540 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <BitstreamColWidth> 1540 </BitstreamColWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4798784    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>2178</BScan_Length>
+            <Package>
+                <Type> 680-ball PBGAM          </Type>
+                <PON> ORT8850H-XXBM680        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+<!--                
+        <Device name="OR3LP26B">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3LP26B </CodeName>
+            <FullName> OR3LP26B </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x8407003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 292            </ColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 548960    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>573</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3LP26B </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 352-ball PBGA    </Type>
+                <PON> OR3LP26BBA352-DB  </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball PBGAM   </Type>
+                <PON> OR3LP26BBM680-DB  </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="OR3TP12">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3TP12 </CodeName>
+            <FullName> OR3TP12 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x0807003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 232            </ColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 287680    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>573</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3TP12 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 240-pin SQFP2     </Type>
+                <PON> OR3TP12-XXPS240    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball PBGA     </Type>
+                <PON> OR3TP12-XXBA256    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 352-ball PBGA     </Type>
+                <PON> OR3TP12-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+-->
+        <Operation>
+        	&quot;Program,Verify&quot;
+            &quot;Program&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Bypass&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+			&quot;Serial Program&quot;
+            &quot;Serial Read DONE bit&quot;
+        </Operation>
+        <BypassInst>111111</BypassInst>
+        <IDInstr>0x05</IDInstr>
+        <ISCRelease value="0x00" extension="*.bit;*.rbt"/>
+        <BitstreamModelTemplate>ORCA Template</BitstreamModelTemplate>
+        <LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+   	<Family name="ORCA4ExxE">
+        <Device name="OR4E02">
+            <Comm> JTAG </Comm>
+			<Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR4E02 </CodeName>
+            <FullName> OR4E02 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x0380803B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 920            </ColWidth>
+            <BitstreamColWidth> 900 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1652544    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>1218</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR4E02 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball FSBGA          </Type>
+                <PON> OR4E02-XXBA256    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 352-ball PBGA          </Type>
+                <PON> OR4E02-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 416-ball PBGAM          </Type>
+                <PON> OR4E02-XXBM416    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 432-ball EBGA          </Type>
+                <PON> OR4E02-XXBC432    </PON>
+            </Package>
+            <Package>
+                <Type> 680-ball PBGAM          </Type>
+                <PON> OR4E02-XXBM680    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="OR4E04">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR4E04 </CodeName>
+            <FullName> OR4E04 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x0140803B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 1304            </ColWidth>
+            <BitstreamColWidth> 1284 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 3176768    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>2178</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR4E04 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 352-ball FBGA          </Type>
+                <PON> OR4E04-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 416-ball PBGAM          </Type>
+                <PON> OR4E04-XXBM416        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 432-ball EBGA          </Type>
+                <PON> OR4E04-XXBC432        </PON>
+            </Package>
+            <Package>
+                <Type> 680-ball PBGAM          </Type>
+                <PON> OR4E04-XXBM680        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="OR4E06">
+            <Comm> JTAG </Comm>
+			<Access> JTAG/SERIAL </Access>
+			<Architecture>or4e00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR4E06 </CodeName>
+            <FullName> OR4E06 </FullName>
+            <AlgoTemplate>Orca4.svp</AlgoTemplate>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <TurboAlgoTemplate name="TURBO_Orca4.svp"
+                         value="0x01"/>
+            <JtagID>0x00C0803B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    6            </IRLength>
+            <ColWidth> 1560         </ColWidth>
+            <BitstreamColWidth> 1540 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4798784    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>2178</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR4E06 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 352-ball FBGA          </Type>
+                <PON> OR4E06-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 432-ball EBGA          </Type>
+                <PON> OR4E06-XXBC432        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball PBGAM          </Type>
+                <PON> OR4E06-XXBM680        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Operation>
+        	&quot;Program,Verify&quot;
+            &quot;Program&quot;
+            &quot;Verify Only&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Bypass&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+            &quot;Read and Save&quot;
+			&quot;Serial Program&quot;
+            &quot;Serial Read DONE bit&quot;
+        </Operation>
+        <BypassInst>111111</BypassInst>
+        <IDInstr>0x05</IDInstr>
+        <ISCRelease value="0x00" extension="*.bit;*.rbt"/>
+        <BitstreamModelTemplate>ORCA Template</BitstreamModelTemplate>
+        <LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+    <Family name="ORCA3LxxB">
+<!--
+        <Device name="OR3L125B">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3L125B </CodeName>
+            <FullName> OR3L125B </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x8407003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 292            </ColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 548960    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>573</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3L125B </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 432-ball EBGA    </Type>
+                <PON> OR3L125B   </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball PBGAM   </Type>
+                <PON> OR3L125B   </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+-->
+        <Device name="OR3L165B">
+            <Comm> JTAG </Comm>
+			<Access> JTAG/SERIAL </Access>
+			<Architecture>or3l00b</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3L165B </CodeName>
+            <FullName> OR3L165B </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x8043003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 520            </ColWidth>
+            <BitstreamColWidth> 500 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1110760    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>1021</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3L165B </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin SQFP2          </Type>
+                <PON> OR3L165B-XXPS208    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 240-pin SQFP2          </Type>
+                <PON> OR3L165B-XXPS240    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 352-ball PBGA          </Type>
+                <PON> OR3L165B-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 432-ball EBGA          </Type>
+                <PON> OR3L165B-XXBC432    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball PBGAM          </Type>
+                <PON> OR3L165B-XXBM680    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="OR3L225B">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3l00b</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3L225B </CodeName>
+            <FullName> OR3L225B </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x8643003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 610            </ColWidth>
+            <BitstreamColWidth> 580 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1537240    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>1213</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3L225B </PON>
+            </Package>
+            <Package>
+                <Type> 432-ball EBGA          </Type>
+                <PON> OR3L225B-XXBC432        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 680-ball PBGAM          </Type>
+                <PON> OR3L225B-XXBM680        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Operation>
+        	&quot;Program,Verify&quot;
+            &quot;Program&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Bypass&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+			&quot;Serial Program&quot;
+            &quot;Serial Read DONE bit&quot;
+        </Operation>
+        <BypassInst>111</BypassInst>
+        <IDInstr>0x03</IDInstr>
+        <ISCRelease value="0x00" extension="*.bit;*.rbt"/>
+        <BitstreamModelTemplate>Unknown Template</BitstreamModelTemplate>
+        <LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+    <Family name="ORCA3C/T">
+        <Device name="OR3T20">
+            <Comm> JTAG </Comm>
+			<Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3T20 </CodeName>
+            <FullName> OR3T20 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x0303003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 224            </ColWidth>
+            <BitstreamColWidth> 204 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 191912    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>1021</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3L165B </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin SQFP          </Type>
+                <PON> OR3T20-XXS208    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 240-pin SQFP          </Type>
+                <PON> OR3T20-XXS240    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball PBGA          </Type>
+                <PON> OR3T20-XXBA256    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 352-ball PBGA          </Type>
+                <PON> OR3T20-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="OR3T30">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3T30 </CodeName>
+            <FullName> OR3T30 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x8643003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 256            </ColWidth>
+            <BitstreamColWidth> 236 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 252072    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>1213</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3T30 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin SQFP          </Type>
+                <PON> OR3T30-XXS208        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball PBGA          </Type>
+                <PON> OR3T30-XXBA256        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+		<Package>
+                <Type> 352-ball PBGA          </Type>
+                <PON> OR3T30-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="OR3T55">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3T55 </CodeName>
+            <FullName> OR3T55 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x0483003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 312            </ColWidth>
+            <BitstreamColWidth> 292 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 387048    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>573</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3T55 </PON>
+            </Package>
+            <Package>
+                <Type> 208-pin SQFP2          </Type>
+                <PON> OR3T55-XXPS208        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 240-pin SQFP2          </Type>
+                <PON> OR3T55-XXPS240        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball PBGA          </Type>
+                <PON> OR3T55-XXBA256        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+		<Package>
+                <Type> 352-ball PBGA          </Type>
+                <PON> OR3T55-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="OR3C55">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3c00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3C55 </CodeName>
+            <FullName> OR3C55 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x0483003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 312            </ColWidth>
+            <BitstreamColWidth> 292 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 387048    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>573</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3C55 </PON>
+            </Package>
+            <Package>
+                <Type> 208-pin SQFP2          </Type>
+                <PON> OR3C55-XXPS208        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 240-pin SQFP2          </Type>
+                <PON> OR3C55-XXPS240        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 256-ball PBGA          </Type>
+                <PON> OR3C55-XXBA256        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+    		<Package>
+                <Type> 352-ball PBGA          </Type>
+                <PON> OR3C55-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="OR3T80">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3T80 </CodeName>
+            <FullName> OR3T80 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x0683003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 376            </ColWidth>
+            <BitstreamColWidth> 356 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 562664    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>701</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3T80 </PON>
+            </Package>
+            <Package>
+                <Type> 208-pin SQFP2          </Type>
+                <PON> OR3T80-XXPS208        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 240-pin SQFP2          </Type>
+                <PON> OR3T80-XXPS240        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 352-ball PBGA          </Type>
+                <PON> OR3T80-XXBA352    </PON>
+            </Package>
+            <Package>
+                <Type> 432-ball EBGA          </Type>
+                <PON> OR3T80-XXBC432        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="OR3C80">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3c00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3C80 </CodeName>
+            <FullName> OR3C80 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x0683003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 376            </ColWidth>
+            <BitstreamColWidth> 356 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 562664    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>701</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3C80 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin SQFP2          </Type>
+                <PON> OR3C80-XXPS208        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 240-pin SQFP2          </Type>
+                <PON> OR3C80-XXPS240        </PON>
+            </Package>
+			<Package>
+                <Type> 352-ball PBGA          </Type>
+                <PON> OR3C80-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 432-ball EBGA          </Type>
+                <PON> OR3C80-XXBC432        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Device name="OR3T125">
+            <Comm> JTAG </Comm>
+            <Access> JTAG/SERIAL </Access>
+			<Architecture>or3t00</Architecture>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> OR3T125 </CodeName>
+            <FullName> OR3T125 </FullName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>Orca3.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_Orca3.svp"
+                         value="0x01"/>
+            <JtagID>0x0383003B</JtagID>
+            <IDMask>0xFFFFFFFF    </IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    3            </IRLength>
+            <ColWidth> 464            </ColWidth>
+            <BitstreamColWidth> 446 </BitstreamColWidth>
+            <RowWidth> 1            </RowWidth>
+            <UESPhysicalBits> 32    </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 872488    </TotalFuses> 
+            <PWP> 1        </PWP>
+            <PWE> 1 </PWE>
+            <PWV> 1        </PWV>
+            <BScan_Length>893</BScan_Length>
+            <Package>
+                <Type> All          </Type>
+                <PON> OR3T125 </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 208-pin SQFP2          </Type>
+                <PON> OR3T125-XXPS208        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 240-pin SQFP2          </Type>
+                <PON> OR3T125-XXPS240        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+			<Package>
+                <Type> 352-ball PBGA          </Type>
+                <PON> OR3T125-XXBA352    </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 432-ball EBGA          </Type>
+                <PON> OR3T125-XXBC432        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+            <Package>
+                <Type> 600-ball EBGA          </Type>
+                <PON> OR3T125-XXBC600        </PON>
+              <Adapter vendor=
+                       adapter_name="Not Applicable"/>
+            </Package>
+        </Device>
+        <Operation>
+        	&quot;Program,Verify&quot;
+            &quot;Program&quot;
+            &quot;Verify ID&quot;
+            &quot;Display ID&quot;
+            &quot;Bypass&quot;
+            &quot;Verify USERCODE&quot;
+            &quot;Display USERCODE&quot;
+			&quot;Serial Program&quot;
+            &quot;Serial Read DONE bit&quot;
+        </Operation>
+        <BypassInst>111</BypassInst>
+        <IDInstr>0x03</IDInstr>
+        <ISCRelease value="0x00" extension="*.bit;*.rbt"/>
+        <BitstreamModelTemplate>Unknown Template</BitstreamModelTemplate>
+        <LicenseControl>LSC_MATURE_DEVICE</LicenseControl>
+    </Family>
+</ispXDF>

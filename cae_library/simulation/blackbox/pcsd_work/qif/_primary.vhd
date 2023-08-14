@@ -1,0 +1,62 @@
+library verilog;
+use verilog.vl_types.all;
+entity qif is
+    generic(
+        CREG            : integer := 18;
+        SREG            : integer := 9;
+        SREG_ST         : integer := 32;
+        TIE_LO_STS      : integer := 0
+    );
+    port(
+        pcs_addro       : out    vl_logic_vector(5 downto 0);
+        pcs_rdo         : out    vl_logic;
+        pcs_wdatao      : out    vl_logic_vector(7 downto 0);
+        pcs_wstbo       : out    vl_logic;
+        pcs_rdatao      : out    vl_logic_vector(7 downto 0);
+        pcs_into        : out    vl_logic;
+        xge_mode        : out    vl_logic;
+        char_mode       : out    vl_logic;
+        force_int       : out    vl_logic;
+        tck_full        : in     vl_logic;
+        plol            : in     vl_logic;
+        ffc_sync_toggle : in     vl_logic;
+        sync_pulse      : out    vl_logic;
+        bist_head_sel   : out    vl_logic_vector(1 downto 0);
+        bist_time_sel   : out    vl_logic_vector(1 downto 0);
+        bist_res_sel    : out    vl_logic_vector(1 downto 0);
+        bist_rpt_ch_sel : out    vl_logic_vector(1 downto 0);
+        pcs_ctl_3_qd_02 : out    vl_logic_vector(7 downto 0);
+        pcs_ctl_4_qd_03 : out    vl_logic_vector(7 downto 0);
+        bist_en         : out    vl_logic;
+        bist_mode       : out    vl_logic;
+        bist_bus8bit_sel: out    vl_logic;
+        bist_bypass_tx_gate: out    vl_logic;
+        bist_rx_data_sel: out    vl_logic;
+        bist_ptn_sel    : out    vl_logic_vector(2 downto 0);
+        bist_sync_head_req: out    vl_logic_vector(1 downto 0);
+        bist_usr_def_head: out    vl_logic_vector(19 downto 0);
+        ser_ctl_1_qd_0a : out    vl_logic_vector(7 downto 0);
+        ser_ctl_2_qd_0b : out    vl_logic_vector(7 downto 0);
+        ser_ctl_3_qd_0c : out    vl_logic_vector(7 downto 0);
+        ser_ctl_4_qd_0d : out    vl_logic_vector(7 downto 0);
+        ser_ctl_5_qd_0e : out    vl_logic_vector(7 downto 0);
+        rst_ctl_1_qd_10 : out    vl_logic_vector(7 downto 0);
+        rst_ctl_2_qd_11 : out    vl_logic_vector(7 downto 0);
+        resetn          : in     vl_logic;
+        ion_delay       : in     vl_logic;
+        pcs_addri       : in     vl_logic_vector(5 downto 0);
+        pcs_wdatai      : in     vl_logic_vector(7 downto 0);
+        pcs_wstbi       : in     vl_logic;
+        pcs_rdi         : in     vl_logic;
+        sciselaux       : in     vl_logic;
+        pcs_rdatai      : in     vl_logic_vector(7 downto 0);
+        scienaux        : in     vl_logic;
+        mc1_qif_ctl     : in     vl_logic_vector(143 downto 0);
+        int_cha_out     : in     vl_logic_vector(3 downto 0);
+        ffs_ls_sync_status: in     vl_logic_vector(3 downto 0);
+        bist_report     : in     vl_logic_vector(15 downto 0);
+        ser_sts_1_qd_25 : in     vl_logic_vector(7 downto 0);
+        ser_sts_3_qd_27 : in     vl_logic_vector(7 downto 0);
+        ser_sts_4_qd_28 : in     vl_logic_vector(7 downto 0)
+    );
+end qif;

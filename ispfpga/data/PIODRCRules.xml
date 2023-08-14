@@ -1,0 +1,978 @@
+<?xml version="1.0" ?>
+<RuleDatabase>
+	<Rule>
+		<No>001001</No>
+		<Name>PortConnection</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Port connection check.</ShortDes>
+		<Description>The port [{PORT_NAME}] doesn't have a load.</Description>
+		<PossibleSuggestedActions>Connect or remove the port.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001002</No>
+		<Name>NSidePortAssignmentCheck</Name>
+		<Severity>Error</Severity>
+		<ShortDes>N-side port assignment check</ShortDes>
+		<Description>The n-side port [{PORT_NAME}] assignment is not supported.</Description>
+		<PossibleSuggestedActions>Use p-side port to make assignment.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001003</No>
+		<Name>PortDifferentialPSideExistence</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Differential port positive side existence check</ShortDes>
+		<Description>The port [{PORT_NAME}] doesn't have a complementary positive side port defined.</Description>
+		<PossibleSuggestedActions>Check port definition.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001004</No>
+		<Name>PortVrefSupport</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Port VREF support check.</ShortDes>
+		<Description>The Port [{PORT_NAME}] is set to [{IO_TYPE}], which does not require Vref.</Description>
+		<PossibleSuggestedActions>Change IOBUF setting to enable VREF.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001010</No>
+		<Name>PortExistence</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Port existence check.</ShortDes>
+		<Description>The port [{PORT_NAME}] doesn't exist in the design.</Description>
+		<PossibleSuggestedActions>Remove the port.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001014</No>
+		<Name>PortGroupExistence</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Port group existence check.</ShortDes>
+		<Description>The port group [{GROUP_NAME}] is not defined.</Description>
+		<PossibleSuggestedActions>Remove the port group.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePGROUP</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001015</No>
+		<Name>PortGroupUniqueness</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Port group uniqueness check.</ShortDes>
+		<Description>The port [{PORT_NAME...}] defined in [{Group}] has been included in multiple port groups.</Description>
+		<PossibleSuggestedActions>Change group definitions and make sure the port is only included in one port group.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePGROUP</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001016</No>
+		<Name>PortTotalNumber</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Port total number check.</ShortDes>
+		<Description>The total number of ports [{NUMBER}] exceeds the total assignable pins available [{NUMBER}] in the target device [{ARCH_NAME}-{PKG_NAME}].</Description>
+		<PossibleSuggestedActions>Change to a device with more availabe pins.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001017</No>
+		<Name>PortTotalDifferentialPairNumber</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Differential port total number check</ShortDes>
+		<Description>The total number of {true-LVDS/differential} ports [{NUMBER}] exceeds the total {true-LVDS/differential} pin pairs available [{NUMBER}] in the target device [{ARCH_NAME}-{PKG_NAME}].</Description>
+		<PossibleSuggestedActions>Change to a device with more differential pin pairs. Migrate to a large device with more differential pin pairs.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001018</No>
+		<Name>PortGlobalClkNumber</Name>
+		<Severity>Warning</Severity>
+		<ShortDes>Global clock total number check</ShortDes>
+		<Description>The number of clocks [{NUMBER}] exceeds the available number of global clock dedicated pins [{NUMBER}].</Description>
+		<PossibleSuggestedActions>Warning:non-clock dedicated pins will be used for some clock ports.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001019</No>
+		<Name>PortTotalIoTypeNumber</Name>
+		<Severity>Error</Severity>
+		<ShortDes>IO Type number check</ShortDes>
+		<Description>The number of incompatible IO Types defined [{NUMBER}] exceeds the avaiable number of banks/VCCIO values available [{NUMBER}].</Description>
+		<PossibleSuggestedActions>Reduce number of IO Types. Use compatible IO types. Change to a large device with more banks.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001020</No>
+		<Name>PortFloatingNumber</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Floating port number check</ShortDes>
+		<Description>The number of unassigned ports [{NUMBER}] exceeds the number of available pins [{NUMBER}] left based on the current assignment.</Description>
+		<PossibleSuggestedActions>Rearrange pin assignments. Change to a large device with more pins.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001021</No>
+		<Name>PortDifferentialIoType</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Differential port IO Type check</ShortDes>
+		<Description>Single-Ended IO type [{IO_TYPE}] is assigned to the differential port [{PORT_NAME}].</Description>
+		<PossibleSuggestedActions>Use a true-LVDS IO type for the port connected with differential primitives.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001022</No>
+		<Name>PortSingleEndedIoType</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Single ended port IO Type check</ShortDes>
+		<Description>Differential IO type [{IO_TYPE}] is assigned to the single ended port [{PORT_NAME}].</Description>
+		<PossibleSuggestedActions>Use non-differential IO type for the port.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001023</No>
+		<Name>PortBusIoTypeConsistency</Name>
+		<Severity>Warning</Severity>
+		<ShortDes>Bus IO Type consistency check</ShortDes>
+		<Description>The bus [{BUS_NAME}] has members with different IO types [{IO_TYPEs}].</Description>
+		<PossibleSuggestedActions>Use a consistent IO Type for all the members in the bus.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001024</No>
+		<Name>PortBusDirectionConsistency</Name>
+		<Severity>Warning</Severity>
+		<ShortDes>Bus direction consistency check</ShortDes>
+		<Description>The bus [{BUS_NAME}] has members with different port direction.</Description>
+		<PossibleSuggestedActions>Use the same direction for the bus.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001025</No>
+		<Name>PortClockAssignment</Name>
+		<Severity>Warning</Severity>
+		<ShortDes>Clock port assignment check</ShortDes>
+		<Description>The clock port [{PORT_NAME}] is assigned to a non clock dedicated pin [{PIN_NAME}], which might affect the clock performance.</Description>
+		<PossibleSuggestedActions>Use dedicated clock resources for the port.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001026</No>
+		<Name>PortPllAssignment</Name>
+		<Severity>Warning</Severity>
+		<ShortDes>PLL ports assignment check</ShortDes>
+		<Description>The port [{PORT_NAME}] connects to a PLL but is not assigned to a PLL dedicated pin, which might affect the clock performance.</Description>
+		<PossibleSuggestedActions>Assign the port to a PLL dedicated pin.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001027</No>
+		<Name>PortInGroupExistence</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Port defined in PORT GROUP existence check</ShortDes>
+		<Description>The port [{PORT_NAME}] defined in port group [{PORT_GROUP}] doesn't exist in the design.</Description>
+		<PossibleSuggestedActions>Remove the port.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001028</No>
+		<Name>PortVrefAssignment</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Port assigned to a vref which is not in the same bank</ShortDes>
+		<Description>The port [{PORT_NAME}] assigned to bank [{BANK_PORT}] is also assigned to VREF [{VREF_NAME}], which is in different bank [{VREF_BANK}].</Description>
+		<PossibleSuggestedActions>Assign the port to the same bank [{BANK}] of the VREF [{VREF NAME}].</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001029</No>
+		<Name>PortAssignmentLegalCheck</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Port assigned to pin is illegal</ShortDes>
+		<Description>Based on the current IO attributes settings, port [{PORT_NAME}] cannot be assigned to pin [{PIN_NAME}].</Description>
+		<PossibleSuggestedActions>Assign the port to a different pin or change the IO attribute settings of the port.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>001030</No>
+		<Name>IOGroupDriveCheck</Name>
+		<Severity>Warning</Severity>
+		<ShortDes>Drive current exceeds limit for IO group</ShortDes>
+		<Description>The average DC current drawn by IOs between GND connections, or between the last GND in an IO bank and the end of an IO bank shall not exceed n * 8mA. Where n is the number of IOs between bank GND connections or between the last GND in a bank and the end of a bank. The violating IO group/region contains port [{PORT_NAME}]. </Description>
+		<PossibleSuggestedActions>Rearrange your port assignments such that the Drive limit is exceeded.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Port</Category>
+	</Rule>
+	<Rule>
+		<No>002001</No>
+		<Name>PinExistence</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Pin existence check.</ShortDes>
+		<Description>The port [{PORT_NAME}] is assigned to a nonexistent pin [{PIN_NAME}].</Description>
+		<PossibleSuggestedActions>Reassign the port to a valid pin.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002002</No>
+		<Name>PinStateValue</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Pin state value check.</ShortDes>
+		<Description>The pin [{PIN_NAME}] is {reserved/assigned to }{PORT_NAME} and cannot be assigned to the port [{PORT_NAME}].</Description>
+		<PossibleSuggestedActions>Change the pin's assignment</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePin</LinkType>
+		<LinkIndex>2</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002003</No>
+		<Name>PinTypeValue</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Pin type value check.</ShortDes>
+		<Description>The pin [{PIN_NAME}] is not user assignable and cannot be assigned to the port [{PORT_NAME}]; for details, please refer to the device datasheet.</Description>
+		<PossibleSuggestedActions>Change the pin's assignment</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePin</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002004</No>
+		<Name>PinDirection</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Directional pin assignment check</ShortDes>
+		<Description>The [{input/outport}] port [{PORT_NAME}] is assigned to an [{output/input}] dedicated pins [{PIN_NAME}].</Description>
+		<PossibleSuggestedActions>Reassign the port to a valid pin.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002005</No>
+		<Name>PinDifferentialCapability</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Pin differential capability check</ShortDes>
+		<Description>The {true-LVDS/differential} port {PORT_NAME} is assigned to a {non-differential/non true-LVDS} pin [{PIN_NAME}] (or illegal differential pair [{NAME}]).</Description>
+		<PossibleSuggestedActions>Reassign the port to a valid differential pin.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002006</No>
+		<Name>PinDifferentialPSideExistence</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Differential pin pair positive pin existence check</ShortDes>
+		<Description>The differential port [{PORT_NAME}] cannot be assigned to the pin [{PIN_NAME}] because this pin doesn't have a complementary positive pin.</Description>
+		<PossibleSuggestedActions>Assign the port to a valid differential pin pair.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002007</No>
+		<Name>PinSysConfig</Name>
+		<Severity>Error</Severity>
+		<ShortDes>SysConfig pin assignment check.</ShortDes>
+		<Description>The state of the assigned pin [{PIN_NAME}] conflicts with the config mode and cannot be assigned to the port [{PORT_NAME}].</Description>
+		<PossibleSuggestedActions>Change pin assignment. Change sysconfig setting.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePin</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+		<Rule>
+		<No>002024</No>
+		<Name>PinSysConfigShared</Name>
+		<Severity>Warning</Severity>
+		<ShortDes>SysConfig shared pin assignment check.</ShortDes>
+		<Description>The state of the assigned pin [{PIN_NAME}] that is to be assigned to the port [{PORT_NAME}] coincides with the config mode, which can cause contention on the pin. </Description>
+		<PossibleSuggestedActions>Change pin assignment. Change sysconfig setting.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePin</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002008</No>
+		<Name>PinIoTypeCapability</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Pin IO Type capability check</ShortDes>
+		<Description>The port [{PORT_NAME}] has IO Type [{IO_TYPE}] assigned, but the IO Type is not supported by the assigned pin [{PIN_NAME}].</Description>
+		<PossibleSuggestedActions>Use a pin that support the IO Type.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002009</No>
+		<Name>PinVrefGroup</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Pin vref group check</ShortDes>
+		<Description>Pins in the VREF group [{GROUP_NAME}] require different VREF values.</Description>
+		<PossibleSuggestedActions>Make sure all the pins in the same VREF group require the same VREF value.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002010</No>
+		<Name>PinProhibit</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Prohibited pin assignment check</ShortDes>
+		<Description>The port [{PORT_NAME}] is assigned to a PROHIBIT pin [{PIN_NAME}].</Description>
+		<PossibleSuggestedActions>Reassign the port to a different pin.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002011</No>
+		<Name>PinPllAssignment</Name>
+		<Severity>Error</Severity>
+		<ShortDes>PLL pins assignment check</ShortDes>
+		<Description>The dedicated PLL pin [{PIN_NAME}] is used for the port [{PORT_NAME}] which doesn't connect to a PLL.</Description>
+		<PossibleSuggestedActions>Use non PLL dedicated pins.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002012</No>
+		<Name>PinVrefAvailability</Name>
+		<Severity>Error</Severity>
+		<ShortDes>VREF pin availability check</ShortDes>
+		<Description>VREF is required in bank [{BANK}] but there is no VREF pin available in the bank.</Description>
+		<PossibleSuggestedActions>Release a {VREF_pin} in bank [{BANK}].</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePin</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002013</No>
+		<Name>PinFeatureSupport</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Pin supported features check</ShortDes>
+		<Description>The port [{port_name}] with [{mode_name}] mode uses [{VCCIO3.3|LVDS|RSDS|HYPT}] that is not supported by the pin [{pin_name}].</Description>
+		<PossibleSuggestedActions>Assign the port to a pin that supports the VCCIO/LVDS/RSDS/HYPT feature.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002014</No>
+		<Name>PinDifferentialPairComplementary</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Differential pin pair usage check</ShortDes>
+		<Description>The differential port [{port_name}] is assigned to the pin [{pin_name}], but this pin's complementary pin [{pin_name}] is taken by the port [{port_name}].</Description>
+		<PossibleSuggestedActions>Assign the port to a different differential pin pair; or release the complentary pin.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002015</No>
+		<Name>PinDifferentialPairTrue</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Differential pin pair positive pin check</ShortDes>
+		<Description>The differential port [{port_name}] must be placed on a positive pin of a differential pin pair.</Description>
+		<PossibleSuggestedActions>Assign the port to a positive pin of a differential pin pair.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002022</No>
+		<Name>PinDdrUsageCheck</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Pin DDR usage patten check</ShortDes>
+		<Description>The following IDDRX(s) [{port_names}] and ODDRX(s) [{port_names}] can not be placed in the same DQS group.</Description>
+		<PossibleSuggestedActions>Check these ports'DDR usage and follow DDR usage model.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002023</No>
+		<Name>PinDDRSite</Name>
+		<Severity>Error</Severity>
+		<ShortDes>DDR site assignment check</ShortDes>
+		<Description>Cannot place PIO comp [{port_name}] on the PIO site [{pin_name}] because this type of DDR cannot be placed at the [{side}] side of ECP3</Description>
+		<PossibleSuggestedActions>Assign it to a supported side of device (To tell a pin's side from its pad name, PL means left, PR means right, PT means top, PB means bottom).</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>MIX</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>002025</No>
+		<Name>PinSysConfig_EFB_USER</Name>
+		<Severity>Warning</Severity>
+		<ShortDes>SysConfig pin assignment check.</ShortDes>
+		<Description>The state of the assigned pin [{PIN_NAME}] conflicts with the config mode and cannot be assigned to the port [{PORT_NAME}].</Description>
+		<PossibleSuggestedActions>Change pin assignment. Change sysconfig setting.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePin</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Pin</Category>
+	</Rule>
+	<Rule>
+		<No>003001</No>
+		<Name>BankExistence</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank existence check</ShortDes>
+		<Description>Bank [{BANK}] is not available in the target device [{DEVICE_NAME}].</Description>
+		<PossibleSuggestedActions>Use a valid bank number.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003002</No>
+		<Name>BankPinCapacity</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank pin capacity check</ShortDes>
+		<Description>The number of ports [{NUMBER}] assigned to the bank [{BANK_NAME}] exceeds the number [{NUMBER}] of pins available in the bank.</Description>
+		<PossibleSuggestedActions>Use multiple banks.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003003</No>
+		<Name>BankDiffPairCapacity</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank differential pin pair capacity check</ShortDes>
+		<Description>The number of {true-LVDS/differential} ports [{NUMBER}] assigned to the bank [{BANK_NAME}] exceeds the number of {true-LVDS/differential} pin pairs [{NUMBER]}] available in the bank.</Description>
+		<PossibleSuggestedActions>Use multiple banks.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003004</No>
+		<Name>BankVrefCapacity</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank VREF capacity check</ShortDes>
+		<Description>The number of different VREF required [{NUMBER}] exceeds the number of VREF capacity [{NUMBER}] supported by the {BANK/DEVICE} [{BANK_NAME/DEVICE_NAME}].</Description>
+		<PossibleSuggestedActions>Reduce the number of different VREF required for {BANK/DEVICE} [{BANK_NAME/DEVICE_NAME}].</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003005</No>
+		<Name>BankIoTypeCompatability</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank IO Type compatability check</ShortDes>
+		<Description>Ports [{PORT_NAMEs}] with incompatible IO types [{IO_TYPEs}] are assigned to the same bank [{BANK_NAME}].</Description>
+		<PossibleSuggestedActions>Use multiple banks.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003006</No>
+		<Name>BankIoTypeCapability</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank IO Type capability check</ShortDes>
+		<Description>The port [{PORT_NAME}] has IO Type [{IO_TYPE}] assigned, but the IO Type is not available in the assigned bank [{BANK_NAME}].</Description>
+		<PossibleSuggestedActions>Use a bank which supports the IO Type.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003007</No>
+		<Name>BankVccioValueConsistency</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank VCCIO value consistency check</ShortDes>
+		<Description>In the bank [{bank_value}], VCCIO for [{port_name}] is [{VCCIO_value}] and is incompatible with other ports that use VCCIO [{VCCIO_value}] (refer to port [{port_name}]).</Description>
+		<PossibleSuggestedActions>Assign the port to a different bank. {suggestions}</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003008</No>
+		<Name>BankVttValueConsistency</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank VTT value consistency check</ShortDes>
+		<Description>In the bank [{bank_value}], VTT for [{bank_port}] is  [{VTT_value}] and is incompatible with other ports that use VTT [{VTT_value}] (refer to port [{port_name}]).</Description>
+		<PossibleSuggestedActions>Assign the port to a different bank.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003009</No>
+		<Name>BankVrefLoadConsistency</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank VREF load IO_TYPE consistency check</ShortDes>
+		<Description>In the bank [{bank_value}], VREF for [{port_name}] is different from the other two VREFs for ports [{port_name}] and [{port_name}].</Description>
+		<PossibleSuggestedActions>Assign the port to a different bank.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003010</No>
+		<Name>BankVrefLoad1DriverMatch</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank VREF1 load driver consistency check</ShortDes>
+		<Description>The port [{port_name}] in the bank [{bank_value}] uses VREF1_LOAD, but there is no VREF1_DRIVER in that bank.</Description>
+		<PossibleSuggestedActions>Add VREF1_DRIVER to the bank.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003011</No>
+		<Name>BankVrefLoad2DriverMatch</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank VREF2 load driver consistency check</ShortDes>
+		<Description>The port [{port_name}] in the bank [{bank_value}] uses VREF2_LOAD, but there is no VREF2_DRIVER in that bank.</Description>
+		<PossibleSuggestedActions>Assign the port to a different bank.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003012</No>
+		<Name>BankVcmtConsistency</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank VCMT usage and IO_TYPE consistency check</ShortDes>
+		<Description>The ports [{port_name}] and [{port_name}] in the bank [{bank_value}] use VCMTs but their IO_TYPEs [{IO_TYPE_value}] and [{IO_TYPE_value}] are different.</Description>
+		<PossibleSuggestedActions>Assign the port to a different bank; Or modify IO_TYPE for one of the ports.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003013</No>
+		<Name>BankDifferentialLimit</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank differential output limitation check</ShortDes>
+		<Description>HYPT buffer is used together with LVDS/RSDS in the same bank. The port [{port_name}] is in conflict with other ports in the bank [{bank_value}] (refer to port [{port_name}]).</Description>
+		<PossibleSuggestedActions>Assign the port to a different bank.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003014</No>
+		<Name>BankVttDdrIIVcmtExclusive</Name>
+		<Severity>Error</Severity>
+		<ShortDes>VTT/DDR_II and VCMT exclusive check</ShortDes>
+		<Description>VCMT buffer is used together with VTT/DDR_II in the same bank. The port [{port_name}] is in conflict with other ports in bank [{bank_value}] (refer to port [{port_name}]).</Description>
+		<PossibleSuggestedActions>Assign the port to a different bank.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003015</No>
+		<Name>BankUniqueLVDS</Name>
+		<Severity>Error</Severity>
+		<ShortDes>BANK unique LVDS check</ShortDes>
+		<Description>In the bank [{bank_number}], the port [{port_name}] has its own LVDS signal [{signal_name}] which is different from the bank's LVDS signal [{signal_name}].</Description>
+		<PossibleSuggestedActions>Assign the port to a bank with the same LVDS signal.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003016</No>
+		<Name>BankUniquePG</Name>
+		<Severity>Error</Severity>
+		<ShortDes>BANK unique PG check</ShortDes>
+		<Description>In the bank [{bank_number}], the port [{port_name}] has its own PG signal [{signal_name}] which is different from the bank's PG signal [{signal_name}].</Description>
+		<PossibleSuggestedActions>Assign the port to a bank with same PG signal.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003017</No>
+		<Name>BankUniqueINRD</Name>
+		<Severity>Error</Severity>
+		<ShortDes>BANK unique INRD check</ShortDes>
+		<Description>In the bank [{bank_number}], the port [{port_name}] has its own INRD signal [{signal_name}] which is different from the bank's INRD signal [{signal_name}].</Description>
+		<PossibleSuggestedActions>Assign the port to a  bank with the same INRD signal.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003018</No>
+		<Name>ConfigBankIOVoltageMismatch</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Config Bank I/O voltage check</ShortDes>
+		<Description>Cannot assign [{PORT_NAME}] to [{IO_TYPE}] in bank [{BANK}] because [{CONFIG_KEY}] is set to [{CONFIG_ON_VALUE}] and CONFIG_IOVOLTAGE do not match the I/O voltage of the [{PORT_NAME}] in bank [{BANK}]</Description>
+		<PossibleSuggestedActions>Match CONFIG_IOVOLTAGE to the an acceptable IO_TYPE for the port.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>MIX</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003019</No>
+		<Name>DiffdriveBankMismatch</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Same bank same diffdrive check</ShortDes>
+		<Description>In the bank [{bank_value}], differential outputs [{port_name1}] and [{port_name2}] have {incompatible IO_TYPE values/different DIFFDRIVE values}{DRIVE1}{}{DRIVE2}.</Description>
+		<PossibleSuggestedActions>Assign one port to a different bank, or change them to compatible IO_TYPEs.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>MIX</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>003020</No>
+		<Name>BankVccioValueCompatibility</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Bank VCCIO value compatibility check</ShortDes>
+		<Description>The port [{port_name}] with Bank VCCIO requirement [{VCCIO_value}] cannot be assigned to Bank [{bank_value}] because it is incompatible with the Bank's VCCIO [{VCCIO_value}].</Description>
+		<PossibleSuggestedActions>Assign the port to a compatible bank. Change the Bank VCCIO value to be compatible with the port.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>MIX</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+		<Rule>
+		<No>003021</No>
+		<Name>ConfigBankVccioValueCompatibility</Name>
+		<Severity>Warning</Severity>
+		<ShortDes>Config Bank VCCIO value compatibility check</ShortDes>
+		<Description>In bank 8, the Bank VCCIO cannot be set to [{VCCIO_value}] because this Bank is used during configuration and the CONFIG_IOVOLTAGE is already set to [{CONFIG_ON_VALUE}].</Description>
+		<PossibleSuggestedActions>Change the CONFIG_IOVOLTAGE value to be compatible with the Bank VCCIO value. Change the Bank VCCIO value to be compatible with the CONFIG_IOVOLTAGE value.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>MIX</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Bank</Category>
+	</Rule>
+	<Rule>
+		<No>004001</No>
+		<Name>DeviceVrefCapacity</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Device VREF capacity check</ShortDes>
+		<Description>The number of VREF required [{NUMBER}] exceeds the number of VREF pins [{NUMBER}] available in the device [{DEVICE_NAME}].</Description>
+		<PossibleSuggestedActions>Use large devices with more VREF pins.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Device</Category>
+	</Rule>
+	<Rule>
+		<No>004002</No>
+		<Name>DeviceVccioCapacity</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Device VCCIO capacity check</ShortDes>
+		<Description>The number of VCCIO or bank required exceeds the total number of banks available [{BANK_NUMBER}] based on the current assignment.</Description>
+		<PossibleSuggestedActions>Reduce number of IO Types. Use compatible IO types. Change to a large device with more banks.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Device</Category>
+	</Rule>
+	<Rule>
+		<No>004003</No>
+		<Name>SysConfigCheck</Name>
+		<Severity>Warning</Severity>
+		<ShortDes>System configuration check</ShortDes>
+		<Description>All configuration modes/options of the design have been disabled.</Description>
+		<PossibleSuggestedActions>Enabled the desire device configuration method.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Device</Category>
+	</Rule>
+	<Rule>
+		<No>005001</No>
+		<Name>IOBUFAttributeNameValidation</Name>
+		<Severity>Error</Severity>
+		<ShortDes>IOBUF attribute name validation</ShortDes>
+		<Description>The port [{PORT_NAME}] has invalid IOBUF attribute name [{KEY_NAME}].</Description>
+		<PossibleSuggestedActions>Check the string [{KEY_NAME}] for typos, or use a valid attribute name.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>IOBUF</Category>
+	</Rule>
+	<Rule>
+		<No>005002</No>
+		<Name>IOBUFAttributeValueValidation</Name>
+		<Severity>Error</Severity>
+		<ShortDes>IOBUF attribute value validation </ShortDes>
+		<Description>The port [{PORT_NAME}] has some invalid IOBUF attribute values: [{KEY: VALUE}].</Description>
+		<PossibleSuggestedActions>Check the assignments for those attribute and use valid values.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>IOBUF</Category>
+	</Rule>
+	<Rule>
+		<No>005003</No>
+		<Name>IOBUFLegalCombinationTableValidation</Name>
+		<Severity>Error</Severity>
+		<ShortDes>IOBUF legal combination table validation</ShortDes>
+		<Description>The port [{PORT_NAME}] has invalid combination of the IOBUF settings according to the device I/O specifications.</Description>
+		<PossibleSuggestedActions>Check the IOBUF setting and correct the errors.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>Mix</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>IOBUF</Category>
+	</Rule>
+	<Rule>
+		<No>006001</No>
+		<Name>PicCompatibleX24AilTri</Name>
+		<Severity>Error</Severity>
+		<ShortDes>PIC IOLOGIC x2/x4/Ail/Tri-State compatible check</ShortDes>
+		<Description>The port [{port_name}] at pad [{A|B|C|D}] and the port [{port_name}] at pad [{A|B|C|D}] are competing for DDR resources (x2,x4,AIL or tri-state), they cannot be shared in one PIC.</Description>
+		<PossibleSuggestedActions>Assign the port to a different PIC (A group of PIO pins consists of adjacent A/B/C/D pads).</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>PIC</Category>
+	</Rule>
+	<Rule>
+		<No>006002</No>
+		<Name>PicCompatibleOutput</Name>
+		<Severity>Error</Severity>
+		<ShortDes>PIC IOLOGIC output and SHX4/DDR4 compatible check</ShortDes>
+		<Description>The port [{port_name}] at pad [{A|B|C|D}] cannot be used as output (or input) when the [{port_name}] at pad [{A|B|C|D}] is in SHX4/DDRX4 mode (or using AIL).</Description>
+		<PossibleSuggestedActions>Assign the port to a different PIC (A group of PIO pins consists of adjacent A/B/C/D pads).</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>0</LinkIndex>
+		<Category>PIC</Category>
+	</Rule>
+	<Rule>
+		<No>007001</No>
+		<Name>VrefGroupPinAssignment</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Vref group pin assignment check</ShortDes>
+		<Description>VREF GROUP [{GROUP_NAME}] is assigned to pin [{PIN_NAME}], which is {already assigned to port/not a vref pin}{PORT_NAME}{}.</Description>
+		<PossibleSuggestedActions>Assign the group to a valid VREF pin, and make sure the pin is not already assigned.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>MIX</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>VREF</Category>
+	</Rule>
+	<Rule>
+		<No>007002</No>
+		<Name>VrefGroupExistence</Name>
+		<Severity>Error</Severity>
+		<ShortDes>Vref group existency check</ShortDes>
+		<Description>VREFGROUP [{GROUP_NAME}] assigned to the port [{PORT_NAME}] is not defined.</Description>
+		<PossibleSuggestedActions>Assign the group to a valid VREF pin, and ensure the VREF pin is not already assigned.</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>MIX</Type>
+		<LinkType>LocatePort</LinkType>
+		<LinkIndex>1</LinkIndex>
+		<Category>VREF</Category>
+	</Rule>
+	<Rule>
+		<No>999999</No>
+		<Name>OnDemandPIODRC</Name>
+		<Severity>Error</Severity>
+		<ShortDes>OnDemandPIODRC</ShortDes>
+		<Description>OnDemandPIODRC</Description>
+		<PossibleSuggestedActions>OnDemandPIODRC</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>OnDemand</Category>
+	</Rule>
+	<Rule>
+		<No>999998</No>
+		<Name>EnableRealTimePIODRC</Name>
+		<Severity>Error</Severity>
+		<ShortDes>On</ShortDes>
+		<Description>EnableRealTimePIODRC</Description>
+		<PossibleSuggestedActions>EnableRealTimePIODRC</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>Realtime</Category>
+	</Rule>
+	<Rule>
+		<No>999997</No>
+		<Name>EnableOnDemandPIODRC</Name>
+		<Severity>Error</Severity>
+		<ShortDes>On</ShortDes>
+		<Description>EnableOnDemandPIODRC</Description>
+		<PossibleSuggestedActions>EnableOnDemandPIODRC</PossibleSuggestedActions>
+		<Priority>High</Priority>
+		<Type>OnDemand</Type>
+		<LinkType></LinkType>
+		<LinkIndex></LinkIndex>
+		<Category>OnDemand</Category>
+	</Rule>
+</RuleDatabase>

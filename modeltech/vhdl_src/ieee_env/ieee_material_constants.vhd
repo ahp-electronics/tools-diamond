@@ -1,0 +1,11 @@
+--______________________________________________________________________
+--
+-- Copyright 2000 Mentor Graphics Corporation
+-- All Rights Reserved
+--
+-- THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+-- WHICH ARE THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+-- LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+--______________________________________________________________________
+--
+

@@ -1,0 +1,381 @@
+DATA:
+    PATTERN  (--, --, FILE(--, --));      
+    WREN   ( 1, 1, b01100000);
+    WRDI   ( 1, 1, b00100000);
+    RDSR   ( 1, 1, b10100000);
+    WRSR   ( 1, 1, b10000000);
+    READ   ( 1, 1, b11000000);
+    PP   ( 1, 1, b01000000);
+    BE   ( 1, 1, b01000110);
+    SE   ( 1, 1, b01001010);
+    RES   ( 1, 1, b10101000);  	
+    DEVICE_ID  (1,1,FILE(ID, --)); 
+DATA_END;
+
+PROTOCOL:	PCM;
+
+SIGNAL_DECL:
+	inout L_spi_c; 
+	inout L_done;
+	inout L_init;
+	inout L_spi_q;
+	inout L_spi_s;
+	inout L_spi_d;
+SIGNAL_DECL_END;
+             
+BUS_DECL: 
+    /S = L_spi_s;
+    /D = L_spi_d;
+    /Q = L_spi_q;
+    /C = L_spi_c;
+BUS_DECL_END;
+
+CLOCK: L_spi_c;
+
+FUNCTION INITIAL;
+	SIR	8	TDI(00) ;
+	RUNTEST	IDLE	3 TCK	2.00E-002 SEC;
+	CLOCK_LOW;
+	SET_ROW (PATTERN, 0);
+	/D	b0;
+	/C  b0;
+	/S  b1;
+	CYCLE;
+	Addr = START_ADDRESS;
+END_FUNCTION;
+
+FUNCTION FINALIZE;
+	/S  b1;
+	/D	bX;
+	/Q	bX;
+	CYCLE;
+END_FUNCTION;
+
+FUNCTION CHECK_ID;
+	/S  b0;
+	CYCLE;
+	BSCAN_SEND_BYTE (1,RES,--);
+	BSCAN_SEND_BYTE (2,h00,--);
+	BSCAN_RECEIVE_BYTE (1,DEVICE_ID,hFF,BREAK);
+	/S  b1;
+	CYCLE;
+END_FUNCTION;
+
+FUNCTION CHECK_RDID;
+	/S  b0;
+	CYCLE;
+	BSCAN_SEND_BYTE (1,RES,--);
+	BSCAN_RECEIVE_BYTE (1,h1F,hFF,BREAK);
+	/S  b1;
+	CYCLE;
+END_FUNCTION;
+
+FUNCTION ENABLE;
+	/S  b0;
+	CYCLE;
+	BSCAN_SEND_BYTE (1,WREN,--);
+	/S  b1;
+	CYCLE;
+END_FUNCTION;
+
+FUNCTION ERASE_ALL;
+	/S  b0;
+	CYCLE;
+	BSCAN_SEND_BYTE (1,BE,--);
+	/S  b1;
+	CYCLE;
+	RUNTEST	IDLE	50.00E SEC;
+END_FUNCTION;
+
+FUNCTION ERASE;
+	INT32 AddrIdx = 0;
+	INT32 EndAddrIdx = 0;
+	Addr = START_ADDRESS;
+	EndAddrIdx = END_ADDRESS;
+	IF (Addr Equal 0);
+		AddrIdx = 0;
+	ELSE;
+		AddrIdx = Addr/32768;
+	END_IF;
+	IF (EndAddrIdx Equal 0);
+		EndAddrIdx = DEVICE_SIZE;
+	ELSE;
+		EndAddrIdx = EndAddrIdx/32768;
+		EndAddrIdx = EndAddrIdx +1;
+	END_IF;
+	AddrIdx = EndAddrIdx - AddrIdx;	
+	REPEAT AddrIdx;
+		Call ENABLE;
+		/S  b0;
+		CYCLE;
+		BSCAN_SEND_BYTE (1,SE,--);
+		BSCAN_SEND_BYTE (3,Addr,--);
+		/S  b1;
+		CYCLE;
+		RUNTEST	IDLE	2.00E SEC;
+		Addr = Addr+32768;
+	END_REPEAT;
+END_FUNCTION;
+
+FUNCTION PROGRAM;
+	RESET_BURST;
+	Addr = 0;
+	REPEAT 0;
+		IF (PATTERN[Addr...256] NotEqual hFF);
+			Call ENABLE;
+			/S  b0;
+			CYCLE;
+			BSCAN_SEND_BYTE (1,PP,--);
+			BSCAN_SEND_BYTE (3,Addr,--);
+			BSCAN_BURST (256,PATTERN);
+			/S  b1;
+			CYCLE;
+			RUNTEST	IDLE	1.00E-002 SEC;
+			Addr = Addr +256;
+		ELSE;
+			Addr = Addr +256;
+		END_IF;		
+    END_REPEAT;
+END_FUNCTION;
+
+FUNCTION DISABLE;
+	/S  b0;
+	CYCLE;
+	BSCAN_SEND_BYTE (1,WRDI,--);
+	/S  b1;
+	CYCLE;
+END_FUNCTION;
+
+FUNCTION VERIFY;
+	Addr = 0;
+	RESET_BURST;
+	/S  b0;
+	CYCLE;
+	BSCAN_SEND_BYTE (1,READ,--);
+	BSCAN_SEND_BYTE (3,Addr,--);
+	VERIFY_BSCAN_BURST (0,PATTERN);
+	/S  b1;
+	CYCLE;
+	
+END_FUNCTION;
+
+FUNCTION BLANK_CHECK;
+	Addr = 0;
+	/S  b0;
+	CYCLE;
+	BSCAN_SEND_BYTE (1,READ,--);
+	BSCAN_SEND_BYTE (3,Addr,--);
+	VERIFY_BSCAN_BURST (0,hFF);
+	/S  b1;
+	CYCLE;
+	
+END_FUNCTION;
+
+FUNCTION READBACK;
+	Addr = 0;
+	/S  b0;
+	CYCLE;
+	BSCAN_SEND_BYTE (1,READ,--);
+	BSCAN_SEND_BYTE (3,Addr,--);
+	VERIFY_BSCAN_BURST (0,?);
+	/S  b1;
+	CYCLE;
+END_FUNCTION;
+
+OPERATION Verify ID;
+  	INT32 Addr = 0;
+    Call INITIAL;
+    Call CHECK_RDID;
+    Call CHECK_ID;
+END_OPERATION;
+
+OPERATION Erase,Program,Verify;
+  	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Enabling...
+	Call ENABLE;
+    	
+    $ Erasing...
+	Call ERASE;
+
+	$ Disabling...
+	Call DISABLE;
+	
+	$ Enabling...
+	Call ENABLE;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+
+       
+END_OPERATION;
+
+OPERATION Program;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+	$ Enabling...
+	Call ENABLE;
+    	
+    $ Erasing...
+	Call ERASE;
+
+	$ Disabling...
+	Call DISABLE;
+	
+	$ Enabling...
+	Call ENABLE;
+	
+    $ Programming...
+	Call PROGRAM;
+
+    $ Disabling...
+	Call DISABLE;
+	
+	Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Verify Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Verifying...
+	Call VERIFY;
+	
+	Call FINALIZE;
+
+    
+END_OPERATION;
+
+OPERATION Read and Save;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Reading Back...
+	Call READBACK;
+	
+	Call FINALIZE;
+
+END_OPERATION;
+
+OPERATION Erase Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Enabling...
+	Call ENABLE;
+		
+    $ Erasing All...
+	Call ERASE_ALL;
+	
+	$ Disabling...
+	Call DISABLE;
+	
+    Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Erase All;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Enabling...
+	Call ENABLE;
+		
+    $ Erasing All...
+	Call ERASE_ALL;
+	
+	$ Disabling...
+	Call DISABLE;
+	
+    Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Erase Sector(s) Only;
+	INT32 Addr = 0;
+    $ Initializing...
+	Call INITIAL;	
+    
+    $ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Enabling...
+	Call ENABLE;
+		
+    $ Erasing Sector(s)...
+	Call ERASE;
+	
+	$ Disabling...
+	Call DISABLE;
+	
+    Call FINALIZE;
+    
+END_OPERATION;
+OPERATION Blank Check;
+	INT32 Addr = 0;
+    
+    $ Initializing...
+	Call INITIAL;	
+	
+	$ IDCode Checking...
+	Call CHECK_ID;
+	
+    $ Blank Checking...
+	Call BLANK_CHECK;
+	
+	Call FINALIZE;
+    
+END_OPERATION;
+
+OPERATION Disabled;
+    INT32 Idx1 = 0;
+    $ Resetting...
+    SIR	8	TDI (18) ;
+	RUNTEST	IDLE	3 TCK	2.00E-002 SEC;
+	$ FPGA Loader Disabled.Please Reset the target FPGA device...
+END_OPERATION;
+OPERATION Uploaded;
+    INT32 Idx1 = 0;
+    $ Uploading...
+    SIR	8	TDI (23) ;
+	RUNTEST	IDLE	3 TCK	2.00E-002 SEC;
+END_OPERATION;
+OPERATION Bypass;
+	INT32 Addr = 0;
+END_OPERATION;            
+            

@@ -1,0 +1,3068 @@
+-- -------------------------------------------------------------------- 
+-- >>>>>>>>>>>>>>>>>>>>>>>>> COPYRIGHT NOTICE <<<<<<<<<<<<<<<<<<<<<<<<< 
+-- -------------------------------------------------------------------- 
+-- Copyright (c) 2002-2010 by Lattice Semiconductor Corporation 
+-- -------------------------------------------------------------------- 
+-- 
+-- 
+--                     Lattice Semiconductor Corporation 
+--                     5555 NE Moore Court 
+--                     Hillsboro, OR 97214 
+--                     U.S.A 
+-- 
+--                     TEL: 1-800-Lattice (USA and Canada) 
+--                          408-826-6000 (other locations) 
+-- 
+--                     web: http:--www.latticesemi.com/ 
+--                     email: techsupport@latticesemi.com 
+-- 
+-- -------------------------------------------------------------------- 
+-- 
+-- Header files for SC/SCM family.
+-- 
+-- -------------------------------------------------------------------- 
+
+library ieee;
+use ieee.std_logic_1164.all;
+--library synplify;
+--use synplify.attributes.all;
+package components is
+   attribute syn_black_box: boolean ;
+--   attribute ailrst : string;
+   attribute syn_noprune: boolean;
+   attribute black_box_tri_pins : string;
+   attribute black_box_pad_pin : string;
+   attribute syn_tpd1 : string;
+   attribute syn_black_box of components : package is true;
+   attribute syn_noprune of components : package is true;
+
+COMPONENT XOR5
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   E : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of XOR5 : component is true;
+COMPONENT XOR4
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of XOR4 : COMPONENT is true;
+COMPONENT XOR21
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   E : IN STD_LOGIC;
+   F : IN STD_LOGIC;
+   G : IN STD_LOGIC;
+   H : IN STD_LOGIC;
+   I : IN STD_LOGIC;
+   J : IN STD_LOGIC;
+   K : IN STD_LOGIC;
+   L : IN STD_LOGIC;
+   M : IN STD_LOGIC;
+   N : IN STD_LOGIC;
+   O : IN STD_LOGIC;
+   P : IN STD_LOGIC;
+   Q : IN STD_LOGIC;
+   R : IN STD_LOGIC;
+   S : IN STD_LOGIC;
+   T : IN STD_LOGIC;
+   U : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of XOR21 : COMPONENT is true;
+COMPONENT XOR2
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of XOR2 : COMPONENT is true;
+COMPONENT XOR11
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   E : IN STD_LOGIC;
+   F : IN STD_LOGIC;
+   G : IN STD_LOGIC;
+   H : IN STD_LOGIC;
+   I : IN STD_LOGIC;
+   J : IN STD_LOGIC;
+   K : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of XOR11 : COMPONENT is true;
+COMPONENT XNOR5
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   E : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of XNOR5 : COMPONENT is true;
+COMPONENT XNOR4
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of XNOR4 : COMPONENT is true;
+COMPONENT XNOR3
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of XNOR3 : COMPONENT is true;
+COMPONENT XNOR2
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of XNOR2 : COMPONENT is true;
+COMPONENT VLO
+ PORT (
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of VLO : COMPONENT is true;
+COMPONENT VHI
+ PORT (
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of VHI : COMPONENT is true;
+COMPONENT TSALL
+ PORT (
+   TSALLN : IN STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of TSALL : COMPONENT is true;
+attribute syn_noprune of TSALL : COMPONENT is true;
+COMPONENT STRTUP
+ PORT (
+   UCLK : IN STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of STRTUP : COMPONENT is true;
+attribute syn_noprune of STRTUP: COMPONENT is true;
+COMPONENT PFUMX
+ PORT (
+   ALUT : IN STD_LOGIC;
+   BLUT : IN STD_LOGIC;
+   C0 : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of PFUMX : COMPONENT is true;
+--
+COMPONENT AND2
+    PORT(
+          A		:	in	STD_ULOGIC;
+          B		:	in	STD_ULOGIC;
+          Z		:	out	STD_ULOGIC
+        );
+END COMPONENT;
+attribute syn_black_box of AND2 : COMPONENT is true;
+COMPONENT AND3
+    PORT(
+          A		:	in	STD_ULOGIC;
+          B		:	in	STD_ULOGIC;
+          C		:	in	STD_ULOGIC;
+          Z		:	out	STD_ULOGIC
+        );
+END COMPONENT;
+attribute syn_black_box of AND3 : COMPONENT is true;
+COMPONENT AND4
+    PORT(
+          A		:	in	STD_ULOGIC;
+          B		:	in	STD_ULOGIC;
+          C		:	in	STD_ULOGIC;
+          D		:	in	STD_ULOGIC;
+          Z		:	out	STD_ULOGIC
+        );
+END COMPONENT;
+attribute syn_black_box of AND4 : COMPONENT is true;
+COMPONENT AND5
+    PORT(
+          A		:	in	STD_ULOGIC;
+          B		:	in	STD_ULOGIC;
+          C		:	in	STD_ULOGIC;
+          D		:	in	STD_ULOGIC;
+          E		:	in	STD_ULOGIC;
+          Z		:	out	STD_ULOGIC
+        );
+END COMPONENT;
+attribute syn_black_box of AND5 : COMPONENT is true;
+COMPONENT OR5
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   E : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OR5 : COMPONENT is true;
+COMPONENT OR4
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OR4 : COMPONENT is true;
+COMPONENT OR2
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OR2 : COMPONENT is true;
+COMPONENT OFS1P3JX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OFS1P3JX : COMPONENT is true;
+COMPONENT OFS1P3IX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OFS1P3IX : COMPONENT is true;
+COMPONENT OFS1P3DX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OFS1P3DX : COMPONENT is true;
+COMPONENT OFS1P3BX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OFS1P3BX : COMPONENT is true;
+COMPONENT OFE1P3JX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   ECLK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OFE1P3JX : COMPONENT is true;
+COMPONENT OFE1P3IX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   ECLK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OFE1P3IX : COMPONENT is true;
+COMPONENT OFE1P3DX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   ECLK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OFE1P3DX : COMPONENT is true;
+COMPONENT OFE1P3BX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   ECLK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OFE1P3BX : COMPONENT is true;
+COMPONENT NR5
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   E : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of NR5 : COMPONENT is true;
+COMPONENT NR4
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of NR4 : COMPONENT is true;
+COMPONENT NR3
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of NR3 : COMPONENT is true;
+COMPONENT NR2
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of NR2 : COMPONENT is true;
+COMPONENT ND5
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   E : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ND5 : COMPONENT is true;
+COMPONENT ND4
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   D : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ND4 : COMPONENT is true;
+COMPONENT ND3
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ND3 : COMPONENT is true;
+COMPONENT ND2
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ND2 : COMPONENT is true;
+COMPONENT MUX41
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   D2 : IN STD_LOGIC;
+   D3 : IN STD_LOGIC;
+   SD1 : IN STD_LOGIC;
+   SD2 : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of MUX41 : COMPONENT is true;
+COMPONENT MUX21
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of MUX21 : COMPONENT is true;
+COMPONENT INV
+ PORT (
+   A : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of INV : COMPONENT is true;
+COMPONENT ILF2P3JX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   ECLK : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ILF2P3JX : COMPONENT is true;
+COMPONENT ILF2P3IX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   ECLK : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ILF2P3IX : COMPONENT is true;
+COMPONENT ILF2P3DX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   ECLK : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ILF2P3DX : COMPONENT is true;
+COMPONENT ILF2P3BX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   ECLK : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ILF2P3BX : COMPONENT is true;
+COMPONENT IFS1S1J
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of IFS1S1J : COMPONENT is true;
+COMPONENT IFS1S1I
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of IFS1S1I : COMPONENT is true;
+COMPONENT IFS1S1D
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of IFS1S1D : COMPONENT is true;
+COMPONENT IFS1S1B
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of IFS1S1B : COMPONENT is true;
+COMPONENT IFS1P3JX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of IFS1P3JX : COMPONENT is true;
+COMPONENT IFS1P3IX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of IFS1P3IX : COMPONENT is true;
+COMPONENT IFS1P3DX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of IFS1P3DX : COMPONENT is true;
+COMPONENT IFS1P3BX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   SCLK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of IFS1P3BX : COMPONENT is true;
+COMPONENT XOR3
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of XOR3 : COMPONENT is true;
+COMPONENT OR3
+ PORT (
+   A : IN STD_LOGIC;
+   B : IN STD_LOGIC;
+   C : IN STD_LOGIC;
+   Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OR3 : COMPONENT is true;
+COMPONENT FL1S3AY
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1S3AY : COMPONENT is true;
+COMPONENT FL1S3AX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1S3AX : COMPONENT is true;
+COMPONENT FL1S1J
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1S1J : COMPONENT is true;
+COMPONENT FL1S1I
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1S1I : COMPONENT is true;
+COMPONENT FL1S1D
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1S1D : COMPONENT is true;
+COMPONENT FL1S1B
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1S1B : COMPONENT is true;
+COMPONENT FL1S1AY
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1S1AY : COMPONENT is true;
+COMPONENT FL1S1A
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1S1A : COMPONENT is true;
+COMPONENT FL1P3JY
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1P3JY : COMPONENT is true;
+COMPONENT FL1P3IY
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1P3IY : COMPONENT is true;
+COMPONENT FL1P3DX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1P3DX : COMPONENT is true;
+COMPONENT FL1P3BX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1P3BX : COMPONENT is true;
+COMPONENT FL1P3AZ
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1P3AZ : COMPONENT is true;
+COMPONENT FL1P3AY
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D0 : IN STD_LOGIC;
+   D1 : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   SD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FL1P3AY : COMPONENT is true;
+COMPONENT FD1S3JX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S3JX : COMPONENT is true;
+COMPONENT FD1S3IX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S3IX : COMPONENT is true;
+COMPONENT FD1S3DX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S3DX : COMPONENT is true;
+COMPONENT FD1S3BX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S3BX : COMPONENT is true;
+COMPONENT FD1S3AY
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S3AY : COMPONENT is true;
+COMPONENT FD1S3AX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S3AX : COMPONENT is true;
+COMPONENT FD1S1J
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S1J : COMPONENT is true;
+COMPONENT FD1S1I
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S1I : COMPONENT is true;
+COMPONENT FD1S1D
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S1D : COMPONENT is true;
+COMPONENT FD1S1B
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S1B : COMPONENT is true;
+COMPONENT FD1S1AY
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S1AY : COMPONENT is true;
+COMPONENT FD1S1A
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1S1A : COMPONENT is true;
+COMPONENT FD1P3JX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1P3JX : COMPONENT is true;
+COMPONENT FD1P3IX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1P3IX : COMPONENT is true;
+COMPONENT FD1P3DX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   CD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1P3DX : COMPONENT is true;
+COMPONENT FD1P3BX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   PD : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1P3BX : COMPONENT is true;
+COMPONENT FD1P3AY
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1P3AY : COMPONENT is true;
+COMPONENT OSCA
+ GENERIC (DIV : integer := 1 );
+ PORT (
+   OSC : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of OSCA : COMPONENT is true; --ct111505
+COMPONENT PUR
+   GENERIC (
+      RST_PULSE          : Integer   := 1);
+ PORT (
+   PUR : IN STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of PUR : COMPONENT is true; --ct111505
+attribute syn_noprune of PUR : COMPONENT is true;
+COMPONENT FD1P3AX
+ GENERIC (GSR : String := "ENABLED");
+ PORT (
+   D : IN STD_LOGIC;
+   SP : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   Q :OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of FD1P3AX : COMPONENT is true;
+COMPONENT GSR
+ PORT (
+   GSR : IN STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of GSR : COMPONENT is true;
+attribute syn_noprune of GSR: COMPONENT is true;
+COMPONENT PVTIOCTRL
+ PORT (
+   UPDATE : IN STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of PVTIOCTRL : COMPONENT is true;
+attribute syn_noprune of PVTIOCTRL: COMPONENT is true;
+
+COMPONENT JTAGA
+ GENERIC (JTAG_FLASH_PRGRM : String := "ENABLED");
+ PORT(
+      TCK            : IN    STD_LOGIC ;
+      TMS            : IN    STD_LOGIC ;
+      TDI            : IN    STD_LOGIC ;
+      PSROUT1            : IN    STD_LOGIC ;
+      PSROUT2            : IN    STD_LOGIC ;
+      PSROUT3            : IN    STD_LOGIC ;
+      JTDO1          : IN    STD_LOGIC ;
+      JTDO2          : IN    STD_LOGIC ;
+      JTDO3          : IN    STD_LOGIC ;
+      JTDO4          : IN    STD_LOGIC ;
+      JTDO5          : IN    STD_LOGIC ;
+      JTDO6          : IN    STD_LOGIC ;
+      JTDO7          : IN    STD_LOGIC ;
+      JTDO8          : IN    STD_LOGIC ;
+      TDO                :      OUT  STD_LOGIC;
+      TRESET             :      OUT  STD_LOGIC;
+      PSRSFTN            :      OUT  STD_LOGIC;
+      PSRCAP             :      OUT  STD_LOGIC;
+      PSRENABLE1         :      OUT  STD_LOGIC;
+      PSRENABLE2         :      OUT  STD_LOGIC;
+      PSRENABLE3         :      OUT  STD_LOGIC;
+      SCANENABLE1        :      OUT  STD_LOGIC;
+      SCANENABLE2        :      OUT  STD_LOGIC;
+      SCANENABLE3        :      OUT  STD_LOGIC;
+      SCANENABLE4        :      OUT  STD_LOGIC;
+      SCANENABLE5        :      OUT  STD_LOGIC;
+      scanenable6        :      OUT  STD_LOGIC;
+      SCANENABLE7        :      OUT  STD_LOGIC;
+      SCANENABLE8        :      OUT  STD_LOGIC;
+      SCANI              :      OUT  STD_LOGIC;
+      JTCK               :      OUT  STD_LOGIC;
+      JTDI               :      OUT  STD_LOGIC;
+      JSHIFT             :      OUT  STD_LOGIC;
+      JUPDATE            :      OUT  STD_LOGIC;
+      JRSTN              :      OUT  STD_LOGIC;
+      JCE1               :      OUT  STD_LOGIC;
+      JCE2               :      OUT  STD_LOGIC;
+      JCE3               :      OUT  STD_LOGIC;
+      JCE4               :      OUT  STD_LOGIC;
+      JCE5               :      OUT  STD_LOGIC;
+      JCE6               :      OUT  STD_LOGIC;
+      JCE7               :      OUT  STD_LOGIC;
+      JCE8               :      OUT  STD_LOGIC;
+      JRTI1              :      OUT  STD_LOGIC;
+      JRTI2              :      OUT  STD_LOGIC;
+      JRTI3              :      OUT  STD_LOGIC;
+      JRTI4              :      OUT  STD_LOGIC;
+      JRTI5              :      OUT  STD_LOGIC;
+      JRTI6              :      OUT  STD_LOGIC;
+      JRTI7              :      OUT  STD_LOGIC;
+      JRTI8              :      OUT  STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of jtaga : COMPONENT is true;
+attribute syn_noprune of jtaga: COMPONENT is true;
+--
+COMPONENT SGSR
+PORT(
+      GSR: IN STD_LOGIC ;
+      CLK : IN STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of sgsr: COMPONENT is true;
+attribute syn_noprune of sgsr: COMPONENT is true;
+--
+COMPONENT L6MUX21
+PORT(
+        D0: IN STD_LOGIC ;
+        D1: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        Z : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of l6mux21 : COMPONENT is true;
+--
+COMPONENT ROM32X4
+GENERIC(
+        initval : string := "0x00000000000000000000000000000000";
+        GSR : string := "ENABLED"
+  );
+ PORT (
+   AD0 : IN STD_LOGIC;
+   AD1 : IN STD_LOGIC;
+   AD2 : IN STD_LOGIC;
+   AD3 : IN STD_LOGIC;
+   AD4 : IN STD_LOGIC;
+   CK : IN STD_LOGIC;
+   DO0 : OUT STD_LOGIC;
+   DO1 : OUT STD_LOGIC;
+   DO2 : OUT STD_LOGIC;
+   DO3 : OUT STD_LOGIC;
+   QDO0 : OUT STD_LOGIC;
+   QDO1 : OUT STD_LOGIC;
+   QDO2 : OUT STD_LOGIC;
+   QDO3 : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ROM32X4 : COMPONENT is true;
+--
+COMPONENT ROM32X1
+GENERIC(
+        initval : string := "0x00000000"
+  );
+ PORT (
+   AD0 : IN STD_LOGIC;
+   AD1 : IN STD_LOGIC;
+   AD2 : IN STD_LOGIC;
+   AD3 : IN STD_LOGIC;
+   AD4 : IN STD_LOGIC;
+   DO0 : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ROM32X1 : COMPONENT is true;
+--
+COMPONENT ROM16X1
+GENERIC(
+        initval : string := "0x0000"
+  );
+ PORT (
+   AD0 : IN STD_LOGIC;
+   AD1 : IN STD_LOGIC;
+   AD2 : IN STD_LOGIC;
+   AD3 : IN STD_LOGIC;
+   DO0 : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ROM16X1 : COMPONENT is true;
+--
+COMPONENT ROM64X1
+GENERIC(
+        initval : string := "0x0000000000000000"
+  );
+PORT(
+        AD0, AD1, AD2, AD3, AD4, AD5 : IN STD_LOGIC ;
+        DO0: OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of rom64x1 : COMPONENT is true;
+--
+COMPONENT ROM128X1
+GENERIC(
+        initval : string := "0x00000000000000000000000000000000"
+  );
+PORT(
+        AD0, AD1, AD2, AD3, AD4, AD5, AD6 : IN STD_LOGIC ;
+        DO0: OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of rom128x1 : COMPONENT is true;
+--
+COMPONENT ROM256X1
+GENERIC(
+        initval : string := "0x0000000000000000000000000000000000000000000000000000000000000000"
+  );
+PORT(
+        AD0, AD1, AD2, AD3, AD4, AD5, AD6, AD7 : IN STD_LOGIC ;
+        DO0: OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of rom256x1 : COMPONENT is true;
+--
+COMPONENT RDBK
+PORT(
+      RDCFGN     : IN STD_LOGIC ;
+      FFRDCFG    : IN STD_LOGIC ;
+      FFRDCFGCLK : IN STD_LOGIC ;
+      RDDATA     : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of rdbk: COMPONENT is true;
+attribute syn_noprune of rdbk: COMPONENT is true;
+--
+COMPONENT DP16KA
+GENERIC(
+        DATA_WIDTH_A : in Integer := 18;
+        DATA_WIDTH_B : in Integer := 18;
+        REGMODE_A    : String  := "NOREG";
+        REGMODE_B    : String  := "NOREG";
+        RESETMODE    : String  := "SYNC";
+        CSDECODE_A   : STD_LOGIC_vector(2 downto 0)  := "000";
+        CSDECODE_B   : STD_LOGIC_vector(2 downto 0)  := "000";
+        WRITEMODE_A  : String  := "NORMAL";
+        WRITEMODE_B  : String  := "NORMAL";
+        GSR : String  := "DISABLED";
+        initval_00 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_01 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_02 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_03 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_04 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_05 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_06 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_07 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_08 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_09 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0a : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0b : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0c : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0d : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0e : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0f : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_10 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_11 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_12 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_13 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_14 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_15 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_16 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_17 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_18 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_19 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1a : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1b : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1c : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1d : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1e : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1f : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_20 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_21 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_22 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_23 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_24 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_25 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_26 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_27 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_28 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_29 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2a : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2b : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2c : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2d : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2e : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2f : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_30 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_31 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_32 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_33 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_34 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_35 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_36 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_37 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_38 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_39 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3a : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3b : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3c : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3d : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3e : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3f : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  );
+PORT(
+        DIA0, DIA1, DIA2, DIA3, DIA4, DIA5, DIA6, DIA7, DIA8            : IN STD_LOGIC ;
+        DIA9, DIA10, DIA11, DIA12, DIA13, DIA14, DIA15, DIA16, DIA17    : IN STD_LOGIC ;
+        ADA0, ADA1, ADA2, ADA3, ADA4, ADA5, ADA6, ADA7, ADA8            : IN STD_LOGIC ;
+        ADA9, ADA10, ADA11, ADA12, ADA13                                : IN STD_LOGIC ;
+        CEA, CLKA, WEA, CSA0, CSA1, CSA2, RSTA                         : IN STD_LOGIC ;
+        DIB0, DIB1, DIB2, DIB3, DIB4, DIB5, DIB6, DIB7, DIB8            : IN STD_LOGIC ;
+        DIB9, DIB10, DIB11, DIB12, DIB13, DIB14, DIB15, DIB16, DIB17    : IN STD_LOGIC ;
+        ADB0, ADB1, ADB2, ADB3, ADB4, ADB5, ADB6, ADB7, ADB8            : IN STD_LOGIC ;
+        ADB9, ADB10, ADB11, ADB12, ADB13                                : IN STD_LOGIC ;
+        CEB, CLKB, WEB, CSB0, CSB1, CSB2, RSTB                         : IN STD_LOGIC ;
+
+        DOA0, DOA1, DOA2, DOA3, DOA4, DOA5, DOA6, DOA7, DOA8            : OUT STD_LOGIC ;
+        DOA9, DOA10, DOA11, DOA12, DOA13, DOA14, DOA15, DOA16, DOA17    : OUT STD_LOGIC ;
+        DOB0, DOB1, DOB2, DOB3, DOB4, DOB5, DOB6, DOB7, DOB8            : OUT STD_LOGIC ;
+        DOB9, DOB10, DOB11, DOB12, DOB13, DOB14, DOB15, DOB16, DOB17    : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of dp16ka: COMPONENT is true;
+--
+COMPONENT PDP16KA
+GENERIC(
+        DATA_WIDTH_W : in Integer := 18;
+        DATA_WIDTH_R : in Integer := 18;
+        REGMODE      : String  := "NOREG";
+        RESETMODE    : String  := "SYNC";
+        CSDECODE_W   : STD_LOGIC_vector(2 downto 0)  := "000";
+        CSDECODE_R   : STD_LOGIC_vector(2 downto 0)  := "000";
+        GSR : String  := "DISABLED";
+        initval_00 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_01 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_02 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_03 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_04 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_05 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_06 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_07 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_08 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_09 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0a : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0b : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0c : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0d : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0e : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_0f : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_10 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_11 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_12 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_13 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_14 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_15 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_16 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_17 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_18 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_19 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1a : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1b : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1c : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1d : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1e : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_1f : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_20 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_21 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_22 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_23 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_24 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_25 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_26 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_27 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_28 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_29 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2a : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2b : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2c : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2d : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2e : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_2f : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_30 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_31 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_32 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_33 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_34 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_35 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_36 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_37 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_38 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_39 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3a : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3b : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3c : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3d : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3e : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        initval_3f : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  );
+PORT(
+        DI0, DI1, DI2, DI3, DI4, DI5, DI6, DI7, DI8            : IN STD_LOGIC ;
+        DI9, DI10, DI11, DI12, DI13, DI14, DI15, DI16, DI17    : IN STD_LOGIC ;
+        DI18, DI19, DI20, DI21, DI22, DI23, DI24, DI25, DI26   : IN STD_LOGIC ;
+        DI27, DI28, DI29, DI30, DI31, DI32, DI33, DI34, DI35   : IN STD_LOGIC ;
+        ADW0, ADW1, ADW2, ADW3, ADW4, ADW5, ADW6, ADW7, ADW8   : IN STD_LOGIC ;
+        ADW9, ADW10, ADW11, ADW12, ADW13                       : IN STD_LOGIC ;
+        CEW, CLKW, WE, CSW0, CSW1, CSW2                        : IN STD_LOGIC ;
+        ADR0, ADR1, ADR2, ADR3, ADR4, ADR5, ADR6, ADR7, ADR8   : IN STD_LOGIC ;
+        ADR9, ADR10, ADR11, ADR12, ADR13                       : IN STD_LOGIC ;
+        CER, CLKR, CSR0, CSR1, CSR2, RST                  : IN STD_LOGIC ;
+
+        DO0, DO1, DO2, DO3, DO4, DO5, DO6, DO7, DO8            : OUT STD_LOGIC ;
+        DO9, DO10, DO11, DO12, DO13, DO14, DO15, DO16, DO17    : OUT STD_LOGIC ;
+        DO18, DO19, DO20, DO21, DO22, DO23, DO24, DO25, DO26   : OUT STD_LOGIC ;
+        DO27, DO28, DO29, DO30, DO31, DO32, DO33, DO34, DO35   : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of pdp16ka: COMPONENT is true;
+--
+COMPONENT FIFO16KA
+GENERIC(
+        DATA_WIDTH_W               : Integer  := 18;
+        DATA_WIDTH_R               : Integer  := 18;
+        REGMODE                    : String  := "NOREG";
+        RESETMODE                  : String  := "ASYNC";
+        CSDECODE_W                 : STD_LOGIC_vector(1 downto 0)  := "00";
+        CSDECODE_R                 : STD_LOGIC_vector(1 downto 0)  := "00";
+        AEPOINTER                  : STD_LOGIC_vector(14 downto 0)  := "000000000000000";
+        AEPOINTER1                 : STD_LOGIC_vector(14 downto 0)  := "000000000000000";
+        AFPOINTER                  : STD_LOGIC_vector(14 downto 0)  := "000000000000000";
+        AFPOINTER1                 : STD_LOGIC_vector(14 downto 0)  := "000000000000000";
+        FULLPOINTER                : STD_LOGIC_vector(14 downto 0)  := "000000000000000";
+        FULLPOINTER1               : STD_LOGIC_vector(14 downto 0)  := "000000000000000";
+        GSR : String  := "DISABLED"
+  );
+PORT(
+        DI0, DI1, DI2, DI3, DI4, DI5, DI6, DI7, DI8            : IN STD_LOGIC ;
+        DI9, DI10, DI11, DI12, DI13, DI14, DI15, DI16, DI17    : IN STD_LOGIC ;
+        DI18, DI19, DI20, DI21, DI22, DI23, DI24, DI25, DI26   : IN STD_LOGIC ;
+        DI27, DI28, DI29, DI30, DI31, DI32, DI33, DI34, DI35   : IN STD_LOGIC ;
+        FULLI, CSW0, CSW1, EMPTYI, CSR0, CSR1                     : IN STD_LOGIC ;
+        WE, RE, CLKW, CLKR, RST, RPRST                       : IN STD_LOGIC ;
+
+        DO0, DO1, DO2, DO3, DO4, DO5, DO6, DO7, DO8            : OUT STD_LOGIC ;
+        DO9, DO10, DO11, DO12, DO13, DO14, DO15, DO16, DO17    : OUT STD_LOGIC ;
+        DO18, DO19, DO20, DO21, DO22, DO23, DO24, DO25, DO26   : OUT STD_LOGIC ;
+        DO27, DO28, DO29, DO30, DO31, DO32, DO33, DO34, DO35   : OUT STD_LOGIC ;
+        EF, AEF, AFF, FF                                       : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of fifo16ka: COMPONENT is true;
+--
+COMPONENT SP16KA
+GENERIC(
+        DATA_WIDTH   : in Integer := 18;
+        REGMODE      : String  := "NOREG";
+        RESETMODE    : String  := "SYNC";
+        CSDECODE     : STD_LOGIC_vector(2 downto 0)  := "000";
+        WRITEMODE    : String  := "NORMAL";
+        GSR : String  := "DISABLED";
+        INITVAL_00 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_01 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_02 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_03 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_04 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_05 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_06 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_07 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_08 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_09 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_0A : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_0B : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_0C : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_0D : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_0E : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_0F : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_10 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_11 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_12 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_13 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_14 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_15 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_16 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_17 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_18 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_19 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_1A : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_1B : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_1C : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_1D : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_1E : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_1F : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_20 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_21 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_22 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_23 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_24 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_25 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_26 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_27 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_28 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_29 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_2A : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_2B : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_2C : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_2D : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_2E : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_2F : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_30 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_31 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_32 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_33 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_34 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_35 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_36 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_37 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_38 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_39 : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_3A : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_3B : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_3C : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_3D : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_3E : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        INITVAL_3F : string := "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  );
+PORT(
+        DI0, DI1, DI2, DI3, DI4, DI5, DI6, DI7, DI8            : IN STD_LOGIC ;
+        DI9, DI10, DI11, DI12, DI13, DI14, DI15, DI16, DI17    : IN STD_LOGIC ;
+        AD0, AD1, AD2, AD3, AD4, AD5, AD6, AD7, AD8            : IN STD_LOGIC ;
+        AD9, AD10, AD11, AD12, AD13                            : IN STD_LOGIC ;
+        CE, CLK, WE, CS0, CS1, CS2, RST                        : IN STD_LOGIC ;
+
+        DO0, DO1, DO2, DO3, DO4, DO5, DO6, DO7, DO8            : OUT STD_LOGIC ;
+        DO9, DO10, DO11, DO12, DO13, DO14, DO15, DO16, DO17    : OUT STD_LOGIC 
+  );
+END COMPONENT;
+
+attribute syn_black_box of sp16ka: COMPONENT is true;
+--
+
+COMPONENT BBW
+PORT(
+        B:  INOUT STD_LOGIC ;
+        I:  IN STD_LOGIC ;
+        T:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of bbw: COMPONENT is true;
+attribute black_box_pad_pin of bbw : COMPONENT is "b";
+--
+COMPONENT OBW
+PORT(
+        I:  IN STD_LOGIC ;
+        T:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of obw: COMPONENT is true;
+attribute black_box_pad_pin of obw : COMPONENT is "o";
+--
+COMPONENT ILVDS
+PORT(
+        A : IN STD_LOGIC ;
+        AN: IN STD_LOGIC ;
+        Z : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of ilvds: COMPONENT is true;
+attribute black_box_pad_pin of ilvds : COMPONENT is "a,an";
+--
+COMPONENT OLVDS
+PORT(
+        A  : IN STD_LOGIC ;
+        Z  : OUT STD_LOGIC ;
+        ZN : OUT STD_LOGIC
+ );
+END COMPONENT;
+attribute syn_black_box of olvds: COMPONENT is true;
+attribute black_box_pad_pin of olvds : COMPONENT is "z,zn";
+--
+--
+COMPONENT CLKDIV
+PORT(
+      CLKI, LSR            :   IN   STD_LOGIC;
+      CLKO, ELSR           :   OUT  STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of clkdiv: COMPONENT is true;
+attribute syn_tpd1 of clkdiv : COMPONENT is "clki->clko=0.0";
+--
+COMPONENT CLKDET
+PORT(
+      CLK, RST               :   IN   STD_LOGIC;
+      Q                     :   OUT  STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of clkdet: COMPONENT is true;
+attribute syn_tpd1 of clkdet : COMPONENT is "rst->q=0.0";
+
+COMPONENT CLKCNTL
+GENERIC(
+        CLKMODE : in String := "ECLK");
+PORT(
+        D               : IN STD_LOGIC;
+        CLK             : IN STD_LOGIC;
+        CE              : IN STD_LOGIC;
+        Q               : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of clkcntl: COMPONENT is true;
+attribute syn_tpd1 of clkcntl : COMPONENT is "clk->q=0.0";
+--
+COMPONENT BB
+PORT(
+        B:  INOUT STD_LOGIC ;
+        I:  IN STD_LOGIC ;
+        T:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of bb: COMPONENT is true;
+attribute black_box_pad_pin of bb : COMPONENT is "b";
+--
+COMPONENT BBPD
+PORT(
+        B:  INOUT STD_LOGIC ;
+        I:  IN STD_LOGIC ;
+        T:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of bbpd: COMPONENT is true;
+attribute black_box_pad_pin of bbpd : COMPONENT is "b";
+--
+COMPONENT BBPU
+PORT(
+        B:  INOUT STD_LOGIC ;
+        I:  IN STD_LOGIC ;
+        T:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of bbpu: COMPONENT is true;
+attribute black_box_pad_pin of bbpu : COMPONENT is "b";
+--
+COMPONENT IB
+PORT(
+        I:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of ib: COMPONENT is true;
+attribute black_box_pad_pin of ib : COMPONENT is "i";
+--
+COMPONENT IBPD
+PORT(
+        I:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of ibpd: COMPONENT is true;
+attribute black_box_pad_pin of ibpd : COMPONENT is "i";
+--
+COMPONENT IBPU
+PORT(
+        I:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of ibpu: COMPONENT is true;
+attribute black_box_pad_pin of ibpu : COMPONENT is "i";
+--
+COMPONENT IDDRA
+GENERIC(
+        AILRST          : in string := "ENABLED");
+PORT(
+        D               : IN STD_LOGIC;
+        CLK             : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        RUNAIL          : IN STD_LOGIC;
+        RSTAIL          : IN STD_LOGIC;
+        QA              : OUT STD_LOGIC;
+        QB              : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC;
+        LOCK            : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of iddra: COMPONENT is true;
+attribute syn_tpd1 of iddra : COMPONENT is "d->lock=0.0";
+--attribute ailrst of iddra : COMPONENT is "DISABLED";
+
+--
+COMPONENT IDDRXA
+GENERIC(
+        AILRST          : in string := "ENABLED");
+PORT(
+        D               : IN STD_LOGIC;
+        CLK             : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        RUNAIL          : IN STD_LOGIC;
+        RSTAIL          : IN STD_LOGIC;
+        QA              : OUT STD_LOGIC;
+        QB              : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC;
+        LOCK            : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of iddrxa: COMPONENT is true;
+attribute syn_tpd1 of iddrxa : COMPONENT is "d->lock=0.0";
+--attribute ailrst of iddrxa : COMPONENT is "DISABLED";
+--
+COMPONENT IDDRX1A
+GENERIC(
+        AILRST          : in string := "ENABLED");
+PORT(
+        D               : IN STD_LOGIC;
+        ECLK            : IN STD_LOGIC;
+        SCLK            : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        RUNAIL          : IN STD_LOGIC;
+        RSTAIL          : IN STD_LOGIC;
+        QA              : OUT STD_LOGIC;
+        QB              : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC;
+        LOCK            : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of iddrx1a: COMPONENT is true;
+attribute syn_tpd1 of iddrx1a : COMPONENT is "d->lock=0.0";
+--attribute ailrst of iddrx1a : COMPONENT is "DISABLED";
+--
+COMPONENT IDDRX2A
+GENERIC(
+        AILRST          : in string := "ENABLED";
+        lsrmode         : in string := "LOCAL";
+        updt            : in string := "POS");
+PORT(
+        D               : IN STD_LOGIC;
+        ECLK            : IN STD_LOGIC;
+        SCLK            : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        RUNAIL          : IN STD_LOGIC;
+        RSTAIL          : IN STD_LOGIC;
+        QA0             : OUT STD_LOGIC;
+        QB0             : OUT STD_LOGIC;
+        QA1             : OUT STD_LOGIC;
+        QB1             : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC;
+        LOCK            : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of iddrx2a: COMPONENT is true;
+attribute syn_tpd1 of iddrx2a : COMPONENT is "d->lock=0.0";
+--
+COMPONENT IDDRX4A
+GENERIC(
+        AILRST          : in string := "ENABLED";
+        lsrmode         : in string := "LOCAL";
+        updt            : in string := "POS");
+PORT(
+        D               : IN STD_LOGIC;
+        ECLK            : IN STD_LOGIC;
+        SCLK            : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        RUNAIL          : IN STD_LOGIC;
+        RSTAIL          : IN STD_LOGIC;
+        QA0             : OUT STD_LOGIC;
+        QB0             : OUT STD_LOGIC;
+        QA1             : OUT STD_LOGIC;
+        QB1             : OUT STD_LOGIC;
+        QA2             : OUT STD_LOGIC;
+        QB2             : OUT STD_LOGIC;
+        QA3             : OUT STD_LOGIC;
+        QB3             : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC;
+        LOCK            : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of iddrx4a: COMPONENT is true;
+attribute syn_tpd1 of iddrx4a : COMPONENT is "d->lock=0.0";
+--
+COMPONENT ISRX1A
+GENERIC(
+        AILRST          : in string := "ENABLED");
+PORT(
+        D               : IN STD_LOGIC;
+        CLK             : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        RUNAIL          : IN STD_LOGIC;
+        RSTAIL          : IN STD_LOGIC;
+        Q               : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC;
+        LOCK            : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of isrx1a: COMPONENT is true;
+attribute syn_tpd1 of isrx1a : COMPONENT is "d->lock=0.0";
+--attribute ailrst of isrx1a : COMPONENT is "DISABLED";
+--
+COMPONENT ISRX2A
+GENERIC(
+        AILRST          : in string := "ENABLED";
+        lsrmode         : in string := "LOCAL";
+        updt            : in string := "POS");
+PORT(
+        D               : IN STD_LOGIC;
+        ECLK            : IN STD_LOGIC;
+        SCLK            : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        RUNAIL          : IN STD_LOGIC;
+        RSTAIL          : IN STD_LOGIC;
+        Q0              : OUT STD_LOGIC;
+        Q1              : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC;
+        LOCK            : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of isrx2a: COMPONENT is true;
+attribute syn_tpd1 of isrx2a : COMPONENT is "d->lock=0.0";
+
+--
+COMPONENT ISRX4A
+GENERIC(
+        AILRST          : in string := "ENABLED";
+        lsrmode         : in string := "LOCAL";
+        updt            : in string := "POS");
+PORT(
+        D               : IN STD_LOGIC;
+        ECLK            : IN STD_LOGIC;
+        SCLK            : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        RUNAIL          : IN STD_LOGIC;
+        RSTAIL          : IN STD_LOGIC;
+        Q0              : OUT STD_LOGIC;
+        Q1              : OUT STD_LOGIC;
+        Q2              : OUT STD_LOGIC;
+        Q3              : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC;
+        LOCK            : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of isrx4a: COMPONENT is true;
+attribute syn_tpd1 of isrx4a : COMPONENT is "d->lock=0.0";
+
+--
+COMPONENT OB
+PORT(
+        I:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of ob: COMPONENT is true;
+attribute black_box_pad_pin of ob : COMPONENT is "o";
+--
+COMPONENT OBZ
+PORT(
+        I:  IN STD_LOGIC ;
+        T:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of obz: COMPONENT is true;
+attribute black_box_pad_pin of obz : COMPONENT is "o";
+--
+COMPONENT OBZPD
+PORT(
+        I:  IN STD_LOGIC ;
+        T:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of obzpd: COMPONENT is true;
+attribute black_box_pad_pin of obzpd : COMPONENT is "o";
+--
+COMPONENT OBZPU
+PORT(
+        I:  IN STD_LOGIC ;
+        T:  IN STD_LOGIC ;
+        O:  OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of obzpu: COMPONENT is true;
+attribute black_box_pad_pin of obzpu : COMPONENT is "o";
+--
+COMPONENT OSRX1A
+GENERIC(
+        REGSET  : String := "RESET");
+PORT(
+        D              : IN STD_LOGIC;
+        CLK            : IN STD_LOGIC;
+        RST            : IN STD_LOGIC;
+        Q              : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of osrx1a: COMPONENT is true;
+attribute syn_tpd1 of osrx1a : COMPONENT is "rst->q=0.0";
+--
+COMPONENT OSRX2A
+GENERIC(
+        LSRMODE : String := "LOCAL";
+        UPDT    : String := "POS";
+        REGSET  : String := "RESET");
+PORT(
+        D0              : IN STD_LOGIC;
+        D1              : IN STD_LOGIC;
+        ECLK            : IN STD_LOGIC;
+        SCLK            : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        Q               : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of osrx2a: COMPONENT is true;
+attribute syn_tpd1 of osrx2a : COMPONENT is "rst->q=0.0";
+--
+COMPONENT OSRX4A
+GENERIC(
+        LSRMODE : String := "LOCAL";
+        UPDT    : String := "POS";
+        REGSET  : String := "RESET");
+PORT(
+        D0              : IN STD_LOGIC;
+        D1              : IN STD_LOGIC;
+        D2              : IN STD_LOGIC;
+        D3              : IN STD_LOGIC;
+        ECLK            : IN STD_LOGIC;
+        SCLK            : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        Q               : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of osrx4a: COMPONENT is true;
+attribute syn_tpd1 of osrx4a : COMPONENT is "rst->q=0.0";
+--
+COMPONENT ODDRA
+GENERIC(
+        REGSET  : String := "RESET");
+PORT(
+        DA              : IN STD_LOGIC;
+        DB              : IN STD_LOGIC;
+        CLK             : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        Q               : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of oddra: COMPONENT is true;
+attribute syn_tpd1 of oddra : COMPONENT is "rst->q=0.0";
+--
+COMPONENT ODDRXA
+GENERIC(
+        REGSET  : String := "RESET");
+PORT(
+        DA              : IN STD_LOGIC;
+        DB              : IN STD_LOGIC;
+        CLK             : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        Q               : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of oddrxa: COMPONENT is true;
+attribute syn_tpd1 of oddrxa : COMPONENT is "rst->q=0.0";
+--
+COMPONENT ODDRX2A
+GENERIC(
+        LSRMODE : String := "LOCAL";
+        UPDT    : String := "POS";
+        REGSET  : String := "RESET");
+PORT(
+        DA0             : IN STD_LOGIC;
+        DB0             : IN STD_LOGIC;
+        DA1             : IN STD_LOGIC;
+        DB1             : IN STD_LOGIC;
+        ECLK            : IN STD_LOGIC;
+        SCLK            : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        Q               : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of oddrx2a: COMPONENT is true;
+attribute syn_tpd1 of oddrx2a : COMPONENT is "rst->q=0.0";
+--
+COMPONENT ODDRX4A
+GENERIC(
+        LSRMODE : String := "LOCAL";
+        UPDT    : String := "POS";
+        REGSET  : String := "RESET");
+PORT(
+        DA0             : IN STD_LOGIC;
+        DB0             : IN STD_LOGIC;
+        DA1             : IN STD_LOGIC;
+        DB1             : IN STD_LOGIC;
+        DA2             : IN STD_LOGIC;
+        DB2             : IN STD_LOGIC;
+        DA3             : IN STD_LOGIC;
+        DB3             : IN STD_LOGIC;
+        ECLK            : IN STD_LOGIC;
+        SCLK            : IN STD_LOGIC;
+        RST             : IN STD_LOGIC;
+        Q               : OUT STD_LOGIC;
+        UPDATE          : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of oddrx4a: COMPONENT is true;
+attribute syn_tpd1 of oddrx4a : COMPONENT is "rst->q=0.0";
+--
+COMPONENT DCS
+GENERIC(
+        DCSMODE : in String := "NEG");
+PORT(
+        CLK0              : IN STD_LOGIC;
+        CLK1              : IN STD_LOGIC;
+        SEL               : IN STD_LOGIC;
+        DCSOUT            : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of dcs: COMPONENT is true;
+attribute syn_tpd1 of dcs : COMPONENT is "sel->dcsout=0.0";
+--
+COMPONENT DELAY
+PORT(
+        A                 : IN STD_LOGIC;
+        DCNTL0            : IN STD_LOGIC;
+        DCNTL1            : IN STD_LOGIC;
+        DCNTL2            : IN STD_LOGIC;
+        DCNTL3            : IN STD_LOGIC;
+        DCNTL4            : IN STD_LOGIC;
+        DCNTL5            : IN STD_LOGIC;
+        DCNTL6            : IN STD_LOGIC;
+        DCNTL7            : IN STD_LOGIC;
+        DCNTL8            : IN STD_LOGIC;
+        Z                 : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of delay: COMPONENT is true;
+attribute syn_tpd1 of delay : COMPONENT is "a->z=0.0";
+
+--
+COMPONENT DPR16X2
+GENERIC(
+        GSR                : String    := "ENABLED";
+        initval : string := "0x0000000000000000"
+  );
+PORT(
+        DI0               : IN STD_LOGIC;
+        di1               : IN STD_LOGIC;
+        WAD0              : IN STD_LOGIC;
+        WAD1              : IN STD_LOGIC;
+        wad2              : IN STD_LOGIC;
+        WAD3              : IN STD_LOGIC;
+        WRE               : IN STD_LOGIC;
+        WPE               : IN STD_LOGIC;
+        WCK               : IN STD_LOGIC;
+        RAD0              : IN STD_LOGIC;
+        RAD1              : IN STD_LOGIC;
+        RAD2              : IN STD_LOGIC;
+        RAD3              : IN STD_LOGIC;
+        WDO0              : OUT STD_LOGIC;
+        WDO1              : OUT STD_LOGIC;
+        RDO0              : OUT STD_LOGIC;
+        RDO1              : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of dpr16x2: COMPONENT is true;
+--
+COMPONENT SPR16X2
+GENERIC(
+        GSR                : String    := "ENABLED";
+        initval : string := "0x0000000000000000"
+  );
+PORT(
+        DI0               : IN STD_LOGIC;
+        DI1               : IN STD_LOGIC;
+        AD0               : IN STD_LOGIC;
+        AD1               : IN STD_LOGIC;
+        AD2               : IN STD_LOGIC;
+        AD3               : IN STD_LOGIC;
+        WRE               : IN STD_LOGIC;
+        WPE               : IN STD_LOGIC;
+        CK                : IN STD_LOGIC;
+        DO0               : OUT STD_LOGIC;
+        DO1               : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of spr16x2: COMPONENT is true;
+--
+COMPONENT TRDLLA
+GENERIC(
+      CLKOP_PHASE        : Integer   := 0;
+      CLKOS_PHASE        : Integer   := 0;
+      CLKOS_FPHASE       : Integer   := 0;
+      CLKOS_DIV          : Integer   := 1;
+      CLKOP_DUTY50       : String    := "DISABLED";
+      CLKOS_DUTY50       : String    := "DISABLED";
+      GSR                : String    := "DISABLED";
+      CLKOS_FDEL_ADJ     : String    := "DISABLED";
+      CLKOS_FPHASE_ADJVAL : Integer   := 0;
+      ALU_LOCK_CNT       : Integer   := 3;
+      ALU_UNLOCK_CNT     : Integer   := 3;
+      GLITCH_TOLERANCE   : Integer   := 0;
+      DCNTL_ADJVAL       : Integer   := 0;
+      LOCK_DELAY         : Integer   := 100;
+      SMI_OFFSET         : String    := "0x410";
+      MODULE_TYPE        : String    := "TRDLLA";
+      IP_TYPE            : String    := "TRDLLA"
+  );
+PORT(
+        CLKI               : IN STD_LOGIC;
+        RSTN               : IN STD_LOGIC;
+        ALUHOLD            : IN STD_LOGIC;
+        UDDCNTL            : IN STD_LOGIC;
+        SMIADDR9           : IN STD_LOGIC;
+        SMIADDR8           : IN STD_LOGIC;
+        SMIADDR7           : IN STD_LOGIC;
+        SMIADDR6           : IN STD_LOGIC;
+        SMIADDR5           : IN STD_LOGIC;
+        SMIADDR4           : IN STD_LOGIC;
+        SMIADDR3           : IN STD_LOGIC;
+        SMIADDR2           : IN STD_LOGIC;
+        SMIADDR1           : IN STD_LOGIC;
+        SMIADDR0           : IN STD_LOGIC;
+        SMIRD              : IN STD_LOGIC;
+        SMIWR              : IN STD_LOGIC;
+        SMICLK             : IN STD_LOGIC;
+        SMIWDATA           : IN STD_LOGIC;
+        SMIRSTN            : IN STD_LOGIC;
+        CLKOP              : OUT STD_LOGIC;
+        CLKOS              : OUT STD_LOGIC;
+        LOCK               : OUT STD_LOGIC;
+        DCNTL8             : OUT STD_LOGIC;
+        DCNTL7             : OUT STD_LOGIC;
+        DCNTL6             : OUT STD_LOGIC;
+        DCNTL5             : OUT STD_LOGIC;
+        DCNTL4             : OUT STD_LOGIC;
+        DCNTL3             : OUT STD_LOGIC;
+        DCNTL2             : OUT STD_LOGIC;
+        DCNTL1             : OUT STD_LOGIC;
+        DCNTL0             : OUT STD_LOGIC;
+        SMIRDATA           : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of trdlla: COMPONENT is true;
+attribute syn_tpd1 of trdlla : COMPONENT is "clki->clkop=0.0";
+--
+COMPONENT CIMDLLA
+GENERIC(
+      CLKOS_FPHASE       : Integer   := 0;
+      CLKOS_DIV          : Integer   := 1;
+      GSR                : String    := "DISABLED";
+      ALU_LOCK_CNT       : Integer   := 3;
+      ALU_UNLOCK_CNT     : Integer   := 3;
+      GLITCH_TOLERANCE   : Integer   := 0;
+      DCNTL_ADJVAL       : Integer   := 0;
+      LOCK_DELAY         : Integer   := 100;
+      CLKOS_FDEL_ADJ     : String    := "DISABLED";
+      SMI_OFFSET         : String    := "0x410";
+      MODULE_TYPE        : String    := "CIMDLLA";
+      IP_TYPE            : String    := "CIMDLLA"
+  );
+PORT(
+        CLKI               : IN STD_LOGIC;
+        CLKFB              : IN STD_LOGIC;
+        RSTN               : IN STD_LOGIC;
+        ALUHOLD            : IN STD_LOGIC;
+        UDDCNTL            : IN STD_LOGIC;
+        SMIADDR9           : IN STD_LOGIC;
+        SMIADDR8           : IN STD_LOGIC;
+        SMIADDR7           : IN STD_LOGIC;
+        SMIADDR6           : IN STD_LOGIC;
+        SMIADDR5           : IN STD_LOGIC;
+        SMIADDR4           : IN STD_LOGIC;
+        SMIADDR3           : IN STD_LOGIC;
+        SMIADDR2           : IN STD_LOGIC;
+        SMIADDR1           : IN STD_LOGIC;
+        SMIADDR0           : IN STD_LOGIC;
+        SMIRD              : IN STD_LOGIC;
+        SMIWR              : IN STD_LOGIC;
+        SMICLK             : IN STD_LOGIC;
+        SMIWDATA           : IN STD_LOGIC;
+        SMIRSTN            : IN STD_LOGIC;
+        CLKOP              : OUT STD_LOGIC;
+        CLKOS              : OUT STD_LOGIC;
+        LOCK               : OUT STD_LOGIC;
+        DCNTL8             : OUT STD_LOGIC;
+        DCNTL7             : OUT STD_LOGIC;
+        DCNTL6             : OUT STD_LOGIC;
+        DCNTL5             : OUT STD_LOGIC;
+        DCNTL4             : OUT STD_LOGIC;
+        DCNTL3             : OUT STD_LOGIC;
+        DCNTL2             : OUT STD_LOGIC;
+        DCNTL1             : OUT STD_LOGIC;
+        DCNTL0             : OUT STD_LOGIC;
+        SMIRDATA           : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of cimdlla: COMPONENT is true;
+attribute syn_tpd1 of cimdlla : COMPONENT is "clki->clkop=0.0";
+
+--
+COMPONENT CIDDLLA
+GENERIC(
+      CLKOP_PHASE        : Integer   := 0;
+      CLKOS_PHASE        : Integer   := 0;
+      CLKOS_FPHASE       : Integer   := 0;
+      CLKI_DIV           : Integer   := 1;
+      CLKOS_DIV          : Integer   := 1;
+      CLKOP_DUTY50       : String    := "DISABLED";
+      CLKOS_DUTY50       : String    := "DISABLED";
+      GSR                : String    := "DISABLED";
+      CLKOS_FDEL_ADJ     : String    := "DISABLED";
+      ALU_LOCK_CNT       : Integer   := 3;
+      ALU_UNLOCK_CNT     : Integer   := 3;
+      GLITCH_TOLERANCE   : Integer   := 0;
+      ALU_INIT_CNTVAL    : Integer   := 0;
+      LOCK_DELAY         : Integer   := 100;
+      SMI_OFFSET         : String    := "0x410";
+      MODULE_TYPE        : String    := "CIDDLLA";
+      IP_TYPE            : String    := "CIDDLLA"
+  );
+PORT(
+        CLKI               : IN STD_LOGIC;
+        CLKFB              : IN STD_LOGIC;
+        RSTN               : IN STD_LOGIC;
+        ALUHOLD            : IN STD_LOGIC;
+        SMIADDR9           : IN STD_LOGIC;
+        SMIADDR8           : IN STD_LOGIC;
+        SMIADDR7           : IN STD_LOGIC;
+        SMIADDR6           : IN STD_LOGIC;
+        SMIADDR5           : IN STD_LOGIC;
+        SMIADDR4           : IN STD_LOGIC;
+        SMIADDR3           : IN STD_LOGIC;
+        SMIADDR2           : IN STD_LOGIC;
+        SMIADDR1           : IN STD_LOGIC;
+        SMIADDR0           : IN STD_LOGIC;
+        SMIRD              : IN STD_LOGIC;
+        SMIWR              : IN STD_LOGIC;
+        SMICLK             : IN STD_LOGIC;
+        SMIWDATA           : IN STD_LOGIC;
+        SMIRSTN            : IN STD_LOGIC;
+        CLKOP              : OUT STD_LOGIC;
+        CLKOS              : OUT STD_LOGIC;
+        LOCK               : OUT STD_LOGIC;
+        SMIRDATA           : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of ciddlla: COMPONENT is true;
+attribute syn_tpd1 of ciddlla : COMPONENT is "clki->clkop=0.0";
+--
+COMPONENT SDCDLLA
+GENERIC(
+      CLKOS_FPHASE       : Integer   := 0;
+      CLKOS_DIV          : Integer   := 1;
+      CLKI_DIV           : Integer   := 1;
+      GSR                : String    := "DISABLED";
+      CLKOS_FDEL_ADJ     : String    := "DISABLED";
+      ALU_LOCK_CNT       : Integer   := 3;
+      ALU_UNLOCK_CNT     : Integer   := 3;
+      GLITCH_TOLERANCE   : Integer   := 0;
+      DCNTL_ADJVAL       : Integer   := 0;
+      ALU_INIT_CNTVAL    : Integer   := 0;
+      LOCK_DELAY         : Integer   := 100;
+      SMI_OFFSET         : String    := "0x410";
+      MODULE_TYPE        : String    := "SDCDLLA";
+      IP_TYPE            : String    := "SDCDLLA"
+ );
+    PORT (
+        CLKI               : IN STD_LOGIC;
+        CLKFB              : IN STD_LOGIC;
+        RSTN               : IN STD_LOGIC;
+        ALUHOLD            : IN STD_LOGIC;
+        UDDCNTL            : IN STD_LOGIC;
+        SMIADDR9           : IN STD_LOGIC;
+        SMIADDR8           : IN STD_LOGIC;
+        SMIADDR7           : IN STD_LOGIC;
+        SMIADDR6           : IN STD_LOGIC;
+        SMIADDR5           : IN STD_LOGIC;
+        SMIADDR4           : IN STD_LOGIC;
+        SMIADDR3           : IN STD_LOGIC;
+        SMIADDR2           : IN STD_LOGIC;
+        SMIADDR1           : IN STD_LOGIC;
+        SMIADDR0           : IN STD_LOGIC;
+        SMIRD              : IN STD_LOGIC;
+        SMIWR              : IN STD_LOGIC;
+        SMICLK             : IN STD_LOGIC;
+        SMIWDATA           : IN STD_LOGIC;
+        SMIRSTN            : IN STD_LOGIC;
+        CLKOP              : OUT STD_LOGIC;
+        CLKOS              : OUT STD_LOGIC;
+        LOCK               : OUT STD_LOGIC;
+        DCNTL8             : OUT STD_LOGIC;
+        DCNTL7             : OUT STD_LOGIC;
+        DCNTL6             : OUT STD_LOGIC;
+        DCNTL5             : OUT STD_LOGIC;
+        DCNTL4             : OUT STD_LOGIC;
+        DCNTL3             : OUT STD_LOGIC;
+        DCNTL2             : OUT STD_LOGIC;
+        DCNTL1             : OUT STD_LOGIC;
+        DCNTL0             : OUT STD_LOGIC;
+        SMIRDATA           : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of sdcdlla: COMPONENT is true;
+attribute syn_tpd1 of sdcdlla: COMPONENT is "clki->clkop=0.0";
+
+--
+COMPONENT EHXPLLA
+GENERIC(
+      CLKI_DIV           : Integer   := 1;
+      CLKFB_DIV          : Integer   := 1;
+      CLKOP_DIV          : Integer   := 1;
+      CLKOS_DIV          : Integer   := 1;
+      CLKOP_MODE         : String    := "BYPASS";
+      CLKOS_MODE         : String    := "BYPASS";
+      PHASEADJ           : Integer   := 0;
+      gsr                : String    := "ENABLED";
+      CLKI_FDEL          : Integer   := 0;
+      CLKFB_FDEL         : Integer   := 0;
+      CLKOS_FDEL         : Integer   := 0;
+      LOCK_DELAY         : Integer   := 100;
+      CLKOS_VCODEL       : Integer   := 0;
+      SMI_OFFSET         : String    := "0x410";
+      MODULE_TYPE        : String    := "EHXPLLA";
+      IP_TYPE            : String    := "EHXPLLA"
+  );
+PORT(
+      SMIADDR9              : IN STD_LOGIC;
+      SMIADDR8              : IN STD_LOGIC;
+      SMIADDR7              : IN STD_LOGIC;
+      SMIADDR6              : IN STD_LOGIC;
+      SMIADDR5              : IN STD_LOGIC;
+      SMIADDR4              : IN STD_LOGIC;
+      SMIADDR3              : IN STD_LOGIC;
+      SMIADDR2              : IN STD_LOGIC;
+      SMIADDR1              : IN STD_LOGIC;
+      SMIADDR0              : IN STD_LOGIC;
+      SMIRD                 : IN STD_LOGIC;
+      SMIWR                 : IN STD_LOGIC;
+      SMICLK                : IN STD_LOGIC;
+      SMIWDATA              : IN STD_LOGIC;
+      SMIRSTN               : IN STD_LOGIC;
+      CLKI                  : IN STD_LOGIC;
+      CLKFB                 : IN STD_LOGIC;
+      RSTN                  : IN STD_LOGIC;
+      CLKOS                 : OUT STD_LOGIC;
+      CLKOP                 : OUT STD_LOGIC;
+      LOCK                  : OUT STD_LOGIC;
+      CLKINTFB              : OUT STD_LOGIC;
+      SMIRDATA              : OUT STD_LOGIC);
+END COMPONENT;
+attribute syn_black_box of ehxplla: COMPONENT is true;
+attribute syn_tpd1 of ehxplla : COMPONENT is "clki->clkop=0.0";
+--
+COMPONENT CD2
+PORT(
+        CI : IN STD_LOGIC ;
+        PC0, PC1 : IN STD_LOGIC ;
+        CO : OUT STD_LOGIC ;
+        NC0, NC1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of CD2: COMPONENT is true;
+--
+COMPONENT CU2
+PORT(
+        CI : IN STD_LOGIC ;
+        PC0, PC1 : IN STD_LOGIC ;
+        CO : OUT STD_LOGIC ;
+        NC0, NC1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of CU2: COMPONENT is true;
+--
+COMPONENT CB2
+PORT(
+        CI : IN STD_LOGIC ;
+        PC0, pc1 : IN STD_LOGIC ;
+        CON: IN STD_LOGIC ;
+        CO : OUT STD_LOGIC ;
+        NC0, NC1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of CB2: COMPONENT is true;
+--
+COMPONENT CB4
+ port (
+   CI : in std_logic;
+   PC0 : in std_logic;
+   PC1 : in std_logic;
+   PC2 : in std_logic;
+   PC3 : in std_logic;
+   CON : in std_logic;
+   CO : out std_logic;
+   NC0 : out std_logic;
+   NC1 : out std_logic;
+   NC2 : out std_logic;
+   NC3 : out std_logic
+ );
+END COMPONENT;
+attribute syn_black_box of CB4: COMPONENT is true;
+--
+COMPONENT LB2P3BX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, d1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        PD: IN STD_LOGIC ;
+        CON: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of lb2p3bx: COMPONENT is true;
+--
+COMPONENT LB2P3DX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, d1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        CD: IN STD_LOGIC ;
+        CON: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of lb2p3dx: COMPONENT is true;
+--
+COMPONENT LB2P3IX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        CD: IN STD_LOGIC ;
+        CON: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of lb2p3ix: COMPONENT is true;
+--
+COMPONENT LB2P3JX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, d1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        PD: IN STD_LOGIC ;
+        CON: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of lb2p3jx: COMPONENT is true;
+component LB4P3JX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   PD : in std_logic;
+   CON : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LB4P3JX : component is true;
+component LB4P3IX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CD : in std_logic;
+   CON : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LB4P3IX : component is true;
+component LB4P3DX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CD : in std_logic;
+   CON : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LB4P3DX : component is true;
+component LB4P3BX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   PD : in std_logic;
+   CON : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LB4P3BX : component is true;
+component LB4P3AY
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CON : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LB4P3AY : component is true;
+component LB4P3AX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CON : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LB4P3AX : component is true;
+--
+COMPONENT LD2P3AX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of ld2p3ax: COMPONENT is true;
+--
+COMPONENT LD2P3AY
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of ld2p3ay: COMPONENT is true;
+--
+COMPONENT LD2P3BX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        PD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of ld2p3bx: COMPONENT is true;
+--
+COMPONENT LD2P3DX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        CD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of ld2p3dx: COMPONENT is true;
+--
+COMPONENT LD2P3IX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        CD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of ld2p3ix: COMPONENT is true;
+--
+COMPONENT LD2P3JX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        PD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of ld2p3jx: COMPONENT is true;
+component LD4P3JX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   PD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LD4P3JX : component is true;
+component LD4P3IX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LD4P3IX : component is true;
+component LD4P3DX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LD4P3DX : component is true;
+component LD4P3BX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   PD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LD4P3BX : component is true;
+component LD4P3AY
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LD4P3AY : component is true;
+component LD4P3AX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LD4P3AX : component is true;
+--
+COMPONENT LU2P3AX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of lu2p3ax: COMPONENT is true;
+--
+COMPONENT LU2P3AY
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of lu2p3ay: COMPONENT is true;
+--
+COMPONENT LU2P3BX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        PD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of lu2p3bx: COMPONENT is true;
+--
+COMPONENT LU2P3DX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        CD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of lu2p3dx: COMPONENT is true;
+--
+COMPONENT LU2P3IX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        CD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of lu2p3ix: COMPONENT is true;
+--
+COMPONENT LU2P3JX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        SP: IN STD_LOGIC ;
+        CK: IN STD_LOGIC ;
+        SD: IN STD_LOGIC ;
+        PD: IN STD_LOGIC ;
+        CO: OUT STD_LOGIC ;
+        Q0, Q1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of lu2p3jx: COMPONENT is true;
+--
+component LU4P3JX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   PD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LU4P3JX : component is true;
+component LU4P3IX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LU4P3IX : component is true;
+--
+component LU4P3DX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LU4P3DX : component is true;
+component LU4P3BX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   PD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LU4P3BX : component is true;
+--
+component LU4P3AY
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LU4P3AY : component is true;
+--
+component LU4P3AX
+ GENERIC (gsr : String := "ENABLED");
+ port (
+   D0 : in std_logic;
+   D1 : in std_logic;
+   D2 : in std_logic;
+   D3 : in std_logic;
+   CI : in std_logic;
+   SP : in std_logic;
+   CK : in std_logic;
+   SD : in std_logic;
+   CO : out std_logic;
+   Q0 : out std_logic;
+   Q1 : out std_logic;
+   Q2 : out std_logic;
+   Q3 : out std_logic
+ );
+end component;
+attribute syn_black_box of LU4P3AX : component is true;
+--
+COMPONENT FADD2
+PORT(
+        A0, A1 : IN STD_LOGIC ;
+        B0, B1 : IN STD_LOGIC ;
+        CI: IN STD_LOGIC ;
+        COUT0, COUT1 : OUT STD_LOGIC ;
+        S0, S1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of fadd2: COMPONENT is true;
+--
+COMPONENT FSUB2
+PORT(
+        A0, A1 : IN STD_LOGIC ;
+        B0, B1 : IN STD_LOGIC ;
+        BI: IN STD_LOGIC ;
+        BOUT0, BOUT1 : OUT STD_LOGIC ;
+        S0, S1 : OUT STD_LOGIC 
+  );
+END COMPONENT;
+attribute syn_black_box of fsub2: COMPONENT is true;
+--
+COMPONENT AGEB2
+    PORT(
+          A0		:	IN	STD_ULOGIC;
+          A1		:   IN	STD_ULOGIC;
+          B0		:   IN	STD_ULOGIC;
+          B1		:   IN	STD_ULOGIC;
+          CI		:   IN	STD_ULOGIC;
+          GE		:   OUT	STD_ULOGIC
+        );
+END COMPONENT;
+attribute syn_black_box of ageb2: COMPONENT is true;
+
+COMPONENT ALEB2
+    PORT(
+          A0		:   IN	STD_ULOGIC;
+          A1		:   IN	STD_ULOGIC;
+          B0		:   IN	STD_ULOGIC;
+          B1		:   IN	STD_ULOGIC;
+          CI		:   IN	STD_ULOGIC;
+          LE		:   OUT	STD_ULOGIC
+        );
+END COMPONENT;
+attribute syn_black_box of aleb2: COMPONENT is true;
+
+COMPONENT ANEB2
+    PORT(
+          A0		:   IN	STD_ULOGIC;
+          A1		:   IN	STD_ULOGIC;
+          B0		:   IN	STD_ULOGIC;
+          B1		:   IN	STD_ULOGIC;
+          CI		:   IN	STD_ULOGIC;
+          NE		:   OUT	STD_ULOGIC
+        );
+END COMPONENT;
+attribute syn_black_box of aneb2: COMPONENT is true;
+
+COMPONENT MUX81
+    PORT(
+          D0		:   IN	STD_ULOGIC;
+          D1		:   IN	STD_ULOGIC;
+          D2		:   IN	STD_ULOGIC;
+          D3		:   IN	STD_ULOGIC;
+          D4		:   IN	STD_ULOGIC;
+          D5		:   IN	STD_ULOGIC;
+          D6		:   IN	STD_ULOGIC;
+          D7		:   IN	STD_ULOGIC;
+          SD1		:   IN	STD_ULOGIC;
+          SD2		:   IN	STD_ULOGIC;
+          SD3		:   IN	STD_ULOGIC;
+          Z		:   OUT	STD_ULOGIC
+        );
+END COMPONENT;
+attribute syn_black_box of mux81: COMPONENT is true;
+
+COMPONENT MUX161
+    PORT(
+
+          D0		:   IN	STD_ULOGIC;
+          D1		:   IN	STD_ULOGIC;
+          D2		:   IN	STD_ULOGIC;
+          D3		:   IN	STD_ULOGIC;
+          D4		:   IN	STD_ULOGIC;
+          D5		:   IN	STD_ULOGIC;
+          D6		:   IN	STD_ULOGIC;
+          D7		:   IN	STD_ULOGIC;
+          SD1		:   IN	STD_ULOGIC;
+          SD2		:   IN	STD_ULOGIC;
+          SD3		:   IN	STD_ULOGIC;
+          SD4		:   IN	STD_ULOGIC;
+          D8		:   IN	STD_ULOGIC;
+          D9		:   IN	STD_ULOGIC;
+          D10		:   IN	STD_ULOGIC;
+          D11		:   IN	STD_ULOGIC;
+          D12		:   IN	STD_ULOGIC;
+          D13		:   IN	STD_ULOGIC;
+          D14		:   IN	STD_ULOGIC;
+          D15		:   IN	STD_ULOGIC;
+          Z		:   OUT	STD_ULOGIC
+        );
+END COMPONENT;
+attribute syn_black_box of mux161: COMPONENT is true;
+
+COMPONENT MUX321
+    PORT(
+
+          D0		:   IN	STD_ULOGIC;
+          D1		:   IN	STD_ULOGIC;
+          D2		:   IN	STD_ULOGIC;
+          D3		:   IN	STD_ULOGIC;
+          D4		:   IN	STD_ULOGIC;
+          D5		:   IN	STD_ULOGIC;
+          D6		:   IN	STD_ULOGIC;
+          D7		:   IN	STD_ULOGIC;
+          SD1		:   IN	STD_ULOGIC;
+          SD2		:   IN	STD_ULOGIC;
+          SD3		:   IN	STD_ULOGIC;
+          SD4		:   IN	STD_ULOGIC;
+          SD5		:   IN	STD_ULOGIC;
+          D8		:   IN	STD_ULOGIC;
+          D9		:   IN	STD_ULOGIC;
+          D10		:   IN	STD_ULOGIC;
+          D11		:   IN	STD_ULOGIC;
+          D12		:   IN	STD_ULOGIC;
+          D13		:   IN	STD_ULOGIC;
+          D14		:   IN	STD_ULOGIC;
+          D15		:   IN	STD_ULOGIC;
+          D16		:   IN	STD_ULOGIC;
+          D17		:   IN	STD_ULOGIC;
+          D18		:   IN	STD_ULOGIC;
+          D19		:   IN	STD_ULOGIC;
+          D20		:   IN	STD_ULOGIC;
+          D21		:   IN	STD_ULOGIC;
+          D22		:   IN	STD_ULOGIC;
+          D23		:   IN	STD_ULOGIC;
+          D24		:   IN	STD_ULOGIC;
+          D25		:   IN	STD_ULOGIC;
+          D26		:   IN	STD_ULOGIC;
+          D27		:   IN	STD_ULOGIC;
+          D28		:   IN	STD_ULOGIC;
+          D29		:   IN	STD_ULOGIC;
+          D30		:   IN	STD_ULOGIC;
+          D31		:   IN	STD_ULOGIC;
+          Z		:   OUT	STD_ULOGIC
+        );
+END COMPONENT;
+attribute syn_black_box of mux321: COMPONENT is true;
+
+COMPONENT LB2P3AX
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC := 'X';
+        CI: IN STD_LOGIC := 'X';
+        SP: IN STD_LOGIC := 'X';
+        CK: IN STD_LOGIC := 'X';
+        SD: IN STD_LOGIC := 'X';
+        CON: IN STD_LOGIC := 'X';
+        CO: OUT STD_LOGIC := 'X';
+        Q0, Q1 : OUT STD_LOGIC := 'X'
+  );
+END COMPONENT;
+attribute syn_black_box of lb2p3ax: COMPONENT is true;
+--
+COMPONENT LB2P3AY
+    GENERIC (GSR : String := "ENABLED");
+PORT(
+        D0, D1 : IN STD_LOGIC := 'X';
+        CI: IN STD_LOGIC := 'X';
+        SP: IN STD_LOGIC := 'X';
+        CK: IN STD_LOGIC := 'X';
+        SD: IN STD_LOGIC := 'X';
+        CON: IN STD_LOGIC := 'X';
+        CO: OUT STD_LOGIC := 'X';
+        Q0, Q1 : OUT STD_LOGIC := 'X'
+  );
+END COMPONENT;
+attribute syn_black_box of lb2p3ay: COMPONENT is true;
+--
+end package COMPONENTs;
+

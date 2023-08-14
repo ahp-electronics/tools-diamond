@@ -1,0 +1,24 @@
+var pairs =
+{
+"creating":{"schematic":1}
+,"schematic":{"symbols":1,"editor":1}
+,"symbol":{"editor":1,"add":1,"relationship":1,"schematic":1}
+,"editor":{"construct":1,"create":1}
+,"construct":{"schematic":1}
+,"symbols":{"besides":1}
+,"besides":{"various":1}
+,"various":{"lines":1}
+,"lines":{"arcs":1}
+,"arcs":{"boxes":1}
+,"boxes":{"needed":1}
+,"needed":{"create":1}
+,"create":{"symbol":1,"block":1}
+,"add":{"text":1}
+,"text":{"give":1}
+,"give":{"information":1}
+,"information":{"symbol":1}
+,"relationship":{"rest":1}
+,"rest":{"circuit":1}
+,"block":{"symbol":1}
+}
+;Search.control.loadWordPairs(pairs);

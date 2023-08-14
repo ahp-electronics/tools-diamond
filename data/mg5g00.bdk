@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="mg5g00" include="baseflow">
+  <TaskDef id ="Task_Bitgen" title ="Bitgen" lable ="JEDEC File" depend_on_milestones="par">
+	 <Target id ="target">
+	   <Command using_def="Cmd_TimingCheck"/>
+	   <Command using_def="Cmd_Bitstream"/>
+	   <Command id="Cmd_JDec" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+	     <!--<cmd_str>ispdfw -dev $device.inner_name -if "${report_base}.bit" -oft -jed -of "${report_base}.jed" #PROP_BIT_DisableUESBitgen -comment "${report_base}.alt"</cmd_str>-->
+	     <cmd_str>ddtcmd -dev $device.inner_name -if "${report_base}.bit" -oft -jed -of "${report_base}.jed" #PROP_BIT_DisableUESBitgen -comment "${report_base}.alt" </cmd_str>
+		 <scripts>
+		 <![CDATA[
+			proc ispufw {args} {
+				set msg "ispufw $args\n";
+				runtime_log $msg;
+				set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+				runtime_log $msg;
+			}
+		 ]]>
+		 </scripts>  
+	   </Command>
+     </Target>
+	 <Report using_def="Report_BitGen"/>
+	 <Report using_def="Report_JDec"/>
+  </TaskDef>
+  <VariableDef name="TimingGen:WriteVerbose" value=" " />
+  <CommandDef id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+    <CommandFile name="${report_base}.t2b" clean="TRUE" >
+	  <line>#PROP_BIT_RunDRCBitGen</line>	
+	  <line>#PROP_BIT_ConModBitGen</line>
+	  <line>#PROP_BIT_ReadBackBitGen</line>
+	  <line>#PROP_BIT_ReadCaptureBitGen</line>
+	  <line>#PROP_BIT_DisRAMResBitGen</line>
+	  <line>-g ES:No</line>
+	</CommandFile>
+	 <!-- bitgen" -w "%J.ncd" -f "%J.t2b" "%J.prf"" -->
+    <cmd_str>bitgen -w "${report_base}.ncd" -f "${report_base}.t2b" "${report_base}.prf"</cmd_str>
+	<scripts>
+	<![CDATA[
+		proc bitgen {args} {
+			set msg "bitgen $args\n";
+			runtime_log $msg;
+			set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+			runtime_log $msg;
+		}
+	]]>
+	</scripts>  
+  </CommandDef>
+  <ToolEnvDef name="Download">
+    <Member name="input" value1="$(report_base).jed"/>
+    <Member name="type" value1="jed"/>
+  </ToolEnvDef>
+</BaliFlowDef>

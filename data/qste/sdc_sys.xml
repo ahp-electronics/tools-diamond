@@ -1,0 +1,506 @@
+<Folder treetype="root" label="System Templates" >
+<Template treetype="leaf" label="all_registers" >all_registers
+	[-no_hierarchy]
+	[-clock clock_name]
+	[-rise_clock clock_name]
+	[-fall_clock clock_name]
+	[-cells]
+	[-data_pins]
+	[-clock_pins]
+	[-slave_clock_pins]
+	[-async_pins]
+	[-output_pins]
+	[-level_sensitive]
+	[-edge_triggered]
+	[-master_slave]
+	current_design
+	</Template>
+<Template treetype="leaf" label="get_cells" >get_cells
+	[-hierarchical]
+	[-hsc separator]
+	[-regexp]
+	[-nocase]
+	-of_objects objects
+	patterns
+	</Template>	
+<Template treetype="leaf" label="get_clocks" >get_clocks
+	[-regexp]
+	[-nocase]
+	patterns
+	</Template>		
+<Template treetype="leaf" label="get_lib_cells" >get_lib_cells
+	[-hsc separator]
+	[-regexp]
+	[-nocase]
+	patterns
+	</Template>	
+<Template treetype="leaf" label="get_lib_pins" >get_lib_pins
+	[-hsc separator]
+	[-regexp]
+	[-nocase]
+	patterns
+	</Template>		
+<Template treetype="leaf" label="get_libs" >get_libs
+	[-regexp]
+	[-nocase]
+	patterns
+	</Template>		
+<Template treetype="leaf" label="get_nets" >get_nets
+	[-hierarchical]
+	[-hsc separator]
+	[-regexp]
+	[-nocase]
+	-of_objects objects
+	patterns
+	</Template>	
+<Template treetype="leaf" label="get_pins" >get_pins
+	[-hierarchical]
+	[-hsc separator]
+	[-regexp]
+	[-nocase]
+	-of_objects objects
+	patterns
+	</Template>	
+<Template treetype="leaf" label="get_ports" >get_ports
+	[-regexp]
+	[-nocase]
+	patterns
+	</Template>	
+<Template treetype="leaf" label="get_libs" >get_libs
+	[-regexp]
+	[-nocase]
+	patterns
+	</Template>		
+<Template treetype="leaf" label="create_clock" >create_clock
+	-period period_value
+	[-name clock_name]
+	[-waveform edge_list]
+	[-add]
+	[source_objects]
+	</Template>
+<Template treetype="leaf" label="create_generated_clock" >create_generated_clock
+	[-name clock_name]
+	-source master_pin
+	[-edges edge_list]
+	[-divide_by factor]
+	[-multiply_by factor]
+	[-duty_cycle percent]
+	[-invert]
+	[-edge_shift shift_list]
+	[-add]
+	[-master_clock clock]
+	source_objects
+	</Template>
+<Template treetype="leaf" label="group_path" >group_path
+	[-name group_name]
+	[-default]
+	[-weight weight_value]
+	[-from from_list]
+	[-rise_from from_list]
+	[-fall_from from_list]
+	[-to to_list]
+	[-rise_to to_list]
+	[-fall_to to_list]
+	[-through through_list]
+	[-rise_through through_list]
+	[-fall_through through_list]
+	</Template>
+<Template treetype="leaf" label="set_clock_gating_check" >set_clock_gating_check
+	[-setup setup_value]
+	[-hold hold_value]
+	[-rise]
+	[-fall]
+	[-high]
+	[-low]
+	[object_list]
+	</Template>
+<Template treetype="leaf" label="set_clock_groups" >set_clock_groups
+	[-name name]
+	[-logically_exclusive]
+	[-physically_exclusive]
+	[-asynchronous]
+	[-allow_paths]
+	-group clock_list
+	</Template>
+<Template treetype="leaf" label="set_clock_latency" >set_clock_latency
+	[-rise]
+	[-fall]
+	[-min]
+	[-max]
+	[-source]
+	[-late]
+	[-early]
+	[-clock clock_list]
+	delay
+	object_list
+	</Template>
+<Template treetype="leaf" label="set_clock_sense" >set_clock_sense
+	[-positive]
+	[-negative]
+	[-pulse pulse]
+	[-stop_propagation]
+	[-clock clock_list]
+	pin_list
+	</Template>
+<Template treetype="leaf" label="set_clock_transition" >set_clock_transition
+	[-rise]
+	[-fall]
+	[-min]
+	[-max]
+	transition
+	clock_list
+	</Template>
+<Template treetype="leaf" label="set_clock_uncertainty" >set_clock_uncertainty
+	[-from from_clock]
+	[-rise_from rise_from_clock]
+	[-fall_from fall_from_clock]
+	[-to to_clock]
+	[-rise_to rise_to_clock]
+	[-fall_to fall_to_clock]
+	[-rise]
+	[-fall]
+	[-setup]
+	[-hold]
+	uncertainty
+	[object_list]
+	</Template>
+<Template treetype="leaf" label="set_data_check" >set_data_check
+	[-from from_object]
+	[-to to_object]
+	[-rise_from from_object]
+	[-fall_from from_object]
+	[-rise_to to_object]
+	[-fall_to to_object]
+	[-setup]
+	[-hold]
+	[-clock clock_object]
+	value
+	</Template>
+<Template treetype="leaf" label="set_disable_timing" >set_disable_timing
+	[-from from_pin_name]
+	[-to to_pin_name]
+	cell_pin_list
+	</Template>
+<Template treetype="leaf" label="set_false_path" >set_false_path
+	[-setup]
+	[-hold]
+	[-rise]
+	[-fall]
+	[-from from_list]
+	[-to to_list]
+	[-through through_list]
+	[-rise_from rise_from_list]
+	[-rise_to rise_to_list]
+	[-rise_through rise_through_list]
+	[-fall_from fall_from_list]
+	[-fall_to fall_to_list]
+	[-fall_through fall_through_list]
+	</Template>
+<Template treetype="leaf" label="set_ideal_latency" >set_ideal_latency
+	[-rise]
+	[-fall]
+	[-min]
+	[-max]
+	delay
+	object_list
+	</Template>
+<Template treetype="leaf" label="set_ideal_network" >set_ideal_network
+	[-no_propagate]
+	object_list
+	</Template>
+<Template treetype="leaf" label="set_ideal_transition" >set_ideal_transition
+	[-rise]
+	[-fall]
+	[-min]
+	[-max]
+	transition_time
+	object_list
+	</Template>
+<Template treetype="leaf" label="set_input_delay" >set_input_delay
+	[-clock clock_name]
+	[-clock_fall]
+	[-level_sensitive]
+	[-rise]
+	[-fall]
+	[-max]
+	[-min]
+	[-add_delay]
+	[-network_latency_included]
+	[-source_latency_included]
+	delay_value
+	port_pin_list	</Template>
+<Template treetype="leaf" label="set_max_delay" >set_max_delay
+	[-rise]
+	[-fall]
+	[-from from_list]
+	[-to to_list]
+	[-through through_list]
+	delay_value
+	[-rise_from rise_from_list]
+	[-rise_to rise_to_list]
+	[-rise_through rise_through_list]
+	[-fall_from fall_from_list]
+	[-fall_to fall_to_list]
+	[-fall_through fall_through_list]
+	</Template>
+<Template treetype="leaf" label="set_min_delay" >set_min_delay
+	[-rise]
+	[-fall]
+	[-from from_list]
+	[-to to_list]
+	[-through through_list]
+	delay_value
+	[-rise_from rise_from_list]
+	[-rise_to rise_to_list]
+	[-rise_through rise_through_list]
+	[-fall_from fall_from_list]
+	[-fall_to fall_to_list]
+	[-fall_through fall_through_list]
+	</Template>
+<Template treetype="leaf" label="set_multicycle_path" >set_multicycle_path
+	[-setup]
+	[-hold]
+	[-rise]
+	[-fall]
+	[-start]
+	[-end]
+	[-from from_list]
+	[-to to_list]
+	[-through through_list]
+	path_multiplier
+	[-rise_from rise_from_list]
+	[-rise_to rise_to_list]
+	[-rise_through rise_through_list]
+	[-fall_from fall_from_list]
+	[-fall_to fall_to_list]
+	[-fall_through fall_through_list]
+	</Template>
+<Template treetype="leaf" label="set_output_delay" >set_output_delay
+	[-clock clock_name]
+	[-clock_fall]
+	[-level_sensitive]
+	[-rise]
+	[-fall]
+	[-max]
+	[-min]
+	[-add_delay]
+	[-network_latency_included]
+	[-source_latency_included]
+	delay_value
+	port_pin_list
+	</Template>
+<Template treetype="leaf" label="set_case_analysis" >set_case_analysis
+	value
+	port_or_pin_list
+	</Template>
+<Template treetype="leaf" label="set_drive" >set_drive
+	[-rise]
+	[-fall]
+	[-min]
+	[-max]
+	resistance
+	port_list
+	</Template>
+<Template treetype="leaf" label="set_driving_cell" >set_driving_cell
+	[-lib_cell lib_cell_name]
+	[-rise]
+	[-fall]
+	[-min]
+	[-max]
+	[-library lib_name]
+	[-pin pin_name]
+	[-from_pin from_pin_name]
+	[-multiply_by factor]
+	[-dont_scale]
+	[-no_design_rule]
+	[-clock clock_name]
+	[-clock_fall]
+	[-input_transition_rise rise_time]
+	[-input_transition_fall fall_time]
+	port_list
+	</Template>
+<Template treetype="leaf" label="set_input_transition" >set_input_transition
+	[-rise]
+	[-fall]
+	[-min]
+	[-max]
+	[-clock clock_name]
+	[-clock_fall]
+	transition
+	port_list
+	</Template>
+<Template treetype="leaf" label="set_load" >set_load
+	[-min]
+	[-max]
+	[-subtract_pin_load]
+	[-pin_load]
+	[-wire_load]
+	value
+	objects
+	</Template>
+<Template treetype="leaf" label="set_logic_dc" >set_logic_dc
+	port_list
+	</Template>
+<Template treetype="leaf" label="set_logic_one" >set_logic_one
+	port_list
+	</Template>
+<Template treetype="leaf" label="set_logic_zero" >set_logic_zero
+	port_list
+	</Template>
+<Template treetype="leaf" label="set_max_area" >set_max_area
+	value
+	object_list
+	</Template>
+<Template treetype="leaf" label="set_max_fanout" >set_max_fanout
+	value
+	object_list
+	</Template>
+<Template treetype="leaf" label="set_max_transition" >set_max_transition
+	[-clock_path]
+	[-data_path]
+	[-rise]
+	[-fall]
+	value
+	object_list
+	</Template>
+<Template treetype="leaf" label="set_min_capacitance" >set_min_capacitance
+	value
+	object_list
+	</Template>
+<Template treetype="leaf" label="set_operating_conditions" >set_operating_conditions
+	[-library lib_name]
+	[-max max_condition]
+	[-min min_condition]
+	[-max_library max_lib]
+	[-min_library min_lib]
+	[-object_list objects]
+	[condition]
+	</Template>
+<Template treetype="leaf" label="set_port_fanout_number" >set_port_fanout_number
+	value
+	object_list
+	</Template>
+<Template treetype="leaf" label="set_resistance" >set_resistance
+	[-min]
+	[-max]
+	value
+	net_list
+	</Template>
+<Template treetype="leaf" label="set_timing_derate" >set_timing_derate
+	[-cell_delay]
+	[-cell_check]
+	[-net_delay]
+	[-data]
+	[-clock]
+	[-early]
+	[-late]
+	derate_value
+	[object_list]
+	</Template>
+<Template treetype="leaf" label="set_wire_load_min_block_size" >set_wire_load_min_block_size
+	size
+	</Template>
+<Template treetype="leaf" label="set_wire_load_mode" >set_wire_load_mode
+	mode_name
+	</Template>
+<Template treetype="leaf" label="set_wire_load_model" >set_wire_load_model
+	value
+	object_list
+	</Template>
+<Template treetype="leaf" label="set_max_fanout" >set_max_fanout
+	-name model_name
+	[-library lib_name]
+	[-min]
+	[-max]
+	[object_list]
+	</Template>
+<Template treetype="leaf" label="set_wire_load_selection_group" >set_wire_load_selection_group
+	[-library lib_name]
+	[-min]
+	[-max]
+	group_name
+	[object_list]
+	</Template>
+<Template treetype="leaf" label="create_voltage_area" >create_voltage_area
+	-name name
+	[-coordinate
+	coordinate_list]
+	[-guard_band_x float]
+	[-guard_band_y float]
+	cell_list
+	</Template>
+<Template treetype="leaf" label="set_level_shifter_strategy" >set_level_shifter_strategy
+	[-rule rule_type]
+	</Template>
+<Template treetype="leaf" label="set_level_shifter_threshold" >set_level_shifter_threshold
+	[-voltage float]
+	[-percent float]
+	</Template>
+<Template treetype="leaf" label="set_max_dynamic_power" >set_max_dynamic_power
+	power
+	[unit]
+	</Template>
+<Template treetype="leaf" label="set_max_leakage_power" >set_max_leakage_power
+	power
+	[unit]
+	</Template>
+<Template treetype="leaf" label="define_clock" >define_clock
+	[ -disable ]
+	[ -virtual] {clockObject }
+	[ -freq MHz | -period ns ]
+	[ -clockgroup domain ]
+	[ -rise value -fall value]
+	[ -route ns ]
+	[-name clockName]
+	[ -comment textString ]
+	</Template>
+<Template treetype="leaf" label="define_clock_delay" >define_clock_delay
+	-rise|-fall {clockName1}
+	-rise|-fall {clockName2}
+	delayValue
+	</Template>	
+<Template treetype="leaf" label="define_compile_point" >define_compile_point
+	[ -disable ] { moduleName }
+	-type { black_box | soft | hard | locked | locked, partition }
+	[-cpfile { } ]
+	[ -comment textString ]
+	</Template>	
+<Template treetype="leaf" label="define_current_design" >define_current_design
+	{regionName | libraryName.moduleName }
+	define_false_path {-from startPoint | -to endPoint | -through throughPoint}
+	[-comment textString]
+	</Template>	
+<Template treetype="leaf" label="define_input_delay" >define_input_delay
+	[ -disable ] { inputportName } | -default ns [ -route ns ] 
+	[ -ref clockName:edge ]
+	[ -comment textString ]
+	</Template>		
+<Template treetype="leaf" label="define_multicycle_path" >define_multicycle_path
+	[ -start | -end ] { -from startPoint | -to endPoint | -through throughPoint }
+	clockCycles [ -comment textString ]
+	</Template>		
+<Template treetype="leaf" label="define_output_delay" >define_output_delay
+	[ -disable ] { outputportName } | -default ns [ -route ns ]
+	[ -ref clockName:edge ]
+	[ -comment textString ]
+	</Template>
+<Template treetype="leaf" label="define_path_delay" >define_path_delay
+	[-disable] {-from {startPoint} | -to {endPoint } | -through {throughPoint }
+	-max delayValue
+	[-comment textString ]
+	</Template>
+<Template treetype="leaf" label="define_reg_input_delay" >define_reg_input_delay
+	{ registerName } [ -route ns ]
+	[ -comment textString ]
+	</Template>
+<Template treetype="leaf" label="define_reg_output_delay" >define_reg_output_delay
+	{ registerName }
+	[ -route ns ]
+	[ -comment textString ]
+	</Template>				
+<Template treetype="leaf" label="set_option -frequency" >set_option
+	-optionName  optionValue
+	</Template>	
+<SubFolder treetype="node" label="PMI" >
+</SubFolder>
+</Folder>

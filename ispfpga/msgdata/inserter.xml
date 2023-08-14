@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messageFile name="analyzer" fid="212" alias="rva" vendor="Lattice Semiconductor Corporation" stamp="08/06/2013">
+  <description text="Message database of Reveal Inserter" />
+  <owner text="Andrew Lin, Tong.Feng" />
+  <messages>
+    <!----------------------------------------------------------------------------------------------------\>
+    <!-- Reveal Inserter's message database---------------------------------------------------------------|>
+	<!-- Messages are divided into several groups based on components ------------------------------------|>
+    <!-- Three types of message: Error, Warning, Info ----------------------------------------------------|>
+	<!---Component------ Start:End------------------------------------------------------------------------|>
+	<!-- GUI------------ 0000:0099 -----------------------------------------------------------------------|>
+	<!-- TCL------------ 0100:0199 -----------------------------------------------------------------------|>
+	<!-- COMMONDATA----- 0200:0299 -----------------------------------------------------------------------|>
+	<!-- ISTDATA-------- 0200:0299 -----------------------------------------------------------------------|>
+    <!-- Reserve 9990 and following IDs for messages Inserter gets no idea -------------------------------|>
+	<!-- Please DO NOT remove any item even it is obsolete -----------------------------------------------|>	
+    <!----------------------------------------------------------------------------------------------------/>
+
+    <!-- GUI 0000:0099------------------------------------------------------------------------------------->
+    <msg uid="0000" type="Error" text="There is no core selected." />
+    <msg uid="0001" type="Error" text="Signal is not found." />
+    <msg uid="0002" type="Error" text="There is no core selected." />
+    <msg uid="0003" type="Error" text="Cannot use empty name." />
+    <msg uid="0004" type="Error" text="Cannot use reserved keyword." />
+    <msg uid="0005" type="Error" text="The TU name has already been used." />
+	<msg uid="0006" type="Error" text="The TE name has already been used." />
+	<msg uid="0007" type="Error" text="The token set name $$s contains invalid charactor." />
+    <msg uid="0008" type="Error" text="The token set name $$s was used." />
+	<msg uid="0009" type="Error" text="The token set name cannot be start with 'RVL_ENUM', 'RVL_BOOLEAN' or 'RVL_INT'. These prefixes are reserved by Reveal." />
+    <msg uid="0010" type="Error" text="The maximum token bit number is invalid." />
+    <msg uid="0011" type="Error" text="The maximum token bit number should be between 1 and 256." />
+    <msg uid="0012" type="Error" text="Token set $$s: The token name $$s is set to invlaid value." />
+    <msg uid="0013" type="Error" text="Token set $$s: The bit number of the token value exceeds the maximum token bit number." />
+    <msg uid="0014" type="Warning" text="Cannot use enumeration/boolean/integer type signal as control signal." />
+    <msg uid="0015" type="Warning" text="The type of $$s is unsupported in this version." />
+    <msg uid="0016" type="Error" text="The core name was used." />
+    <msg uid="0017" type="Error" text="The core name is the same as the design module name." />
+    <msg uid="0018" type="Error" text="The bus name was used." />
+    <msg uid="0019" type="Error" text="Can't name a trace bus with the same name of a signal in the design." />
+	<msg uid="0020" type="Error" text="The new trigger out net name '$$s' has been reserved by the internal debug core." />
+	<msg uid="0021" type="Status" text="Checking design rules ..." />
+	
+	<!-- TCL 0100:0199------------------------------------------------------------------------------------->
+	<msg uid="0100" type="Error" text="Failed to open reveal project '$$s'." />
+	<msg uid="0101" type="Error" text="No reveal project is opened." />
+	<msg uid="0102" type="Error" text="The current reveal project is changed and not saved.\nUse -force option to close unsaved project." />
+	<msg uid="0103" type="Error" text="Failed to close project." />
+	<msg uid="0104" type="Error" text="The file '$$s' already exists.\nUse -overwrite option if you want to overwrite it." />
+	<msg uid="0105" type="Error" text="Failed to create reveal project $$s." />
+	<msg uid="0106" type="Error" text="Failed to save reveal project $$s." />
+	<msg uid="0107" type="Error" text="The core '$$s' does not exist. It's ignored." />
+	<msg uid="0108" type="Error" text="Save file name is not specified.\nPlease use -saveAs option to specify the name you want to save." />
+	<msg uid="0109" type="Error" text="Failed to run insert project." />
+	<msg uid="0110" type="Error" text="Failed to add debug core." />
+	<msg uid="0111" type="Error" text="Failed to delete debug core." />
+	<msg uid="0112" type="Error" text="Core '$$s' does not exist in current project." />
+	<msg uid="0113" type="Error" text="Failed to rename debug core." />
+	<msg uid="0114" type="Error" text="Failed to add Wishbone Master." />
+	<msg uid="0115" type="Error" text="Failed to remove Wishbone Master." />
+	<msg uid="0116" type="Error" text="Failed to move trace signal." />
+	<msg uid="0117" type="Error" text="Failed to add trace signal." />
+	<msg uid="0118" type="Error" text="Failed to delete trace signal." />
+	<msg uid="0119" type="Error" text="Failed to group trace signals." />
+	<msg uid="0120" type="Error" text="Failed to rename trace bus." />
+	<msg uid="0121" type="Warning" text="The trace option 'SampleEnable'; value must be 'on' or 'off'. Ignore 'SampleEnable = $$s'." />
+	<msg uid="0122" type="Warning" text="The trace option 'SampleEnable' is not on. The option 'SampleEnableSig' setting is ignored." />
+	<msg uid="0123" type="Warning" text="The trace option 'SampleEnable' is not on. The option 'SampleEnablePri' setting is ignored." />
+	<msg uid="0124" type="Warning" text="The trace option 'SampleEnablePri'; value must be 'ACTIVE_LOW' or 'ACTIVE_HIGH'. Ignore 'SampleEnablePri = $$s'." />
+	<msg uid="0125" type="Warning" text="The trace option 'BufferDepth' value must be the followings:\n\t $$s. Ignore 'BufferDepth = $$s'." />
+	<msg uid="0126" type="Warning" text="The trace option 'Implementation' value must be 'EBR' or 'DRAM'. Ignore 'Implementation = $$s'." />
+	<msg uid="0127" type="Warning" text="The trace option 'Timestamp' value must be 'on' or 'off'. Ignore 'Timestamp = $$s'." />
+	<msg uid="0128" type="Warning" text="The trace option 'Timestamp' is not on. The option 'TimestampBits' setting is ignored." />
+	<msg uid="0129" type="Warning" text="The trace option 'TimestampBits' value must be an integer number in the range from $$s." />
+	<msg uid="0130" type="Warning" text="The trace option 'CaptureMode' value must be 'single' or 'multiple'. Ignore 'CaptureMode = $$s'." />
+	<msg uid="0131" type="Warning" text="The trace option 'CaptureMode' isn't multiple mode. The option 'MinimumSamplesPerTrigger' setting is ignored." />
+	<msg uid="0132" type="Warning" text="The trace option 'MinimumSamplesPerTrigger' value must be the followings:\n\t $$s. Ignore 'MinimumSamplesPerTrigger = $$s'." />
+	<msg uid="0133" type="Warning" text="The trace option 'IncludeTrigger' value must be 'on' or 'off'. Ignore 'IncludeTrigger = $$s'." />
+	<msg uid="0134" type="Warning" text="The trace option 'TriggerEnable' value must be 'on' or 'off'. Ignore 'TriggerEnable =$$s'." />
+	<msg uid="0135" type="Warning" text="The trace option 'TriggerEnable' is not on. The option 'TriggerEnableSig' setting is ignored." />
+	<msg uid="0136" type="Warning" text="The trace option 'TriggerEnable' is not on. The option 'TrigEnablePri' setting is ignored." />
+	<msg uid="0137" type="Warning" text="The trace option 'TrigEnablePri' value must be 'ACTIVE_LOW' or 'ACTIVE_HIGH'. Ignore 'SampleEnablePri = $$s." />
+	<msg uid="0138" type="Warning" text="The trace option 'CaptureMode' isn't multiple mode. The option 'NumberofTriggers' setting is ignored." />
+	<msg uid="0139" type="Warning" text="The trace option 'TriggerEnable' isn't true. The option 'NumberofTriggers' setting is ignored." />
+	<msg uid="0140" type="Warning" text="The trace option 'NumberofTriggers' value must be the followings:\n\t $$s. Ignore 'NumberofTriggers = $$s'." />
+	<msg uid="0141" type="Warning" text="The trigger option 'DefaultRadix' value must be 'Bin', 'Oct', 'Dec' or 'Hex'. Ignore 'DefaultRadix = $$s." />
+	<msg uid="0142" type="Warning" text="The trigger option 'EventCounter' value must be 'on' or 'off'. Ignore 'EventCounter = $$s." />
+	<msg uid="0143" type="Warning" text="The trigger option 'EventCounter' is not on. The option 'CounterValue' setting is ignored." />
+	<msg uid="0144" type="Warning" text="The trigger option 'CounterValue' value must be 2, 4, 8, 16, ... ,65536. Ignore 'CounterValue = $$s." />
+	<msg uid="0145" type="Warning" text="The trigger option 'TriggerOut' value must be 'on' or 'off'. Ignore TriggerOut = $$s." />
+	<msg uid="0146" type="Warning" text="The trigger option 'TriggerOut' is not on. The option 'OutNetType' setting is ignored." />
+	<msg uid="0147" type="Warning" text="The trigger option 'OutNetType' value must be 'IO', 'NET' or 'BOTH'. Ignore 'OutNetType = $$s'." />
+	<msg uid="0148" type="Warning" text="The trigger option 'TriggerOut' is not on. The option 'OutNetName' setting is ignored." />
+	<msg uid="0149" type="Warning" text="The trigger option 'OutNetName' value must be in format [a-zA-Z_][a-zA-Z0-9_]*. Ignore 'OutNetName = $$s'." />
+	<msg uid="0150" type="Warning" text="The new trigger out net name '$$s' has been reserved by the internal debug core. Ignore 'OutNetName = $$s'." />
+	<msg uid="0151" type="Warning" text="The new trigger out net name '$$s' is invalid.\nIgnore 'OutNetName = $$s'." />
+	<msg uid="0152" type="Warning" text="The trigger option 'TriggerOut' is not on. The option 'OutNetPri' setting is ignored ." />
+	<msg uid="0153" type="Warning" text="The trace option 'OutNetPri' value must be 'ACTIVE_HIGH' or 'ACTIVE_LOW'. Ignore 'OutNetPri = $$s'." />
+	<msg uid="0154" type="Warning" text="The trigger option 'TriggerOut' is not on. The option 'OutNetMPW' setting is ignored." />
+	<msg uid="0155" type="Warning" text="The trigger option 'OutNetMPW' value must be an integer and can't be negtive. Ignore 'OutNetMPW = $$s'." />
+	<msg uid="0156" type="Warning" text="Invalid parameter format. Please use the 'option=value' format to set '$$s' option. It's ignored." />
+	<msg uid="0157" type="Warning" text="Unknown '$$s' option '$$s'. It's ignored." />
+	<msg uid="0158" type="Warning" text="'$$s' option. '$$s' will be set again. Ignore the previous setting." />
+	<msg uid="0159" type="Warning" text="Can't perform connection to Whishbone while the rvl_j2w module shell is not instantiated in the design. Ignore 'PerformConnect = true." />
+	<msg uid="0160" type="Warning" text="The Wishbone Master option 'PerformConnect' value must be 'true' or 'false'. Ignore 'PerformConnect = $$s'." />
+	<msg uid="0161" type="Warning" text="The Wishbone Master endian mode can't be little-endian when the 'PerformConnect' option is set true. Ignore 'Endian = $$s'." />
+	<msg uid="0162" type="Warning" text="The Wishbone Master option 'Endian' value must be 'big' or 'little'. Ignore 'Endian = $$s'." />
+	<msg uid="0163" type="Warning" text="Invalid parameter format. Please use the 'option = value' format to set Wishbone Master option. It's ignored." />
+	<msg uid="0164" type="Warning" text="Unknown Wishbone Master option. It's ignored." />
+	<msg uid="0165" type="Warning" text="Wishbone Master option '$$s' will be set again. Ignore the previous setting." />
+	<msg uid="0166" type="Error" text="Failed to add Serdes debug." />
+	<msg uid="0167" type="Error" text="Failed to remove Serdes debug." />
+	
+	<!-- COMMONDATA 0200:0299------------------------------------------------------------------------------>	
+	<msg uid="0200" type="Error" text="Reveal Inserter can't update design tree automatically." />
+	<msg uid="0201" type="Error" text="Can't load design information again before closing the current reveal insert project." />
+	<msg uid="0202" type="Error" text="No project is opened." />
+	<msg uid="0203" type="Error" text="The device $$s does not support Reveal Debug." />
+	<msg uid="0204" type="Error" text="Failed to synthesis the design." />
+	<msg uid="0205" type="Error" text="Reveal Inserter does not support System Verilog file." />
+	<msg uid="0206" type="Error" text="Error in parsing design. Please refer to reveal_error.log file for details." />
+	<msg uid="0207" type="Error" text="No Reveal project is opened." />
+	<msg uid="0208" type="Error" text="Can't close design infomation before closing the current reveal insert project." />
+	<msg uid="0209" type="Error" text="Failed to create Reveal file." />
+	<msg uid="0210" type="Warning" text="The project file '$$s' has been already opened." />
+	<msg uid="0211" type="Error" text="There already exists an opened project '$$s'." />
+	<msg uid="0212" type="Error" text="Project file does not exist." />
+	<msg uid="0213" type="Warning" text="Cannot find RVS file. Some settings are missing." />
+	<msg uid="0214" type="Error" text="Failed to read Reveal project." />
+	<msg uid="0215" type="Error" text="Invalid file name '$$s'." />
+	<msg uid="0216" type="Error" text="Wishbone Master is not supported by the $$s  device." />
+	<msg uid="0217" type="Error" text="Wishbone Master is already used." />
+	<msg uid="0218" type="Error" text="Wishbone Master does not exist." />
+	<msg uid="0219" type="Error" text="The maximum number of cores is 15. Cannot create any more." />
+	<msg uid="0220" type="Error" text="Meet invalid character in the new core name '$$s'." />
+	<msg uid="0221" type="Error" text="The new core name '$$s' is the same as the design module name." />
+	<msg uid="0222" type="Error" text="A core with the same name exists, please specify another name." />
+	<msg uid="0223" type="Error" text="The core does not exist." />
+	<msg uid="0224" type="Error" text="Meet invalid character in the new core name '$$s'." />
+	<msg uid="0225" type="Warning" text="The type of $$s is unsupported in this version. It's ignored." />
+	<msg uid="0226" type="Warning" text="The bus $$s has already been added to trace data." />
+	<msg uid="0227" type="Warning" text="$$s has already been added to trace data." />
+	<msg uid="0228" type="Error" text="The trace bus named as '$$s' does not exist." />
+	<msg uid="0229" type="Error" text="'$$s' isn't a valid position of trace bus '$$s'." />
+	<msg uid="0230" type="Warning" text="The trace signal or bus named as '$$s'." />
+	<msg uid="0231" type="Error" text="Can't move trace signals which are not under the same trace bus or on the top." />
+	<msg uid="0232" type="Warning" text="The trace signal or bus named as '$$s' does not exist. It's ignored." />
+	<msg uid="0232" type="Warning" text="The trace bus named as '$$s' does not exist. It's ignored and all trace signals will be appended to the end." />
+	<msg uid="0233" type="Warning" text="'$$s' isn't a valid position of trace bus '$$s'. It's ignored and all trace signals will be appended to the end of the trace bus." />
+	<msg uid="0234" type="Warning" text="The trace signal or bus named as '$$s' does not exist. It's ignored and all trace signals will be appended to the end." />
+	<msg uid="0235" type="Warning" text="The type of '$$s' is unsupported in this version. It's ignored." />
+	<msg uid="0236" type="Warning" text="The signal '$$s' has already been added to trace data." />
+	<msg uid="0237" type="Warning" text="'$$s' does not exist." />
+	<msg uid="0238" type="Error" text="Trace signal/bus '$$s' does not exist." />
+	<msg uid="0239" type="Error" text="Meet invalid character in new trace bus name '$$s'." />
+	<msg uid="0240" type="Warning" text="The name '$$s' which you want to chang the trace bus name to is already used by another trace bus." />
+	<msg uid="0241" type="Warning" text="Can't name a trace bus with the same name of a signal in the design." />
+	<msg uid="0242" type="Warning" text="Meet invalid character in new trace bus name '$$s'." />
+	<msg uid="0243" type="Warning" text="Trace bus '$$s' has already existed." />
+	<msg uid="0244" type="Warning" text="Can't name a trace bus with the same name of a signal in the design." />
+	<msg uid="0245" type="Warning" text="No trace signal/bus named as '$$' exists. It will be ignored." />
+	<msg uid="0246" type="Warning" text="Trace signal or bus named as '$$s' can't be added into a bus twice. It will be ignored." />
+	<msg uid="0247" type="Warning" text="'$$s' is converted signal. It cannot be grouped." />
+	<msg uid="0248" type="Warning" text="Can't group trace signals under different level sub-bus items." />
+	<msg uid="0249" type="Warning" text="No trace signal is grouped." />
+	<msg uid="0250" type="Warning" text="The maximum number of TUs is 16. Cannot create any more." />
+	<msg uid="0251" type="Warning" text="Meet invalid character in new TU name. It must be '[a-zA-Z_][a-zA-Z0-9_]*'." />
+	<msg uid="0252" type="Warning" text="Cannot add more than 256 signals to a trigger unit. Ignore all the rest of adding signals." />
+	<msg uid="0253" type="Warning" text="'$$s' has already been added to the this trigger unit." />
+	<msg uid="0254" type="Warning" text="Cannot mix the converted signal '$$s'to other signals. Ignore all the rest of adding signals." />
+	<msg uid="0255" type="Warning" text="Cannot mix the converted signal '$$s'to other signals. It's ignored." />
+	<msg uid="0256" type="Warning" text="The type of '$$s' is unsupported in this version. It's ignored." />
+	<msg uid="0257" type="Warning" text="'$$S' is the trigger output signal for the this core and can not be triggered. It's ignored." />
+	<msg uid="0258" type="Warning" text="The signal '$$s' does not exist. It's ignored." />
+	<msg uid="0259" type="Warning" text="The new name exists, please specify another name." />
+	<msg uid="0260" type="Warning" text="'$$s' is not in this trigger unit." />
+	<msg uid="0261" type="Warning" text="Invalid operator '$$s'. Replace it with '$$s'." />
+	<msg uid="0262" type="Warning" text="Invalid radix value'$$s'. Replace it with '$$s'." />
+	<msg uid="0263" type="Warning" text="The value in the trigger unit expression is not in valid format. Ignore the value setting and set it empty." />
+	<msg uid="0264" type="Warning" text="The value in the trigger unit expression can't contains 'DON'T CARE' bit 'X'. Ignore the value setting and set it empty." />
+	<msg uid="0265" type="Warning" text="The bits length of the value in the trigger unit expression exceeds the bits length of the all signals ." />
+	<msg uid="0266" type="Error" text="The maximum number of TEs is 16. Cannot create any more." />
+	<msg uid="0267" type="Warning" text="Meet invalid character in new TE name. It must be '[a-zA-Z_][a-zA-Z0-9_]*'." />
+	<msg uid="0268" type="Warning" text="New tokens set name is already used in current project." />
+	<msg uid="0269" type="Warning" text="The token set '$$s' to be imported has already existed, the name is replaced by'$$s'." />
+	<msg uid="0270" type="Warning" text="The token set '$$s' has already existed. It's ignored." />
+	<msg uid="0271" type="Error" text="Cannot write file '$$s' : '$$'." />
+	<msg uid="0272" type="Warning" text="The token name '$$s' is already used. It's ignored." />
+	<msg uid="0273" type="Error" text="Save file name is not specified." />
+	<msg uid="0274" type="Error" text="Failed to save project." />
+	<msg uid="0275" type="Warning" text="Reveal Inserter does not support System Verilog file." />
+	<msg uid="0276" type="Status" text="Loading Reveal project..." />
+	<msg uid="0277" type="Status" text="Loaded Reveal project successfully." />
+	<msg uid="0278" type="Error" text="Failed to load design, please check HDL Manager setting or Top-Level Unit value." />
+        <msg uid="0279" type="Error" text="Serdes debug core is not supported by the $$s  device." />
+	<msg uid="0280" type="Error" text="Serdes debug core is already used." />
+	<msg uid="0281" type="Error" text="Serdes debug core does not exist." />
+	<!-- ISTDATA 0300:0399------------------------------------------------------------------------------>
+	<msg uid="0300" type="Error" text="The number of logic analyzer cores can't exceed 15." />
+	<msg uid="0301" type="Error" text="No debug core is added into this reveal project." />
+	<msg uid="0302" type="Error" text="core '$$s': name contains invalid character." />
+	<msg uid="0303" type="Error" text="core '$$s': name was used by other core->m_." />
+	<msg uid="0304" type="Error" text="core '$$s': name is the same as the design module name." />
+	<msg uid="0305" type="Error" text="core '$$s': Sample clock signal is not specified." />
+	<msg uid="0306" type="Error" text="core '$$s': Cannot find the sample clock signal in design hierarchy." />
+	<msg uid="0307" type="Error" text="core '$$s': Sample clock signal is not a one-bit signal." />
+	<msg uid="0308" type="Error" text="core '$$s': The type of sample clock signal is not supported in this version." />
+	<msg uid="0309" type="Error" text="Cannot use enumeration/boolean/integer type signal as sample clock signal." />
+	<msg uid="0310" type="Error" text="core '$$s': Sample enable signal is not specified." />
+	<msg uid="0311" type="Error" text="core '$$s': Cannot find the sample enable signal in design hierarchy." />
+	<msg uid="0312" type="Error" text="core '$$s': Sample enable signal is not a one-bit signal." />
+	<msg uid="0313" type="Error" text="core '$$s': The type of sample enable signal is not supported in this version." />
+	<msg uid="0314" type="Error" text="Cannot use enumeration/boolean/integer type signal as sample enable signal." />
+	<msg uid="0315" type="Error" text="core '$$s': Trigger enable signal is not specified." />
+	<msg uid="0316" type="Error" text="core '$$s': Cannot find the trigger enable signal in design hierarchy." />
+	<msg uid="0317" type="Error" text="core '$$s': Trigger enable signal is not a one-bit signal." />
+	<msg uid="0318" type="Error" text="core '$$s': The type of trigger enable signal is not supported in this version." />
+	<msg uid="0319" type="Error" text="Cannot use enumeration/boolean/integer type signal as trigger enable signal." />
+	<msg uid="0320" type="Error" text="core '$$s': Trigger out was enabled but trigger out net was not specified." />
+	<msg uid="0321" type="Error" text="core '$$s': The name of Trigger Out Net contains invalid character." />
+	<msg uid="0322" type="Error" text="core '$$s': The name of Trigger Out Net has been reserved by the internal debug core." />
+	<msg uid="0323" type="Error" text="core '$$s': The name of Trigger Out Net is the same as the signal name in design." />
+	<msg uid="0324" type="Error" text="core '$$s': The name of Trigger Out Net is duplicate to the name of Trigger Out Net from other cores." />
+	<msg uid="0325" type="Error" text="core '$$s': Trigger out was enabled but the minimum pulse width was not specified." />
+	<msg uid="0326" type="Error" text="core '$$s': The number of trace signals should be between 1 and 512." />
+	<msg uid="0327" type="Error" text="core '$$s': The number of trigger signals should be between 1 and 4096." />
+	<msg uid="0328" type="Error" text="core '$$s': Cannot use sample clock signal as trace signal." />
+	<msg uid="0329" type="Error" text="core '$$s': Cannot use sample clock signal as trigger signal." />
+	<msg uid="0330" type="Error" text="core '$$s': Trace data includes invalid trigger out signal. Please check $$s in the inserted cores." />
+	<msg uid="0331" type="Error" text="core '$$s': Trace data includes invalid trigger out signal. Cannot find $$s in the inserted cores." />
+	<msg uid="0332" type="Error" text="core '$$s': Trigger data includes invalid trigger out signal. Please check $$s in other inserted cores." />
+	<msg uid="0333" type="Error" text="core '$$s': Trigger data includes invalid trigger out signal. Cannot find $$s in other inserted cores." />
+	<msg uid="0334" type="Error" text="core '$$s': The number of TUs should be between 1 and 16." />
+	<msg uid="0335" type="Error" text="core '$$s': The number of TEs should be between 1 and 16." />
+	<msg uid="0336" type="Error" text="core '$$s': TU '$$s' : The number of signals should be between 1 and 256." />
+	<msg uid="0337" type="Error" text="core '$$s': TU '$$s' : Value is invalid." />
+	<msg uid="0338" type="Error" text="core '$$s': TU '$$s' : Value is out of range." />
+	<msg uid="0339" type="Error" text="core '$$s': TU '$$s' : Don't care bit is only for operator '==', '!=' and 'serial compare'. And don't care bit is only for radix Bin, Oct and Hex." />
+	<msg uid="0340" type="Error" text="core '$$s': TE '$$s' : Expression syntax error: $$s." />
+	<msg uid="0341" type="Error" text="core '$$s': TE '$$s' : The sequence depth is over the maximum sequence depth." />
+	<msg uid="0342" type="Error" text="core '$$s': TE '$$s' : The event counter is over the maximun event counter." />
+	<msg uid="0343" type="Error" text="The number of EBRs needed ($$s) exceeds the number available ($$s)." />	
+	<msg uid="0344" type="Info" text="The number of EBRs needed is $$s." />
+	<msg uid="0345" type="Error" text="The number of DistRAM (logic/ROM/RAM) slices needed ($$s)exceeds the number available ($$s)." />
+	<msg uid="0346" type="Info" text="The number of DistRAM (logic/ROM/RAM) slices needed is $$s."/>
+	<msg uid="0347" type="Status" text="Design Rule Check PASSED."/>
+	<msg uid="0348" type="Error" text="Cannot create $$s." />
+	<msg uid="0349" type="Error" text="Total $$s error(s)." />
+        <msg uid="0350" type="Warning" text="JTAG_TCK, JTAG_TMS,JTAG_TDI and JTAG_TDO pins have to be located using SpreadSheet View, otherwise tool will randomly assign available pins which may not match the pins user assigned on the board" />
+	<!-- ISTFLOW 0400:0499------------------------------------------------------------------------------>
+	<msg uid="0400" type="Error" text="[HDLs] section contains invalid file type '$$s'." />
+	<msg uid="0401" type="Error" text="The syntax of the command is incorrect." />
+	<msg uid="0402" type="Error" text="istflow -design <rvp file> -prj <rvl file>." />
+	<msg uid="0403" type="Error" text="istflow -design <rvp file> -clean." />
+	<msg uid="0404" type="Error" text="Failed processing rvp file '$$s'." />
+	<msg uid="0405" type="Error" text="Invalid project file." />
+	<msg uid="0406" type="Error" text="Failed to Get Top Module." />
+	<msg uid="0407" type="Error" text="Failed to read design." />
+	<msg uid="0408" type="Error" text="Wrong Top." />
+	<msg uid="0409" type="Status" text="Copyright (c) 2001-2013 Lattice Semiconductor Corporation. All rights reserved." />
+	<msg uid="0410" type="Error" text="$$s" />
+	<msg uid="0411" type="Error" text="Failed to read Reveal project." />
+	<msg uid="0412" type="Error" text="Failed to find Reveal project." />
+	<msg uid="0413" type="Warning" text="The design name or the design entry type saved in the Reveal project does not match the current design." />
+	<msg uid="0414" type="Status" text="Check Reveal Inserter settings..." />
+	<msg uid="0415" type="Error" text="There are ERRORs in Reveal Inserter settings. Please use Reveal Inserter to correct them." />
+	<msg uid="0416" type="Status" text="Finished checking Reveal Inserter settings." />
+	<msg uid="0417" type="Error" text="Cannot update reveal project file." />
+	<msg uid="0418" type="Status" text="Generating core template(s)..." />
+	<msg uid="0419" type="Error" text="Please check correct path '$$s'." />
+	<msg uid="0420" type="Error" text="Please check correct syntax '$$s'." />
+	<msg uid="0421" type="Status" text="$$s" />
+	<msg uid="0422" type="Status" text="Finished running Tcl command: $$s." />
+	<msg uid="0423" type="Status" text="Lpf file '$$s' is updated." />
+	<msg uid="0424" type="Warning" text="Lpf file '$$s' doesn't exist." />
+	
+    <!-- messages defined to handle ut_** -------------------------------------------------------------------------------------------------------------------->
+    <msg uid="9990" type="Error" text="$$s" />
+    <msg uid="9991" type="Warning" level="2" text="$$s" />
+    <msg uid="9992" type="Info" text="$$s" />
+    <msg uid="9993" type="Status" text="$$s" />
+    <msg uid="9994" type="Error" text="Error - $$s" />
+    <msg uid="9995" type="Warning" level="2" text="Warning - $$s" />
+    <msg uid="9996" type="Info" text="Info - $$s" />
+    <msg uid="9997" type="Status" text="Error - $$s" />
+    <msg uid="9999" type="Error" text="This is a testing message with one dynamic data $$s" >
+       <help online="onlineID" web="webID" datasheet="datasheet" />
+       <navigation>
+          <!-- define navigation function that require first dynamic data and first navigation data as input -->
+          <fun menu="fun1" cmd="command line 0 1" />
+          <!-- define navigation function that require first dynamic data and second navigation data as input -->
+          <fun menu="fun2" cmd="command line 0 2" />
+       </navigation>
+    </msg>
+  </messages>
+</messageFile>

@@ -1,0 +1,10 @@
+WrClock: CLK * 1 ;
+RdClock: CLK * 1 *(width/rwidth) ;
+Reset: => 1; @100 => 0;
+RPReset: => 1; @100 => 0; 
+// The 100 delay is required for Verilog to work
+Data: => 0; @100; @Reset & E0; *(depth+3)@WrClock => COUNT;
+WrEn: => 0; @100; @Reset & E0; *(depth+3)@WrClock => 1; => 0;
+RdEn: => 0; @Reset & E0; @WrEn & E1; @ WrEn & E0;
+       *(depth*(width/rwidth)+3) @RdClock => 1; => 0;
+

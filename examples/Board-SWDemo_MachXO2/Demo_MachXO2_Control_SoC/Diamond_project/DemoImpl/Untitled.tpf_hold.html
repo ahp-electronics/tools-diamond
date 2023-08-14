@@ -1,0 +1,1053 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+<!--
+.blink {text-decoration:blink}
+.ms  {font-size: 9pt; font-family: monospace; font-weight: normal}
+.msb {font-size: 9pt; font-family: monospace; font-weight: bold  }
+-->
+</STYLE>
+<META content="MSHTML 6.00.2900.2180" name=GENERATOR></HEAD>
+<BODY><B>
+</B>
+<BR><PRE><A name="Report Header"></A>
+--------------------------------------------------------------------------------
+Lattice TRACE Report - Hold
+Tue Oct 25 14:12:05 2011
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2011 Lattice Semiconductor Corporation,  All rights reserved.
+
+Report Information
+------------------
+Design file:     control_soc_demo
+Device,speed:    LCMXO2-1200HC,M
+Report level:    verbose report, limited to 10 items per preference
+--------------------------------------------------------------------------------
+
+
+
+</A><A name="FREQUENCY NET 'clk_c' 2.080000 MH"></A>================================================================================
+Preference: FREQUENCY NET "clk_c" 2.080000 MHz ;
+            30 items scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 0.219ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i0</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    FF         Data in        <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM0</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+                   FF                        <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM0</A>
+
+   Delay:               0.348ns  (37.6% logic, 62.4% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.348ns physical path delay lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24 meets
+      0.129ns WAD_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling 0.129ns) by 0.219ns
+
+ Physical Path Details:
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352,lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_0,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD0_INT">Data path</A> lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.131     R9C20C.CLK to      R9C20C.Q0 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352">lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE        18     0.217<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_0:R9C20C.Q0:R9C19C.A0:0.217">      R9C20C.Q0 to R9C19C.A0     </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_0</A>
+ZERO_DEL    ---     0.000      R9C19C.A0 to   R9C19C.WADO0 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0</A>
+ROUTE         2     0.000<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD0_INT:R9C19C.WADO0:R9C19A.WAD0:0.000">   R9C19C.WADO0 to R9C19A.WAD0   </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD0_INT">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD0_INT</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    0.348   (37.6% logic, 62.4% route), 2 logic levels.
+
+ Clock Skew Details: 
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Source Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C20C.CLK:1.190">        OSC.OSC to R9C20C.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Destination Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C19A.WCK:1.190">        OSC.OSC to R9C19A.WCK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 0.219ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i0</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    FF         Data in        <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM1</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+                   FF                        <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM1">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM1</A>
+
+   Delay:               0.348ns  (37.6% logic, 62.4% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.348ns physical path delay lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25 meets
+      0.129ns WAD_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling 0.129ns) by 0.219ns
+
+ Physical Path Details:
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352,lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_0,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD0_INT">Data path</A> lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.131     R9C20C.CLK to      R9C20C.Q0 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352">lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE        18     0.217<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_0:R9C20C.Q0:R9C19C.A0:0.217">      R9C20C.Q0 to R9C19C.A0     </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_0</A>
+ZERO_DEL    ---     0.000      R9C19C.A0 to   R9C19C.WADO0 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0</A>
+ROUTE         2     0.000<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD0_INT:R9C19C.WADO0:R9C19B.WAD0:0.000">   R9C19C.WADO0 to R9C19B.WAD0   </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD0_INT">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD0_INT</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    0.348   (37.6% logic, 62.4% route), 2 logic levels.
+
+ Clock Skew Details: 
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Source Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C20C.CLK:1.190">        OSC.OSC to R9C20C.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Destination Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C19B.WCK:1.190">        OSC.OSC to R9C19B.WCK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 0.229ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i1</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    FF         Data in        <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM0</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+                   FF                        <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM0</A>
+
+   Delay:               0.358ns  (36.6% logic, 63.4% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.358ns physical path delay lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24 meets
+      0.129ns WAD_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling 0.129ns) by 0.229ns
+
+ Physical Path Details:
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352,lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_1,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD1_INT">Data path</A> lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.131     R9C20C.CLK to      R9C20C.Q1 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352">lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE        17     0.227<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_1:R9C20C.Q1:R9C19C.B0:0.227">      R9C20C.Q1 to R9C19C.B0     </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_1">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_1</A>
+ZERO_DEL    ---     0.000      R9C19C.B0 to   R9C19C.WADO1 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0</A>
+ROUTE         2     0.000<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD1_INT:R9C19C.WADO1:R9C19A.WAD1:0.000">   R9C19C.WADO1 to R9C19A.WAD1   </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD1_INT">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD1_INT</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    0.358   (36.6% logic, 63.4% route), 2 logic levels.
+
+ Clock Skew Details: 
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Source Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C20C.CLK:1.190">        OSC.OSC to R9C20C.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Destination Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C19A.WCK:1.190">        OSC.OSC to R9C19A.WCK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 0.229ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i1</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    FF         Data in        <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM1</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+                   FF                        <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM1">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM1</A>
+
+   Delay:               0.358ns  (36.6% logic, 63.4% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.358ns physical path delay lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25 meets
+      0.129ns WAD_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling 0.129ns) by 0.229ns
+
+ Physical Path Details:
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352,lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_1,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD1_INT">Data path</A> lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.131     R9C20C.CLK to      R9C20C.Q1 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352">lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE        17     0.227<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_1:R9C20C.Q1:R9C19C.B0:0.227">      R9C20C.Q1 to R9C19C.B0     </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_1">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_1</A>
+ZERO_DEL    ---     0.000      R9C19C.B0 to   R9C19C.WADO1 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0</A>
+ROUTE         2     0.000<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD1_INT:R9C19C.WADO1:R9C19B.WAD1:0.000">   R9C19C.WADO1 to R9C19B.WAD1   </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD1_INT">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD1_INT</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    0.358   (36.6% logic, 63.4% route), 2 logic levels.
+
+ Clock Skew Details: 
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Source Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_352:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C20C.CLK:1.190">        OSC.OSC to R9C20C.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Destination Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C19B.WCK:1.190">        OSC.OSC to R9C19B.WCK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 0.254ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i2</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    FF         Data in        <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.26">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM1</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+                   FF                        <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM1">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM1</A>
+
+   Delay:               0.383ns  (34.2% logic, 65.8% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.383ns physical path delay lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.26 meets
+      0.129ns WAD_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling 0.129ns) by 0.254ns
+
+ Physical Path Details:
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353,lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_2,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD2_INT">Data path</A> lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.26:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.131     R9C20B.CLK to      R9C20B.Q0 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE        17     0.252<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_2:R9C20B.Q0:R7C20C.C0:0.252">      R9C20B.Q0 to R7C20C.C0     </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_2">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_2</A>
+ZERO_DEL    ---     0.000      R7C20C.C0 to   R7C20C.WADO2 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27</A>
+ROUTE         2     0.000<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD2_INT:R7C20C.WADO2:R7C20B.WAD2:0.000">   R7C20C.WADO2 to R7C20B.WAD2   </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD2_INT">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD2_INT</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    0.383   (34.2% logic, 65.8% route), 2 logic levels.
+
+ Clock Skew Details: 
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Source Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C20B.CLK:1.190">        OSC.OSC to R9C20B.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Destination Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.26:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R7C20B.WCK:1.190">        OSC.OSC to R7C20B.WCK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 0.254ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i2</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    FF         Data in        <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM0</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+                   FF                        <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM0</A>
+
+   Delay:               0.383ns  (34.2% logic, 65.8% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.383ns physical path delay lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1 meets
+      0.129ns WAD_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling 0.129ns) by 0.254ns
+
+ Physical Path Details:
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353,lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_2,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD2_INT">Data path</A> lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.131     R9C20B.CLK to      R9C20B.Q0 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE        17     0.252<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_2:R9C20B.Q0:R7C20C.C0:0.252">      R9C20B.Q0 to R7C20C.C0     </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_2">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_2</A>
+ZERO_DEL    ---     0.000      R7C20C.C0 to   R7C20C.WADO2 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27</A>
+ROUTE         2     0.000<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD2_INT:R7C20C.WADO2:R7C20A.WAD2:0.000">   R7C20C.WADO2 to R7C20A.WAD2   </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD2_INT">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD2_INT</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    0.383   (34.2% logic, 65.8% route), 2 logic levels.
+
+ Clock Skew Details: 
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Source Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C20B.CLK:1.190">        OSC.OSC to R9C20B.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Destination Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R7C20A.WCK:1.190">        OSC.OSC to R7C20A.WCK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 0.255ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i3</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    FF         Data in        <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM0</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+                   FF                        <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM0</A>
+
+   Delay:               0.384ns  (34.1% logic, 65.9% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.384ns physical path delay lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1 meets
+      0.129ns WAD_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling 0.129ns) by 0.255ns
+
+ Physical Path Details:
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353,lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD3_INT">Data path</A> lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.131     R9C20B.CLK to      R9C20B.Q1 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE        16     0.253<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3:R9C20B.Q1:R7C20C.D0:0.253">      R9C20B.Q1 to R7C20C.D0     </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3</A>
+ZERO_DEL    ---     0.000      R7C20C.D0 to   R7C20C.WADO3 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27</A>
+ROUTE         2     0.000<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD3_INT:R7C20C.WADO3:R7C20A.WAD3:0.000">   R7C20C.WADO3 to R7C20A.WAD3   </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD3_INT">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD3_INT</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    0.384   (34.1% logic, 65.9% route), 2 logic levels.
+
+ Clock Skew Details: 
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Source Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C20B.CLK:1.190">        OSC.OSC to R9C20B.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Destination Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R7C20A.WCK:1.190">        OSC.OSC to R7C20A.WCK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 0.255ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i3</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    FF         Data in        <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.26">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM1</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+                   FF                        <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM1">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/RAM1</A>
+
+   Delay:               0.384ns  (34.1% logic, 65.9% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.384ns physical path delay lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.26 meets
+      0.129ns WAD_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling 0.129ns) by 0.255ns
+
+ Physical Path Details:
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353,lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD3_INT">Data path</A> lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.26:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.131     R9C20B.CLK to      R9C20B.Q1 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE        16     0.253<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3:R9C20B.Q1:R7C20C.D0:0.253">      R9C20B.Q1 to R7C20C.D0     </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3</A>
+ZERO_DEL    ---     0.000      R7C20C.D0 to   R7C20C.WADO3 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.27</A>
+ROUTE         2     0.000<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD3_INT:R7C20C.WADO3:R7C20B.WAD3:0.000">   R7C20C.WADO3 to R7C20B.WAD3   </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD3_INT">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1/AD3_INT</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    0.384   (34.1% logic, 65.9% route), 2 logic levels.
+
+ Clock Skew Details: 
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Source Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C20B.CLK:1.190">        OSC.OSC to R9C20B.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Destination Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_1.26:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R7C20B.WCK:1.190">        OSC.OSC to R7C20B.WCK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 0.266ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i3</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    FF         Data in        <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM0</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+                   FF                        <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM0</A>
+
+   Delay:               0.395ns  (33.2% logic, 66.8% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.395ns physical path delay lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24 meets
+      0.129ns WAD_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling 0.129ns) by 0.266ns
+
+ Physical Path Details:
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353,lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD3_INT">Data path</A> lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.131     R9C20B.CLK to      R9C20B.Q1 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE        16     0.264<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3:R9C20B.Q1:R9C19C.D0:0.264">      R9C20B.Q1 to R9C19C.D0     </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3</A>
+ZERO_DEL    ---     0.000      R9C19C.D0 to   R9C19C.WADO3 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0</A>
+ROUTE         2     0.000<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD3_INT:R9C19C.WADO3:R9C19A.WAD3:0.000">   R9C19C.WADO3 to R9C19A.WAD3   </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD3_INT">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD3_INT</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    0.395   (33.2% logic, 66.8% route), 2 logic levels.
+
+ Clock Skew Details: 
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Source Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C20B.CLK:1.190">        OSC.OSC to R9C20B.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Destination Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.24:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C19A.WCK:1.190">        OSC.OSC to R9C19A.WCK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 0.266ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_759__i3</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    FF         Data in        <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM1</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+                   FF                        <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM1">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/RAM1</A>
+
+   Delay:               0.395ns  (33.2% logic, 66.8% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.395ns physical path delay lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25 meets
+      0.129ns WAD_HLD and
+      0.000ns delay constraint less
+      0.000ns skew requirement (totaling 0.129ns) by 0.266ns
+
+ Physical Path Details:
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353,lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0,lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD3_INT">Data path</A> lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353 to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.131     R9C20B.CLK to      R9C20B.Q1 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353">lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE        16     0.264<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3:R9C20B.Q1:R9C19C.D0:0.264">      R9C20B.Q1 to R9C19C.D0     </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3">lm8_inst/u1_isp8/u1_isp8_flow_cntl/stack_ptr_3</A>
+ZERO_DEL    ---     0.000      R9C19C.D0 to   R9C19C.WADO3 <A href="#@comp:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0</A>
+ROUTE         2     0.000<A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD3_INT:R9C19C.WADO3:R9C19B.WAD3:0.000">   R9C19C.WADO3 to R9C19B.WAD3   </A> <A href="#@net:lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD3_INT">lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0/AD3_INT</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    0.395   (33.2% logic, 66.8% route), 2 logic levels.
+
+ Clock Skew Details: 
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Source Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/SLICE_353:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C20B.CLK:1.190">        OSC.OSC to R9C20B.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:FREQUENCY NET 'clk_c' 2.080000 MHz ;:clk_c">Destination Clock Path</A> OSCH_inst to lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416/mem_0_0.25:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R9C19B.WCK:1.190">        OSC.OSC to R9C19B.WCK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+
+</A><A name="MAXDELAY FROM PORT 'rst_n' TO CELL 'reset_gen*' 5.000000 n"></A>================================================================================
+Preference: MAXDELAY FROM PORT "rst_n" TO CELL "reset_gen*" 5.000000 ns ;
+            3 items scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 1.154ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         Port       Pad            <A href="#@comp:rst_n">rst_n</A>
+
+   Delay:               1.154ns  (33.9% logic, 66.1% route), 1 logic levels.
+
+ Constraint Details:
+
+      1.154ns physical path delay rst_n to SLICE_397 meets
+      0.000ns delay constraint by 1.154ns
+
+ Physical Path Details:
+
+      <A href="#@path:MAXDELAY FROM PORT 'rst_n' TO CELL 'reset_gen*' 5.000000 ns ;:rst_n,rst_n_c">Data path</A> rst_n to SLICE_397:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+PADI_DEL    ---     0.391         K2.PAD to       K2.PADDI <A href="#@comp:rst_n">rst_n</A>
+ROUTE        52     0.763<A href="#@net:rst_n_c:K2.PADDI:R10C2A.LSR:0.763">       K2.PADDI to R10C2A.LSR    </A> <A href="#@net:rst_n_c">rst_n_c</A>
+                  --------
+                    1.154   (33.9% logic, 66.1% route), 1 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 1.154ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         Port       Pad            <A href="#@comp:rst_n">rst_n</A>
+
+   Delay:               1.154ns  (33.9% logic, 66.1% route), 1 logic levels.
+
+ Constraint Details:
+
+      1.154ns physical path delay rst_n to reset_gen_inst/SLICE_382 meets
+      0.000ns delay constraint by 1.154ns
+
+ Physical Path Details:
+
+      <A href="#@path:MAXDELAY FROM PORT 'rst_n' TO CELL 'reset_gen*' 5.000000 ns ;:rst_n,rst_n_c">Data path</A> rst_n to reset_gen_inst/SLICE_382:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+PADI_DEL    ---     0.391         K2.PAD to       K2.PADDI <A href="#@comp:rst_n">rst_n</A>
+ROUTE        52     0.763<A href="#@net:rst_n_c:K2.PADDI:R8C2C.LSR:0.763">       K2.PADDI to R8C2C.LSR     </A> <A href="#@net:rst_n_c">rst_n_c</A>
+                  --------
+                    1.154   (33.9% logic, 66.1% route), 1 logic levels.
+<font color=#FF0000> 
+
+Passed: The following path meets requirements by 1.154ns
+ </font>
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         Port       Pad            <A href="#@comp:rst_n">rst_n</A>
+
+   Delay:               1.154ns  (33.9% logic, 66.1% route), 1 logic levels.
+
+ Constraint Details:
+
+      1.154ns physical path delay rst_n to reset_gen_inst/SLICE_383 meets
+      0.000ns delay constraint by 1.154ns
+
+ Physical Path Details:
+
+      <A href="#@path:MAXDELAY FROM PORT 'rst_n' TO CELL 'reset_gen*' 5.000000 ns ;:rst_n,rst_n_c">Data path</A> rst_n to reset_gen_inst/SLICE_383:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+PADI_DEL    ---     0.391         K2.PAD to       K2.PADDI <A href="#@comp:rst_n">rst_n</A>
+ROUTE        52     0.763<A href="#@net:rst_n_c:K2.PADDI:R8C2A.LSR:0.763">       K2.PADDI to R8C2A.LSR     </A> <A href="#@net:rst_n_c">rst_n_c</A>
+                  --------
+                    1.154   (33.9% logic, 66.1% route), 1 logic levels.
+
+Report:    1.154ns is the minimum delay for this preference.
+
+
+</A><A name="CLOCK_TO_OUT PORT 'led_1' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_1"></A>================================================================================
+Preference: CLOCK_TO_OUT PORT "led_1" 8.000000 ns MIN 0.000000 ns CLKNET "clk_c" CLKOUT PORT "led_1" ;
+            1 item scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed:  The following path meets requirements by 0.000ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:led_1_MGIOL">led_sw_inst/led___i2</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    Port       Pad            <A href="#@comp:led_1">led_1</A>
+
+   Data Path Delay:     1.123ns  (99.8% logic, 0.2% route), 2 logic levels.
+
+   Clock Path Delay:    1.015ns  (0.0% logic, 100.0% route), 0 logic levels.
+
+ Constraint Details:
+      1.015ns delay OSCH_inst to led_1_MGIOL and
+      1.123ns delay led_1_MGIOL to led_1 less
+      2.138ns delay OSCH_inst to led_1 (totaling 0.000ns) meets
+      0.000ns hold offset OSCH_inst to led_1 by 0.000ns
+
+ Physical Path Details:
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_1' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_1' ;:clk_c">Clock path</A> OSCH_inst to led_1_MGIOL:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.015<A href="#@net:clk_c:OSC.OSC:IOL_L4B.CLK:1.015">        OSC.OSC to IOL_L4B.CLK   </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.015   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_1' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_1' ;:led_1_MGIOL,n1984,led_1">Data path</A> led_1_MGIOL to led_1:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+C2OUT_DEL   ---     0.274    IOL_L4B.CLK to  IOL_L4B.IOLDO <A href="#@comp:led_1_MGIOL">led_1_MGIOL</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE         1     0.002<A href="#@net:n1984:IOL_L4B.IOLDO:F2.IOLDO:0.002">  IOL_L4B.IOLDO to F2.IOLDO      </A> <A href="#@net:n1984">n1984</A>
+OP0PAD_DEL  ---     0.847       F2.IOLDO to         F2.PAD <A href="#@comp:led_1">led_1</A>
+                  --------
+                    1.123   (99.8% logic, 0.2% route), 2 logic levels.
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_1' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_1' ;:clk_c,led_1_MGIOL,n1984,led_1">Output clock path</A> OSCH_inst to led_1:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.015<A href="#@net:clk_c:OSC.OSC:IOL_L4B.CLK:1.015">        OSC.OSC to IOL_L4B.CLK   </A> <A href="#@net:clk_c">clk_c</A>
+C2OUT_DEL   ---     0.274    IOL_L4B.CLK to  IOL_L4B.IOLDO <A href="#@comp:led_1_MGIOL">led_1_MGIOL</A>
+ROUTE         1     0.002<A href="#@net:n1984:IOL_L4B.IOLDO:F2.IOLDO:0.002">  IOL_L4B.IOLDO to F2.IOLDO      </A> <A href="#@net:n1984">n1984</A>
+OP0PAD_DEL  ---     0.847       F2.IOLDO to         F2.PAD <A href="#@comp:led_1">led_1</A>
+                  --------
+                    2.138   (52.4% logic, 47.6% route), 2 logic levels.
+
+Report:    0.000ns is the maximum offset for this preference.
+
+
+</A><A name="CLOCK_TO_OUT PORT 'led_2' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_2"></A>================================================================================
+Preference: CLOCK_TO_OUT PORT "led_2" 8.000000 ns MIN 0.000000 ns CLKNET "clk_c" CLKOUT PORT "led_2" ;
+            1 item scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed:  The following path meets requirements by 0.000ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:led_2_MGIOL">led_sw_inst/led___i3</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    Port       Pad            <A href="#@comp:led_2">led_2</A>
+
+   Data Path Delay:     1.123ns  (99.8% logic, 0.2% route), 2 logic levels.
+
+   Clock Path Delay:    1.015ns  (0.0% logic, 100.0% route), 0 logic levels.
+
+ Constraint Details:
+      1.015ns delay OSCH_inst to led_2_MGIOL and
+      1.123ns delay led_2_MGIOL to led_2 less
+      2.138ns delay OSCH_inst to led_2 (totaling 0.000ns) meets
+      0.000ns hold offset OSCH_inst to led_2 by 0.000ns
+
+ Physical Path Details:
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_2' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_2' ;:clk_c">Clock path</A> OSCH_inst to led_2_MGIOL:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.015<A href="#@net:clk_c:OSC.OSC:IOL_L4D.CLK:1.015">        OSC.OSC to IOL_L4D.CLK   </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.015   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_2' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_2' ;:led_2_MGIOL,n1983,led_2">Data path</A> led_2_MGIOL to led_2:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+C2OUT_DEL   ---     0.274    IOL_L4D.CLK to  IOL_L4D.IOLDO <A href="#@comp:led_2_MGIOL">led_2_MGIOL</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE         1     0.002<A href="#@net:n1983:IOL_L4D.IOLDO:F3.IOLDO:0.002">  IOL_L4D.IOLDO to F3.IOLDO      </A> <A href="#@net:n1983">n1983</A>
+OP0PAD_DEL  ---     0.847       F3.IOLDO to         F3.PAD <A href="#@comp:led_2">led_2</A>
+                  --------
+                    1.123   (99.8% logic, 0.2% route), 2 logic levels.
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_2' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_2' ;:clk_c,led_2_MGIOL,n1983,led_2">Output clock path</A> OSCH_inst to led_2:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.015<A href="#@net:clk_c:OSC.OSC:IOL_L4D.CLK:1.015">        OSC.OSC to IOL_L4D.CLK   </A> <A href="#@net:clk_c">clk_c</A>
+C2OUT_DEL   ---     0.274    IOL_L4D.CLK to  IOL_L4D.IOLDO <A href="#@comp:led_2_MGIOL">led_2_MGIOL</A>
+ROUTE         1     0.002<A href="#@net:n1983:IOL_L4D.IOLDO:F3.IOLDO:0.002">  IOL_L4D.IOLDO to F3.IOLDO      </A> <A href="#@net:n1983">n1983</A>
+OP0PAD_DEL  ---     0.847       F3.IOLDO to         F3.PAD <A href="#@comp:led_2">led_2</A>
+                  --------
+                    2.138   (52.4% logic, 47.6% route), 2 logic levels.
+
+Report:    0.000ns is the maximum offset for this preference.
+
+
+</A><A name="CLOCK_TO_OUT PORT 'led_3' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_3"></A>================================================================================
+Preference: CLOCK_TO_OUT PORT "led_3" 8.000000 ns MIN 0.000000 ns CLKNET "clk_c" CLKOUT PORT "led_3" ;
+            1 item scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed:  The following path meets requirements by 0.000ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:led_3_MGIOL">led_sw_inst/led___i4</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    Port       Pad            <A href="#@comp:led_3">led_3</A>
+
+   Data Path Delay:     1.123ns  (99.8% logic, 0.2% route), 2 logic levels.
+
+   Clock Path Delay:    1.015ns  (0.0% logic, 100.0% route), 0 logic levels.
+
+ Constraint Details:
+      1.015ns delay OSCH_inst to led_3_MGIOL and
+      1.123ns delay led_3_MGIOL to led_3 less
+      2.138ns delay OSCH_inst to led_3 (totaling 0.000ns) meets
+      0.000ns hold offset OSCH_inst to led_3 by 0.000ns
+
+ Physical Path Details:
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_3' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_3' ;:clk_c">Clock path</A> OSCH_inst to led_3_MGIOL:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.015<A href="#@net:clk_c:OSC.OSC:IOL_L5B.CLK:1.015">        OSC.OSC to IOL_L5B.CLK   </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.015   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_3' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_3' ;:led_3_MGIOL,n1982,led_3">Data path</A> led_3_MGIOL to led_3:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+C2OUT_DEL   ---     0.274    IOL_L5B.CLK to  IOL_L5B.IOLDO <A href="#@comp:led_3_MGIOL">led_3_MGIOL</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE         1     0.002<A href="#@net:n1982:IOL_L5B.IOLDO:H2.IOLDO:0.002">  IOL_L5B.IOLDO to H2.IOLDO      </A> <A href="#@net:n1982">n1982</A>
+OP0PAD_DEL  ---     0.847       H2.IOLDO to         H2.PAD <A href="#@comp:led_3">led_3</A>
+                  --------
+                    1.123   (99.8% logic, 0.2% route), 2 logic levels.
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_3' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' CLKOUT PORT 'led_3' ;:clk_c,led_3_MGIOL,n1982,led_3">Output clock path</A> OSCH_inst to led_3:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.015<A href="#@net:clk_c:OSC.OSC:IOL_L5B.CLK:1.015">        OSC.OSC to IOL_L5B.CLK   </A> <A href="#@net:clk_c">clk_c</A>
+C2OUT_DEL   ---     0.274    IOL_L5B.CLK to  IOL_L5B.IOLDO <A href="#@comp:led_3_MGIOL">led_3_MGIOL</A>
+ROUTE         1     0.002<A href="#@net:n1982:IOL_L5B.IOLDO:H2.IOLDO:0.002">  IOL_L5B.IOLDO to H2.IOLDO      </A> <A href="#@net:n1982">n1982</A>
+OP0PAD_DEL  ---     0.847       H2.IOLDO to         H2.PAD <A href="#@comp:led_3">led_3</A>
+                  --------
+                    2.138   (52.4% logic, 47.6% route), 2 logic levels.
+
+Report:    0.000ns is the maximum offset for this preference.
+
+
+</A><A name="CLOCK_TO_OUT PORT 'led_0' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c"></A>================================================================================
+Preference: CLOCK_TO_OUT PORT "led_0" 8.000000 ns MIN 0.000000 ns CLKNET "clk_c" ;
+            1 item scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed:  The following path meets requirements by 2.138ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              <A href="#@comp:led_0_MGIOL">led_sw_inst/led___i1</A>  (from <A href="#@net:clk_c">clk_c</A> +)
+   Destination:    Port       Pad            <A href="#@comp:led_0">led_0</A>
+
+   Data Path Delay:     1.123ns  (99.8% logic, 0.2% route), 2 logic levels.
+
+   Clock Path Delay:    1.015ns  (0.0% logic, 100.0% route), 0 logic levels.
+
+ Constraint Details:
+      1.015ns delay OSCH_inst to led_0_MGIOL and
+      1.123ns delay led_0_MGIOL to led_0 (totaling 2.138ns) meets
+      0.000ns hold offset OSCH_inst to led_0 by 2.138ns
+
+ Physical Path Details:
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_0' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' ;:clk_c">Clock path</A> OSCH_inst to led_0_MGIOL:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.015<A href="#@net:clk_c:OSC.OSC:IOL_L4C.CLK:1.015">        OSC.OSC to IOL_L4C.CLK   </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.015   (0.0% logic, 100.0% route), 0 logic levels.
+
+      <A href="#@path:CLOCK_TO_OUT PORT 'led_0' 8.000000 ns MIN 0.000000 ns CLKNET 'clk_c' ;:led_0_MGIOL,led_c,led_0">Data path</A> led_0_MGIOL to led_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+C2OUT_DEL   ---     0.274    IOL_L4C.CLK to  IOL_L4C.IOLDO <A href="#@comp:led_0_MGIOL">led_0_MGIOL</A> (from <A href="#@net:clk_c">clk_c</A>)
+ROUTE         1     0.002<A href="#@net:led_c:IOL_L4C.IOLDO:F1.IOLDO:0.002">  IOL_L4C.IOLDO to F1.IOLDO      </A> <A href="#@net:led_c">led_c</A>
+OP0PAD_DEL  ---     0.847       F1.IOLDO to         F1.PAD <A href="#@comp:led_0">led_0</A>
+                  --------
+                    1.123   (99.8% logic, 0.2% route), 2 logic levels.
+
+Report:    2.138ns is the maximum offset for this preference.
+
+
+</A><A name="INPUT_SETUP PORT 'sw_2' 2.000000 ns CLKNET 'clk_c"></A>================================================================================
+Preference: INPUT_SETUP PORT "sw_2" 2.000000 ns CLKNET "clk_c" ;
+            1 item scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed:  The following path meets requirements by 0.040ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         Port       Pad            <A href="#@comp:sw_2">sw_2</A>
+   Destination:    FF         Data in        <A href="#@comp:lm8_wb_inst/SLICE_313">lm8_wb_inst/lm8_ext_io_din_i2</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+
+   Min Data Path Delay:     1.217ns  (50.2% logic, 49.8% route), 3 logic levels.
+
+   Max Clock Path Delay:    1.190ns  (0.0% logic, 100.0% route), 0 logic levels.
+
+ Constraint Details:
+
+      1.217ns delay sw_2 to lm8_wb_inst/SLICE_313 plus
+      0.000ns hold offset sw_2 to OSCH_inst (totaling 1.217ns) meets
+      1.190ns delay OSCH_inst to lm8_wb_inst/SLICE_313 plus
+     -0.013ns DIN_HLD requirement (totaling 1.177ns) by 0.040ns
+
+ Physical Path Details:
+
+      <A href="#@path:INPUT_SETUP PORT 'sw_2' 2.000000 ns CLKNET 'clk_c' ;:sw_2,wb_dat_i_c_34,lm8_wb_inst/SLICE_400,lm8_wb_inst/n10192,lm8_wb_inst/SLICE_313,lm8_wb_inst/data_mux_2">Data path</A> sw_2 to lm8_wb_inst/SLICE_313:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+PADI_DEL    ---     0.391        A13.PAD to      A13.PADDI <A href="#@comp:sw_2">sw_2</A>
+ROUTE         1     0.606<A href="#@net:wb_dat_i_c_34:A13.PADDI:R4C11B.D0:0.606">      A13.PADDI to R4C11B.D0     </A> <A href="#@net:wb_dat_i_c_34">wb_dat_i_c_34</A>
+CTOOFX_DEL  ---     0.153      R4C11B.D0 to    R4C11B.OFX0 <A href="#@comp:lm8_wb_inst/SLICE_400">lm8_wb_inst/SLICE_400</A>
+ROUTE         1     0.000<A href="#@net:lm8_wb_inst/n10192:R4C11B.OFX0:R4C11A.FXA:0.000">    R4C11B.OFX0 to R4C11A.FXA    </A> <A href="#@net:lm8_wb_inst/n10192">lm8_wb_inst/n10192</A>
+FXTOOFX_DE  ---     0.067     R4C11A.FXA to    R4C11A.OFX1 <A href="#@comp:lm8_wb_inst/SLICE_313">lm8_wb_inst/SLICE_313</A>
+ROUTE         1     0.000<A href="#@net:lm8_wb_inst/data_mux_2:R4C11A.OFX1:R4C11A.DI1:0.000">    R4C11A.OFX1 to R4C11A.DI1    </A> <A href="#@net:lm8_wb_inst/data_mux_2">lm8_wb_inst/data_mux_2</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    1.217   (50.2% logic, 49.8% route), 3 logic levels.
+
+      <A href="#@path:INPUT_SETUP PORT 'sw_2' 2.000000 ns CLKNET 'clk_c' ;:clk_c">Clock path</A> OSCH_inst to lm8_wb_inst/SLICE_313:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R4C11A.CLK:1.190">        OSC.OSC to R4C11A.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+Report: There is no minimum offset greater than zero for this preference.
+
+
+</A><A name="INPUT_SETUP PORT 'sw_3' 2.000000 ns CLKNET 'clk_c"></A>================================================================================
+Preference: INPUT_SETUP PORT "sw_3" 2.000000 ns CLKNET "clk_c" ;
+            1 item scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed:  The following path meets requirements by 0.148ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         Port       Pad            <A href="#@comp:sw_3">sw_3</A>
+   Destination:    FF         Data in        <A href="#@comp:lm8_wb_inst/SLICE_314">lm8_wb_inst/lm8_ext_io_din_i3</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+
+   Min Data Path Delay:     1.325ns  (46.1% logic, 53.9% route), 3 logic levels.
+
+   Max Clock Path Delay:    1.190ns  (0.0% logic, 100.0% route), 0 logic levels.
+
+ Constraint Details:
+
+      1.325ns delay sw_3 to lm8_wb_inst/SLICE_314 plus
+      0.000ns hold offset sw_3 to OSCH_inst (totaling 1.325ns) meets
+      1.190ns delay OSCH_inst to lm8_wb_inst/SLICE_314 plus
+     -0.013ns DIN_HLD requirement (totaling 1.177ns) by 0.148ns
+
+ Physical Path Details:
+
+      <A href="#@path:INPUT_SETUP PORT 'sw_3' 2.000000 ns CLKNET 'clk_c' ;:sw_3,wb_dat_i_c_35,lm8_wb_inst/SLICE_398,lm8_wb_inst/n10193,lm8_wb_inst/SLICE_314,lm8_wb_inst/data_mux_3">Data path</A> sw_3 to lm8_wb_inst/SLICE_314:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+PADI_DEL    ---     0.391         B1.PAD to       B1.PADDI <A href="#@comp:sw_3">sw_3</A>
+ROUTE         1     0.714<A href="#@net:wb_dat_i_c_35:B1.PADDI:R5C10D.D0:0.714">       B1.PADDI to R5C10D.D0     </A> <A href="#@net:wb_dat_i_c_35">wb_dat_i_c_35</A>
+CTOOFX_DEL  ---     0.153      R5C10D.D0 to    R5C10D.OFX0 <A href="#@comp:lm8_wb_inst/SLICE_398">lm8_wb_inst/SLICE_398</A>
+ROUTE         1     0.000<A href="#@net:lm8_wb_inst/n10193:R5C10D.OFX0:R5C10C.FXA:0.000">    R5C10D.OFX0 to R5C10C.FXA    </A> <A href="#@net:lm8_wb_inst/n10193">lm8_wb_inst/n10193</A>
+FXTOOFX_DE  ---     0.067     R5C10C.FXA to    R5C10C.OFX1 <A href="#@comp:lm8_wb_inst/SLICE_314">lm8_wb_inst/SLICE_314</A>
+ROUTE         1     0.000<A href="#@net:lm8_wb_inst/data_mux_3:R5C10C.OFX1:R5C10C.DI1:0.000">    R5C10C.OFX1 to R5C10C.DI1    </A> <A href="#@net:lm8_wb_inst/data_mux_3">lm8_wb_inst/data_mux_3</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    1.325   (46.1% logic, 53.9% route), 3 logic levels.
+
+      <A href="#@path:INPUT_SETUP PORT 'sw_3' 2.000000 ns CLKNET 'clk_c' ;:clk_c">Clock path</A> OSCH_inst to lm8_wb_inst/SLICE_314:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R5C10C.CLK:1.190">        OSC.OSC to R5C10C.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+Report: There is no minimum offset greater than zero for this preference.
+
+
+</A><A name="INPUT_SETUP PORT 'sw_0' 2.000000 ns CLKNET 'clk_c"></A>================================================================================
+Preference: INPUT_SETUP PORT "sw_0" 2.000000 ns CLKNET "clk_c" ;
+            1 item scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed:  The following path meets requirements by 0.131ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         Port       Pad            <A href="#@comp:sw_0">sw_0</A>
+   Destination:    FF         Data in        <A href="#@comp:lm8_wb_inst/SLICE_311">lm8_wb_inst/lm8_ext_io_din_i0</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+
+   Min Data Path Delay:     1.308ns  (46.7% logic, 53.3% route), 3 logic levels.
+
+   Max Clock Path Delay:    1.190ns  (0.0% logic, 100.0% route), 0 logic levels.
+
+ Constraint Details:
+
+      1.308ns delay sw_0 to lm8_wb_inst/SLICE_311 plus
+      0.000ns hold offset sw_0 to OSCH_inst (totaling 1.308ns) meets
+      1.190ns delay OSCH_inst to lm8_wb_inst/SLICE_311 plus
+     -0.013ns DIN_HLD requirement (totaling 1.177ns) by 0.131ns
+
+ Physical Path Details:
+
+      <A href="#@path:INPUT_SETUP PORT 'sw_0' 2.000000 ns CLKNET 'clk_c' ;:sw_0,wb_dat_i_c_32,lm8_wb_inst/SLICE_399,lm8_wb_inst/n10198,lm8_wb_inst/SLICE_311,lm8_wb_inst/data_mux_0">Data path</A> sw_0 to lm8_wb_inst/SLICE_311:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+PADI_DEL    ---     0.391        C10.PAD to      C10.PADDI <A href="#@comp:sw_0">sw_0</A>
+ROUTE         1     0.697<A href="#@net:wb_dat_i_c_32:C10.PADDI:R4C12D.B0:0.697">      C10.PADDI to R4C12D.B0     </A> <A href="#@net:wb_dat_i_c_32">wb_dat_i_c_32</A>
+CTOOFX_DEL  ---     0.153      R4C12D.B0 to    R4C12D.OFX0 <A href="#@comp:lm8_wb_inst/SLICE_399">lm8_wb_inst/SLICE_399</A>
+ROUTE         1     0.000<A href="#@net:lm8_wb_inst/n10198:R4C12D.OFX0:R4C12C.FXA:0.000">    R4C12D.OFX0 to R4C12C.FXA    </A> <A href="#@net:lm8_wb_inst/n10198">lm8_wb_inst/n10198</A>
+FXTOOFX_DE  ---     0.067     R4C12C.FXA to    R4C12C.OFX1 <A href="#@comp:lm8_wb_inst/SLICE_311">lm8_wb_inst/SLICE_311</A>
+ROUTE         1     0.000<A href="#@net:lm8_wb_inst/data_mux_0:R4C12C.OFX1:R4C12C.DI1:0.000">    R4C12C.OFX1 to R4C12C.DI1    </A> <A href="#@net:lm8_wb_inst/data_mux_0">lm8_wb_inst/data_mux_0</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    1.308   (46.7% logic, 53.3% route), 3 logic levels.
+
+      <A href="#@path:INPUT_SETUP PORT 'sw_0' 2.000000 ns CLKNET 'clk_c' ;:clk_c">Clock path</A> OSCH_inst to lm8_wb_inst/SLICE_311:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R4C12C.CLK:1.190">        OSC.OSC to R4C12C.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+Report: There is no minimum offset greater than zero for this preference.
+
+
+</A><A name="INPUT_SETUP PORT 'sw_1' 2.000000 ns CLKNET 'clk_c"></A>================================================================================
+Preference: INPUT_SETUP PORT "sw_1" 2.000000 ns CLKNET "clk_c" ;
+            1 item scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed:  The following path meets requirements by 0.069ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         Port       Pad            <A href="#@comp:sw_1">sw_1</A>
+   Destination:    FF         Data in        <A href="#@comp:lm8_wb_inst/SLICE_312">lm8_wb_inst/lm8_ext_io_din_i1</A>  (to <A href="#@net:clk_c">clk_c</A> +)
+
+   Min Data Path Delay:     1.246ns  (49.0% logic, 51.0% route), 3 logic levels.
+
+   Max Clock Path Delay:    1.190ns  (0.0% logic, 100.0% route), 0 logic levels.
+
+ Constraint Details:
+
+      1.246ns delay sw_1 to lm8_wb_inst/SLICE_312 plus
+      0.000ns hold offset sw_1 to OSCH_inst (totaling 1.246ns) meets
+      1.190ns delay OSCH_inst to lm8_wb_inst/SLICE_312 plus
+     -0.013ns DIN_HLD requirement (totaling 1.177ns) by 0.069ns
+
+ Physical Path Details:
+
+      <A href="#@path:INPUT_SETUP PORT 'sw_1' 2.000000 ns CLKNET 'clk_c' ;:sw_1,wb_dat_i_c_33,lm8_wb_inst/SLICE_401,lm8_wb_inst/n10191,lm8_wb_inst/SLICE_312,lm8_wb_inst/data_mux_1">Data path</A> sw_1 to lm8_wb_inst/SLICE_312:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+PADI_DEL    ---     0.391        B13.PAD to      B13.PADDI <A href="#@comp:sw_1">sw_1</A>
+ROUTE         1     0.635<A href="#@net:wb_dat_i_c_33:B13.PADDI:R4C10B.C0:0.635">      B13.PADDI to R4C10B.C0     </A> <A href="#@net:wb_dat_i_c_33">wb_dat_i_c_33</A>
+CTOOFX_DEL  ---     0.153      R4C10B.C0 to    R4C10B.OFX0 <A href="#@comp:lm8_wb_inst/SLICE_401">lm8_wb_inst/SLICE_401</A>
+ROUTE         1     0.000<A href="#@net:lm8_wb_inst/n10191:R4C10B.OFX0:R4C10A.FXA:0.000">    R4C10B.OFX0 to R4C10A.FXA    </A> <A href="#@net:lm8_wb_inst/n10191">lm8_wb_inst/n10191</A>
+FXTOOFX_DE  ---     0.067     R4C10A.FXA to    R4C10A.OFX1 <A href="#@comp:lm8_wb_inst/SLICE_312">lm8_wb_inst/SLICE_312</A>
+ROUTE         1     0.000<A href="#@net:lm8_wb_inst/data_mux_1:R4C10A.OFX1:R4C10A.DI1:0.000">    R4C10A.OFX1 to R4C10A.DI1    </A> <A href="#@net:lm8_wb_inst/data_mux_1">lm8_wb_inst/data_mux_1</A> (to <A href="#@net:clk_c">clk_c</A>)
+                  --------
+                    1.246   (49.0% logic, 51.0% route), 3 logic levels.
+
+      <A href="#@path:INPUT_SETUP PORT 'sw_1' 2.000000 ns CLKNET 'clk_c' ;:clk_c">Clock path</A> OSCH_inst to lm8_wb_inst/SLICE_312:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+ROUTE       315     1.190<A href="#@net:clk_c:OSC.OSC:R4C10A.CLK:1.190">        OSC.OSC to R4C10A.CLK    </A> <A href="#@net:clk_c">clk_c</A>
+                  --------
+                    1.190   (0.0% logic, 100.0% route), 0 logic levels.
+
+Report: There is no minimum offset greater than zero for this preference.
+
+<A name="Report Summary"></A><B><U><big>Report Summary</big></U></B>
+--------------
+----------------------------------------------------------------------------
+Preference(MIN Delays)                  |   Constraint|       Actual|Levels
+----------------------------------------------------------------------------
+                                        |             |             |
+FREQUENCY NET "clk_c" 2.080000 MHz ;    |            -|            -|   2  
+                                        |             |             |
+MAXDELAY FROM PORT "rst_n" TO CELL      |             |             |
+"reset_gen*" 5.000000 ns ;              |     0.000 ns|     1.154 ns|   1  
+                                        |             |             |
+CLOCK_TO_OUT PORT "led_1" 8.000000 ns   |             |             |
+MIN 0.000000 ns CLKNET "clk_c" CLKOUT   |             |             |
+PORT "led_1" ;                          |     0.000 ns|     0.000 ns|   2  
+                                        |             |             |
+CLOCK_TO_OUT PORT "led_2" 8.000000 ns   |             |             |
+MIN 0.000000 ns CLKNET "clk_c" CLKOUT   |             |             |
+PORT "led_2" ;                          |     0.000 ns|     0.000 ns|   2  
+                                        |             |             |
+CLOCK_TO_OUT PORT "led_3" 8.000000 ns   |             |             |
+MIN 0.000000 ns CLKNET "clk_c" CLKOUT   |             |             |
+PORT "led_3" ;                          |     0.000 ns|     0.000 ns|   2  
+                                        |             |             |
+CLOCK_TO_OUT PORT "led_0" 8.000000 ns   |             |             |
+MIN 0.000000 ns CLKNET "clk_c" ;        |     0.000 ns|     2.138 ns|   2  
+                                        |             |             |
+INPUT_SETUP PORT "sw_2" 2.000000 ns     |             |             |
+CLKNET "clk_c" ;                        |     0.000 ns|    -0.040 ns|   3  
+                                        |             |             |
+INPUT_SETUP PORT "sw_3" 2.000000 ns     |             |             |
+CLKNET "clk_c" ;                        |     0.000 ns|    -0.148 ns|   3  
+                                        |             |             |
+INPUT_SETUP PORT "sw_0" 2.000000 ns     |             |             |
+CLKNET "clk_c" ;                        |     0.000 ns|    -0.131 ns|   3  
+                                        |             |             |
+INPUT_SETUP PORT "sw_1" 2.000000 ns     |             |             |
+CLKNET "clk_c" ;                        |     0.000 ns|    -0.069 ns|   3  
+                                        |             |             |
+----------------------------------------------------------------------------
+
+
+All preferences were met.
+
+
+<A name="Clock Domains Analysis"></A><B><U><big>Clock Domains Analysis</big></U></B>
+------------------------
+
+Found 2 clocks:
+
+Clock Domain: <A href="#@net:clk_c">clk_c</A>   Source: OSCH_inst.OSC   Loads: 315
+   Covered under: FREQUENCY NET "clk_c" 2.080000 MHz ;
+
+   Data transfers from:
+   Clock Domain: <A href="#@net:TIME_INST/sec_clock">TIME_INST/sec_clock</A>   Source: TIME_INST/SLICE_208.Q0
+      Covered under: FREQUENCY NET "clk_c" 2.080000 MHz ;   Transfers: 24
+
+Clock Domain: <A href="#@net:TIME_INST/sec_clock">TIME_INST/sec_clock</A>   Source: TIME_INST/SLICE_208.Q0   Loads: 14
+   No transfer within this clock domain is found
+
+
+Timing summary (Hold):
+---------------
+
+Timing errors: 0  Score: 0
+Cumulative negative slack: 0
+
+Constraints cover 38334 paths, 1 nets, and 4301 connections (96.9% coverage)
+
+TRCE completed with 1 Preference error (ignored).
+
+
+
+Timing summary (Setup and Hold):
+---------------
+
+Timing errors: 0 (setup), 0 (hold)
+Score: 0 (setup), 0 (hold)
+Cumulative negative slack: 0 (0+0)

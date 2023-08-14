@@ -1,0 +1,60 @@
+[ActiveSupport MAP]
+Device = LFE3-35EA;
+Package = FPBGA484;
+Speed = 8;
+LUTS_avail = 33264;
+LUTS_used = 3050;
+FF_avail = 25243;
+FF_used = 2483;
+INPUT_LVCMOS15 = 6;
+INPUT_LVCMOS33 = 1;
+INPUT_LVDS25 = 1;
+OUTPUT_LVCMOS15 = 1;
+OUTPUT_LVCMOS33 = 22;
+OUTPUT_SSTL15 = 24;
+OUTPUT_SSTL15D = 1;
+BIDI_SSTL15 = 16;
+BIDI_SSTL15D = 2;
+IO_avail = 295;
+IO_used = 78;
+Serdes_avail = 1;
+Serdes_used = 0;
+PLL_avail = 4;
+PLL_used = 1;
+EBR_avail = 72;
+EBR_used = 0;
+;
+; start of DSP statistics
+MULT18X18C = 0;
+MULT9X9C = 0;
+ALU54A = 0;
+ALU24A = 0;
+DSP_MULT_avail = 128;
+DSP_MULT_used = 0;
+DSP_ALU_avail = 64;
+DSP_ALU_used = 0;
+; end of DSP statistics
+;
+; Begin PLL Section
+Instance_Name = u_ddr3_sdram_mem_top/clocking/pll/PLLInst_0;
+Type = EHXPLLF;
+Output_Clock(P)_Actual_Frequency = 400.0000;
+CLKOP_BYPASS = DISABLED;
+CLKOS_BYPASS = DISABLED;
+CLKOK_BYPASS = DISABLED;
+CLKOK_Input = CLKOP;
+FB_MODE = INTERNAL;
+CLKI_Divider = 1;
+CLKFB_Divider = 4;
+CLKOP_Divider = 2;
+CLKOK_Divider = 2;
+Phase_Duty_Control = DYNAMIC;
+CLKOS_Phase_Shift_(degree) = 0.0;
+CLKOS_Duty_Cycle = 8;
+CLKOS_Delay_Adjust_Power_Down = DISABLED;
+CLKOS_Delay_Adjust_Static_Delay_(ps) = 0;
+CLKOP_Duty_Trim_Polarity = RISING;
+CLKOP_Duty_Trim_Polarity_Delay_(ps) = 0;
+CLKOS_Duty_Trim_Polarity = RISING;
+CLKOS_Duty_Trim_Polarity_Delay_(ps) = 0;
+; End PLL Section

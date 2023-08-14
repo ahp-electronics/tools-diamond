@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="sn5w00" include="basenewdev,sa5p00" family="SNOW">
+  <!--Close the security setting -->
+  <VariableDef name="Bitgen:security" value="" />
+  <VariableDef name="Export_JEDEC" value="true" />
+  <CommandFileDef id="Bitgen_T2BCmd" name="${report_base}.t2b" clean="TRUE" >
+    <line>#PROP_BIT_RunDRCBitGen</line>
+    <line>#PROP_BIT_CreateBitFile</line>
+    <line>#PROP_BIT_OutFormatBitGen</line>
+    <line>#PROP_BIT_NoHeader</line>
+<!--    <line>#PROP_BIT_ConModBitGen</line>-->
+    <line>#PROP_BIT_DisRAMResBitGen</line>
+    <line>#PROP_BIT_DisableUESBitgen</line>
+    <line>!Bitgen::ES</line>
+  </CommandFileDef>
+  <CommandFileDef id="MPARTRC_P2TCmd" name="${report_base}.p2t" clean="TRUE" >
+    <line>-w</line>
+    <line>#PROP_PAR_PARModArgs</line>
+    <line>#PROP_PAR_EffortParDes</line>
+    <line>#PROP_PAR_RoutePassParDes</line>
+    <line>#PROP_PAR_NewRouteParDes</line>
+    <line>#PROP_PAR_DisableTDParDes</line>
+    <line>#PROP_PAR_CrDlyStFileParDes</line>
+    <line>#PROP_PAR_PrefErrorOut</line>
+    <line>#PROP_PAR_RoutingCDP</line>
+    <line>#PROP_PAR_RoutingCDR</line>
+    <line>#PROP_PAR_PlcIterParDes</line>
+    <line>#PROP_PAR_PlcStCostTblParDes</line>
+    <line>#PROP_PAR_SaveBestRsltParDes</line>
+    <line>#PROP_PAR_RouteResOptParDes</line>
+    <line>#PROP_PAR_RouteDlyRedParDes</line>
+    <line>#PROP_PAR_ParRunPlaceOnly</line>
+    <line>#PROP_PAR_ParMultiNodeList</line>
+<!--<line>#PROP_PAR_ParNCDGuideFile</line>
+    <line>#PROP_PAR_ParMatchFact</line>
+    <line>#PROP_PAR_ParGuideRepMatch</line>-->
+    <line>#PROP_PAR_parPathBased</line>
+    <line>#PROP_PAR_parHold</line>
+    <line>#PROP_PAR_PARClockSkew</line>
+    <line>#PROP_PAR_StopZero</line>
+    <line>#PROP_PAR_MultiSeedSortMode</line>
+    <line>#PROP_PAR_SLVS_MIPI_LVCMOS_OUTPUT</line>
+  </CommandFileDef>  
+</BaliFlowDef>

@@ -1,0 +1,171 @@
+<?xml version='2.0' encoding='utf-8' ?>
+<!ELEMENT	ispJOB	(	Comment?, LotNumber?, ProcessCounter?, SerialMode?,
+						Chain*)	>
+<!ATTLIST	ispJOB
+			version		CDATA	#REQUIRED>
+
+<!ELEMENT	Comment	(	#PCDATA	)>
+<!ELEMENT	LotNumber	(	#PCDATA	)>
+<!ELEMENT	ProcessCounter	(	#PCDATA	)>
+<!ATTLIST	SerialMode
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	Chain	(	Board*) >
+
+<!ELEMENT	Board	(	Pos, Ref?, Active?, BoardFile?, BoardFileTime?, Cable?, Port?, PortID?, PassCounter?, FailCounter?, CheckBoard?, StartTAP?, EndTAP?, AvoidTLR?, ContinueOnError?, TCKDelay?, Device*)>
+
+<!ELEMENT	Device	(	Vendor?, Family?, Name, IDCode?, IDCodeInst?, IDCodeMask?, UserCodeInst?,
+				UserCodeMask?, Package?, PON?, MCtrl?, ((File?, ReadBackFile?, MaskFile?, BSDLFilename?, ISCDataFile?, ISCDataCRC?, ISCOutputData File?, 
+				FileTime?, JedecChecksum?, Operation) |  Bypass), Option?, ActionList?, NVsector?, CentralLockPolicy?, PortsLockPolicy?)>
+				
+<!ELEMENT	Pos		(	#PCDATA	) >
+<!ELEMENT	Ref		(	#PCDATA	) >
+<!ELEMENT	BoardFile	(	#PCDATA	) >
+<!ELEMENT	BoardFileTime	(	#PCDATA	) >
+<!ELEMENT	Cable	(	#PCDATA	) >
+<!ELEMENT	Port	(	#PCDATA	) >
+<!ELEMENT	PortID	(	#PCDATA	) >
+<!ELEMENT	StartTAP	(	#PCDATA	)	>
+<!ELEMENT	EndTAP	(	#PCDATA	)	>
+<!ELEMENT	AvoidTLR	EMPTY	>
+<!ATTLIST	AvoidTLR
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	ContinueOnError	EMPTY	>
+<!ATTLIST	ContinueOnError
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	CheckBoard	EMPTY	>
+<!ATTLIST	CheckBoard
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	TCKDelay		(	#PCDATA	) >
+<!ELEMENT	PassCounter	(	#PCDATA	) >
+<!ELEMENT	FailCounter	(	#PCDATA	) >
+<!ATTLIST	Active
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	Vendor	(	#PCDATA	) >
+<!ELEMENT	Family	(	#PCDATA	) >
+<!ELEMENT	Name	(	#PCDATA	) >
+<!ELEMENT	IDCode	(	#PCDATA	) >
+<!ELEMENT	IDCodeInst	(	#PCDATA	) >
+<!ELEMENT	IDCodeMask	(	#PCDATA	) >
+<!ELEMENT	UserCodeInst	(	#PCDATA	) >
+<!ELEMENT	UserCodeMask	(	#PCDATA	) >
+<!ELEMENT	Package	(	#PCDATA	) >
+<!ELEMENT	PON		(	#PCDATA	) >
+<!ELEMENT	File	(	#PCDATA	) >
+<!ELEMENT	ReadBackFile	(	#PCDATA	) >
+<!ELEMENT	MaskFile	(	#PCDATA	) >
+<!ELEMENT	BSDLFilename	(	#PCDATA	) >
+<!ELEMENT	ISCDataFile	(	#PCDATA	) >
+<!ELEMENT	ISCDataCRC	(	#PCDATA	) >
+<!ELEMENT	ISCOutputDataFile	(	#PCDATA	) >
+<!ELEMENT	FileTime	(	#PCDATA	) >
+<!ELEMENT	JedecChecksum	(	#PCDATA	) >
+<!ELEMENT	Operation	(	#PCDATA	) >
+<!ELEMENT	ActionList	(	Action+)	>
+
+<!ELEMENT	Action	(ProcedureList?) >
+<!ATTLIST	Action
+		name		CDATA		#REQUIRED
+		selected	(FALSE | TRUE)	#REQUIRED
+		proprietary	(FALSE | TRUE)	#REQUIRED>
+
+<!ELEMENT	ProcedureList	(Procedure+)	>
+<!ATTLIST	ProcedureList
+		number_of_procedures	CDATA	#REQUIRED>
+
+<!ELEMENT	Procedure	EMPTY >
+<!ATTLIST	Procedure
+		name	 CDATA 	#REQUIRED
+		options  CDATA	#REQUIRED>
+
+<!ELEMENT	Bypass	(	InstrLen, InstrVal, BScanLen, BScanVal	)	>
+
+<!ELEMENT	InstrLen	(	#PCDATA	) >
+<!ELEMENT	InstrVal	(	#PCDATA	) >
+
+<!ELEMENT	BScanLen	(	#PCDATA	) >
+<!ELEMENT	BScanVal	(	#PCDATA	) >
+
+<!ELEMENT	Option	(	IOState?, PreloadLength?, IOVector?, IOVectorData?, Reinitialize?,
+						TCKFrequency?, SVFVendor?,Usercode?,AccessMode?, IOVectorMask?, DebugMode?, SECUREMode?) >
+
+
+<!ELEMENT	IOState		(	#PCDATA	) >
+
+<!ELEMENT	PreloadLength	(	#PCDATA	) >
+
+<!ELEMENT	IOVector	EMPTY >
+<!ATTLIST	IOVector
+			value	(FALSE | TRUE)	#REQUIRED	>
+
+<!ELEMENT	IOVectorData		(	#PCDATA	) >
+<!ELEMENT	IOVectorMask		(	#PCDATA	) >
+<!ELEMENT	Reinitialize	EMPTY	>
+<!ATTLIST	Reinitialize
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	TCKFrequency	(	#PCDATA	)	>
+<!ELEMENT	SVFVendor	(	#PCDATA	)	>
+<!ELEMENT	Usercode	(	#PCDATA	)	>
+<!ELEMENT	AccessMode	(	#PCDATA	)	>
+<!ELEMENT	SECUREMode	(	Protect?, KeyFile?, KeyPass?, ProtectKey?, SecurityKey?, KeyDisplay?, KeyLock?, EncryptOnly?, RandClock?, BkgrNoise?, BekFile?, BekPass?, PublicKey?, PubFile?, PwdEnable?, PwdAll?, PwdUFM?  ) >
+
+
+<!ELEMENT	Protect		(	#PCDATA	) >
+<!ELEMENT	ProtectKey	(	#PCDATA	) >
+<!ELEMENT	SecurityKey	(	#PCDATA	) >
+<!ELEMENT	KeyDisplay	(	#PCDATA	) >
+<!ELEMENT	KeyLock		(	#PCDATA	) >
+<!ELEMENT	EncryptOnly	(	#PCDATA	) >
+<!ELEMENT	BekFile		(	#PCDATA	) >
+<!ELEMENT	BekPass		(	#PCDATA	) >
+<!ELEMENT	PublicKey	(	#PCDATA	) >
+<!ELEMENT	KeyFile		(	#PCDATA	) >
+<!ELEMENT	KeyPass		(	#PCDATA	) >
+<!ELEMENT	PubFile		(	#PCDATA	) >
+<!ELEMENT	RandClock	(	#PCDATA	) >
+<!ELEMENT	BkgrNoise	(	#PCDATA	) >
+<!ELEMENT   PwdEnable	(	#PCDATA	) >
+<!ELEMENT   PwdAll		(	#PCDATA	) >
+<!ELEMENT   PwdUFM		(	#PCDATA	) >
+			
+<!ELEMENT	DebugMode	EMPTY	>
+<!ATTLIST	DebugMode
+			value	(FALSE | TRUE)	#REQUIRED	>
+
+<!ELEMENT	MCtrl	EMPTY >
+<!ATTLIST 	MCtrl
+		setting	CDATA #REQUIRED>
+		
+<!ELEMENT NVSector (SectorIndex, SectorName?, SectorFile?, SectorOper?, LocalLockPolicy?)	>
+<!ATTLIST	NVSector	
+		selected CDATA 		#REQUIRED>
+
+<!ELEMENT	SectorIndex	(	#PCDATA	) >
+<!ELEMENT	SectorName	(	#PCDATA	) >
+<!ELEMENT	SectorFile	(	#PCDATA	) >
+<!ELEMENT	SectorOper	(	#PCDATA	) >
+
+<!ELEMENT	LocalLockPolicy	EMPTY	>	
+<!ATTLIST	LocalLockPolicy
+		selected CDATA 		#REQUIRED
+		locktarget  CDATA	#REQUIRED
+		lockread (FALSE | TRUE) #REQUIRED
+		lockwrite (FALSE | TRUE) #REQUIRED
+    lockerase (FALSE | TRUE) #IMPLED
+		lockaccess (FALSE | TRUE) #IMPLED>	
+		
+<!ELEMENT	CentralLockPolicy	EMPTY	>	
+<!ATTLIST	CentralLockPolicy
+		selected CDATA 		#REQUIRED
+		locktarget  CDATA	#REQUIRED
+		lockread (FALSE | TRUE) #IMPLED
+		lockerase (FALSE | TRUE) #IMPLED
+		lockaccess (FALSE | TRUE) #IMPLED
+		lockwrite (FALSE | TRUE) #IMPLED>	
+		
+<!ELEMENT	PortsLockPolicy	EMPTY	>	
+<!ATTLIST	PortsLockPolicy
+		selected CDATA 		#REQUIRED
+		locktarget  CDATA	#REQUIRED
+		lockhard (FALSE | TRUE) #IMPLED
+		lockaccess_0 (FALSE | TRUE) #IMPLED
+		lockaccess_1 (FALSE | TRUE) #IMPLED>			

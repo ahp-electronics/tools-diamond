@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title ="basetool">
+  <ToolEnvDef name="Download">
+    <Member name="dependon" value1="Export.Bitgen"/>
+    <Member name="input" condition='strategy.PROP_BIT_OutFormatBitGen=="Bit File (Binary)"||strategy.PROP_BIT_OutFormatBitGen=="Mask and Readback File (Binary)"' value1="$(report_base).bit" value2="$(report_base).rbt"/>
+    <Member name="type" condition='strategy.PROP_BIT_OutFormatBitGen=="Bit File (Binary)"||strategy.PROP_BIT_OutFormatBitGen=="Mask and Readback File (Binary)"' value1="bit" value2="rbt"/>
+  </ToolEnvDef>
+  <ToolEnvDef name="Report">
+    <Member name="SSO" value1='!Support_SSO'/>
+  </ToolEnvDef>
+  <!-- Source type support can be device specific or depend on the other conditions.
+       It will be checked in DRC checking triggered by some condition change.
+       If the src type is not supported, it will be disabled.
+  -->
+  <SrcSupportDef type="SPX" condition='project.device.family == "LatticeECP4"' event="">
+    <Condition expr = "this.device.device == project.device.device" reason="The device used in this source does not match the device in current project." event="project:option.set/device/"  />
+  </SrcSupportDef>
+  <SrcSupportDef type="PTM" condition='project.device.has_asc' event="">
+    <Condition expr = "this.device.device == project.device.device" reason="The device used in this source does not match the device in current project." event="project:option.set/device/"  />
+  </SrcSupportDef>
+  <SrcSupportDef type="SBX" condition='project.device.family @ {"ECP5U", "ECP5UM", "LIFMD", "LIFMDF", "ECP5UM5G"}' event="">
+    <Condition expr = "this.device.device == project.device.device" reason="The device used in this source does not match the device in current project." event="project:option.set/device/"  />
+  </SrcSupportDef>
+  <SrcSupportDef type="IPX" condition='project.device.family !@ {"ECP5U", "ECP5UM", "ECP5UM5G", "LIFMD", "LIFMDF"}' event="">
+    <Condition expr = "this.device.device == project.device.device" reason="The device used in this source does not match the device in current project." event="project:option.set/device/"  />
+  </SrcSupportDef>
+  <CloneRuleDef name="resource">
+  <Member name="psbarchive" flag="ptm"/>
+  <Member name="sbparchive" flag="sbx"/>
+  </CloneRuleDef>
+  <CloneRuleDef name="strategy">
+  <Member name="PROP_BD_EdfInLibPath" flag="ngo" value="macro_search_path" />
+  <Member name="PROP_BD_EdfMemPath" flag="mem"  value="memory_file_path" />
+  <Member name="PROP_BD_ParSearchPath" flag="ngo" value="partition_search_path" />
+  <!--<Member name="PROP_MAP_GuideFileMapDes" />-->
+  <Member name="PROP_PAR_ParMultiNodeList" />
+  <!--<Member name="PROP_PAR_ParNCDGuideFile" />-->
+  </CloneRuleDef>
+  <CloneRuleDef name="files">
+    <!-- Member name="reveal" flag="folder,recursion"  value="$(result_dir)/reveal_workspace" /-->
+    <!-- Member name="inc" flag="folder"  value="$(result_dir)/inc1" /-->
+    <!-- Member name="inc" flag="folder"  value="$(result_dir)/inc2" /-->
+  <Member name="reveal" flag="file,cname,hub" value="$(result_dir)/${report_base}.hub" />
+  <Member name="tcl" flag="folder,project,cname,tcr" value="${project_dir}/${implementation.title}_tcr.dir" />
+  <Member name="message" flag="file,project,xml" value="$(project_dir)/promote.xml" />
+  <Member name="ip" flag="folder,ngo" value="$(result_dir)" />
+  </CloneRuleDef>
+  <!-- Internal virtual tasks to support Tool Report status -->
+  <MileStoneDef id ="tool_report" title ="TOOL_Report" main_task="hdle_tool::hdle">
+    <SubTasks>
+    <Task definition ="tool_report::hdle" />
+      <Task definition ="tool_report::bkm" />
+      <if condition='implementation.synthesis == "lse" &amp;&amp; implementation.synthesisable_srces_count &gt; 0' task="tool_report::lse_sso" default ="tool_report::sso"/>
+      <if condition='implementation.synthesis == "lse" &amp;&amp; implementation.synthesisable_srces_count &gt; 0' task="tool_report::lse_piodrc" default ="tool_report::piodrc"/>
+    <Task definition ="tool_report::dec" />
+    </SubTasks>
+  </MileStoneDef>
+  <TaskDef id ="tool_report::hdle" title ="HDLE" depend_on_milestones="hdlgen" depend_on_properties="implementation.synthesis_hdls, implementation.EDIF">
+    <Target id ="target">
+    </Target>
+  </TaskDef>
+  <TaskDef id ="tool_report::bkm" title ="BKM" depend_on_milestones="hdlgen" depend_on_properties="implementation.synthesis_hdls, implementation.EDIF">
+    <Target id ="target">
+    </Target>
+  </TaskDef>
+  <TaskDef id ="tool_report::sso" title ="SSO" depend_on_milestones="translate" >
+    <Target id ="target">
+    </Target>
+  </TaskDef>
+  <TaskDef id ="tool_report::piodrc" title ="PIODRC" depend_on_milestones="translate" >
+    <Target id ="target">
+    </Target>
+  </TaskDef>
+  <TaskDef id ="tool_report::dec" title ="DEC" depend_on_milestones="translate" >
+  <Target id ="target">
+  </Target>
+  </TaskDef>
+</BaliFlowDef>

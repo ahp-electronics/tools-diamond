@@ -1,0 +1,319 @@
+<?xml version='2.0' encoding='utf-8' ?>
+<!ELEMENT	ispXCF	(	Comment?,
+						Chain*, ProjectOptions?, USBOptions? CableOptions?)	>
+<!ATTLIST	ispXCF
+			version		CDATA	#REQUIRED>
+
+<!ELEMENT	Comment	(	#PCDATA	)>
+<!ELEMENT	Chain	(	Comm, Device*) >
+
+<!ELEMENT	Comm	(	#PCDATA	) >
+
+<!ELEMENT	Device	(	Pos, Ref?, Vendor?, Family?, Name, IDCode?, IDCodeInst?, IDCodeMask?, UserCodeInst?,
+				UserCodeMask?, Package?, PON?, SelectedProg?
+				MCtrl?, ((File?, ReadBackFile?, MaskFile?, BSDLFilename?, ISCDataFile?, ISCDataCRC?, ISCOutputData File?, 
+				FileTime?, JedecChecksum?, Operation) |  Bypass), Option?, ActionList?, ConditionalErase,
+				ByteShiftCtrl, AdaptProg, AdaptProgOption, TimeOut, ProcessType	, FPGALoader?, I2CSlaveAddress?, ExternalASC?, NVsector?, CentralLockPolicy?, PortsLockPolicy?)>
+
+<!ELEMENT FPGALoader (	CPLDDevice?, FlashDevice?, FPGADevice? ReErase?, ProcessMode?, AdaptProgN?)	>
+<!ELEMENT CPLDDevice (Pos?, Ref?, Vendor?, Family?, Name, IDCode?, IDCodeInst?, IDCodeMask?, UserCodeInst?,
+				UserCodeMask?, Package?, PON?, MCtrl?, ((File?, ReadBackFile?, MaskFile?, BSDLFilename?, ISCDataFile?, ISCDataCRC?, ISCOutputData File?, 
+				FileTime?, JedecChecksum?, Operation) |  Bypass), Option?, ActionList?, ConditionalErase,
+				ByteShiftCtrl, AdaptProg, AdaptProgOption, TimeOut, ProcessType)>
+<!ELEMENT FPGADevice (Pos?, Ref?, Vendor?, Family?, Name, IDCode?, IDCodeInst?, IDCodeMask?, UserCodeInst?,
+				UserCodeMask?, Package?, PON?, MCtrl?, ((File?, ReadBackFile?, MaskFile?, BSDLFilename?, ISCDataFile?, ISCDataCRC?, ISCOutputData File?, 
+				FileTime?, JedecChecksum?, Operation) |  Bypass), Option?, ActionList?, ConditionalErase,
+				ByteShiftCtrl, AdaptProg, AdaptProgOption, TimeOut, ProcessType, LocalChainList+)>
+<!ELEMENT FlashDevice (Pos?,PON?, Vendor?, Name, AlgTemplate?, AddressBase?, EndAddress?, DataSize?, DeviceSize?, NumberOfDevices?, WEConnect?, BUSYConnect?, ReInitialize?, Secure?)>
+<!ATTLIST	ReErase
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	ProcessMode (	#PCDATA	) >
+<!ATTLIST	AdaptProgN
+			value	(FALSE | TRUE)	#REQUIRED	>	
+
+<!ATTLIST	SelectedProg
+			value	(FALSE | TRUE)	#REQUIRED	>				
+<!ELEMENT	Pos		(	#PCDATA	) >
+<!ELEMENT	Ref		(	#PCDATA	) >
+<!ELEMENT	Vendor	(	#PCDATA	) >
+<!ELEMENT	Family	(	#PCDATA	) >
+<!ELEMENT	Name	(	#PCDATA	) >
+<!ELEMENT	IDCode	(	#PCDATA	) >
+<!ELEMENT	IDCodeInst	(	#PCDATA	) >
+<!ELEMENT	I2CSlaveAddress	(	#PCDATA	) >
+<!ELEMENT	IDCodeMask	(	#PCDATA	) >
+<!ELEMENT	UserCodeInst	(	#PCDATA	) >
+<!ELEMENT	UserCodeMask	(	#PCDATA	) >
+<!ELEMENT	Package	(	#PCDATA	) >
+<!ELEMENT	PON		(	#PCDATA	) >
+<!ELEMENT	File	(	#PCDATA	) >
+<!ELEMENT	USFFile	(	#PCDATA	) >
+<!ELEMENT	ReadBackFile	(	#PCDATA	) >
+<!ELEMENT	MaskFile	(	#PCDATA	) >
+<!ELEMENT	BSDLFilename	(	#PCDATA	) >
+<!ELEMENT	ISCDataFile	(	#PCDATA	) >
+<!ELEMENT	ISCDataCRC	(	#PCDATA	) >
+<!ELEMENT	ISCOutputDataFile	(	#PCDATA	) >
+<!ELEMENT	FileTime	(	#PCDATA	) >
+<!ELEMENT	JedecChecksum	(	#PCDATA	) >
+<!ELEMENT	Operation	(	#PCDATA	) >
+<!ELEMENT	ConditionalErase	EMPTY	>
+<!ATTLIST	ConditionalErase
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	ByteShiftCtrl	EMPTY	>
+<!ATTLIST	ByteShiftCtrl
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	AdaptProg	EMPTY	>
+<!ATTLIST	AdaptProg
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	AdaptProgOption	(	AdaptProgBit, AdaptProgPin)	>
+
+<!ELEMENT	AdaptProgBit	EMPTY >
+<!ATTLIST	AdaptProgBit
+			value	(FALSE | TRUE)	#REQUIRED	>
+			
+<!ELEMENT	AdaptProgPin	EMPTY >
+<!ATTLIST	AdaptProgPin
+			value	(FALSE | TRUE)	#REQUIRED	>			
+
+<!ELEMENT	TimeOut	(	#PCDATA	) >
+
+<!ELEMENT	ProcessType	(	#PCDATA	) >
+
+<!ELEMENT	ActionList	(	Action+)	>
+
+<!ELEMENT	Action	(ProcedureList?) >
+<!ATTLIST	Action
+		name		CDATA		#REQUIRED
+		selected	(FALSE | TRUE)	#REQUIRED
+		proprietary	(FALSE | TRUE)	#REQUIRED>
+
+<!ELEMENT	ProcedureList	(Procedure+)	>
+<!ATTLIST	ProcedureList
+		number_of_procedures	CDATA	#REQUIRED>
+
+<!ELEMENT	Procedure	EMPTY >
+<!ATTLIST	Procedure
+		name	 CDATA 	#REQUIRED
+		options  CDATA	#REQUIRED>
+
+<!ELEMENT	Bypass	(	InstrLen, InstrVal, BScanLen, BScanVal	)	>
+
+<!ELEMENT	InstrLen	(	#PCDATA	) >
+<!ELEMENT	InstrVal	(	#PCDATA	) >
+
+<!ELEMENT	BScanLen	(	#PCDATA	) >
+<!ELEMENT	BScanVal	(	#PCDATA	) >
+
+<!ELEMENT	Option	(	IOState?, PreloadLength?, IOVector?, IOVectorData?, IOVectorFile?, BSDLFile?, Reinitialize?, OverideUES?,
+						AutoIncrement?, TCKFrequency?, SVFVendor?,SVFProcessor?,Usercode?,AccessMode?, IOVectorMask?, IOLVDSPair?, DebugMode?, MDRMode?, USFMode?, SECUREMode?, JTAGI2CMode?) >
+
+
+<!ELEMENT	IOState		(	#PCDATA	) >
+
+<!ELEMENT	PreloadLength	(	#PCDATA	) >
+
+<!ELEMENT	IOVector	EMPTY >
+<!ATTLIST	IOVector
+			value	(FALSE | TRUE)	#REQUIRED	>
+
+<!ELEMENT	IOVectorData		(	#PCDATA	) >
+<!ELEMENT	IOVectorMask		(	#PCDATA	) >
+<!ELEMENT	IOLVDSPair			(	#PCDATA	) >
+<!ELEMENT	IOVectorFile		(	#PCDATA	) >
+<!ELEMENT	BSDLFile		(	#PCDATA	) >
+
+
+<!ELEMENT	Reinitialize	EMPTY	>
+<!ATTLIST	Reinitialize
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	OverideUES	EMPTY	>
+<!ATTLIST	OverideUES
+			value	(FALSE | TRUE)	#REQUIRED	>
+
+<!ELEMENT	AutoIncrement	(	#PCDATA	)	>
+<!ELEMENT	TCKFrequency	(	#PCDATA	)	>
+<!ELEMENT	SVFVendor	(	#PCDATA	)	>
+<!ELEMENT	SVFProcessor	(	#PCDATA	)	>
+<!ELEMENT	Usercode	(	#PCDATA	)	>
+<!ELEMENT	AccessMode	(	#PCDATA	)	>
+<!ELEMENT   AlgTemplate (	#PCDATA	)	>
+<!ELEMENT   AddressBase (	#PCDATA	)	>
+<!ELEMENT   EndAddress (	#PCDATA	)	>
+<!ELEMENT   DataSize	(	#PCDATA	)	>
+<!ELEMENT   DeviceSize	(	#PCDATA	)	>
+<!ELEMENT   NumberOfDevices	(	#PCDATA	)	>
+<!ELEMENT	WEConnect	EMPTY	>
+<!ATTLIST	WEConnect
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	BUSYConnect	EMPTY	>
+<!ATTLIST	BUSYConnect
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	ReInitialize	EMPTY	>
+<!ATTLIST	ReInitialize
+			value	(FALSE | TRUE)	#REQUIRED	>			
+
+<!ELEMENT	Secure	EMPTY	>
+<!ATTLIST	Secure
+			value	(FALSE | TRUE)	#REQUIRED	>
+			
+<!ELEMENT	MDRMode	(	MDR_PROGRAMN?, MDR_BSDLFile?, MDR_IOState?, IOProgramVector?, IOProgramMaskVector? , IOProgramHighVector?, IOProgramLowVector?,
+						IOProgramDMaskVector?,MDR_IOLVDSPair?, MDR_Delay?, MDR_TRST?) >
+
+<!ELEMENT	MDR_PROGRAMN		(	#PCDATA	) >
+<!ELEMENT	MDR_BSDLFile		(	#PCDATA	) >
+<!ELEMENT	MDR_IOState		    (	#PCDATA	) >
+<!ELEMENT	IOProgramVector	(	#PCDATA	) >
+<!ELEMENT	IOProgramMaskVector		(	#PCDATA	) >
+<!ELEMENT	IOProgramHighVector		(	#PCDATA	) >
+<!ELEMENT	IOProgramLowVector		(	#PCDATA	) >
+<!ELEMENT	IOProgramDMaskVector	(	#PCDATA	) >
+<!ELEMENT	MDR_IOLVDSPair			(	#PCDATA	) >
+<!ELEMENT	MDR_Delay			(	#PCDATA	) >
+<!ELEMENT	MDR_TRST		(	#PCDATA	) >
+
+<!ELEMENT	USFMode	(	USFFile?, USFStart?, USFEnd?) >
+
+<!ELEMENT	USFFile		(	#PCDATA	) >
+<!ELEMENT	USFStart	(	#PCDATA	) >
+<!ELEMENT	USFEnd		(	#PCDATA	) >
+
+<!ELEMENT	SECUREMode	(	Protect?, KeyFile?, KeyPass?, ProtectKey?, SecurityKey?, KeyDisplay?, KeyLock?, EncryptOnly?, RandClock?, BkgrNoise?, BekFile?, BekPass?, PublicKey?, PubFile?, PwdEnable?, PwdAll?, PwdUFM?  ) >
+
+<!ELEMENT	Protect		(	#PCDATA	) >
+<!ELEMENT	ProtectKey	(	#PCDATA	) >
+<!ELEMENT	SecurityKey	(	#PCDATA	) >
+<!ELEMENT	KeyDisplay	(	#PCDATA	) >
+<!ELEMENT	KeyLock		(	#PCDATA	) >
+<!ELEMENT	EncryptOnly	(	#PCDATA	) >
+<!ELEMENT	BekFile		(	#PCDATA	) >
+<!ELEMENT	BekPass		(	#PCDATA	) >
+<!ELEMENT	PublicKey	(	#PCDATA	) >
+<!ELEMENT	KeyFile		(	#PCDATA	) >
+<!ELEMENT	KeyPass		(	#PCDATA	) >
+<!ELEMENT	PubFile		(	#PCDATA	) >
+<!ELEMENT	RandClock	(	#PCDATA	) >
+<!ELEMENT	BkgrNoise	(	#PCDATA	) >
+<!ELEMENT   PwdEnable	(	#PCDATA	) >
+<!ELEMENT   PwdAll		(	#PCDATA	) >
+<!ELEMENT   PwdUFM		(	#PCDATA	) >
+
+<!ELEMENT	ProjectOptions	(	Program?, Process?, SelectedPos?, OperationOverride?, DisableCheckBoard?, SequentializeEnableDisable?,
+					StartTAP?, EndTAP?, AvoidTLR?, ContinueOnError?, TCKDelay?, PinSetting?, DeGlitch?, VerifyUsercode?, ParityCheck?)	>
+<!ELEMENT	Program	(	#PCDATA	)	>
+<!ELEMENT	Process	(	#PCDATA	)	>
+<!ELEMENT	SelectedPos		(	#PCDATA	) >
+<!ELEMENT	OperationOverride	(	#PCDATA	)	>
+<!ELEMENT	StartTAP	(	#PCDATA	)	>
+<!ELEMENT	EndTAP	(	#PCDATA	)	>
+<!ELEMENT	AvoidTLR	EMPTY	>
+<!ATTLIST	AvoidTLR
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	ContinueOnError	EMPTY	>
+<!ATTLIST	ContinueOnError
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	DisableCheckBoard	EMPTY	>
+<!ATTLIST	DisableCheckBoard
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	SequentializeEnableDisable	EMPTY	>
+<!ATTLIST	SequentializeEnableDisable
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	VerifyUsercode	EMPTY	>
+<!ATTLIST	VerifyUsercode
+			value	(FALSE | TRUE)	#REQUIRED	>	
+<!ELEMENT	ParityCheck	EMPTY	>
+<!ATTLIST	ParityCheck
+			value	(FALSE | TRUE)	#REQUIRED	>		
+<!ELEMENT	TCKDelay		(	#PCDATA	) >
+<!ELEMENT	PinSetting	(	#PCDATA	)	>
+<!ELEMENT	DeGlitch	EMPTY	>
+<!ATTLIST	DeGlitch
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	DebugMode	EMPTY	>
+<!ATTLIST	DebugMode
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	JTAGI2CMode	EMPTY	>
+<!ATTLIST	JTAGI2CMode
+			value	(FALSE | TRUE)	#REQUIRED	>
+			
+<!ELEMENT	MCtrl	EMPTY >
+<!ATTLIST 	MCtrl
+		setting	CDATA #REQUIRED>
+<!ELEMENT   CableOptions	(	CableName?, PortAdd?, CableID?, DONEConnect?, PROGConnect?, INITConnect?, TRSTConnect?, ISPENConnect?, JTAGPinSetting?, DynamicSetting?)	>		
+<!ELEMENT	USBOptions	(	PortAdd?, DONEConnect?, PROGConnect?, INITConnect?, USBID? )	>
+<!ELEMENT	CableName	(	#PCDATA	) >
+<!ELEMENT	CableID	(	#PCDATA	) >
+<!ELEMENT	JTAGPinSetting	(	#PCDATA	)	>
+<!ELEMENT	DynamicSetting (	DynamicState?, DynamicDelay? )	>
+<!ELEMENT	DynamicState EMPTY	>
+<!ATTLIST	DynamicState
+			value	CDATA	#REQUIRED	>
+<!ELEMENT	DynamicDelay		(	#PCDATA	) >			
+<!ELEMENT	PortAdd	(	#PCDATA	) >
+<!ELEMENT	USBID	(	#PCDATA	) >
+<!ELEMENT	DONEConnect	EMPTY	>
+<!ATTLIST	DONEConnect
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	PROGConnect	EMPTY	>
+<!ATTLIST	PROGConnect
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	INITConnect	EMPTY	>
+<!ATTLIST	INITConnect
+			value	(FALSE | TRUE)	#REQUIRED	>
+			
+<!ELEMENT	TRSTConnect	EMPTY	>
+<!ATTLIST	TRSTConnect
+			value	(FALSE | TRUE)	#REQUIRED	>
+<!ELEMENT	ISPENConnect	EMPTY	>
+<!ATTLIST	ISPENConnect
+			value	(FALSE | TRUE)	#REQUIRED	>			
+<!ELEMENT	LocalChainList	(	LocalDevice+)	>
+<!ELEMENT	LocalDevice	EMPTY	>
+<!ATTLIST	LocalDevice
+		index CDATA 	#REQUIRED
+		name  CDATA 	#REQUIRED
+		file  CDATA		#REQUIRED>			
+<!ELEMENT	ExternalASC	(	ASCDevice+)	>
+<!ELEMENT	ASCDevice	EMPTY	>
+<!ATTLIST	ASCDevice
+		index CDATA 	#REQUIRED
+		name CDATA 	#IMPLED		
+		selected CDATA 	#REQUIRED
+		file  CDATA		#REQUIRED
+		operation  CDATA 	#REQUIRED
+		slaveAddr  CDATA 	#REQUIRED>
+			
+<!ELEMENT NVSector (SectorIndex, SectorName?, SectorFile?, SectorOper?, LocalLockPolicy?)	>
+<!ATTLIST	NVSector	
+		selected CDATA 		#REQUIRED>
+
+<!ELEMENT	SectorIndex	(	#PCDATA	) >
+<!ELEMENT	SectorName	(	#PCDATA	) >
+<!ELEMENT	SectorFile	(	#PCDATA	) >
+<!ELEMENT	SectorOper	(	#PCDATA	) >
+
+<!ELEMENT	LocalLockPolicy	EMPTY	>	
+<!ATTLIST	LocalLockPolicy
+		selected CDATA 		#REQUIRED
+		locktarget  CDATA	#REQUIRED
+		lockread (FALSE | TRUE) #REQUIRED
+		lockwrite (FALSE | TRUE) #REQUIRED
+    lockerase (FALSE | TRUE) #IMPLED
+		lockaccess (FALSE | TRUE) #IMPLED>	
+		
+<!ELEMENT	CentralLockPolicy	EMPTY	>	
+<!ATTLIST	CentralLockPolicy
+		selected CDATA 		#REQUIRED
+		locktarget  CDATA	#REQUIRED
+		lockread (FALSE | TRUE) #IMPLED
+		lockerase (FALSE | TRUE) #IMPLED
+		lockaccess (FALSE | TRUE) #IMPLED
+		lockwrite (FALSE | TRUE) #IMPLED>	
+		
+<!ELEMENT	PortsLockPolicy	EMPTY	>	
+<!ATTLIST	PortsLockPolicy
+		selected CDATA 		#REQUIRED
+		locktarget  CDATA	#REQUIRED
+		lockhard (FALSE | TRUE) #IMPLED
+		lockaccess_0 (FALSE | TRUE) #IMPLED	
+		lockaccess_1 (FALSE | TRUE) #IMPLED>						

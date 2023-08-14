@@ -1,0 +1,23 @@
+var pairs =
+{
+"pvt":{"monitor":1,"process":1}
+,"monitor":{"circuit":1}
+,"circuit":{"controller":1,"update":1,"output":1}
+,"architectures":{"supported":1}
+,"input":{"update":1}
+,"pvtioctrl":{"primitive":1}
+,"primitive":{"used":1}
+,"used":{"generate":1}
+,"generate":{"signal":1}
+,"signal":{"control":1}
+,"control":{"pvt":1}
+,"process":{"voltage":1}
+,"voltage":{"temperature":1}
+,"temperature":{"monitor":1}
+,"update":{"pvt":1,"last":1}
+,"output":{"updated":1,"latched":1}
+,"updated":{"update":1}
+,"last":{"value":1}
+,"value":{"pvt":1}
+}
+;Search.control.loadWordPairs(pairs);

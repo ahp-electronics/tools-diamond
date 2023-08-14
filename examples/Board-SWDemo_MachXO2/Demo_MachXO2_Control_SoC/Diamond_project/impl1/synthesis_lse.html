@@ -1,0 +1,437 @@
+<HTML>
+<HEAD><TITLE>Synthesis and Ngdbuild Report</TITLE>
+<STYLE TYPE="text/css">
+<!--
+ body,pre{    font-family:'Courier New', monospace;    color: #000000;    font-size:88%;    background-color: #ffffff;}h1 {    font-weight: bold;    margin-top: 24px;    margin-bottom: 10px;    border-bottom: 3px solid #000;    font-size: 1em;}h2 {    font-weight: bold;    margin-top: 18px;    margin-bottom: 5px;    font-size: 0.90em;}h3 {    font-weight: bold;    margin-top: 12px;    margin-bottom: 5px;    font-size: 0.80em;}p {    font-size:78%;}P.Table {    margin-top: 4px;    margin-bottom: 4px;    margin-right: 4px;    margin-left: 4px;}table{    border-width: 1px 1px 1px 1px;    border-style: solid solid solid solid;    border-color: black black black black;    border-collapse: collapse;}th {    font-weight:bold;    padding: 4px;    border-width: 1px 1px 1px 1px;    border-style: solid solid solid solid;    border-color: black black black black;    vertical-align:top;    text-align:left;    font-size:78%;}td {    padding: 4px;    border-width: 1px 1px 1px 1px;    border-style: solid solid solid solid;    border-color: black black black black;    vertical-align:top;    font-size:78%;}a {    color:#013C9A;    text-decoration:none;}a:visited {    color:#013C9A;}a:hover, a:active {    text-decoration:underline;    color:#5BAFD4;}.pass{background-color: #00ff00;}.fail{background-color: #ff0000;}.comment{    font-size: 90%;    font-style: italic;}
+-->
+</STYLE>
+</HEAD>
+<PRE><A name="Syn"></A><B><U><big>Synthesis and Ngdbuild  Report</big></U></B>
+synthesis:  version Diamond_1.3_Production (92) 
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved. Copyright (c) 1995 AT&T Corp.   All rights reserved. Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved. Copyright (c) 2001 Agere Systems   All rights reserved. Copyright (c) 2002-2011 Lattice Semiconductor Corporation,  All rights reserved.
+Fri Oct 14 15:11:20 2011 
+
+Command Line:  synthesis -f control_SoC_demo_impl1_lattice.synproj 
+
+-- all messages logged in file synthesis.log
+
+<A name="lse_synopt"></A><B><U><big>Synthesis Options</big></U></B>
+
+INFO: Synthesis Options: (LSE-1022)
+INFO: -a option is = MachXO2
+INFO: -s option is = 5
+INFO: -t option is = CSBGA132
+INFO: -d option is = LCMXO2-1200HC
+INFO: Using package CSBGA132
+INFO: Using speed grade 5
+INFO:                                                           
+INFO: ##########################################################
+INFO: ### Lattice Family : MachXO2
+INFO: ### Device  : LCMXO2-1200HC
+INFO: ### Package : CSBGA132
+INFO: ### Speed   : 5
+INFO: ##########################################################
+INFO:                                                           
+INFO: Optimization Goal = Balanced
+INFO: Top level module name = control_soc_demo
+INFO: Target Frequency = 200.000000 MHz
+INFO: Max Fanout = 1000
+INFO: Timing Path count = 3
+INFO: bram Utilization = 100.000000 %
+INFO: dsp usage = TRUE (default)
+INFO: dsp utilization = 100 (default)
+INFO: fsm_encoding_style = auto
+INFO: Mux style = Auto
+INFO: Use Carry Chain = TRUE
+INFO: carry_chain_length = 0
+INFO: Use IO Insertion = TRUE
+INFO: Use IO Reg = TRUE
+INFO: Resource Sharing = TRUE
+INFO: Propagate Constants = TRUE
+INFO: Remove Duplicate Registers = TRUE
+INFO: force_gsr = auto
+INFO: ROM style = auto
+INFO: RAM style = auto
+INFO: -comp option is FALSE
+INFO: -syn option is FALSE
+INFO: -p C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project (searchpath added)
+INFO: -p C:/lscc/1.3_20110802-1_3p.92/diamond/1.3/ispfpga/xo2c00/data (searchpath added)
+INFO: -p C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/impl1 (searchpath added)
+INFO: -p C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project (searchpath added)
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../source/clk_gen.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../source/uptime_wb.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../rd1044/Source/Spi_wb.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../latticemico8_v3_1_verilog/source/isp8_core.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../source/rom_ebr_wb.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../rd1066/source/verilog/box_ave.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../rd1066/source/verilog/sigmadelta_adc.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../rd1066/source/verilog/adc_top.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../source/adc_wb.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../rd1042/source/modem.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../rd1042/source/uart_core.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../source/lm8_top.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../latticemico8_v3_1_verilog/source/isp8_io_cntl.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../latticemico8_v3_1_verilog/source/isp8_flow_cntl.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../latticemico8_v3_1_verilog/source/isp8_alu.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../latticemico8_v3_1_verilog/source/isp8_idec.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../rd1043/source/lm8_wb.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../source/led_sw_wb.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../source/reset_gen.v
+INFO: Verilog design file = C:/work/SWDemoProject/MachXOBoard/Demo_MachXO2_Control_SoC/Diamond_project/../source/control_soc_demo.v
+INFO: Ngd file = control_SoC_demo_impl1.ngd
+INFO: -sdc option: sdc file input not used
+INFO: -lpf option: output file option is OFF
+INFO: hardtimer checking is enabled (default); -dt option not used
+INFO: -r option is OFF [ Remove LOC Properties is OFF ]
+-- Technology family check...
+INFO: The default vhdl library search path is now "c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/impl1" (VHDL-1504)
+
+<A name="lse_comp"></A><B><U><big>Compile Design</big></U></B>
+
+INFO: Compile Design Begin
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../source/control_soc_demo.v(46): INFO: compiling module control_soc_demo (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../source/reset_gen.v(46): INFO: compiling module reset_gen (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../source/led_sw_wb.v(46): INFO: compiling module led_sw_wb (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1043/source/lm8_wb.v(47): INFO: compiling module lm8_wb(LM8_ADDR_W=24,NUM_DECODE=4) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../source/lm8_top.v(46): INFO: compiling module isp8(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_core.v(42): INFO: compiling module isp8_core(FAMILY_NAME="XO2",PROM_FILE="prom_init.hex",PORT_AW=8,EXT_AW=24,PROM_AW=10,PROM_AD=1024,REGISTERS_16=0,PGM_STACK_AW=4,PGM_STACK_AD=16) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_idec.v(40): INFO: compiling module isp8_idec(PROM_AW=10) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_alu.v(41): INFO: compiling module isp8_alu(FAMILY_NAME="XO2") (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_alu.v(135): INFO: compiling module pmi_addsub(pmi_data_width=8,pmi_result_width=8,pmi_sign="off",pmi_family="XO2",module_type="pmi_addsub") (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_flow_cntl.v(41): INFO: compiling module isp8_flow_cntl(PGM_STACK_AW=4,PGM_STACK_AD=16,PROM_AW=10,FAMILY_NAME="XO2") (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../source/lm8_top.v(142): INFO: compiling module pmi_distributed_spram(pmi_addr_depth=16,pmi_addr_width=4,pmi_data_width=12,pmi_regmode="noreg",pmi_init_file="none",pmi_init_file_format="binary",pmi_family="XO2",module_type="pmi_distributed_spram") (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_io_cntl.v(39): INFO: compiling module isp8_io_cntl(PORT_AW=8) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_core.v(513): INFO: compiling module pmi_rom_renamed_due_excessive_length_1 (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_core.v(488): INFO: compiling module pmi_distributed_dpram(pmi_addr_depth=32,pmi_addr_width=5,pmi_data_width=8,pmi_regmode="noreg",pmi_init_file="none",pmi_init_file_format="binary",pmi_family="XO2",module_type="pmi_distributed_dpram") (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../source/lm8_top.v(142): INFO: compiling module pmi_distributed_spram(pmi_addr_depth=32,pmi_addr_width=5,pmi_data_width=8,pmi_regmode="noreg",pmi_init_file="none",pmi_init_file_format="binary",pmi_family="XO2",module_type="pmi_distributed_spram") (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1042/source/uart_core.v(52): INFO: compiling module uart_core(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1042/source/intface.v(51): INFO: compiling module intface(CLK_IN_MHZ=24,BAUD_RATE=115200,ADDRWIDTH=3,DATAWIDTH=8,FIFO=0) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1042/source/rxcver.v(49): INFO: compiling module rxcver(DATAWIDTH=8,FIFO=0) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1042/source/txmitt.v(48): INFO: compiling module txmitt(DATAWIDTH=8,FIFO=0) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1042/source/modem.v(49): INFO: compiling module modem(DATAWIDTH=8) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../source/adc_wb.v(46): INFO: compiling module adc_wb (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1066/source/verilog/adc_top.v(62): INFO: compiling module ADC_top (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1066/source/verilog/sigmadelta_adc.v(62): INFO: compiling module sigmadelta_adc(ADC_WIDTH=8,ACCUM_BITS=10,LPF_DEPTH_BITS=3) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1066/source/verilog/box_ave.v(66): INFO: compiling module box_ave(ADC_WIDTH=8,LPF_DEPTH_BITS=3) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../source/rom_ebr_wb.v(45): INFO: compiling module rom_ebr_wb (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_core.v(513): INFO: compiling module pmi_rom_renamed_due_excessive_length_2 (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1044/source/spi_wb.v(48): INFO: compiling module spi(SHIFT_DIRECTION=0,CLOCK_PHASE=0,CLOCK_POLARITY=0,CLOCK_SEL=1,MASTER=1,SLAVE_NUMBER=1,DATA_LENGTH=8,DELAY_TIME=2,CLKCNT_WIDTH=5,INTERVAL_LENGTH=2) (VERI-1018)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../source/uptime_wb.v(46): INFO: compiling module uptime_wb(CLK_FREQ=24180000,CLK_IN_HZ=25) (VERI-1018)
+INFO: ######## Converting i/o port : scl to OUTPUT ... (LSE-1067)
+INFO: ######## Converting i/o port : sda to OUTPUT ... (LSE-1067)
+INFO: ######## Missing driver on net : \UART_INST/DCD_N, patching with GND... (LSE-1017)
+INFO: ######## Missing driver on net : \UART_INST/CTS_N, patching with GND... (LSE-1017)
+INFO: ######## Missing driver on net : \UART_INST/RI_N, patching with GND... (LSE-1017)
+INFO: ######## Missing driver on net : \UART_INST/DSR_N, patching with GND... (LSE-1017)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_flow_cntl.v(229): WARNING: Register \lm8_inst/u1_isp8/u1_isp8_flow_cntl/intr_reg0 is stuck at Zero (VDB-5013)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../latticemico8_v3_1_verilog/source/isp8_flow_cntl.v(375): WARNING: Register \lm8_inst/u1_isp8/u1_isp8_flow_cntl/intr_ack_int is stuck at Zero (VDB-5013)
+WARNING: Bit 0 of Register \UART_INST/u_txmitt/tx_state_FSM is stuck at Zero (VDB-5010)
+WARNING: Bit 0 of Register \UART_INST/u_rxcver/cs_state_FSM is stuck at Zero (VDB-5010)
+WARNING: Bit 1 of Register \UART_INST/u_rxcver/cs_state_FSM is stuck at Zero (VDB-5010)
+WARNING: Bit 2 of Register \UART_INST/u_rxcver/cs_state_FSM is stuck at Zero (VDB-5010)
+WARNING: Bit 0 of Register \UART_INST/u_intface/cs_state_FSM is stuck at Zero (VDB-5010)
+WARNING: Bit 1 of Register \UART_INST/u_intface/cs_state_FSM is stuck at Zero (VDB-5010)
+WARNING: Bit 2 of Register \UART_INST/u_intface/cs_state_FSM is stuck at Zero (VDB-5010)
+WARNING: Skipping pad insertion on analog_cmp_n due to black_box_pad_pin attribute (LSE-1154)
+WARNING: Skipping pad insertion on analog_cmp_p due to black_box_pad_pin attribute (LSE-1154)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1042/source/modem.v(124): WARNING: Register \UART_INST/u_modem/msr_reg_i3 is stuck at Zero (VDB-5013)
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1042/source/intface.v(227): WARNING: Register \UART_INST/u_intface/divisor_i0_i0_i8 is stuck at Zero (VDB-5013)
+INFO: Combinational loop found : 1
+INFO: 	Net \lm8_inst/u1_isp8/prom_addr[9] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/mux_98_i10 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/dout_stack[9] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_stack_w_cz[11] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/i107 
+INFO: 	Net \lm8_inst/u1_isp8/clrc 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i58 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_idec/instr_l7_0 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i33 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_alu/equal_23/n2 
+INFO: 	Instance i991 
+INFO: 	Net \lm8_inst/u1_isp8/instr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024 
+INFO: Combinational loop found : 2
+INFO: 	Net \lm8_inst/u1_isp8/prom_addr[8] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/mux_98_i9 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/dout_stack[8] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_stack_w_cz[11] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/i107 
+INFO: 	Net \lm8_inst/u1_isp8/clrc 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i58 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_idec/instr_l7_0 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i33 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_alu/equal_23/n2 
+INFO: 	Instance i991 
+INFO: 	Net \lm8_inst/u1_isp8/instr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024 
+INFO: Combinational loop found : 3
+INFO: 	Net \lm8_inst/u1_isp8/prom_addr[7] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/mux_98_i8 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/dout_stack[7] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_stack_w_cz[11] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/i107 
+INFO: 	Net \lm8_inst/u1_isp8/clrc 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i58 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_idec/instr_l7_0 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i33 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_alu/equal_23/n2 
+INFO: 	Instance i991 
+INFO: 	Net \lm8_inst/u1_isp8/instr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024 
+INFO: Combinational loop found : 4
+INFO: 	Net \lm8_inst/u1_isp8/prom_addr[6] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/mux_98_i7 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/dout_stack[6] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_stack_w_cz[11] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/i107 
+INFO: 	Net \lm8_inst/u1_isp8/clrc 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i58 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_idec/instr_l7_0 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i33 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_alu/equal_23/n2 
+INFO: 	Instance i991 
+INFO: 	Net \lm8_inst/u1_isp8/instr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024 
+INFO: Combinational loop found : 5
+INFO: 	Net \lm8_inst/u1_isp8/prom_addr[5] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/mux_98_i6 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/dout_stack[5] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_stack_w_cz[11] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/i107 
+INFO: 	Net \lm8_inst/u1_isp8/clrc 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i58 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_idec/instr_l7_0 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i33 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_alu/equal_23/n2 
+INFO: 	Instance i991 
+INFO: 	Net \lm8_inst/u1_isp8/instr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024 
+INFO: Combinational loop found : 6
+INFO: 	Net \lm8_inst/u1_isp8/prom_addr[4] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/mux_98_i5 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/dout_stack[4] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_stack_w_cz[11] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/i107 
+INFO: 	Net \lm8_inst/u1_isp8/clrc 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i58 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_idec/instr_l7_0 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i33 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_alu/equal_23/n2 
+INFO: 	Instance i991 
+INFO: 	Net \lm8_inst/u1_isp8/instr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024 
+INFO: Combinational loop found : 7
+INFO: 	Net \lm8_inst/u1_isp8/prom_addr[3] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/mux_98_i4 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/dout_stack[3] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_stack_w_cz[11] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/i107 
+INFO: 	Net \lm8_inst/u1_isp8/clrc 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i58 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_idec/instr_l7_0 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i33 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_alu/equal_23/n2 
+INFO: 	Instance i991 
+INFO: 	Net \lm8_inst/u1_isp8/instr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024 
+INFO: Combinational loop found : 8
+INFO: 	Net \lm8_inst/u1_isp8/prom_addr[2] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/mux_98_i3 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/dout_stack[2] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_stack_w_cz[11] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/i107 
+INFO: 	Net \lm8_inst/u1_isp8/clrc 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i58 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_idec/instr_l7_0 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i33 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_alu/equal_23/n2 
+INFO: 	Instance i991 
+INFO: 	Net \lm8_inst/u1_isp8/instr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024 
+INFO: Combinational loop found : 9
+INFO: 	Net \lm8_inst/u1_isp8/prom_addr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/mux_98_i2 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/dout_stack[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_stack_w_cz[11] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/i107 
+INFO: 	Net \lm8_inst/u1_isp8/clrc 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i58 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_idec/instr_l7_0 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i33 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_alu/equal_23/n2 
+INFO: 	Instance i991 
+INFO: 	Net \lm8_inst/u1_isp8/instr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024 
+INFO: Combinational loop found : 10
+INFO: 	Net \lm8_inst/u1_isp8/prom_addr[0] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/mux_98_i1 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/dout_stack[0] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/pmi_distributed_sprampmi_distributed_spramXO2binarynonenoreg12416 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_flow_cntl/din_stack_w_cz[11] 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_flow_cntl/i107 
+INFO: 	Net \lm8_inst/u1_isp8/clrc 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i58 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_idec/instr_l7_0 
+INFO: 	Instance \lm8_inst/u1_isp8/u1_isp8_idec/i33 
+INFO: 	Net \lm8_inst/u1_isp8/u1_isp8_alu/equal_23/n2 
+INFO: 	Instance i991 
+INFO: 	Net \lm8_inst/u1_isp8/instr[1] 
+INFO: 	Instance \lm8_inst/u1_isp8/pmi_rompmi_romXO2hexprom_init.hexasyncdisablenoreg18101024 
+c:/work/swdemoproject/machxoboard/demo_machxo2_control_soc/diamond_project/../rd1044/source/spi_wb.v(441): WARNING: Register \SPI_INST/tx_shift_data_i0 is stuck at Zero (VDB-5013)
+INFO: GSR inferred on net: n3660 (LSE-1147)
+INFO: Duplicate Register/Latch removal : \UART_INST/u_modem/msr_reg_i1 is one to one match with \UART_INST/u_modem/msr_reg_i4
+INFO: Duplicate Register/Latch removal : \UART_INST/u_modem/msr_reg_i2 is one to one match with \UART_INST/u_modem/msr_reg_i1
+WARNING: No lpf file will be written because there is no user sdc file
+INFO: Applying 200.000000 MHz constraint to all clocks (LSE-5000)
+INFO: Results of ngd drc checks are available in control_soc_demo_drc.log
+INFO: All blocks are expanded and NGD expansion is successful
+INFO: Writing ngd file control_SoC_demo_impl1.ngd
+
+################### Begin Area Report (control_soc_demo)######################
+Number of register bits => 466 of 5435 (8 % )
+AND2 => 10
+CCU2D => 87
+FD1P3AX => 111
+FD1P3AY => 6
+FD1P3DX => 52
+FD1P3IX => 36
+FD1P3JX => 10
+FD1S3AX => 99
+FD1S3AY => 9
+FD1S3BX => 4
+FD1S3DX => 100
+FD1S3IX => 33
+GSR => 1
+IB => 8
+IFS1P3DX => 1
+ILVDS => 1
+INV => 20
+L6MUX21 => 4
+LUT4 => 595
+MUX21 => 4
+OB => 14
+OBZ => 2
+OFS1P3DX => 4
+OFS1P3JX => 1
+OR2 => 5
+OSCH => 1
+PFUMX => 44
+XOR2 => 1
+pmi_addsubXo88 => 1
+pmi_distributed_dpramXbnonen8532 => 2
+pmi_distributed_spramXbnonen12416 => 1
+pmi_distributed_spramXbnonen8532 => 1
+pmi_romXhmenusdn8101024 => 1
+pmi_romXhprom_initadn18101024 => 1
+################### End Area Report ##################
+
+################### Begin Clock Report ######################
+Clock Nets
+Number of Clocks: 3
+  Net : clk_c, loads : 419
+  Net : sec_clock, loads : 25
+  Net : n10723, loads : 11
+Clock Enable Nets
+Number of Clock Enables: 43
+Highest fanout non-clock nets
+Top 10 highest fanout non-clock nets:
+  Net : rst, loads : 88
+  Net : n10682, loads : 65
+  Net : instr_13, loads : 33
+  Net : wb_addr_0, loads : 32
+  Net : instr_0, loads : 29
+  Net : wb_addr_1, loads : 27
+  Net : addr_20, loads : 26
+  Net : n51, loads : 26
+  Net : instr_15, loads : 26
+  Net : instr_14, loads : 26
+################### End Clock Report ##################
+
+<A name="lse_trs"></A><B><U><big>Timing Report Summary</big></U></B>
+--------------
+--------------------------------------------------------------------------------
+Constraint                              |   Constraint|       Actual|Levels
+--------------------------------------------------------------------------------
+                                        |             |             |
+create_clock -period 5.000000 -name     |             |             |
+clk1 [get_nets \TIME_INST/sec_clock]    |  200.000 MHz|  138.122 MHz|     8 *
+                                        |             |             |
+create_clock -period 5.000000 -name     |             |             |
+clk0 [get_nets clk_c]                   |  200.000 MHz|   49.097 MHz|     8 *
+                                        |             |             |
+--------------------------------------------------------------------------------
+
+
+2 constraints not met.
+
+
+Peak Memory Usage: 59.523  MB
+
+--------------------------------------------------------------
+Elapsed CPU time for LSE flow : 5.382  secs
+--------------------------------------------------------------
+
+
+
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+</PRE></FONT>
+</BODY>
+</HTML>

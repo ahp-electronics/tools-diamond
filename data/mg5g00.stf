@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file defines all properties of FPGA devices -->
+<StrategyConfig parent="base_jedec.stf" version="1.0">
+
+<!--	_EdfFanout=A,INT,Fanout Limit,100 -->
+<Property
+	name="PROP_SYN_EdfFanout"
+	tclid="syn_fanout_limit"
+	type="int"
+	cmdline="set_option -maxfan %CurrentValue%">
+	<Value
+		defaultValue="100"
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- _XPDisableUESBitgen=A,BOOL,Disable UES,FALSE -->
+<!-- for synsvf cmd line -->
+<Property
+	name="PROP_BIT_DisableUESBitgen"
+	tclid="bit_disable_ues"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-overwriteues disable"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- *************************************************************** -->
+<!-- *****************************  PropertySet *************************** -->
+<!-- *************************************************************** -->
+<!-- PROPUI_PAR_NewRouteParDes not exist for XP -->
+<PropertySet	
+	name="PROPSET_PlaceRoute" >
+  <Include>
+      <PropertyUIItem> PROPUI_PAR_EffortParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RoutePassParDes </PropertyUIItem>
+	  <PropertyUIItem> PROPUI_PAR_NewRouteParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RemoveDir </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_DisableTDParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_CrDlyStFileParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PrefErrorOut </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RoutingCDP </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RoutingCDR </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PlcIterParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PlcStCostTblParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_SaveBestRsltParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RouteResOptParDes </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RouteDlyRedParDes </PropertyUIItem>
+<!--  <PropertyUIItem> PROPUI_PAR_PlcInputLimit </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PlcInputNeighborSize </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RoutingOpt </PropertyUIItem> -->
+      <PropertyUIItem> PROPUI_PAR_ParRunPlaceOnly </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_ParMultiNodeList </PropertyUIItem>
+<!--  <PropertyUIItem> PROPUI_PAR_ParNCDGuideFile </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_ParMatchFact </PropertyUIItem> 
+      <PropertyUIItem> PROPUI_PAR_ParGuideRepMatch </PropertyUIItem> -->
+      <PropertyUIItem> PROPUI_PAR_parPathBased </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_parHold </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PARClockSkew </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_PARModArgs </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RunParWithTrce </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_StopZero </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_MultiSeedSortMode </PropertyUIItem>
+      <PropertyUIItem> PROPUI_PAR_RunTimeReduction </PropertyUIItem>
+  </Include>		
+</PropertySet>
+
+<!-- *****************************  Bitgen *************************** -->
+<PropertySet	
+	name="PROPSET_BITGEN" >
+  <Include>
+      <PropertyUIItem> PROPUI_BIT_RunDRCBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_ConModBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_ReadBackBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_ReadCaptureBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_DisRAMResBitGen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_BIT_DisableUESBitgen </PropertyUIItem>
+      <PropertyUIItem> PROPUI_TMCHK_EnableCheck </PropertyUIItem>
+  </Include>          
+</PropertySet>
+
+</StrategyConfig>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaliFlowDef title="xo2c00p" include="mj5g00">
+<!--<VariableDef name="IBISGen:ibs_file" value='"${InstallPath}/cae_library/ibis/machxo2.ibs"' />-->    
+<VariableDef name="IBISGen:ibs_outfile" value='device.has_exasc? IBIS/$(report_base)_${project.device.device_low}.ibs : IBIS/$(report_base).ibs' />   
+<VariableDef name="EQUATION_NEEDED" value="false" />
+<VariableDef name="Support_SSO" value="true" />
+    <TaskDef id ="Task_Bitgen" title ="Bitgen" lable ="Bitstream File" visible ='!defined(implementation.PTM)&amp;&amp;implementation.pojo_flow != "EXPORT"' depend_on_milestones="par">
+     <Target id ="target">
+       <Command using_def="Cmd_TimingCheck"/>
+       <Command id="Cmd_Bitstream" SC_type="CMD_TCL_SCRIPT" type="CMD_EXTERNAL_ENGINE_NEWMSG">
+         <CommandFile name="${report_base}.t2b" clean="TRUE" >
+           <line>#PROP_BIT_RunDRCBitGen</line>    
+           <line>#PROP_BIT_DisableUESBitgen</line>
+           <line>#PROP_BIT_DisRAMResBitGen</line>
+           <line>-path "${project_dir}" #PROP_BIT_SearchPthBitGen </line>
+          <!-- line>-g ES:Yes</line --> 
+         </CommandFile>
+         <cmd_str>bitgen -f "${report_base}.t2b" -w "${report_base}.ncd" -jedec "${report_base}.prf"</cmd_str>
+         <scripts>
+          <![CDATA[
+            proc bitgen {args} {
+                set msg "bitgen $args\n";
+                runtime_log $msg;
+                set msg "This is a demo about run a piece of TCL script in the BDK file.\n";
+                runtime_log $msg;
+            }
+          ]]>
+         </scripts>
+       </Command>
+     </Target>
+     <Report using_def="Report_BitGen"/>
+     <Report using_def="Report_JDec"/>
+    </TaskDef>
+
+    <!-- cxi@10/27 fix sof127219 -->
+    <TaskDef id ="Task_MrgPojo" title ="Merge_Pojo" lable="Merge POJOII Jedec File" depend_on_milestones="cmppojo,export:Task_Bitgen">
+        <Target id ="target">
+            <Command using_def="Cmd_POJOJdc"/>
+            <!--if condition='implementation.PTM.ddt._COUNT &gt; 0' cmd="Cmd_POJODdt"/-->
+            <if condition='implementation.PTM.hasddt' cmd="Cmd_POJODdt"/>    
+        </Target>
+    </TaskDef>
+    <TaskDef id ="Task_CopyJed" title ="Copy_MainJed" lable="Copy Jedec File" visible="false" depend_on_milestones="export:Task_Bitgen">
+        <Target id ="target">
+            <Command using_def="Cmd_CopyJED"/>
+        </Target>
+    </TaskDef>
+    <TaskDef id ="Task_BitgenPOJOII" title ="BitgenPOJOII" lable="PTM Jedec File" depend_on_milestones="cmppojo,export:Task_Bitgen,export:Task_CopyJed">
+        <Target id ="target">
+            <Command using_def="Cmd_POJOBitGen"/>
+        </Target>
+        <Report using_def="Report_JDec"/>
+    </TaskDef>
+    <TaskDef id ="Task_BitgenPOJOIIExpt" title ="BitgenPOJOIIExpt" lable="JEDEC File" visible ='device.has_intasc' depend_on_milestones="export:Task_Bitgen">
+        <Target id ="target">
+            <Command using_def="Cmd_POJOJdcExpt" />
+            <Command using_def="Cmd_POJO_Rename" />
+        </Target>
+    </TaskDef>  
+</BaliFlowDef>

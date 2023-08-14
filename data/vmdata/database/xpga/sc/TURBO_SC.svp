@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		SVF_Plus	SYSTEM	"SVF_Plus.dtd" >
+<!-- 
+	09/16/04 Spinti: Added RAM_WRITE and RAM_READ instructions.
+					 Added JTAG Burst Program operation.
+					 Removed Erase, Read, and Program DONE operations.
+					 Added function BURST_PROGRAM.
+					 Changed program TCK's from 5 to 64.
+	09/17/04 Spinti: Changed BURST_PROGRAM's RAM_WRITE(0xC1) instruction RUN_TEST IDLE TCK to 10000.
+					 Changed BURST_PROGRAM's RUN_TEST IDLE TCK to 100.
+    09/20/04 Spinti: Changed Preload to all 1's
+	09/24/04 Spinti: Added Fast Program operation (same as JTAG Burst Program).
+    03/07/05 Spinti: Changed the ENABLE delay to 20ms, and DISCHARGE delay to 10ms.
+	01/28/08 Spinti: Added "Refresh from FLASH" operation and function REFRESH_FUNCTION.
+	01/29/08 Spinti: Changed the REFRESH instruction name to LSCC_REFRESH.
+	05/20/08 Nguyen: Changed the "Fast Program" operation to do sequential.
+-->
+<SVF_Plus version="1.0">
+<Header>
+	<Device name="DEVICE_NAME"/>
+</Header>
+
+<Setup> <!-- use default Header, Trailer and Frequency value -->
+	<Interface protocol="JTAG_1149.1">
+	</Interface>
+</Setup>
+
+<Parameter>
+	<!-- Length fields are in number if bits -->
+	<Instruction_Length value="INSTRUCTION_REGISTER_LENGTH"/> 
+	<Row_Width			value="DEVICE_ROW_WIDTH"/> 
+	<Address_Length		value="ADDRESS_REGISTER_LENGTH"/> 
+	<ID_Length 			value="DEVICE_ID_LENGTH"/>
+	<Usercode_Length 	value="DEVICE_USERCODE_LENGTH"/>
+	<BSCAN_Length value="BSCAN_REGISTER_LENGTH"/> 
+	<Bscan length="BSCAN_LENGTH">
+		BSCAN_DATA
+	</Bscan>
+	<BscanMask length="BSCAN_LENGTH">
+		BSCAN_MASK
+	</BscanMask>
+	<TotalFuse value="TOTAL_FUSE_MAP"/>
+	<PWP	value="PROGRAMING_PULSE_WIDTH"/>
+	<PWV	value="VERIFY_PULSE_WIDTH"/>
+	<PWE	value="ERASE_PULSE_WIDTH"/>
+	
+	<Instruction>
+		BYPASS				= 0xFF;
+		EXTEST	 			= 0x00;
+		ISC_PROGRAM			= 0x07;
+		ISC_READ			= 0x0A;
+		ISC_ENABLE 			= 0x15;
+		USERCODE 			= 0x17;
+		HIGHZ				= 0x18;
+		IDCODE 				= 0x19;
+		ISC_PROGRAM_USERCODE	= 0x1A;
+		ISC_DISABLE			= 0x1E;
+		CLAMP				= 0x20;
+		LSCC_REFRESH				= 0x23;
+		ISC_ERASE_DONE		= 0x24;
+		INTEST				= 0x2C;
+		ISC_PROGRAM_DONE	= 0x2F;
+		ISC_NOOP			= 0x30;
+		BSAMPLE	 			= 0x6C;
+		BPRELOAD			= 0x6D;
+		RUNBIST				= 0x04;
+		RAM_WRITE			= 0xC1;
+		RAM_READ			= 0xC2;
+		SPI_PROGRAM			= 0xDB;
+	</Instruction>
+</Parameter>
+<Data>
+	<DataField	name="IDTDI">
+		<FieldBlock	row_width="DEVICE_ID_LENGTH">
+			ID_DATA
+		</FieldBlock>
+	</DataField>
+</Data>
+<Operation_List label="TurboOperation0">
+	"Program,Verify" = "	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							SYNCFUNCTION,
+							ENABLE	! Enable the programming mode, 
+							SYNCFUNCTION,
+							PROGRAM	[SEQUENTIAL]! Program Fuse Map,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							VERIFY	[SEQUENTIAL]! Verify Fuse Map,
+							PROGRAM_USERCODE	! Program USERCODE,
+							SYNCFUNCTION,
+							SYNCFUNCTION,			
+							SYNCFUNCTION,
+							SYNCFUNCTION,	
+		 			 		DISABLE ! Exit the programming mode"	;
+	"Program" = "	INIT 	! Initialize, 
+					READ_ID	! Check the IDCODE,
+					SYNCFUNCTION, 
+					ENABLE	! Enable the programming mode, 
+					SYNCFUNCTION,
+					PROGRAM	[SEQUENTIAL]! Program Fuse Map,
+					SYNCFUNCTION,
+					SYNCFUNCTION,
+					PROGRAM_USERCODE	! Program USERCODE,
+					SYNCFUNCTION,
+					SYNCFUNCTION,			
+					SYNCFUNCTION,
+					SYNCFUNCTION,
+ 			 		DISABLE ! Exit the programming mode"	;
+ 	"Verify Only"	=	"	INIT 	! Initialize, 
+							READ_ID	! Check the IDCODE, 
+							SYNCFUNCTION,
+							ENABLE	! Enable the programming mode,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+							VERIFY [SEQUENTIAL]! Verify Fuse Map,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION,
+							SYNCFUNCTION, 
+		 			 		DISABLE ! Exit the programming mode"	;
+ 	"Verify USERCODE"	=	"	INIT 	! Initialize, 
+								READ_ID	! Check the IDCODE,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								SYNCFUNCTION,
+								VERIFY_USERCODE		! Verify USERCODE"	; 
+	"Serial Program" = "	INIT 	! Initialize, 
+							SERIAL_PROGRAM	[SEQUENTIAL]! Program Fuse Map"	;
+ 		
+
+	"Verify ID" = 	"	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE"	; 
+	"Bypass"	=	"	INIT 	! Initialize"	;
+	"Enable Only" = "	INIT 	! Initialize, 
+						READ_ID	! Check the IDCODE,
+						SYNCFUNCTION,
+						ENABLE	! Enable the programming mode" ;
+	"Serial Enable Only" = "	INIT 	! Initialize, 
+						SYNCFUNCTION,
+						SYNCFUNCTION,
+						ENABLE	! Enable the programming mode" ;
+	"Disable Only" = "	INIT 	! Initialize, 
+						SYNCFUNCTION, 
+						DISABLE ! Exit the programming mode"	;
+	"Serial Disable Only" = "	INIT 	! Initialize, 
+						SYNCFUNCTION, 
+						DISABLE ! Exit the programming mode"	;
+	"Fast Program" = "	INIT 	! Initialize,   
+								READ_ID	! Check the IDCODE,
+								SYNCFUNCTION,
+								ENABLE	! Enable the programming mode,
+								SYNCFUNCTION,
+								BURST_PROGRAM	[SEQUENTIAL]! Program Fuse Map,
+								DISABLE ! Exit the programming mode"	;
+	
+	"Refresh from FLASH" = " 	INIT !Initialize,
+					READ_ID !Check the IDCODE,
+					REFRESH_FUNCTION ! Refresh";
+					
+	
+</Operation_List>
+<Script>
+<![CDATA[
+function INIT {
+	HDR 0;
+	HIR 0;
+	TDR 0;
+	TIR 0;
+	ENDDR DRPAUSE;
+	ENDIR IRPAUSE;
+	FREQUENCY 1E6 HZ;
+	STATE IDLE;
+	SYNC	BYPASS_INFO	INSTRUCTION 8 0xFF
+						DATA 1 0x00 ;
+}
+function READ_ID {
+	SIR Instruction_Length 	TDI (IDCODE);
+	SDR_VERIFY	ID_Length 	TDI (#0^ID_Length)
+							TDO	(IDTDI[1])
+							MASK (DEVICE_ID_MASK);
+	SYNC;
+}
+function PRELOAD {				
+   // Shift in Preload instruction
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1]);
+   SYNC;
+}
+function SAMPLE {				
+   // Shift in Preload instruction
+   SIR Instruction_Length TDI(BSAMPLE);
+   SYNC;
+   STATE DRPAUSE;
+   STATE IDLE;
+   SYNC;
+}
+function DYNAMIC {	
+   // Shift in Preload instruction
+   ENDDR DRPAUSE;
+   SIR Instruction_Length TDI(BPRELOAD);
+   SDR BSCAN_Length TDI(Bscan[1])
+   					DMASK(BscanMask[1]);
+   ENDDR IDLE;
+   STATE IDLE;
+   SYNC;
+}
+function ENABLE {
+	SYNC;
+	SIR 	Instruction_Length TDI (ISC_ENABLE);
+	RUN_TEST	IDLE TCK 5 DELAY 20;
+	SYNC;
+}
+
+function DISABLE {
+	SYNC;
+	SIR 	Instruction_Length TDI (ISC_DISABLE);
+	RUN_TEST	IDLE TCK 5 DELAY 1;
+	SIR	Instruction_Length 	TDI (BYPASS);
+	RUN_TEST	IDLE  TCK 5 DELAY 200;
+	SYNC;
+}
+function PROGRAM {
+	FuseArray_TDI.row = 1;
+	// Load in program instruction with auto increment
+	SIR Instruction_Length	TDI (ISC_PROGRAM);
+	repeat Address_Length {			
+		SDR	Row_Width	TDI	(FuseArray_TDI);
+		RUN_TEST	IDLE	TCK 64 ;
+	} // repeat
+	SYNC;
+}
+function PROGRAM_USERCODE {
+	Usercode_TDI.row = 1;
+	// Shift in Data Shift instruction 
+	SIR Instruction_Length	TDI (ISC_PROGRAM_USERCODE);
+	SDR Usercode_Length	TDI	(Usercode_TDI[1]);
+	RUN_TEST	TCK 	5 ;
+	SYNC;
+}
+function VERIFY {
+	FuseArray_TDI.row = 1;
+	FuseArray_MASK.row = 1;
+	// Shift in ISC READ (0x0A) instruction 
+	SIR Instruction_Length	TDI	(ISC_READ);
+	repeat Address_Length {	
+		RUN_TEST	IDLE	TCK 64 ;	
+		SDR_VERIFY	Row_Width	TDI	(#0^Row_Width)
+								TDO	(FuseArray_TDI)
+								MASK(FuseArray_MASK);
+	} // repeat
+	SYNC;
+}
+function VERIFY_ONLY {
+	FuseArray_TDI.row = 1;
+	// Shift Verify Instruction 
+	SIR Instruction_Length	TDI	(RAM_READ);
+	RUN_TEST	IDLE TCK 64 DELAY 1;
+	SDR 	TotalFuse			TDI	(#0^TotalFuse)
+								TDO	(FuseArray_TDI);
+	RUN_TEST	IDLE TCK 64 DELAY 1;
+	SYNC;
+}
+function VERIFY_USERCODE {
+	SYNC;
+}
+function SERIAL_PROGRAM {
+	FuseArray_TDI.row = 1;
+	SDR	TotalFuse		TDI	(FuseArray_TDI);
+	SYNC;
+}
+function BURST_PROGRAM {
+	FuseArray_TDI.row = 1;
+	SIR Instruction_Length	TDI (RAM_WRITE);
+	RUN_TEST	IDLE TCK 10000 DELAY 1;
+	SDR		TotalFuse		TDI	(FuseArray_TDI);
+	RUN_TEST	IDLE TCK 100 DELAY 1;
+	SYNC;
+}
+function SYNCFUNCTION {
+	SYNC;
+}
+function REFRESH_FUNCTION {
+	// Shift in LSCC REFRESH(0x23) instruction;
+    SIR Instruction_Length	TDI (LSCC_REFRESH);
+	RUN_TEST IDLE TCK 5 DELAY 20000;  
+	// Shift in BYPASS(0xFF) instruction;
+    SIR Instruction_Length	TDI (BYPASS);
+	RUN_TEST IDLE TCK 10000 ;
+	SYNC;
+}
+]]>
+</Script>
+</SVF_Plus>

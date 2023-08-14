@@ -1,0 +1,26 @@
+! Initialization
+TRST OFF;
+ENDIR IRPAUSE;
+ENDDR DRPAUSE;
+HDR     0;
+HIR     0;
+TDR     0;
+TIR     0;
+
+! Start in Test-Logic-Reset
+STATE RESET;
+
+! By default, DTCKs are running to chain with DTMSx=1
+! All secondary chains are Test-Logic-Reset
+! Load ScanSel reg to drive DTMSx=0 and put them in Run-Test/Idle
+SHIFT_INSTRUCTION;
+SHIFT_DUMMY_DATA;
+
+! Select chain 
+SHIFT_INSTRUCTION;
+SHIFT_PORT_CODE;
+
+! Synchronize linker and SSPx
+STATE END_STATE;
+STATE IRPAUSE;
+STATE END_STATE;

@@ -1,0 +1,177 @@
+
+
+##### START OF TIMING REPORT #####[
+# Timing Report written on Tue Oct 25 15:57:23 2011
+#
+
+
+Top view:               ddr3_test_top
+Requested Frequency:    200.0 MHz
+Wire load mode:         top
+Paths requested:        3
+Constraint File(s):    
+@N: MT320 |This timing report estimates place and route data. Please look at the place and route timing report for final timing..
+
+
+Performance Summary 
+*******************
+
+
+Worst slack in design: -0.264
+
+                                  Requested     Estimated     Requested     Estimated               Clock        Clock              
+Starting Clock                    Frequency     Frequency     Period        Period        Slack     Type         Group              
+------------------------------------------------------------------------------------------------------------------------------------
+ddr3_clks|clkos                   200.0 MHz     560.7 MHz     5.000         1.784         1.731     inferred     Inferred_clkgroup_2
+ddr3_clks|eclk_inferred_clock     200.0 MHz     901.1 MHz     5.000         1.110         3.890     inferred     Inferred_clkgroup_1
+ddr3_pll|CLKOK_inferred_clock     200.0 MHz     324.8 MHz     5.000         3.079         1.921     inferred     Inferred_clkgroup_0
+ddr3_test_top|clk_in              200.0 MHz     264.1 MHz     5.000         3.786         1.214     inferred     Inferred_clkgroup_3
+System                            200.0 MHz     305.9 MHz     5.000         3.269         1.731     system       system_clkgroup    
+====================================================================================================================================
+
+
+
+Clock Relationships
+*******************
+
+Clocks                                                        |    rise  to  rise    |    fall  to  fall   |    rise  to  fall   |    fall  to  rise 
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Starting                       Ending                         |  constraint  slack   |  constraint  slack  |  constraint  slack  |  constraint  slack
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+System                         System                         |  0.000       0.000   |  No paths    -      |  No paths    -      |  No paths    -    
+System                         ddr3_pll|CLKOK_inferred_clock  |  0.000       -0.264  |  No paths    -      |  No paths    -      |  No paths    -    
+System                         ddr3_test_top|clk_in           |  0.000       -0.059  |  No paths    -      |  No paths    -      |  No paths    -    
+ddr3_pll|CLKOK_inferred_clock  System                         |  0.000       0.449   |  No paths    -      |  No paths    -      |  No paths    -    
+ddr3_pll|CLKOK_inferred_clock  ddr3_pll|CLKOK_inferred_clock  |  0.000       0.242   |  No paths    -      |  No paths    -      |  No paths    -    
+ddr3_pll|CLKOK_inferred_clock  ddr3_test_top|clk_in           |  Diff grp    -       |  No paths    -      |  No paths    -      |  No paths    -    
+ddr3_clks|eclk_inferred_clock  ddr3_pll|CLKOK_inferred_clock  |  Diff grp    -       |  No paths    -      |  No paths    -      |  No paths    -    
+ddr3_clks|eclk_inferred_clock  ddr3_clks|eclk_inferred_clock  |  0.000       0.659   |  No paths    -      |  No paths    -      |  No paths    -    
+ddr3_clks|clkos                System                         |  0.000       0.857   |  No paths    -      |  No paths    -      |  0.000       0.546
+ddr3_clks|clkos                ddr3_clks|clkos                |  No paths    -       |  0.000       0.420  |  No paths    -      |  2.500       2.920
+ddr3_test_top|clk_in           System                         |  0.000       0.506   |  No paths    -      |  No paths    -      |  No paths    -    
+ddr3_test_top|clk_in           ddr3_pll|CLKOK_inferred_clock  |  Diff grp    -       |  No paths    -      |  No paths    -      |  No paths    -    
+ddr3_test_top|clk_in           ddr3_clks|clkos                |  No paths    -       |  No paths    -      |  Diff grp    -      |  No paths    -    
+ddr3_test_top|clk_in           ddr3_test_top|clk_in           |  0.000       0.282   |  No paths    -      |  No paths    -      |  No paths    -    
+=====================================================================================================================================================
+ Note: 'No paths' indicates there are no paths in the design for that pair of clock edges.
+       'Diff grp' indicates that paths exist but the starting clock and ending clock are in different clock groups.
+
+
+
+Interface Information 
+*********************
+
+
+
+Input Ports: 
+
+Port                Starting            User           Arrival     Required          
+Name                Reference           Constraint     Time        Time         Slack
+                    Clock                                                            
+-------------------------------------------------------------------------------------
+clk_in              NA                  NA             NA          NA           NA   
+dip_sw[0]           System (rising)     NA             0.000       -0.944            
+dip_sw[1]           System (rising)     NA             0.000       -1.197            
+dip_sw[2]           System (rising)     NA             0.000       -0.914            
+dip_sw[3]           System (rising)     NA             0.000       -0.914            
+dip_sw[4]           System (rising)     NA             0.000       -1.379            
+dip_sw[5]           System (rising)     NA             0.000       -1.605            
+em_ddr_data[0]      System (rising)     NA             0.000       0.000             
+em_ddr_data[1]      System (rising)     NA             0.000       0.000             
+em_ddr_data[2]      System (rising)     NA             0.000       0.000             
+em_ddr_data[3]      System (rising)     NA             0.000       0.000             
+em_ddr_data[4]      System (rising)     NA             0.000       0.000             
+em_ddr_data[5]      System (rising)     NA             0.000       0.000             
+em_ddr_data[6]      System (rising)     NA             0.000       0.000             
+em_ddr_data[7]      System (rising)     NA             0.000       0.000             
+em_ddr_data[8]      System (rising)     NA             0.000       0.000             
+em_ddr_data[9]      System (rising)     NA             0.000       0.000             
+em_ddr_data[10]     System (rising)     NA             0.000       0.000             
+em_ddr_data[11]     System (rising)     NA             0.000       0.000             
+em_ddr_data[12]     System (rising)     NA             0.000       0.000             
+em_ddr_data[13]     System (rising)     NA             0.000       0.000             
+em_ddr_data[14]     System (rising)     NA             0.000       0.000             
+em_ddr_data[15]     System (rising)     NA             0.000       0.000             
+em_ddr_dqs[0]       System (rising)     NA             0.000       0.000             
+em_ddr_dqs[1]       System (rising)     NA             0.000       0.000             
+reset_n             System (rising)     NA             0.000       -1.030            
+=====================================================================================
+
+
+Output Ports: 
+
+Port                Starting                                   User           Arrival     Required          
+Name                Reference                                  Constraint     Time        Time         Slack
+                    Clock                                                                                   
+------------------------------------------------------------------------------------------------------------
+em_ddr_addr[0]      System (rising)                            NA             0.000       0.000             
+em_ddr_addr[1]      System (rising)                            NA             0.000       0.000             
+em_ddr_addr[2]      System (rising)                            NA             0.000       0.000             
+em_ddr_addr[3]      System (rising)                            NA             0.000       0.000             
+em_ddr_addr[4]      System (rising)                            NA             0.000       0.000             
+em_ddr_addr[5]      System (rising)                            NA             0.000       0.000             
+em_ddr_addr[6]      System (rising)                            NA             0.000       0.000             
+em_ddr_addr[7]      System (rising)                            NA             0.000       0.000             
+em_ddr_addr[8]      System (rising)                            NA             0.000       0.000             
+em_ddr_addr[9]      System (rising)                            NA             0.000       0.000             
+em_ddr_addr[10]     System (rising)                            NA             0.000       0.000             
+em_ddr_addr[11]     System (rising)                            NA             0.000       0.000             
+em_ddr_addr[12]     System (rising)                            NA             0.000       0.000             
+em_ddr_ba[0]        System (rising)                            NA             0.000       0.000             
+em_ddr_ba[1]        System (rising)                            NA             0.000       0.000             
+em_ddr_ba[2]        System (rising)                            NA             0.000       0.000             
+em_ddr_cas_n        System (rising)                            NA             0.000       0.000             
+em_ddr_cke[0]       System (rising)                            NA             0.000       0.000             
+em_ddr_clk[0]       System (rising)                            NA             0.000       0.000             
+em_ddr_cs_n[0]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[0]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[1]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[2]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[3]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[4]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[5]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[6]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[7]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[8]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[9]      System (rising)                            NA             0.000       0.000             
+em_ddr_data[10]     System (rising)                            NA             0.000       0.000             
+em_ddr_data[11]     System (rising)                            NA             0.000       0.000             
+em_ddr_data[12]     System (rising)                            NA             0.000       0.000             
+em_ddr_data[13]     System (rising)                            NA             0.000       0.000             
+em_ddr_data[14]     System (rising)                            NA             0.000       0.000             
+em_ddr_data[15]     System (rising)                            NA             0.000       0.000             
+em_ddr_dm[0]        System (rising)                            NA             2.288       0.000             
+em_ddr_dm[1]        System (rising)                            NA             2.288       0.000             
+em_ddr_dqs[0]       System (rising)                            NA             0.000       0.000             
+em_ddr_dqs[1]       System (rising)                            NA             0.000       0.000             
+em_ddr_odt[0]       System (rising)                            NA             0.000       0.000             
+em_ddr_ras_n        System (rising)                            NA             0.000       0.000             
+em_ddr_reset_n      System (rising)                            NA             2.288       0.000             
+em_ddr_we_n         System (rising)                            NA             0.000       0.000             
+oled[0]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.794       0.000             
+oled[1]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.768       0.000             
+oled[2]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.768       0.000             
+oled[3]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.768       0.000             
+oled[4]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             3.202       0.000             
+oled[5]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.825       0.000             
+oled[6]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             3.176       0.000             
+seg[0]              ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.828       0.000             
+seg[1]              ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.828       0.000             
+seg[2]              ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.828       0.000             
+seg[3]              ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.828       0.000             
+seg[4]              ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.828       0.000             
+seg[5]              ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.828       0.000             
+seg[6]              ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.737       0.000             
+seg[7]              ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.737       0.000             
+seg[8]              ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.737       0.000             
+seg[9]              ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.737       0.000             
+seg[10]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.737       0.000             
+seg[11]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.737       0.000             
+seg[12]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.737       0.000             
+seg[13]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.737       0.000             
+seg[14]             ddr3_pll|CLKOK_inferred_clock (rising)     NA             2.737       0.000             
+============================================================================================================
+
+
+##### END OF TIMING REPORT #####]
+

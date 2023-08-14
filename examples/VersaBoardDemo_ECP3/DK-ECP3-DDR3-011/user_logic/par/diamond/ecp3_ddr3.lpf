@@ -1,0 +1,209 @@
+COMMERCIAL;
+BLOCK RESETPATHS ;
+BLOCK ASYNCPATHS ;
+##########################################################################
+# Frequency Declerations
+##########################################################################
+FREQUENCY NET "clk_in_c" 100.000000 MHz ;
+FREQUENCY NET "sclk" 200.000000 MHz PAR_ADJ 40.000000 ;
+FREQUENCY NET "*clocking/clkos" 400.000000 MHz PAR_ADJ 80.000000 ;
+FREQUENCY NET "*sclk2x" 400.000000 MHz PAR_ADJ 80.000000 ;
+##########################################################################
+# Block, Maxdelay, Multicycle preferences
+##########################################################################
+BLOCK PATH FROM PORT "reset_*" ;
+BLOCK NET "*read_pulse_tap*" ;
+MAXDELAY NET "*U1_ddr3_sdram_mem_io_top/ddr3_read_data_out*" 4.500000 nS ;
+MAXDELAY NET "*U1_ddr3_sdram_mem_io_top/datavalid_o_*" 4.400000 nS ;
+MULTICYCLE FROM CELL "*/uddcntln" 2.000000 X ;
+#Half SCLK clock path
+MAXDELAY TO CELL "*/dq_read_o_n0*" 5.000000 ns ;
+#sclk(-)  or sclk(+) to sclk2x(+)
+MAXDELAY TO CELL "*/dq_read_o_t2_sclk*" 2.500000 ns ;
+#Half SCLK2x clock path
+MAXDELAY TO CELL "*/dq_read_o_n00*" 2.500000 ns ;
+#Mux input and output paths
+MAXDELAY NET "*/dq_read_o_p01*" 0.550000 nS ;
+MAXDELAY NET "*/dq_read_o_n00*" 0.550000 nS ;
+MAXDELAY NET "*/dqs_read*" 0.615000 nS ;
+##########################################################################
+# CSM logic preferences
+##########################################################################
+BLOCK PATH FROM CLKNET "clk_in_c" TO CLKNET "sclk" ;
+BLOCK PATH FROM CLKNET "clk_in_c" TO CLKNET "*clocking/clkos" ;
+BLOCK PATH FROM CLKNET "sclk" TO CLKNET "clk_in_c" ;
+BLOCK PATH FROM CLKNET "*sclk2x" TO CLKNET "clk_in_c" ;
+BLOCK PATH FROM CLKNET "clk_in_c" TO CLKNET "*eclk" ;
+BLOCK PATH FROM CLKNET "*clocking/clkos" TO CLKNET "*eclk" ;
+BLOCK PATH FROM CLKNET "*clocking/clkos" TO CLKNET "sclk" ;
+BLOCK PATH FROM CLKNET "*sclk2x" TO CLKNET "*clocking/clkos" ;
+MAXDELAY NET "*clocking/pll_phase*" 2.500000 nS ;
+MAXDELAY NET "*dqclk1bar_ff" 0.650000 nS ;
+MAXDELAY NET "*eclk" 1.200000 nS ;
+MAXDELAY NET "*clocking/stop" 0.800000 nS ;
+MAXDELAY NET "*clocking/clkos" 1.100000 nS ;
+##########################################################################
+# IO Type Declarations
+##########################################################################
+IOBUF ALLPORTS IO_TYPE=LVCMOS33 ;
+DEFINE PORT GROUP "EM_DDR_DQS_GRP" "em_ddr_dqs*" ;
+IOBUF GROUP "EM_DDR_DQS_GRP" IO_TYPE=SSTL15D EQ_CAL=0 ;
+DEFINE PORT GROUP "EM_DDR_DATA_GRP" "em_ddr_data*" ;
+IOBUF GROUP "EM_DDR_DATA_GRP" IO_TYPE=SSTL15 ;
+DEFINE PORT GROUP "EM_DDR_DM_GRP" "em_ddr_dm[*" ;
+IOBUF GROUP "EM_DDR_DM_GRP" IO_TYPE=SSTL15 ;
+DEFINE PORT GROUP "EM_DDR_ADDR_GRP" "em_ddr_addr[*" ;
+IOBUF GROUP "EM_DDR_ADDR_GRP" IO_TYPE=SSTL15 ;
+DEFINE PORT GROUP "EM_DDR_BA_GRP" "em_ddr_ba[*" ;
+IOBUF GROUP "EM_DDR_BA_GRP" IO_TYPE=SSTL15 ;
+IOBUF PORT "em_ddr_ras_n" IO_TYPE=SSTL15 ;
+IOBUF PORT "em_ddr_cas_n" IO_TYPE=SSTL15 ;
+IOBUF PORT "em_ddr_we_n" IO_TYPE=SSTL15 ;
+DEFINE PORT GROUP "EM_DDR_CS_GRP" "em_ddr_cs_n[*" ;
+IOBUF GROUP "EM_DDR_CS_GRP" IO_TYPE=SSTL15 ;
+DEFINE PORT GROUP "EM_DDR_ODT_GRP" "em_ddr_odt[*" ;
+IOBUF GROUP "EM_DDR_ODT_GRP" IO_TYPE=SSTL15 ;
+DEFINE PORT GROUP "EM_DDR_CKE_GRP" "em_ddr_cke[*" ;
+IOBUF GROUP "EM_DDR_CKE_GRP" IO_TYPE=SSTL15 ;
+DEFINE PORT GROUP "EM_DDR_CLK_GRP" "em_ddr_clk[*" ;
+IOBUF GROUP "EM_DDR_CLK_GRP" IO_TYPE=SSTL15D ;
+IOBUF PORT "clk_in" IO_TYPE=SSTL15D PULLMODE=NONE DIFFRESISTOR=OFF ;
+IOBUF PORT "em_ddr_reset_n" IO_TYPE=LVCMOS15 ;
+##########################################################################
+## LOCATE FOR CSM logic
+##########################################################################
+LOCATE COMP "clk_in"  SITE "L5" ;
+LOCATE COMP "u_ddr3_sdram_mem_top/clocking/pll/PLLInst_0" SITE "PLL_R35C5" ;
+LOCATE COMP "u_ddr3_sdram_mem_top/clocking/sync"          SITE "LECLKSYNC2" ;
+LOCATE PGROUP "u_ddr3_sdram_mem_top/clocking/clk_phase/phase_ff_0_inst/clk_phase0"    SITE "R24C5D" ;
+LOCATE PGROUP "u_ddr3_sdram_mem_top/clocking/clk_phase/dqclk1bar_ff_inst/clk_phase1a" SITE "R34C2D" ;
+LOCATE PGROUP "u_ddr3_sdram_mem_top/clocking/clk_phase/phase_ff_1_inst/clk_phase1b"   SITE "R34C2D" ;
+LOCATE PGROUP "u_ddr3_sdram_mem_top/clocking/clk_stop/clk_stop"                       SITE "R34C2D" ;
+##########################################################################
+### DIMM ADDR/CMD/CTRL/CLK
+##########################################################################
+LOCATE COMP "em_ddr_addr[0]"  SITE "C8" ;
+LOCATE COMP "em_ddr_addr[1]"  SITE "C7" ;
+LOCATE COMP "em_ddr_addr[2]"  SITE "B7" ;
+LOCATE COMP "em_ddr_addr[3]"  SITE "D8" ;
+LOCATE COMP "em_ddr_addr[4]"  SITE "F9" ;
+LOCATE COMP "em_ddr_addr[5]"  SITE "E9" ;
+LOCATE COMP "em_ddr_addr[6]"  SITE "A3" ;
+LOCATE COMP "em_ddr_addr[7]"  SITE "D7" ;
+LOCATE COMP "em_ddr_addr[8]"  SITE "A7" ;
+LOCATE COMP "em_ddr_addr[9]"  SITE "B8" ;
+LOCATE COMP "em_ddr_addr[10]" SITE "C9" ;
+LOCATE COMP "em_ddr_addr[11]" SITE "C10" ;
+LOCATE COMP "em_ddr_addr[12]" SITE "F7" ;
+LOCATE COMP "em_ddr_clk[0]"   SITE "K4" ;
+LOCATE COMP "em_ddr_cke[0]"   SITE "G8" ;
+LOCATE COMP "em_ddr_ba[0]"    SITE "B4" ;
+LOCATE COMP "em_ddr_ba[1]"    SITE "E6" ;
+LOCATE COMP "em_ddr_ba[2]"    SITE "D5" ;
+LOCATE COMP "em_ddr_ras_n"   SITE "A6" ;
+LOCATE COMP "em_ddr_cas_n"   SITE "A4" ;
+LOCATE COMP "em_ddr_we_n"    SITE "D6" ;
+LOCATE COMP "em_ddr_cs_n[0]"  SITE "C6" ;
+LOCATE COMP "em_ddr_odt[0]"   SITE "E7" ;
+LOCATE COMP "em_ddr_reset_n" SITE "D4" ;
+##########################################################################
+# DIMM DQ, DQS, DM
+##########################################################################
+LOCATE COMP "em_ddr_data[0]"  SITE "E5" ;
+LOCATE COMP "em_ddr_data[1]"  SITE "E4" ;
+LOCATE COMP "em_ddr_data[2]"  SITE "D2" ;
+LOCATE COMP "em_ddr_data[3]"  SITE "D1" ;
+LOCATE COMP "em_ddr_data[4]"  SITE "C2" ;
+LOCATE COMP "em_ddr_data[5]"  SITE "B2" ;
+LOCATE COMP "em_ddr_data[6]"  SITE "G5" ;
+LOCATE COMP "em_ddr_data[7]"  SITE "G4" ;
+LOCATE COMP "em_ddr_data[8]"  SITE "G2" ;
+LOCATE COMP "em_ddr_data[9]"  SITE "F1" ;
+LOCATE COMP "em_ddr_data[10]" SITE "H4" ;
+LOCATE COMP "em_ddr_data[11]" SITE "E2" ;
+LOCATE COMP "em_ddr_data[12]" SITE "J4" ;
+LOCATE COMP "em_ddr_data[13]" SITE "B1" ;
+LOCATE COMP "em_ddr_data[14]" SITE "C1" ;
+LOCATE COMP "em_ddr_data[15]" SITE "G3" ;
+LOCATE COMP "em_ddr_dm[0]"    SITE "E3" ;
+LOCATE COMP "em_ddr_dm[1]"    SITE "F3" ;
+LOCATE COMP "em_ddr_dqs[0]"   SITE "F5" ;
+LOCATE COMP "em_ddr_dqs[1]"   SITE "H5" ;
+#########################
+## READ PULSE CONSTRAINTS
+#########################
+LOCATE PGROUP "u_ddr3_sdram_mem_top/U1_ddr3core/U1_ddr3_sdram_mem_io_top/read_pulse_delay_0/read_pulse_delay_0" SITE "R13C2D" ;
+LOCATE PGROUP "u_ddr3_sdram_mem_top/U1_ddr3core/U1_ddr3_sdram_mem_io_top/read_pulse_delay_1/read_pulse_delay_1" SITE "R22C2D" ;
+###############################################################################################
+## DEMO LOGIC
+###############################################################################################
+LOCATE COMP "reset_n" SITE "A21" ;
+LOCATE COMP "dip_sw[0]" SITE "J7" ;
+LOCATE COMP "dip_sw[1]" SITE "J6" ;
+LOCATE COMP "dip_sw[2]" SITE "H2" ;
+LOCATE COMP "dip_sw[3]" SITE "H3" ;
+LOCATE COMP "dip_sw[4]" SITE "J3" ;
+LOCATE COMP "dip_sw[5]" SITE "K3" ;
+#LOCATE COMP "dip_sw[6]" SITE "J2" ;
+#LOCATE COMP "dip_sw[7]" SITE "J1" ;
+LOCATE COMP "oled[0]" SITE "Y20" ;
+LOCATE COMP "oled[1]" SITE "AA21" ;
+LOCATE COMP "oled[2]" SITE "U18" ;
+LOCATE COMP "oled[3]" SITE "U19" ;
+LOCATE COMP "oled[4]" SITE "W19" ;
+LOCATE COMP "oled[5]" SITE "AB20" ;
+LOCATE COMP "oled[6]" SITE "AA20" ;
+#LOCATE COMP "oled[7]" SITE "V19" ;
+
+LOCATE COMP "seg[0]"  SITE "V6" ; 
+LOCATE COMP "seg[1]"  SITE "U7" ; 
+LOCATE COMP "seg[2]"  SITE "Y6" ; 
+LOCATE COMP "seg[3]"  SITE "AA6" ;
+LOCATE COMP "seg[4]"  SITE "U8" ; 
+LOCATE COMP "seg[5]"  SITE "T8" ; 
+LOCATE COMP "seg[6]"  SITE "T9" ;  
+LOCATE COMP "seg[7]"  SITE "AB3" ; 
+LOCATE COMP "seg[8]"  SITE "AB4" ; 
+LOCATE COMP "seg[9]"  SITE "W4" ;  
+LOCATE COMP "seg[10]" SITE "Y5" ;  
+LOCATE COMP "seg[11]" SITE "AA4" ; 
+LOCATE COMP "seg[12]" SITE "AA5" ; 
+LOCATE COMP "seg[13]" SITE "R9" ;  
+LOCATE COMP "seg[14]" SITE "W5" ;
+
+###########################################################################
+# IO Type Declarations
+##########################################################################
+IOBUF PORT "clk_in" IO_TYPE=LVDS25 PULLMODE=NONE DIFFRESISTOR=OFF ;
+IOBUF PORT "reset_n" IO_TYPE=LVCMOS33;
+IOBUF PORT "dip_sw[0]" IO_TYPE=LVCMOS15 ;
+IOBUF PORT "dip_sw[1]" IO_TYPE=LVCMOS15 ;
+IOBUF PORT "dip_sw[2]" IO_TYPE=LVCMOS15 ;
+IOBUF PORT "dip_sw[3]" IO_TYPE=LVCMOS15 ;
+IOBUF PORT "dip_sw[4]" IO_TYPE=LVCMOS15 ;
+IOBUF PORT "dip_sw[5]" IO_TYPE=LVCMOS15 ;
+#IOBUF PORT "dip_sw[6]" IO_TYPE=LVCMOS15 ;
+#IOBUF PORT "dip_sw[7]" IO_TYPE=LVCMOS15 ;
+IOBUF PORT "oled[0]" IO_TYPE=LVCMOS33;
+IOBUF PORT "oled[1]" IO_TYPE=LVCMOS33;
+IOBUF PORT "oled[2]" IO_TYPE=LVCMOS33;
+IOBUF PORT "oled[3]" IO_TYPE=LVCMOS33;
+IOBUF PORT "oled[4]" IO_TYPE=LVCMOS33;
+IOBUF PORT "oled[5]" IO_TYPE=LVCMOS33;
+IOBUF PORT "oled[6]" IO_TYPE=LVCMOS33;
+#IOBUF PORT "oled[7]" IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[0]"  IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[1]"  IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[2]"  IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[3]"  IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[4]"  IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[5]"  IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[6]"  IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[7]"  IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[8]"  IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[9]"  IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[10]" IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[11]" IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[12]" IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[13]" IO_TYPE=LVCMOS33;
+IOBUF PORT "seg[14]" IO_TYPE=LVCMOS33;

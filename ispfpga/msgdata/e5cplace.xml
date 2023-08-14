@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messageFile name="e5cplace" fid="6113" alias="e5cplace" vendor="Lattice Semiconductor Corporation" stamp="Date and Time">
+  <description text="this message file contains message for [name] package"/>
+  <!-- owner of this message file -->
+  <owner text="owner" />
+  <messages>
+
+	<msg uid="1001" type="Error" text="More than 4 $$s instances found in netlist.\n"/>
+	<msg uid="1002" type="Error" text="Signal $$s has $$d DCCs on it, maximally 4 is allowed.\n"/>
+	<msg uid="1003" type="Error" text="DCC comp &quot;$$s&quot; has no input signal.  Please correct the design."/>
+	<msg uid="1004" type="Error" text="PCS comp '$$s' cannot be locked at site '$$s' due to regional clock conflict as follows.\n"/>
+	<msg uid="1005" type="Error" text="PCS '$$s' cannot be locked at site '$$s' due to unbonded APIOs in package '$$s'.\n"/>
+	<msg uid="1006" type="Error" text="Fail to place Multi-Quad PCSs.\n"/>
+	<msg uid="1007" type="Error" text="Unable to place PCS comp '$$s'; no legal site available.\n"/>
+	<msg uid="1008" type="Error" text="Invalid NC_NODE '$$s' connecting PCS and APIO site '$$s'.\n"/>
+	<msg uid="1009" type="Error" text="failed to place PCS comp '$$s' due to regional clock constraints as follows.\n"/>
+	<msg uid="1010" type="Error" text="PCS comp $$s driving multiple PCS thru PCS_REFCLK_TO_NQ pin.\n"/>
+	<msg uid="1011" type="Error" text="PIO site &quot;$$s / $$s&quot; cannot be used as a DQS pin."/>
+	<msg uid="1012" type="Error" text="DQFBUF site &quot;$$s&quot; cannot be used for any DDR group."/>
+	<msg uid="1013" type="Error" text="PIO site &quot;$$s/$$s&quot; is not a DQS pin."/>
+	<msg uid="1014" type="Error" text="DQS data pad &quot;$$s&quot; uses site &quot;$$s/$$s&quot;, which is out of range."/>
+	<msg uid="1015" type="Error" text="The design cannot be placed due to incompatible Vccio=&quot;$$s&quot; (for PIO comp &quot;$$s&quot;) vs Vccio=&quot;$$s&quot; (for PIO comp &quot;$$s&quot; in the same DDR bus) in the same I/O bank."/>
+	<msg uid="1016" type="Warning" level="2" text="The DQS strobe comp &quot;$$s&quot; of a DDR bus uses &quot;$$s&quot; instead of SSTL25/SSTL18/SSTL15 as its sysIO signaling standard."/>
+	<msg uid="1017" type="Warning" level="2" text="A DQ data PIO comp &quot;$$s&quot; of a DDR bus (with DQS strobe comp &quot;$$s&quot;) uses &quot;$$s&quot; instead of SSTL25/SSTL18/SSTL15 as its sysIO signaling standard."/>
+	<msg uid="1018" type="Error" text="The DQS strobe &quot;$$s&quot; uses sysIO type &quot;$$s&quot;, while the DQS data pad &quot;$$s&quot; uses a different sysIO type &quot;$$s&quot;, which is not allowed."/>
+	<msg uid="1019" type="Error" text="Dangling signal &quot;$$s&quot; is driving $$s input of IOLOGIC comp &quot;$$s&quot;."/>
+	<msg uid="1020" type="Error" text="The $$s input of IOLOGIC comp &quot;$$s&quot; (signal &quot;$$s&quot;) is driven by comp &quot;$$s&quot;, which is not a DQSBUF."/>
+	<msg uid="1021" type="Error" text="The $$s input of IOLOGIC comp &quot;$$s&quot; (signal &quot;$$s&quot;) is not driven by the $$s output of DQSBUF comp &quot;$$s&quot;."/>
+	<msg uid="1022" type="Error" text="The $$s output of DQSBUF comp &quot;$$s&quot; (signal &quot;$$s&quot;) is driving comp &quot;$$s&quot;, which is not an IOLOGIC."/>
+	<msg uid="1023" type="Error" text="The $$s output of DQSBUF comp &quot;$$s&quot; (signal &quot;$$s&quot;) is not driving the $$s input of IOLOGIC comp &quot;$$s&quot;."/>
+	<msg uid="1024" type="Warning" level="2" text="The ECLKO output of ECLKSYNC comp &quot;$$s&quot; is driving a non-ECLK load comp &quot;$$s&quot;.  Signal &quot;$$s&quot; may be hard to route."/>
+	<msg uid="1025" type="Error" text="The number of signals that drive the ECLKDQSR input of IDDRs in this design is $$d, which exceeds the device limit of 3 (because these signals have to use ECLK2)."/>
+	<msg uid="1026" type="Status" text="  -- signal [$$d]: &quot;$$s&quot;.\n"/>
+	<msg uid="1027" type="Error" text="ECP3 only allows one ECLK per side (i.e. ECLK2) to drive the ECLKDQSR input of IOLOGIC directly."/>
+	<msg uid="1028" type="Error" text="Illegal DDR connections found:  The SCLK inputs of DQSBUF comp &quot;$$s&quot; and DQSIOL comp &quot;$$s&quot; of the same DDR group are either driven by different signals, or they are the same signal but with different polarity.  Per ECP3 architecture, they have to come from the same signal and have the same polarity, otherwise the design is unrouteable."/>
+	<msg uid="1029" type="Error" text="The number of ECLK signals that drive the CLK input of DQSDLL comps in this design is $$d, which exceeds the device limit of 2 (because these signals have to use ECLK1 on left/right sides)."/>
+	<msg uid="1030" type="Status" text="  -- [$$d] Signal &quot;$$s&quot; ==&gt; DQSDLL comp &quot;$$s&quot;.\n"/>
+	<msg uid="1031" type="Error" text="Signal &quot;$$s&quot; drives the DQSI input of DQSBUF comps &quot;$$s&quot; and &quot;$$s&quot; at the same time, which is illegal for ECP3 devices.  Please correct the design."/>
+	<msg uid="1032" type="Error" text="The design has an illegal bi-directional IDDRX1/ODDRX1 (PIO comp &quot;$$s&quot;).  For more details, please contact Lattice Semiconductor technical support at 1-800-LATTICE, or 503-268-8001, or techsupport@latticesemi.com."/>
+	<msg uid="1033" type="Error" text="PIO comp &quot;$$s&quot; has an illegal standalone generic ODDRX1 on its IOLOGIC side (i.e. with its SCLK/DQCLK1 tied together)."/>
+	<msg uid="1034" type="Status" text="Please check your design carefully."/>
+	<msg uid="1035" type="Error" text="DDR bus with $$s comp &quot;$$s&quot; has $$d edge clocks, which exceeds the device limit (maximum 2)."/>
+	<msg uid="1036" type="Status" text="ECLK signal [$$d]: &quot;$$s\"/>
+	<msg uid="1037" type="Warning" level="2" text="The DQS bus with $$s comp &quot;$$s&quot; is not assigned yet."/>
+	<msg uid="1038" type="Error" text="DDR group (with $$s comp &quot;$$s&quot;) has illegal DDR type combination &quot;$$s+ODDRX1(gen)&quot;."/>
+	<msg uid="1039" type="Error" text="Unable to place DQSBUF comp &quot;$$s&quot;."/>
+	<msg uid="1040" type="Status" text="&gt;&gt;&gt; [iter:$$d, iter2:$$d] placed DQ PIO comp &quot;$$s&quot; on site &quot;$$s/$$s&quot;."/>
+	<msg uid="1041" type="Warning" level="2" text="Initial placement of DQS data pad $$s is unsuccessful."/>
+	<msg uid="1042" type="Error" text="Could not find a valid range for PIO comp &quot;$$s&quot;."/>
+	<msg uid="1043" type="Warning" level="2" text="Initial placement of DQS strobe &quot;$$s&quot; is unsuccessful."/>
+	<msg uid="1044" type="Error" text="DDR assignment finished unsuccessfully."/>
+	<msg uid="1045" type="Error" text="INTERROR: DSP comp $$s has been processed"/>
+	<msg uid="1046" type="Error" text="DSP comp $$s appears in multiple DSP groups\n"/>
+	<msg uid="1047" type="Error" text="\nInitial placement of DSP components failed due to insufficient DSP blocks.\n"/>
+	<msg uid="1048" type="Error" text="comp '$$s': Loop found in forming shiftchain for DSP\n"/>
+	<msg uid="1049" type="Error" text="illegal locking of DSP comps as follows.\n"/>
+	<msg uid="1050" type="Error" text="INTERROR: DSP comp '$$s' with site=0\n"/>
+	<msg uid="1051" type="Warning" level="2" text="&gt;&gt;&gt; P2E signal &quot;$$s&quot; is going to be assigned in another bank &quot;$$d&quot;."/>
+	<msg uid="1052" type="Status" text="//// it=$$d ==&gt; ECLK &quot;$$s&quot;, PIO driver site: &quot;$$s/$$s&quot;."/>
+	<msg uid="1053" type="Warning" level="2" text="Edge clock signal &quot;$$s&quot; (driven by comp &quot;$$s&quot;) has to use a CIB (i.e. general routing); therefore, it may suffer from excessive delay or skew."/>
+	<msg uid="1054" type="Warning" level="2" text="Cannot place comp &quot;$$s&quot; on site &quot;$$s&quot; because they are incompatible."/>
+	<msg uid="1055" type="Warning" level="2" text="Cannot place comp &quot;$$s&quot; on site &quot;$$s&quot; because this comp has been placed on site &quot;$$s&quot; already."/>
+	<msg uid="1056" type="Warning" level="2" text="Cannot place comp &quot;$$s&quot; on site &quot;$$s&quot; because this site has been occupied by another comp &quot;$$s&quot;."/>
+	<msg uid="1057" type="Warning" level="2" text="Cannot place comp &quot;$$s&quot; on site &quot;$$s&quot; because this site has been prohibited."/>
+	<msg uid="1058" type="Warning" level="2" text="Cannot place comp &quot;$$s&quot; on site &quot;$$s&quot;."/>
+	<msg uid="1059" type="Warning" level="2" text="Cannot place comp &quot;$$s&quot; on site &quot;$$s / $$s&quot; because this site has been booked by a quadrant clock."/>
+	<msg uid="1060" type="Warning" level="2" text="Cannot place the eclk driver comp &quot;$$s&quot; on PIO site &quot;$$s / $$s&quot; [site is out of PIO comp's PGROUP range]."/>
+	<msg uid="1061" type="Warning" level="2" text="Cannot place the eclk driver comp &quot;$$s&quot; on PIO site &quot;$$s / $$s&quot; [I/O banking rule conflict]."/>
+	<msg uid="1062" type="Warning" level="2" text="Cannot place the eclk driver comp &quot;$$s&quot; on PIO site &quot;$$s / $$s&quot; [potential I/O banking rule conflict]."/>
+	<msg uid="1063" type="Warning" level="2" text="Cannot place the eclk driver comp &quot;$$s&quot; on PLL site &quot;$$s&quot; [dedicated PLL inputs should be used]."/>
+	<msg uid="1064" type="Warning" level="2" text="ECLK &quot;$$s&quot;, driver &quot;$$s&quot;: site &quot;$$s&quot;, pin &quot;$$s&quot; does not directly drive an ECLK."/>
+	<msg uid="1065" type="Warning" level="2" text="B2E clock signal &quot;$$s&quot;: cannot use site &quot;$$s&quot; for driver comp &quot;$$s&quot; [due to B2E connectivity]."/>
+	<msg uid="1066" type="Warning" level="2" text="ECLK &quot;$$s&quot;, driver &quot;$$s&quot;: cannot use site &quot;$$s&quot; because it has already been assigned to something else."/>
+	<msg uid="1067" type="Warning" level="2" text="ECLK &quot;$$s&quot;, driver &quot;$$s&quot;: site &quot;$$s&quot; does not drive &quot;$$s&quot; directly."/>
+	<msg uid="1068" type="Warning" level="2" text="ECLK &quot;$$s&quot;, driver &quot;$$s&quot;: cannot use site &quot;$$s&quot; because &quot;$$s&quot; has been assigned to signal &quot;$$s&quot;."/>
+	<msg uid="1069" type="Warning" level="2" text="Signal &quot;$$s&quot; cannot be assigned to use &quot;$$s&quot;."/>
+	<msg uid="1070" type="Warning" level="2" text="Cannot place the eclk driver comp &quot;$$s&quot; on site &quot;$$s / $$s&quot; because I/O placement failed for this comp."/>
+	<msg uid="1071" type="Warning" level="2" text="Cannot use CIB &quot;$$d&quot; for ECLK &quot;$$s&quot; (driver comp &quot;$$s&quot;) because it has been used already."/>
+	<msg uid="1072" type="Warning" level="2" text="Cannot use CIB &quot;$$d&quot; for ECLK &quot;$$s&quot; (driver comp &quot;$$s&quot;) because this site does not drive &quot;$$s&quot;."/>
+	<msg uid="1073" type="Warning" level="2" text="Cannot use CIB &quot;$$d&quot; for ECLK &quot;$$s&quot; (driver comp &quot;$$s&quot;) because &quot;$$s&quot; has been used by signal &quot;$$s&quot;."/>
+	<msg uid="1074" type="Status" text=" "/>
+	<msg uid="1075" type="Status" text="*** ECLK signal &quot;$$s&quot; ==&gt; &quot;$$s&quot; (ECLK index: $$d)"/>
+	<msg uid="1076" type="Warning" level="2" text="ECLKSYNC comp &quot;$$s&quot; drives edge clock &quot;$$s&quot;; however, the ECLKI input of this ECLKSYNC comp is dangling.  Please check your design carefully."/>
+	<msg uid="1077" type="Warning" level="2" text="Cannot find ECLKSYNC site for &quot;$$s&quot;."/>
+	<msg uid="1078" type="Warning" level="2" text="Failed to assign ECLK to signal &quot;$$s&quot;."/>
+	<msg uid="1079" type="Warning" level="2" text="Edge clock signal &quot;$$s&quot;: PIO driver comp &quot;$$s&quot; will be placed along with other PIO comps."/>
+	<msg uid="1080" type="Warning" level="2" text="Edge clock signal &quot;$$s&quot;: driver comp &quot;$$s&quot; cannot be placed."/>
+	<msg uid="1081" type="Error" text="The number of Primary2Edge signals is $$d, which exceeds maximum of $$d."/>
+	<msg uid="1082" type="Warning" level="2" text="Some of the load comps of ECLK &quot;$$s&quot; are locked to an invalid I/O bank &quot;$$d&quot;.  The PRIMARY2EDGE preference will be ignored."/>
+	<msg uid="1083" type="Warning" level="2" text="ECLK &quot;$$s&quot; will not use PRIMARY2EDGE because all its load comps are on the same side of the device."/>
+	<msg uid="1084" type="Warning" level="2" text="ECLK signal &quot;$$s&quot; cannot be fully assigned to use PRIMARY2EDGE, therefore it may suffer from large skew."/>
+	<msg uid="1085" type="Status" text="&gt;&gt;&gt; P2E clock: &quot;$$s&quot; ==&gt; ECLK index: $$d, CIB idx: $$d"/>
+	<msg uid="1086" type="Warning" level="2" text="ECLK signal &quot;$$s&quot; cannot be fully assigned to use PRIMARY2EDGE, therefore they may suffer from large skew."/>
+	<msg uid="1087" type="Warning" level="2" text="ECLK signal &quot;$$s&quot; cannot be assigned to PRIMARY2EDGE due to limited # of resources available."/>
+	<msg uid="1088" type="Error" text="According to its connectivity, PLL comp &quot;$$s&quot; has to be placed on PLL site &quot;$$s&quot;; however, it is impossible because this site is $$s$$s."/>
+	<msg uid="1089" type="Warning" level="2" text="ECLK load PIO comp &quot;$$s&quot; has been placed on I/O bank $$d, which is inconsistent with the assignment of its ECLK signal &quot;$$s&quot;."/>
+	<msg uid="1090" type="Warning" level="2" text="User preference on ECLK load comp &quot;$$s&quot; is inconsistent with the assignment of its ECLK signal &quot;$$s&quot;."/>
+	<msg uid="1091" type="Warning" level="2" text="PIO comp &quot;$$s&quot; has conflict requirements between PIO PGROUP range (from &quot;$$s/$$s&quot; to &quot;$$s/$$s&quot;) and ECLK assignment (ECLK &quot;$$s&quot; on the $$s side)."/>
+	<msg uid="1092" type="Warning" level="2" text="PIO comp &quot;$$s&quot; has conflict requirements between PIO PGROUP range (from &quot;$$s/$$s&quot; to &quot;$$s/$$s&quot;) and ECLK assignment (ECLK &quot;$$s&quot; from bank $$d to $$d)."/>
+	<msg uid="1093" type="Error" text="Edge clock signal &quot;$$s&quot; probably has not been assigned yet."/>
+	<msg uid="1094" type="Warning" level="2" text="IOLOGIC comp &quot;$$s&quot; (driven by ECLK signal &quot;$$s&quot;) cannot be placed on its optimal site, therefore general routing has to be used to route from the ECLK to this comp."/>
+	<msg uid="1095" type="Status" text="// check_and_place_gddr_eclk() - bank=$$d, eclk_idx=$$d: eclk_sig=&quot;$$s\"/>
+	<msg uid="1096" type="Status" text="// + drv_comp=&quot;$$s&quot;, drv_site=&quot;$$s/$$s&quot; [bank $$d]"/>
+	<msg uid="1097" type="Status" text="// + drv_comp=&quot;$$s&quot;, drv_site=&quot;$$s\"/>
+	<msg uid="1098" type="Status" text="// + drv_idx=$$d"/>
+	<msg uid="1099" type="Warning" level="2" text="Unable to assign signal &quot;$$s&quot; as an ECLK on the side of I/O bank $$d."/>
+	<msg uid="1100" type="Warning" level="2" text="Unable to assign signal &quot;$$s&quot; as an ECLK."/>
+	<msg uid="1101" type="Warning" level="2" text="Unsupported PRIMARY2EDGE preference for clock signal &quot;$$s&quot; will be ignored."/>
+	<msg uid="1102" type="Error" text="Invalid bank # &quot;$$d&quot; specified in BANK VCCIO preference."/>
+	<msg uid="1103" type="Error" text="Violation of BANK VCCIO preference at bank $$d"/>
+	<msg uid="1104" type="Status" text="&gt;&gt;&gt; init_place_piopgroup(): Placed PIO PGROUP comp &quot;$$s&quot; on &quot;$$s/$$s&quot;."/>
+	<msg uid="1105" type="Error" text="init_place_piopgroup(): Failed to place PIO PGROUP comp &quot;$$s&quot;."/>
+	<msg uid="1106" type="Status" text="*** I/O bank info ***"/>
+	<msg uid="1107" type="Status" text="*** End of I/O bank info ***"/>
+	<msg uid="1108" type="Status" text="//// iter=$$d: bank=$$d, I/O group=$$x, # of assigned / placed=$$d / $$d"/>
+	<msg uid="1109" type="Error" text="Signal &quot;$$s&quot; (driven by PCS comp &quot;$$s&quot;) cannot drive DCS input."/>
+	<msg uid="1110" type="Error" text="DCC comp &quot;$$s&quot; is not placed yet."/>
+	<msg uid="1111" type="Error" text="Signal &quot;$$s&quot; is driven by $$d DCC comps.  Only $$d is allowed."/>
+	<msg uid="1112" type="Error" text="$$s"/>
+	<msg uid="1113" type="Error" text="Illegal locking of DSP comp $$s at $$s; DSP group is out of chip boundary."/>
+
+	</messages>
+</messageFile>

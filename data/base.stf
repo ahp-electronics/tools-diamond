@@ -1,0 +1,3402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file defines all properties of FPGA devices -->
+<!-- Property,ProertyUI,PropertyUISet can be override in leaf node when it has same name -->
+<StrategyConfig parent="baseui.stf" version="1.0" >
+
+<!-- *************************************************************** -->
+<!-- *****************************  Property  *************************** -->
+<!-- ************************************************`*************** -->
+<!-- property type : int,double,bool,string,list,file,multifile -->
+<!-- property projectlevel : 0=>normal 1=>project -->
+<!-- property obsolete:True, False -->
+
+<!-- *************************************************************** -->
+<!-- Synplify Property --> 
+<!-- *************************************************************** -->
+
+<!-- ispLEVER : _EdfFrequency=S,INT,Frequency (MHz),200 
+     SOF-129577, Crosslink, xp2, ecp3 family and ecp5 family - Fmax = 200MHz,
+     all Xo2 and above devices - Fmax = 100MHz -->
+<Property
+	name="PROP_SYN_EdfFrequency"
+	tclid="syn_frequency"
+	type="numstring"
+	cmdline="set_option -frequency %CurrentValue%"
+	reversedcmdline="set_option -frequency auto">
+	<Value
+		defaultValue="200"
+		lowerLimitValue="0"
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- ispLEVER : _EdfArea=S,BOOL,Area,FALSE -->
+<Property
+	name="PROP_SYN_EdfArea"
+	tclid="syn_area"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -frequency 1"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- ispLEVER : _EdfInConsFile=S,STRLIST,Input SDC Constraint File (.sdc) -->
+<Property
+	name="PROP_SYN_EdfInConsFile"
+	tclid=""
+	type="multifile"
+	cmdline='add_file -constraint "%CurrentValue@;@" "%"'
+	reversedcmdline=""
+	obsolete="True">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- _EdfInPrfWrite=S,BOOL,Output Preference File, FALSE 
+<Property
+	name="PROP_SYN_EdfInPrfWrite"
+	tclid="syn_out_prf_file"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -write_apr_constraint 1"/>
+		<Correlation driverValue="False" cmdline="set_option -write_apr_constraint 0"/>		
+	</CmdLines>
+</Property> -->
+
+<!-- Use LPF Created from SDC in Project -->
+<Property
+	name="PROP_SYN_UseLPF"
+	tclid="syn_use_lpf_file"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline=""/>		
+	</CmdLines>
+</Property>
+
+<!-- _EdfSymFSM=S,BOOL,FSM Encoding,TRUE -->
+<Property
+	name="PROP_SYN_EdfSymFSM"
+	tclid="syn_fsm_encoding"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -symbolic_fsm_compiler true"/>
+		<Correlation driverValue="False" cmdline="set_option -symbolic_fsm_compiler false"/>		
+	</CmdLines>
+</Property>
+
+<!--  _EdfInsertIO=S,SLIST,Disable IO Insertion -->
+<!--	_EdfInsertIOTBMD=S,LITEM,True,T -->
+<!-- 	_EdfInsertIOF=S,LITEM,False,F -->	
+<!--	_EdfInsertIOT=S,LITEM,True,T -->
+<Property
+	name="PROP_SYN_EdfInsertIO"
+	tclid="syn_disable_io_insert"
+	type="bool" >
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -disable_io_insertion true"/>
+		<Correlation driverValue="False" cmdline="set_option -disable_io_insertion false"/>
+	</CmdLines>
+</Property>
+	
+<!-- ispLEVER : _EdfOutNetForm=S,SLIST,Output Netlist Format, -->
+<!--			_EdfOutNetFormN=S,LITEM,None,N -->
+<!--			_EdfOutNetFormVlg=S,LITEM,Verilog,V -->
+<!--			_EdfOutNetFormVHDL=S,LITEM,VHDL,H -->
+<Property
+	name="PROP_SYN_EdfOutNetForm"
+	tclid="syn_output_netlist_format"
+	type="list">
+	<Value
+		defaultValue="None"
+	/>
+	<CmdLines>
+		<Correlation driverValue="None" cmdline=""/>
+		<Correlation driverValue="Verilog" cmdline="set_option -write_verilog true"/>
+		<Correlation driverValue="VHDL" cmdline="set_option -write_vhdl true"/>
+	</CmdLines>
+</Property>
+
+<!-- _EdfNumCritPath=S,Int,Number of Critical Paths,3 -->
+<Property
+	name="PROP_SYN_EdfNumCritPath"
+	tclid="syn_critical_path_num"
+	type="numstring"
+	cmdline="set_option -num_critical_paths %CurrentValue%"
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- _EdfPushTirstates=A,BOOL,Push Tristates,TRUE -->
+<Property
+	name="PROP_SYN_EdfPushTirstates"
+	tclid="syn_push_tristates"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -compiler_compatible 0"/>
+		<Correlation driverValue="False" cmdline="set_option -compiler_compatible 1"/>		
+	</CmdLines>
+</Property>
+
+<!--  _EdfRunRetiming=A,SLIST,Pipelining and Retiming, -->
+<!--  _EdfRunRetimingPipe=A,LITEM,Pipelining and Retiming,R -->
+<!--  _EdfRunRetimingOffPipeOn=A,LITEM,Pipelining Only,P -->
+<!--  _EdfRunRetimingNone=A,LITEM,None,N -->
+<Property
+	name="PROP_SYN_EdfRunRetiming"
+	tclid="syn_pipelining_retiming"
+	type="list">
+	<Value
+		defaultValue="Pipelining Only"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Pipelining and Retiming" cmdline="set_option -retiming true; set_option -pipe true"/>
+		<Correlation driverValue="Pipelining Only" cmdline="set_option -retiming false; set_option -pipe true"/>
+		<Correlation driverValue="None" cmdline="set_option -retiming false; set_option -pipe false"/>
+	</CmdLines>
+</Property>
+
+<!-- _EdfResSharing=A,BOOL,Resource Sharing,TRUE -->
+<Property
+	name="PROP_SYN_EdfResSharing"
+	tclid="syn_res_sharing"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -resource_sharing true"/>
+		<Correlation driverValue="False" cmdline="set_option -resource_sharing false"/>		
+	</CmdLines>
+</Property>
+
+<!-- _EdfFixGateClocks=A,INTRANGE,Fix Gated Clocks [0-3],3,0,3 
+<Property
+	name="PROP_SYN_EdfFixGateClocks"
+	tclid="syn_fix_gated_clks"
+	type="int"
+	cmdline="set_option -fixgatedclocks %CurrentValue%">
+	<Value
+		defaultValue="3"
+		lowerLimitValue="0"
+		upperLimitValue="3"
+	/>
+</Property> -->
+
+<!-- _EdfFixGeneratedClocks=A,INTRANGE,Fix Generated Clocks [0-3],3,0,3 
+<Property
+	name="PROP_SYN_EdfFixGeneratedClocks"
+	tclid="syn_fix_generated_clks"
+	type="int"
+	cmdline="set_option -fixgeneratedclocks %CurrentValue%">
+	<Value
+		defaultValue="3"
+		lowerLimitValue="0"
+		upperLimitValue="3"
+	/>
+</Property> -->
+
+<!-- Clock Conversion -->
+<Property
+	name="PROP_SYN_ClockConversion"
+	tclid="syn_fix_gated_and_generated_clks"
+	type="bool" >
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -fix_gated_and_generated_clocks 1"/>
+		<Correlation driverValue="False" cmdline="set_option -fix_gated_and_generated_clocks 0"/>		
+	</CmdLines>
+</Property>
+
+<!-- _EdfDefEnumEncode=A,SLIST,Default Enum Encoding, -->
+<!-- 	_EdfDefEnumEncodeDefault=A,LITEM,default,D -->
+<!--	_EdfDefEnumEncodeOnehot=A,LITEM,onehot,O -->
+<!--	_EdfDefEnumEncodeGray=A,LITEM,gray,G -->
+<!--	_EdfDefEnumEncodeSequential=A,LITEM,sequential,S -->
+<Property
+	name="PROP_SYN_EdfDefEnumEncode"
+	tclid="syn_default_enum_encode"
+	type="list">
+	<Value
+		defaultValue="Default"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Default" cmdline="set_option -default_enum_encoding default"/>
+		<Correlation driverValue="Onehot" cmdline="set_option -default_enum_encoding onehot"/>
+		<Correlation driverValue="Gray" cmdline="set_option -default_enum_encoding gray"/>
+		<Correlation driverValue="Sequential" cmdline="set_option -default_enum_encoding sequential"/>
+	</CmdLines>
+</Property>
+
+<!-- _EdfAllowDUPMod=A,BOOL,Allow Duplicate Modules,FALSE -->
+<Property
+	name="PROP_SYN_EdfAllowDUPMod"
+	tclid="syn_allow_dup_modules"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -dup true"/>
+		<Correlation driverValue="False" cmdline="set_option -dup false"/>		
+	</CmdLines>
+</Property>
+
+<!-- _EdfVerilogInput=A,SLIST,Verilog Input, -->
+<!--	_EdfVerilogInput_2001=A,LITEM,Verilog 2001,T -->
+<!--	_EdfVerilogInput_95=A,LITEM,Verilog 95,N -->
+<Property
+	name="PROP_SYN_EdfVerilogInput"
+	tclid="syn_vlog_input"
+	type="list">
+	<Value
+		defaultValue="Verilog 2001"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Verilog 2001" cmdline="set_option -vlog_std v2001"/>
+		<Correlation driverValue="Verilog 95" cmdline="set_option -vlog_std v95"/>
+		<Correlation driverValue="System Verilog" cmdline="set_option -vlog_std sysv"/>
+	</CmdLines>
+</Property>
+	
+<!-- _EdfUnconsClk=A,BOOL,Use Clock Period for Unconstrained I/O,TRUE -->
+<Property
+	name="PROP_SYN_EdfUnconsClk"
+	tclid="syn_use_clk_for_uncons_io"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -auto_constrain_io 1"/>
+		<Correlation driverValue="False" cmdline="set_option -auto_constrain_io 0"/>		
+	</CmdLines>
+</Property>
+	
+<!--	_EdfFanout=A,INT,Fanout Limit,100 -->
+<Property
+	name="PROP_SYN_EdfFanout"
+	tclid="syn_fanout_limit"
+	type="int"
+	cmdline="set_option -maxfan %CurrentValue%">
+	<Value
+		defaultValue="1000"
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- _EdfGSR=A,SLIST,Force GSR -->
+<!--	_EdfGSROff=A,LITEM,False,F -->
+<!--	_EdfGSRAuto=A,LITEM,Auto,A -->
+<!--	_EdfGSROn=A,LITEM,True,T -->
+<Property
+	name="PROP_SYN_EdfGSR"
+	tclid="syn_force_gsr"
+	type="list">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Auto" cmdline="set_option -force_gsr auto"/>
+		<Correlation driverValue="False" cmdline="set_option -force_gsr false"/>
+		<Correlation driverValue="True" cmdline="set_option -force_gsr true"/>
+	</CmdLines>
+</Property>
+
+<!-- _EdfNumStartEnd=A,INT,Number of Start/End Points,0 -->
+<Property
+	name="PROP_SYN_EdfNumStartEnd"
+	tclid="syn_start_end_pt_num"
+	type="numstring"
+	cmdline="set_option -num_startend_points %CurrentValue%"
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- _EdfArrangeVHDLFiles=A,BOOL,Arrange VHDL Files,FALSE -->
+<Property
+	name="PROP_SYN_EdfArrangeVHDLFiles"
+	tclid="syn_arrange_vhdl_files"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-fileorder"/>
+		<Correlation driverValue="False" cmdline=""/>		
+	</CmdLines>
+</Property>
+
+<!-- Update Compile Point Timing Data  -->
+<Property
+	name="PROP_SYN_UpdateCompilePtTimData"
+	tclid="syn_update_compile_pt_timing_data"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -update_models_cp 1"/>
+		<Correlation driverValue="False" cmdline="set_option -update_models_cp 0"/>		
+	</CmdLines>
+</Property>
+
+<!-- 2/15/2011 - Resolved Mixed Drivers -->
+<Property
+	name="PROP_SYN_ResolvedMixedDrivers"
+	tclid="syn_resolved_mixed_drivers"
+	type="bool" >
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -resolve_multiple_driver 1"/>
+		<Correlation driverValue="False" cmdline="set_option -resolve_multiple_driver 0"/>		
+	</CmdLines>
+</Property>
+
+<!-- 6/13/2012 - Edif Array Rename 
+<Property
+	name="PROP_SYN_EdifNames"
+	tclid="syn_edif_names"
+	type="list" >
+	<Value
+		defaultValue="ON"
+	/>
+	<CmdLines>
+		<Correlation driverValue="ON" cmdline="set_option -syn_edif_array_rename 1"/>
+		<Correlation driverValue="OFF" cmdline="set_option -syn_edif_array_rename 0"/>
+	</CmdLines>
+</Property> -->
+
+<!-- rerun synplify 
+<Property
+	name="PROP_SYN_RERUN"
+	tclid="syn_rerun"	
+	type="bool" >
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-clean"/>
+		<Correlation driverValue="False" cmdline=""/>		
+	</CmdLines>
+</Property> -->
+
+<!-- Command line Options -->
+<Property
+	name="PROP_SYN_CmdLineArgs"
+	tclid="syn_cmdline_args"	
+	type="string"
+	cmdline="%CurrentValue%" 
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- Export Diamond settings to Synplify Pro GUI -->
+<Property
+	name="PROP_SYN_ExportSetting"
+	tclid="syn_export_setting"	
+	type="list">
+	<Value
+		defaultValue="No"
+	/>
+	<CmdLines>
+		<Correlation driverValue="No" cmdline=""/>
+		<Correlation driverValue="Yes" cmdline=""/>
+		<Correlation driverValue="Only on First Launch" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- VHDL 2008 -->
+<Property
+	name="PROP_SYN_VHDL2008"
+	tclid="syn_vhdl2008"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -vhdl2008 1"/>
+		<Correlation driverValue="False" cmdline=""/>		
+	</CmdLines>
+</Property>
+
+<!-- library directories -->
+<Property
+	name="PROP_SYN_LibPath"
+	tclid="syn_lib_path"
+	type="dir"
+	cmdline='set_option -library_path {%CurrentValue%}'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- Disable Register Replication during S/R Optimization -->
+<Property
+	name="PROP_SYN_DisableRegisterRep"
+	tclid="syn_disable_register_replication"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="set_option -seqshift_no_replicate 1"/>
+		<Correlation driverValue="False" cmdline="set_option -seqshift_no_replicate 0"/>
+	</CmdLines>
+</Property>
+
+<!-- *************************************************************** -->
+<!-- Precision Property -->
+<!-- *************************************************************** -->
+
+<!-- _VSynFreq=S,INT,Frequency (MHz),200 -->
+<Property
+	name="PROP_PRE_VSynFreq"
+	tclid="pre_frequency"
+	type="int"
+	cmdline="setup_design -frequency=%CurrentValue%">
+	<Value
+		defaultValue="200"
+		lowerLimitValue="0"
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- _VSynComArea=S,BOOL,Area,FALSE -->
+<Property
+	name="PROP_PRE_VSynComArea"
+	tclid="pre_area"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -compile_for_area"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _VSynPrf=S,STRLIST,Input SDC Constraint Filename (.sdc) -->
+<Property
+	name="PROP_PRE_VSynPrf"
+	tclid=""
+	type="multifile"
+	cmdline='add_input_file {"%CurrentValue@;@" "%"}'
+	reversedcmdline=""
+	obsolete="True">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- _VSynOutPref=S,SLIST,Output Preference File -->
+<!--	_VSynOutPrefF=S,LITEM,False,F -->
+<!--	_VSynOutPrefT=S,LITEM,True,T -->
+<Property
+	name="PROP_PRE_VSynOutPref"
+	tclid="pre_out_prf_file"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -vendor_constraint_file=true"/>
+		<Correlation driverValue="False" cmdline="setup_design -vendor_constraint_file=false"/>
+	</CmdLines>	
+</Property>
+
+<!--_VSynFSM=S,SLIST,FSM Encoding -->
+<!--	_VSynFSMAuto=S,LITEM,Auto,A -->
+<!--	_VSynFSMBinary=S,LITEM,Binary,B -->	
+<!--	_VSynFSMOneHot=S,LITEM,One Hot,O -->	
+<!--	_VSynFSMTwoHot=S,LITEM,Two Hot,T -->
+<!--	_VSynFSMRandom=S,LITEM,Random,R -->
+<!--	_VSynFSMGray=S,LITEM,Gray,G -->
+<Property
+	name="PROP_PRE_VSynFSM"
+	tclid="pre_fsm_encoding"
+	type="list">
+	<Value
+		defaultValue="Auto"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Auto" cmdline="setup_design -encoding=auto"/>
+		<Correlation driverValue="Binary" cmdline="setup_design -encoding=binary"/>
+		<Correlation driverValue="One Hot" cmdline="setup_design -encoding=onehot"/>
+		<Correlation driverValue="Two Hot" cmdline="setup_design -encoding=twohot"/>
+		<Correlation driverValue="Random" cmdline="setup_design -encoding=random"/>
+		<Correlation driverValue="Gray" cmdline="setup_design -encoding=gray"/>		
+	</CmdLines>
+</Property>
+
+<!-- _VSynIOPad=S,BOOL,Disable I/O Insertion,FALSE -->
+<Property
+	name="PROP_PRE_VSynIOPad"
+	tclid="pre_disable_io_insert"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -vendor_constraint_file=true"/>
+		<Correlation driverValue="False" cmdline="setup_design -vendor_constraint_file=false"/>
+	</CmdLines>	
+</Property>
+
+<!-- _VSynOutNetForm=S,SLIST,Output Netlist Format -->
+<!--	_VSynOutNetFormN=S,LITEM,None,N -->
+<!--	_VSynOutNetFormVlg=S,LITEM,Verilog,G -->
+<!--	_VSynOutNetFormVHDL=S,LITEM,VHDL,H -->
+<Property
+	name="PROP_PRE_VSynOutNetForm"
+	tclid="pre_output_netlist_format"
+	type="list">
+	<Value
+		defaultValue="None"
+	/>
+	<CmdLines>
+		<Correlation driverValue="None" cmdline=""/>
+		<Correlation driverValue="Verilog" cmdline="setup_design -verilog"/>
+		<Correlation driverValue="VHDL" cmdline="setup_design -vhdl"/>
+	</CmdLines>
+</Property>
+	
+<!-- _VSynCritcal=S,INT,Number of Critical Paths,3 -->
+<Property
+	name="PROP_PRE_VSynCritcal"
+	tclid="pre_critical_path_num"
+	type="int"
+	cmdline="setup_analysis -critical_paths -num_critical_paths=%CurrentValue%">
+	<Value
+		defaultValue="3"
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- _EdfResSharing=A,BOOL,Resource Sharing,TRUE -->
+<Property
+	name="PROP_PRE_EdfResSharing"
+	tclid="pre_res_sharing"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -resource_sharing"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _EdfIgnoreRamRWCol=A,BOOL,Ignore RAM Read/Write Collision,FALSE -->
+<Property
+	name="PROP_PRE_EdfIgnoreRamRWCol"
+	tclid="pre_ignore_ram_read_write_collision"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -ignore_ram_rw_collision"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+	
+<!-- _EdfDSPAcrossHie=A,BOOL,Infer DSPs Across Hierarchy,FALSE -->
+<Property
+	name="PROP_PRE_EdfDSPAcrossHie"
+	tclid="pre_infer_dsp_across_hier"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -dsp_across_hier"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _EdfUseSafeFSM=A,BOOL,Use Safe FSM,FALSE -->
+<Property
+	name="PROP_PRE_EdfUseSafeFSM"
+	tclid="pre_use_safe_fsm"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -use_safe_fsm"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _EdfReencodeFSM=A,BOOL,Reencode FSM Outputs,TRUE -->
+<Property
+	name="PROP_PRE_EdfReencodeFSM"
+	tclid="pre_reencode_fsm_outputs"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -reencode_fsm_outputs"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _EdfAutoResOfRam=A,BOOL,Auto Resource Allocation of RAM,FALSE -->
+<Property
+	name="PROP_PRE_EdfAutoResOfRam"
+	tclid="pre_auto_res_alloc_of_ram"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -auto_resource_allocation_ram"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _EdfFullCase=A,BOOL,Full Case,FALSE -->
+<Property
+	name="PROP_PRE_EdfFullCase"
+	tclid="pre_full_case"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -variable full_case=TRUE"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+	
+<!-- _EdfParaCase=A,BOOL,Parallel Case,FALSE -->
+<Property
+	name="PROP_PRE_EdfParaCase"
+	tclid="pre_para_case"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -variable parallel_case=TRUE"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _EdfArrayBoundsCase=A,BOOL,Array Bounds Case,FALSE -->
+<Property
+	name="PROP_PRE_EdfArrayBoundsCase"
+	tclid="pre_array_bounds_case"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -array_bounds_check"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _EdfVlog2001=A,BOOL,Verilog Standard V2001,TRUE -->
+<Property
+	name="PROP_PRE_EdfVlog2001"
+	tclid="pre_vlog2001"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -language_syntax_verilog v2001"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- __EdfTimingViolation=A,BOOL,Report Timing Violations,TRUE -->
+<Property
+	name="PROP_PRE_EdfTimingViolation"
+	tclid="pre_rpt_timing_violation"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_analysis -timing_violations"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _EdfNetFanout=A,BOOL,Show Net Fanout,TRUE -->
+<Property
+	name="PROP_PRE_EdfNetFanout"
+	tclid="pre_show_net_fanout"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_analysis -net_fanout"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _EdfClockDomainCross=A,BOOL,Show Clock Domain Crossing,FALSE -->
+<Property
+	name="PROP_PRE_EdfClockDomainCross"
+	tclid="pre_show_clk_domain_crossing"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_analysis -clock_domain_crossing"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _EdfMissConstraint=A,BOOL,Report Missing Constraints,FALSE -->
+<Property
+	name="PROP_PRE_EdfMissConstraint"
+	tclid="pre_rpt_missing_constraints"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_analysis -missing_constraints"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _VSynRetime=A,BOOL,Run Retiming,TRUE -->
+<Property
+	name="PROP_PRE_VSynRetime"
+	tclid="pre_run_retiming"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -retiming"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _VSyninpd=A,INT,Input Delay (ns),0 -->
+<Property
+	name="PROP_PRE_VSyninpd"
+	tclid="pre_input_delay"
+	type="int"
+	cmdline="setup_design -input_delay=%CurrentValue%">
+	<Value
+		defaultValue="0"
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- _VSynoutd=A,INT,Output Delay (ns),0 -->
+<Property
+	name="PROP_PRE_VSynoutd"
+	tclid="pre_output_delay"
+	type="int"
+	cmdline="setup_design -output_delay=%CurrentValue%">
+	<Value
+		defaultValue="0"
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- _VSynTransform=A,BOOL,Transform Set/Reset on DFFs to Latches,TRUE -->
+<Property
+	name="PROP_PRE_VSynTransform"
+	tclid="pre_transform_setrest_to_latch"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -transformations=true"/>
+		<Correlation driverValue="False" cmdline="setup_design -transformations=false"/>
+	</CmdLines>	
+</Property>
+
+<!-- _VSynRepClkFreq=A,BOOL,Report Clock Frequencies,TRUE -->
+<Property
+	name="PROP_PRE_VSynRepClkFreq"
+	tclid="pre_rpt_clk_freqency"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_analysis -clock_frequency"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>	
+</Property>
+
+<!-- _VSynTimSum=A,INT,Number of Timing Summary Paths,10 -->
+<Property
+	name="PROP_PRE_VSynTimSum"
+	tclid="pre_timing_summary_path_num"
+	type="int"
+	cmdline="setup_analysis -summary -num_summary_paths=%CurrentValue%">
+	<Value
+		defaultValue="10"
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- _VSynGatedClk=A,BOOL,Convert Gated Clock,FALSE -->
+<Property
+	name="PROP_PRE_VSynGatedClk"
+	tclid="pre_conv_gated_clk"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline="setup_design -gated_clock=0"/>
+	</CmdLines>	
+</Property>
+
+<!-- _VSynGSR=A,SLIST,Force GSR -->
+<!--	_VSynGSROff=A,LITEM,False,F -->
+<!--	_VSynGSROn=A,LITEM,True,T -->
+<Property
+	name="PROP_PRE_VSynGSR"
+	tclid="pre_force_gsr"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="setup_design -infer_gsr=true"/>
+		<Correlation driverValue="False" cmdline="setup_design -infer_gsr=false"/>
+	</CmdLines>
+</Property>
+
+<!-- Command line Options -->
+<Property
+	name="PROP_PRE_CmdLineArgs"
+	tclid="pre_cmdline_args"
+	type="string"
+	cmdline="%CurrentValue%" 
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+<!-- *************************************************************** -->
+<!-- LST Property --> 
+<!-- *************************************************************** -->
+
+<!--  Input SDC Constraint File (.sdc) -->
+<Property
+	name="PROP_LST_EdfInConsFile"
+	tclid="lse_sdc_file"
+	type="file"
+	cmdline='-sdc "%CurrentValue@;@" -sdc "%"'
+	reversedcmdline=""
+	obsolete="True">
+	<Value
+		defaultValue=""
+	/>
+</Property> 
+
+<!-- Frequency (MHz) -->
+<Property
+	name="PROP_LST_EdfFrequency"
+	tclid="lse_frequency"
+	type="int"
+	cmdline="-frequency %CurrentValue%"
+	reversedcmdline=""
+	condition='PROP_LST_OptimizeGoal!="Area"'>
+	<Value
+		defaultValue="200"
+		lowerLimitValue="1"
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- -	Optimization goal
+	Family specific:  	Area (MachXO/XO2)  
+				Balanced (Others)	 -->
+<Property
+	name="PROP_LST_OptimizeGoal"
+	tclid="lse_opt_goal"
+	type="list">
+	<Value
+		defaultValue="Timing"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Area" cmdline="-optimization_goal Area"/>
+		<Correlation driverValue="Timing" cmdline="-optimization_goal Timing"/>
+		<Correlation driverValue="Balanced" cmdline="-optimization_goal Balanced"/>
+	</CmdLines>
+</Property>
+
+<!-- Number of Critical Paths-->
+<Property
+	name="PROP_LST_NumCriticalPaths"
+	tclid="lse_critical_path_num"
+	type="numstring"
+	cmdline="-twr_paths %CurrentValue%"
+    reversedcmdline="">
+	<Value
+		defaultValue="3"
+		lowerLimitValue="0"
+		upperLimitValue=""
+	/>
+</Property>
+
+<!--  Edif Output 
+<Property
+	name="PROP_LST_EdfOutput"
+	tclid="lse_edf_out"
+	type="file"
+	cmdline='-output_edif "%CurrentValue%"'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property> -->
+
+<!-- Preference Output  
+<Property
+	name="PROP_LST_PrfOutput"
+	tclid="lse_output_prf_file"
+	type="bool" >
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-lpf 1"/>
+		<Correlation driverValue="False" cmdline="-lpf 0"/>
+	</CmdLines>	
+</Property> -->
+
+<Property
+	name="PROP_LST_UseLPF"
+	tclid="lse_use_lpf_file"
+	type="bool"	>
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline=""/>		
+	</CmdLines>
+</Property>
+
+<!--Log file
+<Property
+	name="PROP_LST_Logfile"
+	type="file"
+	cmdline='-logfile "%CurrentValue%"'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property> -->
+
+<!--NGD Output
+<Property
+	name="PROP_LST_NGDOutput"
+	type="file"
+	cmdline='-ngd "%CurrentValue%"'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property> -->
+
+<!--NGO Output
+<Property
+	name="PROP_LST_NGOOutput"
+	type="file"
+	cmdline='-ngo "%CurrentValue%"'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property> -->
+
+<!-- Block RAM utilization 
+<Property
+	name="PROP_LST_BlockRAMUtil"
+	type="double"
+	cmdline="-bram_utilization %CurrentValue%">
+	<Value
+		defaultValue="100.0"
+		lowerLimitValue="0.0"
+		upperLimitValue="100.0"
+	/>
+</Property> -->
+
+<!-- EBR Utilization -->
+<Property
+	name="PROP_LST_EBRUtil"
+	tclid="lse_ebr_util"
+	type="double"
+	cmdline="-bram_utilization %CurrentValue%">
+	<Value
+		defaultValue="100.0"
+		lowerLimitValue="0.0"
+		upperLimitValue="100.0"
+	/>
+</Property>
+
+<!-- DSP Utilization -->
+<Property
+	name="PROP_LST_DSPUtil"
+	tclid="lse_dsp_util"
+	type="double"
+	cmdline="-dsp_utilization %CurrentValue%">
+	<Value
+		defaultValue="100.0"
+		lowerLimitValue="0.0"
+		upperLimitValue="100.0"
+	/>
+</Property>
+
+<!-- 	DSP style	 -->
+<Property
+	name="PROP_LST_DSPStyle"
+	tclid="lse_dsp_style"
+	type="list">
+	<Value
+		defaultValue="DSP"
+	/>
+	<CmdLines>
+		<Correlation driverValue="DSP" cmdline="-use_dsp 1"/>
+		<Correlation driverValue="Logic" cmdline="-use_dsp 0"/>
+	</CmdLines>
+</Property>
+
+<!-- 	RAM style	 -->
+<Property
+	name="PROP_LST_RAMStyle"
+	tclid="lse_ram_style"
+	type="list">
+	<Value
+		defaultValue="Auto"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Auto" cmdline="-ramstyle Auto"/>
+		<Correlation driverValue="Distributed" cmdline="-ramstyle Distributed"/>
+		<Correlation driverValue="Block_RAM" cmdline="-ramstyle Block_RAM"/>
+		<Correlation driverValue="Registers" cmdline="-ramstyle Registers"/>
+	</CmdLines>
+</Property>
+
+<!-- 	ROM style	 -->
+<Property
+	name="PROP_LST_ROMStyle"
+	tclid="lse_rom_style"
+	type="list">
+	<Value
+		defaultValue="Auto"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Auto" cmdline="-romstyle auto"/>
+		<Correlation driverValue="EBR" cmdline="-romstyle ebr"/>
+		<Correlation driverValue="Logic" cmdline="-romstyle logic"/>
+	</CmdLines>
+</Property>
+
+<!-- 	DSP usage	
+<Property
+	name="PROP_LST_DSPUsage"
+	type="list">
+	<Value
+		defaultValue="TRUE"
+	/>
+	<CmdLines>
+		<Correlation driverValue="TRUE" cmdline="-use_dsp 1"/>
+		<Correlation driverValue="FALSE" cmdline="-use_dsp 0"/>
+	</CmdLines>
+</Property>  -->
+
+<!-- DSP utilization 
+<Property
+	name="PROP_LST_DSPUtil"
+	type="int"
+	cmdline="-dsp_utilization %CurrentValue%">
+	<Value
+		defaultValue="100"
+		lowerLimitValue="0"
+		upperLimitValue="100"
+	/>
+</Property> -->
+
+<!-- Carry chain -->
+<Property
+	name="PROP_LST_CarryChain"
+	tclid="lse_use_carry_chain"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-use_carry_chain 1"/>
+		<Correlation driverValue="False" cmdline="-use_carry_chain 0"/>
+	</CmdLines>
+</Property>
+
+<!-- Carry chain length -->
+<Property
+	name="PROP_LST_CarryChainLength"
+	tclid="lse_carry_chain_length"
+	type="numstring"
+	cmdline="-carry_chain_length %CurrentValue%"
+    reversedcmdline="">
+	<Value
+		defaultValue="0"
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- Force GSR infer -->
+<Property
+	name="PROP_LST_ForceGSRInfer"
+	tclid="lse_force_gsr"
+	type="list">
+	<Value
+		defaultValue="Auto"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Yes" cmdline="-force_gsr Yes"/>
+		<Correlation driverValue="No" cmdline="-force_gsr No"/>
+		<Correlation driverValue="Auto" cmdline="-force_gsr Auto"/>
+	</CmdLines>
+</Property>
+
+<!-- Resource sharing -->
+<Property
+	name="PROP_LST_ResourceShare"
+	tclid="lse_res_sharing"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-resource_sharing 1"/>
+		<Correlation driverValue="False" cmdline="-resource_sharing 0"/>
+	</CmdLines>
+</Property>
+
+<!--Propagate constant -->
+<Property
+	name="PROP_LST_PropagatConst"
+	tclid="lse_propagat_const"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-propagate_constants 1"/>
+		<Correlation driverValue="False" cmdline="-propagate_constants 0"/>
+	</CmdLines>
+</Property>
+
+<!-- Remove duplicate registers -->
+<Property
+	name="PROP_LST_RemoveDupRegs"
+	tclid="lse_remove_dup_regs"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-remove_duplicate_regs 1"/>
+		<Correlation driverValue="False" cmdline="-remove_duplicate_regs 0"/>
+	</CmdLines>
+</Property>
+
+<!-- 	MUX style	 -->
+<Property
+	name="PROP_LST_MuxStyle"
+	tclid="lse_mux_style"
+	type="list">
+	<Value
+		defaultValue="Auto"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Auto" cmdline="-mux_style Auto"/>
+		<Correlation driverValue="PFU Mux" cmdline="-mux_style pfu_mux"/>
+		<Correlation driverValue="L6Mux Single" cmdline="-mux_style L6Mux_single"/>
+		<Correlation driverValue="L6Mux Multiple" cmdline="-mux_style L6Mux_multiple"/>
+	</CmdLines>
+</Property>
+
+<!-- 	Maximal fanout	 -->
+<Property
+	name="PROP_LST_MaxFanout"
+	tclid="lse_max_fanout_limit"
+	type="int"
+	cmdline="-max_fanout %CurrentValue%">
+	<Value
+		defaultValue="1000"
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- FSM encoding style -->
+<Property
+	name="PROP_LST_FSMEncodeStyle"
+	tclid="lse_fsm_encoding"
+	type="list">
+	<Value
+		defaultValue="Auto"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Auto" cmdline="-fsm_encoding_style Auto"/>
+		<Correlation driverValue="Binary" cmdline="-fsm_encoding_style Binary"/>
+		<Correlation driverValue="One-Hot" cmdline="-fsm_encoding_style One-Hot"/>
+		<Correlation driverValue="Gray" cmdline="-fsm_encoding_style Gray"/>
+	</CmdLines>
+</Property>
+
+<!-- I/O Insertion -->
+<Property
+	name="PROP_LST_IOInsertion"
+	tclid="lse_use_io_insertion"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-use_io_insertion 1"/>
+		<Correlation driverValue="False" cmdline="-use_io_insertion 0"/>
+	</CmdLines>
+</Property>
+
+<!-- Use IO register -->
+<Property
+	name="PROP_LST_UseIOReg"
+	tclid="lse_use_io_reg"
+	type="list">
+	<Value
+		defaultValue="Auto"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Auto" cmdline="-use_io_reg auto"/>
+		<Correlation driverValue="True" cmdline="-use_io_reg 1"/>
+		<Correlation driverValue="False" cmdline="-use_io_reg 0"/>
+	</CmdLines>
+</Property>
+
+<!-- IP installation location 
+<Property
+	name="PROP_LST_IPInstallLocation"
+	type="dir"
+	cmdline='-ip_dir "%CurrentValue%"'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property> -->
+
+<!-- IP core name
+<Property
+	name="PROP_LST_IPCoreName"
+	type="string"
+	cmdline='-corename %CurrentValue%'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>  -->
+
+<!-- Encrypted RTL name
+<Property
+	name="PROP_LST_EncryptedRTLName"
+	type="string"
+	cmdline='-ertl %CurrentValue%'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>  -->
+
+<!-- Intermediate file dump -->
+<Property
+	name="PROP_LST_InterFileDump"
+	tclid="lse_inter_file_dump"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-ifd"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- translate option in LST -->
+<!-- _EdfInLibPath=S,STRLIST,Macro Search Path -->
+<Property
+	name="PROP_LST_EdfInLibPath"
+	tclid="lse_macro_search_path"
+	type="dir"
+	cmdline='-p "%CurrentValue@;@" -p "%"'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!--  _EdfInRemLoc=S,SLIST,Remove LOC properties -->
+<!--	_EdfInRemLocOff=S,LITEM,Off,F -->
+<!--	_EdfInRemLocOn=S,LITEM,On,N -->        
+<Property
+	name="PROP_LST_EdfInRemLoc"
+	tclid="lse_remove_loc_prop"
+	type="list">
+	<Value
+		defaultValue="Off"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Off" cmdline=""/>
+		<Correlation driverValue="On" cmdline="-r"/>
+	</CmdLines>
+</Property>
+
+<!--  Consistent Bus Name Conversion  
+<Property
+	name="PROP_LST_EdfInBusNameConv"
+	type="list"	>
+	<Value
+		defaultValue="None"
+	/>
+	<CmdLines>
+		<Correlation driverValue="None" cmdline="-cbn 0"/>
+		<Correlation driverValue="Lattice" cmdline="-cbn 1"/>
+	</CmdLines>	
+</Property>-->
+
+<!-- ispLEVER : _EdfHardtimer=S,SLIST,Hardware Evaluation -->
+<!--			_EdfHardtimerY=S,LITEM,Enable,E -->
+<!--			_EdfHardtimerN=S,LITEM,Disable,D -->
+<Property
+	name="PROP_LST_EdfHardtimer"
+	tclid="lse_hardware_eval"
+	type="list">
+	<Value
+		defaultValue="Enable"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Enable" cmdline=""/>
+		<Correlation driverValue="Disable" cmdline="-dt"/>
+	</CmdLines>
+</Property>
+
+<!-- _EdfMemPath=S,STRLIST,Memory Initial Value File Search Path -->
+<Property
+	name="PROP_LST_EdfMemPath"
+	tclid="lse_mem_init_file_path"
+	type="dir"
+	cmdline='-path "%CurrentValue@;@" -path "%"' 
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- 5/15/2011 - Resolved Mixed Drivers -->
+<Property
+	name="PROP_LST_ResolvedMixedDrivers"
+	tclid="lse_resolved_mixed_drivers"
+	type="bool" >
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-resolve_mixed_drivers  1"/>
+		<Correlation driverValue="False" cmdline="-resolve_mixed_drivers 0"/>		
+	</CmdLines>
+</Property>
+
+<!-- 9/27/2013 - VHDL 2008 -->
+<Property
+	name="PROP_LST_VHDL2008"
+	tclid="lse_vhdl2008"
+	type="bool" >
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-vh2008"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- 3/3/2014 - Fix Gated Clocks -->
+<Property
+	name="PROP_LST_FIXGATEDCLKS"
+	tclid="lse_fix_gated_clocks"
+	type="bool" >
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-fix_gated_clocks 1"/>
+		<Correlation driverValue="False" cmdline="-fix_gated_clocks 0"/>		
+	</CmdLines>
+</Property>
+
+<!-- 7/1/2014 - Loop Limit -->
+<Property
+	name="PROP_LST_LoopLimit"
+	tclid="lse_loop_limit"
+	type="int"
+	cmdline="-loop_limit %CurrentValue%">
+	<Value
+		defaultValue="1950"
+		lowerLimitValue="1"
+		upperLimitValue="20000"
+	/>
+</Property>
+
+<!-- 7/10/2014 - Disable Distributed RAM -->
+<Property
+	name="PROP_LST_DisableDistRam"
+	tclid="lse_disable_distram"
+	type="bool" >
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-disable_distributed_ram"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- 2/27/2015 - Allow Duplicate Modules -->
+<Property
+	name="PROP_LST_AllowDUPMod"
+	tclid="lse_allow_dup_modules"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-allow_duplicate_modules"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- 3/20/2015 - Decode Unreachable States -->
+<Property
+	name="PROP_LST_DecodeUnreachableStates"
+	tclid="lse_decode_unreachable_states"
+	type="bool"	>
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-decode_unreachable_states"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- Command line Options -->
+<Property
+	name="PROP_LST_CmdLineArgs"
+	tclid="lse_cmdline_args"
+	type="string"
+	cmdline="%CurrentValue%" 
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+<!-- *************************************************************** -->
+<!-- Translate Design Property --> 
+<!-- *************************************************************** -->
+
+<!-- _EdfInLibPath=S,STRLIST,Macro Search Path -->
+<Property
+	name="PROP_BD_EdfInLibPath"
+	tclid="bd_macro_search_path"
+	type="dir"
+	cmdline='-p "%CurrentValue@;@" -p "%"'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- Partition Search Path -->
+<Property
+	name="PROP_BD_ParSearchPath"
+	tclid="bd_par_search_path"
+	type="dir"
+	cmdline='-incpath "%CurrentValue@;@" -incpath "%"'
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!--  _EdfInRemLoc=S,SLIST,Remove LOC properties -->
+<!--	_EdfInRemLocOff=S,LITEM,Off,F -->
+<!--	_EdfInRemLocOn=S,LITEM,On,N -->        
+<Property
+	name="PROP_BD_EdfInRemLoc"
+	tclid="bd_remove_loc_prop"
+	type="list">
+	<Value
+		defaultValue="Off"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Off" cmdline=""/>
+		<Correlation driverValue="On" cmdline="-r"/>
+	</CmdLines>
+</Property>
+
+<!--  _EdfInBusNameConv=S,SLIST,Consistent Bus Name Conversion -->
+<!--	_EdfInBusNameConvNone=S,LITEM,None,N -->
+<!--	_EdfInBusNameConvSyn=S,LITEM,Synplify,S -->
+<!--	_EdfInBusNameConvPre=S,LITEM,Precision,P -->
+<!--	_EdfInBusNameConvLat=S,LITEM,Lattice,L -->
+<Property
+	name="PROP_BD_EdfInBusNameConv"
+	tclid="bd_consistent_bus_name_conv"
+	type="list"	>
+	<Value
+		defaultValue="None"
+	/>
+	<CmdLines>
+		<Correlation driverValue="None" cmdline=""/>
+		<Correlation driverValue="Synplify" cmdline="-cbn SYNPLIFY"/>
+		<Correlation driverValue="Precision" cmdline="-cbn PRECISION"/>
+		<Correlation driverValue="Lattice" cmdline="-cbn LATTICE"/>
+	</CmdLines>	
+</Property>
+
+<!-- ispLEVER : _EdfHardtimer=S,SLIST,Hardware Evaluation -->
+<!--			_EdfHardtimerY=S,LITEM,Enable,E -->
+<!--			_EdfHardtimerN=S,LITEM,Disable,D -->
+<Property
+	name="PROP_BD_EdfHardtimer"
+	tclid="bd_hardware_eval"
+	type="list">
+	<Value
+		defaultValue="Enable"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Enable" cmdline=""/>
+		<Correlation driverValue="Disable" cmdline="-dt"/>
+	</CmdLines>
+</Property>
+
+<!-- _EdfMemPath=S,STRLIST,Memory Initial Value File Search Path -->
+<Property
+	name="PROP_BD_EdfMemPath"
+	tclid="bd_mem_init_file_path"
+	type="dir"
+	cmdline='-path "%CurrentValue@;@" -path "%"' 
+	reversedcmdline="" >
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- Command line Options -->
+<Property
+	name="PROP_BD_CmdLineArgs"
+	tclid="bd_cmdline_args"
+	type="string"
+	cmdline="%CurrentValue%" 
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- *************************************************************** -->
+<!-- Map Design Property --> 
+<!-- *************************************************************** -->
+
+<!--_PackLogMapDes=S,INT,Pack Logic Block Util. [blank or 0 to 100] -->
+<Property
+	name="PROP_MAP_PackLogMapDes"
+	tclid="map_pack_logic_blk_util"
+	type="numstring"
+	cmdline="-c %CurrentValue%"
+  reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- _SwlMapDes=S,INTRANGE,Softwire Lookup Util. [0-10],8,0,10
+     unused for ecp2,ecp2m,ecp3,ec,xo,ecp,sc,scm,xp,xp2
+<Property
+	name="PROP_MAP_SwlMapDes"
+	type="int"
+	cmdline="-swl %CurrentValue%">
+	<Value
+		defaultValue="8"
+		lowerLimitValue="0"
+		upperLimitValue="10"
+	/>
+</Property>  -->
+
+<!-- _HierMapDes=S,BOOL,Hierarchical Mapping,FALSE
+     unused for ecp2,ecp2m,ecp3,ec,xo,ecp,sc,scm,xp,xp2
+<Property
+	name="PROP_MAP_HierMapDes"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-hier"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property> -->
+
+<!-- _IgnorePreErr=S,BOOL,Ignore Preference Errors,TRUE -->
+<Property
+	name="PROP_MAP_IgnorePreErr"
+	tclid="map_ignore_pref_err"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline="-pe"/>
+	</CmdLines>
+</Property>
+
+<!-- _SymCrossRef=S,BOOL,Report Symbol Cross Reference,FALSE -->
+<Property
+	name="PROP_MAP_SymCrossRef"
+	tclid="map_rpt_symbol_cross_ref"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-xref_sym"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _SigCrossRef=S,BOOL,Report Signal Cross Reference,FALSE -->
+<Property
+	name="PROP_MAP_SigCrossRef"
+	tclid="map_rpt_signal_cross_ref"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-xref_sig"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _OvermapDevice=A,BOOL,Overmap device if design does not fit,FALSE -->
+<Property
+	name="PROP_MAP_OvermapDevice"
+	tclid="map_overmap_device"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-m"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _GuideFileMapDes=A,STRLIST,NCD Guide File -->
+<!-- ecp2,ecp2m,ecp3,ec,xo,ecp,sc,scm,xp,xp2 all support
+<Property
+	name="PROP_MAP_GuideFileMapDes"
+	tclid="map_ncd_guide_file"
+	type="file"
+	cmdline='-g "%CurrentValue%"' 
+  reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+ -->
+<!-- _RegRetiming=A,BOOL,Register Retiming,FALSE -->
+<!-- support ecp2,ecp2m,ecp3,ec,xo,ecp,sc(no fc),scm(no fc),xp,xp2 -->
+<Property
+	name="PROP_MAP_RegRetiming"
+	tclid="map_reg_retiming"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-retime"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _MapBlkModProp=S,DYNLIB,Block Module Properties, blkmod, GetMapProp -->
+<!-- just ignore dynlib type item by samuel's comment 
+<Property
+	name="PROP_MAP_MapBlkModProp"
+	type="dynlib"
+	lib="blkmod"
+	function="GetMapProp">
+</Property>-->
+
+<!-- _TimingDriven=A,BOOL,Timing Driven Mapping,FALSE -->
+<!-- not support SC/M in fc mode -->
+<Property
+	name="PROP_MAP_TimingDriven"
+	tclid="map_timing_driven"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-tdm"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _TimingDrivenNodeRep=A,BOOL,Timing Driven Node Replication,FALSE -->
+<!-- not support SC/M in fc mode -->
+<Property
+	name="PROP_MAP_TimingDrivenNodeRep"
+	tclid="map_timing_driven_node_replication"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-split_node"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _TimingDrivenPack=A,BOOL,Timing Driven Packing,FALSE -->
+<!-- not support SC/M in fc mode -->
+<Property
+	name="PROP_MAP_TimingDrivenPack"
+	tclid="map_timing_driven_pack"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-td_pack"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _MapModArgs=A,STRLIST,Command line Options -->
+<Property
+	name="PROP_MAP_MapModArgs"
+	tclid="map_cmdline_args"
+	type="string"
+	cmdline="%CurrentValue%" 
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- _MAPIORegister=A,SLIST,IO Registering
+        _MAPIORegisterBlank=A,LITEM,<Blank>,E
+        _MAPIORegisterInput=A,LITEM,Input,I
+        _MAPIORegisterOutput=A,LITEM,Output,O
+        _MAPIORegisterBoth=A,LITEM,Both,B
+        _MAPIORegisterNone=A,LITEM,None,N -->
+<Property
+	name="PROP_MAP_MAPIORegister"
+	tclid="map_io_reg"
+	type="list">
+	<Value
+		defaultValue="Auto"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Auto" cmdline=""/>
+		<Correlation driverValue="Input" cmdline="-ioreg i"/>
+		<Correlation driverValue="Output" cmdline="-ioreg o"/>
+		<Correlation driverValue="Both" cmdline="-ioreg b"/>
+		<Correlation driverValue="None" cmdline="-ioreg n"/>
+	</CmdLines>
+</Property>      
+
+<!-- _MAPInferGSR=A,BOOL,Infer GSR,TRUE -->
+<Property
+	name="PROP_MAP_MAPInferGSR"
+	tclid="map_infer_gsr"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline="-noinferGSR"/>
+	</CmdLines>
+</Property>
+
+<!-- *************************************************************** -->
+<!-- Place & Route Design Property --> 
+<!-- *************************************************************** -->
+
+<!-- _EffortParDes=S,SLIST,Placement Effort Level [1-5] -->
+<!--       _Effort5ParDes=S,LITEM,5,5 -->
+<!--        _Effort4ParDes=S,LITEM,4,4 -->
+<!--        _Effort3ParDes=S,LITEM,3,3 -->
+<!--        _Effort2ParDes=S,LITEM,2,2 -->
+<!--        _Effort1ParDes=S,LITEM,1,1 -->
+<Property
+	name="PROP_PAR_EffortParDes"
+	tclid="par_place_effort_level"
+	type="int"
+	cmdline="-l %CurrentValue%">
+	<Value
+		defaultValue="5"
+		lowerLimitValue="1"
+		upperLimitValue="5"
+	/>
+</Property>
+
+<!-- _RoutePassParDes=S,INTRANGE,Routing Passes [1-1000],6,1,1000 -->
+<Property
+	name="PROP_PAR_RoutePassParDes"
+	tclid="par_routeing_pass"
+	type="int"
+	cmdline="-i %CurrentValue%">
+	<Value
+		defaultValue="6"
+		lowerLimitValue="1"
+		upperLimitValue="1000"
+	/>
+</Property>
+
+<!-- _NewRouteParDes=S,SLIST,Routing method -->
+<!--	_NewRouteParDesR=S,LITEM,Default,R -->
+<!--	_NewRouteParDesN=S,LITEM,NBR,N -->
+<Property
+	name="PROP_PAR_NewRouteParDes"
+	tclid="par_routing_method"
+	type="list">
+	<Value
+		defaultValue="NBR"
+	/>
+	<CmdLines>
+		<Correlation driverValue="CDR" cmdline="-exp parUseNBR=0"/>
+		<Correlation driverValue="NBR" cmdline="-exp parUseNBR=1"/>		
+	</CmdLines>
+</Property>
+
+<!-- _RemoveDir=S,BOOL,Remove previous design directory,TRUE -->
+<Property
+	name="PROP_PAR_RemoveDir"
+	tclid="par_remove_dir"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-rem"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _DisableTDParDes=S,BOOL,Disable Timing Driven,FALSE -->
+<Property
+	name="PROP_PAR_DisableTDParDes"
+	tclid="par_disable_timing_driven"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-x"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _CrDlyStFileParDes=S,BOOL,Create Delay Statistic File,FALSE -->
+<Property
+	name="PROP_PAR_CrDlyStFileParDes"
+	tclid="par_create_delay_statistic_file"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-y"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _PrefErrorOut=S,BOOL,Ignore Preference Errors,TRUE -->
+<Property
+	name="PROP_PAR_PrefErrorOut"
+	tclid="par_ignore_pref_err"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline="-pe"/>
+	</CmdLines>
+</Property>
+
+<!-- _RoutingCDP=S,SLIST,Congestion-Driven Placement -->
+<!--        _RoutingCDP0=S,LITEM,0,0 -->
+<!--        _RoutingCDP1=S,LITEM,1,1 -->
+<Property
+	name="PROP_PAR_RoutingCDP"
+	tclid="par_cdp"
+	type="list">
+	<Value
+		defaultValue="0"
+	/>
+	<CmdLines>
+		<Correlation driverValue="0" cmdline="-exp parCDP=0"/>
+		<Correlation driverValue="1" cmdline="-exp parCDP=1"/>
+		<Correlation driverValue="Auto" cmdline="-exp parCDP=auto"/>
+	</CmdLines>
+</Property>
+
+<!-- _RoutingCDR=S,SLIST,Congestion-Driven Routing -->
+<!--        _RoutingCDR0=S,LITEM,0,0 -->
+<!--        _RoutingCDR1=S,LITEM,1,1 -->
+<Property
+	name="PROP_PAR_RoutingCDR"
+	tclid="par_cdr"
+	type="list">
+	<Value
+		defaultValue="0"
+	/>
+	<CmdLines>
+		<Correlation driverValue="0" cmdline="-exp parCDR=0"/>
+		<Correlation driverValue="1" cmdline="-exp parCDR=1"/>
+    <Correlation driverValue="Auto" cmdline="-exp parCDR=auto"/>		
+	</CmdLines>
+</Property>
+
+<!-- _PlcIterParDes=A,INTRANGE,Placement Iterations [0-99](0=run until solved),1,0,99 -->
+<Property
+	name="PROP_PAR_PlcIterParDes"
+	tclid="par_place_iterator"
+	type="int"
+	cmdline="-n %CurrentValue%">
+	<Value
+		defaultValue="1"
+		lowerLimitValue="0"
+		upperLimitValue="100"
+	/>
+</Property>
+
+<!-- _PlcStCostTblParDes=A,INTRANGE,Placement Iteration Start Pt,1,1,100 -->
+<Property
+	name="PROP_PAR_PlcStCostTblParDes"
+	tclid="par_place_iterator_start_pt"
+	type="int"
+	cmdline="-t %CurrentValue%">
+	<Value
+		defaultValue="1"
+		lowerLimitValue="1"
+		upperLimitValue="100"
+	/>
+</Property>
+
+<!-- _SaveBestRsltParDes=A,INTRANGE,Placement Save Best Run [1-100],1,1,100 -->
+<Property
+	name="PROP_PAR_SaveBestRsltParDes"
+	tclid="par_save_best_result"
+	type="int"
+	cmdline="-s %CurrentValue%">
+	<Value
+		defaultValue="1"
+		lowerLimitValue="1"
+		upperLimitValue="100"
+	/>
+</Property>
+
+<!-- _RouteResOptParDes=A,INTRANGE,Routing Resource Optimization [0-6],0,0,6 -->
+<Property
+	name="PROP_PAR_RouteResOptParDes"
+	tclid="par_routing_res_opt"
+	type="int"
+	cmdline="-c %CurrentValue%">
+	<Value
+		defaultValue="0"
+		lowerLimitValue="0"
+		upperLimitValue="6"
+	/>
+</Property>
+
+<!-- _RouteDlyRedParDes=A,INTRANGE,Routing Delay Reduction Passes [0-100],0,0,100 -->
+<Property
+	name="PROP_PAR_RouteDlyRedParDes"
+	tclid="par_route_delay_reduction_pass"
+	type="int"
+	cmdline="-e %CurrentValue%">
+	<Value
+		defaultValue="0"
+		lowerLimitValue="0"
+		upperLimitValue="100"
+	/>
+</Property>
+
+<!-- _PlcInputLimit=A,SLIST,PLC Input Limit -->
+<!--	_PlcInputLimit0=A,LITEM,Off,0 -->
+<!--	_PlcInputLimit1=A,LITEM,Low,1 -->
+<!--	_PlcInputLimit2=A,LITEM,Medium,2 -->
+<!--	_PlcInputLimit3=A,LITEM,High,3 
+<Property
+	name="PROP_PAR_PlcInputLimit"
+	type="list">
+	<Value
+		defaultValue="Off"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Off" cmdline="-exp parPlcInLimit=0"/>
+		<Correlation driverValue="Low" cmdline="-exp parPlcInLimit=1"/>
+		<Correlation driverValue="Medium" cmdline="-exp parPlcInLimit=2"/>
+		<Correlation driverValue="High" cmdline="-exp parPlcInLimit=3"/>
+	</CmdLines>
+</Property> -->
+
+<!-- _PlcInputNeighborSize=A,SLIST,PLC Input Neighbor Size -->
+<!--	_PlcInputNeighborSize1=A,LITEM,1 PLC region,1 -->
+<!--	_PlcInputNeighborSize2=A,LITEM,2x2 PLC regions,2
+<Property
+	name="PROP_PAR_PlcInputNeighborSize"
+	type="list">
+	<Value
+		defaultValue="1 PLC region"
+	/>
+	<CmdLines>
+		<Correlation driverValue="1 PLC region" cmdline="-exp parPlcInNeighborSize=1"/>
+		<Correlation driverValue="2x2 PLC regions" cmdline="-exp parPlcInNeighborSize=2"/>
+	</CmdLines>
+</Property> -->
+
+<!-- _GuideFileParDes=A,STRLIST,Guide Filename
+<Property
+	name="PROP_PAR_GuideFileParDes"
+	type="file"
+	cmdline="-gv -g %CurrentValue%" 
+  reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>	 -->
+
+<!-- _ParBlkModProp=S,DYNLIB,Block Module Properties, blkmod, GetParProp -->
+
+<!-- _RoutingOpt=A,SLIST,Routing Options[0-1] -->
+<!--        _RoutingOpt0=A,LITEM,0,0 -->
+<!--        _RoutingOpt1=A,LITEM,1,1 -->
+<!-- support ecp2,ecp2m,ecp3,ec,ecp,xp,xp2,sc,scm. Not support xo 
+<Property
+	name="PROP_PAR_RoutingOpt"
+	type="list">
+	<Value
+		defaultValue="0"
+	/>
+	<CmdLines>
+		<Correlation driverValue="0" cmdline=""/>
+		<Correlation driverValue="1" cmdline="-exp M5GRoutingOrder=1"/>
+	</CmdLines>
+</Property> -->
+
+<!-- _ParRunPlaceOnly=A,BOOL,Run Placement Only,FALSE -->
+<Property
+	name="PROP_PAR_ParRunPlaceOnly"
+	tclid="par_run_place_only"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-r"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _ParMultiNodeList=A,STRLIST,Multi-Tasking Node List -->
+<Property
+	name="PROP_PAR_ParMultiNodeList"
+	tclid="par_multi_node_list"
+	type="file"
+	cmdline='-m "%CurrentValue%"' 
+  reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- _ParNCDGuideFile=A,STRLIST,NCD Guide File 
+<Property
+	name="PROP_PAR_ParNCDGuideFile"
+	tclid="par_ncd_guide_file"
+	type="file"
+	cmdline='-g "%CurrentValue%"' 
+  reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>	
+-->
+<!-- _ParMatchFact=A,INT,Guided PAR Matching Factor 
+<Property
+	name="PROP_PAR_ParMatchFact"
+	tclid="par_matching_factor"
+	type="numstring"
+	cmdline="-mf %CurrentValue%"
+  reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+-->
+<!-- _ParGuideRepMatch=A,BOOL,Guided PAR Report Matches,FALSE 
+<Property
+	name="PROP_PAR_ParGuideRepMatch"
+	tclid="par_rpt_matches"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-gv"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+-->
+<!-- _parPathBased=A,SLIST,Path-based Placement -->
+<!--	_parPathBasedOff=A,LITEM,OFF,F -->
+<!--	_parPathBasedOn=A,LITEM,ON,N -->
+<Property
+	name="PROP_PAR_parPathBased"
+	tclid="par_pathbased_place"
+	type="list">
+	<Value
+		defaultValue="Off"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Off" cmdline="-exp parPathBased=OFF"/>
+		<Correlation driverValue="On" cmdline="-exp parPathBased=ON"/>
+	</CmdLines>
+</Property>
+
+<!-- ; 8/8/05 TN - turn off for all fpga except machXO (default) -->
+<!-- _parHold=A,SLIST,Auto Hold-Time Correction -->
+<!--	_parHoldOff=A,LITEM,OFF,F -->
+<!--	_parHoldOn=A,LITEM,ON,N	 -->
+<!-- D2.1 R5026 - GUI Default setting for Auto Hold Time Correction -->
+<Property
+	name="PROP_PAR_parHold"
+	tclid="par_auto_hld"
+	type="list">
+	<Value
+		defaultValue="On"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Off" cmdline="-exp parHold=0"/>
+		<Correlation driverValue="On" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _PARClockSkew=A,SLIST,Clock Skew Minimization -->
+<!--	_PARClockSkew0=A,LITEM,OFF,0 -->
+<!--	_PARClockSkew2=A,LITEM,2 (recommended for ON),2 -->
+<!--	_PARClockSkew1=A,LITEM,1,1 -->
+<Property
+	name="PROP_PAR_PARClockSkew"
+	tclid="par_clk_skew_min"
+	type="list">
+	<Value
+		defaultValue="Off"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Off" cmdline=""/>
+		<Correlation driverValue="2 (recommended for On)" cmdline="-exp clockSkewMin=2"/>
+		<Correlation driverValue="1" cmdline="-exp clockSkewMin=1"/>
+	</CmdLines>
+</Property>
+
+<!-- _PARModArgs=A,STRLIST,Command line Options -->
+<Property
+	name="PROP_PAR_PARModArgs"
+	tclid="par_cmdline_args"
+	type="string"
+	cmdline="%CurrentValue%" 
+  reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- new option from LCai -->
+<Property
+	name="PROP_PAR_RunParWithTrce"
+	tclid="par_gen_trace_rpt"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline="-distrce"/>
+	</CmdLines>
+</Property>
+
+<!-- stop once timing is met-->
+<Property
+	name="PROP_PAR_StopZero"
+	tclid="par_stop_zero"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-stopzero"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- Placement sort best run-->
+<Property
+	name="PROP_PAR_MultiSeedSortMode"
+	tclid="par_sort_mode"
+	type="list">
+	<Value
+		defaultValue="Worst Slack"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Worst Slack" cmdline=""/>
+		<Correlation driverValue="Timing Score" cmdline="-exp parMultiSeedSortMode=timingScore"/>
+	</CmdLines>
+</Property>
+
+<!-- Run-Time Reduction -->
+<Property
+	name="PROP_PAR_RunTimeReduction"
+	tclid="par_runtime_reduction"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-exp parASE=1"/>
+		<Correlation driverValue="False" cmdline="-exp parASE=0"/>
+	</CmdLines>
+</Property>
+
+<!-- _TrceBlkModProp=S,DYNLIB,Block Module Properties, blkmod, GetTrceProp -->
+
+<!-- _TrceChkOptionFile=S,DYNLIB,Trace option files, checktracefile, tracefiles -->
+
+<!-- *************************************************************** -->
+<!-- IO Timing Property --> 
+<!-- *************************************************************** -->   
+<!-- -allSpeed=S,BOOL,All Speed Grade,FALSE -->
+<Property
+	name="PROP_IOTIMING_AllSpeed"
+	tclid="iotiming_all_speed"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-v"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>  
+
+<!-- *************************************************************** -->
+<!-- Timing Check Property --> 
+<!-- *************************************************************** -->
+<Property
+	name="PROP_TMCHK_EnableCheck"
+	tclid="tmchk_enable_check"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline="-nocheck"/>
+	</CmdLines>
+</Property>
+
+<!-- *************************************************************** -->
+<!-- Bitgen Property --> 
+<!-- *************************************************************** -->
+
+<!-- _RunDRCBitGen=S,BOOL,Run DRC,TRUE -->
+<Property
+	name="PROP_BIT_RunDRCBitGen"
+	tclid="bit_run_drc"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline="-d"/>
+	</CmdLines>
+</Property>
+
+<!-- _CreateBitFile=S,BOOL,Create bit file,TRUE -->
+<Property
+	name="PROP_BIT_CreateBitFile"
+	tclid="bit_create_bit_file"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline="-j"/>
+	</CmdLines>
+</Property>
+
+<!-- _MIFFileBitGen=S,STRLIST,MIF Filename -->
+<Property
+	name="PROP_BIT_MIFFileBitGen"
+	tclid="bit_mif_file"
+	type="string"
+	cmdline="-r %CurrentValue%" 
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+	
+<!-- _OutFormatBitGen=S,SLIST,Output Format
+        _BFBFormatBitGen=S,LITEM,Bit File (Binary),B
+        _RBFFormatBitGen=S,LITEM,Raw Bit File (ASCII),R 
+        _ASMaskReadbackFile=S,LITEM,Mask and Readback File (ASCII),A
+        _BIMaskReadbackFile=S,LITEM,Mask and Readback File (Binary),I -->
+<Property
+	name="PROP_BIT_OutFormatBitGen"
+	tclid="bit_out_format"
+	type="list">
+	<Value
+		defaultValue="Bit File (Binary)"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Bit File (Binary)" cmdline=""/>
+		<Correlation driverValue="Raw Bit File (ASCII)" cmdline="-b"/>
+		<Correlation driverValue="Mask and Readback File (ASCII)" cmdline="-m 0"/>
+		<Correlation driverValue="Mask and Readback File (Binary)" cmdline="-m 1"/>		
+	</CmdLines>
+</Property>
+
+<!-- strategy item which refers to PROP_BIT_OutFormatBitGen -->
+<Property
+	name="PROP_BIT_OutFormatBitGen_REF"
+	tclid=""
+	type="list"
+	refer="PROP_BIT_OutFormatBitGen">
+	<CmdLines>
+		<Correlation driverValue="Bit File (Binary)" cmdline="-if %ReportBase%.bit"/>
+		<Correlation driverValue="Raw Bit File (ASCII)" cmdline="-if %ReportBase%.rbt"/>
+		<Correlation driverValue="Mask and Readback File (ASCII)" cmdline="-if %ReportBase%.rbt"/>
+		<Correlation driverValue="Mask and Readback File (Binary)" cmdline="-if %ReportBase%.bit"/>		
+	</CmdLines>
+</Property>
+
+<!-- _OutFormatPromGen=S,SLIST,Output Format
+        _IntFormatBitGen=S,LITEM,Intel Hex 32-bit,I
+        _MotFormatBitGen=S,LITEM,Motorola Hex 32-bit,T -->
+<Property
+	name="PROP_BIT_OutFormatPromGen"
+	tclid="bit_prom_out_format"
+	type="list">
+	<Value
+		defaultValue="Intel Hex 32-bit"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Intel Hex 32-bit" cmdline="-oft -int -of %ReportBase%.mcs"/>
+		<Correlation driverValue="Motorola Hex 32-bit" cmdline="-oft -mot -of %ReportBase%.exo"/>
+		<Correlation driverValue="Extended Tektronix Hex" cmdline="-oft -xtek -of %ReportBase%.xtek"/>		
+	</CmdLines>
+</Property>
+
+<!-- _NoHeader=A,BOOL,No Header,FALSE -->
+<Property
+	name="PROP_BIT_NoHeader"
+	tclid="bit_no_header"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-q"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _SearchPthBitGen=S,STRLIST,Search Path -->
+<Property
+	name="PROP_BIT_SearchPthBitGen"
+	tclid="bit_search_path"
+	type="dir"
+	cmdline='-path "%CurrentValue@;@" -path "%"' 
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- _LenBitsBitGen=A,SLIST,LengthBits -->
+<!--         _LenBits2BitGen=A,LITEM,24,2 -->
+<!--         _LenBits3BitGen=A,LITEM,32,3 -->
+<Property
+	name="PROP_BIT_LenBitsBitGen"
+	tclid="bit_lenth_bits"
+	type="list">
+	<Value
+		defaultValue="24"
+	/>
+	<CmdLines>
+		<Correlation driverValue="24" cmdline="-g LengthBits:24"/>
+		<Correlation driverValue="32" cmdline="-g LengthBits:32"/>
+	</CmdLines>
+</Property>
+
+<!-- _ConModBitGen=A,SLIST,Config Mode
+     _ConModEBitGen=A,LITEM,Enable,E
+     _ConModSBitGen=A,LITEM,Serial,S 
+<Property
+	name="PROP_BIT_ConModBitGen"
+	type="list">
+	<Value
+		defaultValue="Enable"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Enable" cmdline="-g CfgMode:Enable"/>
+		<Correlation driverValue="Serial" cmdline="-g CfgMode:Serial"/>
+	</CmdLines>
+</Property> -->
+
+<!-- _ConModBitGen=A,SLIST,Chain Mode
+         _ConModDBitGen=A,LITEM,Disable,E
+         _ConModFBitGen=A,LITEM,Flowthrough,F
+         _ConModBBitGen=A,LITEM,Bypass,B -->
+<!-- list value is same with ecp2/m ecp3-->
+<Property
+	name="PROP_BIT_ConModBitGen"
+	tclid="bit_chain_mode"
+	type="list">
+	<Value
+		defaultValue="Disable"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Disable" cmdline="-g CfgMode:Disable"/>		
+		<Correlation driverValue="Flowthrough" cmdline="-g CfgMode:Flowthrough"/>
+		<Correlation driverValue="Bypass" cmdline="-g CfgMode:Bypass"/>
+	</CmdLines>
+</Property> 
+
+<!-- _DoneSigBitGen=A,SLIST,Done Signal Active On -->
+<!--         _DoneSig4BitGen=A,LITEM,Cycle 4, 4 -->
+<!--         _DoneSig1BitGen=A,LITEM,Cycle 1, 1 -->
+<!--         _DoneSig2BitGen=A,LITEM,Cycle 2, 2 -->
+<!--         _DoneSig3BitGen=A,LITEM,Cycle 3, 3 -->
+<Property
+	name="PROP_BIT_DoneSigBitGen"
+	tclid="bit_done_signal"
+	type="list">
+	<Value
+		defaultValue="4"
+	/>
+	<CmdLines>
+		<Correlation driverValue="4" cmdline="-g DoneActive:C4"/>
+		<Correlation driverValue="1" cmdline="-g DoneActive:C1"/>
+		<Correlation driverValue="2" cmdline="-g DoneActive:C2"/>
+		<Correlation driverValue="3" cmdline="-g DoneActive:C3"/>		
+	</CmdLines>
+</Property>
+
+<!-- _DonePinBitGen=A,SLIST,Done Pin -->
+<!--  _DonePinUBitGen=A,LITEM,Pullup,U -->
+<!--  _DonePinNBitGen=A,LITEM,Pullnone,N -->
+<Property
+	name="PROP_BIT_DonePinBitGen"
+	tclid="bit_done_pin"
+	type="list">
+	<Value
+		defaultValue="Pullup"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Pullup" cmdline="-g DonePin:Pullup"/>
+		<Correlation driverValue="Pullnone" cmdline="-g DonePin:Pullnone"/>
+	</CmdLines>
+</Property>
+
+<!-- _ExtClockBitGen=A,BOOL,External Clock,FALSE -->
+<Property
+	name="PROP_BIT_ExtClockBitGen"
+	tclid="bit_ext_clk"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g ExternalClk:Yes"/>
+		<Correlation driverValue="False" cmdline="-g ExternalClk:No"/>
+	</CmdLines>
+</Property>
+
+<!-- _GSRRelOnBitGen=A,SLIST,GSR release on -->
+<!--  _GSRRelOnDBitGen=A,LITEM,DoneIn,D -->
+<!--  _GSRRelOn1BitGen=A,LITEM,Cycle 1,1 -->
+<!--  _GSRRelOn2BitGen=A,LITEM,Cycle 2,2 -->
+<!--  _GSRRelOn3BitGen=A,LITEM,Cycle 3,3 -->
+<!--   _GSRRelOn4BitGen=A,LITEM,Cycle 4,4 -->
+<Property
+	name="PROP_BIT_GSRRelOnBitGen"
+	tclid="bit_gsr_release_on"
+	type="list">
+	<Value
+		defaultValue="DoneIn"
+	/>
+	<CmdLines>
+    <Correlation driverValue="DoneIn" cmdline="-g GSRInactive:DoneIn"/>		
+		<Correlation driverValue="1" cmdline="-g GSRInactive:C1"/>
+		<Correlation driverValue="2" cmdline="-g GSRInactive:C2"/>
+		<Correlation driverValue="3" cmdline="-g GSRInactive:C3"/>
+    <Correlation driverValue="4" cmdline="-g GSRInactive:C4"/>		
+	</CmdLines>
+</Property>
+
+<!-- _JTAGEnableBitGen=A,BOOL,JTAG after Configuration,FALSE -->
+<Property
+	name="PROP_BIT_JTAGEnableBitGen"
+	tclid="bit_jtag_enable"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g JTAG:Enable"/>
+		<Correlation driverValue="False" cmdline="-g JTAG:Disable"/>
+	</CmdLines>
+</Property>
+
+<!-- _EnIntOscBitGen=A,SLIST,Internal Oscillator Control -->
+<!--        _EnIntOscDBitGen=S,LITEM,Disable,D -->
+<!--        _EnIntOscEBitGen=S,LITEM,Enable,E -->
+<!--        _EnIntOsc8BitGen=S,LITEM,EnableDiv8,8 -->
+<Property
+	name="PROP_BIT_EnIntOscBitGen"
+	tclid="bit_internal_osc_control"
+	type="list">
+	<Value
+		defaultValue="Disable"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Disable" cmdline="-g Oscillator:Disable"/>		
+		<Correlation driverValue="Enable" cmdline="-g Oscillator:Enable"/>
+		<Correlation driverValue="EnableDiv8" cmdline="-g Oscillator:EnableDiv8"/>
+	</CmdLines>
+</Property>
+
+<!-- _IOTriRelBitGen=A,SLIST,I/O Tri-State Rel. On -->
+<!--         _IOTriRel2BitGen=A,LITEM,Cycle 2, 2 -->
+<!--         _IOTriRelDBitGen=A,LITEM,DoneIn, D -->
+<!--         _IOTriRel1BitGen=A,LITEM,Cycle 1, 1 -->
+<!--         _IOTriRel3BitGen=A,LITEM,Cycle 3, 3 -->
+<!--         _IOTriRel4BitGen=A,LITEM,Cycle 4, 4 -->
+<Property
+	name="PROP_BIT_IOTriRelBitGen"
+	tclid="bit_io_tristate_rel_on"
+	type="list">
+	<Value
+		defaultValue="Cycle 2"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Cycle 2" cmdline="-g OutputsActive:C2"/>		
+		<Correlation driverValue="DoneIn" cmdline="-g OutputsActive:DoneIn"/>
+		<Correlation driverValue="Cycle 1" cmdline="-g OutputsActive:C1"/>
+		<Correlation driverValue="Cycle 3" cmdline="-g OutputsActive:C4"/>
+    <Correlation driverValue="Cycle 4" cmdline="-g OutputsActive:C4"/>		
+	</CmdLines>
+</Property>
+
+<!-- _EnIOBitGen=A,SLIST,Enable I/O in re-configuration -->
+<!--         _EnIOABitGen=A,LITEM,False,A -->
+<!--         _EnIOBBitGen=A,LITEM,True,B -->
+<!--         _EnIOABitGen=A,LITEM,TriStateDuringReConfig,A
+             _EnIOBBitGen=A,LITEM,DriveDuringReConfig,B -->
+<Property
+	name="PROP_BIT_EnIOBitGen"
+	tclid="bit_enable_io"
+	type="list">
+	<Value
+		defaultValue="TriStateDuringReConfig"
+	/>
+	<CmdLines>
+    <Correlation driverValue="TriStateDuringReConfig" cmdline="-g OutputsCfg:TriStateDuringReConfig"/>		
+		<Correlation driverValue="DriveDuringReConfig" cmdline="-g OutputsCfg:DriveDuringReConfig"/>
+	</CmdLines>
+</Property>
+
+<!-- _DisRAMResBitGen=A,BOOL,Reset Config RAM in re-configuration,TRUE -->
+<Property
+	name="PROP_BIT_DisRAMResBitGen"
+	tclid="bit_reset_conf_ram"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g RamCfg:Reset"/>
+		<Correlation driverValue="False" cmdline="-g RamCfg:NoReset"/>
+	</CmdLines>
+</Property>
+
+<!-- _AllowReadBitGen=A,SLIST,Allow Readback -->
+<!--         _AllowReadNBitGen=A,LITEM,Disable,N -->
+<!--         _AllowReadOBitGen=A,LITEM,Once,O -->
+<!--         _AllowReadOCBitGen=A,LITEM,Command,C -->
+<Property
+	name="PROP_BIT_AllowReadBitGen"
+	tclid="bit_allow_readback"
+	type="list">
+	<Value
+		defaultValue="Disable"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Disable" cmdline="-g OutputsCfg:TriStateDuringReConfig"/>		
+		<Correlation driverValue="Once" cmdline="-g OutputsCfg:DriveDuringReConfig"/>
+		<Correlation driverValue="Command" cmdline="-g OutputsCfg:DriveDuringReConfig"/>
+	</CmdLines>
+</Property>
+
+<!-- _CapReadBitGen=A,SLIST,Capture Readback
+         _CapReadDBitGen=A,LITEM,Disable,D
+         _CapReadRBitGen=A,LITEM,Read,R
+         _CapReadUBitGen=A,LITEM,UserNet,U
+         _CapReadBBitGen=A,LITEM,Both,B -->
+<Property
+	name="PROP_BIT_CapReadBitGen"
+	tclid="bit_capture_readback"
+	type="list">
+	<Value
+		defaultValue="Disable"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Disable" cmdline="-g ReadCapture:Disable"/>		
+		<Correlation driverValue="Read" cmdline="-g ReadCapture:Read"/>
+		<Correlation driverValue="UserNet" cmdline="-g ReadCapture:UserNet"/>
+		<Correlation driverValue="Both" cmdline="-g ReadCapture:Both"/>
+	</CmdLines>
+</Property>         
+
+<!-- _GSREnableBitGen=A,SLIST,GSR during re-configuration
+         _GSREnableABitGen=A,LITEM,True,A
+         _GSREnableBBitGen=A,LITEM,False,B -->
+<Property
+	name="PROP_BIT_GSREnableBitGen"
+	tclid="bit_gsr"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g RegisterCfg:Enable"/>
+		<Correlation driverValue="False" cmdline="-g RegisterCfg:Disable"/>
+	</CmdLines>
+</Property>
+
+<!-- _StartUpClkBitGen=A,SLIST,Startup Clock
+         _StartUpClkCClkBitGen=A,LITEM,Cclk,S
+         _StartUpClkUClkBitGen=A,LITEM,UserClk,U -->
+<Property
+	name="PROP_BIT_StartUpClkBitGen"
+	tclid="bit_startup_clk"
+	type="list">
+	<Value
+		defaultValue="Cclk"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Cclk" cmdline="-g StartupClk:Cclk"/>		
+		<Correlation driverValue="UserClk" cmdline="-g StartupClk:UserClk"/>
+	</CmdLines>
+</Property>         
+
+<!-- _SynchIOBitGen=A,BOOL,Synch I/O Startup to DoneIn,FALSE -->
+<Property
+	name="PROP_BIT_SynchIOBitGen"
+	tclid="bit_synch_io"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g SyncToDone:Yes"/>
+		<Correlation driverValue="False" cmdline="-g SyncToDone:No"/>
+	</CmdLines>
+</Property>
+
+<!-- _AddressBitGen=A,SLIST,Address
+         _AddressIncBitGen=A,LITEM,Increment,I
+         _AddressExpBitGen=A,LITEM,Explicit,E -->
+<Property
+	name="PROP_BIT_AddressBitGen"
+	tclid="bit_addr"
+	type="list">
+	<Value
+		defaultValue="Increment"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Increment" cmdline="-g Address:Increment"/>		
+		<Correlation driverValue="Explicit" cmdline="-g Address:Explicit"/>
+	</CmdLines>
+</Property> 
+
+<!-- _RemZeroFramesBitGen=A,BOOL,Remove Zero Frames,FALSE -->
+<Property
+	name="PROP_BIT_RemZeroFramesBitGen"
+	tclid="bit_remove_zero_frames"
+	type="bool">
+	<Value
+		defaultValue="FALSE"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g ZeroFrames:No"/>
+		<Correlation driverValue="False" cmdline="-g ZeroFrames:Yes"/>
+	</CmdLines>
+</Property>
+
+<!-- _SysConBitGen=A,SLIST,Sysbus Config
+         _SysConRBitGen=A,LITEM,Reset,R
+         _SysConNBitGen=A,LITEM,NoReset,N -->
+<Property
+	name="PROP_BIT_SysConBitGen"
+	tclid="bit_sysbus_conf"
+	type="list">
+	<Value
+		defaultValue="Reset"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Reset" cmdline="-g SysbusCfg:Reset"/>		
+		<Correlation driverValue="NoReset" cmdline="-g SysbusCfg:NoReset"/>
+	</CmdLines>
+</Property> 
+
+<!-- _SysClockConBitGen=A,SLIST,Sysbus Clock Config
+         _SysClockConRBitGen=A,LITEM,Reset,R
+         _SysClockConNBitGen=A,LITEM,NoReset,N -->
+<Property
+	name="PROP_BIT_SysClockConBitGen"
+	tclid="bit_sysbus_clk_conf"
+	type="list">
+	<Value
+		defaultValue="Reset"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Reset" cmdline="-g SysbusclkCfg:Reset"/>		
+		<Correlation driverValue="NoReset" cmdline="-g SysbusclkCfg:NoReset"/>
+	</CmdLines>
+</Property>
+       
+<!-- _WaitStTimBitGen=A,INTRANGE,Wait State Timeout [0-15],5,0,15-->
+<Property
+	name="PROP_BIT_WaitStTimBitGen"
+	tclid="bit_wait_state_timeout"
+	type="int"
+	cmdline="-g WaitStateTimeout:%CurrentValue%">
+	<Value
+		defaultValue="5"
+		lowerLimitValue="0"
+		upperLimitValue="15"
+	/>
+</Property>
+
+<!-- _GranTimBitGen=A,INTRANGE,Grant Timeout [0-15],0,0,15-->
+<Property
+	name="PROP_BIT_GranTimBitGen"
+	tclid="bit_grant_timeout"
+	type="int"
+	cmdline="-g GrantTimeout:%CurrentValue%">
+	<Value
+		defaultValue="0"
+		lowerLimitValue="0"
+		upperLimitValue="15"
+	/>
+</Property>
+
+<!-- _ParityCheckBitGen=A,BOOL,Parity Check,TRUE -->
+<Property
+	name="PROP_BIT_ParityCheckBitGen"
+	tclid="bit_parity_check"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-g Parity:Enable"/>
+		<Correlation driverValue="False" cmdline="-g Parity:Disable"/>
+	</CmdLines>
+</Property>       
+
+<!-- 3/8/2013 Byte Wide Bit Mirror -->
+<Property
+	name="PROP_BIT_ByteWideBitMirror"
+	tclid="bit_byte_mirror"
+	type="list">
+	<Value
+		defaultValue="Disable"
+	/>
+	<CmdLines>
+		<Correlation driverValue="Disable" cmdline=""/>		
+		<Correlation driverValue="Enable" cmdline="-mirror"/>		
+	</CmdLines>
+</Property>
+
+<!-- *************************************************************** -->
+<!-- Generate Timing Simulation File Property --> 
+<!-- *************************************************************** -->
+
+<!--  *** original default value depend on project's entry type ****
+      *** always make verilog as default because only rtl/edif entry in bali *** 
+        _TimSimFormat=S,SLIST,Netlist Format
+        _NetVerilogTimSimDes=S,LITEM,Verilog,V
+        _NetVHDLTimSimDes=S,LITEM,VHDL,H 
+<Property
+	name="PROP_TIM_TimSimFormat"
+	type="list">
+	<Value
+		defaultValue="Verilog"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Verilog" cmdline="-n Verilog -o &quot;%ReportBase%.vo&quot;"/>		
+		<Correlation driverValue="VHDL" cmdline="-n VHDL -o &quot;%ReportBase%.vho&quot;"/>
+	</CmdLines>
+</Property>-->
+
+<!-- _TimSimHierSep=S,STRLIST,Verilog Hierarchy Separator -->
+<Property
+	name="PROP_TIM_TimSimHierSep"
+	tclid="timsim_vlog_hier_separator"
+	type="string"
+	cmdline="-s %CurrentValue%" 
+  reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- Only for ecp2/m ecp3, sc/m
+    _WriteVerboseNetlist=A,BOOL,Write Verbose Netlist,FALSE -->
+<Property
+	name="PROP_TIM_WriteVerboseNetlist"
+	tclid="timsim_verbose"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-noslice"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property> 
+
+<!-- _NegStupHldTim=A,BOOL,Negative Setup-Hold Times ,TRUE -->
+<Property
+	name="PROP_TIM_NegStupHldTim"
+	tclid="timsim_negative_setup_hld_times"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-neg"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _TimSimGenX=A,BOOL,Generate X for Setup/Hold Violation,FALSE -->
+<Property
+	name="PROP_TIM_TimSimGenX"
+	tclid="timsim_gen_x"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-x"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _TimSimGenPUR=A,BOOL,Generate PUR in the Netlist,TRUE -->
+<Property
+	name="PROP_TIM_TimSimGenPUR"
+	tclid="timsim_gen_pur"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline="-nopur"/>
+	</CmdLines>
+</Property>
+
+<!-- _MinSpeedGrade=A,BOOL,Hold Check Min Speed Grade,FALSE -->
+<Property
+	name="PROP_TIM_MinSpeedGrade"
+	tclid="timsim_hld_check_min_speed"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-min"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- _TrgtSpeedGrade=A,INT,Retarget Speed Grade -->
+<Property
+	name="PROP_TIM_TrgtSpeedGrade"
+	tclid="timsim_retarget_speed_grade"
+	type="numstring"
+	cmdline="-sp %CurrentValue%"
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- _ModPreSimDes=A,STRLIST,Multichip Module Prefix -->
+<Property
+	name="PROP_TIM_ModPreSimDes"
+	tclid="timsim_multichip_module_prefix"
+	type="string"
+	cmdline="-pre %CurrentValue%" 
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+	/>
+</Property>
+
+<!-- _MaxDelSimDes=A,INT,Max delay bet. buffers(pS) -->
+<Property
+	name="PROP_TIM_MaxDelSimDes"
+	tclid="timsim_max_delay"
+	type="numstring"
+	cmdline="-dis %CurrentValue%"
+	reversedcmdline="">
+	<Value
+		defaultValue=""
+		lowerLimitValue=""
+		upperLimitValue=""
+	/>
+</Property>
+
+<!-- SOF-127090, Transport mode of path delay in VHDL -->
+<Property
+	name="PROP_TIM_TransportModeOfPathDelay"
+	tclid="timsim_transport_mode"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-tpath"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property> 
+
+<!-- *************************************************************** -->
+<!-- Trace Option Before Route--> 
+<!-- *************************************************************** -->
+
+<!-- Route Estimation Algorithm (%),0%,0%, 100% -->
+<Property
+	name="PROP_MAPSTA_RouteEstAlogtithm"
+	tclid="maptrce_route_estimation_alogrithm"
+	type="int"
+	cmdline="-mapchkpnt %CurrentValue%">
+	<Value
+		defaultValue="0"
+		lowerLimitValue="0"
+		upperLimitValue="100"
+	/>
+</Property>
+
+<!-- =S,SLIST,Report Style,
+        =S,LITEM,Verbose Timing report
+        =S,LITEM,Error Timing report   -->
+<Property
+	name="PROP_MAPSTA_ReportStyle"
+	tclid="maptrce_rpt_style"
+	type="list">
+	<Value
+		defaultValue="Verbose Timing Report"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Verbose Timing Report" cmdline="-v"/>		
+		<Correlation driverValue="Error Timing Report" cmdline="-e"/>
+	</CmdLines>
+</Property>
+
+<!--  =S,INT,Word-Case Paths (0-4096),1 -->
+<Property
+	name="PROP_MAPSTA_WordCasePaths"
+	tclid="maptrce_worstcase_paths"
+	type="int"
+	cmdline="%CurrentValue%">
+	<Value
+		defaultValue="1"
+		lowerLimitValue="0"
+		upperLimitValue="4096"
+	/>
+</Property>
+
+<!-- =A,BOOL,Report Asynchronous Timing Loops,FALSE -->
+<Property
+	name="PROP_MAPSTA_RptAsynTimLoop"
+	tclid="maptrce_rpt_asyn_timing_loop"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-p"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- D2.0  Change tclid and label from "Check Unconstrained Paths" to "Check Unconstrained Connections". DON't change internal ID to avoid consistenet issue -->
+<!-- =A,BOOL,Check Unconstrained Connections,FALSE -->
+<Property
+	name="PROP_MAPSTA_CheckUnconstrainedConns"
+	tclid="maptrce_check_unconstrained_connections"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-c"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- =A,BOOL,Check Unconstrained Paths,FALSE -->
+<Property
+	name="PROP_MAPSTA_CheckUnconstrainedPaths"
+	tclid="maptrce_check_unconstrained_paths"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- =A,INT,Number of Unconstrained Paths (0 to 4096),0 -->
+<Property
+	name="PROP_MAPSTA_NumUnconstrainedPaths"
+	tclid="maptrce_number_unconstrained_paths"
+	type="int"
+	cmdline="-u %CurrentValue%" 
+	condition='PROP_MAPSTA_CheckUnconstrainedPaths=="True"'>
+	<Value
+		defaultValue="0"
+		lowerLimitValue="0"
+		upperLimitValue="4096"
+	/>
+</Property>
+
+<!-- =A,BOOL,Auto Timing, True -->
+<Property
+	name="PROP_MAPSTA_AutoTiming"
+	tclid="maptrce_auto_timing"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-gt"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- =A,BOOL,Full Name, False -->
+<Property
+	name="PROP_MAPSTA_FullName"
+	tclid="maptrce_full_name"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-fullname"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- S,SLIST, Analysis Options, -->          
+<Property
+	name="PROP_MAPSTA_AnalysisOption"
+	tclid="maptrce_analysis_option"
+	type="list">
+	<Value
+		defaultValue="Standard Setup and Hold Analysis"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Standard Setup Analysis" cmdline=""/>		
+		<Correlation driverValue="Standard Setup With Hold Analysis on IOs" cmdline="-setuphold"/>
+    <Correlation driverValue="Hold Analysis" cmdline="-hld"/>		
+		<Correlation driverValue="Standard Setup and Hold Analysis" cmdline="-sethld"/>
+	</CmdLines>
+</Property>
+
+<!-- *************************************************************** -->
+<!-- Trace Option After Route --> 
+<!-- *************************************************************** -->
+
+<!-- =S,SLIST,Report Style,
+        =S,LITEM,Verbose Timing report
+        =S,LITEM,Error Timing report   -->
+<Property
+	name="PROP_PARSTA_ReportStyle"
+	tclid="partrce_rpt_style"
+	type="list">
+	<Value
+		defaultValue="Verbose Timing Report"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Verbose Timing Report" cmdline="-v"/>		
+		<Correlation driverValue="Error Timing Report" cmdline="-e"/>
+	</CmdLines>
+</Property>
+
+<!--  =S,INT,Word-Case Paths (0-4096),1 -->
+<Property
+	name="PROP_PARSTA_WordCasePaths"
+	tclid="partrce_worstcase_paths"
+	type="int"
+	cmdline="%CurrentValue%">
+	<Value
+		defaultValue="10"
+		lowerLimitValue="0"
+		upperLimitValue="4096"
+	/>
+</Property>
+
+<!-- =A,BOOL,Report Asynchronous Timing Loops,FALSE -->
+<Property
+	name="PROP_PARSTA_RptAsynTimLoop"
+	tclid="partrce_rpt_asyn_timing_loop"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-p"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- D2.0  Change tclid and label from "Check Unconstrained Paths" to "Check Unconstrained Connections". DON't change internal ID to avoid consistenet issue -->
+<!-- =A,BOOL,Check Unconstrained Connections,FALSE -->
+<Property
+	name="PROP_PARSTA_CheckUnconstrainedConns"
+	tclid="partrce_check_unconstrained_connections"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-c"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- =A,BOOL,Check Unconstrained Paths,FALSE -->
+<Property
+	name="PROP_PARSTA_CheckUnconstrainedPaths"
+	tclid="partrce_check_unconstrained_paths"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline=""/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- =A,INT,Number of Unconstrained Paths (0 to 4096),0 -->
+<Property
+	name="PROP_PARSTA_NumUnconstrainedPaths"
+	tclid="partrce_number_unconstrained_paths"
+	type="int"
+	cmdline="-u %CurrentValue%" 
+	condition='PROP_PARSTA_CheckUnconstrainedPaths=="True"'>
+	<Value
+		defaultValue="0"
+		lowerLimitValue="0"
+		upperLimitValue="4096"
+	/>
+</Property>
+
+<!-- =A,BOOL,Auto Timing, True -->
+<Property
+	name="PROP_PARSTA_AutoTiming"
+	tclid="partrce_auto_timing"
+	type="bool">
+	<Value
+		defaultValue="True"
+	/>
+	<CmdLines>
+		<Correlation driverValue="True" cmdline="-gt"/>
+		<Correlation driverValue="False" cmdline=""/>
+	</CmdLines>
+</Property>
+
+<!-- =S,SLIST,Report Options,
+        =S,LITEM,Truncated Names
+        =S,LITEM,Expanded Names   -->
+<Property
+	name="PROP_PARSTA_FullName"
+	tclid="partrce_full_name"
+	type="bool">
+	<Value
+		defaultValue="False"
+	/>
+	<CmdLines>
+    <Correlation driverValue="False" cmdline=""/>		
+		<Correlation driverValue="True" cmdline="-fullname"/>
+	</CmdLines>
+</Property>
+
+<!-- ***************************************************************
+    setup and hold analysis options 
+--> 
+
+<!-- S,SLIST, Analysis Options, -->
+<Property
+	name="PROP_PARSTA_AnalysisOption"
+	tclid="partrce_analysis_option"
+	type="list">
+	<Value
+		defaultValue="Standard Setup and Hold Analysis"
+	/>
+	<CmdLines>
+    <Correlation driverValue="Standard Setup Analysis" cmdline=""/>		
+		<Correlation driverValue="Standard Setup With Hold Analysis on IOs" cmdline="-setuphold"/>
+    <Correlation driverValue="Hold Analysis" cmdline="-hld"/>		
+		<Correlation driverValue="Standard Setup and Hold Analysis" cmdline="-sethld"/>
+	</CmdLines>
+</Property>
+
+<!-- S,SLIST, Speed for Setup Analysis,     -->     
+<Property
+	name="PROP_PARSTA_SpeedForSetupAnalysis"
+	tclid="partrce_setup_speed"
+	type="list">
+	<Value
+		defaultValue="default"
+	/>
+	<CmdLines>
+    <CorrelationSet driverValueSet="%DeviceSpeedSet%" cmdline="-sp %CurrentValue%"/>
+    <Correlation driverValue="m" cmdline="-sp m"/>
+    <Correlation driverValue="default" cmdline="-sp %DeviceSpeedValue%"/>
+	</CmdLines>	
+
+</Property>
+
+<!-- S,SLIST, Speed for Hold Analysis, -->         
+<Property
+	name="PROP_PARSTA_SpeedForHoldAnalysis"
+	tclid="partrce_hld_speed"
+	type="list">
+	<Value
+		defaultValue="m"
+	/>
+	<CmdLines>
+    <CorrelationSet driverValueSet="%DeviceSpeedSet%" cmdline="-sphld %CurrentValue%"/>
+    <Correlation driverValue="m" cmdline="-sphld m"/>
+	</CmdLines>
+</Property> 
+
+<!-- *************************************************************** -->
+<!-- Thermal Analysis --> 
+<!-- *************************************************************** -->
+<Property
+	name="PROP_THERMAL_DefaultFreq"
+	tclid="thermal_default_clock_frequency"
+	type="int"
+	cmdline="-freq %CurrentValue%" >
+	<Value
+		defaultValue="0"
+		lowerLimitValue="0"
+		upperLimitValue="250"
+	/>
+</Property>
+
+</StrategyConfig>
+

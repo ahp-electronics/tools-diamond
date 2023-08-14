@@ -1,0 +1,1253 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE        ispXDF    SYSTEM    "IspXDF.dtd" >
+<!-- 
+	Spinti 06/30/04
+	xpga/Magma sub directory
+		.Contains device database file and all the algorithm files for LatticeXP technology devices.
+	 ispVM_011.xdf  support :
+		. LatticeXP family.
+	08/03/04 Spinti: Changed the family names to match ispLEVER and Lattice's official family names.
+	09/22/04 Spinti: Changed the LFXP10E and LFXP10E_ES JtagID from 0x0125D043 to 0x0125C043.
+	09/24/04 Spinti: Added SRAM Fast Program.
+	11/17/04 Nguyen added Status_Control field and "Read Programming Status" operation
+	11/18/04 Nguyen added "Voltage_Control" field 	
+	11/18/04 Nguyen added "Voltage_Control" field
+	12/10/04 Ong   : Commented out Pin List for LatticeXP-ES device family. 
+	12/14/04 Nguyen added BScan_Control and Programming_Mode_Control for the family
+	02/01/05 Spinti: Removed SRAM Program,Verify; SRAM Program,Verify,Secure; SRAM Verify Only; and XSRAM Verify Only
+	                 operations from the LatticeXP-ES family.
+	02/02/05 Ong   : Remove the word "Intelligent" from the Device Operation List.
+	02/03/05 Ong   : Removed FLASH Program and XFLASH Program operation from LatticeXP-ES family.
+	02/03/05 Ong   : Renamed "FLASH Uploaded" to "FLASH Upload to Static RAM" for LatticeXP and LatticeXP-ES. .
+                       Renamed "XFLASH Uploaded" to "XFLASH Upload to Static RAM" for LatticeXP and LatticeXP-ES	
+	02/04/05 Spinti: Added All packages, and updated header.
+      02/18/05 Ong   : Added PA-F388/LXP10E and PA-F388/LXP10C socket adapter listing to LatticeXP device family.
+	03/01/05 Spinti: Correct persistent bit location.
+	03/14/05 Ong   : Changed Model300 Vcc setting from 1.8V to 3.3V for LatticeXP device family.
+			     Commented out Model300 Vcc setting for LatticeXP-ES 256fpBGA package.     
+	04/11/05 Nguyen added FLASH MDR and XFLASH MDR operations
+	05/05/05 Nguyen changed FLASH MDR and XFLASH MDR operations to FLASH Dynamic Upgrade
+	05/10/05 Nguyen changed FLASH Dynamic Upgrade and XFLASH Dynamic Upgrade operations to FLASH TransFR
+	05/10/05 NGuyen added LFXP10C and LFXP10E devices. 
+	It is for the purpose of identifying in the field:
+		the engineering material which requires a special erase flow from the production material which doesn't.
+
+		0  125C  043 LFXP10E_ES    EE12  (1.2V Core)    (1.2)  VCC Engineering Mask Set
+		1  125C  043 LFXP10C       EE12  (1.2V Core)    (1.2)  VCC Production Mask Set
+
+		0  125D  043 LFXP10C_ES    EE12  (1.2V Core)     (1.5-3.3) VCC Engineering Mask Set
+		1  125D  043 LFXP10C	   EE12  (1.2V Core)     (1.5-3.3) VCC Production Mask Set
+	05/11/05 Nguyen added support:
+	LFXP3C_ES
+	LFXP3E_ES
+	LFXP6C_ES
+  	LFXP6E_ES
+  	LFXP15C_ES
+  	LFXP15E_ES
+  	LFXP20C_ES
+  	LFXP20E_ES					
+  	06/06/05 Nguyen added XFLASH Program and TransFR operation 
+  	06/07/05 Nguyen added XFLASH Program USF with Static EBR and XSRAM Read EBR   
+  	06/21/05 Thao: added sync bit locations.
+  	06/23/05 Nguyen took out unnecessary operations
+  	07/15/05 Nguyen changed the "Read..." operations to "Display..." operations
+	08/09/05 Ong   :Added PA-T144/LFXP3C,PA-T144/LFXP3E,PA-Q208/LFXP3C,PA-Q208/LFXP3E,PA-F256/LFXP10C 
+			    and PA-F256/LFXP10E socket adapter listing to LatticeXP device family. 
+	08/16/05 Nguyen removed LatticeXP-ES family			    
+	09/15/05 Ong   :Added PA-T100/LFXP3C,PA-T100/LFXP3E, PA-F484/LFXP20C and PA-F484/LFXP20E 
+			    socket adapter listing to LatticeXP device family. 		    	
+	08/16/05 Nguyen added LFXP10C_ENG and LFXP10E_ENG			    	
+	09/16/05 Spinti: added LatticeXP/LatticeXP-ENG family	
+	10/21/05 Nguyen: removed LatticeXP/LatticeXP-ENG family
+	10/21/05 Nguyen: Changed the ID MASK for XP10 from 0xFFFFFFFF to 0xEFFFFFFF	
+	11/22/05 Nguyen: Changed the Scan ID MASK for XP10 from 0xEFFFFFFF to 0xFFFFFFFF		    	
+					 Changed the algo svp files for XP10 devices
+	01/03/06 Nguyen added "FLASH Calculate Checksum" operation	
+	03/16/06 Ong   : Commented out XSRAM Verfiy USERCODE and XFLASH Program USF from PROM file operations.
+	03/23/06 Nguyen changed the totalfuse of XP20 to 4982712
+	10/16/06 Nguyen added "XSRAM Display USERCODE" and "XFLASH Display USERCODE" to the operation lists
+	12/11/06 Nguyen added "XFLASH Calculate Checksum" operation	
+	01/02/07 Nguyen change to improve the turbo
+	07/16/07 Nguyen added SERIAL support
+	07/20/07 Nguyen modified to support "SRAM Program,Verify" Operation
+	09/07/07 Ong   : Updated the names to the T100, T144, F256, F388 and F484 SAB's that have been converted to lead-free with PA(N).
+	02/13/08 Liu	: Fix alias from LFP10E_ES to LFXP10E_ES for LFXP10E device
+	-->
+
+<ispXDF version="15.3">
+    <Family name="LatticeXP">
+       <FamilyAliasName>LatticeXP-ES</FamilyAliasName>
+       <Device name="LFXP3C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP3C </CodeName>
+            <FullName> LFXP3C </FullName>
+            <AliasName> LFXP3C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA.svp"
+                         value="0x07"/>
+            <JtagID>0x01255043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 558 </ColWidth>
+            <RowWidth> 1680 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 937440 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>290</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP3C </PON>
+                <AliasPON> LFXP3C-ES </AliasPON>
+                <JDFFile> lfxp3.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LFXP3C-XXT100 </PON>
+                <AliasPON> LFXP3C-XXT100ES </AliasPON>
+                <JDFFile> lfxp3.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LFXP3C"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON>  LFXP3C-XXT144 </PON>
+                <AliasPON> LFXP3C-XXT144ES </AliasPON>
+                <JDFFile> lfxp3.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LFXP3C"/>
+            </Package>
+           	<Package>
+                <Type> 208-pin PQFP </Type>
+                <PON>  LFXP3C-XXP208 </PON>
+                <AliasPON> LFXP3C-XXP208ES </AliasPON>
+                <JDFFile> lfxp3.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-Q208/LFXP3C"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>198 to 341</EBRColumn>
+            	<EBRAddress>453 to 516</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;1677;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;186;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1678</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>188</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;245;183;243;247;246;242;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LFXP3E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP3E </CodeName>
+            <FullName> LFXP3E </FullName>
+            <AliasName> LFXP3E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA.svp"
+                         value="0x07"/>
+            <JtagID>0x01254043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 558 </ColWidth>
+            <RowWidth> 1680 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 937440 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>290</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP3E </PON>
+                <AliasPON> LFXP3E-ES </AliasPON>
+                <JDFFile> lfxp3.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 100-pin TQFP </Type>
+                <PON> LFXP3E-XXT100 </PON>
+                <AliasPON> LFXP3E-XXT100ES </AliasPON>
+                <JDFFile> lfxp3.msk </JDFFile>
+           		<MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T100/LFXP3E"/>
+            </Package>
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON>  LFXP3E-XXT144 </PON>
+                <AliasPON> LFXP3E-XXT144ES </AliasPON>
+                <JDFFile> lfxp3.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LFXP3E"/>
+            </Package>
+           	<Package>
+                <Type> 208-pin PQFP </Type>
+                <PON>  LFXP3E-XXP208 </PON>
+                <AliasPON> LFXP3E-XXP208ES </AliasPON>
+                <JDFFile> lfxp3.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-Q208/LFXP3E"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>198 to 341</EBRColumn>
+            	<EBRAddress>453 to 516</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;1677;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;186;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1678</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>188</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;245;183;243;247;246;242;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LFXP6C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP6C </CodeName>
+            <FullName> LFXP6C </FullName>
+            <AliasName> LFXP6C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA.svp"
+                         value="0x07"/>
+            <JtagID>0x01259043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 734 </ColWidth>
+            <RowWidth> 2072 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1520848 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>386</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP6C </PON>
+                <AliasPON> LFXP6C-ES </AliasPON>
+                <JDFFile> lfxp6.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON>  LFXP6C-XXT144 </PON>
+                <AliasPON> LFXP6C-XXT144ES </AliasPON>
+                <JDFFile> lfxp6.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LFXP3C"/>
+            </Package>
+           	<Package>
+                <Type> 208-pin PQFP </Type>
+                <PON>  LFXP6C-XXP208 </PON>
+                <AliasPON> LFXP6C-XXP208ES </AliasPON>
+                <JDFFile> lfxp6.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-Q208/LFXP3C"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON>  LFXP6C-XXF256 </PON>
+                <AliasPON> LFXP6C-XXF256ES </AliasPON>
+                <JDFFile> lfxp6.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F256/LFXP10C"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>374 to 517</EBRColumn>
+            	<EBRAddress>517 to 580</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;287;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>289</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;331;241;329;333;332;328;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LFXP6E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP6E </CodeName>
+            <FullName> LFXP6E </FullName>
+            <AliasName> LFXP6E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA.svp"
+                         value="0x07"/>
+            <JtagID>0x01258043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 734 </ColWidth>
+            <RowWidth> 2072 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 1520848 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>386</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP6E </PON>
+                <AliasPON> LFXP6E-ES </AliasPON>
+                <JDFFile> lfxp6.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 144-pin TQFP </Type>
+                <PON>  LFXP6E-XXT144 </PON>
+                <AliasPON> LFXP6E-XXT144ES </AliasPON>
+                <JDFFile> lfxp6.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-T144/LFXP3E"/>
+            </Package>
+           	<Package>
+                <Type> 208-pin PQFP </Type>
+                <PON>  LFXP6E-XXP208 </PON>
+                <AliasPON> LFXP6E-XXP208ES </AliasPON>
+                <JDFFile> lfxp6.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-Q208/LFXP3E"/>
+            </Package>
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON>  LFXP6E-XXF256 </PON>
+                <AliasPON> LFXP6E-XXF256ES </AliasPON>
+                <JDFFile> lfxp6.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F256/LFXP10E"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>374 to 517</EBRColumn>
+            	<EBRAddress>517 to 580</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;287;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>289</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;331;241;329;333;332;328;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>    
+       <Device name="LFXP10C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP10C </CodeName>
+            <FullName> LFXP10C </FullName>
+            <AliasName> LFXP10C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA.svp"
+                         value="0x07"/>
+            <JtagID>0x1125D043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2148 </ColWidth>
+            <RowWidth> 1288 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 2766624 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>498</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP10C </PON>
+                <AliasPON> LFXP10C_ES </AliasPON>
+                <JDFFile> lfxp10.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFXP10C-XXF256 </PON>
+                <AliasPON> LFXP10C-XXF256ES </AliasPON>
+                <JDFFile> lfxp10.msk </JDFFile>
+           		<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F256/LFXP10C"/>
+            </Package>
+            <Package>
+                <Type> 388-ball fpBGA </Type>
+                <PON> LFXP10C-XXF388 </PON>
+                <AliasPON> LFXP10C-XXF388ES </AliasPON>
+                <JDFFile> lfxp10.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F388/LXP10C"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>714 to 857</EBRColumn>
+            	<EBRAddress>770 to 707</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;1778;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>1780</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;429;311;427;431;430;426;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>      
+       <Device name="LFXP10C_ENG">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP10C_ENG </CodeName>
+            <FullName> LFXP10C_ENG </FullName>
+            <AliasName> LFXP10C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA_ES.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA_ES.svp"
+                         value="0x07"/>
+            <JtagID>0x0125D043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2148 </ColWidth>
+            <RowWidth> 1288 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 2766624 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>498</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP10C-ES </PON>
+                <JDFFile> lfxp10.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFXP10C-XXF256ES </PON>
+                <JDFFile> lfxp10.msk </JDFFile>
+           	    <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F256/LFXP10C"/>
+            </Package>
+            <Package>
+                <Type> 388-ball fpBGA </Type>
+                <PON> LFXP10C-XXF388ES </PON>
+                <JDFFile> lfxp10.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F388/LFXP10C"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>714 to 857</EBRColumn>
+            	<EBRAddress>770 to 707</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;1778;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>1780</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;429;311;427;431;430;426;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            <!--  <PinList>TCK,TMS,TDI,TDO,DONE,INITN,PROGRAMN</PinList> -->
+            </Voltage_Control>
+       </Device>   
+       <Device name="LFXP10E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP10E </CodeName>
+            <FullName> LFXP10E </FullName>
+            <AliasName> LFXP10E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA.svp"
+                         value="0x07"/>
+            <JtagID>0x1125C043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2148 </ColWidth>
+            <RowWidth> 1288 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 2766624 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>498</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP10E </PON>
+                <AliasPON> LFXP10E-ES </AliasPON>
+                <JDFFile> lfxp10.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFXP10E-XXF256 </PON>
+                <AliasPON> LFXP10E-XXF256ES </AliasPON>
+                <JDFFile> lfxp10.msk </JDFFile>
+           		<MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F256/LFXP10E"/>
+            </Package>
+            <Package>
+                <Type> 388-ball fpBGA </Type>
+                <PON> LFXP10E-XXF388 </PON>
+                <AliasPON> LFXP10E-XXF388ES </AliasPON>
+                <JDFFile> lfxp10.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA-F388/LXP10E"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>714 to 857</EBRColumn>
+            	<EBRAddress>770 to 707</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;1778;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>1780</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;429;311;427;431;430;426;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>         
+        <Device name="LFXP10E_ENG">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP10E_ENG </CodeName>
+            <FullName> LFXP10E_ENG </FullName>
+            <AliasName> LFP10E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA_ES.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA_ES.svp"
+                         value="0x07"/>
+            <JtagID>0x0125C043</JtagID>
+            <IDMask>0xEFFFFFFF</IDMask>
+            <IDScanMask>0xEFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2148 </ColWidth>
+            <RowWidth> 1288 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 2766624 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>498</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP10E-ES </PON>
+                <JDFFile> lfxp10.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFXP10E-XXF256ES </PON>
+                <JDFFile> lfxp10.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F256/LFXP10E"/>
+            </Package>
+            <Package>
+                <Type> 388-ball fpBGA </Type>
+                <PON> LFXP10E-XXF388ES </PON>
+                <JDFFile> lfxp10.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F388/LFXP10E"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>714 to 857</EBRColumn>
+            	<EBRAddress>770 to 707</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;1778;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>1780</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;429;311;427;431;430;426;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+        </Device>       
+        <Device name="LFXP15C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP15C </CodeName>
+            <FullName> LFXP15C </FullName>
+            <AliasName> LFXP15C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA.svp"
+                         value="0x07"/>
+            <JtagID>0x01261043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2500 </ColWidth>
+            <RowWidth> 1610 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4025000 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>610</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP15C </PON>
+                <AliasPON> LFXP15C-ES </AliasPON>
+                <JDFFile> lfxp15.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFXP15C-XXF256 </PON>
+                <AliasPON> LFXP15C-XXF256ES </AliasPON>
+                <JDFFile> lfxp15.msk </JDFFile>
+           	    <MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F256/LFXP10C"/>
+            </Package>
+            <Package>
+                <Type> 388-ball fpBGA </Type>
+                <PON> LFXP15C-XXF388 </PON>
+                <AliasPON> LFXP15C-XXF388ES </AliasPON>
+                <JDFFile> lfxp15.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F388/LFXP10C"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFXP15C-XXF484 </PON>
+                <AliasPON> LFXP15C-XXF484ES </AliasPON>
+                <JDFFile> lfxp15.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F484/LFXP20C"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>2052 to 2195</EBRColumn>
+            	<EBRAddress>1027 to 1090</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2042;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>2042</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;527;381;525;529;528;524;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device> 
+       <Device name="LFXP15E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP15E </CodeName>
+            <FullName> LFXP15E </FullName>
+            <AliasName> LFXP15E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA.svp"
+                         value="0x07"/>
+            <JtagID>0x01260043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2500 </ColWidth>
+            <RowWidth> 1610 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4025000 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>610</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP15E </PON>
+                <AliasPON> LFXP15E-ES </AliasPON>
+                <JDFFile> lfxp15.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFXP15E-XXF256 </PON>
+                <AliasPON> LFXP15E-XXF256ES </AliasPON>
+                <JDFFile> lfxp15.msk </JDFFile>
+           	    <MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F256/LFXP10E"/>
+            </Package>
+            <Package>
+                <Type> 388-ball fpBGA </Type>
+                <PON> LFXP15E-XXF388 </PON>
+                <AliasPON> LFXP15E-XXF388ES </AliasPON>
+                <JDFFile> lfxp15.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F388/LFXP10E"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFXP15E-XXF484 </PON>
+                <AliasPON> LFXP15E-XXF484ES </AliasPON>
+                <JDFFile> lfxp15.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F484/LFXP20E"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>2052 to 2195</EBRColumn>
+            	<EBRAddress>1027 to 1090</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2042;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>2042</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;527;381;525;529;528;524;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>       
+       <Device name="LFXP20C">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP20C </CodeName>
+            <FullName> LFXP20C </FullName>
+            <AliasName> LFXP20C_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA.svp"
+                         value="0x07"/>
+            <JtagID>0x01269043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2676 </ColWidth>
+            <RowWidth> 1862 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4982712 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>690</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP20C </PON>
+                <AliasPON> LFXP20C-ES </AliasPON>
+                <JDFFile> lfxp20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFXP20C-XXF256 </PON>
+                <AliasPON> LFXP20C-XXF256ES </AliasPON>
+                <JDFFile> lfxp20.msk </JDFFile>
+           	    <MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F256/LFXP10C"/>
+            </Package>
+            <Package>
+                <Type> 388-ball fpBGA </Type>
+                <PON> LFXP20C-XXF388 </PON>
+                <AliasPON> LFXP20C-XXF388ES </AliasPON>
+                <JDFFile> lfxp20.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F388/LFXP10C"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFXP20C-XXF484 </PON>
+                <AliasPON> LFXP20C-XXF484ES </AliasPON>
+                <JDFFile> lfxp20.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F484/LFXP20C"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>1624 to 1767</EBRColumn>
+            	<EBRAddress>1283 to 1346</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2174;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>2174</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;593;435;591;595;594;590;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.8V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+       <Device name="LFXP20E">
+            <Comm> JTAG </Comm>
+            <Access> FLASH/XFLASH/SRAM/XSRAM </Access>
+            <Vendor> Lattice </Vendor>
+            <Pins>4</Pins>
+            <CodeName> LFXP20E </CodeName>
+            <FullName> LFXP20E </FullName>
+            <AliasName> LFXP20E_ES </AliasName>
+            <Bitmap_Transformation>0x01</Bitmap_Transformation>
+            <AlgoTemplate>MAGMA.svp</AlgoTemplate>
+            <TurboAlgoTemplate name="TURBO_MAGMA.svp"
+                         value="0x07"/>
+            <JtagID>0x01268043</JtagID>
+            <IDMask>0xFFFFFFFF</IDMask>
+            <IDScanMask>0xFFFFFFFF</IDScanMask>
+            <IDSize>32</IDSize>
+            <IRLength>    8 </IRLength>
+            <ColWidth> 2676 </ColWidth>
+            <RowWidth> 1862 </RowWidth>
+            <UESPhysicalBits> 32 </UESPhysicalBits>
+            <jtagUSERCODELogicalBits>32</jtagUSERCODELogicalBits>
+            <TotalFuses> 4982712 </TotalFuses> 
+            <PWP>   1 </PWP>
+            <PWE>   1 </PWE>
+            <PWV>   1 </PWV>
+            <BScan_Length>690</BScan_Length>
+            <Package>
+                <Type> All </Type>
+                <PON> LFXP20E </PON>
+                <AliasPON> LFXP20E-ES </AliasPON>
+                <JDFFile> lfxp20.msk </JDFFile>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="Not Applicable"/>
+           </Package>    
+            <Package>
+                <Type> 256-ball fpBGA </Type>
+                <PON> LFXP20E-XXF256 </PON>
+                <AliasPON> LFXP20E-XXF256ES </AliasPON>
+                <JDFFile> lfxp20.msk </JDFFile>
+           	    <MCtrl setting="00101100"/> 
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F256/LFXP10E"/>
+            </Package>
+            <Package>
+                <Type> 388-ball fpBGA </Type>
+                <PON> LFXP20E-XXF388 </PON>
+                <AliasPON> LFXP20E-XXF388ES </AliasPON>
+                <JDFFile> lfxp20.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F388/LFXP10E"/>
+            </Package>
+            <Package>
+                <Type> 484-ball fpBGA </Type>
+                <PON> LFXP20E-XXF484 </PON>
+                <AliasPON> LFXP20E-XXF484ES </AliasPON>
+                <JDFFile> lfxp20.msk </JDFFile>
+                <MCtrl setting="00101100"/>
+                <Adapter vendor="Lattice Semiconductor"
+                         adapter_name="PA(N)-F484/LFXP20E"/>
+            </Package>
+            <ControlReg0>
+            	<Frequency>;2.5 MHz;4.3 MHz;5.4 MHz;6.9 MHz;8.1 MHz;9.2 MHz;10.0 MHz;13 MHz;15 MHz;20 MHz;26 MHz;30 MHz;34 MHz;41 MHz;45 MHz;51 MHz;55 MHz;60 MHz;130 MHz;</Frequency>
+            	<Master_Clock_Frequency>;000000;001010;000011;011101;010011;011101;010100;
+            							011000;000111;011110;010000;010100;011100;
+            							101101;000011;010110;101101;100111;000000;</Master_Clock_Frequency>
+            	<Clock_divider>;000000;010001;101011;100000;100000;111101;111101;
+            				   111001;111011;110101;110110;110111;110000;
+            				   110000;110001;110001;110001;110001;110011;</Clock_divider>
+            </ControlReg0>
+            <EBR>
+            	<EBRBitName>1152</EBRBitName>
+            	<EBRColumn>1624 to 1767</EBRColumn>
+            	<EBRAddress>1283 to 1346</EBRAddress>
+            	<EBRName>EBR0</EBRName>
+            </EBR>
+            <Persistent_fuse>
+            	<Persistent_fuse_Address>;0;</Persistent_fuse_Address>
+            	<Persistent_fuse_Column>;2174;</Persistent_fuse_Column>
+            </Persistent_fuse>
+            <Sync_Ext_Done>
+            	<Sync_Ext_Done_Address>1</Sync_Ext_Done_Address>
+            	<Sync_Ext_Done_Column>2174</Sync_Ext_Done_Column>
+            </Sync_Ext_Done>
+            <Status_Control>
+            	<StatusBitName>;DONE;INITN;PROGRAMN;CFG0;CFG1;CCLK;</StatusBitName>
+            	<StatusControl>;inout;inout;in;in;in;inout;</StatusControl>
+            	<StatusIndex>;593;435;591;595;594;590;</StatusIndex>
+            </Status_Control>
+            <Voltage_Control>
+            	<VCCCore>1.2V</VCCCore>
+            	<VCCJ>Yes</VCCJ>
+            </Voltage_Control>
+       </Device>
+        <Operation>
+        	&quot;FLASH Erase,Program,Verify&quot;
+        	&quot;FLASH Erase,Program,Verify,Secure&quot;
+			&quot;FLASH Program&quot; 
+			&quot;FLASH Verify Only&quot;
+			&quot;FLASH Erase Only&quot;
+			&quot;FLASH Verify ID&quot;
+			&quot;FLASH Display ID&quot;
+	    <!--	&quot;FLASH Verify USERCODE&quot;-->
+			&quot;FLASH Display USERCODE&quot;
+			&quot;FLASH Read and Save&quot;
+			&quot;FLASH Calculate Checksum&quot;
+		<!--	&quot;FLASH Read Trim Code&quot;-->
+		<!--	&quot;FLASH Read Programming Status&quot;-->
+			&quot;FLASH Read DONE bit&quot;
+		<!--	&quot;FLASH Erase DONE bit&quot;-->
+		<!--	&quot;FLASH Program DONE bit&quot;-->
+		<!--	&quot;FLASH Upload to Static RAM&quot;-->
+			&quot;FLASH Bypass&quot;
+			
+			&quot;XFLASH Erase,Program,Verify&quot;
+			&quot;XFLASH Erase,Program,Verify,Secure&quot;
+			&quot;XFLASH Program&quot; 
+			&quot;XFLASH Program and TransFR&quot;
+			&quot;XFLASH TransFR&quot;
+		<!--	&quot;XFLASH Program USF with Static EBR&quot; -->
+		<!--	&quot;XFLASH Program USF from PROM file&quot; -->
+			&quot;XFLASH Verify Only&quot;
+			&quot;XFLASH Erase Only&quot;
+			&quot;XFLASH Display USERCODE&quot;
+			&quot;XFLASH Read and Save&quot;
+			&quot;XFLASH Calculate Checksum&quot;
+		<!--	&quot;XFLASH Read Programming Status&quot;-->
+		<!--	&quot;XFLASH Read DONE bit&quot;-->
+		<!--	&quot;XFLASH Erase DONE bit&quot;-->
+		<!--	&quot;XFLASH Program DONE bit&quot;-->
+			&quot;XFLASH Upload to Static RAM&quot;
+			&quot;XFLASH Bypass&quot;
+            
+			&quot;SRAM Program,Verify&quot;
+<!--		&quot;SRAM Program Only&quot;-->
+            &quot;SRAM Verify ID&quot;
+            &quot;SRAM Display ID&quot;
+            &quot;SRAM Verify Only&quot; 
+            &quot;SRAM Erase Only&quot;
+<!--            &quot;SRAM Verify USERCODE&quot;-->
+            &quot;SRAM Display USERCODE&quot;
+            &quot;SRAM Read and Save&quot;
+<!--            &quot;SRAM Read Programming Status&quot;-->
+            &quot;SRAM Read DONE bit&quot;
+<!--            &quot;SRAM Erase DONE bit&quot;-->
+<!--            &quot;SRAM Program DONE bit&quot;-->
+            &quot;SRAM Refresh&quot;
+            &quot;SRAM Bypass&quot;
+
+            &quot;XSRAM Verify ID&quot;
+            &quot;XSRAM Display ID&quot;
+            &quot;XSRAM Display USERCODE&quot;
+<!--            &quot;XSRAM Verify Only&quot; -->
+<!--        &quot;XSRAM Verify USERCODE&quot; -->
+            &quot;XSRAM Read and Save&quot;
+<!--            &quot;XSRAM Read Programming Status&quot;-->
+<!--            &quot;XSRAM Read DONE bit&quot;-->
+            &quot;XSRAM Bypass&quot;
+<!--            &quot;XSRAM Read EBR&quot;-->
+            &quot;Serial Program&quot;
+        </Operation>
+        <BypassInst>11111111</BypassInst>
+        <IDInstr>0x16</IDInstr>
+        <ISCRelease value="0x01" extension="*.jed;*.isc"/>
+		<XFPFile>MAGMA.xfp</XFPFile>
+		<ICFFile>\xpga\xp\lfxp.icf</ICFFile>
+		<Compliant1532>YES</Compliant1532>
+		<DebugMode>YES</DebugMode>
+        <ReInitialize value="TRUE"/>
+        <FPGADeviceFamily>YES</FPGADeviceFamily>
+        <FPGALoaderSupport>YES</FPGALoaderSupport>
+        <STAPLSupport>YES</STAPLSupport>
+        <CFGPinCount>2</CFGPinCount>
+     	<BitstreamModelTemplate>Magma Template</BitstreamModelTemplate>
+     	<BScan_Control>
+     		<BScan_Operation>;HighZ;All 1's;All 0's;Leave Alone;Capture;Custom;Dynamic IO;</BScan_Operation>
+     		<BScan_Default_Value>1</BScan_Default_Value>
+     	</BScan_Control>
+     	<Programming_Mode_Control>;FLASH;XFLASH;SRAM;XSRAM;Parallel Flash;SERIAL;</Programming_Mode_Control>
+    </Family>   
+</ispXDF>

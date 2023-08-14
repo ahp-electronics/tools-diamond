@@ -1,0 +1,301 @@
+//
+// Translation Table for AT&T ORCA Macro Library (Viewlogic Version)
+//
+// $Header: /home/dmsys/pvcs/RCSMigTest/rcs/base/pkg/bascl/data/RCS/orcalib.ttl,v 1.20 1998/01/21 00:04:16 liou Exp $
+//
+
+// translate the TTL input buffers to their CMOS counterparts
+// in orcalib.nml changing the IBUFLEVEL to TTL
+
+IBT     = IBM    (IBUFLEVEL=TTL);  // TTL Input Buffer
+IBTS    = IBMS   (IBUFLEVEL=TTL);  // TTL Input Buffer with Delay
+IBTPD   = IBMPD  (IBUFLEVEL=TTL);  // TTL Input Buffer with Pulldown
+IBTPDS  = IBMPDS (IBUFLEVEL=TTL);  // TTL Input Buffer with Pulldown & Delay
+IBTPU   = IBMPU  (IBUFLEVEL=TTL);  // TTL Input Buffer with Pullup
+IBTPUS  = IBMPUS (IBUFLEVEL=TTL);  // TTL Input Buffer with Pullup & Delay
+
+// translate the Bidirectional TTL input buffers to their CMOS counterparts
+// in orcalib.nml by changing the IBUFLEVEL to TTL
+ 
+BTZ12   = BMZ12   (IBUFLEVEL=TTL);  // TTL Input 12/6ma Output w/tristate
+BTZ12PU = BMZ12PU (IBUFLEVEL=TTL);  // TTL Input 12/6ma Output w/tristate & Pullup
+BTZ12PD = BMZ12PD (IBUFLEVEL=TTL);  // TTL Input 12/6ma Output w/tristate & Pulldown
+BTZ12F  = BMZ12F  (IBUFLEVEL=TTL);  // TTL Input 12/6ma Fast Output w/tristate
+BTZ12FPU = BMZ12FPU (IBUFLEVEL=TTL); // TTL Input 12/6ma Fast Output w/tristate & Pullup
+BTZ12FPD = BMZ12FPD (IBUFLEVEL=TTL); // TTL Input 12/6ma Fast Output w/tristate & Pulldown
+BTZ6    = BMZ6    (IBUFLEVEL=TTL);  // TTL Input 6/3ma Output w/ tristate
+BTZ6PU  = BMZ6PU  (IBUFLEVEL=TTL);  // TTL Input 6/3ma Output w/ tristate & Pullup
+BTZ6PD  = BMZ6PD  (IBUFLEVEL=TTL);  // TTL Input 6/3ma Output w/ tristate & Pulldown
+BTIZ12  = BMIZ12  (IBUFLEVEL=TTL);  // TTL Input 12/6ma Inverted Output w/tristate
+BTIZ12F = BMIZ12F (IBUFLEVEL=TTL);  // TTL Input 12/6ma Fast Inverted Output w/tristate
+BTIZ6   = BMIZ6   (IBUFLEVEL=TTL);  // TTL Input 6/3ma Inverted Output w/ tristate  
+BTZI12  = BMZI12  (IBUFLEVEL=TTL);  // TTL Input 12/6ma Output w/Inverted tristate
+BTZI12F = BMZI12F (IBUFLEVEL=TTL);  // TTL Input 12/6ma Fast Output w/Inverted tristate
+BTZI6   = BMZI6   (IBUFLEVEL=TTL);  // TTL Input 6/3ma Output w/Inverted tristate  
+BTIZI12 = BMIZI12 (IBUFLEVEL=TTL); // TTL Input 12/6ma Inverted Output w/Inverted tristate
+BTIZI12F = BMIZI12F (IBUFLEVEL=TTL); // TTL Input 12/6ma Fast Inv. Output w/Inv. tristate
+BTIZI6  = BMIZI6   (IBUFLEVEL=TTL); // TTL Input 6/3ma Inverted Output w/Inverted tristate  
+
+BMS12 = BMZ12 (DELAYMODE=1);      // CMOS delayed input 12/6ma Output w/tri
+BMS12PU = BMZ12PU (DELAYMODE=1);  // CMOS delayed input 12/6ma Output w/tri & PU
+BMS12PD = BMZ12PD (DELAYMODE=1);  // CMOS delayed input 12/6ma Output w/tri & PD
+BMS12F = BMZ12F (DELAYMODE=1);  // CMOS delayed input 12/6ma fast Output w/tri
+BMS12FPU = BMZ12FPU (DELAYMODE=1); // CMOS Input 12/6ma Fast Output w/tri & PU
+BMS12FPD = BMZ12FPD (DELAYMODE=1); // CMOS Input 12/6ma Fast Output w/tri & PD
+BMS6    = BMZ6    (DELAYMODE=1);  // CMOS delayed Input 6/3ma Output w/ tri
+BMS6PU  = BMZ6PU  (DELAYMODE=1);  // CMOS delayed Input 6/3ma Output w/ tri & PU
+BMS6PD  = BMZ6PD  (DELAYMODE=1);// CMOS delayed Input 6/3ma Output w/ tri & PD 
+
+BTS12 = BMZ12 (DELAYMODE=1 IBUFLEVEL=TTL); // TTL delayed input 12/6ma Output w/tri
+BTS12PU = BMZ12PU (DELAYMODE=1 IBUFLEVEL=TTL);  // TTL delayed input 12/6ma Output w/tri & PU
+BTS12PD = BMZ12PD (DELAYMODE=1 IBUFLEVEL=TTL);  // TTL delayed input 12/6ma Output w/tri & PD
+BTS12F = BMZ12F (DELAYMODE=1 IBUFLEVEL=TTL);  // TTL delayed input 12/6ma fast Output w/tri
+BTS12FPU = BMZ12FPU (DELAYMODE=1 IBUFLEVEL=TTL); // TTL Input 12/6ma Fast Output w/tri & PU
+BTS12FPD = BMZ12FPD (DELAYMODE=1 IBUFLEVEL=TTL); // TTL Input 12/6ma Fast Output w/tri & PD
+BTS6    = BMZ6    (DELAYMODE=1 IBUFLEVEL=TTL);  // TTL delayed Input 6/3ma Output w/ tri
+BTS6PU  = BMZ6PU  (DELAYMODE=1 IBUFLEVEL=TTL);  // TTL delayed Input 6/3ma Output w/ tri & PU
+BTS6PD  = BMZ6PD  (DELAYMODE=1 IBUFLEVEL=TTL);// TTL delayed Input 6/3ma Output w/ tri & PD
+
+// translate the ODS 2.0 macros to their 1.0 equivalent - these names changed
+// due to a naming convention change by AT&T...
+
+CU4P3DX	= FC4U3D   (HARDMACRO); // 4-bit Up counter w/ pos clock enab & pos asynch CLR
+CU4P3IX	= FC4U3I   (HARDMACRO); // 4-bit Up counter w/ pos clock enab & pos sync CLR
+CD4P3DX	= FC4D3D   (HARDMACRO);	// 4-bit Down counter w/ pos clock enab & pos asynch CLR
+CD4P3IX	= FC4D3I   (HARDMACRO);	// 4-bit Down counter w/ pos clock enab & pos sync CLR
+CB4P3DX	= FC4UD3D  (HARDMACRO);	// 4-bit Up/Down counter w/ pos clock enab & pos asynch CLR
+CB4P3IX	= FC4UD3I  (HARDMACRO);	// 4-bit Up/Down counter w/ pos clock enab & pos sync CLR
+LU4P3AX	= FLC4U3A  (HARDMACRO);	// 4-bit Loadable Up counter w/ pos GSR CLR
+LD4P3AX	= FLC4D3A  (HARDMACRO);	// 4-bit Loadable Down counter w/ pos GSR CLR
+LD4P3AX	= FLC4UD3A (HARDMACRO);	// 4-bit Loadable Up/Down counter w/ pos GSR CLR
+
+// Translate ODS 2.0 RAM components with WE and data lines tied LOW to ROM
+RAM16X2 = ROM16X2 {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1;
+   WREN = @0;
+   DI0 = @0;
+   DI1 = @0;
+} ;
+RAM16X4 = ROM16X4 {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1; DO2; DO3;
+   WREN = @0;
+   DI0 = @0;
+   DI1 = @0;
+   DI2 = @0;
+   DI3 = @0;
+} ;
+RPP16X2 = ROM16X2 {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1;
+   WREN = @0;
+   DI0 = @0;
+   DI1 = @0;
+} ;
+RPP16X4 = ROM16X4 {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1; DO2; DO3;
+   WREN = @0;
+   DI0 = @0;
+   DI1 = @0;
+   DI2 = @0;
+   DI3 = @0;
+} ;
+
+RAM16X2Z = ROM16X2Z {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1;
+   TRI;
+   WREN = @0;
+   DI0 = @0;
+   DI1 = @0;
+} ;
+RAM16X4Z = ROM16X4Z {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1; DO2; DO3;
+   TRI;
+   WREN = @0;
+   DI0 = @0;
+   DI1 = @0;
+   DI2 = @0;
+   DI3 = @0;
+} ;
+RPP16X2Z = ROM16X2Z {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1;
+   TRI;
+   WREN = @0;
+   DI0 = @0;
+   DI1 = @0;
+} ;
+RPP16X4Z = ROM16X4Z {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1; DO2; DO3;
+   TRI;
+   WREN = @0;
+   DI0 = @0;
+   DI1 = @0;
+   DI2 = @0;
+   DI3 = @0;
+} ;
+
+RPN16X2Z = RMN16X2Z {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1;
+   TRI;
+   WREN = @0;
+   DI0 = @0;
+   DI1 = @0;
+} ;
+RPN16X4Z = RMN16X4Z {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1; DO2; DO3;
+   TRI;
+   WREN = @0;
+   DI0 = @0;
+   DI1 = @0;
+   DI2 = @0;
+   DI3 = @0;
+} ;
+
+// Translate ODS 2.0 RAMs to their library equivalent - the only difference
+// between these is the RAM parts have their pins in bus notation in
+// viewlogic, while the RPP parts have explicit pins.
+
+RPP16X2	= RAM16X2; // 16 x 2 bit static ram (nml model)
+RPP16X2Z = RAM16X2Z; // 16 x 2 bit static ram w/ tristate outputs (nml model)
+RPP16X4	= RAM16X4; // 16 x 4 bit static ram (nml model)
+RPP16X4Z = RAM16X4Z; // 16 x 4 bit static ram w/ tristate outputs (nml model)
+
+// Added new 2A library elements with port enable to convert to
+// ROM's. These get turned to ROM's if WREN = WPE = DI[0..3] = low
+ 
+RPE16X2 = ROM16X2 {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1;
+   WREN = @0;
+   WPE = @0;
+   DI0 = @0;
+   DI1 = @0;
+} ;
+RPE16X4 = ROM16X4 {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1; DO2; DO3;
+   WREN = @0;
+   WPE = @0;
+   DI0 = @0;
+   DI1 = @0;
+   DI2 = @0;
+   DI3 = @0;
+} ;
+RPE16X2Z = ROM16X2Z {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1;
+   TRI;
+   WREN = @0;
+   WPE = @0;
+   DI0 = @0;
+   DI1 = @0;
+} ;
+RPE16X4Z = ROM16X4Z {
+   AD0; AD1; AD2; AD3;
+   DO0; DO1; DO2; DO3;
+   TRI;
+   WREN = @0;
+   WPE = @0;
+   DI0 = @0;
+   DI1 = @0;
+   DI2 = @0;
+   DI3 = @0;
+} ;
+
+// mark ODS elements that are hard macros
+
+ADD4     = ADD4     (HARDMACRO);
+ADDSUB4  = ADDSUB4  (HARDMACRO);
+CB4      = CB4      (HARDMACRO);
+CB4P2BX  = CB4P2BX  (HARDMACRO);
+CB4P2DX  = CB4P2DX  (HARDMACRO);
+CB4P2IX  = CB4P2IX  (HARDMACRO);
+CB4P2JX  = CB4P2JX  (HARDMACRO);
+CB4P3BX  = CB4P3BX  (HARDMACRO);
+CB4P3JX  = CB4P3JX  (HARDMACRO);
+CD4      = CD4      (HARDMACRO);
+CD4P2BX  = CD4P2BX  (HARDMACRO);
+CD4P2DX  = CD4P2DX  (HARDMACRO);
+CD4P2IX  = CD4P2IX  (HARDMACRO);
+CD4P2JX  = CD4P2JX  (HARDMACRO);
+CD4P3BX  = CD4P3BX  (HARDMACRO);
+CD4P3JX  = CD4P3JX  (HARDMACRO);
+CNT4_BI  = CNT4_BI  (HARDMACRO);
+CNT4_DN  = CNT4_DN  (HARDMACRO);
+CNT4_UP  = CNT4_UP  (HARDMACRO);
+CU4      = CU4      (HARDMACRO);
+CU4P2BX  = CU4P2BX  (HARDMACRO);
+CU4P2DX  = CU4P2DX  (HARDMACRO);
+CU4P2IX  = CU4P2IX  (HARDMACRO);
+CU4P2JX  = CU4P2JX  (HARDMACRO);
+CU4P3BX  = CU4P3BX  (HARDMACRO);
+CU4P3JX  = CU4P3JX  (HARDMACRO);
+FAC16P3D = FAC16P3D (HARDMACRO);
+FAC4P3D  = FAC4P3D  (HARDMACRO);
+FAC8P3D  = FAC8P3D  (HARDMACRO);
+FADD16   = FADD16   (HARDMACRO);
+FADD4    = FADD4    (HARDMACRO);
+FADD4O   = FADD4O   (HARDMACRO);
+FADD4N   = FADD4N   (HARDMACRO);
+FADD8    = FADD8    (HARDMACRO);
+FADSU16  = FADSU16  (HARDMACRO);
+FADSU4   = FADSU4   (HARDMACRO);
+FADSU4O  = FADSU4O  (HARDMACRO);
+FADSU4N  = FADSU4N  (HARDMACRO);
+FADSU8   = FADSU8   (HARDMACRO);
+FC16D3D  = FC16D3D  (HARDMACRO);
+FC16D3I  = FC16D3I  (HARDMACRO);
+FC16U3D  = FC16U3D  (HARDMACRO);
+FC16U3I  = FC16U3I  (HARDMACRO);
+FC16UD3D = FC16UD3D (HARDMACRO);
+FC16UD3I = FC16UD3I (HARDMACRO);
+FC4D3D   = FC4D3D   (HARDMACRO);
+FC4D3I   = FC4D3I   (HARDMACRO);
+FC4U3D   = FC4U3D   (HARDMACRO);
+FC4U3I   = FC4U3I   (HARDMACRO);
+FC4UD3D  = FC4UD3D  (HARDMACRO);
+FC4UD3I  = FC4UD3I  (HARDMACRO);
+FC8D3D   = FC8D3D   (HARDMACRO);
+FC8D3I   = FC8D3I   (HARDMACRO);
+FC8U3D   = FC8U3D   (HARDMACRO);
+FC8U3I   = FC8U3I   (HARDMACRO);
+FC8UD3D  = FC8UD3D  (HARDMACRO);
+FC8UD3I  = FC8UD3I  (HARDMACRO);
+FLC4D3A  = FLC4D3A  (HARDMACRO);
+FLC4U3A  = FLC4U3A  (HARDMACRO);
+FLC4UD3A = FLC4UD3A (HARDMACRO);
+FLC8D3A  = FLC8D3A  (HARDMACRO);
+FLC8U3A  = FLC8U3A  (HARDMACRO);
+FLC8UD3A = FLC8UD3A (HARDMACRO);
+FLC16D3A = FLC16D3A (HARDMACRO);
+FLC16U3A = FLC16U3A (HARDMACRO);
+FSUB16   = FSUB16   (HARDMACRO);
+FSUB4    = FSUB4    (HARDMACRO);
+FSUB4N   = FSUB4N   (HARDMACRO);
+FSUB4O   = FSUB4O   (HARDMACRO);
+FSUB8    = FSUB8    (HARDMACRO);
+LB4P2AX  = LB4P2AX  (HARDMACRO);
+LB4P2AY  = LB4P2AY  (HARDMACRO);
+LB4P3AX  = LB4P3AX  (HARDMACRO);
+LB4P3AY  = LB4P3AY  (HARDMACRO);
+LD4P2AX  = LD4P2AX  (HARDMACRO);
+LD4P2AY  = LD4P2AY  (HARDMACRO);
+LD4P3AX  = LD4P3AX  (HARDMACRO);
+LD4P3AY  = LD4P3AY  (HARDMACRO);
+LDCNT4BI = LDCNT4BI (HARDMACRO);
+LDCNT4DN = LDCNT4DN (HARDMACRO);
+LDCNT4UP = LDCNT4UP (HARDMACRO);
+LU4P2AX  = LU4P2AX  (HARDMACRO);
+LU4P2AY  = LU4P2AY  (HARDMACRO);
+LU4P3AX  = LU4P3AX  (HARDMACRO);
+LU4P3AY  = LU4P3AY  (HARDMACRO);
+SUB4     = SUB4     (HARDMACRO);
+
